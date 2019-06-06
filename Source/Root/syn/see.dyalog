@@ -2,8 +2,10 @@
  ps←-1 1 1 3
  ⎕←'state=',state,',signal=',D stk[stkp;Stkstate]
  c seecs(E x),E y
- s←(E'Stkstate'),(E'Stkvalue'),E'Stktokcl'
- ⎕←(E'Stack: '),E(mcb(-stkp+1)⌽(stkp+2)↑E'->'),s⍪((stkp+1),¯1↑⍴stk)↑stk
+ s←(E'Stkstate'),(E'Stkvalue'),(E'StkValueName'),E'Stktokcl'
+ st← ((stkp+1),¯1↑⍴stk)↑stk
+ st←st[;0 1],( ast TargetName st[;,1]),st[;,2]
+ ⎕←(E'Stack: '),E(mcb(-stkp+1)⌽(stkp+2)↑E'->'),s⍪st
  j←(astp,¯1↑⍴ast)↑ast
  k←j[;astlarg]∊ER0⍳1↑⍴st
  j[k/⍳⍴k;astlarg]←st[,D k/j[;astlarg];0]
