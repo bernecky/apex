@@ -2,7 +2,7 @@
  ⍝ Push y onto ast.
  j←mm y
  p←j[;astlarg,astrarg]
- :If 0∊(p∊NULL)∨(p<1↑⍴ast)∧(p≥0)
+ :If 0∊p∊NULL,⍳≢ast
      ⎕←'Non-pointer in astlarg, astrarg'
  :EndIf
  j[;aststmt]←E lineno ⍝ No line #s today

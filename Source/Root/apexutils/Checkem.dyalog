@@ -25,7 +25,7 @@
      'Invalid astparms'assert(i∊NULL)∨(i<1↑⍴ast)∧(i≥0)
  ⍝ (Some) pointers must be legal
      i←ast[;astlarg,astrarg] ⍝ This should be astptrs, but one at a time...
-     'Invalid astlarg or astrarg'assert(i∊NULL)∨(i<1↑⍴ast)∧(i≥0)
+     'Invalid astlarg or astrarg'assert ∧/,i∊NULL,⍳≢ast
      t←dfainit ast
      cv←t/ast[;asttarget]
      cv←∧/(cv∊NULL)∨(cv∊⍳+/~t)∨cv∊t/⍳⍴t

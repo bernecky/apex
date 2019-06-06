@@ -1,4 +1,4 @@
-﻿ r←{width}seeast ast
+﻿ r←{width}seeast ast;dec;decast;p
  :If 0=⎕NC'width'
      width←¯1↑⍴ast
  :EndIf
@@ -27,7 +27,11 @@
  r[astShapeExpn]←E'ShapeExpn'
  r[astShapeGuard]←E'shapeguard'
  r[astSpecCase]←E'speccase'
- r←r⍪ast
+ p←asttarget,astlarg,astlop,astfn,astrop,astrarg
+ dec←ast FindTarget ast[;p]
+ decast←ast
+ decast[;p]←dec
+ r←r⍪decast
  :If 0≠⎕NC'width'
      r←r[;⍳width]
  :EndIf
