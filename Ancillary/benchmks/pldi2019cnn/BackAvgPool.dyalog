@@ -1,0 +1,3 @@
+BackAvgPool←{RR⍤⍺⊢⍵}
+
+

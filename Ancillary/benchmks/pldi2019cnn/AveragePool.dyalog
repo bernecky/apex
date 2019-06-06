@@ -1,0 +1,2 @@
+AveragePool←{ avgpool⍤⍺⊢⍵}
+

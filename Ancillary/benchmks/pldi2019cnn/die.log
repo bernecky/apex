@@ -1,0 +1,20 @@
+Dyalog APL/S-64 Version 17.1.36353
+Unicode Edition
+Mon Jun  3 08:15:14 2019
+      )clear
+clear ws
+      ⎕ml
+3
+      )copy crash NL crash blanktis foo
+./crash.dws saved Mon Jun  3 08:14:23 2019
+      ⎕vr'foo'
+     ∇ foo
+[1]    ('} ',NL)blanktis crash
+     ∇
+      ⎕vr'blanktis'
+     ∇ blanktis←{b←~,⌽∧\⌽⍵∊⍺
+[1]        (⍴⍵)⍴b\b/,⍵
+[2]    }
+     ∇
+     foo
+{SysError} 

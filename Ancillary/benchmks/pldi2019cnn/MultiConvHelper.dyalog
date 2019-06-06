@@ -1,0 +1,3 @@
+﻿MultiConvHelper←{⍺ +⍵ conv A}
+
+
