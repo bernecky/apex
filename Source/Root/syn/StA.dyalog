@@ -1,0 +1,1 @@
+﻿⌷StA←<char>A</char>

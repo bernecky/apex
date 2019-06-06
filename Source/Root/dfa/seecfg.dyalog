@@ -1,0 +1,4 @@
+﻿ r←seecfg cfg;az
+ ⍝ Display cfg in human readable form
+ az←(1⍴⍴cfg)⍴(⎕AV⍳'a')↓⎕AV
+ r←(⍴cfg)⍴(,cfg)\(,cfg)/,(⍴cfg)⍴az

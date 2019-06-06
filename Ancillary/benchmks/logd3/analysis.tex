@@ -1,0 +1,28 @@
+The {\tt logd3AKS} benchmark performs significantly
+slower (about 60\%) under \awlf than under \wlf. 
+This is by happenstance: it is due to differences in when 
+array optimizations are able to be applied in the two cases.
+\wlf performs its analysis
+in one traversal of the abstract syntax tree, but \awlf requires
+several such traversals. In the relevant section of
+this benchmark, one with-loop
+produces an extremely long vector, and another with-loop
+consumes exactly one element from the producer-with-loop.
+The \wlf optimization folds the code that produces the
+vector elements into the consumer-with-loop, at which time
+the producer-with-loop becomes dead code, to be
+eliminated, eventually by a Dead Code Removal (DCR)
+traversal. However, in the \awlf case, another optimization,
+With-Loop Simplification (WLSIMP), gets control before
+\awlf is able to deduce that it can legitimately
+fold the two with-loops; WLSIMP detects
+that the consumer-with-loop is degenerate, and so eliminates
+it, replacing it by an indexing function that selects
+just one element from that producer-with-loop. This selection
+operation is not seen by \awlf, so we are left with
+the producer-with-loop still generating a large vector;
+it is this vector that causes the performance loss.
+
+We plan to fix this by extending \awlf to support consumers that 
+are not contained within consumer-with-loops.
+

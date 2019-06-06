@@ -1,0 +1,13 @@
+﻿ r←ct InitializeShapeClique asts;ast;fn;ndx;msg;maxlines
+⍝ Clique values are of the form: cti.line, where
+⍝ cti is calling-tree index (a unique numeric function identifier)
+⍝ and line is ast row#
+ ast←D asts[ssaast]
+ fn←(D ct[0])⍳ast[dfnname;asttarget] ⍝ Function index
+ ndx←(⍴ast)[0]
+ maxlines←1000 ⍝ This is arbitrary
+ msg←'too many lines in function: ',ast[dfnname;asttarget]
+ msg assert maxlines>ndx
+ ast[;astShapeClique]←(fn×maxlines)+⍳ndx
+ r←asts
+ r[ssaast]←E ast

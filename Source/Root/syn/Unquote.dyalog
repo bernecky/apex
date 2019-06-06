@@ -1,0 +1,7 @@
+﻿ r←Unquote y;i
+ ⍝ Remove leading & trailing quotes from constant y
+ ⍝ Also remove double embedded quotes
+ i←''''''⍷y ⍝ Undouble quotes
+ i←~i>¯1⌽i ⍝ Avoid problem with '''.
+ r←1↓¯1↓i/y
+ ⍝ This code still screws up on 'adf''''adf'/ 1994-10-01

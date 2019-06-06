@@ -1,0 +1,32 @@
+
+/* ipbb.sac failure, due to transpose being treated as a copy-WL.
+ * IvmatchCase1 was a bit too eager.
+ */
+
+/* RESULT: with 666 666 -noprelude */
+ bool[.,.] tranXBB(bool[.,.] y)
+{ 
+  z = with {
+        ( . <= iv=[i,j] <= .) : _sel_VxA_( [j,i], y);
+       } : genarray( [6,6], true);
+       return(z);
+}
+
+bool[*] rhoIBB(int[.] x, bool[+] y)
+{ 
+  z = with {
+    (. <= [i] <= .) : y;
+    } : genarray( [6], y);
+ return(z);
+}
+
+int main ()
+{ 
+  V = [false,true,true,false,false,false];
+  m_0 = rhoIBB( [6,6], V);
+  A_29=tranXBB( m_0);
+  StdIO::print( A_29); 
+  return(0);
+}
+
+

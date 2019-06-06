@@ -1,0 +1,3 @@
+﻿ r←tied y
+ ⍝ Return tie number of file y if tied
+ r←((0 11↓⎕FNAMES)∧.=11↓y)/⎕FNUMS

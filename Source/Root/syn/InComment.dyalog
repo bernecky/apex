@@ -1,0 +1,1 @@
+InComment←{ ∨\(⍵='⍝')∧~InQuotes ⍵ }

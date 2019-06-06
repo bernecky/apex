@@ -1,0 +1,33 @@
+use Array: all;
+
+inline bool[+] ordotandBBBSTAR(bool[.,.]x, bool[.,.]y)
+{ /* CDC STAR-100 APL Algorithm for inner product */
+  rowsx = drop([-1],shape(x));
+  colsx = shape(x)[[dim(x)-1]];
+  colsy = shape(y)[[dim(y)-1]];
+  Zrow = genarray([colsy],false);
+  /* Parallel over rows of x */
+  z = with {
+      (. <= [row] <= .) {
+           Crow = Zrow;
+           for (colx=0; colx<colsx; colx++) {
+                     xrow = x[row];
+                     xel = xrow[[colx]];
+                    if (false != xel) { /* Skip iteration if it's an identity */
+                           VEC = xel & y[[colx]];
+                          Crow = VEC | Crow;
+                    }
+                      }
+      } : Crow;
+      } : genarray( rowsx, Zrow);
+  return(z);
+}
+
+int main()
+{
+ X =genarray([400, 400], false);
+ A_30=ordotandBBBSTAR(X,X);
+ StdIO::print(_sel_VxA_([0,0], (A_30)));
+ return(0);
+}
+

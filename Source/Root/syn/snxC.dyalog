@@ -1,0 +1,8 @@
+﻿ snxC
+ ⍝ Expression left of naked conjunction
+ ⍝ expn left operand to conj,
+ ⍝ OR right operand to a leftmore conj.
+ ⍝ DAMN. OR, the left argument to the derived fn...
+ ∘∘∘
+ PushCursor Push stV
+ ⍝  Push left operand; new state is naked verb

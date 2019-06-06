@@ -1,0 +1,4 @@
+﻿ r←dodfaone y
+ ⍝ Perform dfa on one function
+ ⎕←'Performing dfa on ',(D y[ssaast])[dfnname;asttarget]
+ r←dfa y

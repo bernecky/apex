@@ -1,0 +1,15 @@
+% Monadic query -- roll
+
+% This doesn't work, but we're hiding it here until we figure a way to
+% make it work.
+
+function query(qrl: integer, y: integer; 
+returns integer,integer)
+% Roll N-sided die. Update quad-rl
+let 
+ newqrl:= lehmer(qrl);
+ two31m1:= 2147483647; % (-1)+2^31.
+in
+ QUADIO+floor((newqrl*y)/two31m1), newqrl
+end let
+end function

@@ -1,0 +1,38 @@
+﻿ r←dfaBase y;ast;wl;i;j;k;m;n;p
+ ⍝ Handle Base value
+ ast←D y[ssaast]
+ wl←D y[ssacv]
+ i←wl∧ast[;astfn]∊E,'⊥' ⍝ Locate base value
+ i←i\~(i/ast[;astlarg])∊NULL ⍝ Dyadics only
+ wl←wl∧~i ⍝ Update worklist
+⍝⍝ i←i∧~(D ast[;astPred])[;astPredKnowValue]
+ i←i∧∧/~ast[;astlarg,astrarg]∊NULL ⍝ Both args known?
+ :If 1∊i ⍝ Any work?
+     k←ast[D(i⌿ast)[;astlarg,astrarg];] ⍝ Arguments.
+  ⍝ Result rank is matrixproduct-like.
+  ⍝ Need both argument ranks at least.
+     m←∧/~k[;;astrank]∊NULL ⍝ Need both ranks.
+     k←m⌿k
+     i←i∧i\m
+     :If 1∊i ⍝ Any work?
+         j←i⌿ast
+         m←+/0⌈¯1+D k[;;astrank] ⍝ Eliminate inner axes
+         j[;astrank]←ER0 m
+   ⍝ Result shape is (¯1↓⍴⍺),1↓⍴⍵
+         m←∧/~k[;;astshape]∊NULL ⍝ Compute these shapes
+         n←m⌿k[;;astshape]
+         n←(¯1↓¨n[;0]),¨1↓¨n[;1] ⍝ Trim & catenate shapes
+         j[m/⍳⍴m;astshape]←n
+   ⍝ Need arg types to get result type.
+         m←~∨/k[;;asttype]∊NULL ⍝ Know both types.
+   ⍝ Get right function result type.
+         n←(m/i/ast[;astrop])dftype m⌿k[;;asttype]
+         n←(m/j[;astlop])dftype 2/mcb n ⍝ Reduction-like result type.
+         j[m/⍳⍴m;asttype]←n
+   ⍝
+         j[;astPred]←E astPredLen⍴0
+         j←astmerge(E ast),(E j),E i
+         ast←D j[0] ⋄ wl←wl∨D j[1]
+     :EndIf
+ :EndIf
+ r←y ⋄ r[ssaast]←E ast ⋄ r[ssacv]←E wl

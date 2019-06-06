@@ -1,0 +1,16 @@
+﻿ ApexSetOption y;opts
+⍝ Set APEX compiler option y
+⍝ These are defined as:
+⍝ 'option1=value1' 'option2=value2' ...
+⍝ E.g., APEXSetOption 'output=sac'
+⍝ We replace any current option file line
+⍝ with the new option(s)
+⍝
+⍝ For now, you may not have a comma in the
+⍝ option valueX, because of the sloppy parser in
+⍝ next line.
+ opts←,(D y),CR ⍝ Catenate options.
+ ÷0 ⍝ You probably don't want to continue from here,
+ ⍝ as this will overwrite the entire apex.opt file, NOT
+ ⍝ just update an entry. FIXME
+ opts PutFile'apex.opt' ⍝ Save option file

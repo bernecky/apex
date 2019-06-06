@@ -1,0 +1,17 @@
+﻿ r←mil EmitDefnsIndexAssignEpilog fns;tps;rks;cv;nul;p
+⍝# Emit FOR loop closure code for indexed assign
+⍝ mil[;k]>0: Loop over Ik
+⍝ mil[;k]=0: nothing
+⍝ mil[;k]<0: Loop over shape(X)[k]
+ tps←0 3↓D fns[;fnstypes]
+ rks←0 3↓D fns[;fnsranks]
+ mil←(⍴rks)↑mil
+ nul←tps∊'x'
+ cv←(~nul)∧tps∊Types
+ r←(⍴cv)⍴E'}',NL
+ r←,((⍴cv)⍴(⍳¯1↑⍴cv)⍴¨E' '),¨r ⍝ indenting
+ p←,EmitDefnsIndexAssignMarkElidedTrailingAxes mil
+ p←p∨,EmitDefnsIndexAssignMarkScalarIndices rks
+ r[p/⍳⍴r]←E'' ⍝ Remove trash entries
+ r←Raze⍉(⍴cv)⍴r
+ r[(AllScalarIndices fns)/⍳⍴r]←E'' ⍝ No loops for all-scalar indices

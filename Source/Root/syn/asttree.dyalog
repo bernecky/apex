@@ -1,0 +1,11 @@
+﻿ r←astp asttree ast;fn;i;j
+ ⍝ Build asttree starting at astp-1
+ r←''
+ →(astp=D NULL)⍴0 ⍝ Left arg of monadic function
+ i←astp
+ →((fn←ast[i;astfn])∊NULL)⍴ez
+ j←(D ast[i;astlarg])asttree ast
+ j←(0≠⍴j)/'(',j,')'
+ r←j,(D fn),'(',((D ast[i;astrarg])asttree ast),')'
+ →0
+ez:r←D ast[i;asttarget]

@@ -1,0 +1,3 @@
+﻿ r←bb BBn n
+ ⍝ Return cv for nTH basic block in bb
+ r←(n+1)=+\bb

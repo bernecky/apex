@@ -1,0 +1,23 @@
+This benchmark performs an AKS Boolean-Boolean matrix 
+product ({\tt B1\qor\qdot\qand\0B2}),
+such as might be used as a step in finding the transitive closure of
+a graph, operating on Boolean arrays of shape {\tt [400, 400]}. 
+
+The algorithm used is Bernecky's generalization of
+the CDC STAR matrix product algorithm,
+which interchanges loop ordering so that each element
+of the left argument is fetched only once, and is
+applied, scalar-vector, against a row of the right argument,
+then vector-vector reduced into the result.~\cite{RBernecky:apex}
+
+This algorithm offers several opportunities for optimizations.
+First, any type coercion of the left argument (absent in this
+case but, for example, present in a Boolean-Double matrix 
+product) occurs only once per element. Second, the left
+argument can be considered sparse, as a zero 
+contributes nothing to the result, in which case both of the computations
+above can be ignored. Third, a one is an identity on the 
+scalar-vector computation, so that can be elided.
+Finally, the presence of vector-based, stride-1 computations
+permits exploitation of vector and parallel hardware.
+

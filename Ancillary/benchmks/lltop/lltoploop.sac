@@ -1,0 +1,18 @@
+use Array:all;
+
+int main()
+{
+ n = 100000;
+ links = iota(n) - 1;
+ hd = n - 1;
+ r = genarray( shape(links), -1);
+ /* Links are origin 0, terminated by ¯1. */
+
+ for( III=0; III<_shape_A_(links)[0]; III++) {
+   r[hd] = III;
+   hd    = links[hd];
+ }
+ StdIO::print(sum(r));
+ return(0);
+}
+

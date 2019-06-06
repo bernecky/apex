@@ -1,0 +1,1 @@
+﻿⌷clsid←<char>i</char>

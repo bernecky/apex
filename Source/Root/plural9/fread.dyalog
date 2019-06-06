@@ -1,0 +1,2 @@
+﻿ r←fread y
+ r←⎕FREAD y

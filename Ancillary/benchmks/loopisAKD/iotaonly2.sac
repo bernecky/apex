@@ -1,0 +1,100 @@
+use Array: all;
+use Numerical : all;
+use StdIO : all;
+use CommandLine: all;
+use String: {to_string,tochar,sscanf};
+use ArrayFormat: all;
+use Bits: all;
+
+/* Compiled by APEX Version: /home/apex/apex2003/wss/sac3006.dws2009-08-10 10:54:36.032 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+inline int plusIII(int x, int y)
+{ return(toI(x)+toI(y));
+}
+
+inline int barIBI(int x, bool y)
+{ return(toI(x)-toI(y));
+}
+
+inline int mpyIII(int x, int y)
+{ return(toI(x)*toI(y));
+}
+
+inline double divIID(int x, int y)
+{ dx = tod(x);
+  dy = tod(y);
+  z = (dx == dy) ? 1.0  : dx/dy;
+  return(z);
+}
+
+inline int plusBBI(bool x, bool y)
+{ return(toI(x)+toI(y));
+}
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline bool sameIDB(int x, double y,double QUADct)
+{ /* Scalar match scalar */
+  z = eqDDB(toD(x), toD(y), QUADct);
+ return(z);
+}
+
+
+
+inline int CommandLineArgvXBI(bool y)
+{ /* Get Command-line argument element #y as integer scalar */
+  int z;
+  junk, z = sscanf(argv(toi(y)), "%d");
+  return( z);
+}
+
+inline bool eqDDB(double x, double y, double QUADct)
+{ /* A=B on doubles */
+ return((toD(x) == toD(y)) || APEXFUZZEQ(toD(x),toD(y),QUADct));
+}
+
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+int main()
+{
+ n = id( 200000000); 
+ qio = id(0);
+StdIO::print(tochar("Building iota n"));
+z=iotaXII( n,0 );
+StdIO::print(tochar("fini"));
+ return(z[200]);
+}
+
+int[*] id( int[*] y)
+{  return(y);
+}
+

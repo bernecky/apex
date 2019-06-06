@@ -1,0 +1,1 @@
+﻿⌷astclassNFN←<char>N</char>

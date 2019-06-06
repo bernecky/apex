@@ -1,0 +1,14 @@
+﻿ r←EmitFnCallsDyadicScalar y;fns;cv;cal;ast;j;i;ctl
+⍝# Emit function calls for dyadic scalar functions
+⍝# The generic stuff is already done. All we
+⍝# do here is to pick up special cases.
+ j←EmitDyadicScalarFnCallsArgumentSwap y ⍝ Maybe swap args
+ ast←D j[0] ⍝ ast
+ fns←D j[2] ⍝ All fn names
+ cal←D j[3] ⍝ Generic calls
+⍝ Get dyadic scalar function names
+ ctl←7 FragmentCode'dscalar' ⍝ fn names we have, sort of...
+⍝ Generate function names we need to call
+ cv←∨/<\(ctl FindFn fns)∧ctl FindType fns
+ cal←cv EmitDyadicScalarConformabilityCheck j
+ r←j ⋄ r[2]←E fns ⋄ r[3]←E cal

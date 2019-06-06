@@ -1,0 +1,262 @@
+use Array: all;
+use Numerical : all;
+use StdIO : all;
+use CommandLine: all;
+use String: {tochar,sscanf};
+use ArrayFormat: all;
+use Bits: all;
+
+/* Compiled by APEX Version: /home/apex/apex2003/wss/sac3004.dws2009-04-26 14:41:29.690 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+inline bool eqIIB(int x, int y)
+{ /* A=B on non-doubles */
+ return(toI(x) == toI(y));
+}
+
+inline int plusBBI(bool x, bool y)
+{ return(toI(x)+toI(y));
+}
+
+inline char[.,.] tranXCC(char[.,.] y)
+{ /* Transpose on rank-2 */
+   z = { [i,j] -> y[j,i] };
+       return(z);
+}
+
+inline int[.] rhoIII(int x, int y)
+{ /* Scalar reshape scalar to vector) */
+      z = genarray([toi(x)], y);
+     return(z);
+}
+
+inline char[*] rhoICC(int[.] x, char[+] y)
+{ /* APEX vector x reshape, with item reuse */
+  ix = toi(x);
+  ry = comaXCC(y);
+  zxrho = prod(ix); /* THIS NEEDS XRHO FOR CODE SAFETY!! */
+  yxrho = shape(ry)[[0]];
+  if( zxrho <= yxrho) { /* No element resuse case */
+        z = take([zxrho],ry);
+ } else {
+        ncopies = zxrho/yxrho; /* # complete copies of y. */
+        /* FIXME: y empty case !*/
+        z = with {
+          (. <= [i] <= .)
+                        : ry;
+          } : genarray( [ncopies], ry);
+        /* Now append the leftover bits */
+        z = comaXCC(z) ++ take([zxrho-(ncopies*yxrho)],ry);
+ }
+ return(reshape(ix,z));
+}
+
+
+
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+  show(y);
+       return(y);
+}
+
+inline bool[+] anddoteqCCBSTAR(char[+]x, char[+]y)
+{ /* CDC STAR-100 APL Algorithm for inner product */
+
+ /* This computes, for z=x f.g y,
+  *                z[i;] = z[i;]f x[i;j]g y[j;]
+  *  Thus, it runs stride-1, and we only fetch left argument
+  *  elements once. It includes skipping a g row iteration and
+  *  an f row-reduce iteration when x[i;j] generates an identity for f.
+  *  R. Bernecky 2005-11-24
+  */
+  rowsx = drop([-1],shape(x));
+  colsx = shape(x)[[dim(x)-1]];
+  colsy = shape(y)[[dim(y)-1]];
+  Zrow = genarray([colsy],false);
+  /* Parallel over rows of x */
+  z = with {
+      (. <= row <= .) {
+              Crow = Zrow;
+           for (colx=0; colx<colsx; colx++) {
+                     xrow = x[row];
+                     xel = xrow[[colx]];
+                     VEC =  xel == y[[colx]];
+                     Crow = Crow & VEC;
+                      }
+      } : Crow;
+      } : genarray( rowsx, Zrow);
+  return(z);
+}
+
+inline int[+] plusslXBIFOLD(bool[+] y)
+{ /* last axis reduce rank-2 or greater matrix w/folding */
+  sy = shape(y);
+  zrho = drop([-1], sy);
+  z = with {
+        (. <= iv <= .)
+               : plusslXBIFOLD(y[iv]);
+   } : genarray(zrho, 0);
+  return(z);
+}
+
+
+inline int plusslXIIFOLD(int[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+     (0*shape(y) <= iv < shape(y))
+                 : toI(y[lim-iv]);
+       } :  fold( plusIII, toI(0));
+  return(z);
+}
+
+
+inline int plusIII(int x, int y)
+{ return(toI(x)+toI(y));
+}
+
+inline bool[+] eqCCBsl(char[+] x, char[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+   sx = DSFLenErrorCheck(shape(x), shape(y),tochar("eqCCBsl(char[+],char[+]"));
+        z = with {
+             ( . <= iv <= .) {
+                      xel = toC(x[iv]);
+                    yel = toC(y[iv]);
+            } : eqCCB(xel,yel);
+        } : genarray(sx, false);
+  return(z);
+}
+
+
+
+
+
+
+
+inline char[.] comaXCC(char[+] y)
+{ /* Ravel of anything with rank>1 */
+     z = reshape([prod(shape(y))],y);
+       return(z);
+}
+
+inline bool andslXBBQUICKSTOP(bool[.] y)
+{ /* First/last axis reduction of vector with quick stop*/
+  z = with {
+          (0*shape(y) <= iv < shape(y))
+                : toB(y[iv]);
+        } : foldfix( andBBB, toB(1), toB(0));
+  return(z);
+}
+
+
+inline int plusslXBIFOLD(bool[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+     (0*shape(y) <= iv < shape(y))
+                 : toI(y[lim-iv]);
+       } :  fold( plusIII, toI(0));
+  return(z);
+}
+
+
+inline bool eqCCB(char x, char y)
+{ /* A=B on non-doubles */
+ return(toC(x) == toC(y));
+}
+
+inline bool andBBB(bool x, bool y)
+{ return(to_bool(x)&to_bool(y));
+}
+
+inline bool[+] eqCCB(char x, char[+] y)
+{ /* SxA scalar function */
+  xel = toC(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toC(y[iv]);
+                    } : eqCCB(xel,yel);
+  } : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqCCB(char[+] x, char y)
+{ /* AxS scalar function */
+  yel = toC(y);
+  z = with {
+        ( . <= iv <= .) {
+              xel = toC(x[iv]);
+    } : eqCCB(xel,yel);
+  } : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline int[.] DSFLenErrorCheck(int[.] sx, int[.] sy, char[.] whodunit)
+{ /* Dyadic scalar fn length error check */
+     z = sx;
+#ifdef GENME
+/* SAC bug #306 - side effect kills fold!  */
+    if (any(sx != sy)) { /* Check that shapes match */
+   show(tochar("APEX dyadic scalar function length error in function"));
+  show(whodunit);
+        show(sx); show(sy);
+    }
+#endif
+     return(z);
+}
+
+inline int ipapeXII(int siz)
+{ 
+/*
+ ?
+*/
+A_26=rhoIII(2,siz);
+ A_27=rhoICC(A_26,['a','b','c','d','e','f','g','h','i','j','k']);
+m_0=( A_27);
+ A_29=tranXCC( m_0);
+ A_30=anddoteqCCBSTAR(m_0,A_29);
+ A_38=plusslXBIFOLD( A_30);
+ A_42=plusslXIIFOLD( A_38);
+ r_0=( A_42);
+ return(r_0);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+QUADio_0=toi(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toi(( false));
+ n_0=( 2000);
+ QUADrl_1=( 16807);
+ QUADpp_1=( 16);
+ QUADpw_1=( 80);
+ A_59=ipapeXII( n_0);
+ r_0=( A_59);
+ A_63=quadXII( r_0,QUADpp_1,QUADpw_1);
+ /* dsf scalar(s) */
+A_65=eqIIB(r_0,363638);
+ /* dsf scalar(s) */
+A_66=plusBBI(true,A_65);
+r_1=( A_66);
+ A_70=quadXII( A_66,QUADpp_1,QUADpw_1);
+ return(r_1);
+}
+

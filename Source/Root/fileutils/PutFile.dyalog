@@ -1,0 +1,1 @@
+PutFile←{⍺ ⎕nput ⍵  1}

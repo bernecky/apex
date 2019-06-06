@@ -1,0 +1,115 @@
+/*
+ * Macro code fragments for dyadic scalar function loop structures.
+ * 2004-09-09 R. Bernecky 
+ * 
+ * 
+ * We can not, in general, provide full support for singleton
+ * extension. Consider the (1 1 1 rho 2)+ iota n.
+ * If n>1 then the result is a vector. If n=1, the result is a tensor!
+ * Hence, we forbid ALL singletons of rank>1. We SHOULD forbid
+ * vector singletons as well (things would run faster), but 
+ * there is too much code that depends on this behavior. 1996-05-04
+ *
+ * There is some redundancy in the code fragments below, because,
+ * e.g., we may mark a SxS operation as sx, sy, or neither...
+ *
+ */
+
+#define AssertSameShape(x,y) 
+/*
+ The above needs to be a wee bit more effective. rbe 2004-02-27 
+*/
+
+#define dsfctlsl(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) 	\
+inline ZTYPE FN##XT##YT##ZT##sl(XTYPE x, YTYPE y)	\
+/* SxS Dyadic scalar functions, shapes match */		\
+{							\
+  z = d##FN##XT##YT##ZT(to##CT(x),to##CT(y));		\
+  return(z);						\
+}							\
+							\
+inline ZTYPE FN##XT##YT##ZT##sl(XTYPE[*] x, YTYPE[*] y)	\
+/* AxA Dyadic scalar functions, shapes unknown, shapes match */	\
+{							\
+  z = with( . <= iv <= .) {				\
+	xel = to##CT(_sel_(iv,x));			\
+	yel = to##CT(_sel_(iv,y));			\
+      }							\
+        genarray( _shape_(x), 				\
+		d##FN##XT##YT##ZT(xel,yel));		\
+  return(z);						\
+}							\
+
+
+#define dsfctlsx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) 	\
+inline ZTYPE FN##XT##YT##ZT##sx(XTYPE x, YTYPE y)	\
+{ /* SxS scalar function */				\
+  z = d##FN##XT##YT##ZT(to##CT(x),to##CT(y));		\
+  return(z);						\
+}							\
+inline ZTYPE FN##XT##YT##ZT##sx(XTYPE x, YTYPE[*] y)    \
+{ /* SxA scalar function */                             \
+  xel = to##CT(x);                                      \
+  z = with( . <= iv <= .) {                             \
+        yel = to##CT(_sel_(iv,y));                      \
+      }                                                 \
+        genarray( _shape_(y),                           \
+                d##FN##XT##YT##ZT(xel,yel));            \
+  return(z);                                            \
+}
+
+
+#define dsfctlsy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE)	\
+inline ZTYPE FN##XT##YT##ZT##sy(XTYPE x, YTYPE y)       \
+{ /* SxS scalar function */                             \
+  z = d##FN##XT##YT##ZT(to##CT(x),to##CT(y));		\
+  return(z);                                            \
+}							\
+inline ZTYPE FN##XT##YT##ZT##sy(XTYPE[*] x, YTYPE y)	\
+{ /* AxS scalar function */				\
+  yel = to##CT(y);					\
+  z = with( . <= iv <= .) {				\
+	xel = to##CT(_sel_(iv,x));			\
+      }							\
+        genarray( _shape_(x), 				\
+		d##FN##XT##YT##ZT(xel,yel));		\
+  return(z);						\
+}
+
+#define dsfctl(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) 	\
+inline ZTYPE FN##XT##YT##ZT(XTYPE x, YTYPE y)		\
+{ /* SxS Scalar function (with "unknown shapes") */	\
+  AssertSameShape(x,y)					\
+  z = d##FN##XT##YT##ZT(to##CT(x),to##CT(y));           \
+  return(z);						\
+}							\
+inline ZTYPE FN##XT##YT##ZT(XTYPE x, YTYPE[*] y)	\
+{ /* SxA Scalar function  */			 	\
+  xel = to##CT(x);					\
+  z = with( . <= iv <= .) {                             \
+        yel = to##CT(_sel_(iv,y));                      \
+      }                                                 \
+        genarray( _shape_(y),                           \
+                d##FN##XT##YT##ZT(xel,yel));            \
+  return(z);						\
+}							\
+inline ZTYPE FN##XT##YT##ZT(XTYPE[*] x, YTYPE y)	\
+{ /* AxS Scalar function  */                            \
+  yel = to##CT(y);                                      \
+  z = with( . <= iv <= .) {                             \
+        xel = to##CT(_sel_(iv,x));                      \
+      }                                                 \
+        genarray( _shape_(x),                           \
+                d##FN##XT##YT##ZT(xel,yel));            \
+  return(z);                                            \
+}							\
+inline ZTYPE FN##XT##YT##ZT(XTYPE[*] x, YTYPE[*] y)	\
+{ /* AxA Scalar function  */                            \
+  z = with( . <= iv <= .) {                             \
+        xel = to##CT(_sel_(iv,x));                      \
+        yel = to##CT(_sel_(iv,y));                      \
+      }                                                 \
+        genarray( _shape_(x),                           \
+                d##FN##XT##YT##ZT(xel,yel));            \
+  return(z);                                            \
+} 

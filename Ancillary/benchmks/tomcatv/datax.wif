@@ -1,0 +1,12 @@
+ r{<-}datax n;xij
+@ Tomcatv benchmark
+@ Model based on John Feo's SISAL 1.2 benchmark
+@ Initial field for x(i,j)
+@ This is transpose (sort of) of fortran version
+@ with stretch factor alfa
+@ Following code corresponds to DO loop 1
+@ in the Fortran version.
+ xij{<-}1,((n-2){rho}0.9),1
+ r{<-}n/((n,1){rho}xij{times}{iota}n){divide}n-1
+ r[;0]{<-}({iota}n){divide}n-1
+ r[;n-1]{<-}({iota}n){divide}n-1

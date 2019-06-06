@@ -1,0 +1,7 @@
+﻿ r←fn BuildScalarFnsEntry fns
+⍝ Build fake scalar fn fns entry for fn, using fns as template.
+⍝ AHEM. Always dyadic scalar fns!
+ r←fns
+ r[;fnsfn]←fn
+ r[;fnslop,fnsrop]←E''
+ r[;fnstypes]←ER1(D r[;fnstypes])[;1 1 2]

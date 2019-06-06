@@ -1,0 +1,1 @@
+﻿⌷StN←<char>N</char>

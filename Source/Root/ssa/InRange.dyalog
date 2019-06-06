@@ -1,0 +1,3 @@
+﻿ r←x InRange y
+⍝ Is x in range of matrix y?
+ r←(x∘.≥y[;0])∧x∘.≤y[;1]

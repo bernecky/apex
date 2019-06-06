@@ -1,0 +1,17 @@
+﻿ r←EmitUserDefinedFunctionBody y;ast;fns;rap;j;ct;tcv;sis;cds;cv
+ ⍝# Emit code for a user-defined function's body.
+ ⍝# Function header is handled elsewhere.
+ cds←y
+ ast←D cds[ssaast]
+ cv←(dfainit ast)∧~ast[;astfn]∊NULL
+ ct←DerivedFnCallTree ast
+ fns←ast MarkSpecialCases GenFragNames ast
+ j←cv EmitFnCalls(E cds),E fns ⍝ Primitive and user-defined fn calls
+ sis←D j[0]
+ cv←D j[2]
+ fns←D j[3]
+ ast←D cds[ssaast]
+ cv←cv∧~ast[;astclass]∊astclassLFN
+ 'compiler is broken'assert~1∊cv ⍝ Missed something
+ fns←FilterFns fns
+ r←(E sis),(E fns),E ast

@@ -1,0 +1,9 @@
+﻿ r←ctl FindQuickStops fns;qs;qsb;b;s
+⍝# Mark reductions that can quick-stop
+ qs←(E'mpy')                          ⍝ Quick-stop integer/double
+ qsb←(E'and'),(E'or'),(E'min'),E'max' ⍝ Quick-stop Boolean
+ r←fns[;fnslop]∊qs
+ b←(fns[;fnslop]∊qsb)∧(D fns[;fnstypes])[;fnstypesrarg]∊'B'
+ s←ctl[;ctlspec]∊E'QUICKSTOP'
+ r←r∘.∧s
+ r←r∨(b∘.∧s)

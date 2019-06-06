@@ -1,0 +1,40 @@
+﻿ r←dfaTake y;ast;wl;b;i;j;k;m;n;p;rarg
+ ⍝ Handle take.
+ ast←D y[ssaast]
+ wl←D y[ssacv]
+ i←wl∧ast[;astfn]∊ER1⍪'↑'
+ wl←wl∧~i ⍝ Update worklist
+ i←i∧~(D ast[;astPred])[;astPredKnowValue]
+ :If 1∊i ⍝ Any work?
+     i←i∧~ast[;1]∊NULL ⍝Dyadics only.
+     j←i⌿ast ⍝ Affected rows.
+     k←D j[;astlarg,astrarg] ⍝ Arguments.
+  ⍝ To set result type, rank, must know both argument ranks.
+     m←ast[k;astrank]
+     n←~∨/m∊NULL ⍝ Both ranks known.
+     i←i∧i\n
+     :If 1∊i
+         j←i⌿ast
+         k←D j[;astlarg,astrarg]               ⍝ Arguments.
+         j[;asttype]←ast[k[;1];asttype]
+   ⍝ Result rank is (⍴⍴⍺)⌈⍴⍴m; result type is ⍵ type
+         j[;astrank]←ER0 1⌈⌈/D ast[k;astrank]  ⍝ Result rank≥1
+   ⍝  Result shape needs ⍺ value, part of ⍵ shape ( if short ⍺)
+         b←ast KnowValue k[;0]                 ⍝ ⍺ value
+         rarg←ast[k[;1];]
+         b←b∧(~rarg[;astshape]∊NULL)∨(rarg[;astrank]=ast[k[;0];astxrho])
+         m←(quadfi¨ast[b⌿k[;,0];astvalue]),ast[b⌿k[;,1];astshape]
+         'Take rank error in source program'assert∧/1≥D ast[k[;0];astrank]
+   ⍝ Result shape is (⍺,(⍴,⍺)↓⍴⍵)
+         p←,¨m[;0]            ⍝ Ravel of ⍺s
+         p←p,¨(⍴¨p)↓¨m[;1]    ⍝ Shape of results
+         j[b/⍳⍴b;astshape]←|p ⍝ Shapes always non-negative
+         p←astPredLen⍴0       ⍝ Maintain predicates
+         p[astPredNonNeg,astPredInteger]←1
+         n←D ast[k[;1];astPred]
+         j[;astPred]←ER1 n∧(⍴n)⍴p
+         j←astmerge(E ast),(E j),E i
+         ast←D j[0] ⋄ wl←wl∨D j[1]
+     :EndIf
+ :EndIf
+ r←y ⋄ r[ssaast]←E ast ⋄ r[ssacv]←E wl

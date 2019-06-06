@@ -1,0 +1,13 @@
+use Array:all;
+
+int main()
+{
+  x = iota(50);
+
+  junk = x[3];      /* This inhibits WLF and AWLF */
+  StdIO::show(junk);
+
+  z = sum(x);
+  StdIO::show(z);
+  return(0);
+}

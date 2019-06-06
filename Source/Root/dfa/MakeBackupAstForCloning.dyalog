@@ -1,0 +1,5 @@
+﻿ r←MakeBackupAstForCloning asts
+ ⍝ We do this only so we can get a clean ast when we
+ ⍝ have to clone a fn.
+ r←asts
+ r[ssaastbackup]←asts[ssaast]

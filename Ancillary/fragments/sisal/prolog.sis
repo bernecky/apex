@@ -1,0 +1,11 @@
+%$entry=$MAIN
+define $MAIN
+#include <stdlib.sis>
+#include <dscalar.sis>
+#include <take.sis>
+#include <drop.sis>
+#include <mmisc.sis>
+#include <rank.sis>
+#include <from.sis>
+#include <dsfctlfn.sis>
+

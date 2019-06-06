@@ -1,0 +1,9 @@
+﻿ r←cv SGOMarkAll ast;fcv;f
+ ⍝ Mark all :GO entries for fn calls marked by cv
+ r←cv∧0
+ fcv←cv
+ :While 1∊fcv
+     f←<\fcv
+     r←r∨f SGOMark ast
+     fcv←fcv∧~f
+ :EndWhile

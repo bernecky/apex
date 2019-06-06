@@ -1,0 +1,11 @@
+ j{<-}aa sweepdn dd;r;lim
+@ Updates nrx,nry
+ lim{<-}{neg}1+({rho}dd)[0]
+ nrx[lim;]{<-}nrx[lim;]{times}dd[lim;]
+ nry[lim;]{<-}nry[lim;]{times}dd[lim;]
+@
+ :For j :In {reverse}{iota}lim
+     nrx[j;]{<-}(nrx[j;]-(aa[j;]{times}nrx[j+1;])){times}dd[j;]
+     nry[j;]{<-}(nry[j;]-(aa[j;]{times}nry[j+1;])){times}dd[j;]
+ :EndFor
+ j{<-}lim @ Garbage result

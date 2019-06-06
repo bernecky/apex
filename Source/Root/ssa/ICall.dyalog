@@ -1,0 +1,6 @@
+﻿ r←ICall ast;i
+ ⍝ Get indices of fns called by ast
+ i←astclassDFN,astclassMFN,astclassNFN
+ r←1↓(ast[;astclass]∊i)/⍳1↑⍴ast ⍝ Ignore fn itself
+ r←(~ast[r;asttarget]∊(E,'⎕'),E,'⍞')/r ⍝ Ignore APL oddities
+⍝ R. Bernecky 2004-06-11 Attempt to deal with system fns, quad, etc.

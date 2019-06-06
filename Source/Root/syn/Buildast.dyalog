@@ -1,0 +1,29 @@
+﻿ ast←st Buildast y;src;tok;cv
+ ⍝ Build initial ast with astsz rows, using st.
+ ⍝ y is src⊃tok
+ ast←astNewRows 1+1↑⍴st ⍝ Allocate it
+ ⍝ We introduce an extra row, to
+ ⍝ mark the end of varbs & constants. This allows
+ ⍝ EmitArguments to tell when we're referring to a
+ ⍝ local instead of a temp.
+ ast[¯1+1↑⍴ast;asttarget]←aststz ⍝ Mark end of symbols
+ ast[⍳1↑⍴st;asttarget,astclass]←st[;stname,stclass]
+ ast[⍳1↑⍴st;astscope]←st[;stscope] ⍝ Name, class, and scope
+ ⍝
+ ⍝ Make locals astclass←varb. This will kill function assignment,
+ ⍝ but maybe fix a bug in dfa vs formal parameters. Why, I can't imagine,
+ ⍝ since this worked once a long time ago, but I am grasping at
+ ⍝ straws today. 1996-12-22
+ cv←(st[;stclass]∊NULL)/⍳1↑⍴st
+ ast[cv;astclass]←astclassVARB
+ ⍝
+ ast[dfnname;astlarg,astrarg]←(E dfnlarg),E dfnrarg ⍝ Fixed arg posns
+ ast[;asttag]←ER0⍳1↑⍴ast ⍝ tags
+ ⍝ Fill in data for constants
+ ⍝ Extract type, rank, shape, value
+ ast←ast HandleNumericConstants st
+ Checkem 2⍴E ast ⍝ Pardon the kludge
+ ast←ast HandleCharacterConstants st
+ ast←ast HandleLabels y
+ ast←HandleQuoteQuadInput ast
+ Checkem 2⍴E ast ⍝ Pardon the kludge(s)

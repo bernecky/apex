@@ -1,0 +1,17 @@
+﻿ r←SGSystemVars cds;ast;sg;sysv;cs;nonlocal
+⍝ Set up the system variables used/set by this function.
+ ast←D cds[ssaast]
+ ⍝ Handle Uses first
+ nonlocal←astscopeSGI,astscopeSGO,astscopeSGI+astscopeSGO
+ sg←(0,1↓ast[;astscope]∊nonlocal)/ast[;asttarget] ⍝ Ignore dfnname
+ sysv←PFATSystemVar ast ⍝ cv for ⎕io, etc, by fn
+ cs←,0≠D⍴¨sysv ⍝ These take at least one system var
+ ast←ast SemiGlobalSGICommon(E cs),E cs/sysv
+ ⍝ Now handle Sets. We have to redo some work here,
+ ⍝ because ast may have changed shape
+ sysv←PFATSystemVar ast
+ cs←,D(E,E'⎕rl')∊¨sysv       ⍝ These ref/set ⎕rl
+ sysv[cs/⍳⍴cs]←E,E'⎕rl'    ⍝ Ignore all except ⎕rl
+ ast←ast SemiGlobalSGOCommon(E cs),E cs/sysv
+ r←cds
+ r[ssaast]←E ast

@@ -1,0 +1,39 @@
+use Array: all;
+use CommandLine: all;
+use String: {to_string,tochar,sscanf};
+
+inline int CommandLineArgvXBI(bool y)
+{ /* Get Command-line argument element #y as integer scalar */
+  int z;
+  junk, z = sscanf(argv(toi(y)), "%d");
+  return( z);
+}
+
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+
+int main()
+{
+
+#ifdef FAST
+ n = id( 200000000); 
+#else// FAST
+n=CommandLineArgvXBI( true);
+#endif // FAST
+
+StdIO::print(tochar("Building iota n"));
+z=iotaXII( n,0);
+StdIO::print(tochar("fini"));
+ return(z[200]);
+}
+
+int[*] id( int[*] y)
+{  return(y);
+}
+

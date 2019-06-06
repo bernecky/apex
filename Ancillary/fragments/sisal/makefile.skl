@@ -1,0 +1,125 @@
+# Skeleton makefile for APEX-generated APL+Win DLLs.
+# Microsoft Developer Studio Generated NMAKE File, Based on testforc.dsp
+# The user of this is expected to catenate an nmake line specifying the
+# target name, e.g.:
+#              TARGET=testforc
+
+APEXDIR=h:\oscjan96\apl97
+DIRPREFIX=g:\benchmks
+DIR=$(DIRPREFIX)\$(TARGET)
+CFG=$(TARGET) - Win32 Release
+
+NULL=
+CPP=cl.exe
+MTL=midl.exe
+RSC=rc.exe
+
+OUTDIR=$(DIR)\Release
+INTDIR=$(DIR)\Release
+# Begin Custom Macros
+OutDir=$(DIR)\Release
+# End Custom Macros
+
+ALL : "$(OUTDIR)\$(TARGET).dll"
+
+CLEAN :
+	-@erase "$(OUTDIR)\MAIN.OBJ"
+	-@erase "$(INTDIR)\$(TARGET).OBJ"
+	-@erase "$(INTDIR)\vc50.idb"
+	-@erase "$(OUTDIR)\$(TARGET).dll"
+	-@erase "$(OUTDIR)\$(TARGET).exp"
+	-@erase "$(OUTDIR)\$(TARGET).lib"
+
+"$(OUTDIR)" :
+    if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+
+CPP_PROJ=/nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" \
+ /I"$(APEXDIR)" \
+ /D "WINNT" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD\
+ /c 
+CPP_OBJS=$(DIR)\Release/
+CPP_SBRS=.
+MTL_PROJ=/nologo /D "NDEBUG" /mktyplib203 /o NUL /win32 
+BSC32=bscmake.exe
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\$(TARGET).bsc" 
+BSC32_SBRS= \
+	
+LINK32=link.exe
+LINK32_FLAGS=runtime.lib kernel32.lib user32.lib gdi32.lib winspool.lib\
+ comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib\
+ odbc32.lib odbccp32.lib /nologo /subsystem:windows /dll /incremental:no\
+ /pdb:"$(OUTDIR)\$(TARGET).pdb" /machine:I386 /out:"$(OUTDIR)\$(TARGET).dll"\
+ /implib:"$(OUTDIR)\$(TARGET).lib"\
+ /libpath:"h:\oscjan96\oscjan96port\runtime\release" 
+LINK32_OBJS= \
+	"$(INTDIR)\MAIN.OBJ" \
+	"$(INTDIR)\$(TARGET).OBJ"
+
+"$(OUTDIR)\$(TARGET).dll" : "$(OUTDIR)" $(DEF_FILE) $(LINK32_OBJS)
+    $(LINK32) @<<
+  $(LINK32_FLAGS) $(LINK32_OBJS)
+<<
+
+
+.c{$(CPP_OBJS)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(CPP_OBJS)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(CPP_OBJS)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.c{$(CPP_SBRS)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(CPP_SBRS)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(CPP_SBRS)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+SOURCE=$(DIR)\MAIN.C
+
+DEP_CPP_MAIN_=\
+	"$(APEXDIR)\ARRAYS.H"\
+	"$(APEXDIR)\CONF.H"\
+	"$(APEXDIR)\CONFIG.H"\
+	"$(APEXDIR)\FIBRE.H"\
+	"$(APEXDIR)\interface.h"\
+	"$(APEXDIR)\LOCKS.H"\
+	"$(APEXDIR)\SISAL.H"\
+	"$(APEXDIR)\SISALRT.H"\
+	
+
+"$(INTDIR)\MAIN.OBJ" : $(SOURCE) $(DEP_CPP_MAIN_) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
+
+SOURCE=$(DIR)\$(TARGET).C
+
+DEP_CPP_NEWFO=\
+	"$(APEXDIR)\ARRAYS.H"\
+	"$(APEXDIR)\CONF.H"\
+	"$(APEXDIR)\CONFIG.H"\
+	"$(APEXDIR)\FIBRE.H"\
+	"$(APEXDIR)\interface.h"\
+	"$(APEXDIR)\LOCKS.H"\
+	"$(APEXDIR)\SISAL.H"\
+	"$(APEXDIR)\SISALRT.H"\
+	
+
+"$(INTDIR)\$(TARGET).OBJ" : $(SOURCE) $(DEP_CPP_NEWFO) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
+

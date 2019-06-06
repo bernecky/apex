@@ -1,0 +1,10 @@
+ b{<-}L substfwd b;n;i
+@ row oriented forward substitution.
+@ given lower triangular L{epsilon}R(n{times}n) and b{epsilon}R(n),
+@   return the solution to L x=b.
+@ algorithm 3.1.1 of Golub and Van Loan (2nd ed.).
+ n{<-}1{pick}{rho}b
+ b[1]{<-}b[1]{divide}L[1;1]
+ :For i :In (2 to n)
+     b[i]{<-}(b[i]-+/L[i;1 to(i-1)]{times}b[1 to(i-1)]){divide}L[i;i]
+ :EndFor

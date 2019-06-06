@@ -1,0 +1,13 @@
+﻿ r←astcol ColorAST asts;d;src;ast;stmt;tok;col;colors;pv;loc
+⍝ Display source with colored stuff
+ ast←D asts[ssaast]
+ d←ast[;astcol]     ⍝ asttype or astrank, typically
+ stmt←ast[;aststmt] ⍝ Source code line#
+ tok←ast[;asttoken] ⍝ Source code column#
+ pv←~(d∊NULL)∨(stmt∊NULL)∨(tok∊NULL) ⍝ Must know where to color
+ src←D asts[ssasrc] ⍝ Original source code MIGHT be close enough
+ col←,(⍴src)⍴RTFred ⍝ Unknown
+ colors←(RTFblue,RTFgreen,RTFyellow,RTFcyan,RTFmagenta)[pv/d]
+ loc←(pv/tok)+(¯1↑⍴src)×pv/stmt
+ col[loc]←colors
+ col DrawAPLText src

@@ -1,0 +1,22 @@
+% This table comprises the definitions of the phrases, or idioms, 
+% recognized by APEX. As of 1996-05-20, these are restricted to 
+% functions only. That is, we do not yet recognize  x +.times transpose y,
+% and  f/iota y is not supported.
+% BuildPhaseTable presumes these columns line up. Homage to card punch.
+% 
+% Acceptable ranks are: 
+% 0 1 ... or ? where ? means any rank.
+
+%Name        Monadic definition Dyadic Definition  Comments
+iota rho 0 1 :IOTARHO           :                 % iota rho y
+1 sl iota 1  :                  :SLIOTA           % x compress iota y
+1 sl iota 0  :                  :SLIOTA           % x compress iota y
+1 sl iota rho 1 :               :SLIOTARHO        % x compress iota rho y
+rho rho ?    :RHORHO            :                 % rho rho y
+mpy sl rho ? :MPYSLRHO          :                 % times reduce rho y
+1 iota max sl  1 :              :IOTAMAXSL        % x iota max reduce y
+1 iota min sl  1 :              :IOTAMINSL        % x iota min reduce y
+
+% Monadic code generator fragments are in phrasem.mac
+% Dyadic code generator fragments are in phrased.mac
+

@@ -1,0 +1,2 @@
+﻿ r←isAstConstant ast
+ r←ast[;astclass]∊astclassNC,astclassCC

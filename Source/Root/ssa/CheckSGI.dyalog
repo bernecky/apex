@@ -1,0 +1,4 @@
+﻿ r←MapSGI CheckSGI asts
+⍝ Check global ins
+ r←(E MapSGI)CheckSGIOne¨asts
+ ÷0

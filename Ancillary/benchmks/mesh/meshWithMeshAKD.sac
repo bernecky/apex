@@ -1,0 +1,282 @@
+use Array: all;
+use Numerical : all;
+use StdIO : all;
+use CommandLine: all;
+use String: {to_string,tochar,sscanf};
+use ArrayFormat: all;
+use Bits: all;
+
+/* Compiled by APEX Version: /home/apex/apex2003/wss/sac3006.dws2010-07-21 15:56:33.707 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+inline int barIII(int x, int y)
+{ return(toI(x)-toI(y));
+}
+
+inline double divIID(int x, int y)
+{ dx = tod(x);
+  dy = tod(y);
+  z = (dx == dy) ? 1.0  : dx/dy;
+  return(z);
+}
+
+inline double mpyIDD(int x, double y)
+{ return(toD(x)*toD(y));
+}
+
+inline bool eqIDB(int x, double y, double QUADct)
+{ /* A=B on doubles */
+ return((toD(x) == toD(y)) || APEXFUZZEQ(toD(x),toD(y),QUADct));
+}
+
+
+inline int plusBBI(bool x, bool y)
+{ return(toI(x)+toI(y));
+}
+
+inline bool[+] eqCCB(char[+] x, char y)
+{ /* AxS scalar function */
+  yel = toC(y);
+  z = with {
+        ( . <= iv <= .) {
+                xel = toC(x[iv]);
+        } : eqCCB(xel,yel);
+        } : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline char[.] rhoICC(int x, char y)
+{ /* Scalar reshape scalar to vector) */
+        z = genarray([toi(x)], y);
+        return(z);
+}
+
+inline char[.] rhoICC(int x, char[+] y)
+{ /* Scalar reshape non-scalar (to vector) */
+ z = rhoICC([toi(x)],y);
+ return(z);
+}
+
+
+inline char[.] takeICC(int x, char[.] y)
+{ /* Scalar take vector */
+  return(take([toi(x)], y));
+}
+
+inline int[.]  rhoXBI(bool[+] y)
+{ /* Shape of non-scalar */
+ return(shape(y));
+}
+
+inline int[.] iotaXII(int[1] y, int QUADio)
+{ /* Index generator on 1-element vector */
+ /* HELP! Needs length error check */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y[[0]]));
+  return( z);
+}
+
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline double[*] quadXDD(double[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline bool[*] quadXBB(bool[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline char[+] inds1(char[+] X, int [+] I0, char Yin)
+{ /* X[;;nonscalarI;;;]<- scalarY */
+ 
+ z = toc(X);
+ Y = Yin;
+
+ for(i0=0; i0<shape(I0)[[0]]; i0++){
+
+ z[[I0[[i0]]]]=toc(Y);
+
+ }
+
+ return(z);
+}
+
+
+
+inline int[.] slBII(bool[.] x, int[.] y)
+{/* Boolean vector compress vector */
+ zxrho = sum(toi(x));
+ z = genarray([zxrho], 0);
+ zi = 0;
+ for(i=0; i<shape(x)[0]; i++)
+   if ( x[i]) {
+    z[[zi]] = y[[i]];
+    zi++;
+   }
+ return(z);
+}
+
+inline int plusslXBIFOLD(bool[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : toI(y[lim-iv]);
+       } :  fold( plusIII, toI(0));
+  return(z);
+}
+
+
+inline bool eqCCB(char x, char y)
+{ /* A=B on non-doubles */
+ return(toC(x) == toC(y));
+}
+
+inline int plusIII(int x, int y)
+{ return(toI(x)+toI(y));
+}
+
+inline char[*] rhoICC(int[.] x, char[+] y)
+{ /* APEX vector x reshape, with item reuse */
+  ix = toi(x);
+  ry = comaXCC(y);
+  zxrho = prod(ix); /* THIS NEEDS XRHO FOR CODE SAFETY!! */
+  yxrho = shape(ry)[[0]];
+  if( zxrho <= yxrho) { /* No element resuse case */
+        z = take([zxrho],ry);
+ } else {
+        ncopies = zxrho/yxrho; /* # complete copies of y. */
+        /* FIXME: y empty case !*/
+        z = with {
+                (. <= [i] <= .)
+                        : ry;
+                } : genarray( [ncopies], ry);
+        /* Now append the leftover bits */
+        z = comaXCC(z) ++ take([zxrho-(ncopies*yxrho)],ry);
+ }
+ return(reshape(ix,z));
+}
+
+
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline int[+] ABC(int[+] I, int Xshape)
+{ /* Array bounds checker for indexed ref  X[nonscalarI] and indexed assign */
+ z = I;
+#ifdef BOUNDSCHECKING
+ bad = with {
+        ((0*shape(z)) <= iv < shape(z))
+                : (z[iv] < 0) || (z[iv] >= Xshape);
+        }: fold(|, false);
+ if (bad)
+  print(tochar("APEX index error!"));
+#endif
+ return(z);
+}
+
+inline int ABC(int I, int Xshape)
+{ /* Array bounds checker for indexed ref X[scalarI] and indexed assign */
+ z = I;
+#ifdef BOUNDSCHECKING
+ /* This needs more thought... */
+  if ( (I < 0) || (I >= Xshape)) {
+        print(tochar("APEX index error!"));
+  }
+#endif
+ return(z);
+}
+
+inline char[.] comaXCC(char[+] y)
+{ /* Ravel of anything with rank>1 */
+        z = reshape([prod(shape(y))],y);
+        return(z);
+}
+
+inline char[.] meshXCC(char[.] y ,int QUADio)
+{ 
+ /* mesh using mesh primitive */
+ A_29=eqCCB(y,' ');
+ r_1 = where( A_29, '#', y);
+ return(r_1);
+}
+
+inline char[.] meshtestIIC(int d, int n,int QUADio)
+{ 
+/*
+ ?
+*/
+/* dsf scalar(s) */
+A_28=barIII(100,d);
+A_29=rhoICC(A_28,'x');
+ A_30=takeICC(100,A_29);
+ A_31=rhoICC(n,A_30);
+ vec_0=( A_31);
+ A_34=meshXCC( vec_0,QUADio);
+ r_0=( A_34);
+ return(r_0);
+}
+
+int[*] id( int[*] y)
+{
+ return(y);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+QUADio_0=toi(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toi(( false));
+ n_0=id ( 18000000);
+ pct_0=( 90);
+ A_63=meshtestIIC(pct_0,n_0,QUADio_1);
+ r_0=( A_63);
+ /* dsf scalar(s) */
+A_66=eqCCB(r_0,'#');
+ A_67=plusslXBIFOLD( A_66);
+ t_0=( A_67);
+ A_74=quadXII( A_67,QUADpp_0,QUADpw_0);
+ /* dsf scalar(s) */
+A_75=divIID(pct_0,100);
+ /* dsf scalar(s) */
+A_76=mpyIDD(n_0,A_75);
+ A_79=quadXDD( A_76,QUADpp_0,QUADpw_0);
+ /* dsf scalar(s) */
+A_81=eqIDB(t_0,A_79,QUADct_0);
+t_1=( A_81);
+ A_85=quadXBB( A_81,QUADpp_0,QUADpw_0);
+ /* dsf scalar(s) */
+A_86=plusBBI(t_1,true);
+ r_1=( A_86);
+ return(r_1);
+}
+

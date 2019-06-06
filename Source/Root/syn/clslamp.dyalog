@@ -1,0 +1,1 @@
+﻿⌷clslamp←<char>C</char>

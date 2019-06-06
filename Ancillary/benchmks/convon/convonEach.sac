@@ -1,0 +1,41 @@
+use Array: all;
+use String: {tochar};
+
+nested double[.] NDV;
+nested double NDS;
+
+int main()
+{ 
+  N = 350000;
+  F = 100;
+  X = 0.01 * ( 1.0 + tod( iota( F)));
+  Y = 0.01 * ( 1.0 + tod( iota( N)));
+  r = mconv( X, Y);
+  r = sum( r);
+  StdIO::print( r);
+  z = r == 30931337116.7925;
+  r_1 = 1 - toi( z);
+  StdIO::print( r_1);
+  return( r_1);
+}
+
+inline double[.] mconv( double[.] filter, double[.] trace)
+{
+  pt = trace ++ ( filter * 0.0);
+  z = conv1each( iota( shape( trace)[0]), filter, enclose_NDV( pt));
+  return( z);
+}
+
+inline double[.] conv1each( int[.] dcs, double[.] filter, NDV trace)
+{
+  z = with { ( . <= iv <= .) : convkernel( dcs[iv], filter, disclose_NDV( trace));
+    } : genarray( shape( dcs), 0.0);
+  return( z);
+}
+
+inline double convkernel( int dc, double[.] filter, double[.] trace)
+{
+  // 1-D convolution kernel
+  z = sum( filter * take( shape( filter), rotate( [-dc], trace)));
+  return( z);
+} 

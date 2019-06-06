@@ -1,0 +1,16 @@
+Design rules:
+
+a. All arguments are read-only. No update-in-place allowed.
+   Hence, no indexed assign, take/drop, or other manipulation of
+   function arguments.
+
+   Be wary of array slices.
+
+b. Use .dup if you to copy an argument.
+
+c. I have no idea how to deal efficiently with array results from
+   sub-functions. E.g., consider:  3↑"1 ( 5 6⍴'abcd')
+
+   We want to use vector take, with the rank conjunction wrapped
+   it. 
+

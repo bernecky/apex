@@ -1,0 +1,231 @@
+% C preprocessor code fragments for drop
+%
+% Robert Bernecky 1996-05-02
+% Supports arbitrary user array index origin 1996-03-26 /rbe
+
+% Generation rules:
+% Macro name is:          d,jsymbol,leftrank,rightrank,resultrank[,spec]
+% spec (special case) is: Bool | Int 
+% Bool is:                p0 | p1
+% Int  is:                pi | ni
+% where p0, p1 are 0 and 1, respectively, and pi, ni are arbitrary
+% positive or negative integers, respectively.
+% Parameters to macro are:
+%  take:   left argument, right argument,xtype,overtake fill value
+%  drop:   left argument, right argument,xtype,overtake
+%          overtake argument supplied but not used for drop.
+
+% ------------------------ drop ------------------------------
+
+% scalar drop vector 
+
+#define ddrop011(x0,XT,y1,YT,OTFILL) % generic scalar drop vector \
+% Cases: \
+% identity, positive/negative drop \
+(let  \
+% drop count \
+ drp := XT##toI(x0); \
+in   \
+% identity \
+    if (drp = 0) then y1 \
+    else \
+     let \
+      colsy := array_size(y1); \
+% # elements in result \
+      count := max(0,colsy-abs(drp)); \
+      liml := if drp > 0  \
+       then min(drp,colsy) else 0 end if; \
+     in \
+      array_setl(VECTORTAKEDROP(y1,liml,count),SISALIO) \
+     end let \
+    end if \
+end let)
+
+
+% 0 drop vector 
+#define ddrop011p0(x0,XT,y1,YT,OTFILL) y1 
+
+% 1 drop vector
+#define ddrop011p1(x0,XT,y1,YT,OTFILL) array_setl(array_reml(y1),SISALIO)
+
+% (-1) drop vector
+#define ddrop011n1(x0,XT,y1,YT,OTFILL) array_remh(y1) 
+
+% Positive integer drop vector 
+#define ddrop011pi(x0,XT,y1,YT,OTFILL) \
+array_setl(array_adjustFast((y1),XT##toI(x0),array_limh(y1)),SISALIO)
+
+% Negative integer drop vector 
+#define ddrop011ni(x0,XT,y1,YT,OTFILL) \
+array_adjustFast((y1),array_liml(y1),array_limh(y1)+XT##toI(x0))
+
+% ---------------------- Vector drops  ----------------------
+
+#define ddrop111p0(x0,XT,y1,YT,OTFILL)  % 0 drop vector \
+ ddrop011p0(x0[SISALIO],XT,y1,YT,OTFILL) 
+#define ddrop111p1(x0,XT,y1,YT,OTFILL) % 1 drop vector \
+ ddrop011p1(x0[SISALIO],XT,y1,YT,OTFILL) 
+#define ddrop111n1(x0,XT,y1,YT,OTFILL) % (-1) drop vector \
+ ddrop011n1(x0[SISALIO],XT,y1,YT,OTFILL) 
+#define ddrop111pi(x0,XT,y1,YT,OTFILL) % Positive integer drop vector \
+ ddrop011pi(x0[SISALIO],XT,y1,YT,OTFILL) 
+#define ddrop111ni(x0,XT,y1,YT,OTFILL) % Negative integer drop vector  \
+ ddrop011ni(x0[SISALIO],XT,y1,YT,OTFILL) 
+
+% Generic vector drop vector
+#define ddrop111(x1,XT,y1,YT,OTFILL) \
+ddrop011(x1[ConformSame(SISALIO,array_limh(x1))],XT,y1,YT,OTFILL)
+
+% ----------------- matrix drops -------------------------
+
+% Generic scalar drop matrix
+#define ddrop022(x0,XT,y2,YT,OTFILL) \
+ array_setl(array_adjustFast((y2),array_liml(y2)+XT##toI(x0),array_limh(y2)),SISALIO)
+
+% Generic vector drop matrix
+#define ddrop122(x1,XT,y2,YT,OTFILL) \
+% Cases: \
+% identity, positive/negative drop \
+% Identity and error check \
+ \
+(let  \
+% drop counts \
+ drows := XT##toI(x1[SISALIO+ConformSame(2,array_size(x1))-2]); \
+ dcols := XT##toI(x1[SISALIO+1]); \
+% # rows in result \
+ zrows := max(0,array_size(y2)-abs(drows));  \
+% # columns in result \
+ zcols := max(0,array_size(y2[SISALIO])-abs(dcols)); \
+% First result row, col \
+ firstrow := if drows <= 0 then 0 else drows end if; \
+ firstcol := if dcols <= 0 then 0 else dcols end if; \
+ yrows := array_size(y2); \
+ ycols := array_size(y2[SISALIO]); \
+in \
+ if (zrows = yrows) & (zcols = ycols)  \
+% identity \
+  then y2  \
+  else    \
+  % Must do some real work \
+   let  \
+% First, we drop off unneeded rows. Then, we drop each \
+% column as needed. \
+    newy2 := if (zrows = yrows) then y2  \
+             else array_setl(VECTORTAKEDROP(y2,firstrow,zrows),SISALIO) \
+             end if; \
+   in \
+% Now do drop on each row \
+    if (zcols = ycols) then newy2  \
+    else for y1 in newy2  \
+  returns array of array_setl(VECTORTAKEDROP(y1,firstcol,zcols),SISALIO) \
+         end for \
+    end if \
+   end let \
+% identity on y2 \
+  end if  \
+end let)
+
+% 0 0 drop matrix
+#define ddrop122p0p0(x1,XT,y2,YT,OTFILL) y2 
+
+% 0 1 drop matrix
+#define ddrop122p0p1(x1,XT,y2,YT,OTFILL) \
+(for y1 in y2 returns array of ddrop011p1(1,XT,y1,YT,OTFILL) end for)
+
+% 0 _1  drop matrix 
+#define ddrop122p0n1(x1,XT,y2,YT,OTFILL) \
+for y1 in y2 returns array of ddrop011n1(-1,XT,y1,YT,OTFILL) end for
+
+% (0,n)  drop matrix 
+#define ddrop122p0pi(x1,XT,y2,YT,OTFILL) \
+if XT##toI(x1[SISALIO+1]=0 then y2 else \
+for y1 in y2 returns array of ddrop011pi(x1[SISALIO+1],XT,y1,YT) end for end if
+
+% (0,-n)  drop matrix 
+#define ddrop122p0ni(x1,XT,y2,YT,OTFILL) \
+if XT##toI(x1[SISALIO+1]=0 then y2 else \
+for y1 in y2 returns array of \
+ddrop011ni(x1[SISALIO+1],XT,y1,YT,OTFILL) end for end if
+
+% 1  0  drop matrix 
+#define ddrop122p1p0(x1,XT,y2,YT,OTFILL) \
+ array_setl(array_reml(y2),SISALIO)
+
+% 1  1  drop matrix 
+#define ddrop122p1p1(x1,XT,y2,YT,OTFILL) \
+ ddrop122p0p1(x1,XT,ddrop122p1p0(x1,XT,y2,YT,OTFILL),YT,OTFILL)
+
+% (1,-1) drop matrix
+#define ddrop122p1n1(x1,XT,y2,YT,OTFILL) \
+ ddrop122p0n1(x1,XT,ddrop122p1p0(x1,XT,y2,YT,OTFILL),YT,OTFILL)
+
+ % (1,n)  drop matrix 
+#define ddrop122p1pi(x1,XT,y2,YT,OTFILL) \
+ ddrop122p0pi(x1[SISALIO+1],XT,ddrop122p1p0(x1,XT,y2,YT,OTFILL),YT,OTFILL)
+
+% (1,-n) drop matrix 
+#define ddrop122p1ni(x1,XT,y2,YT,OTFILL) \
+ ddrop122p0ni(x1[SISALIO+1],XT,ddrop122p1p0(x1,XT,y2,YT,OTFILL),YT,OTFILL)
+
+% _1 0  drop matrix
+#define ddrop122n1p0(x1,XT,y2,YT,OTFILL) array_remh(y2)
+
+% _1  1  drop matrix 
+#define ddrop122n1p1(x1,XT,y2,YT,OTFILL) \
+ ddrop122p0p1(x1,XT,ddrop122n1p0(x1,XT,y2,YT,OTFILL),YT,OTFILL)
+
+% (_1 _1) drop matrix 
+#define ddrop122n1n1(x1,XT,y2,YT,OTFILL) \
+ ddrop122p0n1(x1,XT,ddrop122n1p0(x1,XT,y2,YT,OTFILL),YT,OTFILL)
+
+% (_1,n)  drop matrix 
+#define ddrop122n1pi(x1,XT,y2,YT,OTFILL)  \
+ ddrop122p0pi(x1[SISALIO+1],XT,ddrop122n1p0(x1,XT,y2,YT,OTFILL),YT,OTFILL)
+
+% (_1,-n) drop matrix 
+#define ddrop122n1ni(x1,XT,y2,YT,OTFILL) \
+ ddrop122p0ni(x1SISALIO+1],XT,ddrop122n1p0(x1,XT,y2,YT,OTFILL),YT,OTFILL)
+
+% (n,0)  drop matrix
+#define ddrop122pip0(x1,XT,y2,YT,OTFILL) \
+ array_setl(array_adjustFast((y2),array_liml(y2)+XT##toI(x1[SISALIO]),array_limh(y2)),SISALIO)
+
+% (n,1)  drop matrix 
+#define ddrop122pip1(x1,XT,y2,YT,OTFILL)  \
+ ddrop122p0p1(1,I,ddrop122pip0(x1,XT,y2,YT,OTFILL),YT,OTFILL)
+
+% (n,_1)  drop matrix 
+#define ddrop122pin1(x1,XT,y2,YT,OTFILL) \
+ ddrop122p0n1(-1,I,ddrop122pip0(x1,XT,y2,YT,OTFILL),YT,OTFILL)
+% special cases that are not.
+
+% (n,m)  drop matrix 
+#define ddrop122pipi(x1,XT,y2,YT,OTFILL) \
+ ddrop122(x1,XT,y2,YT,OTFILL)
+
+ % (n,-m)  drop matrix 
+#define ddrop122pini(x1,XT,y2,YT,OTFILL) \
+ ddrop122(x1,XT,y2,YT,OTFILL)
+
+% ((-n),0)  drop matrix 
+#define ddrop122nip0(x1,XT,y2,YT,OTFILL) \
+ array_adjustFast((y2),array_liml(y2),array_limh(y2)-XT##toI(x1[SISALIO]))
+
+ % ((-n),1)  drop matrix 
+#define ddrop122nip1(x1,XT,y2,YT,OTFILL) \
+ ddrop122p0p1(1,I,ddrop122nip0(x1,XT,y2,YT,OTFILL),YT,OTFILL)
+
+% ((-n),_1)  drop matrix 
+#define ddrop122nin1(x1,XT,y2,YT,OTFILL) \
+ ddrop122p0n1(-1,I,ddrop122nip0(x1,XT,y2,YT,OTFILL),YT,OTFILL)
+
+% special cases that are not.
+
+% ((-n),m)  drop matrix 
+#define ddrop122nipi(x1,XT,y2,YT,OTFILL) \
+ ddrop122(x1,XT,y2,YT,OTFILL)
+
+% ((-n),-m)  drop matrix 
+#define ddrop122nini(x1,XT,y2,YT,OTFILL)  \
+ ddrop122(x1,XT,y2,YT,OTFILL)
+

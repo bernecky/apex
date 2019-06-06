@@ -1,0 +1,10 @@
+﻿ r←EmitDyadicConjunctions fns;sis
+⍝ Emit Dyadic Conjunction SAC code for primitive operands only
+ r←EmitDyadicOuterProducts fns
+ sis←D r[0] ⋄ fns←D r[1]
+ r←EmitDyadicInnerProduct fns
+ sis←sis,D r[0] ⋄ fns←D r[1]
+ r←EmitRankConjunction fns
+ sis←sis,D r[0] ⋄ fns←D r[1]
+ r←(E sis),E fns
+ 'in over our head'assert 2=≡sis

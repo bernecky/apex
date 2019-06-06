@@ -1,0 +1,8 @@
+﻿ r←prim FindFrag fns;lt;f
+ ⍝ Find best primitive fragment in prim
+ ⍝ to use for computing pt
+ ⍝ Result is incidence matrix for pt,prim
+ ⍝ Best: first match on name, l/r types
+ f←prim FindFn fns
+ lt←prim FindType fns
+ r←<⍀f∧lt ⍝ Pick best match

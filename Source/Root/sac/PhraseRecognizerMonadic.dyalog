@@ -1,0 +1,4 @@
+﻿ r←PhraseRecognizerMonadic ast
+⍝ Locate monadic phrases
+⍝ (none yet)
+ r←ast

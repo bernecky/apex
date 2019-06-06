@@ -1,0 +1,29 @@
+use Array: {genarray,<=,<,-,sel,+,modarray};
+
+int main()
+{ 
+ A_48 = genarray([1510, 2010], 0.5);
+  z =plusbslXDD( A_48);
+  StdIO::print( _sel_VxA_( [2,3], z));
+ return(0);
+}
+
+inline double[.,.] plusbslXDD(double[.,.] y)
+{ /* Scan of matrix along last axis */
+  defcell = genarray([2010], 0.0d);
+  z = with{
+          (. <= iv <= .) :  plusbslXDD(y[iv]);
+          } : genarray([1510], defcell);
+ return(z);
+}
+
+ inline double[.] plusbslXDD(double[.] y)
+{ /* Scan of vector */
+/* This does the scan in the wrong direction, but since
+ * we assume associative functions only, it should be ok.
+ */
+  z = y;
+  z = _modarray_AxVxS_( z, [0], _sel_VxA_([0], y)); 
+
+ return(z);
+}

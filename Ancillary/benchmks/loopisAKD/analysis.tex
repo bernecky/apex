@@ -1,0 +1,30 @@
+The \awlf of this benchmark performs much better than the \wlf
+version: in the former, elapsed time and instruction counts are
+several times shorter than in the latter, and cache miss
+rates are much smaller. 
+
+However, the performance of {\tt loopisAKD.sac} 
+in both environments is several times worse than that of 
+{\tt loopis.sac}, its AKS-based sibling,
+in both \wlf and \awlf environments: The AKD version
+instruction counts are several times higher than those in
+the AKS version, and the AKD version makes almost 
+no use of vector instructions, despite the fact that
+the \awlf code properly folds the {\tt \qiota\0n}
+vector.
+
+Examination of the IL for both benchmarks shows that
+that the \awlf inner loops are nearly identical, except that the
+AKD version passes the loop count as a parameter, whereas
+the AKS version has it embedded in the loop. This, by
+itself, would explain a slight performance loss, but it does
+not explain the inability of the compiler to perform 
+vectorization. It may be that the GCC compiler is unable
+to perform vectorization unless it knows the array
+bounds explicitly. If so, it maybe that loop peeling,
+applied at the 
+ 
+FIXME: try using ICC, per Stephan
+
+
+

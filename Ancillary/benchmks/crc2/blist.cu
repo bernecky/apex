@@ -1,0 +1,10 @@
+Bool2Int.ufn
+CShiftl.ufn
+CShiftr.ufn
+Cxor.ufn
+Int2Bool.ufn
+crcint.ufn
+crcint32.ufn
+main.ufn
+table32.ufn
+tobin.ufn

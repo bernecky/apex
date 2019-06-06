@@ -1,0 +1,10 @@
+ z{<-}fma y;t;ay;v
+@ value and xy-index of maximum
+@ absolute value in y
+@ Sets xy-index in i,j as side effects. Ugh.
+ ay{<-}|y
+ v{<-}{max}/ay
+ t{<-}{max}/v
+ i{<-}v{iota}t
+ j{<-}ay[i;]{iota}t
+ z{<-}y[i;j]

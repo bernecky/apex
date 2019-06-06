@@ -1,0 +1,5 @@
+ r{<-}rx correct x;n
+@ Return x at edges, otherwise rx+x
+ r{<-}x
+ n{<-}1+{iota}{neg}2+({rho}x)[1]
+ r[n;n]{<-}rx+r[n;n]

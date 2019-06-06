@@ -1,0 +1,12 @@
+ d{<-}aa sweepup dd;j;r
+@ We thought this was a scan, but I can't make it work.
+ d{<-}dd
+ d[0;]{<-}{divide}d[0;]
+ nrx{<-}rx
+ nry{<-}ry
+ :For j :In 1+{iota}({rho}dd)[0]-1
+     r{<-}aa[j;]{times}d[j-1;]
+     d[j;]{<-}{divide}d[j;]-r{times}aa[j-1;]
+     nrx[j;]{<-}nrx[j;]-nrx[j-1;]{times}r
+     nry[j;]{<-}nry[j;]-nry[j-1;]{times}r
+ :EndFor

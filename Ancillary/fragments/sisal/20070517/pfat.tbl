@@ -1,0 +1,117 @@
+% Column definitions are as follows:
+%  0  jsymbol name
+%  1  monadic compute types
+%  2  monadic result  types
+%  3  dyadic  compute types
+%  4  dyadic  result  types
+%  5  Commuting function,  if any. If none, then "."
+%     A commuting function is the one that is used to replace
+%     the original function when its arguments are swapped.
+%     For example:   function        commuting function
+%                      +               +
+%                     less than       greater than or equal
+%     This is done because OSC generates better code if a
+%     scalar is the left, rather the right, argument to a function.
+%     1996-05-17
+%  6  monadic function class (who generates code for it)
+%  7  dyadic function class (who generates code for it)
+%  8  Left identity element (li fn anything produces anything)
+%  9  Left 0 (l0 fn anything produces 0)
+% 10  Left 1 (l1 fn anything produces 1)
+%
+%jsymbol monadic  monadic  dyadic  dyadic 
+% name   compute  result   compute result
+%         types   types    types   types
+% type ordering is BIDZC:
+%  Boolean, Integer, Double_real, Complex, Character 
+% type definitions:
+$top of defn classes
+tdefault bidzc     bidzc  % The usual maximum of types
+tarith   iidzc     iidzc  % Simple integer/float arithmetic
+tbinom   bddzc     bddzc  % Binomial
+tbool    bbbbb     bbbbb  % Pure Booleans
+tdeal    iiiii     iiiii  % Deal
+telfs    dddzc     dddzc  % Most elementary fns
+tfloor   bidzc     biizc  % Floor, ceiling, signum
+trelat   bidzc     bbbbb  % Relationals
+tiota    bidzc     iiiii  % Indexof, index generator
+tleft    LLLLL     LLLLL  % Lev
+tright   RRRRR     RRRRR  % Dex, rotate, reverse, transpose
+$bottom of defn classes
+
+diam  ?        ?        ?        ?           .     .    .
+doll  ?        ?        ?        ?           .     .    .
+cent  ?        ?        ?        ?           .     .    .
+dot   ?        ?        ?        ?           .     .    .
+lbr   ?        ?        ?        ?           .     .    .
+rbr   ?        ?        ?        ?           .     .    .
+lpar  ?        ?        ?        ?           .     .    .
+rpar  ?        ?        ?        ?           .     .    .
+semi  ?        ?        ?        ?           .     .    .
+sl    ?        ?        ?        ?           .     .    .
+bsl   ?        ?        ?        ?           .     .    .
+assg  ?        ?        ?        ?           .     .    .
+goto  ?        ?        ?        ?           .     .    .
+dier  ?        ?        ?        ?           .     .    .
+plus  tdefault tdefault tarith   tarith      plus  msf  dsf
+bar   tarith   tarith   tarith   tarith      .     msf  dsf
+mpy   tfloor   tfloor   tdefault tdefault    mpy   msf  dsf
+div   tarith   tarith   telfs    telfs       .     msf  dsf
+star  telfs    telfs    tbinom   tbinom      .     msf  dsf
+max   tfloor   tfloor   tdefault tdefault    max   msf  dsf
+min   tfloor   tfloor   tdefault tdefault    min   msf  dsf
+mod   tdefault tdefault tdefault tdefault    .     msf  dsf
+and   ?        ?        tdefault tdefault    and   .    msf
+or    ?        ?        tdefault tdefault    or    .    dsf
+lt    ?        ?        trelat   trelat      gt    .    dsf
+le    ?        ?        trelat   trelat      ge    .    dsf
+eq    ?        ?        trelat   trelat      eq    .    dsf 
+ge    ?        ?        trelat   trelat      le    .    dsf
+gt    ?        ?        trelat   trelat      lt    .    dsf
+ne    ?        ?        trelat   trelat      ne    .    dsf
+alph  ?        ?        ?        ?           .     .    .
+eps   ?        ?        trelat   trelat      .     .    dsf
+iota  tdeal    tdeal    tiota    tiota       .     mmisc dmisc
+rho     ?        ?      tright   tright      .     mmisc dmisc
+coma  tright   tright   tdefault tdefault    .     .     .
+bang  tfloor   tfloor   tbinom   tbinom      .     .     .
+rotr  tright   tright   tright   tright      .     .     .
+dtak    ?        ?        ?        ?         .     .     .
+utak    ?        ?        ?        ?         .     .     .
+circ  telfs    telfs    telfs    telfs       .     msf   dsf
+quer  tdeal    tdeal    tdeal    tdeal       .     .     .
+not   tbool    tbool    tbool    tbool       .     msf   .
+take    ?        ?      tright   tright      .     .     take
+drop    ?        ?      tright   tright      .     .     take
+subs    ?        ?        ?        ?         .     .     .
+rsub    ?        ?        ?        ?         .     .     .
+cap     ?        ?        ?        ?         .     .     .
+cup     ?        ?        ?        ?         .     .     .
+ubar    ?        ?        ?        ?         .     .     .
+tran    ?        ?        ?        ?         .     .     .
+ibem    ?        ?        ?        ?         .     .     . 
+jot     ?        ?        ?        ?         .     .     .
+quad    ?        ?        ?        ?         .     .     .
+qqd     ?        ?        ?        ?         .     .     .
+log   telfs    telfs    telfs    telfs       .     msf   dsf
+nand  tbool    tbool    tbool    tbool       nand  .     dsf
+nor   tbool    tbool    tbool    tbool       nor   .     dsf
+lamp    ?        ?        ?        ?         .     .     .
+ugrd  tiota    tiota    tiota    tiota       .     mgrade .
+dgrd  tiota    tiota    tiota    tiota       .     mgrade .
+rot1  tright   tright   tright   tright      .     .     .
+sl1     ?        ?        ?        ?         .     .     .
+bsl1    ?        ?        ?        ?         .     .     .
+mdiv  telfs    telfs    telfs    telfs       .     .     .
+thrn    ?        ?        ?        ?         .     .     .
+hydr    ?        ?        ?        ?         .     .     .
+rtak  tleft    tleft    tleft    tleft       .     .     dmisc
+ltak  tright   tright   tright   tright      .     mmisc dmisc
+rbr     ?        ?        ?        ?         .     .     .
+lbr     ?        ?        ?        ?         .     .     . 
+same    ?        ?       trelat  trelat      .     .     dmisc
+nuax    ?        ?        ?        ?         .     .     .
+coax    ?        ?        ?        ?         .     .     .
+comb  tright   tright    tdefault tdefault   .     .     .
+epsb    ?        ?       trelat   trelat     .     .     .
+                                                         

@@ -1,0 +1,266 @@
+use Array: all;
+use StdIO : all;
+use Numerical : all;
+use CommandLine: all;
+use String: {to_string,tochar,sscanf};
+use ArrayFormat: all;
+use Bits: all;
+
+/* Compiled by APEX Version: /home/apex/apex3/wss/sac3013.dws2012-11-07 10:24:07.878 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline bool eqIIB(int x, int y)
+{ /* A=B on non-doubles */
+ return(ItoI(x) == ItoI(y));
+}
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline bool[.,.] tranXBB(bool[.,.] y)
+{ /* Transpose on rank-2 */
+        z = { [i,j] -> y[j,i] };
+        return(z);
+}
+
+inline int[.] rhoIII(int x, int[*] y)
+{ /* Scalar reshape non-scalar (to vector) */
+ z = rhoIII( [toi(x)],y);
+ return(z);
+}
+
+
+inline bool[*] rhoIBB(int[.] x, bool[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _mod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), false);
+   return( z);
+}
+
+
+
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[+] plusdotandBBISTARLIKE(bool[+]x, bool[+]y)
+{ /* CDC STAR-100 APL Algorithm for inner product */
+ /* This computes, for z=x f.g y,
+  *            z[i;] = z[i;]f x[i;j]g y[j;]
+  *  Thus, it runs stride-1, and we only fetch left argument
+  *  elements once. It is similar to dotSTAR, except that:
+  *   1. "f" is such that we can't avoid the reduce step.
+  *   2. "x[i;j] f" is such that it may produce an identity on y[j;].
+  *      If so, we don't apply f to that row.
+  *  R. Bernecky 2005-11-24
+  */
+  rowsx = drop([-1],shape(x));
+  colsx = shape(x)[[dim(x)-1]];
+  colsy = shape(y)[[dim(y)-1]];
+  Zrow = genarray([colsy],0);
+  /* Parallel over rows of x */
+  z = with {
+    (. <= [row] <= .) {
+      Crow = Zrow;
+      for (colx=0; colx<colsx; colx++) {
+        xel = x[row,colx];
+        xel = toB( xel);
+        if (toB(0) != xel) { /* Skip iteration if it's an f identity */
+          Crow = plusIII( toI( y[colx]), Crow );
+        }
+      }
+    } : Crow;
+  }: genarray( rowsx, Zrow);
+  return(z);
+}
+
+
+inline int[+] plusslXIIFOLD(int[+] y)
+{ /* last axis reduce rank-2 or greater matrix w/folding */
+  sy = shape(y);
+  zrho = drop([-1], sy);
+  z = with {
+         (. <= iv <= .)
+                : plusslXIIFOLD(y[iv]);
+        } : genarray(zrho, 0);
+  return(z);
+}
+
+
+inline int plusslXIIFOLD(int[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : ItoI(y[lim-iv]);
+       } :  fold( plusIII, ItoI(0));
+  return(z);
+}
+
+
+inline int plusIII(int x, int y)
+{ return(ItoI(x)+ItoI(y));
+}
+
+inline int[+] plusIII(int[+] x, int[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+         sx = shape(y);
+         z = with {
+             ( . <= iv <= .) {
+                      xel = x[iv];
+                   yel = y[iv];
+           } : plusIII(xel,yel);
+        } : genarray(sx, 0);
+  return(z);
+}
+
+
+
+
+
+
+inline int[*] rhoIII(int[.] x, int[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _mod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), 0);
+   return( z);
+}
+
+
+
+inline int V2O( int[.] shp, int[.] iv)
+{ /* Vector iv to offset into array of shape shp */
+  /* See V2O.dws workspace */
+  offset = 0;
+  wt = 1;
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    offset = offset + ( wt * iv[i]);
+    wt = wt * shp[i];
+  }
+  return( offset);
+}
+
+inline int[.] O2V( int[.] shp, int offset)
+{ /* Offset into array of shape shp to index vector */
+  /* See V2O.dws workspace */
+  iv = genarray( shape(shp), 1);
+  wts = iv;
+  for( i=shape(shp)[0]-2; i>=0; i--) {
+    wts[i] = wts[i+1] * shp[i+1];
+  }
+
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    iv[i] = _mod_SxS_( offset/wts[i], shp[i]);
+    offset = offset - (iv[i]*wts[i]);
+  }
+  return( iv);
+}
+
+inline int[+] plusIII(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : plusIII(xel,yel);
+  } : genarray(shape(y), 0);
+  return(z);
+}
+
+
+inline int[+] plusIII(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : plusIII(xel,y);
+  } : genarray( shape(x), 0);
+  return(z);
+}
+
+
+inline int[.] comaXII(int[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline int ipbbXII(int siz)
+{ 
+/*
+ ?
+*/
+A_23=rhoIII(2,siz);
+ A_24=rhoIBB(A_23,[false,true,true,false,false,false]);
+m_0=( A_24);
+ A_26=tranXBB( m_0);
+ A_27=plusdotandBBISTARLIKE(m_0,A_26);
+ A_34=plusslXIIFOLD( A_27);
+ A_38=plusslXIIFOLD( A_34);
+ r_0=( A_38);
+ return(r_0);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toI(( false));
+ n_0=( 800);
+ QUADrl_1=( 16807);
+ QUADct_1=( 1.0e-13);
+ QUADpp_1=( 16);
+ QUADpw_1=( 80);
+ A_58=ipbbXII( n_0);
+ r_0=( A_58);
+ A_62=quadXII( r_0,QUADpp_1,QUADpw_1);
+ /* dsf scalar(s) */
+A_64=eqIIB(r_0,56889422);
+/* dsf scalar(s) */
+A_65=barBBI(true,A_64);
+ r_1=( A_65);
+ A_69=quadXII( A_65,QUADpp_1,QUADpw_1);
+ return(r_1);
+}
+

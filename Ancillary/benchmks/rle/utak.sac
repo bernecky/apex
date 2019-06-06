@@ -1,0 +1,38 @@
+use Array: all;
+use StdIO : all;
+use String: {tochar,sscanf};
+use ArrayFormat: all;
+use Bits: all;
+
+inline bool[+] utakIIItwos(int[.] x, int[+] y)
+{ /* Vector-of-2s represent non-scalar */
+ yt = y;
+ cell = genarray(shape(x),false);
+ z = with {
+    (. <= iv <= .)
+                 : utakIIItwos(x,yt[iv]);
+    } : genarray(shape(yt), cell);
+ return(transpose(z));
+}
+
+inline bool[.] utakIIItwos(int[.] x, int y)
+{ /* Non-floating Vector-of-2s represent scalar */
+ s = shape(x)[0] - 1;
+ z = with {
+    (. <= iv=[i] <= .) : 1 == BitAND( 1, BitShiftRight( s - i, y));
+    } : genarray(shape(x), false);
+ return(z);
+}
+
+int main()
+{
+ x = genarray([8], 2);
+ y = iota(256);
+ z = utakIIItwos( x, y);
+ 
+ StdIO::show (transpose(z));
+ return(0);
+}
+
+
+

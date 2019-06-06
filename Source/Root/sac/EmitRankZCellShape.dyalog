@@ -1,0 +1,13 @@
+﻿ r←crks EmitRankZCellShape fns;class;cv;case
+⍝# Return cell shape generators for uniform fns
+⍝# crks is cell ranks for left and right arguments
+ r←(1↑⍴fns)⍴E'?'
+ class←,PFATfncl PFATProperty fns
+ cv←class∊E'dsf'            ⍝ Dyadic Scalar fns
+ case←2⊥⍉×cv⌿crks
+ r[cv/⍳⍴cv]←E'xyxy'[case],'cellshape'
+ cv←class∊E'msf'            ⍝ Monadic Scalar fns
+ r[cv/⍳⍴cv]←E'ycellshape'
+ cv←class∊E'op'             ⍝ Outer-product-like (Representation)
+ r[cv/⍳⍴cv]←E'xcellshape++ycellshape'
+ 'Missed a case'assert~(E'?')∊r

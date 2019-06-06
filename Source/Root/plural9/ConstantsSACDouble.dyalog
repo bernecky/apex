@@ -1,0 +1,8 @@
+﻿ r←ConstantsSACDouble ast;cv;c;i;j
+ ⍝ Convert Double APL constants to SISAL format
+ cv←ast[;astclass]∊astclassNC
+ cv←cv∧ast[;asttype]∊asttypeD ⍝ Just the floats
+ c←(cv⌿ast)[;asttarget] ⍝ Get numerics in original form.
+ c←ConstantsSACDoubleFixD¨c ⍝ Turn 1e9 to 1.0e9, add commas
+ ast[cv/⍳⍴cv;asttarget]←c
+ r←ast

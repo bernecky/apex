@@ -1,0 +1,2 @@
+﻿ fdrop y
+ ⎕FDROP y

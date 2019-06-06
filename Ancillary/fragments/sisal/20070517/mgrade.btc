@@ -1,0 +1,74 @@
+% Code fragments for monadic upgrade, downgrade
+%
+% Robert Bernecky 1995-10-08
+%
+
+%Fragment ugrd x11       Vector upgrade
+function $FNAME(y1: array[$XTYPE] returns array[integer])
+
+% Uses Batcher sort from p.43 of David Cann's 
+% SISAL: 1.2 A Brief Introduction and Tutorial
+% May 7,1992
+
+  function CeilingofLog2(N: integer returns integer)
+   for initial 
+    L :=0;
+    TwoToTheL := 1;
+   while TwoToTheL < N repeat
+    L := old L +1;
+    TwoToTheL := 2* old TwoToTheL;
+   returns value of L
+   end for
+  end function
+
+  function FloorOfNOver2(N: integer returns integer)
+   if N=1 then 0 else N/2 end if
+  end function
+
+  function Isec(I,P: integer returns integer)
+   if mod(I/P,2) =1 then P else 0 end if
+  end function
+
+% Code below here modified to return upgrade vector. rbe 1995-10-08
+
+ function Batcher(K: array[$YTYPE] returns array[integer]
+  let 
+   N := array_size(K);
+   T := CeilingOfLog2(N);
+  in
+   for initial 
+    P:= exp (2,T);
+    B := for i in 0,array_size(K)  % iota rho K
+         returns array of i
+         end for
+   while P>1 repeat
+    P := FloorOfNOver2(old P);
+    B:= 
+     for initial
+       Q := exp(2,T);
+       R := 0;
+       C := old B;
+     repeat
+      C := 
+        for Elt in old C at I
+         NewElt := 
+          if Isec(I,P)
+
+
+
+
+ end function
+
+ for i in Batcher(y1)
+  returns array of i+QUADIO
+ end for
+
+end function
+
+%Fragment dgrd x11       Vector downgrade
+function $FNAME(y1: array[$XTYPE] returns array[integer])
+
+under construction
+
+end function
+

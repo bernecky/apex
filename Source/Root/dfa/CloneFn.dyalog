@@ -1,0 +1,31 @@
+﻿ r←cds CloneFn y;ast;parm;cv;callerfn;calleefn;callsite;ct;asts;ast;subfnname;suffix;st;x;astcaller;astscaller
+⍝ Clone the callee function, at calling site.
+ ast←D y[0]
+ parm←D y[1]
+ cv←D y[2]
+ callerfn←(D y[3])[0] ⍝ Calling function's cds index
+ calleefn←(D y[3])[1] ⍝ Called function's cds index
+ callsite←(D y[3])[2] ⍝ Calling fn's ast index of subfn call
+ asts←D cds[calleefn] ⍝ Clone the callee fn's ast
+ ast←D asts[ssaast]
+ astcaller←D(D cds[callerfn])[ssaast]
+ subfnname←D ast[dfnname;asttarget]
+ suffix←'CLONE',⍕⍴cds
+ x←'Cloning: ',subfnname,' as: ',subfnname,suffix
+ ⎕←x,' called from: ',astcaller[dfnname;asttarget],'[',(⍕callsite),']'
+ ast[dfnname;asttarget]←E subfnname,suffix
+ 'Recursive fn - code me'assert~dfnname∊ast[;astfn,astlop,astrop]
+ ast←CleanseDFA ast  ⍝ Discard clone's dfa-derived info
+ st←D asts[ssast]
+ st[0;stname]←E subfnname,suffix
+ asts[ssast]←E st
+ asts[ssaast]←E ast
+ ⍝ Update caller's ast with cloned fn name.
+ astscaller←D cds[callerfn]
+ astscaller←((E subfnname),(E suffix),E callsite)RenameCloneRefs astscaller
+ r←cds,E asts              ⍝ Append cloned subfn to cds
+ r[callerfn]←E astscaller  ⍝ Update caller in cds
+ ct←BuildCallingTree r     ⍝ Update all control flow graphs
+ r←(E ct)UpdateCFG¨r
+ Checkem¨r
+ r←(E r),E(¯1+⍴r)[0]       ⍝ Update calleefn

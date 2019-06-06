@@ -1,0 +1,54 @@
+use Array: all;
+use StdIO : all;
+
+inline bool[+] epsIIB(int[+] x, int[+] y)
+{ /*  Fuzzy, non-fuzzy Membership AxA*/
+ PV = iota (shape(x)[0]); /* DEBUG !*/
+ sy = shape(y)[0];
+ z = with {
+     (. <= iv <= .) {
+               P = BinarySearch(y, x[iv], PV);
+       }: P != sy;
+    }: genarray( shape(x), false);
+ return(z);
+}
+
+/* If INL, EWLF runs like dirt ! */
+/* If INL, ive can't split selection for EWLF */
+#define INL
+#ifdef INL
+inline 
+#endif // INL
+int BinarySearch(int[+] x, int y, int[.] PV)
+{ /* Binary search x[PV] for y */
+
+ found = false;
+ first = 0;
+ sx  = (shape(PV))[[0]];
+ indx = -1; 
+ last = sx - 1;
+ while ((first <= last) && !found) {
+    indx = (first+last)/2;  /* index of middle entry */
+    xval = x[indx];
+    if ( y == xval) {
+       found = true;
+    } else if (y < xval) {
+              last = indx - 1;
+    } else {
+      first = indx + 1;
+    }
+ }
+ z = found ? indx : sx;
+ return(z);
+}
+
+int main()
+{ 
+ n_0=( 30000);
+ z= reverse(iota(n_0));
+ A_68=iota( n_0);
+ A_70=epsIIB(z,z);
+print (sum(toi(A_70)));
+ return(0);
+}
+

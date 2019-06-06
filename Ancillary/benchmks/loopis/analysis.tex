@@ -1,0 +1,17 @@
+The \awlf version of this benchmark outperforms the \wlf one 
+by a significant amount, because the former has support for
+{\em naked consumer \awlf}, whereas the latter
+lacks it.
+
+The speculative optimization, \wlprop, moves the with-loop
+that creates the vector {\tt \qiota\0n} into the {\tt :For}-loop, where
+there is a hidden assignment of {\tt i} to the current element
+of that vector. The naked-consumer \awlf optimization
+then eliminates references to the vector, at which point 
+the WL that creates it becomes dead code. 
+This results in a factor of two reduction
+in scalar and vector instructions, as well as reducing
+L1 and L2 cache miss rates by several orders of magnitude.
+All of these combine to produce an order-of-magnitude
+reduction in elased and CPU time.
+

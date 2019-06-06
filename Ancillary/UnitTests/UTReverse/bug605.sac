@@ -1,0 +1,11 @@
+use Array: {sel,take,shape,drop,genarray,-};
+use StdIO : {print};
+
+int main()
+{
+ shp = drop([1],shape(['x']));
+ cell = genarray(shp, ' ');
+ print(cell);
+ return(0);
+}
+

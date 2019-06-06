@@ -1,0 +1,20 @@
+﻿ r←ast FindValue y;d;i;j
+⍝ y is an ast index.
+⍝ Find the ast row where the item obtains its value
+⍝ This is VERY different from FindReferent! 1996-04-18
+ r←D y
+ d←dfainit ast ⍝ Mark first row of defns
+ d[2 3]←1 ⍝ Mark left,right arguments
+ →d[r]⍴0 ⍝ It's a temp
+⍝ Not temp.
+⍝ If it's a global function, we're done.
+ →(ast[r;astclass]∊astclassMFN,astclassDFN,astclassGFN)⍴0
+ Look for assignment
+ i←ast[;asttarget]∊y
+ 'help?'assert 1=+/i ⍝ just checking...
+ →(r=j←i/⍳⍴i)⍴0 ⍝ It's a temp for sure
+ r←j
+⍝ If the assignment is an assign, go indirect
+lp:→(~ast[r;astfn]∊(E,'←'),(E,'€'),(E':RI'),E':RE')⍴0
+ r←D ast[r;astrarg] ⍝ Get thing that generated
+ →lp ⍝ the assign originally

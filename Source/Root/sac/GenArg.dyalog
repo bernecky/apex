@@ -1,0 +1,6 @@
+﻿ r←tn GenArg p;cv
+ ⍝ Generate argument names for pointers p and names tn
+ ⍝ Returns cv for valid names, names
+ cv←~p∊NULL
+ r←tn[D 0⌈p]
+ r[(~cv)/⍳⍴cv]←E''

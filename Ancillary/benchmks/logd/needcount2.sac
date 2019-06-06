@@ -1,0 +1,12 @@
+use Array:all;
+
+int main()
+{
+  x = iota(50);
+
+  y = rotate( [1], x);
+
+  z = sum(y);
+  StdIO::show(z);
+  return(0);
+}

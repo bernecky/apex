@@ -1,0 +1,104 @@
+% Function attribute table for dyadic scalar functions.
+% This should live with the macros, really...
+%
+% Header contes:
+%    percentFragment  marks the beginning of each entry
+%    Fields are delimited by blanks.
+%    Field 1: primitive function jsymbol
+%    Field 2: acceptable left argument types
+%    Field 3: acceptable right argument types
+%    Field 4: Left compute type for this fragment
+%             (i.e., left argument will be coerced to this type
+%             by EmitDyadicScalarFns
+%             "-" if none
+%    Field 5: Right compute type for this fragment
+%             (i.e., right argument will be coerced to this type)
+%             by EmitDyadicScalarFns
+%    Field 6: Result type for fragment
+%    Field 7: Left identity element for reduction ("-" if none)
+%    Field 8: The left argument value that will make this 
+%             function return a 0 on all right arguments ("-" if none)
+%    Field 9: The left argument value that will make this 
+              function return a 1 on all right arguments ("-" if none)
+%    Field 10: Comments
+%
+% Header ordering may be critical in the case where two 
+% fragments would both work (e.g., Integer+Integer can be handled
+% by Double+Integer, but will give wrong type result). We'll
+% try to fancy up EmitDyadicScalarFn to make this less fussy.
+%
+Fragment plus bi bi i i i  0 - - Boolean + Boolean
+Fragment plus bid bid d d d 0.0d0 - - Double  + Double
+Fragment bar bi bi i i i    0 - - Boolean - Boolean
+Fragment bar bid bid d d d  0.0d0 - - Double  - Double
+Fragment mpy b b b b b      1 0 - Boolean times Boolean
+Fragment mpy bi bi i i i    1 0 - Integer times Integer
+Fragment mpy bid bid d d d  1.0d0 0 - Double times Double
+Fragment div bid bid d d d  - - - Boolean divide Boolean
+Fragment min b b b b b  true false - Boolean min Boolean
+Fragment min bi bi i i i PINFINITYI - - Integer min Integer
+Fragment min bid bid d d d PINFINITYD - - Double min Double
+Fragment max b b b b b     false - true Boolean max Boolean
+Fragment max bi bi i i i   MINFINITYI - -  Integer max Integer
+Fragment max bid bid d d d  MINFINITYD - -  Double max Double 
+Fragment mod b b b b b   false  true - Boolean mod Boolean
+Fragment mod bi bi i i i  0 1 - Integer mod Integer
+Fragment mod bid bid d d d 0.0d0 - - Double mod Double
+Fragment star b b b b b  - - true Boolean exp Boolean 
+% Following fragment won't work because EmitDyadicScalarFns
+% (and everyone else!) uses lhtype,rhtype to compute fragment 
+% type. This fails for general star because we don't know that
+% the result type is going to be double_real, as we can't
+% ascertain that the right argument is positive.
+% Do it the slow way for now... 1995-11-18
+
+%%%%Fragment star bi bi i i i - - 1 Integer exp NON-negative Integer
+%%%%%%                            Boolean exp Integer
+%%%%%%                            Integer exp Boolean
+%%%%%exp($XV,$YV)
+%%%%%
+Fragment star bid bid d d d - 1.0d0 Double exp Integer
+Fragment log  bid bid d d d - 1.0d0 Double log Integer
+Fragment lt b b b b b     false - true Boolean < Boolean
+Fragment lt bi bi i i b    0 - PINFINITYI Integer < Integer
+Fragment lt bid bid d d b  0.0d0 - PINFINITYD Double < Double
+Fragment lt c c c c b     0  - - Character < Character
+Fragment le b b b b b     true  - false Boolean <= Boolean
+Fragment le bi bi i i b   1  - MINFINITYI  Integer <= Integer
+Fragment le bid bid d d b true  - MINFINITYD Double <= Double
+Fragment le c c c c b      - - - Character <= Character
+Fragment eq b b b b b     true  - - Boolean = Boolean
+Fragment eq bi bi i i b   true - - Integer = Integer
+Fragment eq bid bid d d b true  - - Double = Double
+Fragment eq c c c c b     -  - - Character = Character
+Fragment ne b b b b b     false  - - Boolean not = Boolean
+Fragment ne bi bi i i b   false  - - Integer not = Integer
+Fragment ne bid bid d d b false  - - Double not = Double
+Fragment ne c c c c b     -  - - Character not = Character
+Fragment gt b b b b b     false  false - Boolean > Boolean
+Fragment gt bi bi i i b   0  MINFINITYI - Integer > Integer
+Fragment gt bid bid d d b 0.0d0  MINFINITYD - Double > Double
+Fragment gt c c c c b     0  - - Character > Character
+Fragment ge b b b b b     true  - true Boolean >=  Boolean
+Fragment ge bi bi i i b   true  - PINFINITYI Integer >= Integer
+Fragment ge bid bid d d b true  - PINFINITYD Double >= Double
+Fragment ge c c c c b     -  - - Character >= Character
+Fragment and b b b b b     true false - Boolean and Boolean
+Fragment or b b b b b    false -  true Boolean or Boolean
+Fragment nand bidz bidz b b b  - - false Boolean nand Boolean
+Fragment nor bidz bidz b b b   - true - Boolean nor Boolean
+Fragment and i i i i i    1 0 - Integer and Integer (LCM)
+Fragment and b i i i i    1 0 - Integer and Integer (LCM)
+Fragment and i b i i i    1 0 - Integer and Integer (LCM)
+Fragment or  i i i i i    0 1 - Integer or Integer (GCD)
+Fragment or  b i i i i    0 1 - Integer or Integer (GCD)
+Fragment or  i b i i i    0 1 - Integer or Integer (GCD)
+Fragment and d d d d d   1.0d0 0.0d0 - Double and Double(LCM)
+Fragment and b d d d d   1.0d0 0.0d0 - Boolean and Double (LCM)
+Fragment and d b d d d   1.0d0 0.0d0 - Double and Boolean (LCM)
+Fragment or  d d d d d   0.0d0 1.0d0 - Double or Double (GCD)
+Fragment or  b d d d d   0.0d0 1.0d0 - Boolean or Double (GCD)
+Fragment or  d b d d d   0.0d0 1.0d0 - Double or Boolean (GCD)
+Fragment circ bid bid i d d - - -  Number circle number
+Fragment circ4 bid bid i d d - - -  4 circle number
+

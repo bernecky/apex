@@ -1,0 +1,20 @@
+﻿ r←ast dfadsfShape i;b;larg;rarg;ls;rs;lx;rx;pr
+ ⍝ Get result shape of dyadic scalar fn for ast[i;]
+ ⍝ Rules for picking result shape
+ ⍝   Shapes match: Either argument
+ ⍝   Singleton vs non-singleton: Non-singleton
+ ⍝   Both singletons: Higher rank singleton
+ ⍝   Else: Length/rank error
+ larg←D ast[i;astlarg]
+ rarg←D ast[i;astrarg]  ⍝ Args to fns
+ ls←ast[larg;astshape]
+ rs←ast[rarg;astshape]  ⍝ Shapes
+ pr←D ls≡¨rs            ⍝ SHapes match
+ lx←D ast[larg;astxrho]
+ rx←D ast[rarg;astxrho] ⍝ ×/⍴x
+ pr←pr∨(lx=1)∧rx≠1      ⍝ Left arg singleton, right not.
+ pr←pr∨(lx=rx)∧(lx=1)∧(D ast[larg;astrank])<D ast[rarg;astrank] ⍝ Both singletons.
+ ⍝ We don't catch the error case here today! (1 1⍴1)+1 1 1⍴1?
+ r←ls
+ r[pr/⍳⍴r]←pr/rs
+ r[((ls∊NULL)∨rs∊NULL)/⍳⍴r]←NULL

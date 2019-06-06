@@ -1,0 +1,6 @@
+This is tomcatv, except that apex crashes due to
+semi-globals that it does not handle properly.
+
+This is a kludge to get tomcatv compilable by apex, so
+that I can run POGO on it.
+

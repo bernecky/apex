@@ -1,0 +1,6 @@
+﻿ r←ast KillQUADvarsFnDefn sg;target;cv
+ ⍝ Delete unreferenced (before set) system variables
+ ⍝ so they don't appear in the function header.
+ target←ast[;asttarget]⍳sg[;asttarget] ⍝ Name defns
+ cv←target∊(dfainit ast)⌿ast[;astptrs] ⍝ These names are referenced
+ r←cv⌿sg

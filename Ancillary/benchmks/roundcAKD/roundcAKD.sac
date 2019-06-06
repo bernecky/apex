@@ -1,0 +1,908 @@
+use Array: all;
+use StdIO : all;
+use Numerical : all;
+use CommandLine: all;
+use String: {to_string,tochar,sscanf};
+use ArrayFormat: all;
+use Bits: all;
+
+/* Compiled by APEX Version: /home/apex/apex3/wss/sac3014.dws2013-05-15 17:18:43.646 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline int barXII(int y)
+{ return(-y);
+}
+
+inline int[+] mpyXDI(double[+] y)
+{ /* Monadic scalar functions on array */
+  z = with {
+        ( . <= iv <= .)
+                : mpyXDI(toD(y[iv]));
+        } : genarray(shape(y), 0);
+  return(z);
+}
+
+inline int[+] minXDI(double[+] y,double QUADct)
+{ /* Monadic scalar functions on array */
+  z = with {
+        ( . <= iv <= .)
+                : minXDI(toD(y[iv]), QUADct);
+        } : genarray(shape(y), 0);
+  return(z);
+}
+
+inline int[+] mpyXII(int[+] y)
+{ /* Monadic scalar functions on array */
+  z = with {
+        ( . <= iv <= .)
+                : mpyXII(toI(y[iv]));
+        } : genarray(shape(y), 0);
+  return(z);
+}
+
+inline bool[+] mpyXBB(bool[+] y)
+{ /* Monadic scalar functions on array */
+  z = with {
+        ( . <= iv <= .)
+                : mpyXBB(toB(y[iv]));
+        } : genarray(shape(y), false);
+  return(z);
+}
+
+inline double barDDD(double x, double y)
+{ return(DtoD(x)-DtoD(y));
+}
+
+inline double plusIDD(int x, double y)
+{ return(ItoD(x)+DtoD(y));
+}
+
+inline double starDDD(double x, double y)
+{ return(pow(DtoD(x),DtoD(y)));
+}
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline double[+] mpyIDD(int[+] x, double[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+         sy = shape(y);
+         z = with {
+             ( . <= iv <= .) {
+                      xel = x[iv];
+                   yel = y[iv];
+           } : mpyIDD(xel,yel);
+        } : genarray(sy, 0.0d);
+  return(z);
+}
+
+
+
+
+
+
+inline double[+] mpyDDD(double x, double[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : mpyDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline double[+] plusDDD(double x, double[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : plusDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline double[+] divIDD(int[+] x, double y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : divIDD(xel,y);
+  } : genarray( shape(x), 0.0d);
+  return(z);
+}
+
+
+inline int[+] mpyIII(int[+] x, int[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+         sy = shape(y);
+         z = with {
+             ( . <= iv <= .) {
+                      xel = x[iv];
+                   yel = y[iv];
+           } : mpyIII(xel,yel);
+        } : genarray(sy, 0);
+  return(z);
+}
+
+
+
+
+
+
+inline double[+] mpyDID(double x, int[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : mpyDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline bool[+] mpyBBB(bool[+] x, bool[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+         sy = shape(y);
+         z = with {
+             ( . <= iv <= .) {
+                      xel = x[iv];
+                   yel = y[iv];
+           } : mpyBBB(xel,yel);
+        } : genarray(sy, false);
+  return(z);
+}
+
+
+
+
+
+
+inline double[+] mpyDBD(double x, bool[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : mpyDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline double[+] mpyBDD(bool[+] x, double[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+         sy = shape(y);
+         z = with {
+             ( . <= iv <= .) {
+                      xel = x[iv];
+                   yel = y[iv];
+           } : mpyBDD(xel,yel);
+        } : genarray(sy, 0.0d);
+  return(z);
+}
+
+
+
+
+
+
+inline bool[.] rhoBBB(bool x, bool[*] y)
+{ /* Scalar reshape non-scalar (to vector) */
+ z = rhoIBB( [toi(x)],y);
+ return(z);
+}
+
+
+inline double[.] rhoIDD(int x, double[*] y)
+{ /* Scalar reshape non-scalar (to vector) */
+ z = rhoIDD( [toi(x)],y);
+ return(z);
+}
+
+
+inline int[.] rhoIII(int x, int[*] y)
+{ /* Scalar reshape non-scalar (to vector) */
+ z = rhoIII( [toi(x)],y);
+ return(z);
+}
+
+
+inline bool[.] rhoIBB(int x, bool[*] y)
+{ /* Scalar reshape non-scalar (to vector) */
+ z = rhoIBB( [toi(x)],y);
+ return(z);
+}
+
+
+inline bool[*] quadXBB(bool[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline bool[.] comaBBB(bool[.] x, bool y)
+{/* VxS catenate first (or last) axis */
+ return(toB(x)++[toB(y)]);
+}
+
+inline bool sameDDB(double[+] x, double[+] y,double QUADct)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqDDB(toD( x),  toD( y), QUADct))));
+  return(z);
+}
+
+
+
+inline bool sameDIB(double[+] x, int[+] y,double QUADct)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqDDB(toD( x),  toD( y), QUADct))));
+  return(z);
+}
+
+
+
+inline bool sameDBB(double[+] x, bool[+] y,double QUADct)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqDDB(toD( x),  toD( y), QUADct))));
+  return(z);
+}
+
+
+
+inline int CommandLineArgvXBI(bool y)
+{ /* Get Command-line argument element #y as integer scalar */
+  int z;
+  junk, z = sscanf(argv(toi(y)), "%d");
+  return( z);
+}
+
+inline bool andslXBBQUICKSTOP(bool[.] y)
+{ /* First/last axis reduction of vector with quick stop*/
+  z = with {
+         (0*shape(y) <= iv < shape(y))
+                : BtoB(y[iv]);
+        } : foldfix( andBBB, ItoB(1), ItoB(0));
+  return(z);
+}
+
+
+inline int mpyXDI(double y)
+{ /* signum int/double */
+   if( toD(0) == y) {
+    z = 0;
+  } else {
+    if( toD(0) < y) {
+      z = 1;
+    } else {
+      z = -1;
+    }
+  }
+  return(z);
+}
+
+inline int minXDI(double y,double QUADct)
+{ return(DFLOOR(y,QUADct));
+}
+
+
+
+inline int mpyXII(int y)
+{ /* signum int/double */
+   if( toI(0) == y) {
+    z = 0;
+  } else {
+    if( toI(0) < y) {
+      z = 1;
+    } else {
+      z = -1;
+    }
+  }
+  return(z);
+}
+
+inline bool mpyXBB(bool y)
+{ /* Boolean signum (NOP) */
+ return(y);
+}
+
+inline double mpyIDD(int x, double y)
+{ return(ItoD(x)*DtoD(y));
+}
+
+inline double mpyDDD(double x, double y)
+{ return(DtoD(x)*DtoD(y));
+}
+
+inline double plusDDD(double x, double y)
+{ return(DtoD(x)+DtoD(y));
+}
+
+inline double divIDD(int x, double y)
+{ dx = ItoD(x);
+  dy = DtoD(y);
+  z = (dx == dy) ? 1.0  : dx/dy;
+  return(z);
+}
+
+inline int mpyIII(int x, int y)
+{ return(ItoI(x)*ItoI(y));
+}
+
+inline bool mpyBBB(bool x, bool y)
+{ return(BtoB(x) & BtoB(y));
+}
+
+inline double mpyBDD(bool x, double y)
+{ return(BtoD(x)*DtoD(y));
+}
+
+inline bool andBBB(bool x, bool y)
+{ return(BtoB(x)&BtoB(y));
+}
+
+inline double[+] mpyIDD(int x, double[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : mpyDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline double[+] mpyIDD(int[+] x, double y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : mpyIDD(xel,y);
+  } : genarray( shape(x), 0.0d);
+  return(z);
+}
+
+
+inline int[+] mpyIII(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : mpyIII(xel,yel);
+  } : genarray(shape(y), 0);
+  return(z);
+}
+
+
+inline int[+] mpyIII(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : mpyIII(xel,y);
+  } : genarray( shape(x), 0);
+  return(z);
+}
+
+
+inline bool[+] mpyBBB(bool x, bool[+] y)
+{ /* SxA scalar function */
+  xel = toB(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toB(y[iv]);
+                    } : mpyBBB(xel,yel);
+  } : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] mpyBBB(bool[+] x, bool y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : mpyBBB(xel,y);
+  } : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline double[+] mpyBDD(bool x, double[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : mpyDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline double[+] mpyBDD(bool[+] x, double y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : mpyBDD(xel,y);
+  } : genarray( shape(x), 0.0d);
+  return(z);
+}
+
+
+inline bool[+] eqDDB(double[+] x, double[+] y,double QUADct)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+         sy = shape(y);
+         z = with {
+             ( . <= iv <= .) {
+                      xel = x[iv];
+                   yel = y[iv];
+           } : eqDDB(xel,yel, QUADct);
+        } : genarray(sy, false);
+  return(z);
+}
+
+
+
+
+
+
+inline int[.] comaXII(int[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline double[.] comaXDD(double[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline bool[.] comaXBB(bool[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline bool[*] rhoIBB(int[.] x, bool[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _mod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), false);
+   return( z);
+}
+
+
+
+inline double[*] rhoIDD(int[.] x, double[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _mod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), 0.0d);
+   return( z);
+}
+
+
+
+inline int[*] rhoIII(int[.] x, int[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _mod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), 0);
+   return( z);
+}
+
+
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline bool eqDDB(double x, double y, double QUADct)
+{ /* A=B on doubles */
+  /* We use | instead of || on the assumption that
+   * the zero-fuzz case will eliminate the second leg,
+   * and it also eliminate a CONDFUN.
+   */
+ return((DtoD(x) == DtoD(y)) | APEXFUZZEQ(DtoD(x),DtoD(y),QUADct));
+}
+
+
+inline bool[+] eqDDB(double x, double[+] y,double QUADct)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : eqDDB(xel,yel, QUADct);
+  } : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqDDB(double[+] x, double y,double QUADct)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : eqDDB(xel,y, QUADct);
+  } : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline int DFLOOR(double y, double QUADct)
+{ /* Fuzzy floor */
+  /* Definition taken from SHARP APL Refman May 1991, p.6-23
+   * floor:  n <- (signum y) times nofuzzfloor 0.5+abs y)
+   *         z <- n-(QUADct times 1 max abs y)<(n-y)
+   * If you want a double result,  write: "y - 1| y".
+   */
+   n = tod(floor(0.5+fabs(y)));
+   if (y < 0.0)
+        n = -n;
+   else if (0.0 == y)
+        n = 0.0;
+   range = fabs(y);
+   if (1.0 > range)
+        range = 1.0;
+   fuzzlim = QUADct*range;
+   ny = n-y;
+   if (fuzzlim < ny)
+        z = n - 1.0;
+   else
+        z = n;
+   return(toi(z));
+}
+
+inline int V2O( int[.] shp, int[.] iv)
+{ /* Vector iv to offset into array of shape shp */
+  /* See V2O.dws workspace */
+  offset = 0;
+  wt = 1;
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    offset = offset + ( wt * iv[i]);
+    wt = wt * shp[i];
+  }
+  return( offset);
+}
+
+inline int[.] O2V( int[.] shp, int offset)
+{ /* Offset into array of shape shp to index vector */
+  /* See V2O.dws workspace */
+  iv = genarray( shape(shp), 1);
+  wts = iv;
+  for( i=shape(shp)[0]-2; i>=0; i--) {
+    wts[i] = wts[i+1] * shp[i+1];
+  }
+
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    iv[i] = _mod_SxS_( offset/wts[i], shp[i]);
+    offset = offset - (iv[i]*wts[i]);
+  }
+  return( iv);
+}
+
+inline double[.] roundIDD(int scale, double[.] value)
+{ 
+/*
+ ?
+*/
+QUADct_0=( 1.0e-14);
+ A_34=mpyXDI( value);
+ sign_0=( A_34);
+ /* dsf scalar(s) */
+A_36=barDDD(0.5,0.5);
+ A_37=barXII( scale);
+ /* dsf scalar(s) */
+A_38=plusIDD(A_37,A_36);
+ dscale_0=( A_38);
+ /* dsf scalar(s) */
+A_40=barDDD(10.5,0.5);
+ /* dsf scalar(s) */
+A_41=starDDD(A_40,dscale_0);
+ power_0=( A_41);
+ /* dsf Check needed */
+A_43=mpyIDD(sign_0,value);
+/* dsf scalar(s) */
+A_44=mpyDDD(power_0,A_43);
+ /* dsf scalar(s) */
+A_45=plusDDD(0.5,A_44);
+ A_47=minXDI( A_45,QUADct_0);
+ /* dsf scalar(s) */
+A_48=divIDD(A_47,power_0);
+ /* dsf Check needed */
+A_49=mpyIDD(sign_0,A_48);
+ result_0=( A_49);
+ return(result_0);
+}
+
+inline bool[.] benroundXIB(int n ,double QUADct)
+{ 
+/*
+ ?
+*/
+A_74=rhoBBB(false,false);
+ r_0=( A_74);
+ A_76=rhoIDD(n,[-1.2345, -45.678, 12.345, 45.678]);
+A_77=roundIDD(-2,A_76);
+ t2_0=( A_77);
+ A_79=rhoIDD(n,[-1.23, -45.68, 12.35, 45.68]);
+ A_81=sameDDB(t2_0,A_79,QUADct);
+ A_82=comaBBB(r_0,A_81);
+ r_1=( A_82);
+ A_84=rhoIDD(n,[-1.235, -1.2349, 1.2349, 1.235]);
+ A_85=roundIDD(-2,A_84);
+ t3_0=( A_85);
+ A_87=rhoIDD(n,[-1.24, -1.23, 1.23, 1.24]);
+ A_89=sameDDB(t3_0,A_87,QUADct);
+ A_90=comaBBB(r_1,A_89);
+ r_2=( A_90);
+ A_92=rhoIDD(n,[-1.135, -1.1349, 1.1349, 1.135]);
+ A_93=roundIDD(-2,A_92);
+ t4_0=( A_93);
+ A_95=rhoIDD(n,[-1.14, -1.13, 1.13, 1.14]);
+ A_97=sameDDB(t4_0,A_95,QUADct);
+ A_98=comaBBB(r_2,A_97);
+ r_3=( A_98);
+ A_100=rhoIDD(n,[12345.6789, 2.1349, 2.135]);
+ A_101=roundIDD(-2,A_100);
+ t5_0=( A_101);
+ A_103=rhoIDD(n,[12345.68, 2.13, 2.14]);
+ A_105=sameDDB(t5_0,A_103,QUADct);
+ A_106=comaBBB(r_3,A_105);
+ r_4=( A_106);
+ A_108=rhoIII(n,[-12345, -45678, 12345, 45678]);
+ A_109=roundCLONE3IID(3,A_108);
+ t6_0=( A_109);
+ A_111=rhoIII(n,[-12000, -46000, 12000, 46000]);
+ A_113=sameDIB(t6_0,A_111,QUADct);
+ A_114=comaBBB(r_4,A_113);
+ r_5=( A_114);
+ A_116=rhoIII(n,[-11500, -11490, 11490, 11500]);
+ A_117=roundCLONE4IID(3,A_116);
+ t7_0=( A_117);
+ A_119=rhoIII(n,[-12000, -11000, 11000, 12000]);
+ A_121=sameDIB(t7_0,A_119,QUADct);
+ A_122=comaBBB(r_5,A_121);
+ r_6=( A_122);
+ A_124=rhoIII(n,[-12345, -45678, 12345, 45678]);
+ A_125=roundCLONE5IID(-2,A_124);
+ t8_0=( A_125);
+ A_127=rhoIII(n,[-12345, -45678, 12345, 45678]);
+ A_129=sameDIB(t8_0,A_127,QUADct);
+ A_130=comaBBB(r_6,A_129);
+ r_7=( A_130);
+ A_132=rhoIBB(n,[false,true]);
+ A_133=roundCLONE6IBD(-2,A_132);
+ t9_0=( A_133);
+ A_135=rhoIBB(n,[false,true]);
+ A_137=sameDBB(t9_0,A_135,QUADct);
+ A_138=comaBBB(r_7,A_137);
+ r_8=( A_138);
+ z_0=( r_8);
+ return(z_0);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+n=CommandLineArgvXBI( true);
+ QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toI(( false));
+ QUADpp_1=( 16);
+ QUADpw_1=( 80);
+ QUADct_1=( 1.0e-14);
+ QUADrl_1=( 16807);
+ A_57=benroundXXB( n,QUADct_1);
+ r_0=( A_57);
+ A_61=quadXBB( A_57,QUADpp_1,QUADpw_1);
+ A_62=andslXBBQUICKSTOP( r_0);
+ /* dsf scalar(s) */
+A_66=barBBI(true,A_62);
+r_1=( A_66);
+ A_70=quadXII( A_66,QUADpp_1,QUADpw_1);
+ return(r_1);
+}
+
+inline double[.] roundCLONE3IID(int scale, int[.] value)
+{ 
+/*
+ ?
+*/
+QUADct_0=( 1.0e-14);
+ A_34=mpyXII( value);
+ sign_0=( A_34);
+ /* dsf scalar(s) */
+A_36=barDDD(0.5,0.5);
+ A_37=barXII( scale);
+ /* dsf scalar(s) */
+A_38=plusIDD(A_37,A_36);
+ dscale_0=( A_38);
+ /* dsf scalar(s) */
+A_40=barDDD(10.5,0.5);
+ /* dsf scalar(s) */
+A_41=starDDD(A_40,dscale_0);
+ power_0=( A_41);
+ /* dsf Check needed */
+A_43=mpyIII(sign_0,value);
+/* dsf scalar(s) */
+A_44=mpyDID(power_0,A_43);
+ /* dsf scalar(s) */
+A_45=plusDDD(0.5,A_44);
+ A_47=minXDI( A_45,QUADct_0);
+ /* dsf scalar(s) */
+A_48=divIDD(A_47,power_0);
+ /* dsf Check needed */
+A_49=mpyIDD(sign_0,A_48);
+ result_0=( A_49);
+ return(result_0);
+}
+
+inline double[.] roundCLONE4IID(int scale, int[.] value)
+{ 
+/*
+ ?
+*/
+QUADct_0=( 1.0e-14);
+ A_34=mpyXII( value);
+ sign_0=( A_34);
+ /* dsf scalar(s) */
+A_36=barDDD(0.5,0.5);
+ A_37=barXII( scale);
+ /* dsf scalar(s) */
+A_38=plusIDD(A_37,A_36);
+ dscale_0=( A_38);
+ /* dsf scalar(s) */
+A_40=barDDD(10.5,0.5);
+ /* dsf scalar(s) */
+A_41=starDDD(A_40,dscale_0);
+ power_0=( A_41);
+ /* dsf Check needed */
+A_43=mpyIII(sign_0,value);
+/* dsf scalar(s) */
+A_44=mpyDID(power_0,A_43);
+ /* dsf scalar(s) */
+A_45=plusDDD(0.5,A_44);
+ A_47=minXDI( A_45,QUADct_0);
+ /* dsf scalar(s) */
+A_48=divIDD(A_47,power_0);
+ /* dsf Check needed */
+A_49=mpyIDD(sign_0,A_48);
+ result_0=( A_49);
+ return(result_0);
+}
+
+inline double[.] roundCLONE5IID(int scale, int[.] value)
+{ 
+/*
+ ?
+*/
+QUADct_0=( 1.0e-14);
+ A_34=mpyXII( value);
+ sign_0=( A_34);
+ /* dsf scalar(s) */
+A_36=barDDD(0.5,0.5);
+ A_37=barXII( scale);
+ /* dsf scalar(s) */
+A_38=plusIDD(A_37,A_36);
+ dscale_0=( A_38);
+ /* dsf scalar(s) */
+A_40=barDDD(10.5,0.5);
+ /* dsf scalar(s) */
+A_41=starDDD(A_40,dscale_0);
+ power_0=( A_41);
+ /* dsf Check needed */
+A_43=mpyIII(sign_0,value);
+/* dsf scalar(s) */
+A_44=mpyDID(power_0,A_43);
+ /* dsf scalar(s) */
+A_45=plusDDD(0.5,A_44);
+ A_47=minXDI( A_45,QUADct_0);
+ /* dsf scalar(s) */
+A_48=divIDD(A_47,power_0);
+ /* dsf Check needed */
+A_49=mpyIDD(sign_0,A_48);
+ result_0=( A_49);
+ return(result_0);
+}
+
+inline double[.] roundCLONE6IBD(int scale, bool[.] value)
+{ 
+/*
+ ?
+*/
+QUADct_0=( 1.0e-14);
+ A_34=mpyXBB( value);
+ sign_0=( A_34);
+ /* dsf scalar(s) */
+A_36=barDDD(0.5,0.5);
+ A_37=barXII( scale);
+ /* dsf scalar(s) */
+A_38=plusIDD(A_37,A_36);
+ dscale_0=( A_38);
+ /* dsf scalar(s) */
+A_40=barDDD(10.5,0.5);
+ /* dsf scalar(s) */
+A_41=starDDD(A_40,dscale_0);
+ power_0=( A_41);
+ /* dsf Check needed */
+A_43=mpyBBB(sign_0,value);
+/* dsf scalar(s) */
+A_44=mpyDBD(power_0,A_43);
+ /* dsf scalar(s) */
+A_45=plusDDD(0.5,A_44);
+ A_47=minXDI( A_45,QUADct_0);
+ /* dsf scalar(s) */
+A_48=divIDD(A_47,power_0);
+ /* dsf Check needed */
+A_49=mpyBDD(sign_0,A_48);
+ result_0=( A_49);
+ return(result_0);
+}
+

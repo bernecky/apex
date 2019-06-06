@@ -1,0 +1,190 @@
+%$entry=foo
+define foo
+
+#define SISALIO 0
+#define QUADIO 0
+#define $YTYPE integer
+global and(x,y: integer returns integer)
+global shiftr(x,y:integer returns integer)
+
+function ugrdxiix11(y1: array[integer] returns array[integer])
+
+% 32-bit integer upgrade using Radix Sort/Grade
+% R. Bernecky 1997-01-10
+
+function BuildPV(hd: integer; b: array[integer] returns array[integer])
+% Turn linked list from radix grade into Upgrade result
+% hd is integer index into list of first result element, in SISALIO origin.
+% b is a linked list of indices into list of remaining result elements
+% in non-descending order, terminated by NUL.
+
+#define BitsInInteger 32
+#define GradeUpBucketWidth 8  
+% GradeUpBucketWidth is 2 log # buckets.
+% E.g., 8 means 256 buckets, so each upgrade pass processes 
+% 8 bits of the argument.
+
+
+for initial
+r := array_fill(SISALIO,SISALIO-1,-1);
+i := 0; 
+head:= hd;
+lim:= array_size(b);
+while i<lim repeat
+r := array_addh(old r,old head);
+head:= b[old head];
+i:= old i+1;
+returns value of r
+end for
+end function
+
+
+function Coalesce(bin,bhin,btin: array[integer]; col: integer;
+                  returns integer,array[integer])
+% Given a forest of linked links, turn them into a single linked list.
+
+% b is a forest of linked lists produced by radix sort/grade.
+% Each list is indices within b, in SISALIO origin, of the next
+% item on that list, terminated by NUL.
+% bhin is a vector of indices into bin of the head of each list.
+% Empty lists are indicated by bhin=NUL.
+% btin is the index of the tail of each list. 
+% col is column being graded. Zero if this is a signed coalesce, 
+%                         Non-zero if an unsigned coalesce.
+
+for initial
+NUL:= -1;  % Handy end-of-list marker.
+lh:= NUL;
+lt:= NUL;
+IntegerBits:= 32; %%% This needs to be in stdlib or OSC copy code
+nb:= array_size(bhin); % Number of buckets
+half:= nb/2;
+i:= 0; % Starting bucket #
+b:= bin;
+bh:=bhin;
+bt:=btin;
+while i<nb repeat
+ ind:= SISALIO+if (col~=0) then old i  % col 0 has high-order sign bit, so
+               else if (old i < half) % sign bits come first.
+                    then old i+half else old i-half end if
+               end if;
+ b,lh,lt:=
+  if bh[ind] = NUL then old b, old lh, old lt % nothing for null
+  else 
+   if old lh = NUL 
+    then old b, 
+         bh[ind], % No list until now.
+         bt[ind]
+    else old b[old lt+SISALIO: bh[ind]], 
+         old lh,
+         bt[ind] 
+    end if
+  end if; 
+ i:= old i+1;
+returns value of lh value of b
+end for
+end function
+
+function BuildList(radix: integer; dat: array[$YTYPE]
+returns integer, array[integer])
+% Initial pass across data for radix grade. This could be written
+% using RadixGrade (which it strongly resembles), but this should run
+% marginally faster by avoiding construction of iota rho dat and 
+% avoidance of indirect addressing in the first pass.
+
+let
+b,bh,bt:= for initial
+NUL:= -1;
+bh:= array_fill(SISALIO,SISALIO+radix-1,NUL);
+bt:= array_fill(SISALIO,SISALIO+radix-1,NUL);
+b:=array_fill(SISALIO,SISALIO-1,-1);
+i:= 0;
+N:= array_size(dat);
+while i<N repeat
+bn:= SISALIO+and(dat[old i+SISALIO],radix-1); % Bucket #
+b, bh, bt:= if old bh[bn] = NUL  % This list was empty until now
+            then array_addh(old b,NUL),  
+                 old bh[bn: old i+SISALIO],
+                 old bt[bn: old i+SISALIO]
+            else array_addh(old b[old bt[bn]: old i],NUL), 
+                 old bh, 
+                 old bt[bn: old i+SISALIO]
+            end if;
+i:= old i+1;
+returns value of b
+        value of bh
+        value of bt
+end for;
+in
+Coalesce(b,bh,bt,(BitsInInteger/GradeUpBucketWidth)-1) % Unsigned coalesce
+end let
+end function
+           
+
+function RadixGradeUp(radix: integer; dat: array[$YTYPE];
+col: integer; hd: integer; pv: array[integer]
+returns integer, array[integer])
+% Non-initial passes across data for radix grade.
+% radix is # sorter pockets.
+% dat is vector of integer-like data.
+% col is radix index into each integer for the column we are grading now.
+% hd is the index into pv of the first element we are grading.
+% pv is a linked list of indices corresponding to the partially ordered
+% elements of dat. It is used to access dat without rearranging its
+% elements explicitly.
+%
+% The result is a new hd and new pv, representing dat graded on col.
+
+let
+b,bh,bt:= for initial
+NUL:= -1;
+N:= array_size(pv); % Number of elements to be sorted.
+bh:= array_fill(SISALIO,SISALIO+radix-1,NUL);
+bt:= array_fill(SISALIO,SISALIO+radix-1,NUL);
+b:=  array_fill(SISALIO,SISALIO+N-1,-1); % Eventual result
+i:= 0;
+shiftct:=GradeUpBucketWidth*(((BitsInInteger/GradeUpBucketWidth)-1)-col);
+cpv:=hd; % Index of current item being sorted
+while i<N repeat
+bn:= SISALIO + and(shiftr(dat[old cpv+SISALIO],shiftct),radix-1);
+b, bh, bt:= if old bh[bn] = NUL  % This list was empty until now
+            then old b,          % New item ends this list 
+                 old bh[bn: old cpv],
+                 old bt[bn: old cpv]
+            % Point end of last bucket at new element. 
+            else old b[old bt[bn]: old cpv],
+                 old bh, 
+                 old bt[bn: old cpv]
+            end if;
+i:= old i+1;
+cpv:= pv[old cpv]; % Follow linked list
+returns value of b
+        value of bh
+        value of bt
+end for
+in
+Coalesce(b,bh,bt,col) % Unsigned coalesce
+end let
+end function
+           
+% Here is the actual grade function.
+let
+hd,pv:=for initial
+radix:= exp(2,GradeUpBucketWidth); % 256 buckets all the time
+hd,pv:= BuildList(radix,y1);       % Build initial pv based on low-order col
+col:= (BitsInInteger/GradeUpBucketWidth)-2;  % Second-last column, zero-origin
+while col>=0 repeat
+hd,pv:= RadixGradeUp(radix,y1,old col,old hd,old pv);
+col := old col-1;
+returns value of hd
+        value of pv 
+end for;
+in
+BuildPV(hd,pv)
+end let
+end function 
+
+function foo(y1: array[integer] returns array[integer])
+ugrdxiix11(y1)
+end function  
+

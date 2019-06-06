@@ -1,0 +1,14 @@
+define f 
+
+% window reduce kludge
+
+function f(a: integer; b,c: array[double_real] returns 
+array[double_real])                  
+
+  for i in 0,1+array_limh(b)-a
+   s := for j in i,i+a-1
+    returns value of sum b[j] *c[j-i]
+    end for
+   returns array of s 
+  end for
+end function                                                                   

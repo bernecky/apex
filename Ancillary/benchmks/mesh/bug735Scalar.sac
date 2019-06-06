@@ -1,0 +1,18 @@
+use Array:{==,/,sum,iota,&,*,sel};
+int[*] id( int[*] y)
+{ return(y);
+}
+
+int main()
+{
+ v1 = id(iota(1000000));
+ v2 = id(2*iota(1000000));
+ 
+ z = with {
+     ( . <= iv=[i] <= .) : (i == 2*(i/2)) ? v1[ i] : v2[i];
+     } : genarray (_shape_A_(v1), 666);
+
+ return(sum(z));
+}
+
+

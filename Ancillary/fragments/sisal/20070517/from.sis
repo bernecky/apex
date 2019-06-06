@@ -1,0 +1,48 @@
+% C preprocessor code fragments for "from"
+%
+% Robert Bernecky 1996-06-08
+
+% Generation rules:
+% Macro name is:          dfrom,leftrank
+%   left argument, left argument type, right argument, right argument type
+%   right argument type not used today.
+
+% Indexing by scalar
+#define dfrom0(x0,XT,y1,YT) y1[XT##toI(x0)]
+
+% Indexing by vector
+#define dfrom1(x1,XT,y1,YT) for x0 in x1 \
+returns array of dfrom0(x0,XT,y1,YT) end for
+
+% Indexing by matrix
+#define dfrom2(x2,XT,y1,YT) for x1 in x2 \
+returns array of dfrom1(x1,XT,y1,YT) end for
+
+% Indexing by rank-3
+#define dfrom3(x3,XT,y1,YT) for x2 in x3 \
+returns array of dfrom2(x2,XT,y1,YT) end for
+
+% Indexing by rank-4
+#define dfrom4(x4,XT,y1,YT) for x3 in x4 \
+returns array of dfrom3(x3,XT,y1,YT) end for
+
+% Indexing by rank-5
+#define dfrom5(x5,XT,y1,YT) for x4 in x5 \
+returns array of dfrom4(x4,XT,y1,YT) end for
+
+% Indexing by rank-6
+#define dfrom6(x6,XT,y1,YT) for x5 in x6 \
+returns array of dfrom5(x5,XT,y1,YT) end for
+
+% Indexing by rank-7
+#define dfrom7(x7,XT,y1,YT) for x6 in x7 \
+returns array of dfrom6(x6,XT,y1,YT) end for
+
+% Indexing by rank-8
+#define dfrom8(x8,XT,y1,YT) for x7 in x8 \
+returns array of dfrom7(x7,XT,y1,YT) end for
+
+% Indexing by rank-9
+#define dfrom9(x9,XT,y1,YT) for x8 in x9 \
+returns array of dfrom8(x8,XT,y1,YT) end for
+

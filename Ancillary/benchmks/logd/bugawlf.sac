@@ -1,0 +1,98 @@
+
+inline double[.] mydrop( int[.] cnt, double[.] y)
+{
+  shpy = _shape_A_( y);
+  shp = _add_VxV_( shpy, cnt); // NEGATIVE COUNT ONLY
+  z = with {
+         ( [0] <= iv < shp) : _sel_VxA_( iv, y);
+       } : genarray( shp, 0.0);
+
+  return(z); 
+}
+
+
+/* First axis catenation */
+
+
+#define CAT( a)                                                             \
+inline                                                                      \
+a[+] ++( a[+] arr_a, a[+] arr_b)                                          \
+{                                                                           \
+  new_shp = _idx_modarray_AxSxS_( _shape_A_( arr_a), 0,                     \
+                        _add_SxS_( _sel_VxA_([0], _shape_A_( arr_a)),       \
+                                   _sel_VxA_([0], _shape_A_( arr_b)) ) );   \
+  res = with {                                                              \
+          ( . <= iv < _shape_A_(arr_a) ) : _sel_VxA_( iv, arr_a);           \
+        } : genarray( new_shp, zero(arr_a) );                               \
+  offset =  _idx_modarray_AxSxS_( _mul_SxV_( 0, new_shp), 0,                \
+                        _sel_VxA_([0], _shape_A_( arr_a)) );                \
+  res = with {                                                              \
+          ( offset <= iv <= . ) : _sel_VxA_( _sub_VxV_( iv, offset), arr_b);\
+        } : modarray( res );                                                \
+  return( res);                                                             \
+}
+
+#define zero(x) ( 0.0)
+ 
+CAT(double)
+
+
+inline double[.] mytake( int[.] cnt, double[.] y)
+{ // this is NOT take
+  shpz = _shape_A_( y);
+  shpz = _sub_VxS_( shpz, 1);
+  z = _sel_VxA_(shpz, y);
+  z = [z];
+
+  return(z); 
+}
+inline double[.] genarray( int[.] shp, double val)
+{
+ res = with {
+         ( . <= iv <= .) : val;
+       } : genarray( shp, 0.0);
+ return( res);
+}
+  
+inline double[*] +( double x, double[*] y) 
+{ res = with {
+         ( . <= iv <= .) : _add_SxS_( x, _sel_VxA_( iv, y));
+       } : genarray( _shape_A_( y), 0.0);
+ return( res);
+}
+
+inline double[*] -( double x, double[*] y) 
+{ res = with {
+         ( . <= iv <= .) : _sub_SxS_( x, _sel_VxA_( iv, y));
+       } : genarray( _shape_A_( y), 0.0);
+ return( res);
+}
+
+inline double[*] *( double x, double[*] y) 
+{ res = with {
+         ( . <= iv <= .) : _mul_SxS_( x, _sel_VxA_( iv, y));
+       } : genarray( _shape_A_( y), 0.0);
+ return( res);
+}
+
+inline int -( int y) { return( _sub_SxS_( 0, y)); }
+
+inline double[*] sum( double[*] y) 
+{ shpy = _shape_A_( y);
+  z = with {
+        ([0] <= iv < shpy) : _sel_VxA_( iv, y);
+       } :  fold( +, 0.0 );
+  return(z);
+}
+
+int main()
+{ 
+ WV = +( 0.5, genarray([20], 42.0));
+ z = mydrop( [-1], WV) ++ mytake( [-1], WV);
+ z = sum(z);
+ z = _toi_S_( _eq_SxS_( z, 42.0));
+ //StdIO::print(z);
+ 
+ return(z);
+}
+

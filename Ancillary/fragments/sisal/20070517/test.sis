@@ -1,0 +1,15 @@
+%$entry=convo
+define convo 
+
+function convo(wz,tr : array[double_real] returns double_real)
+
+% convolution using inner product.
+ 
+ for i in 0,array_limh(tr)
+     D := for j in 0,min ( array_limh(tr)-i,array_limh(wz))
+         returns value of sum wz[j] * tr[i+j] 
+          end for
+ returns array of D
+end for 
+ 
+end function

@@ -1,0 +1,3 @@
+﻿ r←seect ct
+⍝ See calling tree
+ r←((E'↓caller callee→'),D ct[0]),(D ct[0])⍪D ct[1]

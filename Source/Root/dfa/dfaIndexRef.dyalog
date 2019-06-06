@@ -1,0 +1,26 @@
+﻿ r←dfaIndexRef y;ast;wl;i;j;k;astr;p
+ ⍝ Handle indexed reference
+ ast←D y[ssaast]
+ wl←D y[ssacv]
+ i←wl∧ast[;astfn]∊E,'[' ⍝Indexed ref
+ wl←wl∧~i ⍝ Update worklist
+ i←i∧~(D ast[;astPred])[;astPredKnowValue]
+ :If 1∊i ⍝ Any work?
+     astr←i⌿ast
+ ⍝ Result type is 1+sum of ranks of index arrays
+     j←D astr[;astlarg] ⍝ Array being indexed
+     'Indexed reference to scalar'assert∧/0≠D ast[j;astrank]
+     astr[;asttype]←ast[j;asttype]
+     astr[;astrank]←D(E ast)IndexRank¨i/⍳⍴i
+     p←D ast[j;astPred] ⍝ Indexing kills most predicates
+     p[;astPredPVSubset]←p[;astPredPVSubset]∨p[;astPredPV]
+ ⍝ We are conservative here, killing everything except
+ ⍝ what we know is safe. This will work properly as
+ ⍝ predicates are added to the compiler.
+     k←(⍴p)⍴0
+     k[;astPredAll2,astPredPVSubset,astPredNonNeg,astPredInteger]←1
+     astr[;astPred]←ER1 p∧k
+     j←astmerge(E ast),(E astr),E i
+     ast←D j[0] ⋄ wl←wl∨D j[1]
+ :EndIf
+ r←y ⋄ r[ssaast]←E ast ⋄ r[ssacv]←E wl

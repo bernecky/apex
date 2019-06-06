@@ -1,0 +1,17 @@
+﻿ r←ctl FindRankGen fns;i;j
+⍝ r←incidence matrix for ctl, fns
+⍝ r← ctl[;ctlranks]∘.≡fns[;fnsranks]∘.≡ctl[;ctlranks], but
+⍝ with general rank match
+ :If 0∊⍴fns                  ⍝ UGLY
+     r←((1↑⍴fns),1↑⍴ctl)⍴0
+ :Else
+     i←UC D ctl[;ctlranks]
+     j←UC D fns[;fnsranks]
+     r0←j[;0]∘.=i[;0]
+     r1←j[;1]∘.=i[;1]
+     r2←j[;2]∘.=i[;2]
+     r0←r0∨((⍴r0)⍴i[;0]='*')∧⍉(⌽⍴r0)⍴~j[;0]∊'xX'
+     r1←r1∨(⍴r1)⍴i[;1]='*'
+     r2←r2∨(⍴r2)⍴i[;2]='*' ⍝ Crude, but hopefully effective
+     r←r0∧r1∧r2
+ :EndIf

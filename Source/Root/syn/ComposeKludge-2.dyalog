@@ -1,0 +1,14 @@
+﻿ r←ComposeKludge y;i;ast
+⍝ Compose argument is in wrong place for f&id,
+⍝ because we may not know syntax class of id at
+⍝ syntax time.
+ ast←D y[ssaast]
+ r←y
+ i←ast[;astfn]∊E,'&' ⍝ Compositions
+ →(0=∨/i)⍴lz ⍝ No work
+ i←(i\i⌿ast[;astrop]∊E NULL)/⍳1↑⍴ast
+ ast[i;astrop]←ast[i;astrarg]
+ ast[i;astrarg]←E NULL
+ ast[i;astclass]←E astclassLFN
+ r[ssaast]←E ast
+lz:

@@ -1,0 +1,6 @@
+ r{<-}rx correct x;n
+@ Return x at edges, otherwise rx+x
+@r{<-}x+0.0{commabar}(0.0,rx,0.0){commabar}0.0 @ faster?
+ n{<-}1+{iota}{neg}2+({rho}x)[1]
+ r{<-}x
+ r[n;n]{<-}rx+r[n;n]

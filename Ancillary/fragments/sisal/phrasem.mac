@@ -1,0 +1,41 @@
+% Monadic Phrases
+
+% 1996-05-20 R. Bernecky
+
+% Phrases for iota rho y on various rank arguments.
+% Illegal on anything except a vector
+
+#define IOTARHOx01(y0,YT) error[array[integer]
+#define IOTARHOx11(y1,YT) (for i in QUADIO,QUADIO+array_size(y1)-1 \
+ returns array of i end for)
+#define IOTARHOx21(y2,YT) error[array[integer]
+#define IOTARHOx31(y3,YT) error[array[integer]
+#define IOTARHOx41(y4,YT) error[array[integer]
+#define IOTARHOx51(y5,YT) error[array[integer]
+#define IOTARHOx61(y6,YT) error[array[integer]
+#define IOTARHOx71(y7,YT) error[array[integer]
+#define IOTARHOx81(y8,YT) error[array[integer]
+#define IOTARHOx91(y9,YT) error[array[integer]
+
+% Phrases for rho rho y on various rank arguments
+
+#define IOTARHOx01(y0,YT) array_fill(SISALIO,SISALIO,0)
+#define IOTARHOx11(y1,YT) array_fill(SISALIO,SISALIO,1)
+#define IOTARHOx21(y2,YT) array_fill(SISALIO,SISALIO,2)
+#define IOTARHOx31(y3,YT) array_fill(SISALIO,SISALIO,3)
+#define IOTARHOx41(y4,YT) array_fill(SISALIO,SISALIO,4)
+#define IOTARHOx51(y5,YT) array_fill(SISALIO,SISALIO,5)
+#define IOTARHOx61(y6,YT) array_fill(SISALIO,SISALIO,6)
+#define IOTARHOx71(y7,YT) array_fill(SISALIO,SISALIO,7)
+#define IOTARHOx81(y8,YT) array_fill(SISALIO,SISALIO,8)
+#define IOTARHOx91(y9,YT) array_fill(SISALIO,SISALIO,9)
+
+% Times reduce rho y
+
+#define MPYSLRHOx00(y0,YT) 1
+#define MPYSLRHOx10(y1,YT) array_size(y1)
+#define MPYSLRHOx20(y2,YT) (array_size(y2) * array_size(y2[SISALIO]))
+#define MPYSLRHOx40(y4,YT) (array_size(y4) * array_size(y4[SISALIO]) \
+ * array_size(y4[SISALIO,SISALIO] \
+* array_size(y4[SISALIO,SISALIO,SISALIO]))
+

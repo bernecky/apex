@@ -1,0 +1,2 @@
+﻿ r←fsize y
+ r←⎕FSIZE y

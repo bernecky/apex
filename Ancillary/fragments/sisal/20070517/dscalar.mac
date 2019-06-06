@@ -1,0 +1,164 @@
+%  Dyadic Scalar Function kernel macro definitions 
+
+% Function names are defined as:
+%    {valence, jsymbol, compute type, result type}
+% Having result type available will let us support things like
+% int*int where we know result will be integer, rather than being
+% required to support double_real result. 1996-05-05
+
+% x plus y 
+#define dplusBI(XV,YV) (XV+YV)
+#define dplusII(XV,YV) (XV+YV)
+#define dplusDD(XV,YV) (XV+YV)
+
+% x minus y 
+#define dbarBI(XV,YV) (XV-YV)
+#define dbarII(XV,YV) (XV-YV)
+#define dbarDD(XV,YV) (XV-YV)
+
+% x times y 
+#define dmpyBB(XV,YV) (XV&YV)
+#define dmpyII(XV,YV) (XV*YV)
+#define dmpyDD(XV,YV) (XV*YV)
+
+% x divided by y 
+#define ddivBD(XV,YV) (if XV = YV then 1.0d0 else XV/YV end if)
+#define ddivID(XV,YV) (if XV = YV then 1.0d0 else XV/YV end if)
+#define ddivDD(XV,YV) (if XV = YV then 1.0d0 else XV/YV end if)
+
+% x min y 
+#define dminBB(XV,YV) (XV&YV)
+#define dminII(XV,YV) (min(XV,YV))
+#define dminDD(XV,YV) (min(XV,YV))
+#define dminCC(XV,YV) (min(XV,YV))
+% NB. max and min extended to characters 
+
+% x max y 
+#define dmaxBB(XV,YV) (XV|YV)
+#define dmaxII(XV,YV) (max(XV,YV))
+#define dmaxDD(XV,YV) (max(XV,YV))
+#define dmaxCC(XV,YV) (max(XV,YV))
+
+% x mod y 
+#define dmodBB(XV,YV) ((~XV)&YV)
+#define dmodII(XV,YV) (if XV = 0     then YV else     moD(YV,XV) end if)
+#define dmodDD(XV,YV) (if XV = 0.0d0 then YV else Dmodulo(YV,XV) end if)
+%  See page 93 of the 1993-01-06 version 
+% of Committee Draft 1 of the Extended ISO APL Standard
+% NB.  floating version THIS DOES NOT USE FUZZ!!!!
+
+% x star y 
+#define dstarBB(XV,YV) (XV|~YV)
+#define dstarID(XV,YV) (exp(XV,YV))
+#define dstarDD(XV,YV) (exp(XV,YV))
+
+% 
+% The dstari fragment will not work in integer type because EmitDyadicScalarFns
+% (and everyone else!) uses lhtype,rhtype to compute fragment 
+% type. This fails for general star because we do not know that
+% the result type is going to be double_real, as we can not
+% ascertain that the right argument is positive.
+% Do it the slow way for now... 1995-11-18
+% Actually, now that we have predicates, we can do better! 1996-04-30
+%
+
+#define dlogBD(XV,YV) (log(YV)/log(XV))
+#define dlogID(XV,YV) (log(YV)/log(XV))
+#define dlogDD(XV,YV) (log(YV)/log(XV))
+
+#define dltBB(XV,YV) ((~XV)&YV)
+#define dltIB(XV,YV) (XV<YV)
+#define dltDB(XV,YV) (XV<YV)
+#define dltCB(XV,YV) (XV<YV)
+
+% NB.  Extension of ISO APL to allow comparison of characters
+
+
+% relationals 
+#define dleBB(XV,YV) ((~XV)|YV)
+#define dleIB(XV,YV) (XV<=YV)
+#define dleDB(XV,YV) (XV<=YV)
+#define dleCB(XV,YV) (XV<=YV)
+
+% NB. Relationals are zero fuzz 
+#define deqBB(XV,YV) (XV=YV)
+#define deqIB(XV,YV) (XV=YV)
+#define deqDB(XV,YV) (XV=YV)
+#define deqCB(XV,YV) (XV=YV)
+
+#define dneBB(XV,YV) (XV~=YV)
+#define dneIB(XV,YV) (XV~=YV)
+#define dneDB(XV,YV) (XV~=YV)
+#define dneCB(XV,YV) (XV~=YV)
+
+#define dgtBB(XV,YV) (XV&~YV)
+#define dgtIB(XV,YV) (XV>YV)
+#define dgtDB(XV,YV) (XV>YV)
+#define dgtCB(XV,YV) (XV>YV)
+
+#define dgeBB(XV,YV) (XV|~YV)
+#define dgeIB(XV,YV) (XV>=YV)
+#define dgeDB(XV,YV) (XV>=YV)
+#define dgeCB(XV,YV) (XV>=YV)
+
+#define dandBB(XV,YV) (XV&YV)
+
+% Euclids algorithm for lcm
+#define dandII(XV,YV) (for initial  ax := abs(XV); ay := abs(YV); \
+ u = min(ax,ay); v := max (ax,ay);  \
+while (v ~= 0) repeat \
+ v := mod(old u,old v); \
+ u := old v; \
+returns value of (ax*ay)/u \
+end for)                         
+
+% Euclids algorithm for lcm
+#define dandDD(XV,YV)  (for initial  ax := abs(XV); ay := abs(YV); \
+ u = min(ax,ay); v := max (ax,ay); \
+while (v ~= 0) repeat \
+ v := mod(old u,old v); \
+ u := old v; \
+returns value of (ax*ay)/u \
+end for)
+
+#define dorBB(XV,YV) (XV|YV)
+
+% Euclids algorithm for gcd 
+#define dorII(XV,YV) (for initial \
+ ax := abs(XV); ay := abs(YV); \
+ u = min(ax,ay); v := max (ax,ay); \
+while (v ~= 0) repeat \
+ v := mod(old u,old v); \
+ u := old v; \
+returns value of u \
+end for)               
+
+% Euclids algorithm for gcd 
+#define dorDD(XV,YV) (for initial \
+ ax := abs(XV); ay := abs(YV); \
+ u = min(ax,ay); v := max (ax,ay); \
+while (v ~= 0) repeat \
+ v := mod(old u,old v); \
+ u := old v; \
+returns value of u \
+end for)
+
+#define dnandBB(XV,YV) (~XV&YV)
+#define dnorBB(XV,YV) (~XV|YV)
+
+#define dcircDD(XV,YV) (if (XV = 1.0d0) then sin(YV) % 1 circle \
+elseif (XV = 2.0d0) then cos(YV)  % 2 circle \
+elseif (XV = 3.0d0) then tan(YV)    % 3 circle \
+elseif (XV = 4.0d0) then exp((1.0d0+YV*YV),0.5d0) % 4 circle \
+else error[double_real]  end if)
+% domain error check above
+
+% 1 circle
+#define dcirc1DD(XV,YV) (sin(YV))
+% 2 circle
+#define dcirc2DD(XV,YV) (cos(YV))
+% 3 circle
+#define dcirc3DD(XV,YV) (tan(YV))
+% 3 circle
+#define dcirc4DD(XV,YV) (exp((1.0d0+YV*YV),0.5d0))
+

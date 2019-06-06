@@ -1,0 +1,5 @@
+﻿ snaxQuoteQuadOutput gettentry
+ ⍝ Assign to quad or quote-quad
+ ⍝ Treat "⎕←" as single monadic function
+ PushCursor((E'⎕←'),gettentry[GettClass,GettLength])Push state
+ InvokeMonadicFn

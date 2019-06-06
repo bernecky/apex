@@ -1,0 +1,2 @@
+﻿ funtie tn
+ ⎕FUNTIE tn

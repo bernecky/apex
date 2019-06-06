@@ -1,0 +1,313 @@
+use Array: all;
+use StdIO : all;
+use Numerical : all;
+use CommandLine: all;
+use String: {to_string,tochar,sscanf};
+use ArrayFormat: all;
+use Bits: all;
+
+/* Compiled by APEX Version: /home/apex/apex3/wss/sac3013.dws2012-11-07 10:23:39.045 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline bool eqDDB(double x, double y, double QUADct)
+{ /* A=B on doubles */
+ return((DtoD(x) == DtoD(y)) || APEXFUZZEQ(DtoD(x),DtoD(y),QUADct));
+}
+
+
+inline int plusBBI(bool x, bool y)
+{ return(BtoI(x)+BtoI(y));
+}
+
+inline int[+] plusIII(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : plusIII(xel,yel);
+  } : genarray(shape(y), 0);
+  return(z);
+}
+
+
+inline int[+] plusBII(bool x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : plusIII(xel,yel);
+  } : genarray(shape(y), 0);
+  return(z);
+}
+
+
+inline double[+] mpyDID(double x, int[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : mpyDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline bool[*] rhoIBB(int[.] x, bool[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _mod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), false);
+   return( z);
+}
+
+
+
+inline int[.]  rhoXDI(double[+] y)
+{ /* Shape of non-scalar */
+ return(shape(y));
+}
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline double[*] quadXDD(double[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline double[.] comaDBD(double[.] x, bool[.] y)
+{ /* VxV catenate first or last axis */
+ return(toD(x)++toD(y));
+}
+
+inline double plusdotmpyDDDTRANSPOSE(double[.] x, double[.] y)
+{ /* Vector-Vector inner product */
+  z =  plusslXDDFOLD(mpyDDD(toD(x),toD(y)));
+  return(z);
+}
+
+
+
+inline double plusslXDDFOLD(double y)
+{ /* Reduction of scalar */
+        return(y);
+}
+
+
+
+inline int plusIII(int x, int y)
+{ return(ItoI(x)+ItoI(y));
+}
+
+inline double mpyDDD(double x, double y)
+{ return(DtoD(x)*DtoD(y));
+}
+
+inline double[+] mpyDDD(double[+] x, double[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+         sx = shape(y);
+         z = with {
+             ( . <= iv <= .) {
+                      xel = x[iv];
+                   yel = y[iv];
+           } : mpyDDD(xel,yel);
+        } : genarray(sx, 0.0d);
+  return(z);
+}
+
+
+
+
+
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline int V2O( int[.] shp, int[.] iv)
+{ /* Vector iv to offset into array of shape shp */
+  /* See V2O.dws workspace */
+  offset = 0;
+  wt = 1;
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    offset = offset + ( wt * iv[i]);
+    wt = wt * shp[i];
+  }
+  return( offset);
+}
+
+inline int[.] O2V( int[.] shp, int offset)
+{ /* Offset into array of shape shp to index vector */
+  /* See V2O.dws workspace */
+  iv = genarray( shape(shp), 1);
+  wts = iv;
+  for( i=shape(shp)[0]-2; i>=0; i--) {
+    wts[i] = wts[i+1] * shp[i+1];
+  }
+
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    iv[i] = _mod_SxS_( offset/wts[i], shp[i]);
+    offset = offset - (iv[i]*wts[i]);
+  }
+  return( iv);
+}
+
+inline double plusslXDDFOLD(double[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : DtoD(y[lim-iv]);
+       } :  fold( plusDDD, ItoD(0));
+  return(z);
+}
+
+
+inline double plusDDD(double x, double y)
+{ return(DtoD(x)+DtoD(y));
+}
+
+inline double[+] mpyDDD(double x, double[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : mpyDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline double[+] mpyDDD(double[+] x, double y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : mpyDDD(xel,y);
+  } : genarray( shape(x), 0.0d);
+  return(z);
+}
+
+
+inline double[.] comaXDD(double[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline double fDDD(double[.] tr,double[.] fi)
+{ 
+/*
+ ?
+*/
+A_19=plusdotmpyDDDTRANSPOSE(fi,tr);
+ r_0=( A_19);
+ return(r_0);
+}
+
+inline double convreduDDD(double[.] fi, double[.] tr)
+{ 
+/*
+ ?
+*/
+A_21=rhoXDI( fi);
+ /* dsf scalar(s) */
+A_22=plusIII(-1,A_21);
+A_23=rhoIBB(A_22,false);
+ A_24=comaDBD(tr,A_23);
+ A_25=rhoXDI( fi);
+ A_26=fslIDDONEEL(A_25,A_24);
+ r_0=( A_26);
+ return(r_0);
+}
+
+inline double mconvredIID(int x, int y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_28=iotaXII( x,QUADio);
+ /* dsf scalar(s) */
+A_29=plusBII(true,A_28);
+/* dsf scalar(s) */
+A_30=mpyDID(0.01,A_29);
+ wz_0=( A_30);
+ A_33=iotaXII( y,QUADio);
+ /* dsf scalar(s) */
+A_34=plusBII(true,A_33);
+/* dsf scalar(s) */
+A_35=mpyDID(0.01,A_34);
+ tr_0=( A_35);
+ A_37=convreduDDD(wz_0,tr_0);
+ A_38=plusslXDDFOLD( A_37);
+ r_0=( A_38);
+ return(r_0);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toI(( false));
+ QUADpp_1=( 16);
+ QUADpw_1=( 80);
+ QUADct_1=( 1.0e-10);
+ n_0=( 350000);
+ QUADrl_1=( 16807);
+ A_61=mconvredIID(100,n_0,QUADio_1);
+ r_0=( A_61);
+ A_65=quadXDD( r_0,QUADpp_1,QUADpw_1);
+ /* dsf scalar(s) */
+A_67=eqDDB(r_0,30931337117.0,QUADct_1);
+/* dsf scalar(s) */
+A_68=plusBBI(true,A_67);
+ r_1=( A_68);
+ return(r_1);
+}
+

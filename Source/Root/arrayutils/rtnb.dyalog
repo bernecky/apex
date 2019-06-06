@@ -1,0 +1,3 @@
+﻿ r←rtnb y
+ ⍝ Rotate each row of text matrix left to first non-blank.
+ r←(+/∧\y=' ')⌽y

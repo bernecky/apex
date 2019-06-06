@@ -1,0 +1,8 @@
+Dfn2TradReplaceDfn←{
+cv←~⍺
+(dfn ifnm)←⍵
+z←cv\cv/,dfn
+z[(cv⍳0)]←E ifnm
+dbr vtom NL,D Raze ,((⍴dfn)⍴z),NL
+}
+

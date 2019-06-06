@@ -1,0 +1,24 @@
+﻿ r←ast IndexTypeRank i;il;ir;it;lhs;rhs;rk;tp;j;k;m
+⍝ Get Index ref and assign types and ranks
+⍝ for bracketed info ,etc
+ il←(E ast)IndexList¨(i/⍳⍴i),¨astrarg ⍝ Collect all index lists I
+ il←(E ast)IndexAstLarg¨il
+ mil←D il ⍝ Matrix of indices, NULLS, and 0s
+ ir←ast IndexRank mil ⍝ Rank of each index
+ it←ast IndexType mil ⍝ Type of each index
+ lhs←D(i⌿ast)[;astlarg] ⍝ LHS of indexed assign
+ rhs←D(i⌿ast)[;astrop] ⍝ RHS of indexed assign
+ k←~rhs∊NULL ⍝ Index ref vs assign
+ rk←ir+¯1×mil∊D NULL
+ ⍝ Types & ranks are lhs,rhs,result,indices
+ j←D(i⌿ast)[;astrank]
+ m←(¯1×~k)+k\D(ast[;astrank])[k/rhs] ⍝ Stupid APL2 empty arrayss
+ rk←(D ast[lhs;astrank]),m,j,rk
+ rk←'x01235467'[rk+1]
+ j←D(i⌿ast)[;asttype]
+ m←(¯1×~k)+k\D(ast[;asttype])[k/rhs]
+ tp←(D ast[lhs;asttype]),m,j,it
+ j←3++/mil≠0
+ tp←j takeeach ER1 TYPES tp
+ rk←j takeeach ER1 rk
+ r←(E tp),E rk

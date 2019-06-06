@@ -1,0 +1,23 @@
+ r{<-}x compmesh y;xx;yx;xy;yy;a;b;c;pxx;pxy;qxx;qxy;pyy;qyy
+ xx{<-}1 {neg}2{drop}{neg}1 0{drop}(2{rotate}x)-x
+ yx{<-}1 {neg}2{drop}{neg}1 0{drop}(2{rotate}y)-y
+ xy{<-}{neg}2 1{drop}0 {neg}1{drop}(2{rotatebar}x)-x
+ yy{<-}{neg}2 1{drop}0 {neg}1{drop}(2{rotatebar}y)-y
+@
+ a{<-}0.25{times}(xy{times}xy)+yy{times}yy
+ b{<-}0.25{times}(yx{times}yx)+xx{times}xx
+ c{<-}0.125{times}(xy{times}xx)+yx{times}yy
+@
+ pxx{<-}(1 2{drop}{neg}1 0{drop}x)-(2{times}1 1{drop}{neg}1 {neg}1{drop}x)-1 0{drop}{neg}1 {neg}2{drop}x
+ qxx{<-}(1 2{drop}{neg}1 0{drop}y)-(2{times}1 1{drop}{neg}1 {neg}1{drop}y)-1 0{drop}{neg}1 {neg}2{drop}y
+ pyy{<-}(2 1{drop}0 {neg}1{drop}x)-(2{times}1 1{drop}{neg}1 {neg}1{drop}x)-0 1{drop}{neg}2 {neg}1{drop}x
+ qyy{<-}(2 1{drop}0 {neg}1{drop}y)-(2{times}1 1{drop}{neg}1 {neg}1{drop}y)-0 1{drop}{neg}2 {neg}1{drop}y
+@
+ pxy{<-}((2 2{drop}x)-{neg}2 2{drop}x)+({neg}2 {neg}2{drop}x)-2 {neg}2{drop}x @ signs
+ qxy{<-}((2 2{drop}y)-{neg}2 2{drop}y)+({neg}2 {neg}2{drop}y)-2 {neg}2{drop}y
+@ GLOBALS OUT:
+ aa{<-}-b
+ dd{<-}b+b+(2{divide}0.98){times}a
+ rx{<-}(a{times}pxx)+(b{times}pyy)-c{times}pxy
+ ry{<-}(a{times}qxx)+(b{times}qyy)-c{times}qxy
+ r{<-}0 @ junk result

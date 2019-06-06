@@ -1,0 +1,245 @@
+use Array: all;
+use StdIO : all;
+use Numerical : all;
+use CommandLine: all;
+use String: {to_string,tochar,sscanf};
+use ArrayFormat: all;
+use Bits: all;
+
+/* Compiled by APEX Version: /home/apex/apex3/wss/sac3012.dws2012-05-04 11:51:21.444 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline bool eqIIB(int x, int y)
+{ /* A=B on non-doubles */
+ return(ItoI(x) == ItoI(y));
+}
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline bool[+] eqBIB(bool x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : eqIIB(xel,yel);
+  } : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqIIB(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : eqIIB(xel,yel);
+  } : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline int[.] comaXII(int[+] y)
+{ /* Ravel of anything with rank>1 */
+        z = reshape([prod(shape(y))],y);
+        return(z);
+}
+
+inline int[.] comaXII(int y)
+{ /* Ravel of scalar */
+        return([y]);
+}
+
+inline int[*] rhoIII(int[.] x, int[+] y)
+{ /* APEX vector x reshape, with item reuse */
+  ix = toi(x);
+  ry = comaXII(y);
+  zxrho = prod(ix); /* THIS NEEDS XRHO FOR CODE SAFETY!! */
+  yxrho = shape(ry)[[0]];
+  if( zxrho <= yxrho) { /* No element resuse case */
+        z = take([zxrho],ry);
+ } else {
+        ncopies = zxrho/yxrho; /* # complete copies of y. */
+        /* FIXME: y empty case !*/
+        z = with {
+                (. <= [i] <= .)
+                        : ry;
+                } : genarray( [ncopies], ry);
+        /* Now append the leftover bits */
+        z = comaXII(z) ++ take([zxrho-(ncopies*yxrho)],ry);
+ }
+ return(reshape(ix,z));
+}
+
+
+
+inline int[.]  rhoXII(int[+] y)
+{ /* Shape of non-scalar */
+ return(shape(y));
+}
+
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[.] comaBII(bool x, int[.] y)
+{/* SxV catenate first (or last) axis */
+ return([toI(x)]++toI(y));
+}
+
+inline int[+] combIIILG(int[+] x, int[+] y)
+{/* AxA first axis catenate. Left rank greater */
+ return(toI(x)++toI([y]));
+}
+inline int[.] plussl1XBIFOLD(bool[.,.] y)
+{ /* first-axis reduce rank-2 matrix */
+  zrho = take([1], shape(y));
+  defcell =  genarray( drop([1], shape(y)), 0);
+  z = with {
+        ([0] <= iv < zrho)
+            : toi( y[iv]);
+        } : fold( +, defcell);
+ StdIO::print(z);
+  return(z);
+}
+
+
+inline int plusslXIIFOLD(int[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : ItoI(y[lim-iv]);
+       } :  fold( plusIII, ItoI(0));
+  return(z);
+}
+
+
+inline int plusIII(int x, int y)
+{ return(ItoI(x)+ItoI(y));
+}
+
+inline bool[+] TRANSPOSE(bool[+] y)
+{ /* Generic monadic transpose */
+  z = with {
+        ( . <= iv <= .)
+                : y[reverse( iv)];
+        }: genarray( reverse( shape(y)), false);
+  return(z);
+}
+
+inline int[+] TRANSPOSE(int[+] y)
+{ /* Generic monadic transpose */
+  z = with {
+        ( . <= iv <= .)
+                : y[reverse( iv)];
+        }: genarray( reverse( shape(y)), 0);
+  return(z);
+}
+
+inline int plusslXBIFOLD(bool[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : BtoI(y[lim-iv]);
+       } :  fold( plusIII, BtoI(0));
+  return(z);
+}
+
+
+inline int[.,.] snpMakeXII(int[.] n )
+{ 
+/*
+ ?
+*/
+A_19=rhoIII(n,[0, 1, 2, 0, 1, 0, 0, 1]);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int[.,.] snpcount4XII(int[.,.] snp)
+{ 
+/*
+ ?
+*/
+/* dsf scalar(s) */
+A_26=eqBIB(false,snp);
+A_27=plussl1XBIFOLD( A_26);
+ r_0=( A_27);
+ A_32=rhoXII( r_0);
+ A_33=comaBII(true,A_32);
+ A_34=rhoIII(A_33,r_0);
+ r_1=( A_34);
+ /* dsf scalar(s) */
+A_37=eqBIB(true,snp);
+ A_38=plussl1XBIFOLD( A_37);
+ A_42=combIIILG(r_1,A_38);
+ r_2=( A_42);
+ /* dsf scalar(s) */
+A_45=eqIIB(2,snp);
+ A_46=plussl1XBIFOLD( A_45);
+ A_50=combIIILG(r_2,A_46);
+ r_3=( A_50);
+ return(r_3);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toI(( false));
+ n_0=( [10, 8]);
+ A_61=snpMakeXII( n_0);
+ snp_0=( A_61);
+ A_63=snpcount4XII( snp_0);
+ r4_0=( A_63);
+ r_0=( r4_0);
+ A_66=comaXII( r_0);
+ A_67=plusslXIIFOLD( A_66);
+ z_0=( A_67);
+ A_74=quadXII( z_0,QUADpp_0,QUADpw_0);
+ A_75=comaXII( z_0);
+ A_76=plusslXIIFOLD( A_75);
+ /* dsf scalar(s) */
+A_81=eqIIB(800000000,A_76);
+/* dsf scalar(s) */
+A_82=barBBI(true,A_81);
+ r_1=( A_82);
+ A_86=quadXII( A_82,QUADpp_0,QUADpw_0);
+ return(r_1);
+}
+

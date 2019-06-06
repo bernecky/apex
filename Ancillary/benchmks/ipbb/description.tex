@@ -1,0 +1,15 @@
+\subsubsection{\tt ipbb}
+\label{benchmarkipbb}
+
+{\tt ipbb} is a synthetic AKS benchmark that performs
+a Boolean-Boolean ({\apl M\qor\qdot\qand\qtran\0M}) matrix product on 
+arrays of shape {\tt [400, 400]}.
+
+The \sac implementation of these benchmarks utilizes Bernecky's
+generalization of the CDC STAR APL matrix 
+product algorithm.~\cite{RBernecky:apex}
+
+The benchmarks {\tt ipbb}, {\tt ipbbAKD}, {\tt ipape}, {\tt ipapeAKD},
+{\tt ipopne}, {\tt ipopneAKD}, {\tt ipbd}, {\tt ipbdAKD}, {\tt ipdd},
+{\tt ipddAKD}, {\tt ipplusand}, {\tt ipplusandAKD},
+form a clique, as they all perform similar tasks.

@@ -1,0 +1,5 @@
+﻿ r←v pfatComputeType y;i
+ ⍝ Return Compute type for APL primitive(s) y.
+ ⍝ v is valence (1 for monadic, 2 for dyadic)
+ i←(pfat[;0]≠'*')⌿pfat ⍝ Ignore comments
+ r←i[pfatSymbol y;22+(5×v=2)+⍳4]

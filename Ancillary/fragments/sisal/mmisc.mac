@@ -1,0 +1,74 @@
+% Monadic Miscellaneous function code fragments
+% Handles shape, index generator, matrix inverse,
+% nubsieve, thorn.
+%
+% Converted to macros format. 1996-05-18 Robert Bernecky
+
+% Converted back to origin 0, 1995-06-22.
+% Converted to be origin-independent. Sigh. 1996-03-26
+% Sort of: We support #DEFINEable quadio for APL.
+% SISAL remains origin 0. 
+% Supports arbitrary QUADIO and arbitrary SISALIO 1996-04-01 /rbe
+%
+
+% Index generators
+
+% generic iota on scalar 
+#define iotax01sy(y0,YT) (for i in 0, \
+(ConformNonNegativeInt(YT##toI(y0))-1) returns array of i+QUADIO end for)
+
+% generic iota on vector
+#define iotax11(y1,YT) (for i in 0, \
+(ConformNonNegativeInt(OneElement(y1,YT))-1) returns array of i+QUADIO end for)
+
+#define OneElement(y1,YT) (if 1 = array_size(y1) \
+then YT##toI(y1[SISALIO]) else error[integer] end if)
+
+% Special cases of monadic iota 
+
+% iota 0
+#define iotax01zero(y0,YT) array_fill(SISALIO,SISALIO-1,QUADIO)
+
+% iota 1
+#define iotax01one(y0,YT) array_fill(SISALIO,SISALIO,QUADIO)
+
+% iota non-negative scalar
+#define iotax01NonNegsy(y0,YT) \
+(for i in 0,(YT##toI(y0)-1) returns array of i+QUADIO end for)
+
+% iota non-negative single-element integer vector
+#define iotax11NonNegsy(y1,YT) \
+(for i in 0,(YT##toI(y1[SISALIO])-1) returns array of i+QUADIO end for)
+
+% iota single-element vector
+#define iotax11sy(y1,YT) (for i in 0, \
+(ConformNonNegativeInt(YT##toI(y1[SISALIO]))-1) returns array of i+QUADIO end for)
+
+% Assign
+#define assgx00(y0,YT) y0
+#define assgx11(y1,YT) y1
+#define assgx22(y2,YT) y2
+#define assgx33(y3,YT) y3
+#define assgx44(y4,YT) y4
+#define assgx55(y5,YT) y5
+#define assgx66(y6,YT) y6
+#define assgx77(y7,YT) y7
+#define assgx88(y8,YT) y8
+#define assgx99(y9,YT) y9
+
+% Shape functions
+
+% Shape of scalar
+#define rhox01(y0,YT) array_fill(SISALIO,SISALIO-1,0)
+
+% Shape of vector
+#define rhox11(y1,YT) (array_fill(SISALIO,SISALIO,array_size(y1)))
+
+% Shape of table
+#define rhox21(y2,YT) (array[SISALIO: array_size(y2), array_size(y2[SISALIO])])
+
+% Shape of rank-3
+#define rhox31(y3,YT) (array[SISALIO: array_size(y2), \
+ array_size(y2[SISALIO]), array_size(y2[SISALIO,SISALIO])])
+
+

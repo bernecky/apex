@@ -1,0 +1,24 @@
+﻿ r←BuildPhraseTable;t;b;i;j
+⍝ Build Phrase table from textual description
+ PHRASEName←0       ⍝ Column definitions
+ PHRASEMonadicOut←1
+ PHRASEDyadicOut←2
+ PHRASECols←3
+ t←ReadFile'g:\apex\fragment\phrases.tbl'
+ t←vtom NL,nolf t
+ b←,∧\t≠'%' ⍝ Remove comments
+ t←(⍴t)⍴b\b/,t ⍝ Ignore comments
+ t←dtbm(t∨.≠' ')⌿t ⍝ Drop blank rows, trim trailing blanks
+ r←((1↑⍴t),PHRASECols)⍴E''
+ b←∧\t≠':' ⍝ Extract phrase definition
+ i←(⍴t)⍴(,b)\(,b)/,t
+⍝ Turn phase into APL symbols
+ j←(1↑⍴i)⍴E''
+ i←JsymToPrimitive¨EEW¨ER1 i∘
+ r[;PHRASEName]←D¨Raze¨i
+ t←rtnb(⍴t)⍴(~,b)\(~,b)/,t ⍝ On to next field
+ i←field1 t
+ r[;PHRASEMonadicOut]←dtb¨ER1 i
+ t←rtnb(0,¯1↑⍴i)↓t
+ i←field1 t
+ r[;PHRASEDyadicOut]←dtb¨ER1 i

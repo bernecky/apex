@@ -1,0 +1,4 @@
+dbr←{
+⍝ Delete blank rows
+(⍵∨.≠' ')⌿⍵
+}

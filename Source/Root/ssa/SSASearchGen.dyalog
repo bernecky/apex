@@ -1,0 +1,22 @@
+﻿ r←x SSASearchGen yy;ast;tar;X;y;cv;b;i;j;jj;y;S;nms
+ ⍝ SSA Search Gen: Replace gen V by Vi
+ X←D x[0] ⋄ tar←D x[1] ⍝ Vars,target varb
+ y←D yy[0] ⍝ SSA Stuff
+ S←D yy[1] ⍝ Stack
+ nms←D yy[2] ⍝ New names for old
+ ast←D y[ssaast]
+ ⍝ This almost handles multiple gens properly
+ ⍝ in the same bb. Maybe try it someday? 1995-05-19
+ cv←bb BBn X ⋄ b←cv⌿ast ⍝ The bb of interest
+ i←(cv⌿ast)[;asttarget]∊tar
+ :If 1∊i ⍝ If a gen exists, push it onto the stack
+     jj←~(cv⌿ast)[;astfn]∊E':For' ⍝ This doesn't count as
+ ⍝ a gen, since the PHI does it.
+     'More than 1 gen/bb'assert 1≥+/jj/i
+     j←ast[;asttarget]⍳nms[0]
+     nms←1↓nms ⍝ Fewer names available now
+     S←j,S ⍝ Push target index onto stack
+     ast[(cv\i)/⍳⍴cv;asttarget]←j ⍝ Replace genned result
+ :EndIf
+ r←y ⋄ r[ssaast]←E ast
+ r←(E r),(E S),E nms

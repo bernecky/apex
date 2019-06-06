@@ -1,0 +1,17 @@
+/*
+ * This is a main program driver for all the APEX benchmarks.
+ * It reads one argument from stdin, and passes it to the
+ * benchmark. Then, it prints the result of the benchmark 
+ * on stdout.
+ *
+ * Robert Bernecky 2004-05-13
+ */
+
+int main()
+{
+
+res= loopis(1000);
+print(res);
+return(0);
+}
+

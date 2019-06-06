@@ -1,0 +1,3 @@
+﻿ r←ztype fns
+⍝ ztype for fns
+ r←(D fns[;fnstypes])[;,2]

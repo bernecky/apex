@@ -1,0 +1,29 @@
+% Fragments for the rank conjunction. 
+%
+% Robert Bernecky 1995-06-08
+%
+
+% Start with dyadic macros, as we need them today
+% Macro names are formed from:
+%  m | d for monadic or dyadic invocations
+%  Left, right ranks of arguments to conjunction
+%  Left, right ranks to be used for operand invocation
+
+#define drank1110(FN,x1,y1) for y0 in y1 \
+ returns array of FN(x1,y0) end for 
+
+#define drank1101(FN,x1,y1) for x0 in x1 \
+ returns array of FN(x0,y1) end for 
+
+#define drank2211(FN,x2,y2) for x1 in x2 dot y1 in y2 \
+ returns array of FN(x1,y1) end for 
+
+#define drank2111(FN,x2,y1) for x1 in x2 \
+ returns array of FN(x1,y1) end for 
+
+#define drank2110(FN,x2,y1) for x1 in x2 dot y0 in y1 \
+ returns array of FN(x1,y0) end for 
+
+#define drank1211(FN,x1,y2) for y1 in y2 \
+ returns array of FN(x1,y1) end for 
+

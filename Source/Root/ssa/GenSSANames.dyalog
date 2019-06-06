@@ -1,0 +1,5 @@
+﻿ r←n GenSSANames nm
+ ⍝ Generate temporary SSA variable
+ ⍝ names n for nm.
+ r←nm,¨'_'
+ r←r,¨⍕¨n

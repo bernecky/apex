@@ -1,0 +1,17 @@
+use Array: {toi,genarray,sel};
+
+int[*] id( int[*] y)
+{
+ return(y);
+}
+
+int main()
+{
+
+ x1 = genarray( id([5000000]), false);
+ x2 = toi(x1);
+ z = x2[23];
+ return(z);
+}
+
+

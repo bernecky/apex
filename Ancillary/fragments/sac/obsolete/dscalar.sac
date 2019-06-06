@@ -1,0 +1,704 @@
+/*   Dyadic Scalar Function kernel macro definitions  */
+
+/* x plus y  */
+inline int plusBBI(bool x, bool y)
+{ return(toi(x)+toi(y));
+}
+
+inline int plusBII(bool x, int y)
+{ return(toi(x)+y);
+}
+
+inline int plusIBI(int x, bool y)
+{ return(x+toi(y));
+}
+
+inline int plusIII(int x, int y)
+{ return(x+y);
+}
+
+inline double plusDDD(double x, double y)
+{ return(x+y);
+}
+
+inline double plusBDD(bool x, double y)
+{ return(tod(x)+y);
+}
+
+inline double plusDBD(double x, bool y)
+{ return(x+tod(y));
+}
+
+inline double plusIDD(int x, double y)
+{ return(tod(x)+y);
+}
+
+inline double plusDID(double x, int y)
+{ return(x+tod(y));
+}
+
+/* x minus y  */
+inline int barBBI(bool x, bool y)
+{ return(toi(x)-toi(y));
+}
+
+inline int barBII(bool x, int y)
+{ return(toi(x)-y);
+}
+
+inline int barIBI(int x, bool y)
+{ return(x-toi(y));
+}
+
+inline int barIII(int x, int y)
+{ return(x-y);
+}
+
+inline double barDDD(double x, double y)
+{ return(x-y);
+}
+
+inline double barBDD(bool x, double y)
+{ return(tod(x)-y);
+}
+
+inline double barDBD(double x, bool y)
+{ return(x-tod(y));
+}
+
+inline double barIDD(int x, double y)
+{ return(tod(x)-y);
+}
+
+inline double barDID(double x, int y)
+{ return(x-tod(y));
+}
+
+/* x times y  */
+inline bool mpyBBB(bool x, bool y)
+{ return(x & y);
+}
+
+inline int mpyBII(bool x, int y)
+{ return(toi(x)*y);
+}
+
+inline int mpyIBI(int x, bool y)
+{ return(x*toi(y));
+}
+
+inline int mpyIII(int x, int y)
+{ return(x*y);
+}
+
+inline double mpyDDD(double x, double y)
+{ return(x*y);
+}
+
+inline double mpyBDD(bool x, double y)
+{ return(tod(x)*y);
+}
+
+inline double mpyDBD(double x, bool y)
+{ return(x*tod(y));
+}
+
+inline double mpyIDD(int x, double y)
+{ return(tod(x)*y);
+}
+
+inline double mpyDID(double x, int y)
+{ return(x*tod(y));
+}
+
+/* x divided by y  */
+inline double divDDD(double x, double y)
+{ if (x == y) 
+	z = 1.0d;
+  else 
+	z = x/y;
+  return(z);
+}
+
+inline double divBDD(bool x, double y)
+{ if (tod(x) == y) 
+	z = 1.0d;
+  else 
+	z = tod(x)/y;
+  return(z);
+}
+
+inline double divIDD(int x, double y)
+{ if (tod(x) == y) 
+	z = 1.0d;
+  else 
+	z = tod(x)/y;
+  return(z);
+}
+
+inline double divBID(bool x, int y)
+{ if (tod(x) == tod(y)) 
+	z = 1.0d;
+  else 
+	z = tod(x)/tod(y);
+  return(z);
+}
+
+inline double divIID(int x, int y)
+{ if (tod(x) == tod(y)) 
+	z = 1.0d;
+  else 
+	z = tod(x)/tod(y);
+  return(z);
+}
+
+inline double divDID(double x, int y)
+{ if (x == tod(y)) 
+	z = 1.0d;
+  else 
+	z = x/tod(y);
+  return(z);
+}
+
+inline double divBBD(bool x, bool y)
+{ if (x == y) 
+	z = 1.0d;
+  else 
+	z = tod(x)/tod(y);
+  return(z);
+}
+
+inline double divIBD(int x, bool y)
+{ if (tod(x) == tod(y)) 
+	z = 1.0d;
+  else 
+	z = tod(x)/tod(y);
+  return(z);
+}
+
+inline double divDBD(double x, bool y)
+{ if (x == tod(y)) 
+	z = 1.0d;
+  else 
+	z = x/tod(y);
+  return(z);
+}
+
+/* x min y  */
+inline bool minBBB(bool x, bool y)
+{
+ return (x&y);
+}
+
+inline int minIII(int x, int y)
+{
+ if (x <= y) 
+	z = x;
+ else 
+	z = y;
+ return (z);
+}
+
+inline double minDDD(double x, double y)
+{
+ if (x <= y) 
+	z = x;
+ else 
+	z = y;
+ return (z);
+}
+
+inline char minCCC(char x, char y)
+{
+ if (x <= y) 
+	z = x;
+ else 
+	z = y;
+ return (z);
+}
+
+inline int minBII(bool x, int y)
+{
+ if (toi(x) <= y) 
+	z = toi(x);
+ else 
+	z = y;
+ return (z);
+}
+
+
+inline int minIBI(int x, bool y)
+{
+ if (x <= toi(y)) 
+	z = x;
+ else 
+	z = toi(y);
+ return (z);
+}
+
+inline double minBDD(bool x, double y)
+{
+ if (tod(x) <= y) 
+	z = tod(x);
+ else 
+	z = y;
+ return (z);
+}
+
+
+inline double minDBD(double x, bool y)
+{
+ if (x <= tod(y)) 
+	z = x;
+ else 
+	z = tod(y);
+ return (z);
+}
+
+
+inline double minIDD(int x, double y)
+{
+ if (tod(x) <= y) 
+	z = tod(x);
+ else 
+	z = y;
+ return (z);
+}
+
+
+inline double minDID(double x, int y)
+{
+ if (x <= tod(y)) 
+	z = x;
+ else 
+	z = tod(y);
+ return (z);
+}
+
+/* max */
+inline bool maxBBB(bool x, bool y)
+{ return (x&y);
+}
+
+inline int maxIII(int x, int y)
+{
+ if (x <= y) 
+	z = y;
+ else 
+	z = x;
+ return (z);
+}
+
+inline double maxDDD(double x, double y)
+{
+ if (x <= y) 
+	z = y;
+ else 
+	z = x;
+ return (z);
+}
+
+inline char maxCCC(char x, char y)
+{
+ if (x <= y) 
+	z = y;
+ else 
+	z = x;
+ return (z);
+}
+
+inline int maxBII(bool x, int y)
+{
+ if (toi(x) <= y) 
+	z = y;
+ else 
+	z = toi(x);
+ return (z);
+}
+
+
+inline int maxIBI(int x, bool y)
+{
+ if (x <= toi(y)) 
+	z = toi(y);
+ else 
+	z = x;
+ return (z);
+}
+
+inline double maxBDD(bool x, double y)
+{
+ if (tod(x) <= y) 
+	z = y;
+ else 
+	z = tod(x);
+ return (z);
+}
+
+
+inline double maxDBD(double x, bool y)
+{
+ if (x <= tod(y)) 
+	z = tod(y);
+ else 
+	z = x;
+ return (z);
+}
+
+
+inline double maxIDD(int x, double y)
+{
+ if (tod(x) <= y) 
+	z = y;
+ else 
+	z = tod(x);
+ return (z);
+}
+
+inline double maxDID(double x, int y)
+{
+ if (x <= tod(y)) 
+	z = tod(y);
+ else 
+	z = x;
+ return (z);
+}
+
+
+/* x mod y  */
+inline bool modBBB(bool x, bool y)
+{ return((!x)&y);
+}
+inline int modBII(bool x, int y)
+{ return(Iresidue(toi(x),y,0.0));
+}
+inline int modIBI(int x, bool y)
+{ return(Iresidue(x,toi(y),0.0));
+}
+inline int modIII(int x, int y)
+{ return(Iresidue(x,y,0.0));
+}
+inline double modIII(double x, double y, double QUADct)
+{ return(Dresidue(x,y,QUADct));
+}
+inline double modBDD(bool x, double y, double QUADct)
+{ return(Dresidue(tod(x),y,QUADct));
+}
+inline double modIDD(int x, double y, double QUADct)
+{ return(Dresidue(tod(x),y,QUADct));
+}
+inline double modDID(double x, int y, double QUADct)
+{ return(Dresidue(x,tod(y),QUADct));
+}
+
+/* x star y  */
+inline bool starBBB(bool x, bool y)
+{ return(x| !y);
+}
+
+inline int starIBI(int x, bool y)
+{ /* SxS int to Boolean power */
+ if (y)
+	z = x;
+ else
+	z = 1;
+ return(z);
+}
+
+inline double starDBD(double x, bool y)
+{ /* SxS double to Boolean power */
+ if (y)
+	z = x;
+ else
+	z = 1.0;
+ return(z);
+}
+
+inline double starIDD(int x, double y)
+{ return(pow(tod(x),y));
+}
+
+inline double starBID(bool x, int y)
+{ return(pow(tod(x),tod(y)));
+}
+
+inline double starBDD(bool x, double y)
+{ return(pow(tod(x),y));
+}
+
+inline double starIID(int x, int y)
+{ /* SxS integer power integer */
+ return(pow(tod(x),tod(y)));
+}
+
+
+inline double starDID(double x, int y)
+{ return(pow(x,tod(y)));
+}
+
+inline double starDDD(double x, double y)
+{ return(pow(x,y));
+}
+
+inline double logBDD(bool x, double y)
+{ return(log(tod(x))/log(y));
+}
+
+inline double logDBD(double x, bool y)
+{ return(log(tod(x))/log(tod(y)));
+}
+
+inline double logBBD(bool x, bool y)
+{ return(log(tod(x))/log(tod(y)));
+}
+
+inline double logIBD(int x, bool y)
+{ return(log(tod(x))/log(tod(y)));
+}
+
+inline double logBID(bool x, int y)
+{ return(log(tod(x))/log(tod(y)));
+}
+
+inline double logIID(int x, int y)
+{ return(log(tod(x))/log(tod(y)));
+}
+
+inline double logDID(int x, double y)
+{ return(log(tod(x))/log(y));
+}
+
+inline double logIDD(int x, double y)
+{ return(log(tod(x))/log(y));
+}
+
+inline double logDDD(double x, double y)
+{ return(log(x)/log(y));
+}
+
+/* NB.  APEX Extension of ISO APL to allow comparison of characters */
+/* relationals */
+inline bool ltBBB(bool x, bool y)
+{ return((!x)&y);
+}
+
+inline bool ltIBB(int x, bool y)
+{ return(x<toi(y));
+}
+
+inline bool ltBIB(bool x, int y)
+{ return(toi(x)<y);
+}
+
+inline bool ltIIB(int x, int y)
+{ return(x<y);
+}
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline bool ltIDB(int x, double y, double QUADct)
+{ return((tod(x)<y) & !APEXFUZZEQ(tod(x),y,QUADct));
+}
+
+inline bool ltDIB(double x, int y, double QUADct)
+{ return((x<tod(y)) & !APEXFUZZEQ(x,tod(y),QUADct));
+}
+
+inline bool ltDBB(double x, bool y, double QUADct)
+{ return((x<tod(y)) & !APEXFUZZEQ(x,tod(y),QUADct));
+}
+
+inline bool ltBDB(bool x, double y, double QUADct)
+{ return((tod(x)<y) & !APEXFUZZEQ(tod(x),y,QUADct));
+}
+
+inline bool ltDDD(double x, double y, double QUADct)
+{ return((x<y) & !APEXFUZZEQ(x,y,QUADct));
+}
+
+
+
+inline bool leBBB(bool x, bool y)
+{ return((!x)|y);
+}
+
+inline bool leIIB(int x, int y)
+{ return(x <= y);
+}
+
+inline bool leCCB(int x, int y)
+{ return(x <= y);
+}
+
+inline bool eqBBB(bool x, bool y)
+{ return(x == y);
+}
+
+inline bool eqIIB(int x, int y)
+{ return(x == y);
+}
+
+inline bool eqIBB(int x, bool y)
+{ return(x == toi(y));
+}
+
+inline bool eqBIB(bool x, int y)
+{ return(toi(x) == y);
+}
+
+inline bool eqDDB(double x, double y, double QUADct)
+{ return((x == y) || APEXFUZZEQ(x,y,QUADct));
+}
+
+inline bool eqDIB(double x, int y, double QUADct)
+{ return((x == tod(y)) || APEXFUZZEQ(x,tod(y),QUADct));
+}
+
+inline bool eqDBB(double x, bool y, double QUADct)
+{ return((x == tod(y)) || APEXFUZZEQ(x,tod(y),QUADct));
+}
+
+inline bool eqIDB(int x, double y, double QUADct)
+{ return((tod(x) == y) || APEXFUZZEQ(tod(x),y,QUADct));
+}
+
+inline bool eqBDB(bool x, double y, double QUADct)
+{ return((tod(x) == y) || APEXFUZZEQ(tod(x),y,QUADct));
+}
+
+inline bool eqCCB(char x, char y)
+{ return(x == y);
+}
+
+inline bool neBBB(bool x, bool y)
+{ return(x != y);
+}
+
+inline bool neIIB(int x, int y)
+{ return(x != y);
+}
+
+inline bool neDDB(double x, double y, double QUADct)
+{ return((x != y) & !APEXFUZZEQ(x,y,QUADct));
+}
+
+inline bool neCCB(char x, char y)
+{ return(x != y);
+}
+
+inline bool gtBBB(bool x, bool y)
+{ return(x & !y);
+}
+
+inline bool gtIIB(int x, int y)
+{ return(x > y);
+}
+
+inline bool gtDDB(double x, double y, double QUADct)
+{ return((x > y) && !APEXFUZZEQ(x,y,QUADct));
+}
+
+inline bool gtCCB(char x, char y)
+{ return(x > y);
+}
+
+inline bool geBBB(bool x, bool y)
+{ return(x | !y);
+}
+
+inline bool geIIB(int x, int y)
+{ return(x >= y);
+}
+
+inline bool geDDB(double x, double y, double QUADct)
+{ return((x >= y) || APEXFUZZEQ(x,y,QUADct));
+}
+
+inline bool geCCB(char x, char y)
+{ return(x >= y);
+}
+
+/* Boolean functions */
+inline bool orBBB(bool x, bool y)
+{ return(x | y);
+}
+
+inline bool andBBB(bool x, bool y)
+{ return(x&y);
+}
+
+/* As of 2004-09-16, we don't support lcm/gcd. Needs work
+   in code generator and dfa to support side effects in scan, etc.
+   rbe
+*/
+
+/* Euclids algorithm for lcm */
+#define dandII(XV,YV) (for initial  ax := abs(XV); ay := abs(YV); \
+ u = min(ax,ay); v := max (ax,ay);  \
+while (v ~= 0) repeat \
+ v := mod(old u,old v); \
+ u := old v; \
+returns value of (ax*ay)/u \
+end for)                         
+
+/* Euclids algorithm for lcm */
+#define dandDD(XV,YV)  (for initial  ax := abs(XV); ay := abs(YV); \
+ u = min(ax,ay); v := max (ax,ay); \
+while (v ~= 0) repeat \
+ v := mod(old u,old v); \
+ u := old v; \
+returns value of (ax*ay)/u \
+end for)
+
+
+/* Euclids algorithm for gcd  */
+#define dorII(XV,YV) (for initial \
+ ax := abs(XV); ay := abs(YV); \
+ u = min(ax,ay); v := max (ax,ay); \
+while (v ~= 0) repeat \
+ v := mod(old u,old v); \
+ u := old v; \
+returns value of u \
+end for)               
+
+/* Euclids algorithm for gcd  */
+#define dorDDD(XV,YV) (for initial \
+ ax := abs(XV); ay := abs(YV); \
+ u = min(ax,ay); v := max (ax,ay); \
+while (v ~= 0) repeat \
+ v := mod(old u,old v); \
+ u := old v; \
+returns value of u \
+end for)
+
+inline bool nandBBB(bool x, bool y)
+{ return(!(x&y));
+}
+
+inline bool notBBB(bool x, bool y)
+{ return(!(x|y));
+}
+
+#define dcircDDD(XV,YV) (if (XV = 1.0d) then sin(YV) \
+elseif (XV = 2.0d) then cos(YV)   \
+elseif (XV = 3.0d) then tan(YV)   \
+elseif (XV = 4.0d) then pow((1.0d+YV*YV),0.5d) \
+else error[double_real]  end if)
+/* domain error check above */
+
+/* 1 circle */
+#define dcirc1DDD(XV,YV) (sin(YV))
+/* 2 circle */
+#define dcirc2DDD(XV,YV) (cos(YV))
+/* 3 circle */
+#define dcirc3DDD(XV,YV) (tan(YV))
+/* 3 circle */
+#define dcirc4DDD(XV,YV) (pow((1.0d+YV*YV),0.5d))
+

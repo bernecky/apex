@@ -1,0 +1,37 @@
+/* Main function for APEX/APL+Win quadna dll when result is scalar */
+#include<stdio.h>
+#include<sisal.h>
+
+
+/* Caller fills in the following sorts of items:
+ #define EP ipdd                  NB. Function name (entry point)
+ #define ARGS    ARG0, ARG1siz, ARG1val 
+ #define ARG0    int *    in0     NB. A scalar in
+ #define ARG1siz int *    in1     NB. A vector in. Shape, value
+ #define ARG1val double * in2     NB. Double scalar in 
+ #define RESULT0 double NB. First result
+ As of 1998-02-23, we only support one result.
+ end of typical caller data
+*/
+
+/* Define the OSC output main entry point */
+void EP(ARG0,RESULT0 *);
+
+void sstart(int *, int* ,int *);
+void sstop();
+
+__declspec (dllexport) RESULT0 main(ARG0 in0)
+
+{
+
+  int workers = 1;
+  int heap = 2000000;
+  int resinf = 0;
+  RESULT0 out0 = 666;
+  sstart(&workers,&heap,&resinf); /* start sisal*/
+  EP(in0,&out0);                     /* call fn    */
+  sstop();                        /* stop sisal */
+  return out0;
+}
+                                                                               
+

@@ -1,0 +1,17 @@
+﻿ ast2adverb;i
+⍝ Adverb (monadic operator) left of anything
+ :Select state
+ :Case Stf                   ⍝ Adverb left of function:    /f ⍵
+     InvokeMonadicFn
+ :Case Stx                   ⍝ Adverb left of expn:        /⍵
+     i←((E NULL),(E clsfn),E 0)Push state ⍝ No right operand
+     PushCursor Push Sto     ⍝ Push cursor past adverb
+ :Case Stn                   ⍝ Adverb left of bos:       adv←/
+     i←((E NULL),(E clsfn),E 0)Push state   ⍝ No right operand
+     PushCursor Push StA     ⍝ Push cursor past naked adverb
+ :Case Std                   ⍝ Adverb left of dyadic fn:   /⍺ f ⍵
+     InvokeDyadicFn
+                             ⍝ Need Sta,Stl,Sto,StV,StA cases
+ :Else
+     snerr
+ :EndSelect

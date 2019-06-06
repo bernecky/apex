@@ -1,0 +1,1 @@
+﻿⌷clsgoto←<char>g</char>

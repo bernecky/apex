@@ -1,0 +1,37 @@
+% Dyadic Phrases
+
+% 1996-05-20 R. Bernecky
+
+% x compress iota rho y 
+% defined on boolean vector left arguments only today.
+
+#define SLIOTARHO101(x1,XT,y0,YT) error[array[integer]
+#define SLIOTARHO111(x1,XT,y1,YT) (for i in 0, \
+ConformSameShape(array_size(y1),array_size(x1))-1 \
+ returns array of QUADIO+i when x1[i+SISALIO] end for)
+#define SLIOTARHO121(x1,XT,y2,YT) error[array[integer]
+#define SLIOTARHO131(x1,XT,y3,YT) error[array[integer]
+#define SLIOTARHO141(x1,XT,y4,YT) error[array[integer]
+#define SLIOTARHO151(x1,XT,y5,YT) error[array[integer]
+#define SLIOTARHO161(x1,XT,y6,YT) error[array[integer]
+#define SLIOTARHO171(x1,XT,y7,YT) error[array[integer]
+#define SLIOTARHO181(x1,XT,y8,YT) error[array[integer]
+#define SLIOTARHO191(x1,XT,y9,YT) error[array[integer]
+
+% x compress iota y 
+% defined on boolean vector left arguments only today.
+
+#define SLIOTA101(x1,XT,y0,YT) error[array[integer]
+#define SLIOTA111(x1,XT,y1,YT) (for i in 0, \
+ConformSameShape(array_size(x1),YT##toI(y1))-1 \
+ returns array of QUADIO+i when x1[i+SISALIO] end for)
+#define SLIOTA121(x1,XT,y2,YT) error[array[integer]
+#define SLIOTA131(x1,XT,y3,YT) error[array[integer]
+#define SLIOTA141(x1,XT,y4,YT) error[array[integer]
+#define SLIOTA151(x1,XT,y5,YT) error[array[integer]
+#define SLIOTA161(x1,XT,y6,YT) error[array[integer]
+#define SLIOTA171(x1,XT,y7,YT) error[array[integer]
+#define SLIOTA181(x1,XT,y8,YT) error[array[integer]
+#define SLIOTA191(x1,XT,y9,YT) error[array[integer]
+
+

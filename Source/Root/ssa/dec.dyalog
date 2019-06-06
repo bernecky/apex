@@ -1,0 +1,6 @@
+﻿ r←dec y
+ ⍝
+ ⍝ decorate y to make it a comment.
+ ⍝
+ r←('⍝'≠''⍴y)/CR
+ r←r,'/* ',(dtb y),' */'

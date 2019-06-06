@@ -1,0 +1,64 @@
+/* This identifies the basic problem in WLF/WLFS for AKD arrays.
+ * Compiling this with 
+ * sac2c -O3 -b11:ive -doswlf -doisv -dowlfs tutu.sac -DAKD
+ * produces 3 WLs. Compiling it without -DAKS gives 2 WLs.
+ *
+ */
+ 
+use Array: all;
+use StdIO: all;
+
+#ifdef AKD
+int[*] id(int[*] y)
+{ return(y);
+}
+#else
+#define id(x) (x)
+#endif
+
+#ifdef MYROT
+#define ROT(k,x) myrotate(k,x)
+#else
+#define ROT(k,x) rotate(k,x)
+#endif
+
+#ifdef SUB
+inline int[.] sub(int[.] x, int[.] y)
+{ /* Avoid stupdi AxA substract in stdlib */
+ z = with (. <= iv <= .)
+	genarray(shape(x), _sub_SxS_(x[iv], y[iv]));
+ return(z);
+}
+#else
+inline int[.] sub(int[.] x, int[.] y)
+{ return(x-y);
+}
+#endif
+
+
+inline int[.] myrotate(int[1] k, int[.] y)
+{ 
+ cols = shape(y);
+ z = with{
+        (cols-k <= iv <= .)	: y[iv-(cols-k)];
+	(. <= iv < cols-k)	: y[iv+k];
+	}:
+	modarray(y);
+ return(z);
+}
+
+int main()
+{ 
+ x = iota(id(20));
+ k = [id(3)];
+
+ q = ROT(k,x);
+/*
+ print(q);
+*/
+ z = sub(x,q);
+
+ print(z);
+ return(0);
+}
+

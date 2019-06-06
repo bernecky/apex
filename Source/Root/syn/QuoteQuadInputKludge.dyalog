@@ -1,0 +1,7 @@
+﻿ r←st QuoteQuadInputKludge i
+⍝ ⍞ input in APL is just plain wrong, syntactically.
+⍝ snax will replace '← ... ⍞' by '←⍞' as a single function.
+ r←st stlookup i[stname]
+ :If (r=1↑⍴st)∧i[stname]≡E,'⍞'
+     r←E'⍞'
+ :EndIf

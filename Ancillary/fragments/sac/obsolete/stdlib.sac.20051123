@@ -1,0 +1,436 @@
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+
+% For SAC, we map names of system variables, system functions,
+% quad, and quote-quadfrom APL symbols to legal SAC names
+% by replacing the quad/quote-quad with QUAD or QUOTEQUAD.
+% This happens in the syntax analyzer, for lack of a better
+% place. We also map quad/quote-quad to function calls,
+% removing the assignment. R. Bernecky 2004-06-11
+*/
+
+#define toB(x) tob((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) (x)
+/* The toC above is wrong, but one thing at a time... */
+
+/* Empty vectors */
+#define EMPTYBOOL _drop_SxV_(1, [true])
+#define EMPTYINT _drop_SxV_(1, [0])
+#define EMPTYDOUBLE _drop_SxV_(1, [0d])
+#define EMPTYCHAR _drop_SxV_(1, [' '])
+/* end of empty array jokes */
+
+void APEXERROR(char[.] msg)
+{
+/* Error function. This needs work, as it should kill
+ * the running task, too. 
+ */
+ /*print(msg); */
+return();
+}
+
+/* Structural function utility functions */
+/* Ravel utility */
+#define APEXRAVEL(y) (_reshape_([prod(_shape_(y))],y))
+
+inline int VectorRotateAmount(int x, int y)
+{ /* Normalize x rotate for array of shape y on selected axis */
+ /* normalize rotation count */
+ if (x>0)
+        z = _mod_(x,y);
+ else
+        z = y - _mod_(_abs_(x),y);
+ return(z);
+}
+
+inline bool SameShape(int[*] x, int[*] y)
+{ /* Predicate for two shape vectors having same shape */
+ if (_dim_(x) != _dim_(y))
+	z = false;
+ else
+	z = with ([0] <= i < [_dim_(y)])
+		fold(dandBBB, true,
+		(_shape_(x))[i] == (_shape_(y))[i]);
+ return(z);
+}
+
+
+/* First-axis catenate, stolen from NTCtemplates_array.mac */
+
+
+/** <!--********************************************************************-->
+ *
+ * @fn  <a>[*] psel( int[.] idx, <a>[*] Array)
+ *
+ *   @brief  selects the subarray of Array at position idx, provided
+ *           shape( idx)[[0]] <= dim( Array)    holds.
+ *
+ ******************************************************************************/
+
+#define PSEL( a)                                                         \
+inline                                                                   \
+a[*] psel( int[.] idx, a[*] array)                                       \
+{                                                                        \
+  new_shape = _drop_SxV_( _sel_( [0], _shape_(idx)), _shape_(array));    \
+  res = with( . <= iv <= .) {                                            \
+          new_idx = _cat_VxV_( idx, iv);                                 \
+        } genarray( new_shape, _sel_(new_idx, array), zero( array));     \
+  return( res);                                                          \
+}
+
+/* Indexing helper functions */
+
+inline int[*] indrfr(int fr, int[*] i, int[+] X)
+{ /* X[;;;i;;;], where i has fr semicolons to its left */
+  /* Indexing is origin-0. Invocation will correct this */
+  /* This could stand some optimization, perhaps, for boolean i,
+   * unless SAC avoids building an array-valued temp of toI(i).
+   */
+ cellshape = _shape_(i)++_drop_SxV_(fr+1,_shape_(X));
+ cell = genarray(cellshape,0); /* not used, but SAC needs help */
+ frameshape = _take_SxV_(fr,_shape_(X));
+ z = with (. <= iv <= .)
+        genarray(frameshape,indraxis0(i,psel(iv,X)),cell);
+ zshape = frameshape++cellshape;
+ return(_reshape_(zshape,z));
+}
+
+
+inline int[*] indraxis0(int[*] i, int[*] X)
+{ /* Helper function for indexing along leading axis */
+ cellshape = _drop_SxV_(1,_shape_(X));
+ cell = genarray(cellshape, 0);
+ raveli = APEXRAVEL(i);
+ z = with (. <= iv <= .)
+        genarray(_shape_(raveli), psel([raveli[iv]],X),cell);
+ z = _reshape_(_shape_(i)++cellshape,z);
+ return(z);
+}
+
+#define APEXMIOTA(N) with (. <= [iv] <= .) genarray([N], iv)
+
+
+#define BUILT_IN( fun)    \
+fun( int)                 \
+fun( float)               \
+fun( double)              \
+fun( bool)                \
+fun( char)
+
+BUILT_IN( PSEL)
+
+
+
+#define CAT( a)                                                             \
+inline                                                                      \
+a[*] (++)( a[+] arr_a, a[+] arr_b)                                          \
+{                                                                           \
+  new_shp = _modarray_( _shape_( arr_a),                                    \
+                        [0],                                                \
+                        _add_SxS_( _sel_([0], _shape_( arr_a)),             \
+                                   _sel_([0], _shape_( arr_b)) ) );         \
+  res = with( . <= iv < _shape_( arr_a))                                    \
+        genarray( new_shp, _sel_( iv, arr_a));                              \
+  offset =  _modarray_( _mul_SxA_( 0, new_shp),                             \
+                        [0],                                                \
+                        _sel_([0], _shape_( arr_a)) );                      \
+  res = with( offset <= iv <= .)                                            \
+        modarray( res, iv, _sel_( _sub_AxA_( iv, offset), arr_b));          \
+  return( res);                                                             \
+}
+
+
+/* scalar take matrix, adapted from NTCtemplates_array.mac */
+#define APLTAKE(a)						    \
+inline                                                              \
+a[*] take( int v, a[*] array)	                                    \
+{                                                                   \
+  v2 = _shape_(array);						    \
+  v2 = modarray(v2,[0],v);					    \
+  return( take(v2,array));                                          \
+}
+
+#define APEXPI 3.1415926535897932d
+#define APEXE  2.718281828d
+/*  APEXPINFINITYI largest integer */
+#define APEXPINFINITYD  1.7976931348623156D308
+/*  APEXMINFINITYI smallest integer */
+#define APEXMINFINITYD -1.7976931348623156D308
+
+inline bool[+] tob (bool[+] x)
+{ z = with (. <= iv <= .)
+	genarray(_shape_(x),tob(_sel_(iv,x)));
+  return(z);
+}
+
+inline bool[+] tob (int[+] x)
+{ z = with (. <= iv <= .)
+	genarray(_shape_(x),tob(_sel_(iv,x)));
+  return(z);
+}
+
+inline bool[+] tob (double[+] x)
+{ z = with (. <= iv <= .)
+	genarray(_shape_(x),tob(_sel_(iv,x)));
+  return(z);
+}
+
+inline bool tob(bool x)
+{ return(x);
+}
+
+inline bool tob(int x)
+{ if (1 == _toi_S_(x))
+	z = true;
+  else
+	z = false;
+  return(z);
+}
+
+inline bool tob(double x)
+{ if (1 == _toi_S_(x))
+	z = true;
+  else
+	z = false;
+  return(z);
+}
+
+/*
+% Floating-point utilities
+% This taken from page 93 of the 1993-01-06 version 
+% of Committee Draft 1 of the Extended ISO APL Standard
+% NO {quad}ct support yet! 
+*/
+
+inline int Dsignum(double y)
+{ /* signum double */
+ if (0.0 == y)
+	z = 0;
+ else if (0.0 > y)
+	z = -1;
+ else 
+	z = 1;
+ return(z);
+}
+
+inline int Isignum(int y)
+{ /* signum int */
+ if (0 == y)
+	z = 0;
+ else if (0 > y)
+	z = -1;
+ else 
+	z = 1;
+ return(z);
+}
+
+#define Dmod(p,q) fmod(tod(p),tod(q))
+#define Imod(p,q) _mod_(p,q)
+
+
+/*
+% 1996-12-07 Pearl Harbor Day. Try to fix bug in DBank infdivm 
+% benchmark. (4 5 rho 6) + rank 1 (4 1 rho 7) introduces singleton
+% vectors into scalar fn calls.
+% Hence, we need support for singletons within scalar fns.
+% There is an similar, but independent, bug in rank support for
+% the extension case.
+*/
+
+
+/* vector-scalar simple search loops 
+ * This is origin-0 x1 iota y0
+ * cfn is comparator function type suffix to use, e.g, b,i,d,c,
+ */
+
+#define FindFirst(x,y,cfn,QUADct)			\
+ sx = _shape_(x)[0];					\
+ z = sx; /* if not found */				\
+ for(i=0; i<sx; i++)					\
+  if (comparatorfn##cfn(to##cfn(x[i]),to##cfn(y),QUADct)) \
+   { z = i;						\
+     i = sx; 						\
+   }
+
+int FindFirstB(bool[.] x, bool y, double QUADct)
+{
+ /* x iota y (vector-scalar on Booleans */
+ FindFirst(x,y,b,QUADct)
+ return(z);
+}
+
+int FindFirstI(int[.] x, int y, double QUADct)
+{
+ /* x iota y (vector-scalar on integers */
+ FindFirst(x,y,i,QUADct)
+ return(z);
+}
+
+int FindFirstD(double[.] x, double y,double QUADct)
+{
+ /* x iota y (vector-scalar on doubles */
+ FindFirst(x,y,d,QUADct)
+ return(z);
+}
+
+int FindFirstC(char[.] x, char y, double QUADct)
+{
+ /* x iota y (vector-scalar on characters */
+ FindFirst(x,y,c,QUADct)
+ return(z);
+}
+
+
+inline bool equals(char x, char y,double QUADct)
+{ /* Char comparator */
+ z = (x == y);
+ return(z);
+}
+
+inline bool equals(char[+] x, char[+] y, double QUADct)
+{ /* Char item comparator */
+  /* This definition is sort of flakey - it really compares ravels... */
+  /* It oughta also ensure that the arguments shapes match... */
+  z = with(0*_shape_(x) <= iv < _shape_(x))
+	fold(&, true, x[iv] == y[iv]);
+ return(z);
+}
+
+inline bool lessthan(char[+] x, char[+] y, double QUADct)
+{ /* Char item comparator */
+  /* It oughta also ensure that the arguments shapes match... */
+  shp=_shape_(x)[0];
+  z=false;
+  for (i=0;i<shp;i++)
+        if (x[i]!=y[i]){
+                z= x[i]<y[i];
+                i=shp;
+        }
+ return(z);
+}
+
+inline bool greaterthan(char[+] x, char[+] y, double QUADct)
+{ /* Char item comparator */
+  /* This definition is sort of flakey - it really compares ravels... */
+  /* It oughta also ensure that the arguments shapes match... */
+  shp=_shape_(x)[0];
+  z=false;
+  for (i=0;i<shp;i++)
+        if (x[i]!=y[i]){
+                z= x[i]>y[i];
+                i=shp;
+        }
+ return(z);
+}
+
+inline bool comparatorfnb(bool x, bool y,double QUADct)
+{ /* Boolean comparator */
+ z = (x == y);
+ return(z);
+}
+
+inline bool comparatorfni(int x, int y, double QUADct)
+{ /* integer comparator */
+ z = (x == y);
+ return(z);
+}
+
+inline bool comparatorfnd(double x, double y, double QUADct)
+{ /* double comparator with fuzz */
+ L = _abs_(x-y);  /* Tolerant equality */
+ R = QUADct*max(_abs_(x),_abs_(y));
+ z = (L <= R);
+ return(z);
+}
+
+
+inline bool comparatorfnc(char x, char y,double QUADct)
+{ /* char comparator */
+ z = (x == y);
+ return(z);
+}
+
+inline bool comparatorfndnf(double x,double y, double QUADct)
+{ /* double comparator, no fuzz */
+ z = (x == y);
+ return(z);
+}
+
+/*  Lehmer's random number generator */
+#define lehmer(qrl) mod(qrl*16807,2147483647)
+
+
+
+/* Transposes */
+#define APEXTRANSPOSE(TYPE)				\
+inline TYPE APEXTranspose(TYPE y)			\
+{							\
+ return(y);						\
+}							\
+inline TYPE[.] APEXTranspose(TYPE[.] y)			\
+{							\
+ return(y);						\
+}							\
+inline TYPE[.,.] APEXTranspose(TYPE[.,.] y)		\
+{/* Rank 2 transpose */					\
+ return({[i,j] -> y[[j,i]]});				\
+}							\
+inline TYPE[.,.,.] APEXTranspose(TYPE[.,.,.] y)		\
+{ /* Rank-3 transpose */				\
+ return({[i,j,k] -> y[[k,j,i]]});			\
+}							\
+inline TYPE[.,.,.,.] APEXTranspose(TYPE[.,.,.,.] y)	\
+{ /* Rank-4 transpose */				\
+ return({[i,j,k,l] -> y[[l,k,j,i]]});			\
+}							\
+inline TYPE[.,.,.,.,.] APEXTranspose(TYPE[.,.,.,.,.] y)	\
+{ /* Rank-5 transpose */				\
+ return({[i,j,k,l,m] -> y[[m,l,k,j,i]]});		\
+}							\
+inline TYPE[.,.,.,.,.,.] APEXTranspose(TYPE[.,.,.,.,.,.] y)	\
+{ /* Rank-6 transpose */				\
+ return({[i,j,k,l,m,n] -> y[[n,m,l,k,j,i]]});		\
+}							\
+inline TYPE[.,.,.,.,.,.,.] APEXTranspose(TYPE[.,.,.,.,.,.,.] y)	\
+{ /* Rank-7 transpose */				\
+ return({[i,j,k,l,m,n,o] -> y[[o,n,m,l,k,j,i]]});	\
+}
+
+APEXTRANSPOSE(bool)
+APEXTRANSPOSE(int)
+APEXTRANSPOSE(double)
+APEXTRANSPOSE(char)
+
+/* End of transpose utilities */
+
+/* modulus functions */
+inline int Dmodulo(int x, int y, double QUADct)
+{ 
+ if (0 == x)
+	z = 0;
+ else
+	z = Imod(y,x);
+ return(z);
+}
+
+inline double Dmodulo(double x, double y, double QUADct)
+{ 
+/*  See page 93 of the 1993-01-06 version
+    of Committee Draft 1 of the Extended ISO APL Standard
+ THIS NEEDS WORK TO SUPPORT QUADct!!!! 
+*/
+ if (0.0d == x)
+	z = 0.0d;
+ else
+	z = Dmod(y,x);
+ return(z);
+}
+
+/* End of boilerplate */
+
+

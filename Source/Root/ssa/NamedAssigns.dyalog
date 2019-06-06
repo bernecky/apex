@@ -1,0 +1,4 @@
+﻿ r←NamedAssigns ast
+ ⍝ Return cv for assignments to names in ast
+ r←ast[;asttarget]
+ r←r∊ER0⍳r⍳aststz

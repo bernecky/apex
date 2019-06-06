@@ -1,0 +1,34 @@
+FUTURE WORK IN APEX
+
+1996-05-10 Array sloshing:
+             Make rotate run in place.
+             Make array-adjust run in place
+             Make array_setl go away
+             Make array_reml preserve lower array bound
+           
+           Quick loops:
+             Switch dsfctl arguments when one is a scalar
+             and the op is commutative, so that the scalar goes
+             on the left. (2x speedup in +/0.0d0+iota n)
+             This can be done easily with some additions to pfat.
+             Done 1996-05-17 or so.
+
+             Coerce scalars and small arrays at compile time.
+
+1996-05-14   If the result of a singleton-generating operation
+             is only used by a function that prefers a scalar
+             argument, change the generator to produce a scalar.
+
+
+1996-05-20   Constant propagation aka partial evaluation: Could help metaphon.
+             Quadav iota c: Detect Quadav case in code generator?
+             Source wif as comments in generated code for diagnostics.
+             AST uncompiler for errors.
+             Graphical display of dfa in progress.
+             Function cloner for utilities.
+             Rank support: NMO, RLE3
+
+
+
+              
+

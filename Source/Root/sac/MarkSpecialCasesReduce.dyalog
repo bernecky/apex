@@ -1,0 +1,4 @@
+﻿ r←MarkSpecialCasesReduce fns
+⍝ Special case detector fns fast reduction cases
+ r←IsCaseReduceFOLD fns
+ r←IsCaseReduceQUICKSTOP r ⍝ OK if this overwrites some FOLDs

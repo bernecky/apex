@@ -1,0 +1,44 @@
+/*
+ * CWLE fails to eliminate the toi( r_2) WL if compiled with -ecc -extrema -doawlf -nowlf
+ */
+
+use Array:{genarray,iota,-,+,<,<=};
+
+inline int[.] lltopermIII(int hd , int[.] links,int n)
+{ 
+ r_2=genarray( [n],-1);
+ A_33=iota(n);
+ A_CTR34_= 0;
+ A_CTR34z_ = n-1;
+ for(; A_CTR34_ <= A_CTR34z_; A_CTR34_++) {
+   i_0 = _sel_VxA_( [ A_CTR34_], A_33);
+
+#ifndef FAST
+   r_2 = TOI(r_2);
+#endif // FAST
+   i_0in = i_0;
+   r_2 = _modarray_AxVxS_( r_2, [hd], i_0);
+   hd = _sel_VxA_( [hd], links);
+ }
+ return(r_2);
+}
+
+int main()
+{
+ n = 40000000;
+ A_22 = iota(n) - 1;
+ A_23 = n - 1;
+ z=lltopermIII(A_23,A_22,n);
+ StdIO::print(_sel_VxA_( [23], z));
+ return(0);
+}
+
+inline int[+] TOI( int[+] A) 
+{                                                        
+  shp = _shape_A_( A); 
+  res = with { 
+          ( . <= iv <= . ) : _toi_S_( _sel_VxA_(iv,A) );
+        } : genarray( shp, 0 ); 
+  return( res);
+}
+

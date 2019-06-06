@@ -1,0 +1,36 @@
+﻿ r←sis EmitInnerProductSTARIdent fns;ffns;gfns;flid;zer
+ ⍝# Complete code gen for STAR algorithm inner product x f.g y
+ ⍝ The STAR-100 APL algorithm was first used, to my knowledge,
+ ⍝ in the APL interpreter for the CDC STAR-100 computer,
+ ⍝ designed by people at I.P. Sharp Associates and others.
+ ⍝ I'm not sure who actually came up with the algorithm, but
+ ⍝ suspect it was not someone at IPSA. /rbe 2005-12-07
+ ⍝ This algorithm can be used in the following circumstances:
+ ⍝ There exists a element x[i], denoted $LID, s.t. "x[i] g y[j;]"
+ ⍝ produces the right identity for f. Therefore,
+ ⍝ when we encounter x[i]=$LID, we don't have to perform
+ ⍝ "t←x[i] g y[j]", nor do we have to perform "z[i;]←z[i;] f t"
+ ⍝ so we skip the entire pair of computations.
+ ⍝ As of 2005-12-07, $LID∊0 1, so g∊'⌊⌈∧∨*' in the x Boolean domain,
+ ⍝ and g∊'×' in the integer and double domain. However, the latter
+ ⍝ generally operate slow in the STAR algorithm than in the TRANSPOSE
+ ⍝ algorithm, so we restrict x to Booleans. If we introduce a "sparse"
+ ⍝ array predicate, we could extend the STAR algorithm to cover
+ ⍝ integer- and double-valued x. Also, STAR MAY run faster than
+ ⍝ TRANSPOSE on some architectures.
+ ⍝ Similarly, f∊'+×∧∨⌊⌈' in the x Boolean domain, with possible
+ ⍝ extension to f∊'+×' in the x integer and double domain.
+ ⍝ With the domain restricted to Boolean x, the above set of
+ ⍝ g are such that if "t←x[i] g y[j;]" is NOT $LID, then
+ ⍝ t is simply "y[j;]", so the g computation can be ignored,
+ ⍝ even though the f-reduce  still has to be applied.
+ ⍝ A final performance edge arises from the fact that we fetch
+ ⍝ each element of x only once. This improves cache utilization
+ ⍝ and reduces type coercion overhead for x.
+ ⍝ Select special cases. See commentary in dconj.frg.
+ ffns←fnslop ConjToFns fns  ⍝ We need the identity for f
+ gfns←fnsrop ConjToFns fns  ⍝ and the 0 or 1 for g
+ flid←,D PFATlid PFATProperty ffns ⍝ Identity for f
+ zer←,D(,(PFATl0 PFATProperty gfns),PFATl1 PFATProperty gfns)['01'⍳flid]
+ sis←(E'$FGID')Strepl¨ER1(mcb sis),mcb E zer ⍝ zer ==> skip this dot prod
+ r←sis

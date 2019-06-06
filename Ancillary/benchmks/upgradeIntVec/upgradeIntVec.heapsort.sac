@@ -1,0 +1,287 @@
+use Array: all;
+use Numerical : all;
+use StdIO : all;
+use CommandLine: all;
+use String: {tochar,sscanf};
+use Bits: all;
+
+/* Compiled by APEX Version: /home/apex/apex2003/wss/sac3001.dws2009-04-10 15:27:07.555 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+inline int plusBBI(bool x, bool y)
+{ return(toI(x)+toI(y));
+}
+
+inline int[.] rotrXII(int[.] y)
+{ /* Vector reverse */
+ n = shape(y);
+ cell = 0;
+ z = with {
+         ( . <= iv <= .)
+                : y[(n-1)-iv];
+         } : genarray(n, cell);
+ return(z);
+}
+
+inline int[+] rotrIII(int x, int[+] y)
+{ /* Scalar rotate first/last axis vector */
+ ix = toi(x);
+ rows = shape(y)[0];
+ k = VectorRotateAmount(ix,rows); /* Normalize rotate count */
+ z = with {
+      (. <= [i] <= .)
+        { idx = (i+k) < rows ? (i+k) : (i+k) - rows;
+   } : y[[idx]];
+         } : genarray([rows], 0);
+ return(z);
+}
+
+
+
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline int[.] ugrdXII(int[+] y, int QUADio)
+{ /* Vector/matrix upgrade  */
+ z = QUADio + UpgradeHeap(y);
+ return( z);
+}
+
+
+inline int[1]  rhoXII(int[.] y)
+{ /* Shape of vector */
+ return(shape(y));
+}
+
+inline int[.] iotaXII(int[1] y, int QUADio)
+{ /* Index generator on 1-element vector */
+ /* HELP! Needs length error check */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y[[0]]));
+  return( z);
+}
+
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+  show(y);
+       return(y);
+}
+inline bool sameIIB(int[+] x, int[+] y)
+{ /* Non-scalar match non-scalar */
+ return(match(toI(x),toI(y)));
+}
+
+
+inline int[+] inds0(int[+] X, int  I0, int Yin)
+{ /* X[;;nonscalarI;;;]<- scalarY */
+ 
+ z = toi(X);
+ Y = Yin;
+
+ 
+ z[[I0]]=toi(Y);
+
+ 
+ return(z);
+}
+
+
+
+inline int[.] UpgradeHeap(int[+] y)
+{
+/*    Do APL upgrade of array y using heapsort.
+      This is a sub-function shared by upgrade/downgrade/indexof, etc.
+      This version adapted from the Sara Baase "Computer Algorithms"
+      version of heapsort.
+     Robert Bernecky 2006-11-14
+     Knuth, Vol. III, pp. 145-148 gives a good example.
+     APL model: (See workspace apex2003/wss/upgrade or
+                 apex2003/wif/upgrade)
+                 Also UTGrade.dws
+r{<-}upgradeHeap v;#io;N;heap
+@ Upgrade vector using heapsort
+#io{<-}0
+N{<-}{rho}v
+:if N{<=}1
+  r{<-}{iota}N
+:else
+  heap{<-}MakeHeap(v)
+  r{<-}(UnHeap(heap))
+:endif
+*/
+
+ N = shape(y)[[0]];
+ if (N <= 1)
+    z = iota(N);
+ else{
+   heap = MakeHeap(y);
+    z = UnHeap(heap,y);
+ }
+ return(z);
+}
+
+
+inline int[.] MakeHeap(int[+] v)
+{ /* Build heap from array v. v has at least two elements */
+/*
+r{<-}MakeHeap v;i;n;heap;biggest
+@ Build heap from v
+@ We know v has at least two elements
+N{<-}{rho}v
+heap{<-}{iota}N
+:for i :in {reverse}{iota}{floor}N{divide}2
+  y FixHeap i,heap[i],n
+:endfor
+r{<-}heap
+*/
+ n = shape(v)[[0]];
+ heap = iota(n);
+ lim = n/2;
+ for(i=lim-1; i>=0; i--) {
+         heap = FixHeap(heap, v, i, heap[[i]], n);
+ }
+ return(heap);
+}
+
+inline int[.] UnHeap(int[.] heap, int[+]v)
+{ /* Extract heap elements in top-to-bottom order */
+  n = shape(v)[[0]];
+  for(heapsize= n-1; heapsize>0; heapsize--){
+   biggest = heap[[0]];
+        heap = FixHeap(heap,v,0,heap[[heapsize]],heapsize);
+       heap[[heapsize]] = biggest;
+  }
+ return(heap);
+}
+
+inline int[.] FixHeap(int[.] heap, int[+] v, int root,
+   int heapitem, int heapsize)
+{ /* Restore heap invariant: parent>= both children */
+ vacant = root;
+ lchild = 1+vacant+vacant;
+ while( lchild < heapsize) {
+     bigC = lchild;      /* Identify larger child, if any */
+        rchild = lchild+1;
+     if ((lchild<(heapsize-1))){
+            li = heap[[lchild]];
+                   ri = heap[[rchild]];
+          if ((GradeGT(v[[ri]],v[[li]])) ||
+                     (match(v[[ri]], v[[li]])&&(ri>li))){ /* Stability */
+           bigC = rchild; /* right child larger */
+                }
+      }
+      /* parent vs big kid*/
+         li = heap[[bigC]];
+     if ((GradeGT( v[[li]], v[[heapitem]])) ||
+              (match(v[[li]], v[[heapitem]]) &&(li>heapitem))) {
+                     heap[[vacant]] = heap[[bigC]];
+                         vacant = bigC;
+                         lchild = 1+vacant+vacant;
+      } else lchild = heapsize;   /* exitloop */
+ }
+ heap[[vacant]] = heapitem;
+ return(heap);
+}
+
+
+
+inline int VectorRotateAmount(int x, int y)
+{ /* Normalize x rotate for array of shape y on selected axis */
+ /* normalize rotation count */
+
+if ((0==x) || (0==y))
+  z = 0;
+else if (x>0)
+        z = _mod_SxS_(x,y);
+     else
+        z = y - _mod_SxS_(abs(x),y);
+ return(z);
+}
+
+inline int[+] ABC(int[+] I, int Xshape)
+{ /* Array bounds checker for indexed ref  X[nonscalarI] and indexed assign */
+ z = I;
+#ifdef BOUNDSCHECKING
+ bad = with {
+     ((0*shape(z)) <= iv < shape(z))
+                : (z[iv] < 0) || (z[iv] >= Xshape);
+    }: fold(|, false);
+ if (bad)
+  print(tochar("APEX index error!"));
+#endif
+ return(z);
+}
+
+inline int ABC(int I, int Xshape)
+{ /* Array bounds checker for indexed ref X[scalarI] and indexed assign */
+ z = I;
+#ifdef BOUNDSCHECKING
+ /* This needs more thought... */
+  if ( (I < 0) || (I >= Xshape)) {
+         print(tochar("APEX index error!"));
+  }
+#endif
+ return(z);
+}
+
+inline bool GradeGT(int x, int y)
+{ /* Integer Comparator for upgrade */
+ return(x>y);
+}
+
+inline bool GradeGT(int[+] x, int[+] y)
+{ /* Integer Array Comparator for upgrade */
+  /* The ravels of the two arrays are compared.  */
+ z = with {
+       (0*shape(x) <= iv < shape(x))
+            : x[iv] > y[iv];
+        }: foldfix( &, true,false);
+ return(z);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+QUADio_0=toi(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toi(( false));
+ A_55=iotaXII( 5000000,QUADio_1);
+ A_56=rotrXII( A_55);
+ v_0=( A_56);
+ A_58= ABC(toi(false)-QUADio_1,shape(v_0)[0]);
+A_60=inds0(v_0,A_58,-3);
+v_1=( A_60);
+ A_63=ugrdXII( v_1,QUADio_1);
+ z_0=( A_63);
+ A_65=rhoXII( v_1);
+ A_67=iotaXII( A_65,QUADio_1);
+ A_68=rotrXII( A_67);
+ A_69=rotrIII(-1,A_68);
+ A_71=sameIIB(z_0,A_69);
+ /* dsf scalar(s) */
+A_72=plusBBI(true,A_71);
+ r_0=( A_72);
+ A_76=quadXII( A_72,QUADpp_0,QUADpw_0);
+ return(r_0);
+}
+

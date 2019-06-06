@@ -1,0 +1,8 @@
+As we expected, the \awlf version of this benchmark executes
+somewhat faster (26\%) than the \wlf version. Instruction counts,
+both scalar and vector, track that speedup. The large matrix
+sizes involved ({\tt 2400x2400x5}) result in fairly high
+data cache miss rates for both optimizations, but \awlf
+outperforms \wlf about 60\% better in that regard, due to
+\fixme{Fewer WL?}.
+

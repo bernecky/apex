@@ -1,0 +1,431 @@
+% Start of boilerplate
+% This is used to generate the APEX stdlib.sis include file.
+
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+% This claims to support arbitrary user array index origin. 1996-03-26 /rbe
+
+% Array type definitions
+% These appear to be REQUIRED by the empty array creator... 1996-04-12
+% At least, I cannot figure out how to create them without the typedef.
+type B = boolean;
+type I = integer;
+type D = double_real;
+type C = character;
+type B0 = boolean;
+type I0 = integer;
+type D0 = double_real;
+type C0 = character;
+type B1 = array[boolean];
+type I1 = array[integer];
+type D1 = array[double_real];
+type C1 = array[character];
+type B2 = array[array[boolean]];
+type I2 = array[array[integer]];
+type D2 = array[array[double_real]];
+type C2 = array[array[character]];
+type B3 = array[array[array[boolean]]];
+type I3 = array[array[array[integer]]];
+type D3 = array[array[array[double_real]]];
+type C3 = array[array[array[character]]];
+type B4 = array[array[array[array[boolean]]]];
+type I4 = array[array[array[array[integer]]]];
+type D4 = array[array[array[array[double_real]]]];
+type C4 = array[array[array[array[character]]]];
+
+% Standard global definitions of C library routines from math.h
+
+% These are invoked by: osc -externC fmod... etc
+%global fmod(x,y: double_real returns double_real)in "C" is "fmod";
+%global  sin(y:   double_real returns double_real) in "C" is "sin";
+%global  cos(y:   double_real returns double_real) in "C" is "cos";
+%global  tan(y:   double_real returns double_real) in "C" is "tan";
+
+global fmod(x,y: double_real returns double_real)
+global  sin(y:   double_real returns double_real)
+global  cos(y:   double_real returns double_real)
+global  tan(y:   double_real returns double_real)
+global  asin(y:  double_real returns double_real)
+global  acos(y:  double_real returns double_real)
+global  atan(y:  double_real returns double_real)
+global  sqrt(y:  double_real returns double_real)
+global  log(y:   double_real returns double_real)
+global  log10(y: double_real returns double_real)
+global  etothe(y:double_real returns double_real)
+
+global  and(x: integer; y: integer; returns integer)
+global  or (x: integer; y: integer; returns integer)
+global  xor(x: integer; y: integer; returns integer)
+global  shiftr(x: integer; y: integer; returns integer)
+global  shiftl(x: integer; y: integer; returns integer)
+global  not(y: integer; returns integer)
+
+% Various popular constants
+% These require:   OSC -cpp xxx.sis
+% to operate correctly.
+
+% SisalIO is the origin of the arrays we create with SISAL.
+% We are trying to make them flexible as we want to move toward
+% a uniform index origin compatible with SISAL90. This is likely
+% to be origin 1. R. Bernecky 1996-03-28 
+
+#define SISALIO 0
+
+% Quadio is the APL index origin. This may be set to 0 or 1 for
+% any particular APEX compile. The intent is to move toward proper
+% support of user-set index origin varying within an application.
+% This is a step in that direction. R. Bernecky 1996-03-28
+
+#define QUADIO 0
+
+% Fill elements for Boolean, integer, double, and character
+
+#define OTFILLB false
+#define OTFILLI 0
+#define OTFILLD 0.0d0
+#define OTFILLC ' '
+
+#define OTFILLboolean false
+#define OTFILLinteger 0
+#define OTFILLdouble_real 0.0d0
+#define OTFILLcharacter ' '
+
+#define PI 3.1415926535897932d0
+#define E  2.718281828d0
+% PINFINITYI largest integer
+#define PINFINITYD  1.7976931348623156D308
+% MINFINITYI smallest integer
+#define MINFINITYD -1.7976931348623156D308
+
+
+% Various identity functions
+#define BtoB(x) (x)
+#define ItoI(x) (x)
+#define DtoD(x) (x)
+#define CtoC(x) (x)
+#define BtoB0(x) (x)
+#define ItoI0(x) (x)
+#define DtoD0(x) (x)
+#define CtoC0(x) (x)
+#define BtoB1(x) (x)
+#define ItoI1(x) (x)
+#define DtoD1(x) (x)
+#define CtoC1(x) (x)
+#define BtoB2(x) (x)
+#define ItoI2(x) (x)
+#define DtoD2(x) (x)
+#define CtoC2(x) (x)
+#define BtoB3(x) (x)
+#define ItoI3(x) (x)
+#define DtoD3(x) (x)
+#define CtoC3(x) (x)
+
+% Lev and Dex
+#define ltakx(y)   (y)
+% We do not need no steenking rtakx
+#define ltakb(x,y) (y)
+#define ltakb(x,y) (y)
+#define rtakb(x,y) (x) 
+#define rtakb(x,y) (x)
+#define ltaki(x,y) (y)
+#define ltaki(x,y) (y)
+#define rtaki(x,y) (x) 
+#define rtaki(x,y) (x)
+#define ltakd(x,y) (y)
+#define ltakd(x,y) (y)
+#define rtakd(x,y) (x) 
+#define rtakd(x,y) (x)
+#define ltakc(x,y) (y)
+#define ltakc(x,y) (y)
+#define rtakc(x,y) (x) 
+#define rtakc(x,y) (x)
+
+
+% start of scalar coercions
+
+#define BtoI(x) BtoI0(x)
+#define BtoD(x) BtoD0(x)
+#define BtoC(x) BtoC0(x)
+#define ItoB(x) ItoB0(x)
+#define ItoD(x) ItoD0(x)
+#define ItoC(x) ItoC0(x)
+#define DtoB(x) DtoB0(x)
+#define DtoI(x) DtoI0(x)
+#define DtoC(x) DtoC0(x)
+#define CtoB(x) CtoB0(x)
+#define CtoI(x) CtoI0(x)
+#define CtoD(x) CtoD0(x)
+
+#define BtoI0(x) (if x then 1 else 0 end if)
+#define BtoD0(x) (if x then 1.0d0 else 0.0d0 end if)
+#define BtoC0(x) error[character]
+
+#define ItoB0(x) (if x=1 then true else if x=0 then false  else error[Boolean] end if end if)
+#define ItoD0(x) double_real(x)
+#define ItoC0(x) error[character]
+
+#define DtoB0(x) (if x = 1.0d0 then true else if x = 0.0d0 \
+then false else error[boolean] end if end if)
+#define DtoI0(x) (if x = double_real(trunc(x)) then trunc(x) else \
+error[integer] end if)
+#define DtoC0(x) error[character]
+
+#define CtoB0(x) error[boolean]
+#define CtoI0(x) error[integer]
+#define CtoD0(x) error[double_real]
+
+% end of scalar coercions
+
+% Start of vector coercions
+
+#define BtoI1(x1) (for x in x1 returns array of BtoI0(x) end for)
+#define BtoD1(x1) (for x in x1 returns array of BtoD0(x) end for)
+#define ItoB1(x1) (for x in x1 returns array of ItoB0(x) end for)
+#define ItoD1(x1) (for x in x1 returns array of ItoD0(x) end for)
+#define DtoB1(x1) (for x in x1 returns array of DtoB0(x) end for)
+#define DtoI1(x1) (for x in x1 returns array of DtoI0(x) end for)
+
+#define BtoC1(x1) error[array[character]]
+#define ItoC1(x1) error[array[character]]
+#define DtoC1(x1) error[array[character]]
+#define CtoB1(x1) error[array[boolean]]
+#define CtoI1(x1) error[array[integer]]
+#define CtoD1(x1) error[array[double_real]]
+
+% End of vector coercions
+
+% Start of rank-2 coercions
+
+#define BtoI2(x2) (for x1 in x2 returns array of BtoI1(x1) end for)
+#define BtoD2(x2) (for x1 in x2 returns array of BtoD1(x1) end for)
+#define BtoC2(x2) error[array[array[character]]]
+
+#define ItoB2(x2) (for x1 in x2 returns array of ItoB1(x1) end for)
+#define ItoD2(x2) (for x1 in x2 returns array of ItoD1(x1) end for)
+#define ItoC2(x2) error[array[array[character]]]
+
+#define DtoB2(x2) (for x1 in x2 returns array of DtoB1(x1) end for)
+#define DtoI2(x2) (for x1 in x2 returns array of DtoI1(x1) end for)
+#define DtoC2(x2) error[array[array[character]]]
+
+#define CtoB2(x2) error[array[array[boolean]]]
+#define CtoI2(x2) error[array[array[integer]]]
+#define CtoD2(x2) error[array[array[double_real]]]
+
+% End of rank-2 coercions
+
+% Start of rank-3 coercions
+
+#define BtoI3(x3) (for x2 in x3 returns array of BtoI2(x2) end for)
+#define BtoD3(x3) (for x2 in x3 returns array of BtoD2(x2) end for)
+#define BtoC3(x3) error[array[array[array[character]]]]
+
+#define ItoB3(x3) (for x2 in x3 returns array of ItoB2(x2) end for)
+#define ItoD3(x3) (for x2 in x3 returns array of ItoD2(x2) end for)
+#define ItoC3(x3) error[array[array[array[character]]]]
+
+#define DtoB3(x3) (for x2 in x3 returns array of DtoB2(x2) end for)
+#define DtoI3(x3) (for x2 in x3 returns array of DtoI2(x2) end for)
+#define DtoC3(x3) error[array[array[array[character]]]]
+
+#define CtoB3(x3) error[array[array[array[boolean]]]]
+#define CtoI3(x3) error[array[array[array[integer]]]]
+#define CtoD3(x3) error[array[array[array[double_real]]]]
+
+% End of rank-3 coercions
+
+% Floating-point utilities
+
+% This taken from page 93 of the 1993-01-06 version 
+% of Committee Draft 1 of the Extended ISO APL Standard
+% THIS DOES NOT USE FUZZ!!!!
+
+#define Dsignum(p) (if p = 0.0d0 then 0 elseif p<0.0d0 then -1 else  1 end if)
+#define Isignum(p) (if p = 0 then 0 elseif p<0 then -1 else  1 end if)
+#define Dmodulo(p,q) fmod(p,q)
+#define Imodulo(p,q) mod(p,q)
+
+#define QuadAV( ) (for i in 0,255 returns array of character(i) end for)
+
+% Conformability checkers
+
+#define IsEmpty(y1) (array_size(y1)=0)
+% IsEmpty supports arrays in which array_limh is much much smaller
+% than array_liml (arising from array_adjust)
+
+#define ConformNonNegativeInt(y0) (if y0 >= 0 then y0 else error[integer] end if)
+
+#define ConformSame(x0,y0) (if x0 = y0 then x0 else error[integer] end if)
+
+#define Conform1(x1,XTYPE,y1) (if array_size(x1) = array_size(y1) then \
+ x1 else error[array[XTYPE]] end if)
+
+% Same length or one is a singleton
+#define ConformScalarConformable(x0,y0) (if (x0 = y0) | (x0 = 1) | (y0 = 1) \
+ then max(x0,y0) else error[integer] end if)
+ 
+% Value of vector singleton, if it is, indeed, a singleton
+#define ConformSingleton(y1) (if array_size(y1) = 1 \
+then y1[array_liml(y1)] else error[integer] end if)
+
+
+#ifdef FAST
+#define array_adjustFast(x1,lo,hi) RemLFast(RemHFast((x1),hi),lo) 
+#else
+#define array_adjustFast(x1,lo,hi) array_adjust((x1),lo,hi)
+#endif
+
+#define RemLFast(x1,lo) array_setl(for initial \
+ z:= x1; \
+ c := (lo)-array_liml(x1);  \
+ while c > 0 repeat \
+  c := old c-1;  \
+  z := array_reml(old z);  \
+  returns value of z  \
+ end for,SISALIO)
+
+#define RemHFast(x1,hi) \
+ for initial \
+  z:= x1;  \
+  c := array_limh(x1)-(hi);  \
+  while c >0 repeat  \
+   c := old c-1;  \
+   z:= array_remh(old z);  \
+   returns value of z    \
+  end for
+
+% Utility macros
+
+% Bring arbitrary rotate amount into canonical form: positive range of array.
+% E.g, in 10 rotate iota 6,  4=RotateAmount(10,6)
+% E.g., in (-1) rotate iota 6, 5=RotateAmount(-1,6)
+
+#define VectorRotateAmount(x,ycols) \
+(if x >= 0 then mod(x,ycols) else ycols-mod(abs(x),ycols) end if)
+% Vector rotate does last axis stuff. x0 in canonical form. y1 is vector.
+
+#ifdef FAST
+#define VectorRotate(x0,y1) array_setl( \
+ array_adjustFast((y1),SISALIO+x0,array_limh(y1)) || \
+ array_adjustFast((y1),SISALIO,SISALIO+x0-1),SISALIO) 
+#else
+#define VectorRotate(x0,y1) array_setl( \
+ VECTORTAKEDROP(y1,x0,array_size(y1)-x0) || \
+ VECTORTAKEDROP(y1,0,x0),SISALIO) 
+#endif
+
+% The kludge code below theoretically allows preallocation. It may
+% also get around the sdbx bug in array_adjust on empties. 1996-04-10
+
+#ifdef sdbxkludge
+#define VVRESHAPE(TYPE) \
+ function vvreshape(x,i: integer; \
+                    y: array[TYPE]; \
+                    returns array[TYPE]) \
+array_setl(for initial \
+  zi := 0;   \
+  yi := i;   \
+  ylim := array_size(y)-1; \
+  z := array_fill(0,-1,OTFILL##TYPE); \
+while zi < x repeat \
+  zi := 1 + old zi; \
+  yi := if old yi = ylim then 0 else old yi+1 end if; \
+  z:= array_addh(old z, y[old yi+SISALIO] ); \
+returns value of z   \
+end for,SISALIO) \
+end function 
+
+%KLUDGE
+
+#else 
+
+% Normal macro definitions here
+
+
+#define VVRESHAPE(TYPE)                                     \
+ function vvreshape(x,i: integer;                            \
+                    y: array[TYPE];                         \
+                    returns array[TYPE])                    \
+ % x reshape i rotate y                                      \
+ % This is used as inner loop of many reshapes.              \
+ % We generate 3 pieces: i to end of y                       \
+ %                       many complete copies of y           \
+ %                       tail end bit of y                   \
+ let                                                         \
+  len := array_size(y); \
+% size of source array  \
+  c0  := min(x,len-i);  \
+% first fragment element count       \
+  c1  := (x-c0)/len;    \
+% number of complete copies of y     \
+  c2  := x-(c0+len*c1); \
+% last  fragment element count       \
+ in  \
+ array_setl( \
+  array_adjustFast((y),i+SISALIO,c0+SISALIO+i-1) \
+  || \
+  for j in 1,c1 returns value of catenate y end for \
+  || \
+  array_adjustFast(y,SISALIO,SISALIO+c2-1) \
+  ,SISALIO) \
+ end let \
+end function
+#endif 
+
+#define RAVEL2(TYPE) array_setl(for yi in y2 \
+returns value of catenate yi end for,SISALIO)
+
+% vectortakedrop extracts a contiguous part of an array row,
+% starting at offset LIML for COUNT elements
+
+#ifdef sdbxkludge
+#define VECTORTAKEDROP(Y,DROPCOUNT,TAKECOUNT) \
+  for i in array_liml(Y)+DROPCOUNT,array_liml(Y)+DROPCOUNT+TAKECOUNT-1 \
+  returns array of Y[i] end for
+#else 
+#define VECTORTAKEDROP(Y,DROPCOUNT,TAKECOUNT) \
+array_adjustFast((Y),SISALIO+DROPCOUNT,SISALIO+DROPCOUNT+TAKECOUNT-1)
+#endif 
+% Vectorutakep does a positive undertake on a vector
+#define VECTORUTAKEP(count,y) ArrayAdjustFast(y,SISALIO,SISALIO+COUNT-1)
+
+% Used by ebar. We know that x1[0]=y1[yin]. This does
+% the rest of the job.
+#define MATCHRESTVECTOR(XTYPE,YTYPE,XT,YT,CT)              \
+ function MatchRestVector(x1: array[XTYPE];                      \
+                          y1: array[YTYPE];                      \
+                          yin: integer;                           \
+                          returns boolean)                        \
+ for initial                                                      \
+  i := 1+array_liml(x1);                                          \
+  lim := array_limh(x1);                                          \
+  z := true;                                                      \
+ while z & i <= lim repeat                                        \
+  z := XT##to##CT(x1[i]) = YT##to##CT(y1[yin+i])                      \
+  returns value of z                                              \
+ end for                                                          \
+ end function
+
+% 1996-12-07 Pearl Harbor Day. Try to fix bug in DBank infdivm 
+% benchmark. (4 5 rho 6) + rank 1 (4 1 rho 7) introduces singleton
+% vectors into scalar fn calls.
+% Hence, we need support for singletons within scalar fns.
+% There is an similar, but independent, bug in rank support for
+% the extension case.
+
+% Define our own dot product on vectors.
+
+#define apldot(x1,y1,fn,ZTYPE) \
+if array_size(x1) = array_size(y1) then \
+  for x0 in x1 dot y0 in y1 returns array of fn end for \
+elseif array_size(x1) = 1 then let x0 := x1[array_liml(x1)]; in \
+ for y0 in y1 returns array of fn end for end let \
+elseif array_size(y1) = 1 then let y0 := y1[array_liml(y1)]; in \
+ for x0 in x1 returns array of fn end for end let \
+else  error[array[ZTYPE]] end if
+
+% Lehmer's random number generator
+#define lehmer(qrl) mod(qrl*16807,2147483647)
+
+% End of boilerplate
+

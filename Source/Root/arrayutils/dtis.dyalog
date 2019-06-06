@@ -1,0 +1,5 @@
+dtis←{
+⍝ Delete trailing chars in set on vector
+(⌽∨\⌽~⍵∊⍺)/⍵
+}
+

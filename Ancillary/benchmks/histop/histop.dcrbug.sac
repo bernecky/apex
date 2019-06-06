@@ -1,0 +1,14 @@
+use Array: {sum,toi,==,genarray};
+
+int main()
+{ 
+ y = [0,1,2,3,4];
+
+ cell = [ false, false, false, false, false];
+ z = with {
+  (. <= iv <= .) : _sel_VxA_(iv, y) == y;
+  } : genarray([5] , cell);
+ z2 = sum(toi( z));
+ return(z2);
+}
+

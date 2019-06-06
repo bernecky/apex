@@ -1,0 +1,37 @@
+﻿ r←dfaDrop y;ast;wl;i;j;m;n;t;p;args;os
+ ⍝ Handle x drop y.
+ ast←D y[ssaast]
+ wl←D y[ssacv]
+ i←wl∧ast[;astfn]∊ER1⍪'↓'
+ i←i∧~ast[;astlarg]∊NULL ⍝ Dyadics only.
+ wl←wl∧~i ⍝ Update worklist
+ i←i∧~(D ast[;astPred])[;astPredKnowValue]
+ :If 1∊i ⍝ Any work?
+     j←i⌿ast
+     args←D j[;astlarg,astrarg]         ⍝ Arguments.
+     j[;asttype]←ast[args[;,1];asttype] ⍝ Result type is ⍵ type.
+     m←ast[args;astrank] ⍝ Set result rank if both arg ranks known
+     n←~∨/m∊NULL
+     b←1⌈ast[n⌿args[;1];astrank] ⍝ Result rank is 1⌈(⍴,⍺)⌈⍴⍴⍵
+     j[n/⍳⍴n;astrank]←b⌈ast[n⌿args[;0];astrank]
+  ⍝ Result shape computation needs ⍺ value, ⍵ shape
+     b←(ast KnowValue args[;0])∧~ast[args[;1];astshape]∊NULL
+     :If 1∊b ⍝ Stupid APL2 prototypes
+         m←quadfi¨ast[b⌿args[;0];astvalue]  ⍝ ⍺ values
+         os←ast[b⌿args[;1];astshape]        ⍝ ⍵ shapes
+         t←(b⌿j[;astrank])↑¨m               ⍝ SHARP APL extended drop
+         j[b/⍳1↑⍴j;astshape]←0⌈os-|t        ⍝ Result shape
+     :EndIf
+  ⍝ Set result value if we know the left > right arg values
+     n←D ast[args[;1];astPred]       ⍝ Maintain predicates
+     p←astPredLen⍴0
+     p[astPredPVSubset,astPredAll2]←1
+     p[astPredSortedUp,astPredSortedDown,astPredNoDups]←1
+     p[astPredNonNeg,astPredInteger]←1
+     p[astPredKnowMaxVal,astPredKnowMinVal]←1
+     n[;astPredPVSubset]←n[;astPredPVSubset]∧astPredPV
+     j[;astPred]←ER1 n∧(⍴n)⍴p
+     j←astmerge(E ast),(E j),E i
+     ast←D j[0] ⋄ wl←wl∨D j[1]
+ :EndIf
+ r←y ⋄ r[ssaast]←E ast ⋄ r[ssacv]←E wl

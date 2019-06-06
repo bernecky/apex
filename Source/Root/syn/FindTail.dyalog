@@ -1,0 +1,7 @@
+﻿ r←k FindTail ast;p
+⍝# Find end of linked-list astparms chains starting at ast row indices k
+⍝# Result is ast indices that have null astparms.
+ r←k
+ :While 1∊p←~ast[r;astparms]∊NULL
+     r[p/⍳⍴p]←ast[p/r;astparms]
+ :EndWhile

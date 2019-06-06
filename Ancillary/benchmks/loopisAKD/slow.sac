@@ -1,0 +1,23 @@
+
+use Array: {<=,+,<,iota,sel,-};
+
+int[*] id( int[*] y)
+{
+  return(y);
+}
+
+
+int main()
+{
+  x =  iota(id(12000000));
+  lim = _sel_VxA_([0], _shape_A_(x)) - 1;
+  z = 0;
+  i = 0;
+  for(; i<=lim; i++) {
+    t = z + x[i];
+    z = t;
+  }
+
+  StdIO::print(z);
+  return(0);
+}

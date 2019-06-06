@@ -1,0 +1,28 @@
+use Array: all;
+
+char[.] slBCC(int[.] x, char[.] y)
+{/* vector compress/replicate vector */
+ z = y++['a'];
+ return(z);
+}
+
+int[*] id( int[*] y)
+{ return(y);
+}
+
+int main()
+{ 
+ n = id(300);
+ s_0 = genarray( [n], 'a');
+ b_0 = genarray ([n], 0);
+ s1_0=slBCC(b_0,s_0);
+ A_44= 1 + b_0;
+ s2_0=slBCC(A_44,s_0);
+ A_47 = ['/'] ++ s2_0;
+ A_48 = s1_0 ++ A_47;
+ z = s_0 ++ A_48;
+
+ StdIO::print(z);
+ return(0);
+}
+

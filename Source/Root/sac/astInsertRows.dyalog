@@ -1,0 +1,7 @@
+﻿ r←astp astInsertRows y;k;ast;astr
+⍝ Insert new rows astr into ast at row
+ ast←D y[0]
+ astr←D y[1]
+ k←(⍳1↑⍴ast)+(dfainit ast)×1↑⍴astr ⍝ Renumber old entries
+ ast←k RenumberAst ast
+ r←((astp,¯1↑⍴ast)↑ast)dcb astr dcb(astp,0)↓ast

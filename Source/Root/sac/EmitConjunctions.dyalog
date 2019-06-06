@@ -1,0 +1,14 @@
+﻿ r←EmitConjunctions fns;j;sis
+ ⍝# Emit conjunction code
+⍝⍝ later...  j←ssadat EmitCompose fns ⍝ MUST be first
+⍝⍝ sis←D j[0]
+⍝⍝ fns←D j[1]
+ ⍝ EmitCompose alters fns, and EmitCut [and others]
+ ⍝ are dependent on it.
+ j←EmitDyadicConjunctions fns ⍝ Rank and friends
+ sis←D j[0]
+ fns←D j[1]
+ j←ssadat EmitCut fns
+ sis←sis,D j[0]
+ fns←D j[1]
+ r←(E sis),E fns

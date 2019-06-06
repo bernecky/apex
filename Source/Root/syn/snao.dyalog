@@ -1,0 +1,8 @@
+﻿ r←snao
+ ∘
+⍝ Assign to left of operator expn
+⍝ This is probably  x←(b)/c
+ state←Stf ⍝ (b) already stacked, so
+⍝ proceed as if it's a dyadic function.
+⍝ Now, (1995-10-24), we may get in trouble here
+⍝ on "x←(b)/c" vs "x←/c".

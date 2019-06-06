@@ -1,0 +1,412 @@
+From cruz.llnl.gov!feo Thu Dec 14 20:31:53 1995
+Received: from diego.llnl.gov ([128.115.19.1]) by picton.eecg.toronto.edu with SMTP id <69(1)>; Thu, 14 Dec 1995 20:31:43 -0500
+Received: from cruz.domain. (cruz.llnl.gov) by diego.llnl.gov (4.0/LLNL-1.17)
+	id AA05065; Thu, 14 Dec 95 17:31:34 PST
+Received: by cruz.domain. (5.0/SMI-SVR4)
+	id AA07100; Thu, 14 Dec 1995 17:26:33 +0800
+Date:	Thu, 14 Dec 1995 04:26:33 -0500
+From:	feo@cruz.llnl.gov (John Feo)
+Illegal-Object: Syntax error in Message-Id: value found on picton.eecg.toronto.edu:
+	Message-Id:	<9512150126.AA07100@cruz.domain.>
+							^-illegal subdomain in domain
+To:	bernecky@eecg.utoronto.ca, miller@cruz.llnl.gov
+Subject: Tomcatv
+Content-Length: 11341
+Status: ORr
+
+Here are Sisal 1.2 and Sisal90 versions of tomcatv. The 1.2 version   is
+only 5% slower on a Sparc 5 than the Fortran version I have. The 90 code
+breaks the compiler at the moment, so I don't have any times on it.
+
+John
+____________________________________________
+
+% Sisal 1.2
+
+define main
+
+type OneDim = array[real];
+type TwoDim = array[OneDim];
+
+function data(n: integer returns TwoDim, TwoDim)
+
+  let X :=    array[1: array_fill(1, n, 0.0)]
+           || for i in 2, n - 1
+                  X_i1 := real(i-1) / real(n-1);
+                  X_ij := array_fill(2, n-1, 0.9 * X_i1)
+              returns array of array[1: X_i1] || X_ij || array[1: X_i1]
+              end for
+           || array[1: array_fill(1, n, 1.0)];
+
+      Y :=    array[1: for i in 1, n returns array of X[i, 1] end for]
+           || for i in 2, n - 1
+                  Y_ij := for j in 1, n-1 returns array of
+                              (0.9 - 0.81 * X[i, 1]) * X[j, 1]
+                          end for;
+                  Y_in := (1.0 - 0.90 * X[i, 1]) * X[n,1]
+              returns array of Y_ij || array[1: Y_in]
+              end for
+           || array[1: for i in 1, n returns array of 0.1 * X[i, 1] end for]
+
+  in  X, Y
+  end let
+
+end function % data
+
+
+function first_max_abs(n: integer; rx: TwoDim
+               returns integer, integer, real)
+
+   for initial
+       i       := 1;
+       max_abs := 0.0;
+       ii, jj  := 0, 0
+   while i < n - 1 repeat
+       i := old i + 1;
+       ii, jj, max_abs := for initial
+                              j        := 1;
+                              iii, jjj := old ii, old jj;
+                              mmax_abs := old max_abs
+                          while j < n - 1 repeat
+                              j := old j + 1;
+                              iii, jjj, mmax_abs :=
+                              if abs(rx[i,j]) > old mmax_abs then
+                                 i, j, rx[i,j]
+                              else
+                                 old iii, old jjj, old mmax_abs
+                              end if
+                          returns value of iii
+                                  value of jjj
+                                  value of mmax_abs
+                          end for
+   returns value of ii
+           value of jj
+           value of max_abs
+   end for
+
+
+end function % first_max_abs
+
+
+function compute_mesh(n: integer; x, y: TwoDim
+              returns TwoDim, TwoDim, TwoDim, TwoDim)
+
+   for i in 2, n - 1 cross j in 2, n - 1
+
+       ip  := i + 1;
+       im  := i - 1;
+       jp  := j + 1;
+       jm  := j - 1;
+
+       xx  := x[ip, j] - x[im, j];
+       yx  := y[ip, j] - y[im, j];
+       xy  := x[i, jp] - x[i, jm];
+       yy  := y[i, jp] - y[i, jm];
+
+       a   := 0.250 * (xy * xy + yy * yy);
+       b   := 0.250 * (yx * yx + xx * xx);
+       c   := 0.125 * (xy * xx + yx * yy);
+
+       pxx := x[ip, j] - 2.0 * x[i, j] + x[im, j];
+       qxx := y[ip, j] - 2.0 * y[i, j] + y[im, j];
+       pyy := x[i, jp] - 2.0 * x[i, j] + x[i, jm];
+       qyy := y[i, jp] - 2.0 * y[i, j] + y[i, jm];
+
+       pxy := x[ip, jp] - x[ip, jm] - x[im, jp] + x[im, jm];
+       qxy := y[ip, jp] - y[ip, jm] - y[im, jp] + y[im, jm]
+        
+   returns array of - b
+           array of b + b + (2.0 * a / 0.98)
+           array of a * pxx + b * pyy - c * pxy
+           array of a * qxx + b * qyy - c * qxy
+   end for
+
+end function % compute_mesh
+
+
+function sweep_up(n: integer; ai, di, rxi, ryi: OneDim
+          returns OneDim, OneDim, OneDim)
+
+   let
+       d, x, y :=
+       for initial
+           j := 2;
+           x := rxi[j];
+           y := ryi[j];
+           d := 1.0 / di[j]
+       while j < n - 1 repeat
+           j := old j + 1;
+           r := ai[j] * old d;
+           x := rxi[j] - old x * r;
+           y := ryi[j] - old y * r;
+           d := 1.0 / (di[j] - ai[j-1] * r)
+       returns array of d
+               array of x
+               array of y
+       end for
+   in
+       array_setl(d, 2), array_setl(x, 2), array_setl(y, 2)
+   end let
+
+end function % sweep_up
+
+
+function sweep_down(n: integer; ai, di, rxi, ryi: OneDim
+            returns OneDim, OneDim)
+
+   for initial
+       j := n - 1;
+       x := rxi[j: rxi[j] * di[j] ];
+       y := ryi[j: ryi[j] * di[j] ]
+   while j > 2 repeat
+       j := old j - 1;
+       x := old x[j: (old x[j] - ai[j] * old x[j+1]) * di[j] ];
+       y := old y[j: (old y[j] - ai[j] * old y[j+1]) * di[j] ]
+   returns value of x
+           value of y
+   end for
+
+end function % sweep_down
+
+
+function correct(n: integer; x, rx: TwoDim returns TwoDim)
+
+   for i in 1, n cross j in 1, n returns array of
+
+       if i = 1 | i = n | j = 1 | j = n then
+          x[i, j]
+       else
+          x[i, j] + rx[i, j]
+       end if
+
+   end for
+
+end function % correct
+
+
+% Mesh generation with Thompson's solver.
+%
+% Implementation assumes N > 3 (N = 129).
+%
+% For some reason the working areas of the Fortran rx and ry arrays
+% are [2..n-1, 1..n-2]. In the Sisal version, these arrays have bounds
+% [2..n-1, 2..n-1]. Thus, the jrxm and jrym values returned by the Sisal
+% version are one more than the values returned by the Fortran version.
+% than that returned by the Fortran version.
+%
+function main(n: integer
+      returns integer, integer, integer, real, integer, integer, real)
+
+   for initial
+
+       x, y := data(n);
+       ll, irxm, jrxm, rxm, irym, jrym, rym := 0, 0, 0, 0.0, 0, 0, 0.0
+
+   repeat
+           ll              := old ll + 1;
+           aa, dd, rx, ry  := compute_mesh(n, old x, old y);
+
+         % find maximum residual and its location
+           irxm, jrxm, rxm := first_max_abs(n, rx);
+           irym, jrym, rym := first_max_abs(n, ry);
+
+         % solve tridiagonal system
+           rx1, ry1 := for i in 2, n - 1
+                           x, y := sweep_down(n, aa[i],
+                                     sweep_up(n, aa[i], dd[i], rx[i], ry[i]))
+                       returns array of x
+                               array of y
+                       end for;
+
+         % add corrections
+           x := correct(n, old x, rx1);
+           y := correct(n, old y, ry1)
+
+       while ll < 100  & max(abs(rxm), abs(rym)) > 0.5E-7
+
+       returns value of ll
+               value of irxm value of jrxm value of rxm
+               value of irym value of jrym value of rym
+       end for
+
+end function % main
+
+________________________________________
+
+% Sisal 90
+
+define main
+
+type OneDim = array[real];
+type TwoDim = array[OneDim];
+
+function data(n: integer returns TwoDim, TwoDim)
+
+  let X :=    fill(1, n, 0.0)
+           || for i in 2, n - 1
+                  X_i1 := real(i-1) / real(n-1);
+                  X_ij := fill(2, n-1, 0.9 * X_i1)
+              returns array of X_i1 || X_ij || X_i1
+              end for
+           || fill(1, n, 1.0);
+
+      Y :=    X[1:n, 1]
+           || for i in 2, n - 1
+                  Y_ij := (0.9 - 0.81 * X[i, 1]) * X[1:n-1, 1];
+                  Y_in := (1.0 - 0.90 * X[i, 1]) * X[n,1]
+              returns array of Y_ij || Y_in
+              end for
+           || 0.1 * X[1:n, 1]
+
+  in  X, Y
+  end let
+
+end function % data
+
+
+reduction first_max_abs(repeat i,j: integer; x: real
+                returns integer, integer, real)
+
+   for initial
+       ii, jj  := 0,0;
+       max_abs := 0.0
+   repeat
+       ii, jj,
+       max_abs := if abs(x) > old max_abs then
+                     i, j, x
+                  else
+                     old ii, old jj, old max_abs
+                  end if
+   returns value of ii
+           value of jj
+           value of max_abs
+   end for
+
+end reduction % first_max_abs
+
+
+function compute_mesh(n: integer; x, y: TwoDim
+              returns TwoDim, TwoDim, TwoDim, TwoDim)
+
+   for i in 2, n - 1 cross j in 2, n - 1
+
+       ip  := i + 1;
+       im  := i - 1;
+       jp  := j + 1;
+       jm  := j - 1;
+
+       xx  := x[ip, j] - x[im, j];
+       yx  := y[ip, j] - y[im, j];
+       xy  := x[i, jp] - x[i, jm];
+       yy  := y[i, jp] - y[i, jm];
+
+       a   := 0.250 * (xy * xy + yy * yy);
+       b   := 0.250 * (yx * yx + xx * xx);
+       c   := 0.125 * (xy * xx + yx * yy);
+
+       pxx := x[ip, j] - 2.0 * x[i, j] + x[im, j];
+       qxx := y[ip, j] - 2.0 * y[i, j] + y[im, j];
+       pyy := x[i, jp] - 2.0 * x[i, j] + x[i, jm];
+       qyy := y[i, jp] - 2.0 * y[i, j] + y[i, jm];
+
+       pxy := x[ip, jp] - x[ip, jm] - x[im, jp] + x[im, jm];
+       qxy := y[ip, jp] - y[ip, jm] - y[im, jp] + y[im, jm]
+        
+   returns array(2,2) of - b
+           array(2,2) of b + b + (2.0 * a / 0.98)
+           array(2,2) of a * pxx + b * pyy - c * pxy
+           array(2,2) of a * qxx + b * qyy - c * qxy
+   end for
+
+end function % compute_mesh
+
+
+function sweep_up(n: integer; ai, di, rxi, ryi: OneDim
+          returns OneDim, OneDim, OneDim)
+
+   for initial
+       j := 2;
+       x := rxi[j];
+       y := ryi[j];
+       d := 1.0 / di[j]
+   while j < n - 1 repeat
+       j := old j + 1;
+       r := ai[j] * old d;
+       x := rxi[j] - old x * r;
+       y := ryi[j] - old y * r;
+       d := 1.0 / (di[j] - ai[j-1] * r)
+   returns array(2) of d
+           array(2) of x
+           array(2) of y
+   end for
+
+end function % sweep_up
+
+
+function sweep_down(n: integer; ai, di, rxi, ryi: OneDim
+            returns OneDim, OneDim)
+
+   for initial
+       j := n - 1;
+       x := rxi[j! rxi[j] * di[j] ];
+       y := ryi[j! ryi[j] * di[j] ]
+   while j > 2 repeat
+       j := old j - 1;
+       x := old x[j! (old x[j] - ai[j] * old x[j+1]) * di[j] ];
+       y := old y[j! (old y[j] - ai[j] * old y[j+1]) * di[j] ]
+   returns value of x
+           value of y
+   end for
+
+end function % sweep_down
+
+
+% Mesh generation with Thompson's solver.
+%
+% Implementation assumes N > 3 (N = 129).
+%
+% For some reason the working areas of the Fortran rx and ry arrays
+% are [2..n-1, 1..n-2]. In the Sisal version, these arrays have bounds
+% [2..n-1, 2..n-1]. Thus, the jrxm and jrym values returned by the Sisal
+% version are one more than the values returned by the Fortran version.
+% than that returned by the Fortran version.
+%
+function main(n: integer
+      returns integer, integer, integer, real, integer, integer, real)
+
+   let ll   := 0;
+       x, y := data(n)
+
+   in  for repeat
+           ll              := old ll + 1;
+           aa, dd, rx, ry  := compute_mesh(n, old x, old y);
+
+         % find maximum residual and its location
+           irxm, jrxm, rxm := for z in rx at i, j
+                              returns first_max_abs() of i, j, z
+                              end for;
+           irym, jrym, rym := for z in ry at i, j
+                              returns first_max_abs() of i, j, z
+                              end for;
+
+         % solve tridiagonal system
+           rx1, ry1 := for i in 2, n - 1
+                           x, y := sweep_down(n, aa[i],
+                                     sweep_up(n, aa[i], dd[i], rx[i], ry[i]))
+                       returns array(2) of x
+                               array(2) of y
+                       end for;
+
+         % add corrections
+           x := old x[ 2:n-1, 2:n-1 ! old x[2:n-1, 2:n-1] + rx1 ];
+           y := old y[ 2:n-1, 2:n-1 ! old y[2:n-1, 2:n-1] + ry1 ]
+
+       while ll < 100 & max(abs(rxm), abs(rym)) > 0.5E-7
+
+       returns value of ll,
+               value of irxm, value of jrxm, value of rxm
+               value of irym, value of jrym, value of rym
+       end for
+
+end function % main
+

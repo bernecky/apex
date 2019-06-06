@@ -1,0 +1,47 @@
+﻿ r←frg EmitDefnsIndexAssign fns;ctl;cv;sis;tp;tx;ty;tz;cvm;ravs;fors;indices;fnms;mil;epis;bodies;rks;resh;rk
+ ⍝ Emit PLURAL function defns for indexed assign: X[i]←Y
+ sis←''
+ :If ~0∊⍴fns
+     ctl←6 FragmentCode frg
+     cvm←<\(ctl FindFn fns)∧(ctl FindType fns)∧ctl FindRankGen fns
+     rks←0 3↓D fns[;fnsranks]
+     rks←(∨/cvm)∧(∧/rks∊'0 ')∨∧/rks∊'x ' ⍝ All-scalar or All-null index-ops
+  ⍝⍝⍝ 2006-07-18 no spec cases...        cvm←cvm∧⍉(⌽⍴cvm)⍴~rks
+     cv←∨/cvm
+     :If 1∊cv ⍝ Any work?
+         tp←D cv⌿fns[;fnstypes]      ⍝ Select indexing ops
+         rk←D cv⌿fns[;fnsranks]
+         tx←TS tp[;fnstypeslarg] ⍝ type of X
+         ty←TS tp[;fnstypesrarg] ⍝ Type of Y
+         tz←TS tp[;fnstypesz]    ⍝ Type of Z
+         fnms←squeeze¨Raze⍉(cv⌿fns[;,fnsfn]),¨3↓¨cv⌿fns[;,fnsranks]
+         mil←cv⌿0 3↓D fns[;fnsranks]
+         mil←(~mil∊' x')+NULL×mil='x'
+         indices←mil EmitDefnsIndexAssignHdr cv⌿fns
+         fors←mil EmitDefnsIndexAssignFors cv⌿fns
+         ravs←mil EmitDefnsIndexAssignRavels cv⌿fns
+         epis←mil EmitDefnsIndexAssignEpilog cv⌿fns
+         bodies←mil EmitDefnsIndexAssignBody cv⌿fns
+         resh←mil EmitDefnsIndexAssignResh cv⌿fns
+         sis←ctl Getsis cvm
+         sis←(E'$FNAME')Strepl¨ER1(mcb sis),mcb fnms
+         sis←(E'$XTYPE')Strepl¨ER1(mcb sis),mcb tx TypeRank rk
+         sis←(E'$YTYPE')Strepl¨ER1(mcb sis),mcb ty TypeRank rk
+         sis←(E'$ZTYPE')Strepl¨ER1(mcb sis),mcb tz TypeRank rk
+⍝⍝moved         sis←(E'$XT')Strepl¨ER1(mcb sis),mcb tx
+⍝⍝         sis←(E'$YT')Strepl¨ER1(mcb sis),mcb ty
+         sis←(E'$RESH')Strepl¨ER1(mcb sis),mcb resh
+         sis←(E'$RAVELS')Strepl¨ER1(mcb sis),mcb ravs
+         sis←(E'$FORLOOPSPROLOG')Strepl¨ER1(mcb sis),mcb fors
+         sis←(E'$INDICES')Strepl¨ER1(mcb sis),mcb indices
+         sis←(E'$FORLOOPSEPILOG')Strepl¨ER1(mcb sis),mcb epis
+         sis←(E'$BODY')Strepl¨ER1(mcb sis),mcb bodies
+         sis←(E'$XT')Strepl¨ER1(mcb sis),mcb tx
+         sis←(E'$YT')Strepl¨ER1(mcb sis),mcb ty
+         sis←(E'$ZT')Strepl¨ER1(mcb sis),mcb tz
+         sis←nub sis
+         cv←cv∨rks∨fns[;fnsfn]∊E'semi' ⍝ Delete indices
+         fns←(~cv)⌿fns
+     :EndIf
+ :EndIf
+ r←(E sis),E fns

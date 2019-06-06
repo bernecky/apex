@@ -1,0 +1,11 @@
+ r{<-}main;#IO;#RL;n;#PP;#PW;#CT
+@this function exists only to make sac2c happy
+ #IO{<-}0
+ n{<-}257
+ #RL{<-}16807
+ #PP{<-}16
+ #PW{<-}80
+ #CT{<-}0.0000000000001
+ r{<-}tomcatv n
+ #{<-}r
+ #{<-}r{<-}1+r{match}100 202 2 9.8296417600027E{neg}7 30 256 1.171124699033E{neg}6

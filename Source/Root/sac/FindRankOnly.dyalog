@@ -1,0 +1,3 @@
+﻿ r←ctl FindRankOnly rks
+⍝ r←incidence matrix for ranks
+ r←rks∘.≡ctl[;ctlranks]

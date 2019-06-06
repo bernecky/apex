@@ -1,0 +1,30 @@
+/*
+ * wrong answer. Still fails with -noivecyc -nocyc.
+ *
+ * Does NOT fail with -maxwlur 1
+ * Does NOT fail if rotrXII not inline.
+ *
+ */
+
+use Array : {genarray,take,-,sel};
+
+inline int[+] rotrXII(int[+] y)
+{ /* Last axis reverse on rank>1 */
+ cellshape = take([-1], _shape_A_(y));
+ cell = genarray(cellshape, 0);
+ z = with {
+        ( . <= iv <= .)
+                : (y[iv]);
+       } : genarray( [2], cell);
+ return(z);
+}
+
+int main()
+{ 
+ M =_reshape_VxA_([2, 3],[0,1,2,3,4,5]);
+ A_354=rotrXII( M);
+ StdIO::print(A_354);
+ return(0);
+}
+
+

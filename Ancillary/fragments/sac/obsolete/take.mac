@@ -1,0 +1,27 @@
+
+/*
+ *  Take operation template shamelessly nicked from Array.sac
+ *  Robert Bernecky 2003-06-01
+ */
+
+#define TAKE_TEMPLATE(type)                             \
+inline type[+] take (int[*] vector, type[*] A)      	\
+{                                                       \
+  type array_elem;                                      \
+                                                        \
+  result = with (. <= iv <= .) {                        \
+             array_elem = A[iv];                        \
+           }                                            \
+           genarray(vector, array_elem);                \
+                                                        \
+  return(result);                                       \
+}							\
+inline type[+] take (int scalar, type[*] A)		\
+{							\
+ return(take ([scalar], A);				\
+}
+
+TAKE_TEMPLATE(bool)
+TAKE_TEMPLATE(int)
+TAKE_TEMPLATE(double)
+TAKE_TEMPLATE(char)

@@ -1,0 +1,137 @@
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) tob((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+void APEXERROR(char[.] msg)
+{
+/* Error function. This needs work, as it should kill
+ * the running task, too. 
+ */
+ /*print(msg); */
+return();
+}
+
+inline int VectorRotateAmount(int x, int y)
+{ /* Normalize x rotate for array of shape y on selected axis */
+ /* normalize rotation count */
+
+if ((0==x) || (0==y))
+  z = 0; 
+else if (x>0)
+        z = _mod_(x,y);
+     else
+        z = y - _mod_(_abs_(x),y);
+ return(z);
+}
+
+#define APEXPI 3.1415926535897932d
+#define APEXE  2.718281828d
+/*  APEXPINFINITYI largest integer */
+#define APEXPINFINITYD  1.7976931348623156D308
+/*  APEXMINFINITYI smallest integer */
+#define APEXMINFINITYD -1.7976931348623156D308
+
+
+/*
+% Floating-point utilities
+% This taken from page 93 of the 1993-01-06 version 
+% of Committee Draft 1 of the Extended ISO APL Standard
+*/
+
+inline int Dfloor(double y, double QUADct)
+{ /* Fuzzy floor */
+  /* Definition taken from SHARP APL Refman May 1991, p.6-23
+   * floor:  n <- (signum y) times nofuzzfloor 0.5+abs y)
+   *         z <- n-(QUADct times 1 max abs y)<(n-y)
+   *
+   * If you want a double result,  write: "y - 1| y".
+   *
+   */
+   n = tod(toi(floor(0.5+fabs(y))));
+   if (y < 0.0)
+	n = -n;
+   else if (0.0 == y)
+	n = 0.0;
+   range = fabs(y);
+   if (1.0 > range)
+	range = 1.0;
+   fuzzlim = QUADct*range;
+   ny = n-y;
+   if (fuzzlim < ny)
+	z = n - 1.0;
+   else
+	z = n;
+   return(toi(z)); 
+}
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline bool greaterthan(char[+] x, char[+] y, double QUADct)
+{ /* Char item comparator */
+  /* This definition is sort of flakey - it really compares ravels... */
+  /* It oughta also ensure that the arguments shapes match... */
+  shp=shape(x)[0];
+  z=false;
+  for (i=0;i<shp;i++)
+        if (x[i]!=y[i]){
+                z= x[i]>y[i];
+                i=shp;
+        }
+ return(z);
+}
+inline bool equals(char[+] x, char[+] y, double QUADct)
+{ /* Char item comparator */
+  /* This definition is sort of flakey - it really compares ravels... */
+  /* It oughta also ensure that the arguments shapes match... */
+  z = with(0*shape(x) <= iv < shape(x))
+        fold(&, true, x[iv] == y[iv]);
+ return(z);
+}
+
+inline bool lessthan(char[+] x, char[+] y, double QUADct)
+{ /* Char item comparator */
+  /* It oughta also ensure that the arguments shapes match... */
+  shp=shape(x)[0];
+  z=false;
+  for (i=0;i<shp;i++)
+        if (x[i]!=y[i]){
+                z= x[i]<y[i];
+                i=shp;
+        }
+ return(z);
+}
+
+
+/* Transposes */
+#define APEXTRANSPOSE(TYPE,OTFILL)                      \
+inline TYPE[*] transpose(TYPE[*] y)                     \
+{                                                       \
+  z = with(iv)                                          \
+        ( . <= iv <= .) : y[reverse( iv)];              \
+        genarray( reverse( shape(y)), OTFILL);          \
+  return(z);                                            \
+}
+
+APEXTRANSPOSE(bool,false)
+APEXTRANSPOSE(int,0)
+APEXTRANSPOSE(double,0.0)
+APEXTRANSPOSE(char,' ')
+/* End of transposes */
+
+/* End of boilerplate */
+

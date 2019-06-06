@@ -1,0 +1,5 @@
+﻿ r←InitializeWL asts;ast
+⍝ Initialize the worklist for one asts.
+ r←asts
+ ast←D asts[ssaast]
+ r[ssacv]←E(~ast[;astfn]∊NULL)∧dfainit ast

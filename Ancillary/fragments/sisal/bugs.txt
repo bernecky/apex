@@ -1,0 +1,68 @@
+KNOWN BUGS IN APEX
+
+1996-04-10: Can't handle some empty arrays due to SISAL vectors of vectors
+
+1996-04-10: floor double returns integer -- always
+
+1996-04-10: base value and represent on alpha other than 2 don't work
+
+1996-04-10: z {<-} foo z kills ssa. Need to use two names.
+
+1996-04-16: :for loop contains extra lcvs that are not, in fact,
+            loop-carried. tomcatv generates these.
+
+1996-04-16: :for loop initial values for lcvs are wrong when a 
+            default value is needed. tomcatv generates these.
+
+1996-04-17: :while and :if support is missing.
+
+1996-04-26: z{<-} foo z in function header does not work properly.
+            (Kills benscrun). Must generate distinct name for result.
+
+1996-04-27: :for loop induction variable is not available after exit
+            from the loop. This differs from the APL*PLUS III definition.
+            tomcatv produces this fault.
+
+1996-05-05: It is NOT POSSIBLE for a compiler with fixed rank to 
+            support arbitrary singletons for scalar functions, as
+            the result rank is value-dependent.
+            Consider the example of: (1 1 1 rho 2)+iota n
+
+            If n>1 then the result is a vector. If n=1, then
+            the result is a tensor!
+
+1996-05-10  Declaration of a name of specific type is ignored if
+            the name is not a parameter. Probably also ignored 
+            as a parameter over a function call!
+            This is fixed up to the point of dfa. dfaassign is
+            OK, but astmerge walks on things.
+            Code generator needs work (GenAssignNames) also.
+
+1996-06-08  Inclusion of an unreferenced defined function in the
+            compilation unit causes dfa to complain in dfaOK. 
+            Probably should be fixed with warning around 
+            CallingTree computation time.
+            DeleteUnreferencedFns in ssa attempts to do this,
+            but it only catches falling leaves. It does not
+            catch uncalled fns that call, say, a utility function.
+            Blindly deleting all uncalled fns also deletes "main",
+            which is undesirable...
+
+1996-06-09  Tomcatv2 loops in dfa, because a :PHI target is also
+            the :PHI omega. This is an SSA bug, because the
+            :PHI is fraudulent -- no set within the loop.
+
+1996-12-01  Can't compile niladic functions (or maybe functions
+            with no explicit result).
+
+1996-12-01  Can't handle quad-io set.
+
+1996-12-01  Can't handle quad-io implicit references.
+
+1996-12-01  Can't handle function with argument and result of
+            same name.
+
+1998-02-09  utakiii112 is broken on empties
+
+1998-02-09  utakiii112 does many array copies due to array_addl.
+

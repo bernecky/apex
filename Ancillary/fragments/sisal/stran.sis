@@ -1,0 +1,75 @@
+% SISAL and.equals on characters, using transpose algorithm.
+% Try to make it stop short on mismatch.
+
+
+%$entry=ipapet
+define ipapet 
+
+function tranxccx22(y2: array[array[character]]
+ returns array[array[character]])
+let
+ r := array_limh(y2);
+ c := array_limh(y2[0]);
+in
+ for i in 0,c cross j in 0,r
+ returns array of y2[j,i]
+ end for
+end let
+end function
+
+
+function rhoicc112(x1: array[integer];
+                   y1: array[character]
+                   returns array[array[character]])
+ for i in 0,x1[0]-1
+ S :=
+ for j in 0,x1[1]-1
+ returns array of y1[mod( j+x1[1]*i,array_limh(y1)+1)]
+ end for
+ returns array of S
+ end for
+end function
+
+function ipapet(siz: integer 
+returns integer )
+
+function anddoteqccb222(x2: array[array[character]];
+ y2: array[array[character]]
+ returns array[array[boolean]])
+let
+ r := array_limh(y2);
+ c := array_limh(y2[0]);
+ y2prime := for i in 0,c cross j in 0,r
+ returns array of y2[j,i]
+ end for
+in
+
+for i in 0,array_limh(x2) cross j in 0,array_limh(y2[0])
+    S:= for initial
+     k := 0;
+     lim := array_limh(x2[0]);
+     while ((x2[i,k-1]=y2prime[j,k-1])  & (k < lim)) repeat 
+     K := old k+1;
+     returns value of k=lim
+     end for  
+   returns array of S
+   end for
+end let
+end function
+
+let
+T8:=array_fill(0,1,siz);                                    
+m:=rhoicc112(T8,array[0:'a','b','c','d','e','f','g']);
+TMP11:=tranxccx22(m);                                      
+TMP12:=anddoteqccb222(m,TMP11);                            
+in 
+ for y1 in TMP12 
+  T:= for y in y1
+   returns value of sum 1 when y
+  end for
+ returns value of sum T
+ end for 
+end let
+end function % ipapet
+
+

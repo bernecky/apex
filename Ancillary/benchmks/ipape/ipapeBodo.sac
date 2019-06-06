@@ -1,0 +1,440 @@
+use Array: all;
+use SimplePrint:{display};
+use Math: all;
+use String: {tochar};
+import Char: all;
+use StdIO: all;
+use Bits: all;
+
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+void APEXERROR(char[.] msg)
+{
+/* Error function. This needs work, as it should kill
+ * the running task, too. 
+ */
+ /*print(msg); */
+return();
+}
+
+/* Structural function utility functions */
+/* Ravel utility */
+#define APEXRavel(y) (reshape([prod(shape(y))],y))
+
+inline int VectorRotateAmount(int x, int y)
+{ /* Normalize x rotate for array of shape y on selected axis */
+ /* normalize rotation count */
+
+if ((0==x) || (0==y))
+  z = 0; 
+else if (x>0)
+        z = _mod_(x,y);
+     else
+        z = y - _mod_(_abs_(x),y);
+ return(z);
+}
+
+#define APEXRESHAPE(TYPE)					\
+inline TYPE[*] APEXReshape(int[.] x, TYPE[*] y)			\
+{ /* APEX vector x reshape, with item reuse */			\
+  ry = APEXRavel(y);						\
+  zxrho = prod(x); /* THIS NEEDS XRHO FOR CODE SAFETY!! */	\
+  yxrho = shape(ry)[[0]];					\
+  if( zxrho <= yxrho) { /* No element resuse case */		\
+        z = take([zxrho],ry);					\
+ } else {							\
+        ncopies = zxrho/yxrho; /* # complete copies of y. */	\
+        /* FIXME: y empty case !*/				\
+        z = with(. <= [i] <= .)					\
+                genarray( [ncopies], y,y);			\
+        /* Now append the leftover bits */			\
+        z = APEXRavel(z) ++ take([zxrho-(ncopies*yxrho)],ry);	\
+ }								\
+ return(reshape(x,z));						\
+}
+
+APEXRESHAPE(bool)
+APEXRESHAPE(int)
+APEXRESHAPE(double)
+APEXRESHAPE(char)
+
+#define APEXPI 3.1415926535897932d
+#define APEXE  2.718281828d
+/*  APEXPINFINITYI largest integer */
+#define APEXPINFINITYD  1.7976931348623156D308
+/*  APEXMINFINITYI smallest integer */
+#define APEXMINFINITYD -1.7976931348623156D308
+
+
+/*
+% Floating-point utilities
+% This taken from page 93 of the 1993-01-06 version 
+% of Committee Draft 1 of the Extended ISO APL Standard
+*/
+
+inline int Dfloor(double y, double QUADct)
+{ /* Fuzzy floor */
+  /* Definition taken from SHARP APL Refman May 1991, p.6-23
+   * floor:  n <- (signum y) times nofuzzfloor 0.5+abs y)
+   *         z <- n-(QUADct times 1 max abs y)<(n-y)
+   *
+   * If you want a double result,  write: "y - 1| y".
+   *
+   */
+   n = tod(toi(floor(0.5+fabs(y))));
+   if (y < 0.0)
+	n = -n;
+   else if (0.0 == y)
+	n = 0.0;
+   range = fabs(y);
+   if (1.0 > range)
+	range = 1.0;
+   fuzzlim = QUADct*range;
+   ny = n-y;
+   if (fuzzlim < ny)
+	z = n - 1.0;
+   else
+	z = n;
+   return(toi(z)); 
+}
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+/*
+% 1996-12-07 Pearl Harbor Day. Try to fix bug in DBank infdivm 
+% benchmark. (4 5 rho 6) + rank 1 (4 1 rho 7) introduces singleton
+% vectors into scalar fn calls.
+% Hence, we need support for singletons within scalar fns.
+% There is an similar, but independent, bug in rank support for
+% the extension case.
+*/
+
+/*  Lehmer's random number generator */
+#define lehmer(qrl) mod(qrl*16807,2147483647)
+
+inline bool greaterthan(char[+] x, char[+] y, double QUADct)
+{ /* Char item comparator */
+  /* This definition is sort of flakey - it really compares ravels... */
+  /* It oughta also ensure that the arguments shapes match... */
+  shp=shape(x)[0];
+  z=false;
+  for (i=0;i<shp;i++)
+        if (x[i]!=y[i]){
+                z= x[i]>y[i];
+                i=shp;
+        }
+ return(z);
+}
+inline bool equals(char[+] x, char[+] y, double QUADct)
+{ /* Char item comparator */
+  /* This definition is sort of flakey - it really compares ravels... */
+  /* It oughta also ensure that the arguments shapes match... */
+  z = with(0*shape(x) <= iv < shape(x))
+        fold(&, true, x[iv] == y[iv]);
+ return(z);
+}
+
+inline bool lessthan(char[+] x, char[+] y, double QUADct)
+{ /* Char item comparator */
+  /* It oughta also ensure that the arguments shapes match... */
+  shp=shape(x)[0];
+  z=false;
+  for (i=0;i<shp;i++)
+        if (x[i]!=y[i]){
+                z= x[i]<y[i];
+                i=shp;
+        }
+ return(z);
+}
+
+/* Transposes */
+#define APEXTRANSPOSE(TYPE,OTFILL)			\
+inline TYPE[*] APEXTranspose(TYPE[*] y)			\
+{							\
+  z = with(iv)						\
+	( . <= iv <= .) : y[reverse( iv)];		\
+        genarray( reverse( shape(y)), OTFILL);		\
+  return(z);						\
+}
+
+APEXTRANSPOSE(bool,false)
+APEXTRANSPOSE(int,0)
+APEXTRANSPOSE(double,0.0)
+APEXTRANSPOSE(char,' ')
+/* End of transposes */
+
+inline int[*] IBC(int[*] I, int Xshape)
+{ /* Index bounds checker for indexed ref and indexed assign */
+ z = toi(I);
+ bad = with((0*shape(z)) <= iv < shape(z))
+  fold(|, false, (z[iv] < 0) || z[iv] >= Xshape);
+ if (bad)
+  /* Stupidity with z to stop DCR from eating next line */
+  z = z + display(tochar("APEX index error!"));
+ return(z);  
+}
+ 
+/* End of boilerplate */
+
+inline bool eqIIB(int x, int y)
+{ return(toI(x) == toI(y));
+}
+
+inline int plusBBI(bool x, bool y)
+{ return(toI(x)+toI(y));
+}
+
+inline char[.,.] tranXCC(char[.,.] y)
+{ /* Transpose on rank-2 */
+         z = { [i,j] -> y[j,i] };
+       return(z);
+}
+
+inline int[.] rhoIII(int x, int y)
+{ /* Scalar reshape scalar to vector) */
+     z = genarray([toi(x)], y);
+     return(z);
+}
+
+inline char[*] rhoICC(int[.] x, char[*] y)
+{
+  z = APEXReshape(toi(x),y);
+ return(z);
+}
+
+
+inline int quadXII(int y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} scalar anything except boolean*/
+     print([y]);
+    return(y);
+}
+
+inline bool[*] anddoteqCCB(char[*] x, char[*] y)
+{ /* TRANSPOSE case of inner product z = x f.g y */
+ yt = APEXTranspose(toC(y));
+ xct = toC(x);
+ shp = drop([-1],shape(x)) ++ drop([1], shape(y));
+ z = with(iv)
+/* WAS  (226 seconds)
+  (. <= iv <= .) {
+               vx = xct[take([dim(x)-1], iv)];
+                vy = yt[ reverse(take([1-dim(y)], iv))];
+*/
+
+/* ipape.withij: 9+minutes 
+  (. <= [i,j] <= .) {
+               vx = xct[i];
+                vy = yt[ j];
+       } :  
+Match(vx,vy);
+*/
+
+/* 208 seconds 
+
+  (. <= [i,j] <= .) {
+               vx = xct[i];
+                vy = yt[ j];
+       } :  
+andslXBB(eqCCB(vx,vy));
+*/
+
+  (. <= [i,j] <= .) {
+               vx = xct[[i]];
+                vy = yt[[j]];
+       } :  
+andslXBB(eqCCB(vx,vy));
+   genarray(shp, false);
+ return(z);
+}
+
+inline bool Match(char[.] x, char[.] y)
+{ /* Faster char-char match */
+ n = shape(x)[0];
+ for(i=0; i<n; i++){
+print([x[i]]);
+	if (x[[i]] != y[[i]])
+		i = n+1;
+	}
+ print([i]);
+
+ z = i != (n+1);
+ return(z);
+}
+
+
+inline bool[+] eqCCB(char[+] x, char[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+ /* Insert length error checking code here!! */
+#ifdef NEEDSINGLETONS
+ /* Stupid APL singleton extension check */
+ if (all(shape(x) == [[1]]))
+       z = eqCCB((APEXRavel(x))[[0]], y);
+ else if (all(shape(y) == [[1]]))
+    z = eqCCB(x, (APEXRavel(y))[[0]]);
+ else {
+#endif
+       z = with( . <= iv <= .) {
+      xel = toC(x[iv]);
+    yel = toC(y[iv]);
+      }
+        genarray(shape(x),
+           eqCCB(xel,yel),false);
+#ifdef NEEDSINGLETONS
+ }
+#endif
+  return(z);
+}
+
+
+
+
+inline bool eqCCB(char x, char y)
+{ return(toC(x) == toC(y));
+}
+
+inline bool[+] eqCCB(char x, char[+] y)
+{ /* SxA scalar function */
+  xel = toC(x);
+  z = with( . <= iv <= .) {
+        yel = toC(y[iv]);
+      }
+        genarray(shape(y),
+                eqCCB(xel,yel),false);
+  return(z);
+}
+
+
+inline bool[+] eqCCB(char[+] x, char y)
+{ /* AxS scalar function */
+  yel = toC(y);
+  z = with( . <= iv <= .) {
+       xel = toC(x[iv]);
+      }
+        genarray( shape(x),
+          eqCCB(xel,yel),false);
+  return(z);
+}
+
+
+inline bool andslXBB(bool[.] y)
+{ /* First/last axis reduction of vector */
+  z = with (0*shape(y) <= iv < shape(y))
+        foldfix( andBBB, toB(1), false, toB(y[iv]));
+  return(z);
+}
+
+
+
+inline bool andBBB(bool x, bool y)
+{ return(to_bool(x)&to_bool(y));
+}
+
+inline int[+] plusslXBI(bool[+] y)
+{ /* last axis reduce rank-2 or greater matrix */
+  sy = shape(y);
+  zrho = drop([-1], sy);
+  z = with (. <= iv <= .)
+   genarray(zrho,
+        plusslXBI(y[iv]),0); /* Not quite recursive */
+  return(z);
+}
+
+
+inline int plusslXBI(bool[.] y)
+{ /* First/last axis reduction of vector */
+  z = with (0*shape(y) <= iv < shape(y))
+        fold( plusIII, toI(0), toI(y[iv]));
+  return(z);
+}
+
+
+
+inline int plusIII(int x, int y)
+{ return(toI(x)+toI(y));
+}
+
+inline int plusslXII(int[.] y)
+{ /* First/last axis reduction of vector */
+  z = with (0*shape(y) <= iv < shape(y))
+        fold( plusIII, toI(0), toI(y[iv]));
+  return(z);
+}
+
+
+
+inline int ipapeXII(int siz,double QUADct)
+{ /* Start of function ipape 2006-05-18 14:09:01.000 */
+
+/*
+ r{<-}ipape siz;m
+ @ inner product and point equal
+ m{<-}(2{rho}siz){rho}'abcdefghijk'
+ r{<-}+/+/m^.={transpose}m
+*/
+TMP_26=rhoIII(2,siz) ;
+ m_0=rhoICC(TMP_26 ,['a','b','c','d','e','f','g','h','i','j','k']) ;
+ TMP_28=tranXCC( m_0) ;
+ TMP_29=anddoteqCCB(m_0,TMP_28 ) ;
+ TMP_37=plusslXBI( TMP_29 ) ;
+ r_0=plusslXII( TMP_37 ) ;
+ r=r_0;
+return(r_0);
+}
+
+int main()
+{ /* Start of function main 2006-05-18 14:09:07.000 */
+
+/*
+ r{<-}main;{quad}io;{quad}rl;n;{quad}pp;{quad}pw;#ct
+ {quad}io{<-}0
+ n{<-}2000
+ {quad}rl{<-}16807
+ #ct{<-}1E{neg}13
+ {quad}pp{<-}10
+ {quad}pw{<-}80
+ r{<-}ipape n
+ {quad}{<-}r
+ r{<-}1+r=363638
+ {quad}{<-}r
+*/
+QUADio_0=toi(( false) );
+ QUADct_0=( 1.0e-13) ;
+ QUADpp_0=( 10) ;
+ QUADpw_0=( 80) ;
+ QUADrl_0=( 16807) ;
+ QUADio_1=toi(( false) );
+ n_0=( 2000) ;
+ QUADrl_1=( 16807) ;
+ QUADct_1=( 1.0e-13) ;
+ QUADpp_1=( 10) ;
+ QUADpw_1=( 80) ;
+ r_0=ipapeXII( n_0,QUADct_1) ;
+ TMP_64=quadXII( r_0,QUADpp_1,QUADpw_1) ;
+ /* dsf scalar(s) */
+print(r_0);
+TMP_66=eqIIB(r_0,363638);
+ /* dsf scalar(s) */
+r_1=plusBBI(true,TMP_66 );
+ TMP_70=quadXII( r_1,QUADpp_1,QUADpw_1) ;
+ r=r_1;
+print(r);
+return(r_1);
+}
+

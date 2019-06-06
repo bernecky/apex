@@ -1,0 +1,18 @@
+%$entry=foo
+define foo
+function foo (y: array[real] returns real,real )
+
+let
+x1:= for y0 in y returns value of greatest y0 end for;
+x2:= for initial
+ i := 0; 
+ m := y[0];
+while i <= array_limh(y) repeat
+ i := old i+1;
+ m := max(old m, y[old i]);
+returns value of m
+end for;
+in
+x1,x2
+end let
+end function

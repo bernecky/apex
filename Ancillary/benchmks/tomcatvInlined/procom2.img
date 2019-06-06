@@ -1,0 +1,100 @@
+Article 8614 (1 more) in comp.lang.apl:                                        
+Xref: utcsri comp.lang.apl:8614                                                
+Newsgroups: comp.lang.apl                                                      
+Path: utcsri!utnut!cs.utexas.edu!howland.reston.ans.net!torn!watserv3.uwaterloo.
+ca!watserv1!Roger.Hui@Sympatico.CA                                             
+From: Roger Hui <Roger.Hui@Sympatico.CA>                                       
+Subject: Re: Trying tridiagonal systems                                        
+X-Sender: b1nrgx65@pop1.sympatico.ca                                           
+Content-Type: text/plain; charset="us-ascii"                                   
+Message-ID: <199604170856.DAA28461@smtp1.sympatico.ca>                         
+Originator: daemon@watserv1.uwaterloo.ca                                       
+Sender: news@watserv1.uwaterloo.ca                                             
+Nntp-Posting-Host: watserv1.uwaterloo.ca                                       
+Organization: University of Waterloo                                           
+Mime-Version: 1.0                                                              
+Date: Wed, 17 Apr 1996 08:56:28 GMT                                            
+X-Mailer: Windows Eudora Light Version 1.5.2                                   
+Lines: 41                                                                      
+                                                                               
+Reference: <1996Apr15.175244.6636@jarvis.cs.toronto.edu>                       
+                                                                               
+Bob Bernecky writes on Monday, April 15:                                       
+                                                                               
+--MORE--(38%)                                                                  
+ SCREEN DUMP   ³ VT-100   ³ FDX ³  9600 N81 ³ LOG CLOSED ³ PRT OFF ³ CR   ³ CR 
+> I am trying to convert a piece of Fortran code to APL for                    
+> a benchmark. I've run into a fragment of it that appears to be               
+> part of a solver for a tridiagonal system. It looks ALMOST like a linear     
+> recurrence relation, except that the numerator/denominator flip              
+> on each iteration is giving me a heachache.  ...                             
+                                                                               
+> Now, my problem is defined this way:                                         
+>                                                                              
+>  s[i] {<-} 1{divide} (add[i]-mult[i-1]*mult[i]*s[i-1])                       
+>  s[0] {<-} 1{divide} add[0]                                                  
+>                                                                              
+> Any idea how to solve this in APL non-iteratively? {J solutions that         
+> won't work in APL need not apply. This is intended as an APL compiler        
+> benchmark.}                                                                  
+                                                                               
+Compute vector m such that (0{m)=1 and (i{m)=-((i-1){mult)*i{mult,             
+(that is, 1,-2*/\mult) and the specification simplifies to                     
+                                                                               
+  (i{s) = % (i{add) + (i{m) * (i-1){s                                          
+  (0{s) = % (0{add)                                                            
+                                                                               
+Writing the first few terms of s (where s0=0{s, a1=1{add, etc.):               
+                                                                               
+--MORE--(81%)                                                                  
+ SCREEN DUMP   ³ VT-100   ³ FDX ³  9600 N81 ³ LOG CLOSED ³ PRT OFF ³ CR   ³ CR 
+                                                                               
+Compute vector m such that (0{m)=1 and (i{m)=-((i-1){mult)*i{mult,             
+(that is, 1,-2*/\mult) and the specification simplifies to                     
+                                                                               
+  (i{s) = % (i{add) + (i{m) * (i-1){s                                          
+  (0{s) = % (0{add)                                                            
+                                                                               
+Writing the first few terms of s (where s0=0{s, a1=1{add, etc.):               
+                                                                               
+   s0 = % a0                                                                   
+                                                                               
+   s1 = % a1 + m1 * s0                                                         
+      = % a1 + m1 % a0                                                         
+                                                                               
+   s2 = % a2 + m2 * s1                                                         
+      = % a2 + m2 % a1 + m1 % a0                                               
+                                                                               
+   s3 = % a3 + m3 * s2                                                         
+      = % a3 + m3 % a2 + m2 % a1 + m1 % a0                                     
+                                                                               
+So it is not a tridiagonal system at all, but a continued fraction.            
+It is possible to solve it non-iteratively in J as  +`%/\add f m               
+or in J or APL as a scan on the vector add,{each}m .                           
+End of article 8614 (of 8620)--what next? [npq]                                
+ SCREEN DUMP   ³ VT-100   ³ FDX ³  9600 N81 ³ LOG CLOSED ³ PRT OFF ³ CR   ³ CR 
+                                                                               
+Compute vector m such that (0{m)=1 and (i{m)=-((i-1){mult)*i{mult,             
+(that is, 1,-2*/\mult) and the specification simplifies to                     
+                                                                               
+  (i{s) = % (i{add) + (i{m) * (i-1){s                                          
+  (0{s) = % (0{add)                                                            
+                                                                               
+Writing the first few terms of s (where s0=0{s, a1=1{add, etc.):               
+                                                                               
+   s0 = % a0                                                                   
+                                                                               
+   s1 = % a1 + m1 * s0                                                         
+      = % a1 + m1 % a0                                                         
+                                                                               
+   s2 = % a2 + m2 * s1                                                         
+      = % a2 + m2 % a1 + m1 % a0                                               
+                                                                               
+   s3 = % a3 + m3 * s2                                                         
+      = % a3 + m3 % a2 + m2 % a1 + m1 % a0                                     
+                                                                               
+So it is not a tridiagonal system at all, but a continued fraction.            
+It is possible to solve it non-iteratively in J as  +`%/\add f m               
+or in J or APL as a scan on the vector add,{each}m .                           
+End of article 8614 (of 8620)--what next? [npq]                                
+ SCREEN DUMP   ³ VT-100   ³ FDX ³  9600 N81 ³ LOG CLOSED ³ PRT OFF ³ CR   ³ CR 

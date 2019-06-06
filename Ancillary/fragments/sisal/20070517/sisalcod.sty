@@ -1,0 +1,33 @@
+CODING STYLE IN SISAL
+
+1996-04-20: Building an array via catenate style is really really slow.
+            This method:
+
+%Fragment sl 111          Replicate vector-vector
+function $FNAME(x1: array[$XTYPE];
+                y1: array[$YTYPE] 
+                returns array[$ZTYPE])  
+ array_setl(for i in SISALIO,
+    SISALIO+ConformSameLength(array_size(x1),array_size(y1))-1
+  returns value of catenate
+  array_fill(SISALIO,SISALIO+(ConformNonNegativeInt($XTtoI(x1[i])))-1,y1[i])
+ end for,SISALIO)
+end function
+
+is about 25x slower (compiota 5e6) than:
+
+%Fragment sl 111 b c c Replicate vector-vector
+function $FNAME(x1: array[$XTYPE];
+                y1: array[$YTYPE] 
+                returns array[$ZTYPE])  
+ array_setl(for x0 in x1 at i
+            returns array of y1[i] when x0
+            end for,SISALIO)
+end function
+
+
+1996-04-20: Reduction by working down a column at a time usually
+            is a loser. benscrun loses big here. We do OK when
+            the reduce ???
+
+

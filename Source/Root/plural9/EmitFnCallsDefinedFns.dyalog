@@ -1,0 +1,12 @@
+﻿ r←EmitFnCallsDefinedFns y;ast;cv;fns;cal;j;ret
+ ⍝# Emit function calls to a user-defined fn AND straight assignment
+ ast←D y[0]
+ cv←D y[1]
+ fns←D y[2]
+ cal←D y[3]
+⍝ Assigns for straight assignments and defined fn calls
+ j←(∨\ast[;asttarget]∊aststz)∧ast[;astfn]∊(E,'←')
+ cv←cv∧j∨ast[;astfn]∊⍳1↑⍴ast ⍝ Defined fn calls
+ cal[;calranks]←E''
+ cal←cv EmitAssignment(E ast),E cal
+ r←(E ast),(E cv),(E fns),E cal

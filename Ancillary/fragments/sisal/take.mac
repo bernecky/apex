@@ -1,0 +1,246 @@
+% C preprocessor code fragments for take only.
+%
+% Robert Bernecky 1996-05-02
+% Supports arbitrary user array index origin 1996-03-26 /rbe
+
+% Generation rules:
+% Macro name is:          d,jsymbol,leftrank,rightrank,resultrank[,spec]
+% spec (special case) is: Bool | Int 
+% Bool is:                p0 | p1
+% Int  is:                pi | ni
+% where p0, p1 are 0 and 1, respectively, and pi, ni are arbitrary
+% positive or negative integers, respectively.
+% Parameters to macro are:
+%  take:   left argument, right argument,xtype,overtake fill value
+%  drop:   left argument, right argument,xtype,overtake
+%          overtake argument supplied but not used for drop.
+
+% %%%%%%%%%%%%%%%%%%% take %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%  ----------------------- takes on scalars ----------------------
+
+#define dtake001(x0,XT,y0,YT,OTFILL) \
+( let  % Generic scalar take scalar \
+  xi  := XT##toI(x0); \
+  len := abs(xi); \
+  z:=array_fill(SISALIO,len+SISALIO-1,OTFILL); \
+  pos := if xi = len  \
+         then 0 else len-1  \
+         end if; \
+ in  \
+   z[SISALIO+pos:y0] \
+ end let)
+
+% n take scalar
+#define dtake001pi(x0,XT,y0,YT,OTFILL) \
+(y0 || array_fill(SISALIO,XT##toI(x0)+SISALIO-2,OTFILL))
+
+% (-n) take scalar 
+#define dtake001ni(x0,XT,y0,YT,OTFILL) \
+(array_fill(SISALIO,XT##toI(x0)+SISALIO-2,OTFILL) || y0)
+
+% 0 take scalar
+#define dtake001p0(x0,XT,y0,YT,OTFILL) array_fill(SISALIO,SISALIO-1,OTFILL) 
+
+% 1 take scalar
+#define dtake001p1(x0,XT,y0,OTFILL) array[SISALIO,SISALIO,y0] 
+
+% (-1) take scalar
+#define dtake001n1(x0,XT,y0,OTFILL) array[SISALIO,SISALIO,y0]
+
+
+%  --------------------- Vector takes ------------------------
+% Special cases that are not.
+#define dtake011p1(x0,XT,y1,YT,OTFILL) dtake011(x0,XT,y1,YT,OTFILL) 
+#define dtake011n1(x0,XT,y1,YT,OTFILL) dtake011(x0,XT,y1,YT,OTFILL) 
+#define dtake011pi(x0,XT,y1,YT,OTFILL) dtake011(x0,XT,y1,YT,OTFILL) 
+#define dtake011ni(x0,XT,y1,YT,OTFILL) dtake011(x0,XT,y1,YT,OTFILL) 
+
+#define dtake011(x0,XT,y1,YT,OTFILL) % generic scalar take vector \
+(let \
+ cols := XT##toI(x0); \
+ colsy := array_size(y1); \
+in \
+% identity \
+ if abs(cols) = array_size(y1) then y1 \
+ else \
+ let \
+% Undertake and overtake \
+% 0-origin index of first element fetched from y1 \
+    first :=  if cols >= 0 then 0  \
+                     else max(0,cols+colsy) \
+                     end if; \
+    len := min(abs(cols),max(0,colsy-first));  \
+% # of y elements \
+    fill := abs(cols) - len; \
+% # fill elements \
+    prefill, postfill := \
+       if cols >0 then 0,fill else fill,0 end if; \
+    in \
+     array_fill(SISALIO,SISALIO+prefill-1,OTFILL) \
+     || VECTORTAKEDROP(y1,first,len) || \
+     array_fill(SISALIO,SISALIO+postfill-1,OTFILL) \
+    end let \
+  end if \
+end let)
+
+% 0 take vector
+#define dtake011p0(x0,XT,y1,YT,OTFILL) array_adjustFast((y1),SISALIO,SISALIO-1)
+
+% ---------------------- vector take vector ----------------
+
+#define dtake111(x1,XT,y1,YT,OTFILL) \
+(let  \
+% Detect length error on left argument \
+ cols := XT##toI(x1[ConformSame(SISALIO,array_limh(x1))]); \
+ colsy := array_size(y1); \
+in \
+% identity \
+ if abs(cols) = array_size(y1) then y1 % identity \
+ else \
+  let \
+% undertake and overtake \
+% 0-origin index of first element fetched from y1 \
+    first :=  if cols >= 0 then 0  \
+                     else max(0,cols+colsy) \
+                     end if; \
+% # of y elements \
+    len := min(abs(cols),max(0,colsy-first));   \
+% # of fill elements \
+    fill := abs(cols) - len;  \
+    prefill, postfill := \
+       if cols >0 then 0,fill else fill,0 end if; \
+    in  \
+     array_fill(SISALIO,SISALIO+prefill-1,OTFILL) \
+     || VECTORTAKEDROP(y1,first,len) || \
+     array_fill(SISALIO,SISALIO+postfill-1,OTFILL) \
+    end let \
+  end if \
+end let)
+
+% (,0) take vector
+#define dtake111p0(x1,XT,y1,YT,OTFILL) \
+ dtake011p0(x1[SISALIO],XT,y1,YT,OTFILL) 
+
+% (,1) take vector
+#define dtake111p1(x1,XT,y1,YT,OTFILL) \
+ array[SISALIO: if IsEmpty(y1) then OTFILL else y1[SISALIO] end if]
+
+% (,n) take vector 
+#define dtake111pi(x1,XT,y1,YT,OTFILL) \
+ dtake011(x1[SISALIO],XT,y1,YT,OTFILL) 
+
+% (,-1) take vector 
+#define dtake111n1(x1,XT,y1,YT,OTFILL) \
+ dtake011(x1[SISALIO],XT,y1,YT,OTFILL) 
+
+% (,-n) take vector 
+#define dtake111ni(x1,XT,y1,YT,OTFILL) \
+ dtake011(x1[SISALIO],XT,y1,YT,OTFILL) 
+
+% ------------- take on matrix ---------------------------
+
+#define dtake122(x1,XT,y2,YT,OTFILL) % Generic vector take matrix \
+% Cases: \
+% identity, positive/negative overtake, positive/negative undertake \
+% We know from dfa that x1 has two elements.  \
+% Ergo, no length error possible \
+(let  \
+% No ipsa extensions today. \
+  xrows := XT##toI(x1[SISALIO]); \
+  zrows := abs(xrows); \
+  xcols := XT##toI(x1[SISALIO+1]); \
+  zcols := abs(xcols); \
+% # rows in y2 \
+  yrows := array_size(y2);  \
+% # columns in y2 \
+  ycols := array_size(y2[SISALIO]); \
+ in \
+% identity \
+  if (zrows = yrows) & (zcols = ycols) then y2 \
+% Must do real work. \
+  else \
+   let    \
+% Offset of upper left corner of y2 subcube within result \
+    frow := if xrows >= 0 then 0 else yrows+xrows end if; \
+    fcol := if xcols >= 0 then 0 else ycols+xcols end if; \
+    fillrows := zrows - yrows; \
+    fillcols := zcols - ycols; \
+   in \
+% undertake vs overtake \
+    if fillrows <= 0 & fillcols <= 0  \
+% undertake case \
+    then \
+      for r in 0,zrows-1 returns array of \
+      array_setl(VECTORTAKEDROP(y2[r+frow],fcol,zcols),SISALIO) \
+      end for \
+% overtake case \
+    else \
+     let   \
+% Build long rowfiller if we need it. Otherwise, \
+% build stubby one to save time. \
+      rlen := if fillrows ~= 0 then zcols else 0 end if; \
+% Extra row fill \
+      rowfill := array_fill(SISALIO,SISALIO+rlen-1,OTFILL); \
+     in \
+% leading rows \
+      array_fill(SISALIO,SISALIO+max(0,fillrows)-1,rowfill) \
+      || \
+% Do possible overtakes on columns. \
+% Check for identity on column width \
+       if fillcols = 0  \
+       then y2  \
+       else \
+          for y1 in y2 returns array of  \
+% leading columns \
+          array_fill(SISALIO,SISALIO+max(0,-fillcols)-1,OTFILL) \
+          || VECTORTAKEDROP(y1,fcol,zcols-abs(fillcols)) || \
+% trailing columns \
+          array_fill(SISALIO,SISALIO+max(0,fillcols)-1,OTFILL) \
+         end for \
+       end if \
+      ||  \
+% trailing rows\
+      array_fill(SISALIO,SISALIO+max(0,-fillrows)-1,rowfill) \
+     end let \
+% undertake vs overtake \
+    end if \
+% actual work \
+   end let  \
+% Identity vs real work \
+end if \
+ end let)
+
+% Special cases that are not.
+
+#define dtake122p0p0(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122p0p1(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122p0n1(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122p0pi(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122p0ni(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+
+#define dtake122p1p0(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122p1p1(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122p1n1(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122p1pi(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122p1ni(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+
+#define dtake122n1p0(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122n1p1(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122n1n1(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122n1pi(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122n1ni(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+
+#define dtake122pip0(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122pip1(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122pin1(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122pipi(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122pini(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+
+#define dtake122nip0(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122nip1(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122nin1(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122nipi(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+#define dtake122nini(x1,XT,y2,YT,OTFILL) dtake122(x1,XT,y2,YT,OTFILL)
+
+

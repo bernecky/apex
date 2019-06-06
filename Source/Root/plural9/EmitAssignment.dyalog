@@ -1,0 +1,59 @@
+﻿ r←cv EmitAssignment y;coer;b;i;typ;cl;ast;cal;nops;st
+⍝ Emit all assignments (not indexed assign...) for cv⌿cal,
+⍝ and the coercions for the assigns. Coercions are
+⍝ needed for assigns to system variables, and for
+⍝ assigns of loop-carried variables, such as:
+⍝       i←0
+⍝ loop: i←i+1
+⍝ The loop-carried value is integer, but the initial
+⍝ value is Boolean. R. Bernecky 2004-06-20
+ ast←D y[0]
+ cal←D y[1]
+ r←cal
+ :If 1∊cv   ⍝ Stupid APL2 prototypes
+     :Select TargetLanguage
+     :Case 'sisal'
+         r←(E':='),¨cal÷0 ⍝ Fix SISAL some other day 2004-07-03
+     :Case 'sac'
+⍝ Coercions
+⍝ Since APL is (hohoho) untyped, these should not
+⍝ be needed. However, system variables are typed,
+⍝ at least in the APEX world, so we perform coercion
+⍝ at assign time, rather than at reference time, which
+⍝ otherwise make things messy(messier?). rbe 2004-07-04
+⍝
+⍝ The idea is: If the target has a type already, and
+⍝ the source has a different type, we coerce
+⍝ to that type. Otherwise, we assign with no coercion.
+⍝
+         cal[cv/⍳⍴cv;caltarget]←cal[cv/⍳⍴cv;caltarget],¨E'=' ⍝ All assigns
+         b←ast[;asttarget]
+         b←(~b∊NULL)∧cv/∨\b∊aststz
+         b←b∧typ≠cv⌿ast[;asttype] ⍝ Source, target types differ
+         coer←(E'to'),¨((' ',TypesBig)[1+b/typ]),¨'('
+         b←(cv\b)/⍳⍴cv
+         cal[b;caltarget]←cal[b;caltarget],¨coer
+         cal[b;calrparcoer]←E,')'
+         r←cal
+         r[;calsemicolon]←mcb(ER1 2 2⍴'  ;',NL)[cv]
+     :Case 'plural'
+         cal[cv/⍳⍴cv;caltarget]←cal[cv/⍳⍴cv;caltarget],¨E'=' ⍝ All assigns
+         cal[cv/⍳⍴cv;caltarget]←(E'auto '),¨cal[cv/⍳⍴cv;caltarget]
+         b←ast[;asttarget]
+         b←cv/(~b∊NULL)∧∨\b∊aststz
+         ⍝ If coercions break, make this code a distinct function
+         ⍝⍝⍝⍝needs work b←b∧typ≠cv⌿ast[;asttype] ⍝ Source, target types differ
+     ⍝    st←(' ',TypesBig)[1+b/cv⌿ast[;asttype]] ⍝ Source type
+     ⍝    coer←(E'to'),¨((' ',TypesBig)[1+b/typ]),¨'('
+     ⍝    coer←st,¨coer
+     ⍝    b←(cv\b)/⍳⍴cv
+     ⍝    cal[b;caltarget]←cal[b;caltarget],¨coer
+     ⍝   cal[b;calrparcoer]←E,')'
+         r←cal
+         r[cv/⍳⍴cv;calsemicolon]←E';',NL
+     :Else
+         ⎕←'No EmitAssignment for TargetLanguage: ',TargetLanguage
+         ÷0
+     :EndSelect
+
+ :EndIf

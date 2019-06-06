@@ -1,0 +1,1227 @@
+%$entry=tomcatv
+define tomcatv
+% Compiled by APEX at 1996-04-16 13:51:09.210
+#include <stdlib.sis>
+function modxddx22(y2: array[array[double_real]]
+ returns array[array[double_real]])
+for y1 in y2
+ s1 := for y0 in y1
+ returns array of abs(DtoD(y0))
+ end for
+returns array of s1
+end for
+end function
+
+function barxddx22(y2: array[array[double_real]]
+ returns array[array[double_real]])
+for y1 in y2
+ s1 := for y0 in y1
+ returns array of -DtoD(y0)
+ end for
+returns array of s1
+end for
+end function
+
+function divxddx11(y1: array[double_real];
+ returns array[double_real])
+ for y0 in y1
+ returns array of 1.0d0/DtoD(y0)
+
+ end for
+end function
+
+
+
+function plusbii011(x0: boolean;
+ y1: array[integer] returns array[integer])
+ for y0 in y1
+ returns array of BtoI(x0)+ItoI(y0)
+ end for
+end function
+
+function plusiii000(x: integer;
+ y: integer
+ returns integer)
+ (x)+ItoI(y)
+end function
+
+function plusibi000(x: integer;
+ y: boolean
+ returns integer)
+ (x)+BtoI(y)
+end function
+
+function plusiii011(x0: integer;
+ y1: array[integer] returns array[integer])
+ for y0 in y1
+ returns array of (x0)+ItoI(y0)
+ end for
+end function
+
+function plusddd222(x2: array[array[double_real]];
+ y2: array[array[double_real]]
+ returns array[array[double_real]])
+ for x1 in x2 dot y1 in y2
+ s:= for x0 in x1 dot y0 in y1
+ returns array of (x0)+DtoD(y0)
+ end for
+ returns array of s
+ end for
+end function
+
+function baribi000(x: integer;
+ y: boolean
+ returns integer)
+ (x)-BtoI(y)
+end function
+
+function bariii000(x: integer;
+ y: integer
+ returns integer)
+ (x)-ItoI(y)
+end function
+
+function barddd222(x2: array[array[double_real]];
+ y2: array[array[double_real]]
+ returns array[array[double_real]])
+ for x1 in x2 dot y1 in y2
+ s:= for x0 in x1 dot y0 in y1
+ returns array of (x0)-DtoD(y0)
+ end for
+ returns array of s
+ end for
+end function
+
+function barddd111(x1: array[double_real];
+ y1: array[double_real];
+ returns array[double_real])
+if array_size(x1) = array_size(y1)
+ then for x0 in x1 dot y0 in y1
+ returns array of
+ (x0)-DtoD(y0)
+ end for
+ else % Singleton extension
+ if array_size(x1) = 1 then
+ for y0 in y1 returns array of
+ (x1[0])-DtoD(y0)
+ end for
+ else if array_size(y1) = 1 then
+ for x0 in x1 returns array of
+ (x0)-DtoD(y1[0])
+ end for
+ else error[array[double_real]]
+ end if
+ end if
+ end if
+end function
+
+function barddd022(x0: double_real;
+ y2: array[array[double_real]]
+ returns array[array[double_real]])
+for y1 in y2
+ s1 := for y0 in y1
+ returns array of (x0)-DtoD(y0)
+ end for
+returns array of s1
+end for
+end function
+
+function barddd011(x0: double_real;
+ y1: array[double_real] returns array[double_real])
+ for y0 in y1
+ returns array of (x0)-DtoD(y0)
+ end for
+end function
+
+function mpyddd222(x2: array[array[double_real]];
+ y2: array[array[double_real]]
+ returns array[array[double_real]])
+ for x1 in x2 dot y1 in y2
+ s:= for x0 in x1 dot y0 in y1
+ returns array of (x0)*DtoD(y0)
+ end for
+ returns array of s
+ end for
+end function
+
+function mpyddd022(x0: double_real;
+ y2: array[array[double_real]]
+ returns array[array[double_real]])
+for y1 in y2
+ s1 := for y0 in y1
+ returns array of (x0)*DtoD(y0)
+ end for
+returns array of s1
+end for
+end function
+
+function mpyddd111(x1: array[double_real];
+ y1: array[double_real];
+ returns array[double_real])
+if array_size(x1) = array_size(y1)
+ then for x0 in x1 dot y0 in y1
+ returns array of
+ (x0)*DtoD(y0)
+ end for
+ else % Singleton extension
+ if array_size(x1) = 1 then
+ for y0 in y1 returns array of
+ (x1[0])*DtoD(y0)
+ end for
+ else if array_size(y1) = 1 then
+ for x0 in x1 returns array of
+ (x0)*DtoD(y1[0])
+ end for
+ else error[array[double_real]]
+ end if
+ end if
+ end if
+end function
+
+function mpydid111(x1: array[double_real];
+ y1: array[integer];
+ returns array[double_real])
+if array_size(x1) = array_size(y1)
+ then for x0 in x1 dot y0 in y1
+ returns array of
+ (x0)*ItoD(y0)
+ end for
+ else % Singleton extension
+ if array_size(x1) = 1 then
+ for y0 in y1 returns array of
+ (x1[0])*ItoD(y0)
+ end for
+ else if array_size(y1) = 1 then
+ for x0 in x1 returns array of
+ (x0)*ItoD(y1[0])
+ end for
+ else error[array[double_real]]
+ end if
+ end if
+ end if
+end function
+
+function mpyddd202(x2: array[array[double_real]];
+ y0: double_real
+ returns array[array[double_real]])
+for x1 in x2
+ s1 := for x0 in x1
+ returns array of (x0)*DtoD(y0)
+ end for
+returns array of s1
+end for
+end function
+
+function mpyddd011(x0: double_real;
+ y1: array[double_real] returns array[double_real])
+ for y0 in y1
+ returns array of (x0)*DtoD(y0)
+ end for
+end function
+
+function divddd000(x: double_real;
+ y: double_real
+ returns double_real)
+ (x)/DtoD(y)
+end function
+
+function divdid202(x2: array[array[double_real]];
+ y0: integer
+ returns array[array[double_real]])
+for x1 in x2
+ s1 := for x0 in x1
+ returns array of (x0)/ItoD(y0)
+ end for
+returns array of s1
+end for
+end function
+
+function diviid101(x1: array[integer];
+ y0: integer;
+ returns array[double_real])
+ for x0 in x1
+ returns array of ItoD(x0)/ItoD(y0)
+end for
+end function
+
+
+
+function comaxbbx01(y0: boolean
+ returns array[boolean])
+array_fill(SISALIO,SISALIO,y0)
+end function
+
+function rotrxiix11(y1: array[integer ]
+ returns array[integer])
+let
+ n := array_size(y1);
+in
+ for i in SISALIO,SISALIO+n-1
+ returns array of y1[(n-1)-i]
+ end for
+end let
+end function
+
+
+
+
+
+function rhoidd001(x: integer;
+ y: double_real
+ returns array[double_real])
+ array_fill(SISALIO,ConformNonNegativeInt(ItoI(x))+SISALIO-1,y)
+end function
+
+function rhoidd112(x1: array[integer];
+ y1: array[double_real]
+ returns array[array[double_real]])
+ VVRESHAPE(double_real)
+let
+ rows := ConformNonNegativeInt(ItoI(x1[SISALIO]));
+ cols := ConformNonNegativeInt(ItoI(x1[SISALIO+1]));
+ colsy := array_size(y1);
+in
+ for i in 0,rows-1
+ returns array of vvreshape(cols,mod(i*cols,colsy),y1)
+ end for
+end let
+end function
+
+function iotaddi100(x1: array[double_real];
+ y0: double_real
+ returns integer)
+
+% General case:0
+for initial
+ i := array_liml(x1);
+ lim := array_limh(x1);
+ y := DtoD(y0);
+ z := array_size(x1);
+ topz := z;
+ while (z=topz) & (i <= lim) repeat
+ i := old i+1;
+ z:= if (DtoD(x1[old i]))~=y then old z else old i end if;
+ returns value of z+QUADIO
+end for % End of cases
+end function
+
+function dropidd011(x0: integer;
+ y1: array[double_real]
+ returns array[double_real])
+let
+ drp := ItoI(x0); % Drop count
+in
+ if (drp = 0) then y1 % Identity
+ else
+ let
+ colsy := array_size(y1);
+ count := max(0,colsy-abs(drp)); % # elements in result
+ liml := if drp > 0 % Origin-0 limits
+ then min(drp,colsy) else 0 end if;
+ in
+ VECTORTAKEDROP(y1,liml,count)
+ end let
+ end if
+end let
+end function
+
+function dropidd122(x1: array[integer];
+ y2: array[array[double_real]]
+ returns array[array[double_real]])
+
+let
+ drows := ItoI(x1[SISALIO+ConformSameLength(2,array_size(x1))-2]); % drop counts
+ dcols := ItoI(x1[SISALIO+1]);
+ zrows := max(0,array_size(y2)-abs(drows)); % # rows in result
+ zcols := max(0,array_size(y2[SISALIO])-abs(dcols)); % # cols in result
+ firstrow := if drows <= 0 then 0 else drows end if; % first result row, col
+ firstcol := if dcols <= 0 then 0 else dcols end if;
+ yrows := array_size(y2);
+ ycols := array_size(y2[SISALIO]);
+in
+ if (zrows = yrows) & (zcols = ycols)
+ then y2 % Identity
+ else % Must do some real work
+ let
+ % First, we drop off unneeded rows. Then, we drop each
+ % column as needed.
+ newy2 := if (zrows = yrows) then y2 % (0,x) drop y2
+ else VECTORTAKEDROP(y2,firstrow,zrows)
+ end if;
+ in % Now do drop on each row
+ if (zcols = ycols) then newy2 % (x,0) drop y2
+ else array_setl( % Reset the SISAL array origin
+ for y1 in newy2
+ returns array of VECTORTAKEDROP(y1,firstcol,zcols)
+ end for
+ ,SISALIO)
+ end if
+ end let
+ end if % Identity on y2
+end let
+end function
+
+function dropbdd122(x1: array[boolean];
+ y2: array[array[double_real]]
+ returns array[array[double_real]])
+
+let
+ drows := BtoI(x1[SISALIO+ConformSameLength(2,array_size(x1))-2]); % drop counts
+ dcols := BtoI(x1[SISALIO+1]);
+ zrows := max(0,array_size(y2)-abs(drows)); % # rows in result
+ zcols := max(0,array_size(y2[SISALIO])-abs(dcols)); % # cols in result
+ firstrow := if drows <= 0 then 0 else drows end if; % first result row, col
+ firstcol := if dcols <= 0 then 0 else dcols end if;
+ yrows := array_size(y2);
+ ycols := array_size(y2[SISALIO]);
+in
+ if (zrows = yrows) & (zcols = ycols)
+ then y2 % Identity
+ else % Must do some real work
+ let
+ % First, we drop off unneeded rows. Then, we drop each
+ % column as needed.
+ newy2 := if (zrows = yrows) then y2 % (0,x) drop y2
+ else VECTORTAKEDROP(y2,firstrow,zrows)
+ end if;
+ in % Now do drop on each row
+ if (zcols = ycols) then newy2 % (x,0) drop y2
+ else array_setl( % Reset the SISAL array origin
+ for y1 in newy2
+ returns array of VECTORTAKEDROP(y1,firstcol,zcols)
+ end for
+ ,SISALIO)
+ end if
+ end let
+ end if % Identity on y2
+end let
+end function
+
+
+
+function rhoxdix21(y2: array[array[double_real]] returns array[integer])
+ array[SISALIO: array_size(y2), array_size(y2[SISALIO])]
+end function
+
+function iotaxiix01(y0: integer
+ returns array[integer])
+for i in QUADIO,(ConformNonNegativeInt(ItoI(y0))-1)+QUADIO
+ returns array of i
+ end for
+end function
+
+
+
+function comadbd101(x1: array[double_real];
+ y: boolean;
+ returns array[double_real])
+array_setl(array_addh(DtoD1(x1),BtoD(y)),SISALIO)
+end function
+
+
+
+function comabdd011(x: boolean;
+ y1: array[double_real];
+ returns array[double_real])
+array_setl(array_addl(DtoD1(y1),BtoD(x)),SISALIO)
+end function
+
+function comaibi001(x: integer;
+ y: boolean;
+ returns array[integer])
+array[SISALIO: ItoI(x), BtoI(y)]
+end function
+
+function combddd212(x2: array[array[double_real]];
+ y1: array[double_real];
+ returns array[array[double_real]])
+array_setl(array_addh(DtoD2(x2),DtoD1(y1)),SISALIO)
+end function
+
+function comaddd222(x2: array[array[double_real]];
+ y2: array[array[double_real]];
+ returns array[array[double_real]])
+
+ function Conforms(x2: array[array[double_real]];
+ y2: array[array[double_real]];
+ returns array[array[double_real]])
+ if (array_size(x2) = array_size(y2)) then x2 else
+ error[array[array[double_real]]] end if
+ end function
+
+ for x1 in Conforms(x2,y2) dot y1 in y2
+ returns array of
+ DtoD1(x1) || DtoD1(y1)
+ end for
+end function
+
+function comaiii001(x: integer;
+ y: integer;
+ returns array[integer])
+array[SISALIO: ItoI(x), ItoI(y)]
+end function
+
+function comaidd101(x1: array[integer];
+ y: double_real;
+ returns array[double_real])
+array_setl(array_addh(ItoD1(x1),DtoD(y)),SISALIO)
+end function
+
+
+
+function comaddd011(x: double_real;
+ y1: array[double_real];
+ returns array[double_real])
+array_setl(array_addl(DtoD1(y1),DtoD(x)),SISALIO)
+end function
+
+function comaidd111(x1: array[integer];
+ y1: array[double_real];
+ returns array[double_real])
+ItoD1(x1) || DtoD1(y1)
+end function
+
+function comaidd011(x: integer;
+ y1: array[double_real];
+ returns array[double_real])
+array_setl(array_addl(DtoD1(y1),ItoD(x)),SISALIO)
+end function
+
+
+
+function indrixib1x00(lhs: array[integer];
+ ia0: boolean;
+ 
+ returns integer)
+ lhs[BtoI(ia0)-QUADIO]
+end function
+
+
+function indrdxdi1x00(lhs: array[double_real];
+ ia0: integer;
+ 
+ returns double_real)
+ lhs[ItoI(ia0)-QUADIO]
+end function
+
+
+function indrdxdb1x00(lhs: array[double_real];
+ ia0: boolean;
+ 
+ returns double_real)
+ lhs[BtoI(ia0)-QUADIO]
+end function
+
+
+function indrdxdb1x11(lhs: array[double_real];
+ ia0: array[boolean];
+ 
+ returns array[double_real])
+let
+ tmp:=for i in ia0
+ returns array of
+ lhs[BtoI(i)-QUADIO]
+ end for
+in
+ array_setl(tmp,0)
+end let
+end function
+
+
+function indrdxdi1x11(lhs: array[double_real];
+ ia0: array[integer];
+ 
+ returns array[double_real])
+let
+ tmp:=for i in ia0
+ returns array of
+ lhs[ItoI(i)-QUADIO]
+ end for
+in
+ array_setl(tmp,0)
+end let
+end function
+
+
+function indrdxdii2x000(lhs: array[array[double_real]];
+ ia0: integer;
+ ia1: integer
+ returns double_real)
+ indrdxdi1x00(lhs[ItoI(ia0)-QUADIO],ia1)
+end function
+
+
+function indrdxdib2x000(lhs: array[array[double_real]];
+ ia0: integer;
+ ia1: boolean
+ returns double_real)
+ indrdxdb1x00(lhs[ItoI(ia0)-QUADIO],ia1)
+end function
+
+
+function indrdxdix2x10x(lhs: array[array[double_real]];
+ ia0: integer;
+ 
+ returns array[double_real])
+ lhs[ItoI(ia0)-QUADIO]
+end function
+
+
+function indrdxdxb2x1x0(lhs: array[array[double_real]];
+ ia1: boolean
+ returns array[double_real])
+let
+ tmp:=for i in 0,array_limh(lhs)
+ returns array of
+ indrdxdb1x00(lhs[i],ia1)
+ end for
+in
+array_setl(tmp,0)
+end let
+end function
+
+
+function indrdxdxi2x1x0(lhs: array[array[double_real]];
+ ia1: integer
+ returns array[double_real])
+let
+ tmp:=for i in 0,array_limh(lhs)
+ returns array of
+ indrdxdi1x00(lhs[i],ia1)
+ end for
+in
+array_setl(tmp,0)
+end let
+end function
+
+
+function indrdxdii2x211(lhs: array[array[double_real]];
+ ia0: array[integer];
+ ia1: array[integer]
+ returns array[array[double_real]])
+let
+ tmp:=for i in ia0
+ returns array of
+ indrdxdi1x11(lhs[ItoI(i)-QUADIO],ia1)
+ end for
+in
+ array_setl(tmp,0)
+end let
+end function
+
+
+function indrdxdxb2x2x1(lhs: array[array[double_real]];
+ ia1: array[boolean]
+ returns array[array[double_real]])
+let
+ tmp:=for i in 0,array_limh(lhs)
+ returns array of
+ indrdxdb1x11(lhs[i],ia1)
+ end for
+in
+array_setl(tmp,0)
+end let
+end function
+
+
+function indsdddb1010(lhs: array[double_real];
+ ia0: boolean;
+ rhs: double_real;
+ returns array[double_real])
+lhs[BtoI(ia0)-QUADIO: DtoD(rhs)]
+end function
+
+function indsdddi1010(lhs: array[double_real];
+ ia0: integer;
+ rhs: double_real;
+ returns array[double_real])
+lhs[ItoI(ia0)-QUADIO: DtoD(rhs)]
+end function
+
+function indsdddx102x(lhs: array[double_real];
+ rhs: double_real
+ returns array[double_real])
+array_fill(0,array_limh(lhs), DtoD(rhs))
+end function
+
+function indsdddi1111(lhs: array[double_real];
+ ia0: array[integer];
+ rhs: array[double_real];
+ returns array[double_real])
+ for initial
+ i:= 0;
+ z:= lhs;
+ lim:= array_limh(ia0);
+ while i<=lim repeat
+ indx:= ItoI(ia0[old i]);
+ z:= old z[indx-QUADIO: DtoD(rhs[old i])];
+ i:= old i +1;
+ returns value of z
+ end for
+end function
+
+
+function indsdddbx2120x(lhs: array[array[double_real]];
+ ia0: boolean;
+ 
+ rhs: array[double_real];
+ returns array[array[double_real]])
+let
+ i:= BtoI(ia0);
+in
+ lhs[i-QUADIO: rhs]
+end let
+end function
+
+function indsdddxb212x0(lhs: array[array[double_real]];
+ ia1: boolean;
+ rhs: array[double_real];
+ returns array[array[double_real]])
+
+ for i in 0,array_limh(lhs)
+ returns array of
+ indsdddb1010(lhs[i],ia1,rhs[i])
+ end for
+end function
+
+function indsdddxi212x0(lhs: array[array[double_real]];
+ ia1: integer;
+ rhs: array[double_real];
+ returns array[array[double_real]])
+
+ for i in 0,array_limh(lhs)
+ returns array of
+ indsdddi1010(lhs[i],ia1,rhs[i])
+ end for
+end function
+
+function indsdddii22211(lhs: array[array[double_real]];
+ ia0: array[integer];
+ ia1: array[integer];
+ rhs: array[array[double_real]];
+ returns array[array[double_real]])
+ for initial
+ i:= 0;
+ z:= lhs;
+ lim:= array_limh(ia0);
+ while i<=lim repeat
+ indx:= ItoI(ia0[old i]);
+ z:= old z[indx-QUADIO: indsdddi1111(old z[old i],ia1,rhs[old i])];
+ i:= old i +1;
+ returns value of z
+ end for
+end function
+
+
+
+
+
+function maxslxddx21(y2: array[array[double_real]]
+ returns array[double_real])
+ for y1 in y2
+ t1 := for y in y1
+ returns value of greatest DtoD(y)
+ end for
+ returns array of t1
+ end for
+end function
+
+function maxslxddx10(y1: array[double_real]
+ returns double_real)
+for y in y1
+ returns value of greatest DtoD(y)
+end for
+end function
+
+
+
+%
+% Start of function compmesh
+% 
+function compmesh(x: array[array[double_real]];
+y: array[array[double_real]];
+returns array[array[double_real]]
+,array[array[double_real]]
+,array[array[double_real]]
+,array[array[double_real]]
+,array[array[double_real]])
+
+let
+TMP_85 := dropidd122(array[0: -2, -1] ,x );
+ TMP_86 := dropbdd122(array[0: false,true],TMP_85 );
+ TMP_87 := dropidd122(array[0: 0, -1] ,x );
+ TMP_88 := dropidd122(array[0: 2, 1] ,TMP_87 );
+ xx_0 := barddd222 (TMP_88 ,TMP_86 );
+ TMP_90 := dropidd122(array[0: -2, -1] ,y );
+ TMP_91 := dropbdd122(array[0: false,true],TMP_90 );
+ TMP_92 := dropidd122(array[0: 0, -1] ,y );
+ TMP_93 := dropidd122(array[0: 2, 1] ,TMP_92 );
+ yx_0 := barddd222 (TMP_93 ,TMP_91 );
+ TMP_95 := dropidd122(array[0: -1, -2] ,x );
+ TMP_96 := dropbdd122(array[0: true,false],TMP_95 );
+ TMP_97 := dropidd122(array[0: -1, 0] ,x );
+ TMP_98 := dropidd122(array[0: 1, 2] ,TMP_97 );
+ xy_0 := barddd222 (TMP_98 ,TMP_96 );
+ TMP_100 := dropidd122(array[0: -1, -2] ,y );
+ TMP_101 := dropbdd122(array[0: true,false],TMP_100 );
+ TMP_102 := dropidd122(array[0: -1, 0] ,y );
+ TMP_103 := dropidd122(array[0: 1, 2] ,TMP_102 );
+ yy_0 := barddd222 (TMP_103 ,TMP_101 );
+ TMP_105 := mpyddd222 (yy_0 ,yy_0 );
+ TMP_106 := mpyddd222 (xy_0 ,xy_0 );
+ TMP_107 := plusddd222(TMP_106 ,TMP_105 );
+ a_0 := mpyddd022 ( 0.250d0 ,TMP_107 );
+ TMP_109 := mpyddd222 (xx_0 ,xx_0 );
+ TMP_110 := mpyddd222 (yx_0 ,yx_0 );
+ TMP_111 := plusddd222(TMP_110 ,TMP_109 );
+ b_0 := mpyddd022 ( 0.250d0 ,TMP_111 );
+ TMP_113 := mpyddd222 (yx_0 ,yy_0 );
+ TMP_114 := mpyddd222 (xy_0 ,xx_0 );
+ TMP_115 := plusddd222(TMP_114 ,TMP_113 );
+ c_0 := mpyddd022 ( 0.125d0 ,TMP_115 );
+ TMP_117 := dropidd122(array[0: -2, -1] ,x );
+ TMP_118 := dropbdd122(array[0: false,true],TMP_117 );
+ TMP_119 := dropidd122(array[0: -1, -1] ,x );
+ TMP_120 := dropbdd122(array[0: true,true] ,TMP_119 );
+ TMP_121 := mpyddd022 ( 2.0d0 ,TMP_120 );
+ TMP_122 := barddd222 (TMP_121 ,TMP_118 );
+ TMP_123 := dropidd122(array[0: 0, -1] ,x );
+ TMP_124 := dropidd122(array[0: 2, 1] ,TMP_123 );
+ pxx_0 := barddd222 (TMP_124 ,TMP_122 );
+ TMP_126 := dropidd122(array[0: -2, -1] ,y );
+ TMP_127 := dropbdd122(array[0: false,true],TMP_126 );
+ TMP_128 := dropidd122(array[0: -1, -1] ,y );
+ TMP_129 := dropbdd122(array[0: true,true] ,TMP_128 );
+ TMP_130 := mpyddd022 ( 2.0d0 ,TMP_129 );
+ TMP_131 := barddd222 (TMP_130 ,TMP_127 );
+ TMP_132 := dropidd122(array[0: 0, -1] ,y );
+ TMP_133 := dropidd122(array[0: 2, 1] ,TMP_132 );
+ qxx_0 := barddd222 (TMP_133 ,TMP_131 );
+ TMP_135 := dropidd122(array[0: -1, -2] ,x );
+ TMP_136 := dropbdd122(array[0: true,false],TMP_135 );
+ TMP_137 := dropidd122(array[0: -1, -1] ,x );
+ TMP_138 := dropbdd122(array[0: true,true] ,TMP_137 );
+ TMP_139 := mpyddd022 ( 2.0d0 ,TMP_138 );
+ TMP_140 := barddd222 (TMP_139 ,TMP_136 );
+ TMP_141 := dropidd122(array[0: -1, 0] ,x );
+ TMP_142 := dropidd122(array[0: 1, 2] ,TMP_141 );
+ pyy_0 := barddd222 (TMP_142 ,TMP_140 );
+ TMP_144 := dropidd122(array[0: -1, -2] ,y );
+ TMP_145 := dropbdd122(array[0: true,false],TMP_144 );
+ TMP_146 := dropidd122(array[0: -1, -1] ,y );
+ TMP_147 := dropbdd122(array[0: true,true] ,TMP_146 );
+ TMP_148 := mpyddd022 ( 2.0d0 ,TMP_147 );
+ TMP_149 := barddd222 (TMP_148 ,TMP_145 );
+ TMP_150 := dropidd122(array[0: -1, 0] ,y );
+ TMP_151 := dropidd122(array[0: 1, 2] ,TMP_150 );
+ qyy_0 := barddd222 (TMP_151 ,TMP_149 );
+ TMP_153 := dropidd122(array[0: -2, 2] ,x );
+ TMP_154 := dropidd122(array[0: -2, -2] ,x );
+ TMP_155 := barddd222 (TMP_154 ,TMP_153 );
+ TMP_156 := dropidd122(array[0: 2, -2] ,x );
+ TMP_157 := dropidd122(array[0: 2, 2] ,x );
+ TMP_158 := barddd222 (TMP_157 ,TMP_156 );
+ pxy_0 := plusddd222(TMP_158 ,TMP_155 );
+ TMP_160 := dropidd122(array[0: -2, 2] ,y );
+ TMP_161 := dropidd122(array[0: -2, -2] ,y );
+ TMP_162 := barddd222 (TMP_161 ,TMP_160 );
+ TMP_163 := dropidd122(array[0: 2, -2] ,y );
+ TMP_164 := dropidd122(array[0: 2, 2] ,y );
+ TMP_165 := barddd222 (TMP_164 ,TMP_163 );
+ qxy_0 := plusddd222(TMP_165 ,TMP_162 );
+ aa_0 := barxddx22 ( b_0 );
+ TMP_168 := divddd000 ( 2.0d0 , 0.98d0 );
+ TMP_169 := mpyddd022 (TMP_168 ,a_0 );
+ TMP_170 := plusddd222(b_0 ,TMP_169 );
+ dd_0 := plusddd222(b_0 ,TMP_170 );
+ TMP_172 := mpyddd222 (c_0 ,pxy_0 );
+ TMP_173 := mpyddd222 (b_0 ,pyy_0 );
+ TMP_174 := barddd222 (TMP_173 ,TMP_172 );
+ TMP_175 := mpyddd222 (a_0 ,pxx_0 );
+ rx_0 := plusddd222(TMP_175 ,TMP_174 );
+ TMP_177 := mpyddd222 (c_0 ,qxy_0 );
+ TMP_178 := mpyddd222 (b_0 ,qyy_0 );
+ TMP_179 := barddd222 (TMP_178 ,TMP_177 );
+ TMP_180 := mpyddd222 (a_0 ,qxx_0 );
+ ry_0 := plusddd222(TMP_180 ,TMP_179 );
+ r_0 := ( ry_0 );
+ r:= r_0 ;
+
+in 
+r_0,
+aa_0,
+dd_0,
+rx_0,
+ry_0
+end let
+end function % compmesh
+
+%
+% Start of function fma
+% 
+function fma(y: array[array[double_real]];
+returns double_real 
+,integer
+,integer)
+
+let
+ay_0 := modxddx22 ( y );
+ v_0 := maxslxddx21 ( ay_0 );
+ t_0 := maxslxddx10 ( v_0 );
+ i_0 := iotaddi100 (v_0 ,t_0 );
+ TMP_35 := indrdxdix2x10x(ay_0 ,i_0);
+ j_0 := iotaddi100 (TMP_35 ,t_0 );
+ z_0 := indrdxdii2x000(y ,i_0,j_0);
+ z:= z_0 ;
+
+in 
+z_0,
+i_0,
+j_0
+end let
+end function % fma
+
+%
+% Start of function sweepup
+% 
+function sweepup(aa: array[array[double_real]];
+dd: array[array[double_real]];
+rx:array[array[double_real]];
+ry:array[array[double_real]];
+returns array[array[double_real]]
+,array[array[double_real]]
+,array[array[double_real]])
+
+let
+d_0 := ( dd );
+ TMP_43 := indrdxdxb2x1x0(d_0 ,false);
+ TMP_44 := divxddx11 ( TMP_43 );
+ TMP_47 := indsdddxb212x0(d_0 ,false,TMP_44);
+ d_1 := ( TMP_47 );
+ nrx_0 := ( rx );
+ nry_0 := ( ry );
+ TMP_52 := rhoxdix21 ( dd );
+ TMP_53 := indrixib1x00 (TMP_52 ,true);
+ TMP_54 := baribi000 (TMP_53 ,true );
+ TMP_55 := iotaxiix01 ( TMP_54 );
+ TMP_56 := plusbii011 (true ,TMP_55 );
+ d_2,nrx_1,nry_1:=for initial
+CTR__057:= 0;
+CTR__057z := array_limh(TMP_56 );
+d_3 := (d_1);
+nrx_2 := (nrx_0);
+nry_2 := (nry_0);
+while (CTR__057<=CTR__057z)repeat 
+j_0 := TMP_56 [old CTR__057];
+CTR__057 := 1+old CTR__057;
+ TMP_61 := baribi000 (j_0 ,true );
+ TMP_64 := indrdxdxi2x1x0(old d_3 ,TMP_61);
+ TMP_67 := indrdxdxi2x1x0(aa ,j_0);
+ r_0 := mpyddd111 (TMP_67 ,TMP_64 );
+ TMP_69 := baribi000 (j_0 ,true );
+ TMP_72 := indrdxdxi2x1x0(aa ,TMP_69);
+ TMP_73 := mpyddd111 (r_0 ,TMP_72 );
+ TMP_76 := indrdxdxi2x1x0(old d_3 ,j_0);
+ TMP_77 := barddd111 (TMP_76 ,TMP_73 );
+ TMP_78 := divxddx11 ( TMP_77 );
+ TMP_81 := indsdddxi212x0(old d_3 ,j_0,TMP_78);
+ d_3 := ( TMP_81 );
+ TMP_83 := baribi000 (j_0 ,true );
+ TMP_86 := indrdxdxi2x1x0(old nrx_2,TMP_83);
+ TMP_87 := mpyddd111 (TMP_86 ,r_0 );
+ TMP_90 := indrdxdxi2x1x0(old nrx_2,j_0);
+ TMP_91 := barddd111 (TMP_90 ,TMP_87 );
+ TMP_94 := indsdddxi212x0(old nrx_2,j_0,TMP_91);
+ nrx_2 := ( TMP_94 );
+ TMP_96 := baribi000 (j_0 ,true );
+ TMP_99 := indrdxdxi2x1x0(old nry_2,TMP_96);
+ TMP_100 := mpyddd111 (TMP_99 ,r_0 );
+ TMP_103 := indrdxdxi2x1x0(old nry_2,j_0);
+ TMP_104 := barddd111 (TMP_103 ,TMP_100 );
+ TMP_107 := indsdddxi212x0(old nry_2,j_0,TMP_104);
+ nry_2 := ( TMP_107 );
+ returns
+ value of d_3
+ value of nrx_2
+ value of nry_2
+end for;
+ d:= d_2 ;
+
+in 
+d_2,
+nrx_1,
+nry_1
+end let
+end function % sweepup
+
+%
+% Start of function sweepdn
+% 
+function sweepdn(aa: array[array[double_real]];
+dd: array[array[double_real]];
+nrx:array[array[double_real]];
+nry:array[array[double_real]];
+returns integer 
+,array[array[double_real]]
+,array[array[double_real]])
+
+let
+TMP_34 := rhoxdix21 ( dd );
+ TMP_35 := indrixib1x00 (TMP_34 ,true);
+ lim_0 := plusiii000 (-1 ,TMP_35 );
+ TMP_39 := indrdxdxi2x1x0(dd ,lim_0);
+ TMP_42 := indrdxdxi2x1x0(nrx ,lim_0);
+ TMP_43 := mpyddd111 (TMP_42 ,TMP_39 );
+ TMP_46 := indsdddxi212x0(nrx ,lim_0,TMP_43);
+ nrx_0 := ( TMP_46 );
+ TMP_50 := indrdxdxi2x1x0(dd ,lim_0);
+ TMP_53 := indrdxdxi2x1x0(nry ,lim_0);
+ TMP_54 := mpyddd111 (TMP_53 ,TMP_50 );
+ TMP_57 := indsdddxi212x0(nry ,lim_0,TMP_54);
+ nry_0 := ( TMP_57 );
+ TMP_59 := iotaxiix01 ( lim_0 );
+ TMP_60 := rotrxiix11 ( TMP_59 );
+ nrx_1,nry_1,j_0:=for initial
+CTR__061:= 0;
+CTR__061z := array_limh(TMP_60 );
+nrx_2 := (nrx_0);
+nry_2 := (nry_0);
+j_0 := (0);
+while (CTR__061<=CTR__061z)repeat 
+j_0 := TMP_60 [old CTR__061];
+CTR__061 := 1+old CTR__061;
+ TMP_67 := indrdxdxi2x1x0(dd ,j_0);
+ TMP_68 := plusibi000 (j_0 ,true );
+ TMP_71 := indrdxdxi2x1x0(old nrx_2,TMP_68);
+ TMP_74 := indrdxdxi2x1x0(aa ,j_0);
+ TMP_75 := mpyddd111 (TMP_74 ,TMP_71 );
+ TMP_78 := indrdxdxi2x1x0(old nrx_2,j_0);
+ TMP_79 := barddd111 (TMP_78 ,TMP_75 );
+ TMP_80 := mpyddd111 (TMP_79 ,TMP_67 );
+ TMP_83 := indsdddxi212x0(old nrx_2,j_0,TMP_80);
+ nrx_2 := ( TMP_83 );
+ TMP_87 := indrdxdxi2x1x0(dd ,j_0);
+ TMP_88 := plusibi000 (j_0 ,true );
+ TMP_91 := indrdxdxi2x1x0(old nry_2,TMP_88);
+ TMP_94 := indrdxdxi2x1x0(aa ,j_0);
+ TMP_95 := mpyddd111 (TMP_94 ,TMP_91 );
+ TMP_98 := indrdxdxi2x1x0(old nry_2,j_0);
+ TMP_99 := barddd111 (TMP_98 ,TMP_95 );
+ TMP_100 := mpyddd111 (TMP_99 ,TMP_87 );
+ TMP_103 := indsdddxi212x0(old nry_2,j_0,TMP_100);
+ nry_2 := ( TMP_103 );
+ returns
+ value of nrx_2
+ value of nry_2
+ value of j_0
+end for;
+ j:= j_0 ;
+
+in 
+j_0,
+nrx_1,
+nry_1
+end let
+end function % sweepdn
+
+%
+% Start of function datax
+% 
+function datax(n: integer ;
+returns array[array[double_real]]
+)
+
+function slidd022(x0: integer;
+ y2: array[array[double_real]]
+ returns array[array[double_real]])
+ let
+ n := ConformNonNegativeInt(ItoI(x0));
+ in
+ for y1 in y2 returns array of
+ array_setl(for i in array_liml(y1),array_limh(y1)
+ returns catenate of array_fill(SISALIO,SISALIO+n-1,y1[i])
+ end for,SISALIO)
+ end for
+ end let
+end function
+
+let
+TMP_21 := bariii000 (n ,2 );
+ TMP_22 := rhoidd001 (TMP_21 , 0.9d0 );
+ TMP_23 := comadbd101 (TMP_22 ,true );
+ xij_0 := comabdd011 (true ,TMP_23 );
+ TMP_25 := baribi000 (n ,true );
+ TMP_26 := iotaxiix01 ( n );
+ TMP_27 := mpydid111 (xij_0 ,TMP_26 );
+ TMP_28 := comaibi001 (n ,true );
+ TMP_29 := rhoidd112 (TMP_28 ,TMP_27 );
+ TMP_30 := divdid202 (TMP_29 ,TMP_25 );
+ r_0 := slidd022 (n ,TMP_30 );
+ TMP_32 := baribi000 (n ,true );
+ TMP_33 := iotaxiix01 ( n );
+ TMP_34 := diviid101 (TMP_33 ,TMP_32 );
+ TMP_37 := indsdddxb212x0(r_0 ,false,TMP_34);
+ r_1 := ( TMP_37 );
+ TMP_39 := baribi000 (n ,true );
+ TMP_40 := iotaxiix01 ( n );
+ TMP_41 := diviid101 (TMP_40 ,TMP_39 );
+ TMP_42 := baribi000 (n ,true );
+ TMP_45 := indsdddxi212x0(r_1 ,TMP_42 ,TMP_41);
+ r_2 := ( TMP_45 );
+ r:= r_2 ;
+
+in 
+r_2
+end let
+end function % datax
+
+%
+% Start of function datay
+% 
+function datay(x: array[array[double_real]];
+n: integer ;
+returns array[array[double_real]]
+)
+
+
+function jotdotmpyddd112(x1: array[double_real];
+ y1: array[double_real]
+ returns array[array[double_real]])
+ for x0 in x1 cross y0 in y1
+ returns array of (x0)*DtoD(y0)
+ end for
+end function
+
+let
+TMP_29 := baribi000 (n ,true );
+ TMP_32 := indrdxdib2x000 (x ,TMP_29 ,false);
+ TMP_33 := comaxbbx01 ( false );
+ TMP_36 := indrdxdxb2x2x1 (x ,TMP_33);
+ TMP_37 := mpyddd022 ( 0.9d0 ,TMP_36 );
+ TMP_38 := barddd022 ( 1.0d0 ,TMP_37 );
+ yin_0 := mpyddd202 (TMP_38 ,TMP_32 );
+ TMP_42 := indrdxdxb2x1x0 (x ,false);
+ nod_0 := dropidd011 (-1 ,TMP_42 );
+ TMP_46 := indrdxdxb2x1x0 (x ,false);
+ TMP_47 := dropidd011 (-1 ,TMP_46 );
+ TMP_48 := mpyddd011 ( 0.81d0,TMP_47 );
+ TMP_49 := barddd011 ( 0.9d0 ,TMP_48 );
+ r_0 := jotdotmpyddd112(TMP_49 ,nod_0 );
+ TMP_51 := mpyddd011 ( 0.1d0 ,nod_0 );
+ r_1 := combddd212 (r_0 ,TMP_51 );
+ TMP_55 := indsdddbx2120x (r_1 ,false ,nod_0);
+ r_2 := ( TMP_55 );
+ r_3 := comaddd222 (r_2 ,yin_0 );
+ r:= r_3 ;
+
+in 
+r_3
+end let
+end function % datay
+
+%
+% Start of function correct
+% 
+function correct(rx: array[array[double_real]];
+x : array[array[double_real]];
+returns array[array[double_real]]
+)
+
+let
+r_0 := ( x );
+ TMP_20 := rhoxdix21 ( x );
+ TMP_21 := indrixib1x00 (TMP_20 ,true);
+ TMP_22 := plusiii000 (-2 ,TMP_21 );
+ TMP_23 := iotaxiix01 ( TMP_22 );
+ n_0 := plusbii011 (true ,TMP_23 );
+ TMP_27 := indrdxdii2x211(r_0 ,n_0,n_0);
+ TMP_28 := plusddd222 (rx ,TMP_27 );
+ TMP_31 := indsdddii22211(r_0 ,n_0,n_0,TMP_28);
+ r_1 := ( TMP_31 );
+ r:= r_1 ;
+
+in 
+r_1
+end let
+end function % correct
+
+%
+% Start of function tomcatv
+% 
+function tomcatv(n: integer ;
+returns array[double_real]
+)
+
+let
+x_0 := datax ( n );
+ y_0 := datay (x_0 ,n );
+ jrym_0 := ( false );
+ irym_0 := ( false );
+ jrxm_0 := ( false );
+ irxm_0 := ( false );
+ ll_0 := ( false );
+ rym_0 := ( 0.0d0 );
+ rxm_0 := ( 0.0d0 );
+ TMP_134 := iotaxiix01( 100 );
+ ll_1,rxm_1,irxm_1,jrxm_1,rym_1,i_0,j_0,irym_1,jrym_1,nrx_0,nry_0,x_1,y_1:=
+  for initial
+CTR__135:= 0;
+CTR__135z := array_limh(TMP_134 );
+ll_1 := BtoI0(ll_0);
+rxm_2 := (rxm_0);
+irxm_2 := BtoI0(irxm_0);
+jrxm_2 := BtoI0(jrxm_0);
+rym_2 := (rym_0);
+i_2 := (0);
+j_2 := (0);
+irym_2 := BtoI0(irym_0);
+jrym_2 := BtoI0(jrym_0);
+nrx_2 := (0.0d0);
+nry_2 := (0.0d0);
+x_2 := (x_0);
+y_2 := (y_0);
+while (CTR__135<=CTR__135z)repeat 
+ll_1 := TMP_134 [old CTR__135];
+CTR__135 := 1+old CTR__135;
+ junk_1,aa_0,dd_0,rx_0,ry_0 := compmesh (old x_2 ,old y_2 );
+ rxm_2,i_1,j_1 := fma ( rx_0 );
+ irxm_2 := ( i_1 );
+ jrxm_2 := ( j_1 );
+ rym_2,i_2,j_2 := fma ( ry_0 );
+ irym_2 := ( i_2 );
+ jrym_2 := ( j_2 );
+ d_0,nrx_1,nry_1 := sweepup (aa_0 ,dd_0 ,rx_0,ry_0);
+ junk_2,nrx_2,nry_2 := sweepdn (aa_0 ,d_0 ,nrx_1,nry_1);
+ x_2 := correct (nrx_2 ,old x_2 );
+ y_2 := correct (nry_2 ,old y_2 );
+ returns
+ value of ll_1
+ value of rxm_2
+ value of irxm_2
+ value of jrxm_2
+ value of rym_2
+ value of i_2
+ value of j_2
+ value of irym_2
+ value of jrym_2
+ value of nrx_2
+ value of nry_2
+ value of x_2
+ value of y_2
+end for;
+ TMP_177 := comaiii001(irym_1 ,jrym_1 );
+ TMP_178 := plusiii011(2 ,TMP_177 );
+ TMP_179 := comaidd101(TMP_178 ,rym_1 );
+ TMP_180 := comaddd011(rxm_1 ,TMP_179 );
+ TMP_181 := comaiii001(irxm_1 ,jrxm_1 );
+ TMP_182 := plusiii011(2 ,TMP_181 );
+ TMP_183 := comaidd111(TMP_182 ,TMP_180 );
+ TMP_184 := plusibi000(ll_1 ,true );
+ r_0 := comaidd011(TMP_184 ,TMP_183 );
+ r:= r_0 ;
+
+in 
+r_0
+end let
+end function % tomcatv
+

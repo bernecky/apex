@@ -1,0 +1,21 @@
+\subsubsection{\tt buildvfAKD}
+\label{benchmarkbuildvfAKD}
+
+{\tt buildvfAKD} is an AKD version of a synthetic benchmark that constructs 
+double-precision vectors by successive catenation operations, {\em i.e.}:
+
+ {\apl (1.5+\qiota\00),(1.5+\qiota\01),(1.5+\qiota\02),\dots,(1.5+\qiota\0n-1)}
+
+\noindent It is primarily intended to measure the
+performance of storage allocation/deallocation and
+copying operations. The addition operations are
+intended to force the result type to floating point.
+
+Since all versions of these tests are likely to be dominated
+by storage-subsystem operations, we expect to see little
+difference between the \dapl and \sac versions of them,
+except for APL interpreter overhead.
+
+The benchmarks {\tt buildv}, {\tt buildvAKD}, {\tt buildv2}, {\tt buildv2AKD},
+{\tt buildvf}, and {\tt buildvfAKD} form a clique, as they
+all perform similar tasks.

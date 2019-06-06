@@ -1,0 +1,11 @@
+AND.ufn
+EQ.ufn
+GE.ufn
+GT.ufn
+LE.ufn
+LT.ufn
+NAND.ufn
+NE.ufn
+NOR.ufn
+OR.ufn
+main.ufn

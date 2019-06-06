@@ -1,0 +1,24 @@
+
+use Array: {iota,modarray,<,genarray,-,sel,+};
+
+int[.] lltoperm(int hd, int[.] links)
+{
+  r = genarray(_shape_A_(links), -1);
+  for (i=0; i<_shape_A_(links)[0]; i++) {
+    r[hd] = i;
+    hd = links[hd];
+  }
+  return(r);
+}
+
+
+int main()
+{
+ n = 30;
+ links = iota(n) - 1;
+ r = (n - 1) lltoperm links;
+ StdIO::print(r);
+ return(0);
+}
+ 
+

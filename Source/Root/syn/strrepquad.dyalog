@@ -1,0 +1,15 @@
+﻿ r←strs strrepquad src;tok;old;new;i;n
+⍝ Replace quadly names at source level
+ r←' ',src ⍝ Fake NL
+ tok←,tokenize r
+ r[;0]←NL
+ r←,r
+ old←D strs[0]
+ new←D strs[1]
+ b←,(old⍷r)∧tok∊clsqdnm ⍝ Mark string starters
+ i←1+b×n←(⍴new)-⍴old ⍝ This assumes new strings always longer!
+ r←i/r
+ b←b/⍳⍴b
+ b←b+0,¯1↓+\(⍴b)⍴n
+ r[,b∘.+⍳⍴new]←((⍴b)×⍴new)⍴new
+ r←vtom r

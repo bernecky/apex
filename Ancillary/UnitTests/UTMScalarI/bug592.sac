@@ -1,0 +1,10 @@
+use Array:all;
+use StdIO:{print};
+
+int main()
+{
+ b = genarray([200000000], false);
+ z = any (b);
+ print(z);
+ return(0);
+}

@@ -1,0 +1,11 @@
+﻿ r←mac MacroLocate frag;cv;cvz;i
+ ⍝ Macro Finder
+ ⍝ Marks everything up to
+ ⍝ the closing "}" of macro defn mac in
+ ⍝ fragment frag
+ ⍝ Find the macro invocations
+ →(0=∨/r←cv←mac⍷frag)⍴0 ⍝ No hits
+ ⍝ Want matching bracket in case of nesting.
+ i←((cv⍳1)+⍴mac)↓frag ⍝Start of parms
+ cvz←'{}'FindMatchingBracket i
+ r←(∨\cv)\((⍴mac)⍴1),cvz

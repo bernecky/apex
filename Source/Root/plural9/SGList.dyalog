@@ -1,0 +1,11 @@
+﻿ r←ast SGList i;p
+ ⍝ Get list of indices for semiglobals-in at
+ ⍝ row i of ast. The semiglobals stuff SHOULD be
+ ⍝ reworked to allow use of IndexList here, but
+ ⍝ Godzilla waits for no man. 1995-12-15
+ r←⍳0
+ p←i
+ :While ~p≡NULL
+     r←r,ast[p;astrarg] ⍝ Current list item
+     p←D ast[p;astparms] ⍝ ->next list element
+ :EndWhile

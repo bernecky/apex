@@ -1,0 +1,24 @@
+\subsubsection{\tt buildv2AKD}
+\label{benchmarkbuildv2akd}
+
+{\tt buildv2AKD} is an AKD version of a synthetic benchmark 
+that constructs integer
+vectors in a manner similar to that of {\tt buildvAKD}, except that
+this version preallocates its result, then fills it using indexed
+assignment. Because it does not have to perform repeated copies
+of the already-generated result elements, we expect that it should
+run significantly faster than {\tt buildvAKD}.
+
+The benchmark is primarily intended to measure the
+performance of storage allocation/deallocation and
+copying operations. The addition operations are
+intended to force the result type to 32-bit integers.
+
+Since all versions of these tests are likely to be dominated
+by storage-subsystem operations, we expect to see little
+difference between the \dapl and \sac versions of them,
+except for APL interpreter overhead.
+
+The benchmarks {\tt buildv}, {\tt buildvAKD}, {\tt buildv2}, {\tt buildv2AKD},
+{\tt buildvf}, and {\tt buildvfAKD} form a clique, as they
+all perform similar tasks.

@@ -1,0 +1,284 @@
+use Array: all;
+use StdIO : all;
+use Numerical : all;
+use CommandLine: all;
+use String: {to_string,tochar,sscanf};
+use ArrayFormat: all;
+use Bits: all;
+
+/* Compiled by APEX Version: /home/apex/apex3/wss/sac3014.dws2013-03-06 14:47:34.123 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline bool eqIIB(int x, int y)
+{ /* A=B on non-doubles */
+ return(ItoI(x) == ItoI(y));
+}
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline int[.,.] tranXII(int[.,.] y)
+{ /* Transpose on rank-2 */
+        z = { [i,j] -> y[j,i] };
+        return(z);
+}
+
+inline int[.] comaXII(int[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline int[.] comaXII(int y)
+{ /* Ravel of scalar */
+  return([y]);
+}
+
+inline int[*] rhoIII(int[.] x, int[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _mod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), 0);
+   return( z);
+}
+
+
+
+inline int[+], int querXII(int[+] y, int QUADio, int QUADrl)
+{ /* Monadic query (roll) - non=scalar */
+ zxrho = prod(shape(y));
+ ravely = reshape([zxrho], y);
+ inty = toi(y);
+ if (any(inty <= 0)) print(tochar("roll domain error"));
+ /* The following presumes ordering, so we use FOR loop. Sorry */
+ z = genarray([zxrho], -1);
+ for (i=0; i<zxrho; i++) {
+        QUADrl = Lehmer(QUADrl);
+        val = (tod(QUADrl) * tod(ravely[[i]])) / tod(2147483647);
+        z[[i]] =  QUADio + toi(val);
+ }
+ z = reshape(shape(y), z);
+ return(z, QUADrl);
+}
+
+
+
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline bool[*] jotdoteqIIB(int [+] x, int [+] y)
+{ /* AxA outer product */
+ cell = genarray(shape(y), false);
+ z = with {
+        (. <= iv <= .) {
+         xitem = toI(x[iv]);
+        } : eqIIB(xitem, toI(y));
+        } : genarray(shape(x), cell);
+ return(z);
+}
+
+inline int[+] plussl1XBIFOLD(bool[+] y)
+{ /* first-axis reduce rank-3 or greater matrix */
+  yt = TRANSPOSE(y);
+  zrho = drop([-1], shape(yt));
+  z = with {
+        (. <= iv <= .)
+                : plusslXBIFOLD(yt[iv]);
+        } : genarray(zrho, 0);
+  z = TRANSPOSE(z);
+  return(z);
+}
+
+
+
+
+inline int plusslXIIFOLD(int[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : ItoI(y[lim-iv]);
+       } :  fold( plusIII, ItoI(0));
+  return(z);
+}
+
+
+inline int plusIII(int x, int y)
+{ return(ItoI(x)+ItoI(y));
+}
+
+inline bool[+] eqIIB(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : eqIIB(xel,yel);
+  } : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline int V2O( int[.] shp, int[.] iv)
+{ /* Vector iv to offset into array of shape shp */
+  /* See V2O.dws workspace */
+  offset = 0;
+  wt = 1;
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    offset = offset + ( wt * iv[i]);
+    wt = wt * shp[i];
+  }
+  return( offset);
+}
+
+inline int[.] O2V( int[.] shp, int offset)
+{ /* Offset into array of shape shp to index vector */
+  /* See V2O.dws workspace */
+  iv = genarray( shape(shp), 1);
+  wts = iv;
+  for( i=shape(shp)[0]-2; i>=0; i--) {
+    wts[i] = wts[i+1] * shp[i+1];
+  }
+
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    iv[i] = _mod_SxS_( offset/wts[i], shp[i]);
+    offset = offset - (iv[i]*wts[i]);
+  }
+  return( iv);
+}
+
+inline int Lehmer(int qrl)
+{ /* Lehmer's random number generator
+   * CACM 1966-06, p. 432
+   */
+  val = tod(qrl)*16807.0;
+  z = toi(sacmod(val, 2147483647.0));
+ return(z);
+}
+
+
+inline bool[+] TRANSPOSE(bool[+] y)
+{ /* Generic monadic transpose */
+  z = with {
+        ( . <= iv <= .)
+                : y[reverse( iv)];
+        }: genarray( reverse( shape(y)), false);
+  return(z);
+}
+
+inline int[+] TRANSPOSE(int[+] y)
+{ /* Generic monadic transpose */
+  z = with {
+        ( . <= iv <= .)
+                : y[reverse( iv)];
+        }: genarray( reverse( shape(y)), 0);
+  return(z);
+}
+
+inline int plusslXBIFOLD(bool[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : BtoI(y[lim-iv]);
+       } :  fold( plusIII, ItoI(0));
+  return(z);
+}
+
+
+inline double sacmod(double x, double y)
+{ /* SAC _mod_ for floats */
+ if ( 0.0 == y) {
+        t = 1.0;
+ } else {
+        t = y;
+ }
+ t2 = floor(x/t);
+ z = x - (y*t2);
+ return(z);
+}
+
+inline int[.,.] snpMakeXII(int[.] n ,int QUADio,int QUADrl)
+{ 
+/*
+ ?
+*/
+A_21=rhoIII(n,3);
+ A_25,QUADrl_0=querXII( A_21,QUADio,QUADrl);
+r_0=( A_25);
+ return(r_0);
+}
+
+inline int[.,.] snpcountXII(int[.,.] snp)
+{ 
+/*
+ ?
+*/
+A_19=jotdoteqIIB(snp,[0, 1, 2]);
+ A_27=plussl1XBIFOLD( A_19);
+ A_31=tranXII( A_27);
+ r_0=( A_31);
+ return(r_0);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toI(( false));
+ n_0=( [10000, 30000]);
+ A_58=snpMakeXII( n_0,QUADio_1,QUADrl_0);
+ snp_0=( A_58);
+ A_60=snpcountXII( snp_0);
+ r_0=( A_60);
+ A_62=comaXII( r_0);
+ A_63=plusslXIIFOLD( A_62);
+ z_0=( A_63);
+ A_70=quadXII( z_0,QUADpp_0,QUADpw_0);
+ A_71=comaXII( z_0);
+ A_72=plusslXIIFOLD( A_71);
+ /* dsf scalar(s) */
+A_77=eqIIB(300000000,A_72);
+/* dsf scalar(s) */
+A_78=barBBI(true,A_77);
+ r_1=( A_78);
+ A_82=quadXII( A_78,QUADpp_0,QUADpw_0);
+ return(r_1);
+}
+

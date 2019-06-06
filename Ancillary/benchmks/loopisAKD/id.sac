@@ -1,0 +1,9 @@
+module id;
+
+export {id};
+
+int id( int X)
+{
+  return( X);
+}
+

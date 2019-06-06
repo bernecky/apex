@@ -1,0 +1,10 @@
+﻿ r←UnSSAName y;cv;i;j
+⍝ Remove ssa appendages from name y.
+⍝ KLUDGE: We remove trailing numbers preceeded
+⍝ by an underbar. Also value errors with "?"
+ cv←~⌽∧\⌽y∊'0123456789' ⍝ Mark stuff to leave, except for _
+ b←cv/y ⍝ No change if character preceeding above is not _
+ j←~(¯1↑b)∊'_?'
+ cv←cv∨j
+ cv[0⌈(⍴b)-1]←j
+ r←cv/y

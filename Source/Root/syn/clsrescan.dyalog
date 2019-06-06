@@ -1,0 +1,1 @@
+﻿⌷clsrescan←<char>R</char>

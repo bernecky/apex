@@ -1,0 +1,29 @@
+﻿ r←DeleteUnreferencedFns y;ct;asts;cv;df
+  ⍝ Delete unreferenced defined fns from the
+  ⍝ Compilation unit. This keeps dfaOK from
+  ⍝ complaining and also speeds up compilation
+  ⍝ slightly. Warning may also give user some ideas
+  ⍝ about typing skills.
+ ct←D y[0]
+ asts←D y[1]
+  ⍝ This isn't good enough, but it is a start.
+  ⍝ We delete any fn that has no callers and no
+  ⍝ callees. It fails to catch the case of an
+  ⍝ uncalled fn that calls a utility fn.
+  ⍝ We can't merely delete uncalled fns, because that
+  ⍝ would delete the "main" function. Damn! 1996-06-08
+ r←y
+ cv←×D ct[1]
+ cv←(∨/⍉cv)∨∨/×cv
+ cv[¯1+⍴cv]←1             ⍝ Never delete "main"
+ :If 1≠⍴cv
+     df←(~cv)/D ct[0]
+     ct[0]←E cv/D ct[0]
+     ct[1]←E cv/cv⌿D ct[1]
+     asts←cv/asts
+     r←(E ct),E asts
+     :If 0∊cv
+         ⎕←'WARNING: Unreferenced function(s) deleted:'
+         ⎕←mcb df
+     :EndIf
+ :EndIf

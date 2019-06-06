@@ -1,0 +1,2 @@
+﻿ r←x pluseach y
+ r←x+y

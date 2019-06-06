@@ -1,0 +1,18 @@
+﻿ r←ast MarkSpecialCasesWindowReduce fns;cv;larg;cv2
+⍝# Mark window reduce w/1-element window width
+⍝# Also mark ¯2 f/⍵
+ cv←fns[;fnsfn]∊(E'sl'),E'sl1'
+ ⍝ Next line needs fixing for mask/meh
+ cv←cv\~(cv⌿ast)[;astlop]∊NULL
+ cv←cv\~(cv⌿ast)[;astlarg]∊NULL ⍝ Ignore monadic reduce
+ :If 1∊cv ⍝ Stupid APL2 prototypes
+     cv←cv\1=ast[D(cv⌿ast)[;astlarg];astxrho]
+ :EndIf
+ r←fns
+ r[cv/⍳⍴cv;fnsspec]←E'ONEEL'
+⍝ Mark 2-wide window
+ larg←cv/ast[;astlarg]
+ cv2←cv\ast[larg;astvalue]∊E,'2'
+ r[cv2/⍳⍴cv;fnsspec]←E'WIDTH2'
+ cv2←cv\ast[larg;astvalue]∊E'¯2'
+ r[cv2/⍳⍴cv;fnsspec]←E'WIDTHN2'

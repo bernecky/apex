@@ -1,0 +1,15 @@
+﻿ r←ast GenFragNamesAdvConj fns;cv;tar
+⍝# Generate fragment names for adverbs and conjunctions
+ cv←MarkAdvConjFns ast
+ :If 1∊cv
+     tar←D cv⌿ast[;astlop] ⍝ Find f in f/⍵
+     p←~tar∊NULL
+     tar←p/tar
+     fns[(cv\p)/⍳⍴cv;fnslop]←ast ConjOpName(E astlop),E cv\p
+     tar←D cv⌿ast[;astrop] ⍝ Find g in f.g
+     p←~tar∊NULL
+     tar←p/tar
+     fns[(cv\p)/⍳⍴cv;fnsrop]←ast ConjOpName(E astrop),E cv\p
+     fns←ast WindowReduce fns
+ :EndIf
+ r←fns

@@ -1,0 +1,7 @@
+﻿ r←benchloopb n
+ ⍝ Benchloop with forced scalar n
+ ⍝it should be heavy on l,a,st,b,tm.
+ n←2500×(⍳0)⍴n
+l:
+ →(0<n←n-1)⍴l
+ r←1

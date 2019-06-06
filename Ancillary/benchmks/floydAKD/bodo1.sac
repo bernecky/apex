@@ -1,0 +1,376 @@
+use Array: all;
+use StdIO : all;
+use Numerical : all;
+use CommandLine: all;
+use String: {to_string,tochar,sscanf};
+use ArrayFormat: all;
+use Bits: all;
+
+/* Compiled by APEX Version: /home/apex/apex3/wss/sac3013.dws2012-07-20 10:05:45.872 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline double plusDDD(double x, double y)
+{ return(DtoD(x)+DtoD(y));
+}
+
+inline double minDDD(double x, double y)
+{ /* x min y */
+ return (min(DtoD(x),DtoD(y)));
+}
+
+inline bool eqDIB(double x, int y, double QUADct)
+{ /* A=B on doubles */
+ return((DtoD(x) == ItoD(y)) || APEXFUZZEQ(DtoD(x),ItoD(y),QUADct));
+}
+
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline double[+] plusDID(double x, int[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : plusDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline double[.] comaXDD(double[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline double[*] rhoIDD(int[.] x, double[+] y)
+{ /* APEX vector x reshape, with item reuse */
+  ix = toi(x);
+  ry = comaXDD(y);
+  zxrho = prod(ix); /* THIS NEEDS XRHO FOR CODE SAFETY!! */
+  yxrho = shape(ry)[[0]];
+  if( zxrho <= yxrho) { /* No element resuse case */
+        z = take([zxrho],ry);
+ } else {
+        ncopies = zxrho/yxrho; /* # complete copies of y. */
+        /* FIXME: y empty case !*/
+        z = with {
+                (. <= [i] <= .)
+                        : ry;
+                } : genarray( [ncopies], ry);
+        /* Now append the leftover bits */
+        z = comaXDD(z) ++ take([zxrho-(ncopies*yxrho)],ry);
+ }
+ return(reshape(ix,z));
+}
+
+
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline int[.]  rhoXDI(double[+] y)
+{ /* Shape of non-scalar */
+ return(shape(y));
+}
+
+inline double[*] quadXDD(double[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[2] comaIII(int x, int y)
+{/* SxS catenate first (or last) axis */
+ return([toI(x)]++[toI(y)]);
+}
+
+inline int[*] indr(int[+] X, int I)
+{ /* X[scalarI;;;] */
+  /* Used only in conjunction with other indexing, e.g.,
+   * X[scalarI;;j;]
+   */
+ z = X[[I]];
+ return(z);
+}
+
+
+
+
+inline double[*] indr(double[+] X, int I)
+{ /* X[scalarI;;;] */
+  /* Used only in conjunction with other indexing, e.g.,
+   * X[scalarI;;j;]
+   */
+ z = X[[I]];
+ return(z);
+}
+
+
+
+
+inline double[+] inds00(double[+] X, int  I0,int  I1, double Yin)
+{ /* X[;;nonscalarI;;;]<- scalarY */
+ 
+ z = DtoD(X);
+ Y = Yin;
+
+ 
+ z[[I0,I1]]=DtoD(Y);
+
+ 
+ return(z);
+}
+
+
+
+inline int CommandLineArgvXBI(bool y)
+{ /* Get Command-line argument element #y as integer scalar */
+  int z;
+  junk, z = sscanf(argv(toi(y)), "%d");
+  return( z);
+}
+
+inline double plusslXDDFOLD(double[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : DtoD(y[lim-iv]);
+       } :  fold( plusDDD, ItoD(0));
+  return(z);
+}
+
+
+inline int[*] indrfr(int fr, int[+] X, int[+] I)
+{ /* X[;;;I;;;], where I has fr (framerank) semicolons to its left */
+  /* This is actually "I from"fr X" */
+  frameshape = take([fr], shape(X));
+  cellshape =  shape(I)++drop([fr+1], shape(X));
+  cell = genarray(cellshape, 0);
+ z = with {
+        (. <= iv <= .)
+                : indrfr0(X[iv], I);
+        } : genarray(frameshape, cell);
+ return(z);
+}
+
+inline int[*] indrfr0(int[+] X, int[+] I)
+{ /* X[I;;;] or    I from X */
+  cellshape =  drop([1], shape(X));
+  cell = genarray(cellshape, 0);
+ z = with {
+        (. <= iv <= .)
+                : sel( I[iv], X);
+        } : genarray(shape(I), cell);
+ return(z);
+}
+
+
+
+inline int[*] indrfr(int fr, int[+] X, int I)
+{ /* X[;;;I;;;], where I has fr (framerank) semicolons to its left */
+  /* This is actually "I from"fr X" */
+ frameshape = take([fr], shape(X));
+ cellshape = drop([1+fr],shape(X));
+ cell = genarray(cellshape,0);
+ z = with {
+        (. <= iv <= .)
+                : sel( I, X[iv]);
+        } : genarray(frameshape, cell);
+ return(z);
+}
+
+
+inline double[*] indrfr(int fr, double[+] X, int[+] I)
+{ /* X[;;;I;;;], where I has fr (framerank) semicolons to its left */
+  /* This is actually "I from"fr X" */
+  frameshape = take([fr], shape(X));
+  cellshape =  shape(I)++drop([fr+1], shape(X));
+  cell = genarray(cellshape, 0.0d);
+ z = with {
+        (. <= iv <= .)
+                : indrfr0(X[iv], I);
+        } : genarray(frameshape, cell);
+ return(z);
+}
+
+inline double[*] indrfr0(double[+] X, int[+] I)
+{ /* X[I;;;] or    I from X */
+  cellshape =  drop([1], shape(X));
+  cell = genarray(cellshape, 0.0d);
+ z = with {
+        (. <= iv <= .)
+                : sel( I[iv], X);
+        } : genarray(shape(I), cell);
+ return(z);
+}
+
+
+
+inline double[*] indrfr(int fr, double[+] X, int I)
+{ /* X[;;;I;;;], where I has fr (framerank) semicolons to its left */
+  /* This is actually "I from"fr X" */
+ frameshape = take([fr], shape(X));
+ cellshape = drop([1+fr],shape(X));
+ cell = genarray(cellshape,0.0d);
+ z = with {
+        (. <= iv <= .)
+                : sel( I, X[iv]);
+        } : genarray(frameshape, cell);
+ return(z);
+}
+
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline int ABC(int I, int Xshape)
+{ /* (OLD) Array bounds check for indexed ref X[scalarI] & indexed assign */
+ z = I;
+ return(z);
+}
+
+inline int[+] ABC(int[+] I, int Xshape)
+{ /* (OLD) Array bounds check for indexed ref X[nonscalarI] & indexed assign */
+ z = I;
+ return(z);
+}
+
+inline double[.,.] GenArgXID(int[.] siz,int QUADio)
+{ 
+/*
+ ?
+*/
+A_21=iotaXII( 100,QUADio);
+ /* dsf scalar(s) */
+A_22=plusDID(0.5,A_21);
+A_23=rhoIDD(siz,A_22);
+ r_0=( A_23);
+ return(r_0);
+}
+
+inline double[.,.] floydXDD(double[.,.] D ,int QUADio)
+{ 
+/*
+ ?
+*/
+A_39=rhoXDI( D);
+ siz_0=( A_39);
+ A_41= ABC(toi(false)-QUADio,shape(siz_0)[0]);
+A_43=siz_0[[A_41]];
+ A_45=iotaXII( A_43,QUADio);
+ A_CTR46_= 0;
+A_CTR46z_ = (shape(A_45)[[0]])-1;
+D_3=toD(D);
+for(; A_CTR46_ <= A_CTR46z_; A_CTR46_++){
+k_0 = A_45[[A_CTR46_]];
+ A_48= ABC(toi(false)-QUADio,shape(siz_0)[0]);
+A_50=siz_0[[A_48]];
+ A_52=iotaXII( A_50,QUADio);
+ A_CTR53_= 0;
+A_CTR53z_ = (shape(A_52)[[0]])-1;
+D_3=toD(D_3);
+for(; A_CTR53_ <= A_CTR53z_; A_CTR53_++){
+i_0 = A_52[[A_CTR53_]];
+ A_55= ABC(toi(true)-QUADio,shape(siz_0)[0]);
+A_57=siz_0[[A_55]];
+ A_59=iotaXII( A_57,QUADio);
+ A_CTR60_= 0;
+A_CTR60z_ = (shape(A_59)[[0]])-1;
+D_3=toD(D_3);
+for(; A_CTR60_ <= A_CTR60z_; A_CTR60_++){
+j_0 = A_59[[A_CTR60_]];
+ A_63= ABC(toi(i_0)-QUADio,shape(D_3)[0]);
+A_62= ABC(toi(j_0)-QUADio,shape(D_3)[1]);
+A_65=D_3[[A_63,A_62]];
+ A_67= ABC(toi(k_0)-QUADio,shape(D_3)[0]);
+A_66= ABC(toi(j_0)-QUADio,shape(D_3)[1]);
+A_69=D_3[[A_67,A_66]];
+ A_71= ABC(toi(i_0)-QUADio,shape(D_3)[0]);
+A_70= ABC(toi(k_0)-QUADio,shape(D_3)[1]);
+A_73=D_3[[A_71,A_70]];
+ /* dsf scalar(s) */
+A_74=plusDDD(A_73,A_69);
+ /* dsf scalar(s) */
+A_75=minDDD(A_74,A_65);
+ A_77= ABC(toi(i_0)-QUADio,shape(D_3)[0]);
+A_76= ABC(toi(j_0)-QUADio,shape(D_3)[1]);
+A_79=inds00(D_3,A_77,A_76,A_75);
+ D_3=( A_79);
+ }
+ }
+ }
+ z_0=( D_3);
+ return(z_0);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+n=CommandLineArgvXBI( true);
+ QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ A_49=comaIII(n,n);
+ A_51=GenArgXID( A_49,QUADio_0);
+ arg_0=( A_51);
+ A_54=floydXDD( arg_0,QUADio_0);
+ r_0=( A_54);
+ A_56=comaXDD( r_0);
+ A_57=plusslXDDFOLD( A_56);
+ r_1=( A_57);
+ A_64=quadXDD( r_1,QUADpp_0,QUADpw_0);
+ /* dsf scalar(s) */
+A_66=eqDIB(r_1,2000000,QUADct_0);
+/* dsf scalar(s) */
+A_67=barBBI(A_66,true);
+ r_2=( A_67);
+ A_71=quadXII( A_67,QUADpp_0,QUADpw_0);
+ return(r_2);
+}
+

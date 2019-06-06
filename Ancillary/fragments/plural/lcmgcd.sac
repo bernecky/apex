@@ -1,0 +1,51 @@
+int GCD(int x, int y)
+{ /* Euclid's algorithm for GCD */
+ ax = abs(toi(x));
+ ay = abs(toi(y));
+ u  = min(ax,ay);
+ v  = max(ax,ay);
+ while (v != 0){
+  v = mod(u,v);
+  u = v;
+ }
+ return(u);
+}
+
+double GCD(double x, double y)
+{ /* Euclid's algorithm for GCD */
+ ax = abs(tod(x));
+ ay = abs(tod(y));
+ u  = min(ax,ay);
+ v  = max(ax,ay);
+ while (v != 0){
+  v = mod(u,v);
+  u = v;
+ }
+ return(u);
+}
+
+int LCM(int x, int y)
+{ /* Euclid's algorithm for LCM */
+ ax = abs(x);
+ ay = abs(y);
+ u  = min(ax,ay);
+ v  = max(ax,ay);
+ while (v != 0){ 
+  v = mod(u,v);
+  u = v;
+ }
+ return((ax*ay)/u);
+}
+double LCM(double x, double y)
+{ /* Euclid's algorithm for LCM */
+ ax = abs(x);
+ ay = abs(y);
+ u  = min(ax,ay);
+ v  = max(ax,ay);
+ while (v != 0){ 
+  v = mod(u,v);
+  u = v;
+ }
+ return((ax*ay)/u);
+}
+

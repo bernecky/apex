@@ -1,0 +1,243 @@
+import std.stdio;
+import std.algorithm;
+//import parray;
+import std.conv;
+import std.math;
+
+// Coercions to/from Parrays
+
+Parray* BtoB( Parray* y)
+{  
+  return(y);
+}
+
+Parray* ItoI( Parray* y)
+{  
+  return(y);
+}
+
+Parray* DtoD( Parray* y)
+{  
+  return(y);
+}
+
+Parray* CtoC( Parray* y)
+{  
+  return(y);
+}
+
+Parray* BtoI( Parray* y)
+{  
+  auto vb = y.getB().dup;
+  auto vi = new int[vb.length]; 
+
+  foreach (i; 0 .. vb.length ) {
+   vi[i] = vb[i] ?  1 : 0;
+  }
+  auto z = new Parray( y.getShp(), vi);
+  return(z);
+}
+
+Parray* BtoD( Parray* y)
+{  
+  auto vb = y.getB().dup;
+  auto vd = new double[vb.length]; 
+
+  foreach (i; 0 .. vb.length ) {
+   vd[i] = vb[i] ?  1.0 : 0.0;
+  }
+  auto z = new Parray( y.getShp(), vd);
+  return(z);
+}
+
+Parray* ItoB( Parray* y)
+{  
+  auto vi = y.getI().dup;
+  auto vb = new double[vi.length]; 
+
+  foreach (i; 0 .. vi.length ) {
+   vb[i] = ( 1 == vi[i]) ? true : false;
+  }
+  auto z = new Parray( y.getShp(), vb);
+  return(z);
+}
+
+Parray* ItoD( Parray* y)
+{  
+  auto vi = y.getI().dup;
+  auto vd = new double[vi.length]; 
+
+  foreach (i; 0 .. vi.length ) {
+   vd[i] = cast(double) vi[i];
+  }
+  auto z = new Parray( y.getShp(), vd);
+  return(z);
+}
+
+Parray* DtoB( Parray* y)
+{  
+  auto vd = y.getD().dup;
+  auto vb = new bool[vd.length]; 
+
+  foreach (i; 0 .. vd.length ) {
+   vb[i] = ( 1.0 == vd[i]) ? true : false;
+  }
+  auto z = new Parray( y.getShp(), vb);
+  return(z);
+}
+
+Parray* DtoI( Parray* y)
+{  
+  auto vd = y.getD().dup;
+  auto vi = new int[vd.length]; 
+
+  foreach (i; 0 .. vd.length ) {
+   vi[i] = cast(int) vd[i];
+  }
+  auto z = new Parray( y.getShp(), vi);
+  return(z);
+}
+
+// Coercions to/from scalar types
+
+bool BtoB( bool y)
+{  
+  return(y);
+}
+
+int ItoI( int y)
+{  
+  return(y);
+}
+
+double DtoD( double y)
+{  
+  return(y);
+}
+
+char CtoC( char y)
+{  
+  return(y);
+}
+
+int BtoI( bool y)
+{  
+  auto z = y ? 1 : 0;
+  return(z);
+}
+
+double BtoD( bool y)
+{  
+  auto z = y ? 1.0 : 0.0;
+  return(z);
+}
+
+bool ItoB( int y)
+{  
+  auto z = ( 1 == y) ? true : false;
+  return(z);
+}
+
+double ItoD( int y)
+{  
+  auto z = cast(double) y;
+  return(z);
+}
+
+bool DtoB( double y)
+{  
+  auto z = ( 1.0 == y) ? true : false;
+  return(z);
+}
+
+int DtoI( double y)
+{  
+  auto z = cast(int) y;
+  return(z);
+}
+
+// Coercions to/from vectors
+
+bool[] BtoB( bool[] y)
+{  
+  return(y);
+}
+
+int[] ItoI( int[] y)
+{  
+  return(y);
+}
+
+double[] DtoD( double[] y)
+{  
+  return(y);
+}
+
+char[] CtoC( char[] y)
+{  
+  return(y);
+}
+
+int[] BtoI( bool[] y)
+{  
+  auto z = new int[y.length]; 
+  foreach (i; 0 .. y.length ) {
+    z[i] = y[i] ?  1 : 0;
+  }
+  return(z);
+}
+
+double[] BtoD( bool[] y)
+{  
+  auto z = new double[y.length]; 
+
+  foreach (i; 0 .. y.length ) {
+    z[i] = y[i] ?  1.0 : 0.0;
+  }
+  return(z);
+}
+
+bool[] ItoB( int[] y)
+{  
+  auto z = new bool[y.length]; 
+  foreach (i; 0 .. y.length ) {
+    z[i] = ( 1 == z[i]) ? true : false;
+  }
+  return(z);
+}
+
+double[] ItoD( int[] y)
+{  
+  auto z = new double[y.length]; 
+  foreach (i; 0 .. y.length ) {
+    z[i] = cast(double) y[i];
+  }
+  return(z);
+}
+
+bool[] DtoB( double[] y)
+{  
+  auto z = new bool[y.length]; 
+  foreach (i; 0 .. y.length ) {
+    z[i] = ( 1.0 == y[i]) ? true : false;
+  }
+  return(z);
+}
+
+int[] DtoI( double[] y)
+{  
+  auto z = new int[y.length]; 
+  foreach (i; 0 .. y.length ) {
+    z[i] = cast(int) y[i];
+  }
+  return(z);
+}
+
+Parray* CV2Parray( T1)( T1[] vec)
+{ /* Constant Vector to Parray */
+  auto shpz = [ cast(int) vec.length];
+  auto z = new Parray( shpz, vec);
+  return(z);
+}
+
+

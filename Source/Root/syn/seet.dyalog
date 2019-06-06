@@ -1,0 +1,2 @@
+seet←{z←,⍵ ⋄ cv←z∊NL ⋄ z[cv/⍳⍴cv]←CR ⋄ (⍴⍵)⍴z}
+

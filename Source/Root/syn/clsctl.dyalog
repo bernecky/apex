@@ -1,0 +1,1 @@
+﻿⌷clsctl←<char>k</char>

@@ -1,0 +1,21 @@
+/*
+ * This manages to inline partitionSlicer with int[1] vardec for axis, but int assigns.
+ *  sac2c inlbug.sac -nocyc -nocf -b11:inl >crud
+ *
+ */
+
+use Array : {iota,-};
+
+inline int[.] lltopXII(int n )
+{ 
+z=iota( n);
+ return(z);
+}
+
+int main()
+{ 
+ A_60=lltopXII( 40000);
+ StdIO::print(_sel_VxA_( [23], A_60));
+ return(0);
+}
+

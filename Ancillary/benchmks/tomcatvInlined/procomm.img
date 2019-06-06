@@ -1,0 +1,50 @@
+(5:46) bernecky: #75 of 76> 75                                                 
+Message #75 (52 lines)                                                         
+From CS.Cornell.EDU!evan Sat May 18 10:30:07 1996                              
+From:   Evan Moran <evan@CS.Cornell.EDU>                                       
+Date:   Sat, 18 May 1996 10:29:49 -0400                                        
+To:     bernecky@eecg.toronto.edu                                              
+Subject: Re: Wanted: APL tridiagonal system solver, linked-list-to-PV          
+Newsgroups: comp.lang.apl                                                      
+In-Reply-To: <1996May17.171006.28634@jarvis.cs.toronto.edu>                    
+Organization: Cornell Univ. CS Dept, Ithaca NY 14853                           
+                                                                               
+In article <1996May17.171006.28634@jarvis.cs.toronto.edu> you write:           
+>I seek two APL algorithms:                                                    
+>                                                                              
+>a. A linear-time tridiagonal system solver. Domino need not apply.            
+                                                                               
+here's the row oriented forward substitution algorithm                         
+from Golub and Van Loan, in an APL*PLUS III incarnation...                     
+                                                                               
+                                                                               
+     {del}v {<-} i to j                                                        
+[1]   v {<-} i + {neg}1 + {iota}(1 + (j - i))                                  
+     {del}                                                                     
+--More--                                                                       
+ SCREEN DUMP   ³ VT-100   ³ FDX ³  9600 N81 ³ LOG CLOSED ³ PRT OFF ³ CR   ³ CR 
+     {del}                                                                     
+                                                                               
+     {del}b {<-} L forward_subst b; n; i                                       
+[1]                                                                            
+[2]   @ row oriented forward substitution.                                     
+[3]                                                                            
+[4]   @ given lower triangular L{epsilon}R(n{times}n) and b{epsilon}R(n),      
+[5]   @   return the solution to L x=b.                                        
+[6]                                                                            
+[7]   @ algorithm 3.1.1 of Golub and Van Loan (2nd ed.).                       
+[8]                                                                            
+[9]   n {<-} 1{pick}{rho} b                                                    
+[10]                                                                           
+[11]  b[1] {<-} b[1] {divide} L[1;1]                                           
+[12]                                                                           
+[13]  :for i :in (2 to n)                                                      
+[14]    b[i] {<-} (b[i] - +/ L[i;1 to (i-1)] {times} b[1 to (i-1)]) {+         
+   +}{divide} L[i;i]                                                           
+[15]  :endfor                                                                  
+[16]                                                                           
+     {del}                                                                     
+                                                                               
+                                                                               
+--More--                                                                       
+ SCREEN DUMP   ³ VT-100   ³ FDX ³  9600 N81 ³ LOG CLOSED ³ PRT OFF ³ CR   ³ CR 

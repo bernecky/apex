@@ -1,0 +1,252 @@
+use Array: all;
+use StdIO : all;
+use Numerical : all;
+use CommandLine: all;
+use String: {to_string,tochar,sscanf};
+use ArrayFormat: all;
+use Bits: all;
+
+/* Compiled by APEX Version: /home/apex/apex3/wss/sac3013.dws2012-11-07 10:22:08.136 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline bool eqIIB(int x, int y)
+{ /* A=B on non-doubles */
+ return(ItoI(x) == ItoI(y));
+}
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline bool[+] eqIIB(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : eqIIB(xel,yel);
+  } : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int CommandLineArgvXBI(bool y)
+{ /* Get Command-line argument element #y as integer scalar */
+  int z;
+  junk, z = sscanf(argv(toi(y)), "%d");
+  return( z);
+}
+
+inline int[*] plusdoteqIBITRANSPOSE(int[+] x, bool y)
+{ /* Inner product z =  f.g scalar-y */
+ shp = drop([-1], shape(x));
+ z = with {
+       (. <= iv <= .) {
+       } : plusslXBIFOLD(eqIIB(toI(x[iv]),toI(y)));
+       } : genarray(shp, 0);
+ return(z);
+}
+
+
+
+
+inline int[*] moddnuax10EXTXEXTX(int[+] x, int[+] y)
+{ /* AxA rank conjunction. Extend left argument */
+ yframeshape = drop([-0], shape(y));
+ xcellshape =  take([-1], shape(x));
+ ycellshape =  take([-0], shape(y));
+ defcell = genarray(xcellshape, 0);
+ z = with {
+        (. <= iv <= .)
+                : modIII(x, y[iv]);
+        } : genarray(yframeshape, defcell);
+  return(z);
+}
+
+
+inline int[.] slBII(bool[.] x, int[.] y)
+{/* Boolean vector compress vector */
+  zxrho = sum(toi(x));
+  z = genarray([zxrho], 0);
+  zi = 0;
+  for(i=0; i<shape(x)[0]; i++)
+    if ( x[i]) {
+      z[[zi]] = y[[i]];
+      zi++;
+    }
+  return(z);
+}
+
+inline int plusslXIIFOLD(int[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : ItoI(y[lim-iv]);
+       } :  fold( plusIII, ItoI(0));
+  return(z);
+}
+
+
+inline int plusIII(int x, int y)
+{ return(ItoI(x)+ItoI(y));
+}
+
+inline bool[+] eqIIB(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : eqIIB(xel,y);
+  } : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline int[+] modIII(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : modIII(xel,y);
+  } : genarray( shape(x), 0);
+  return(z);
+}
+
+
+inline int plusslXBIFOLD(bool[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : BtoI(y[lim-iv]);
+       } :  fold( plusIII, ItoI(0));
+  return(z);
+}
+
+
+inline int modIII(int x, int y)
+{ /* SxS residue (aka modulo) */
+  /* (x residue y) <-->   y-x times floor y divide x + 0 = x  */
+  /* See model residueI in workspace UTDScalarI.dws */
+  x = ItoI(x);
+  y = ItoI(y);
+  if( 0 != x) {
+    q = y / x;
+    z = y - ( x * q);
+  } else {
+    z = y;
+  }
+
+  if( z != 0) {
+    if( mpyXII( x) != mpyXII( y)) {
+      z = z + x;
+    }
+  }
+ return(z);
+}
+
+
+inline int mpyXII(int y)
+{ /* signum int/double */
+   if( toI(0) == y) {
+    z = 0;
+  } else {
+    if( toI(0) < y) {
+      z = 1;
+    } else {
+      z = -1;
+    }
+  }
+  return(z);
+}
+
+inline int[.] prim2XII(int b ,int QUADio)
+{ 
+/*
+ ?
+*/
+A_23=iotaXII( b,QUADio);
+ b_0=( A_23);
+ A_25=moddnuax10EXTXEXTX(b_0,b_0);
+ A_30=plusdoteqIBITRANSPOSE(A_25,false);
+ /* dsf scalar(s) */
+A_39=eqIIB(2,A_30);
+A_40=slBII(A_39,b_0);
+ r_0=( A_40);
+ return(r_0);
+}
+
+inline int Primes2XII(int n ,int QUADio)
+{ 
+/*
+ ?
+*/
+A_20=prim2XII( n,QUADio);
+ A_21=plusslXIIFOLD( A_20);
+ r_0=( A_21);
+ return(r_0);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+n=CommandLineArgvXBI( true);
+ QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toI(( false));
+ QUADrl_1=( 16807);
+ QUADpp_1=( 16);
+ QUADpw_1=( 80);
+ A_54=Primes2XII( n,QUADio_1);
+ r_0=( A_54);
+ A_58=quadXII( r_0,QUADpp_1,QUADpw_1);
+ /* dsf scalar(s) */
+A_60=eqIIB(r_0,1548136);
+/* dsf scalar(s) */
+A_61=barBBI(true,A_60);
+ r_1=( A_61);
+ A_65=quadXII( A_61,QUADpp_1,QUADpw_1);
+ return(r_1);
+}
+

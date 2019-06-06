@@ -1,0 +1,18 @@
+﻿ r←dfaCompose y;ast;wl;i;j;rk;b;k
+ ⍝ Handle composition w/array
+ ast←D y[ssaast]
+ wl←D y[ssacv]
+ i←wl∧ast[;astfn]∊ER1⍪'⍤'
+ ⍝ Segregate from cut &rank.
+ ⍝ Neither rop or lop numeric
+ k←ast[;astlop,astrop]
+ i←i∧∧/~isnum k
+ j←,D i⌿k
+ i←i\~∨/ast[j;astclass]∊astclassNC
+ wl←wl∧~i ⍝ Update worklist
+ i←i∧~(D ast[;astPred])[;astPredKnowValue]
+ :If 1∊i ⍝ Any work?
+  ⍝ Maintain Predicates
+     ∘
+ :EndIf
+ r←y ⋄ r[ssaast]←E ast ⋄ r[ssacv]←E wl

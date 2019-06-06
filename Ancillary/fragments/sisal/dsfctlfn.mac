@@ -1,0 +1,477 @@
+% Macro code fragments for dyadic scalar function loop structures.
+% 1996-05-04
+%
+% Supports arbitrary user array index origin 1996-03-26 /rbe
+%
+% We can not, in general, provide full support for singleton
+% extenion. Consider the (1 1 1 rho 2)+ iota n.
+% If n>1 then the result is a vector. If n=1, the result is a tensor!
+% Hence, we forbid ALL singletons of rank>1. We SHOULD forbid
+% vector singletons as well (things would run faster), but 
+% there is too much code that depends on this behavior. 1996-05-04
+%
+% -------------------- Same length cases ----------------------------
+
+% Arguments are known to be the same length and same rank.
+
+%  Dyadic sf control, rank 0-0-0
+#define dsfctl000(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##000(x0: XTYPE; \
+ y0: YTYPE; \
+ returns ZTYPE) \
+dsfiter00(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl000sl(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##000sl(x0: XTYPE; \
+ y0: YTYPE; \
+ returns ZTYPE) \
+dsfiter00(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl000sx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##000sx(x0: XTYPE; \
+ y0: YTYPE; \
+ returns ZTYPE) \
+dsfiter00(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl000sy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##000sy(x0: XTYPE; \
+ y0: YTYPE; \
+ returns ZTYPE) \
+dsfiter00(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Iterators for scalar functions.
+% These do not define functions themselves, but they are
+% used as fragments by the various dyadic scalar function
+% macros.
+% The suffix is the rank of the left and right arguments
+
+% Rank-00 iterator
+
+#define dsfiter00(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ d##FN##CT##ZT(XT##to##CT(x0),YT##to##CT(y0))
+
+% Rank-11 iterators
+
+% Operands known to be same length
+#define dsfiter11sl(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ for x0 in x1 dot y0 in y1  returns array of \
+  d##FN##CT##ZT(XT##to##CT(x0),YT##to##CT(y0)) \
+ end for
+
+% General case with length error check and singleton extension
+#define dsfiter11(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+apldot(x1,y1,d##FN##CT##ZT(XT##to##CT(x0),YT##to##CT(y0)),ZTYPE)
+
+% Rank-22 iterator
+
+#define dsfiter22(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ for x1 in x2 dot y1 in y2  returns array of \
+  dsfiter11sl(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ end for 
+
+% Rank-33 iterator
+
+#define dsfiter33(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ for x2 in x3 dot y2 in y3  returns array of \
+  dsfiter22(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ end for 
+
+% Rank-01 iterator
+
+#define dsfiter01(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ for y0 in y1  returns array of \
+  d##FN##CT##ZT(XT##to##CT(x0),YT##to##CT(y0)) \
+ end for
+
+% Rank-02 iterator
+
+#define dsfiter02(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ for y1 in y2  returns array of \
+  dsfiter01(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ end for 
+
+% Rank-03 iterator
+
+#define dsfiter03(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ for y2 in y3  returns array of \
+  dsfiter02(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ end for 
+
+% Rank-10 iterator
+
+#define dsfiter10(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ for x0 in x1 returns array of \
+  d##FN##CT##ZT(XT##to##CT(x0),YT##to##CT(y0)) \
+ end for
+
+% Rank-20 iterator
+
+#define dsfiter20(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ for x1 in x2 returns array of \
+  dsfiter10(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ end for 
+
+% Rank-30 iterator
+
+#define dsfiter30(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ for x2 in x3 returns array of \
+  dsfiter20(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ end for 
+
+%%%%%%%%%%%%%%%%%% End of iterator fragments %%%%%%%%%%%%%%%%%%%
+
+%  Dyadic scalar function control, rank 1-1-1. Arrays known to be same length 
+#define dsfctl111sl(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##111sl(x1: array[XTYPE]; \
+ y1: array[YTYPE]; \
+ returns array[ZTYPE]) \
+ dsfiter11sl(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl111sx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##111sx(x1: array[XTYPE]; \
+ y1: array[YTYPE]; \
+ returns array[ZTYPE]) \
+ let x0:= x1[SISALIO] in \
+ dsfiter01(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ end let \
+end function
+
+#define dsfctl111sy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##111sy(x1: array[XTYPE]; \
+ y1: array[YTYPE]; \
+ returns array[ZTYPE]) \
+ let y0:= y1[SISALIO] in \
+ dsfiter11(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+ end let \
+end function
+
+%  Dyadic scalar function control, rank 2-2-2. Arrays known to be same length 
+#define dsfctl222sl(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##222sl(x2: array[array[XTYPE]]; \
+ y2: array[array[YTYPE]]; \
+ returns array[array[ZTYPE]]) \
+ dsfiter22(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl222sx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##222sx(x2: array[array[XTYPE]]; \
+ y2: array[array[YTYPE]]; \
+ returns array[array[ZTYPE]]) \
+ dsfiter22(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl222sy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##222sy(x2: array[array[XTYPE]]; \
+ y2: array[array[YTYPE]]; \
+ returns array[array[ZTYPE]]) \
+ dsfiter22(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+%  Dyadic scalar function control, rank 3-3-3. Arrays known to be same length 
+#define dsfctl333sl(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##333sl(x3: array[array[array[XTYPE]]]; \
+ y3: array[array[array[YTYPE]]]; \
+ returns array[array[array[ZTYPE]]]) \
+ dsfiter33(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl333sx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##333sx(x3: array[array[array[XTYPE]]]; \
+ y3: array[array[array[YTYPE]]]; \
+ returns array[array[array[ZTYPE]]]) \
+ dsfiter33(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl333sy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##333sy(x3: array[array[array[XTYPE]]]; \
+ y3: array[array[array[YTYPE]]]; \
+ returns array[array[array[ZTYPE]]]) \
+ dsfiter33(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+
+% -------------------- Generic same rank cases ----------------------
+
+% We do not know how to perserve length error checking without
+% losing loop fusion. 1996-05-08.
+
+%  Dyadic scalar function control, rank 2-2-2. Arrays are of unknown length
+%  NB. See note at top of this file re singletons. We only support
+%      exact match on shapes.
+
+#define Conform2(x2,XTYPE,y2) (if (array_size(x2) ~= array_size(y2)) | \
+ (array_size(x2[array_liml(x2)]) ~= array_size(y2[array_liml(y2)])) \
+ then error[array[array[XTYPE]]] else x2 end if) 
+
+#define Conform3(x3,XTYPE,y3) (if (array_size(x3) ~= array_size(y3)) | \
+ (array_size(x3[SISALIO]) ~= array_size(y3[SISALIO])) | \
+ (array_size(x3[SISALIO,SISALIO]) ~= array_size(y3[SISALIO,SISALIO])) \
+ then error[array[array[array[XTYPE]]]] else x3 end if) 
+
+% CONFORM is an OSC compile-time assertion that same-rank arrays do indeed
+% conform in shape. No singleton extension is permitted. 
+
+#ifdef CONFORMbutwewillneverexecutethiscodeagain
+%  Dyadic scalar function control, rank 1-1-1. Arrays are of unknown length
+#define dsfctl111(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##111(x1: array[XTYPE]; \
+ y1: array[YTYPE]; \
+ returns array[ZTYPE]) \
+ dsfiter11sl(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+%  Dyadic scalar function control, rank 2-2-2. Arrays are of unknown length
+%  NB. See note at top of this file re singletons. We only support
+%      exact match on shapes.
+
+#define dsfctl222(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##222(x2: array[array[XTYPE]]; \
+ y2: array[array[YTYPE]]; \
+ returns array[array[ZTYPE]]) \
+ dsfiter22(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+%  Dyadic scalar function control, rank 3-3-3. Arrays are of unknown length
+%  NB. See note at top of this file re singletons. We only support
+%      exact match on shapes.
+
+#define dsfctl333(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##333(x3: array[array[array[XTYPE]]]; \
+ y3: array[array[array[YTYPE]]]; \
+ returns array[array[array[ZTYPE]]]) \
+ dsfiter33(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#else 
+
+%  Dyadic scalar function control, rank 1-1-1. Arrays are of unknown length
+#define dsfctl111(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##111(x1: array[XTYPE]; \
+ y1: array[YTYPE]; \
+ returns array[ZTYPE]) \
+ dsfiter11(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+%  Dyadic scalar function control, rank 2-2-2. Arrays are of unknown length
+%  NB. See note at top of this file re singletons. We only support
+%      exact match on shapes.
+
+#define dsfctl222(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##222(x2u: array[array[XTYPE]]; \
+ y2: array[array[YTYPE]]; \
+ returns array[array[ZTYPE]]) \
+let x2 := Conform2(x2u,XTYPE,y2); \
+in \
+ dsfiter22(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end let \
+end function
+
+%  Dyadic scalar function control, rank 3-3-3. Arrays are of unknown length
+%  NB. See note at top of this file re singletons. We only support
+%      exact match on shapes.
+
+#define dsfctl333(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##333(x3u: array[array[array[XTYPE]]]; \
+ y3: array[array[array[YTYPE]]]; \
+ returns array[array[array[ZTYPE]]]) \
+let x3 := Conform3(x3u,XTYPE,y3); \
+in \
+ dsfiter33(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end let \
+end function
+#endif 
+
+
+% ----------------------- Scalar extension cases -----------------------
+
+% Dyadic sf control, rank 1-0-1
+#define dsfctl101(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##101(x1: array[XTYPE]; \
+ y0: YTYPE; \
+ returns array[ZTYPE]) \
+dsfiter10(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl101sx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##101sx(x1: array[XTYPE]; \
+ y0: YTYPE; \
+ returns array[ZTYPE]) \
+dsfiter10(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl101sy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##101sy(x1: array[XTYPE]; \
+ y0: YTYPE; \
+ returns array[ZTYPE]) \
+dsfiter10(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+% Dyadic sf control, rank 2-0-2
+#define dsfctl202(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##202(x2: array[array[XTYPE]]; \
+ y0: YTYPE; \
+ returns array[array[ZTYPE]]) \
+dsfiter20(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl202sx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##202sx(x2: array[array[XTYPE]]; \
+ y0: YTYPE; \
+ returns array[array[array[ZTYPE]]]) \
+dsfiter20(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl202sy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##202sy(x2: array[array[XTYPE]]; \
+ y0: YTYPE; \
+ returns array[array[ZTYPE]]) \
+dsfiter20(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+% Dyadic sf control, rank 3-0-3
+#define dsfctl303(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##303(x3: array[array[array[XTYPE]]]; \
+ y0: YTYPE; \
+ returns array[array[array[ZTYPE]]]) \
+dsfiter30(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl303sx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##303sx(x3: array[array[array[XTYPE]]]; \
+ y0: YTYPE; \
+ returns array[array[array[ZTYPE]]]) \
+dsfiter30(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl303sy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##303sy(x3: array[array[array[XTYPE]]]; \
+ y0: YTYPE; \
+ returns array[array[array[ZTYPE]]]) \
+dsfiter30(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+% Dyadic sf control, rank 0-1-1
+#define dsfctl011(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##011(x0: XTYPE; \
+ y1: array[YTYPE]; \
+ returns array[ZTYPE]) \
+dsfiter01(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl011sx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##011sx(x0: XTYPE; \
+ y1: array[YTYPE]; \
+ returns array[ZTYPE]) \
+dsfiter01(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl011sy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##011sy(x0: XTYPE; \
+ y1: array[YTYPE]; \
+ returns array[ZTYPE]) \
+dsfiter01(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+% Dyadic sf control, rank 0-2-2
+#define dsfctl022(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##022(x0: XTYPE; \
+ y2: array[array[YTYPE]]; \
+ returns array[array[ZTYPE]]) \
+dsfiter02(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl022sx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##022sx(x0: XTYPE; \
+ y2: array[array[YTYPE]]; \
+ returns array[array[ZTYPE]]) \
+dsfiter02(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl022sy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##022sy(x0: XTYPE; \
+ y2: array[array[YTYPE]]; \
+ returns array[array[ZTYPE]]) \
+dsfiter02(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+% Dyadic sf control, rank 0-3-3
+#define dsfctl033(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##033(x0: XTYPE; \
+ y3: array[array[array[YTYPE]]]; \
+ returns array[array[array[ZTYPE]]]) \
+dsfiter03(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+#define dsfctl033sx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##033sx(x0: XTYPE; \
+ y3: array[array[array[YTYPE]]]; \
+ returns array[array[array[ZTYPE]]]) \
+dsfiter03(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function 
+
+#define dsfctl033sy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##033sy(x0: XTYPE; \
+ y3: array[array[array[YTYPE]]]; \
+ returns array[array[array[ZTYPE]]]) \
+dsfiter03(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end function
+
+
+% ------------------------- Singleton extension cases ----------------------
+% These are cases where the argument of lesser rank is known to be
+% a singleton.
+
+% Dyadic sf control, rank 2-1-2  Right argument singleton
+#define dsfctl212sy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##212sy(x2: array[array[XTYPE]]; \
+ y1: array[YTYPE]; \
+ returns array[ZTYPE]) \
+let \
+ y0 := y1[SISALIO]; \
+in \
+dsfiter20(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end let \
+end function
+
+% Dyadic sf control, rank 3-1-3  Right argument singleton
+#define dsfctl313sy(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##313sy(x3: array[array[array[XTYPE]]]; \
+ y1: array[YTYPE]; \
+ returns array[array[array[ZTYPE]]]) \
+let \
+ y0 := y1[SISALIO]; \
+in \
+dsfiter30(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end let \
+end function
+
+% Dyadic sf control, rank 1-2-2  Left argument singleton
+#define dsfctl122sx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##122sx(x1: array[XTYPE]; \
+   y3: array[array[YTYPE]]; \
+   returns array[array[[ZTYPE]]) \                     
+let \
+ x0 := x1[SISALIO]; \
+in \
+dsfiter02(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end let \
+end function
+
+% Dyadic sf control, rank 1-3-3  Left argument singleton
+#define dsfctl133sx(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+function FN##XT##YT##ZT##133(x1: array[XTYPE]; \
+   y3: array[array[array[YTYPE]]]; \
+   returns array[array[array[ZTYPE]]]) \                     
+let \
+ x0 := x1[SISALIO]; \
+in \
+dsfiter03(FN,CT,ZT,ZTYPE,XT,XTYPE,YT,YTYPE) \
+end let \
+end function 
+
