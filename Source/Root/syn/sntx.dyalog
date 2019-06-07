@@ -1,7 +1,7 @@
 ﻿ r←x sntx n;i;j;k;src;tok;st;m;gst;f;s;ast;etr;cv;sj;wif
  ⍝ Build symbol table and abstract syntax tree from tokenized src
  gst←D x[0] ⋄ s←D x[1] ⍝ Global symbol table; tokenized source code
- st←gst Buildst D s[n] ⍝Build the local symbol table
+ st←gst Buildst D s[n] ⍝ Build the local symbol table
  src←D(D s[n])[0]
  tok←D(D s[n])[1]
  ⍝ Should do this rank1, but don't have rank support for defined
@@ -13,7 +13,7 @@
  Checkem 2⍴E ast ⍝ Pardon the kludge
  r←(1↑⍴src)⍴E ast
  :For i :In 1↓⍳⍴r    ⍝ Line 0 is special
-     ast←((E ast),E i)SyntaxAnalyzer(E src[i;]),E tok[i;]
+     ast←((E ast),(E i),E st)SyntaxAnalyzer(E src[i;]),E tok[i;]
      Checkem 2⍴E ast
  :EndFor
  ⍝ Deal with possibly differing ast st parts
