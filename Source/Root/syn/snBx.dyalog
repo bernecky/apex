@@ -18,7 +18,7 @@
  astr[;astlarg]←⌽j[;Stkvalue] ⍝ Indices
  astr[;astclass]←astclassVARB
  astr[;astrarg]←NULL,ER0 ¯1↓k ⍝ Link them
- astpush astr
+ Append2Ast astr
  state←D stk[stkp;Stkstate]
  'Under confusion or under construction'assert state∊Stf,Stn,Sto,Sta,Stx
  k←((E astp-1),(E clsexpn),E 0)Push Stl ⍝ Result of ref; now left bracket state

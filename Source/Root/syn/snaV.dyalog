@@ -14,7 +14,7 @@
  astr[astclass]←j[Stktokcl]
  PushCursor i
  :If !(D j[Stkvalue])∊astp-1
-     astpush astr
+     Append2Ast astr
  :Else
   ⍝ Replace temp w/id; set ast class
      i←D j[Stkvalue] ⍝ Target ast row

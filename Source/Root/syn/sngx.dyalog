@@ -12,6 +12,6 @@
  i←stkpop 1 ⍝ The branch argument
  'Source program syntax error: GOTO arg not expn'assert i[0;0]∊(E Stx),E Stn
  astr[astrarg]←i[0;1] ⍝ The branch argument
- astpush astr
+ Append2Ast astr
  ⍝ We leave the stack empty.
  state←Stn ⍝ Effectively, empty statement now.

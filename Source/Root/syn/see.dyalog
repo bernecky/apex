@@ -1,5 +1,5 @@
-﻿ x see y;ps;i;j;k;s;st
- ps←-1 1 1 3
+﻿ x see y;i;j;k;s;st
+⍝⍝ FIXME later SyntaxAnalyzerInit
  ⎕←'state=',state,',signal=',D stk[stkp;Stkstate]
  c seecs(E x),E y
  s←(E'Stkstate'),(E'Stkvalue'),(E'StkValueName'),E'Stktokcl'

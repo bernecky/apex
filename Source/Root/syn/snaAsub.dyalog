@@ -17,5 +17,5 @@
  m←''⍴D b/j[0 2;1] ⍝ Affected ast row
  ast[m;b/astrarg,astlarg]←''⍴b/j[2 0;1]
  →ez
-hard:astpush astr
+hard:Append2Ast astr
 ez:i←((E state),(E m),E StV)Push state

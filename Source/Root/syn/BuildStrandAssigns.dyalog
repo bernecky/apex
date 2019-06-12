@@ -6,7 +6,6 @@ BuildStrandAssigns←{
   sgi←sgi,¨( '_sgo' '_sgi')[inout],¨⍕¨⍪⍳≢⍵  ⍝ E.g., foo_sgi42 foo_sgo666
   (ast sgi)←ast MakeVardecs sgi
   astr←astNewRows ≢⍵
-  astp←astp+≢⍵
   astr[;asttarget]← (sgi,⍪nms)[;inout]
   astr[;astrarg]← (nms,⍪sgi)[;inout]
   astr[;astfn]←E Copy

@@ -15,7 +15,7 @@
  ⍝ Under Construction: Where is astrop when we need it?
  astr[astfn,astrarg]←i[;1] ⍝ Function and right argument
  astr[astclass]←astclassVARB
- astpush astr
+ Append2Ast astr
  stk[stkp;]←(E Stx),(E astp-1),E'x'
  state←Stx
  stkp←stkp+1

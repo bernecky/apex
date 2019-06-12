@@ -17,7 +17,7 @@
  :EndIf
  astr[astrarg]←(stkpop 1)[0;Stkvalue] ⍝ Right argument
  astr[astclass]←astclassVARB
- astpush astr
+ Append2Ast astr
  stk[stkp;]←(E Stx),(E astp-1),E'x'
  state←Stx
  stkp←stkp+1

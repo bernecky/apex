@@ -13,7 +13,7 @@
          astr[astfn]←i[1;Stkvalue]
          astr[astrarg]←i[2;Stkvalue]
          cls←D i[1;Stktokcl]
-         stkpush(E i[2;Stkstate]),i[0;Stkvalue,Stktokcl]
+         stkpush(E i[0;Stkstate]),i[2;Stkvalue,Stktokcl]
      :Else
          i←stkpop 2 ⍝Pop two stack elements
          astr←,astNewRows 1        ⍝ Build new ast entry
@@ -34,7 +34,7 @@
  ⍝ Under Construction: Where is astrop when we need it?
 ⍝⍝⍝ rankop     astr[astfn,astrarg]←i[;1] ⍝ Function and right argument
      astr[astclass]←astclassVARB
-     astpush astr
+     Append2Ast astr
      stk[stkp;]←(E Stx),(E astp-1),E'x'
      state←Stx
      stkp←stkp+1

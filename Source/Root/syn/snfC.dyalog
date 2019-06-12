@@ -12,6 +12,6 @@
  k←stkpop 2 ⍝ Get conjunction and rop
  astr[astfn,astrop]←k[;1]
  astr[astclass]←astclassLFN ⍝ Derived fn
- astpush astr
+ Append2Ast astr
  i←((E state),(E astp-1),E astclassLFN)Push StV
  ⍝ Now just normal derived verb on stack

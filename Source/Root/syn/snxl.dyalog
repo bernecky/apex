@@ -7,7 +7,7 @@
  astr[asttarget]←E astp
  astr[astrarg]←m[1;Stkvalue] ⍝ 2nd stack el is index list
  astr[astclass]←astclassVARB
- astpush astr
+ Append2Ast astr
  ⍝ New state is state when we hit the ].
  i←((E astp-1),(E clsexpn),E 0)Push m[2;Stkstate]
  Rescan clsexpn

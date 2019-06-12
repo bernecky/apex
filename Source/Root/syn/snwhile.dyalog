@@ -15,4 +15,4 @@
  astr[astfn]←E':While'
  astr[astrarg]←j[0;1] ⍝ Argument to :while
  astr[astclass]←NULL
- astpush astr
+ Append2Ast astr

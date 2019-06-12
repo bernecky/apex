@@ -29,5 +29,5 @@
      astr[astrarg]←j[1]
      astr[astclass]←astclassVARB
      astr←QuoteQuadInputKludge2 astr
-     astpush astr
+     Append2Ast astr
  :EndSelect

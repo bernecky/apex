@@ -8,7 +8,7 @@
  astr[astlop,astfn,astrop]←j[0 1 2;1]
  astr[astclass]←E StV
  astr[asttarget]←E astp
- astpush astr
+ Append2Ast astr
  stk[stkp;]←(E clsfn),(E astp-1),E clsconj
  stkp←stko+1
  stk[stkp;0]←E clsfn ⍝ Now naked verb from parens

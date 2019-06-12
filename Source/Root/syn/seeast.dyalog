@@ -1,4 +1,5 @@
 ﻿ r←{width}seeast ast;dec;decast;p
+ ast←mm ast
  :If 0=⎕NC'width'
      width←¯1↑⍴ast
  :EndIf
@@ -31,7 +32,8 @@
  dec←ast FindTarget ast[;p]
  decast←ast
  decast[;p]←dec
- r←r⍪decast
+ p←-+/∧\⌽ast[;asttarget]∊NULL ⍝ Drop unused rows
+ r←r⍪p↓decast
  :If 0≠⎕NC'width'
      r←r[;⍳width]
  :EndIf

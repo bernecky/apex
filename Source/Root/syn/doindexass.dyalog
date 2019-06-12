@@ -20,5 +20,5 @@
  astr[1;astlarg,astlop,astrop]←NULL
  astr[1;astfn]←E,'←'
  astr[1;astrarg]←E astp
- astpush astr
+ Append2Ast astr
  state←Stx ⍝ Always end up in expression state

@@ -11,7 +11,7 @@
  astr[astrop]←rop[0;Stkvalue]
  astr[astrarg]←rarg[0;Stkvalue]
  astr[astclass]←astclassVARB
- astpush astr
+ Append2Ast astr
  stk[stkp;]←(E Stx),(E astp-1),E'x'
  state←Stx
  stkp←stkp+1
