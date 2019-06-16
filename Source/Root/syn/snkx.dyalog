@@ -37,7 +37,7 @@
   ⍝ :endfor is noise for dfa purpose
      j←(astclassVARB,NULL)[(UC D i[GettValue])≡':ENDFOR']
      astr[astclass]←j
-     Append2Ast astr
+     ast←ast append2Ast astr
  :Case ':REPEAT'
      ÷0 ⍝ codeme
  :Case ':UNTIL'

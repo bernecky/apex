@@ -1,4 +1,4 @@
-﻿ doindexass;astr;m
+﻿ doindexass;astr;m;row
 ⍝ Indexed assign
  ⍝ 1995-07-08. We are having troubles with FOR loops
  ⍝ vs indexed assign vs ssa. The result array is
@@ -16,9 +16,10 @@
  astr[astrarg]←m[1;Stkvalue] ⍝ Index list
  astr[astclass]←astclassVARB
  astr←(2,⍴astr)⍴astr
- astr[0;asttarget]←E astp
+ row←≢ast
+ astr[0;asttarget]←E row
  astr[1;astlarg,astlop,astrop]←NULL
  astr[1;astfn]←E,'←'
- astr[1;astrarg]←E astp
- Append2Ast astr
+ astr[1;astrarg]←E row
+ ast←ast append2Ast astr
  state←Stx ⍝ Always end up in expression state

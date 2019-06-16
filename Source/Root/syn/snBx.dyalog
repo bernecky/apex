@@ -1,4 +1,4 @@
-﻿ snBx;j;n;astr
+﻿ snBx;j;n;astr;row
  ⍝ Left bracket [ left of expression
  m←']'StackCheck⍳stkp
  ⍝ Replace stacked indices with head of index list generated from same.
@@ -10,7 +10,8 @@
  ⍝ or bracket axis (under const)
  ⍝ Need 1 ast entry per row
  astr←astNewRows n
- k←astp+⍳n
+ row←≢ast
+ k←row+⍳n
  astr[;asttarget]←ER0 k
  astr[;astfn]←E,';' ⍝ Index list
  ⍝ The right argument is link to next index, or NULL
@@ -18,7 +19,7 @@
  astr[;astlarg]←⌽j[;Stkvalue] ⍝ Indices
  astr[;astclass]←astclassVARB
  astr[;astrarg]←NULL,ER0 ¯1↓k ⍝ Link them
- Append2Ast astr
+ ast←ast append2Ast astr
  state←D stk[stkp;Stkstate]
  'Under confusion or under construction'assert state∊Stf,Stn,Sto,Sta,Stx
- k←((E astp-1),(E clsexpn),E 0)Push Stl ⍝ Result of ref; now left bracket state
+ k←((E row),(E clsexpn),E 0)Push Stl ⍝ Result of ref; now left bracket state

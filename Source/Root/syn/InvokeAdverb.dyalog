@@ -1,9 +1,10 @@
-﻿ InvokeAdverb;astr;i;j;cls
+﻿ InvokeAdverb;astr;i;j;cls;row
  ⍝ Invoke stacked adverb
  ÷0
  i←stkpop 2 ⍝Pop two stack elements
  astr←,astNewRows 1        ⍝ Build new ast entry
- astr[asttarget]←E astp
+ row←≢ast
+ astr[asttarget]←E row
  cls←D i[1;Stktokcl]
  :If cls∊clsadverb,clsconj ⍝ Adverb or conj
      astr[astlop]←i[0;Stkvalue] ⍝ Left operand
@@ -15,7 +16,7 @@
  ⍝ Under Construction: Where is astrop when we need it?
  astr[astfn,astrarg]←i[;1] ⍝ Function and right argument
  astr[astclass]←astclassVARB
- Append2Ast astr
- stk[stkp;]←(E Stx),(E astp-1),E'x'
+ ast←ast append2Ast astr
+ stk[stkp;]←(E Stx),(E row),E'x'
  state←Stx
  stkp←stkp+1

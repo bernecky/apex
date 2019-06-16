@@ -3,7 +3,6 @@
  sz←1+')'StackCheck⍳stkp ⍝ Pop everything up to, and including the )
  j←stkpop sz
  'We ARE confused'assert j[sz-1;Stkvalue]∊E,')'
- c←c-1                ⍝ Push the cursor past the (
  stkpush⊖¯1 0↓j       ⍝ Push everything but the ) back on the stack
  state←j[sz-1;Stkstate] ⍝ Restore state outside parentheses
  newsignal←GetTokenClass j[0;]

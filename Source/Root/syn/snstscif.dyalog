@@ -6,4 +6,4 @@
  astr[astfn]←E':If' ⍝ :if
  astr[astrarg]←j[0;1] ⍝ Argument to :if
  astr[astclass]←astclassCTL
- Append2Ast astr
+ ast←ast append2Ast astr

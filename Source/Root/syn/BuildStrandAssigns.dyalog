@@ -1,5 +1,5 @@
 BuildStrandAssigns←{
-  (ast inout astp)←⍺
+  (ast inout)←⍺
   nms←⍵[;Stkvalue] ⍝ b c d
   ⍝ In vs Out
   sgi←ast[dfnname;asttarget] ⍝ foo
@@ -12,6 +12,6 @@ BuildStrandAssigns←{
   astr[;astclass]←astclassVARB
   ⍝⍝ ??astr[;astscope]←(astscopeSGO astscopeSGI)[inout]
   astr[;astscope]←0 ⍝ Not sure why CheckSGIOOne complains
-  ( ast astr astp)
+  ( ast astr)
  }
 

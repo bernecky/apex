@@ -6,10 +6,9 @@
      PopParenthesis
  :Case Stx         ⍝ lpar left of expn:       (⍵
      snPx
- :Case Std         ⍝ lpar left of dyadic fn:  (⍺ f ⍵
+ :Case Std         ⍝ lpar left of dyadic fn:  (⍺ f ⍵) b c d 
      InvokeDyadicFn
-     ⍝⍝⍝ ?? PopParenthesis
-     ⍝⍝⍝ ?? signal←clslpar ⍝ Now have ( x x x)
+     PopParenthesis ⍝ Now have z b c d
  :Case StV         ⍝ lpar left of naked adv:  ( /
                    ⍝ lpar left of monadic fn: ( monfn) ⍵
      PopParenthesis
@@ -25,3 +24,4 @@
  :Else
      snerr
  :EndSelect
+ PushCursor c gett( E src), E tok ⍝ Skip parenthesis

@@ -28,6 +28,6 @@
      astr[astfn]←E Copy
      astr[astrarg]←j[1]
      astr[astclass]←astclassVARB
-     astr←QuoteQuadInputKludge2 astr
-     Append2Ast astr
+     astr←ast QuoteQuadInputKludge2 astr
+     ast←ast append2Ast astr
  :EndSelect

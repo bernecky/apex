@@ -11,8 +11,8 @@
  ⍝ Emit :while expression.
  j←stkpop 1 ⍝ Pop the :while argument
  astr←,astNewRows 1 ⍝ Build ast entry
- astr[asttarget]←E astp
+ astr[asttarget]←E ≢ast
  astr[astfn]←E':While'
  astr[astrarg]←j[0;1] ⍝ Argument to :while
  astr[astclass]←NULL
- Append2Ast astr
+ ast←ast append2Ast astr

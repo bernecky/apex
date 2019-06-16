@@ -7,11 +7,11 @@
  'Compiler bug'assert stkp=1 ⍝ Only one item on stack, please.
  ⍝ GOTO looks like monadic function invocation from here.
  astr←,astNweRows 1 ⍝ Build new ast entry
- astr[asttarget]←E astp
+ astr[asttarget]←E ≢ast
  astr[astfn]←E src[,c] ⍝ The goto an sich
  i←stkpop 1 ⍝ The branch argument
  'Source program syntax error: GOTO arg not expn'assert i[0;0]∊(E Stx),E Stn
  astr[astrarg]←i[0;1] ⍝ The branch argument
- Append2Ast astr
+ ast←ast append2Ast astr
  ⍝ We leave the stack empty.
  state←Stn ⍝ Effectively, empty statement now.

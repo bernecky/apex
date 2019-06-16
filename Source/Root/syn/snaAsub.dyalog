@@ -1,11 +1,12 @@
-﻿ snaAsub;astr;i;b;k;m;Pop;j
+﻿ snaAsub;astr;i;b;k;m;Pop;j;row
  ⍝ Emit the derived function.
  j←stkpop 3 ⍝ Pop the lop, conj, rop
  astr←,astNewRows 1
  astr[astlop,astfn,astrop]←j[;1]
- astr[asttarget]←E astp
+ row←≢ast
+ astr[asttarget]←E row
  astr[astclass]←E astclassLFN ⍝ Local fn
- m←astp
+ m←row
  ⍝ Now stack the derived fn
  →hard ⍝ EVERYONE is hard 1995-11-11
  →(~j[1;1]∊(E,'&'),E,'⍤')⍴hard ⍝ Not compose/rank
@@ -17,5 +18,5 @@
  m←''⍴D b/j[0 2;1] ⍝ Affected ast row
  ast[m;b/astrarg,astlarg]←''⍴b/j[2 0;1]
  →ez
-hard:Append2Ast astr
+hard:ast←ast append2Ast astr
 ez:i←((E state),(E m),E StV)Push state

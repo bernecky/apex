@@ -1,6 +1,7 @@
-﻿ Append2Ast astr;i;p
- ⍝ Append astr to ast. Extend ast if needed.
+﻿ r←ast append2Ast astr;i;p;row
+ ⍝ Append astr to ast
  astr←mm astr
+ Checkem 2⍴E ast
  p←astr[;astlarg,astrarg]
  :If 0∊p∊NULL,⍳≢ast
      ⎕←'Non-pointer in astlarg, astrarg'
@@ -11,9 +12,10 @@
  :If trace
      ⎕←'Appending to ast: '
      ⎕←y
-     ⎕←⍪src((-c)↑'^')
+     ⎕←⍪src((¯2+-c)↑'^')
  :EndIf
+ row←≢ast
  ast←ast⍪astNewRows i
- ast[astp+⍳i;]←astr
- astp←astp+i
- ast←astp↑ast ⍝ Trim
+ ast[row+⍳i;]←astr
+ Checkem 2⍴E ast
+ r←ast

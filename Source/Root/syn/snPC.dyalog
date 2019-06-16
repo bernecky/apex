@@ -1,4 +1,4 @@
-﻿ snPC;j;astr
+﻿ snPC;j;astr;row
  ⍝ Left parenthesis left of naked conj
  ⍝ Locate matching right paren, pop intervening stuff,
  ⍝ Emit it, and push the resulting derived fn.
@@ -7,9 +7,10 @@
  astr←,astNewRows 1 ⍝ Build new ast row
  astr[astlop,astfn,astrop]←j[0 1 2;1]
  astr[astclass]←E StV
- astr[asttarget]←E astp
- Append2Ast astr
- stk[stkp;]←(E clsfn),(E astp-1),E clsconj
+ row←≢ast
+ astr[asttarget]←E row
+ ast←ast append2Ast astr
+ stk[stkp;]←(E clsfn),(E row),E clsconj
  stkp←stko+1
  stk[stkp;0]←E clsfn ⍝ Now naked verb from parens
  state←Sto ⍝ Outside the parens, the naked

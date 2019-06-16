@@ -23,4 +23,4 @@
  j←(astclassVARB,NULL)[(UC D w)≡UC':EndFor'] ⍝ noise
  astr[astclass]←j ⍝ :FOR is varb
  ⍝ Warning: :IF may not be varb...
- Append2Ast astr
+ ast←ast append2Ast astr
