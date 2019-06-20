@@ -10,11 +10,17 @@
  ⍝ This code sets up :PA for f in f/⍵ and ⍺ f/⍵.
  ⍝ It then (on one or more later passes) extracts
  ⍝ the morphology from the f call.
- 'Rank conj right operand not constant'assert∧/(D ast[rop;astPred])[astPredKnowValue]
- 'Coding time for rank conj'assert∧/ast[rop;astshape]∊(E,1),(E,2),E⍳0
- i←2⍴D quadfi¨ast[rop;astvalue] ⍝ The rank expression itself
- lr←i[0] ⍝ left rank to be used
- rr←i[1] ⍝ right rank to be used
+ :If 0∊(D ast[rop;astPred])[astPredKnowValue]
+     ⎕←'Rank conj right operand not constant'
+ :EndIf
+ :If ~∧/ast[rop;astshape]∊(E,1),(E,2),E⍳0
+     ⎕←'Coding time for rank conj operand shape'
+ :EndIf
+ ⍝⍝ FIXME when above warnings fixed. i←2⍴D quadfi¨ast[rop;astvalue] ⍝ The rank expression itself
+ ⍝⍝       lr←i[0] ⍝ left rank to be used
+ ⍝⍝       rr←i[1] ⍝ right rank to be used
+ ⎕←'fix dfaRankOne before trusting anything rankly!'
+ lr←rr←1 ⍝ RUBBISH
  ⍝ Fill in subfunction's morphology.
  astr←ast[c+1 2;] ⍝ Parameters to operand fn
  'Bobbo kant code'assert astr[;astfn]∊E':PA'

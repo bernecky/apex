@@ -49,6 +49,7 @@
              :For j :In callers ⍝ Our callers
                  asts←D cds[j] ⍝ Get caller's cds
                  ast←D asts[ssaast] ⍝ Get caller's ast
+                 ast←astDeleteNullRows ast ⍝ Make SGIRemove simpler
                  cs←ast[;asttarget]⍳weare ⍝ Our calling sites
                  cs←ast[;astfn]∊E cs
                  csgi←cs SGIMark ast   ⍝ Mark Semi-globals-In in our caller
@@ -56,7 +57,9 @@
      ⍝ Kill :GI entries that are not ref'd by the subfn
      ⍝ NB. Strong assumptions about order and # of entries!
                      astr←csgi⌿ast ⍝ Old :GI entries
-                     nums←ast[D ast[D astr[;astrarg];asttag];asttarget]
+                     nums←D ast[D astr[;astrarg];asttag]
+                     nums←(~nums∊NULL)/nums ⍝ already garbage, I think.
+                     nums←ast[nums;asttarget]
                      nums←(nums∊burn)/nums ⍝ Kill these entries
                      ast←((E cs),E nums)SGIRemove ast
                      asts[ssaast]←E ast ⍝ Put ast back
@@ -66,4 +69,4 @@
          :EndIf
      :EndFor
  :Until cds≡oldcds
- r←DeleteNulls¨cds
+ r←csdDeleteNullAstRows¨cds

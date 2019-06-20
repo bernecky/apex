@@ -1,4 +1,4 @@
-﻿ Checkem asts;ast;cv;i;b;c;d
+﻿ Checkem asts;ast;cv;i;b;c;d;p
 ⍝ This performs various paranoia checks that make
 ⍝ fault isolation faster, supposedly, while also making
 ⍝ you want to buy a faster cpu.
@@ -10,8 +10,9 @@
      'xrho not integral'assert∧/ast[;astxrho]=⌊ast[;astxrho]
  ⍝ Mismatch between predicate and non-Null value?
      cv←~ast[;astvalue]∊NULL
-     'Predicate mismatch'assert∧/i←(D cv/ast[;astPred])[;astPredKnowValue]
-     'Predicate length error'assert astPredLen∧.=,D⍴¨ast[;astPred]
+     p←ast[;astPred]
+     'Predicate mismatch'assert∧/i←(D cv/p)[;astPredKnowValue]
+     'Predicate length error'assert (p∊NULL)∨astPredLen∧.=,D⍴¨p
      b←ast[;astrank]∊E NULL
      'Rank invalid'assert∧/(0=,D⍴¨⍴¨ast[;astrank])∧b∨,D ast[;astrank]≥0
      'Type invalid'assert∧/(,D ast[;asttype])∊NULL,⍳⍴Types

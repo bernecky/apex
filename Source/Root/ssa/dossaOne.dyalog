@@ -18,13 +18,13 @@
  Checkem¨cds
  cds←GenerateSSA¨cds           ⍝ Generate SSA form
  Checkem¨cds
- cds←DeadPHIRemoval¨cds        ⍝ Kill :PHIs w/unref'd target
+ cds←csdDeleteNullAstRows¨DeadPHIRemoval¨cds  ⍝ Kill :PHIs w/unref'd target
  Checkem¨cds
- cds←ct SemiGlobalUnSet cds    ⍝ Kill Unset SGIs again (ssa-ish)
+ cds←csdDeleteNullAstRows¨ct SemiGlobalUnSet cds ⍝ Kill Unset SGIs
  Checkem¨cds
- cds←ct SemiGlobalUnRef cds    ⍝ Kill Unref   "    "      "
+ cds←csdDeleteNullAstRows¨ct SemiGlobalUnRef cds    ⍝ Kill Unref SGIs
  Checkem¨cds
- cds←DeadVarbRemoval¨cds       ⍝ Kill unref'd vars
+ cds←csdDeleteNullAstRows¨DeadVarbRemoval¨cds       ⍝ Kill unref'd vars
  Checkem¨cds
  i←cds ⎕FAPPEND tn
  ⎕←(fts ⎕TS),': SSA analysis complete for: ',fn

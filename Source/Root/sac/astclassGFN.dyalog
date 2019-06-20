@@ -1,1 +1,0 @@
-﻿⌷astclassGFN←<char>F</char>
