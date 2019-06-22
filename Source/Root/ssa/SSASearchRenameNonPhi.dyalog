@@ -26,7 +26,7 @@
      p←p∧,⍉(⌽⍴j)⍴q
      p←S[p[n]]
      j←,j
-     j[n]←ast tar2astndx p ⍝ ast index, not name!
+     j[n]←p ⍝ ast index, not name!
      j←((+/m),⍴k)⍴j
 ⍝  'oops'assert isnum j
      ast[m/⍳⍴m;k]←j

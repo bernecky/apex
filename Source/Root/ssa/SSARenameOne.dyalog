@@ -36,7 +36,7 @@
  'DEBUG'assert~stophere∊tar
  'DEBUG stupid PHI'assert~ast[;astlarg]=⍳1↑⍴ast
  ⍝ First S element is value error or formal parameter
- S←((¯1↑top),tar)[,C]⍝ Top of list
+ S←((ast[;asttarget]⍳¯1↑top),tar)[,C]⍝ Top of list
  'DEBUG'assert~(E us)∊stophere
  Checkem rt
  rt←((E 0),E E tar)SSASearch(E rt),(E S),E top ⍝ Start w/node 0
