@@ -8,15 +8,17 @@ EXEC  : #.⎕EX 'Tests' 'OtherTests'
 NS     : Source/Root/apex/*.dyalog,         target=#
 
 NS     : Source/Root/syn/*.dyalog,          target=#.syn
+NS     : Source/Root/idioms/*.dyalog,       target=#.idioms
 NS     : Source/Root/ssa/*.dyalog,          target=#.ssa
 NS     : Source/Root/dfa/*.dyalog,          target=#.dfa
 NS     : Source/Root/sac/*.dyalog,          target=#.sac
 NS     : Source/Root/plural9/*.dyalog,      target=#.plural9
-NS     : Source/Root/benchmks/*.dyalog, target=#.benchmks
+NS     : Source/Root/benchmks/*.dyalog,     target=#.benchmks
 
 NS     : Source/Root/arrayutils/*.dyalog,   target=#.arrayutils
 NS     : Source/Root/arrayutils/*.dyalog,   target=#
 NS     : Source/Root/arrayutils/*.dyalog,   target=#.syn
+NS     : Source/Root/arrayutils/*.dyalog,   target=#.idioms
 NS     : Source/Root/arrayutils/*.dyalog,   target=#.ssa
 NS     : Source/Root/arrayutils/*.dyalog,   target=#.dfa
 NS     : Source/Root/arrayutils/*.dyalog,   target=#.sac
@@ -26,6 +28,7 @@ NS     : Source/Root/arrayutils/*.dyalog,   target=#.benchmks
 NS     : Source/Root/apexutils/*.dyalog,    target=#.apexutils
 NS     : Source/Root/apexutils/*.dyalog,    target=#
 NS     : Source/Root/apexutils/*.dyalog,    target=#.syn
+NS     : Source/Root/apexutils/*.dyalog,    target=#.idioms
 NS     : Source/Root/apexutils/*.dyalog,    target=#.ssa
 NS     : Source/Root/apexutils/*.dyalog,    target=#.dfa
 NS     : Source/Root/apexutils/*.dyalog,    target=#.sac
@@ -34,6 +37,7 @@ NS     : Source/Root/apexutils/*.dyalog,    target=#.benchmks
 
 NS     : Source/Root/datetimeutils/*.dyalog, target=#.benchmks
 NS     : Source/Root/datetimeutils/*.dyalog, target=#.syn
+NS     : Source/Root/datetimeutils/*.dyalog, target=#.idioms
 NS     : Source/Root/datetimeutils/*.dyalog, target=#.ssa
 NS     : Source/Root/datetimeutils/*.dyalog, target=#.dfa
 NS     : Source/Root/datetimeutils/*.dyalog, target=#.sac
@@ -42,6 +46,7 @@ NS     : Source/Root/datetimeutils/*.dyalog, target=#.plural
 NS     : Source/Root/fileutils/*.dyalog,    target=#.fileutils
 NS     : Source/Root/fileutils/*.dyalog,    target=#
 NS     : Source/Root/fileutils/*.dyalog,    target=#.syn
+NS     : Source/Root/fileutils/*.dyalog,    target=#.idioms
 NS     : Source/Root/fileutils/*.dyalog,    target=#.ssa
 NS     : Source/Root/fileutils/*.dyalog,    target=#.dfa
 NS     : Source/Root/fileutils/*.dyalog,    target=#.sac

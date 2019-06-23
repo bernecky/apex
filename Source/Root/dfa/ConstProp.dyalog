@@ -3,5 +3,5 @@
  ast←D y[ssaast]
  cv←~dfainit ast ⍝ Get constants and varbs
  ast←cv PropArgs ast
- ast[;astPred]←Predicates¨ER1 ast ⍝ Set predicates
+ ast[;astPred]←SetPredicates¨ER1 ast ⍝ Set predicates
  r←y ⋄ r[ssaast]←E ast

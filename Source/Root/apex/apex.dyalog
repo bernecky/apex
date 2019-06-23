@@ -1,4 +1,4 @@
-﻿ apex y;opts;fns;TargetLanguage;drive;PartialEvaluation
+﻿ apex y;opts;fns;TargetLanguage;drive;PartialEvaluation;fns
 ⍝ Set up compiler options
  ⎕FUNTIE ⎕FNUMS ⍝ Don't confuse later phases
  Initialize
@@ -12,6 +12,7 @@
  debugphase←LC GetOption'debugsyn'
  fns←GetBlistFns y
  syn.dosyn fns
+ idioms.doidioms fns
  ssa.dossa
  dfa.dodfa
  sac.dosac ⍝ We call all code generators, for no good reason

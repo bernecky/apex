@@ -2,8 +2,8 @@
  ⍝ Handle Dyalog :for loop
  ast←D y[ssaast]
  wl←D y[ssacv]
- i←wl∧ast[;astfn]∊E':For'
- wl←wl∧~ast[;astfn]∊E':EndFor' ⍝ Kill ends
+ i←ast[;astfn]∊E':for'
+ wl←wl∧~ast[;astfn]∊E':endfor' ⍝ Ignore ends
  wl←wl∧~i ⍝ Update worklist
  :If 1∊i ⍝ Any work?
      j←D(i⌿ast)[;astrarg]

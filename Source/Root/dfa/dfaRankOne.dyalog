@@ -50,7 +50,7 @@
  ⍝ rank expression result rank is shape of lamination of cells
  astr←ast[,c;] ⍝ The rank expression an sich
  astr[;asttype]←ast[tar;asttype] ⍝ Result type from operand
- :If ~ast[tar;astrank]∊NULL ⍝ Don't mess with unknown ranks
+ :If (~ast[tar;astrank]∊NULL)∧(~ast[c;astlarg]∊NULL)∧(~ast[c;astrarg]∊NULL)
      fl←0⌈(D ast[D ast[c;astlarg];astrank])-lr ⍝ Left & right frame ranks
      fr←0⌈(D ast[D ast[c;astrarg];astrank])-rr
      astr[;astrank]←E(D ast[tar;astrank])+fl⌈fr ⍝ Result rank

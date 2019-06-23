@@ -11,7 +11,10 @@
  DrawAPLTextStart src
  wp←dfasee y
  :While 1∊D wp[ssacv]            ⍝ loop until fixpoint reached
-    ⍝⍝ ⎕←'top of dfa loop, examining ',(⍕+/D wp[ssacv]),' items'
+     :if trace
+       ⎕←'top of dfa loop, examining ',(⍕+/D wp[ssacv]),' items:'
+       ⎕←(D wp[ssacv])⌿(D wp[ssaast])[;astfn]
+     :endif
      wp←dfasee dfaMsf wp         ⍝ Monadic scalar functions.
      wp←dfasee dfaDsf wp         ⍝ Dyadic scalar functions.
      wp←dfasee dfaLev wp         ⍝ Lev
@@ -67,5 +70,6 @@
      wp←dfasee dfaQuoteQuadInput wp ⍝ ←⍞
      wp←dfasee dfaQuadts wp      ⍝ ⎕ts
      wp←dfasee dfaQuadAV wp   ⍝ Sigh. Quadav
+     wp←dfasee dfaTally wp       ⍝ Tally (≢⍵)
  :EndWhile
  r←wp

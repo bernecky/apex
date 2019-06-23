@@ -1,0 +1,34 @@
+﻿ r←dfaTally y;ast;wl;i;astr;p;rargs;j;cv
+ ⍝ dfa for "tally" (≢⍵)
+ r←y
+ ast←D y[ssaast]
+ wl←D y[ssacv]
+ i←wl∧ast[;astlarg,astfn]matchR1 NULL,E,'≢'
+ wl←wl∧~i
+ :If 1∊i
+     astr←i⌿ast ⍝ Tally result is integer scalar
+     astr[;asttype]←asttypeI
+     astr[;astrank]←0
+     astr[;astshape]←E⍳0
+     astr←astr SetPreds astPredNonNeg,astPredInteger
+
+   ⍝ If we Know Things about the right argument, we can do more.
+     rargs←astr[;astrarg]
+
+   ⍝ Scalar arg has result 1
+     cv←0=ast[rargs;astrank]
+     p←astPredKnowValue,astPredKnowMinVal,astPredKnowMaxVal
+     astr[cv/⍳⍴cv;]←(cv⌿astr)SetPreds p
+     astr[cv/⍳⍴cv;astvalue]←E 1
+
+   ⍝ Empty arg has result 0
+   ⍝ FIXME
+
+   ⍝ Known arg shape has result 0⌷⍴⍵
+   ⍝ FIXME
+
+     j←astmerge(E ast),(E astr),E i
+     ast←D j[0]
+     wl←wl∨D j[1]
+     r←y ⋄ r[ssaast]←E ast ⋄ r[ssacv]←E wl
+ :EndIf

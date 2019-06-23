@@ -2,7 +2,7 @@
  ⍝ Perform ssa
  fn←,(⎕FNUMS=tn)⌿⎕FNAMES
  ⎕←(⍕⎕TS),': Starting SSA analysis for: ',fn
- cds←⎕FREAD¨tn,¨(1↑⎕FSIZE tn)+⍳|-/2↑⎕FSIZE tn
+ cds←⎕FREAD tn,¯1+1↑1↓⎕FSIZE tn
  ct←BuildCallingTree cds
  i←DFSortast(E ct),E cds       ⍝ Depth-first order
  ct←D i[0] ⋄ cds←D i[1]

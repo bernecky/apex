@@ -8,7 +8,7 @@
  fdrop tn,-/2↑fsize tn
  1000000000 fresize tn
  src←GetFn¨,¨y  ⍝ Get all source code
- src←QuadKludge¨src                ⍝ Undo APL design errors
+ src←LocalizeSysVars¨src           ⍝ Undo APL design errors
  src←(E y)Dfn2Trad¨src             ⍝ Convert any Dfns to Tradfns
  src←D,/src                        ⍝ Flatten new subfns into src list
  src←UnDiamondize¨src              ⍝ Remove diamond statement separators

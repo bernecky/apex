@@ -16,7 +16,7 @@
      row[astshape]←E⍴z
      row[astxrho]←×/⍴z
  ⍝ Update predicates
-     row[astPred]←E Predicates row
+     row[astPred]←E SetPredicates row
      ast[j;]←row
  :EndFor
  →lz
