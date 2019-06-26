@@ -5,8 +5,8 @@
  bb←D y[ssabb] ⍝ Basic Block list
  cfg←D y[ssacfg] ⍝ Current cfg
  ⍝ We start by matching :For/:EndFor blocks.
- f←ast[;astfn]∊E':For'
- ef←ast[;astfn]∊E':EndFor'
+ f←ast[;astfn]∊E':for'
+ ef←ast[;astfn]∊E':endfor'
  ⍝ We ASSUME these are nested properly. Hence,
  ⍝ we have an even number of them, and they
  ⍝ match from outside to in.

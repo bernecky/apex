@@ -4,5 +4,5 @@
  i←+/bb
  cfg←(2⍴i)⍴¯1⌽(1+i)↑1 ⍝ Start w/fall-through flow
  i←y ⋄ i[ssacfg]←E cfg
- j←GenerateCFGFOR i ⍝ Handle :For :EndFor
+ j←GenerateCFGFOR i ⍝ Handle :for :endfor
  r←GenerateCFGIF j ⍝ Handle :If :Else :EndIf

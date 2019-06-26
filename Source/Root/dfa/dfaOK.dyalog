@@ -3,7 +3,7 @@
  ⍝ We need type and rank for all operations.
  ast←D y[ssaast]
  ⍝ Ignore identifiers, nulls and compiler stuff
- k←NULL,(E':PHI'),(E':EndFor'),(E,'['),(E,']'),(E,'€')
+ k←NULL,(E':PHI'),(E':endfor'),(E,'['),(E,']'),(E,'€')
  k←k,(E':GI'),(E':GO'),(E':RE'),(E':RI'),(E':PA'),E,'∘'
  j←(dfainit ast)∧~ast[;astfn]∊k
  k←dfnlarg,dfnrarg,dfnres    ⍝ Check args & results

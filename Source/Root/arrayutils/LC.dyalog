@@ -1,5 +1,6 @@
-﻿ r←LC y;lc
-⍝ Map y to lower case (dirnames,etc)
- lc←⎕AV
- lc[(⎕AV⍳'A')+(⍳26)-⍳1]←⎕AV[(⎕AV⍳'a')+⍳26]
- r←lc[⎕AV⍳y]
+lcase←{                                          ⍝ Lower-casification,  
+     lc←'abcdefghijklmnopqrstuvwxyzåäöàæéñøü'    ⍝ (lower case alphabet)
+     uc←'ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖÀÆÉÑØÜ'    ⍝ (upper case alphabet)
+     (⍴⍵)⍴(lc,,⍵)[(uc,,⍵)⍳⍵]                     ⍝ ... of simple array. 
+ }                                                                      
+

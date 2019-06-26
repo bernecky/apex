@@ -1,10 +1,8 @@
-﻿ snkn;w;wds;astr;j;v
+﻿ snkn;w;astr;j;v
  ⍝state is new stmt. signal is stsc kwd
  w←(c gett(E src),E tok)[0] ⍝ Get the keyword
  ⍝ Make sure kwd should be naked
- wds←(E':else'),(E':endfor'),(E':endif'),E':endwhile'
- wds←wds,(E':repeat'),(E':until')
- 'Source program syntax erorr'assert w∊wds
+ 'Source program syntax erorr'assert w∊ControlStructuresDyalog
  ⍝ kwd must also be only token except for label
  c←c-⍴D w ⍝ Push past kwd
  :If c≠¯1 ⍝ and past any white space
@@ -21,6 +19,6 @@
  astr←,astNewRows 1 ⍝ Build ast entry
  astr[astfn]←w ⍝ :endfor, etc
  j←(astclassVARB,NULL)[(D w)≡':endfor'] ⍝ noise
- astr[astclass]←j ⍝ :for is varb
+ astr[astclass]←j ⍝ keywords are varbs
  ⍝ Warning: :if may not be varb...
  ast←ast append2Ast astr

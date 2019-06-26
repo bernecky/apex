@@ -1,12 +1,12 @@
 ﻿ r←ast APLExpn roots;p;fn;ctl;exp
-⍝# Build APL expressions rooted at roots
+⍝  Build APL expressions rooted at roots
  r←(1↑⍴ast)⍴E''
  cv←~ast[;astfn]∊(E':GI'),(E':GO'),(E':PHI'),(E':RI'),(E':RE')
  cv←cv∧(⍳⍴cv)∊roots
  fn←cv⌿ast[;astfn]
 ⍝ Assign-like fns
- ctl←(E':For'),(E':EndFor'),(E':If'),(E':EndIf'),(E':Else')
- ctl←ctl,(E':While'),(E':EndWhile'),(E,'←') ⍝ etc.
+ ctl←DyalogControlStructures,(,'←') ⍝ etc.
+
  p←cv∧∨/(astlarg,astrarg)APLTemps ast ⍝ Recursively expand temps
  :If 1∊p
      ÷0 ⍝ writeme
