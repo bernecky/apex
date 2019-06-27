@@ -1,8 +1,8 @@
 ﻿ r←ast FORReorder phiomega;b;e;nd;cv;i;j;bi;ei
 ⍝ Reorder phiomega entries to match nesting level
 ⍝ of :For loops.
- b←ast[;astfn]∊E':For'
- e←ast[;astfn]∊E':EndFor'
+ b←ast[;astfn]∊E':for'
+ e←ast[;astfn]∊E':endfor'
  nd←+\b+¯1×e ⍝ Nesting depth
  cv←nd+e ⍝ Match begins and ends
  bi←b\⍳+/b

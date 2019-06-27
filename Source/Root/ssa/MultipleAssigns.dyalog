@@ -12,4 +12,4 @@
  counts←D k[1]
  r[tar]←counts
  ⍝ ⍺ and ⍵
- r[2 3]←r[2 3]+~ast[2 3;asttarget]∊E' -'
+ r[dfnlarg, dfnrarg]←r[dfnlarg,dfnrarg]+~ast[dfnlarg,dfnrarg;asttarget]∊E' -'

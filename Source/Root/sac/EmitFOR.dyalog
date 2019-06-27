@@ -1,9 +1,9 @@
 ﻿ r←EmitFOR y;ast;i;j;k;itctrs;itctrsz;fns;f;ef;innm;fornm;cv;pf;forin;m;t;n;p;au;tar;forlcv;forz;cal
  ⍝ Emit code for :For loops in Dyalog APL
  ast←D y[0] ⋄ cv←D y[1] ⋄ fns←D y[2] ⋄ cal←D y[3]
- i←ast[;astfn]∊(E':For'),E':EndFor' ⍝ Locate loops
+ i←ast[;astfn]∊(E':for'),E':endfor' ⍝ Locate loops
  :If 1∊i ⍝ Any work?
-     j←i\(i/ast[;astfn])∊E':For' ⍝ Handle :For
+     j←i\(i/ast[;astfn])∊E':for' ⍝ Handle :For
   ⍝ Iteration counter
      itctrs←TempName(E'CTR'),¨⍕¨j/⍳⍴j
      itctrsz←mcb MapNamesSAC itctrs catenateeach'z'

@@ -1,4 +1,4 @@
-﻿ r←x SSASearchRenamePhiArguments yy;ast;bb;cfg;curnode;cv2;i;j;S;tar;X;Y
+﻿ r←x SSASearchRenamePhiArguments yy;ast;bb;cfg;curnode;cv2;i;j;S;tar;X;Y;y
  ⍝ SSA Search from Wolfe 1992, p. 183
  ⍝ This only handles ONE target verb, tar
  X←D x[0] ⋄ tar←D x[1] ⍝ Vars,target varb
@@ -34,7 +34,7 @@
   ⍝ We hope to simplify things by placing the ast index
   ⍝ of the name, rather than the ast row that creates
   ⍝ the name.
-         i←ast FindReferentNew i
+         i←ast FindReferentNew S[0] ⍝ FIXME ⍵ was i
          i←(i,S[0])[i=cv2] ⍝ It's a parameter (or value error!)
          'Missed a reference'assert∧/i<1↑⍴ast
          ast[cv2;(astlarg,astrarg)[j]]←i

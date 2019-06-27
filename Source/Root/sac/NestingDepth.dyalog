@@ -1,7 +1,7 @@
 ﻿ r←ast NestingDepth begend;bf;ef
 ⍝ Generate integer vector of nesting depth for each
 ⍝ row of ast, based on begend.
-⍝ E.g, begend←(E':For'),E':EndFor'
+⍝ E.g, begend←(E':for'),E':endfpr'
  bf←ast[;astfn]∊begend[0]
  ef←ast[;astfn]∊begend[1]
  ':For/:EndFor woes'assert(+/bf)=+/ef ⍝ Unbalanced :For/:EndFor

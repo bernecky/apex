@@ -1,4 +1,4 @@
-lcase←{                                          ⍝ Lower-casification,  
+LC←{                                          ⍝ Lower-casification,  
      lc←'abcdefghijklmnopqrstuvwxyzåäöàæéñøü'    ⍝ (lower case alphabet)
      uc←'ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖÀÆÉÑØÜ'    ⍝ (upper case alphabet)
      (⍴⍵)⍴(lc,,⍵)[(uc,,⍵)⍳⍵]                     ⍝ ... of simple array. 

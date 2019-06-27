@@ -3,7 +3,7 @@
  ⍝ This could probably be done easier by avoiding
  ⍝ the renaming in the SSA phase, but languages
  ⍝ like SISAL still need it, so we undo the work here.
- bf←cv∧ast[;astfn]∊E':For'
+ bf←cv∧ast[;astfn]∊E':for'
  phimark←cv∧ast[;astfn]∊E':PHI'
  ⍝ Find the phi result(s) -- there may be several!
  k←~(phimark⌿ast)[;asttarget]∊(bf⌿ast)[;asttarget]

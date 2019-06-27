@@ -5,10 +5,10 @@
  bb←D y[ssabb] ⍝ Basic Block list
  cfg←D y[ssacfg] ⍝ Partially built CFG
  ⍝ We start by finding :If/:Else/:EndIf blocks.
- f←ast[;astfn]∊E':If'
+ f←ast[;astfn]∊E':if'
  :If 1∊f ⍝ Any :If statements?
-     elf←ast[;astfn]∊E':Else'
-     ef←ast[;astfn]∊E':EndIf'
+     elf←ast[;astfn]∊E':else'
+     ef←ast[;astfn]∊E':endif'
   ⍝ We ASSUME these are nested properly.
   ⍝ :If/:EndIf mark sets inner to outer.
      mf←+\f+ef\¯1 ⍝ Same as matching parens

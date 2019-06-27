@@ -9,17 +9,17 @@
  ⍝ to make SSARenameOne easier.
  ast←D y[ssaast]
  r←<\dfainit ast ⍝ Mark Entry node
- r[¯1+⍴r]←1 ⍝ Mark Exit Node as bb
+ r←r∨ast[;asttarget]∊E':RE' ⍝ Mark exit node(s) as bb
  ⍝ Mark bb starters
- b←ast[;astfn]∊E':If'
+ b←ast[;astfn]∊E':if'
  b←b∨0,¯1↓b ⍝ :If has decision, then split
- i←(E':Else'),E':ElseIf'
+ i←(E':else'),E':elseif'
  b←b∨ast[;astfn]∊i
- b←b∨0,¯1↓ast[;astfn]∊E':EndIf'
- b3←ast[;astfn]∊(E':While'),E':For'
+ b←b∨0,¯1↓ast[;astfn]∊E':endif'
+ b3←ast[;astfn]∊(E':while'),E':for'
  b3←b3∨0,¯1↓b3 ⍝ For loops: loop and body are bb
  ⍝ :EndFor/:While: It and next marks new bb
- b4←ast[;astfn]∊(E':EndFor'),E':EndWhile'
+ b4←ast[;astfn]∊(E':endfor'),E':endwhile'
  b4←b4∨0,¯1↓b4
  b4←r∨b∨b3∨b4
  ⍝ Next line [we wish we didn't need it] busts basic

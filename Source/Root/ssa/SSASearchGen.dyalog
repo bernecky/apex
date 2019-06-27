@@ -1,10 +1,11 @@
-﻿ r←x SSASearchGen yy;ast;tar;X;y;cv;b;i;j;jj;y;S;nms
+﻿ r←x SSASearchGen yy;ast;tar;X;y;cv;b;i;j;jj;y;S;nms;bb
  ⍝ SSA Search Gen: Replace gen V by Vi
  X←D x[0] ⋄ tar←D x[1] ⍝ Vars,target varb
  y←D yy[0] ⍝ SSA Stuff
  S←D yy[1] ⍝ Stack
  nms←D yy[2] ⍝ New names for old
  ast←D y[ssaast]
+ bb←D y[ssabb]
  ⍝ This almost handles multiple gens properly
  ⍝ in the same bb. Maybe try it someday? 1995-05-19
  cv←bb BBn X ⋄ b←cv⌿ast ⍝ The bb of interest

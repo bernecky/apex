@@ -13,7 +13,7 @@
 ⍝ point to the right argument of the :For :PHI. This for SAC
 ⍝ only.
  ⍝
- bf←cv∧ast[;astfn]∊E':For'
+ bf←cv∧ast[;astfn]∊E':for'
  phimark←cv∧ast[;astfn]∊E':PHI'
  ⍝ Don't rename loop ctl vars
  k←~(phimark⌿ast)[;asttarget]∊(bf⌿ast)[;asttarget]

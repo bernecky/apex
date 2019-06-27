@@ -31,7 +31,7 @@
  ast←D y[ssaast]
  ⍝ Introduce "old z" names for all :PHIs associated
  ⍝ with :For
- bf←ast[;astfn]∊E':For' ⍝ Begin :For loop
+ bf←ast[;astfn]∊E':for' ⍝ Begin :For loop
  :If 1∊bf ⍝ Any work?
  ⍝ Mark :PHIs associated with each :For loop
      phimark←ast[;astfn]∊E':PHI'
@@ -56,7 +56,7 @@
          ast←ast astInsertSymbols astr
      :EndIf
       ⍝ Rename within loop scopes from inner to outer loops
-     nd←ast NestingDepth(E':For'),E':EndFor'
+     nd←ast NestingDepth(E':for'),E':endfor'
  ⍝
 lp:  →(0=mnd←⌈/nd)⍴lpz ⍝ Work outwards from inner loops
      cv←nd=mnd ⋄ ⍝ Mark next loop
