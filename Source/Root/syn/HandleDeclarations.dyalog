@@ -1,5 +1,8 @@
 ﻿ r←ast HandleDeclarations src;cv;types;ranks;arg;t;rk;tr;i;nms;j;k
  ⍝ Handle declarations in source code
+ ⍝  E.g.,   ⍝ dcl type rank name
+ ⍝          ⍝ dcl integer 3 mytensor  (rank-3 integer array)
+ ⍝          ⍝ dcl complex vector d
  r←ast
  i←rtnb src
  cv←('⍝'=i[;0])∧(rtnb 0 1↓i)[;⍳4]∧.='dcl ' ⍝ Locate dcls
