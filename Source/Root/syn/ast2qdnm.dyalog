@@ -1,13 +1,13 @@
-﻿ ast2qdnm;i;newstate;tar
+﻿ ast2qdnm;i;newstate;nm
 ⍝ System function or variable left of anything
 ⍝ Does not include ⎕ or ⍞
  i←c gett(E src),E tok ⍝ Get purported quadname
- tar←i[GettValue]
+ nm←i[3] ⍝ Chicken. See gett
 ⍝ Next line for ⎕ct, ⎕io, ⎕pp, ⎕pp, ⎕pw, ⎕rl, ⎕ts, ⎕wa, ⎕av, ⎕ts
-⍝⍝⍝ :If tar∊systemnfns      ⍝ ⎕ts, ⎕av
+⍝⍝⍝ :If nm∊systemnfns      ⍝ ⎕ts, ⎕av
 ⍝⍝⍝     ast2fn              ⍝ Treat as primitive fn
 ⍝⍝⍝ :EndIf
- :If tar∊systemvars,systemconsts
+ :If nm∊systemvars,systemconsts
      :Select state
      :Case Stf          ⍝ System variable left of fn
          snif
@@ -22,10 +22,10 @@
      :Else              ⍝ More coding needed...
          snerr
      :EndSelect
- :ElseIf tar∊systemfns,systemnfns  ⍝ ⎕fd, ⎕nl, ⎕wa, ⎕ts, ⎕av
+ :ElseIf nm∊systemfns,systemnfns,systemvars  ⍝ ⎕fd, ⎕nl, ⎕wa, ⎕ts, ⎕av, ⎕io
      :Select state
      :Case Stn          ⍝ Systemfn left of bos
-         newstate←(StV,StN)[tar∊systemnfns] ⍝ systemnfn (⎕ts, ⎕wa)?
+         newstate←(StV,StN)[nm∊systemnfns,systemvars] ⍝ ⎕ts ⎕io
          PushCursor i Push newstate   ⍝ past systemfn
      :Case Stf ⍝ Systemfn left of function
          snif     ⍝ Treat like id left of function

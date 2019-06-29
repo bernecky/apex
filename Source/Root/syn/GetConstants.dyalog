@@ -1,5 +1,5 @@
 ﻿ r←cls GetConstants y;src;cv;len;beg;tok;con
- ⍝ Get constants of class clsfrom function.
+ ⍝ Get constants of class cls from function.
  ⍝ y is src⊃tok
  src←(D y[0]),NullChar ⋄ tok←(D y[1]),NullChar
  con←0⍴E''

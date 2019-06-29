@@ -1,4 +1,4 @@
-﻿ r←x RenameCloneRefs astscaller;callee;suffix;callsite;pv;np;refs;target;cv;astcaller
+﻿ r←x RenameCloneRefs astscaller;callee;suffix;callsite;pv;np;refs;target;cv;astcaller;p
 ⍝ Rename one call of a subfn by a call to the subfn clone
  callee←D x[0]                    ⍝ Subfn being called
  suffix←D x[1]                    ⍝ Suffix for subfn clone
@@ -6,7 +6,7 @@
  ⍝ This isn't quite going to work for "foo.foo" and the like...
  astcaller←D astscaller[ssaast]
  cv←D astscaller[ssacv]
- target←astcaller[;asttarget]⍳E callee    ⍝ Find fn name
+ target←astcaller[;asttarget]⍳E callee ⍝ Find original subfn name
  ⍝ Find and clone :GI and :GO entries
  pv←(1↑⍴astcaller)⍴1
  pv[target]←2
@@ -20,4 +20,11 @@
  refs[pv/⍳⍴pv]←refs[pv/⍳⍴pv]+1
  astcaller[callsite+1;astptrs]←refs
  r←astscaller
- r[ssaast]←E astcaller
+
+⍝ If the original callee is no longer referenced in the caller,
+⍝ remove it from the caller's symbol table.
+ p←(~astptrs∊asttag)/astptrs ⍝ Ignore asttag here
+ pv←1∊astcaller[;p]∊target ⍝ Called (almost) anywhere
+ pv←pv∨(⍳≢astcaller)≠target
+ astcaller[(~pv)/⍳⍴pv;]←NULL
+ r[ssaast]←E astDeleteNullRows astcaller
