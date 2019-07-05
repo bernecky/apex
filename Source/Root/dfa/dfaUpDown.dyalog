@@ -1,4 +1,4 @@
-﻿ r←dfaUpDown cds;sf;sfl;al;j;k;fil;lr;m;n;st;wl;curfn;ast;p;parm;asts;subfn;callerfn;calleefn;callsite;ct;cv
+﻿ r←dfaUpDown cds;sf;sfl;al;j;k;fil;lr;m;n;st;wl;curfn;ast;p;parm;asts;subfn;callerfn;calleefn;callsite;ct;cv;tx
  ⍝ Propagate dfa info up/downwards in calling tree.
  ⍝ asts is list of ssa data, one per defined fn
  ⍝ ct is calling tree, in same order as asts
@@ -18,6 +18,10 @@
   ⍝ Propagate caller's array morph into its subfns
      :For j :In ⍳⍴fil              ⍝ One call at a time
          callsite←(CallSites ast)[j] ⍝ Caller ast index of subfn call
+         tx←'Propagating astlarg, astrarg from: '
+         tx←tx,(D ast[dfnname;asttarget]),' into: '
+         tx←tx,D ast[ast[callsite;astfn];asttarget]
+         ⎕←tx
          lr←D ast[callsite;astlarg,astrarg] ⍝ Left, right subfn args
          n←lr∊NULL                 ⍝ Missing args
          :If 0∊n                   ⍝ Propagate into subfns if any args

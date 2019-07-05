@@ -1,4 +1,4 @@
-﻿ dosac;TargetLanguage;fnm;pathfrag;fragbuf
+﻿ r←fldr dosac asts;TargetLanguage;pathfrag;fragbuf
 ⍝# Emit object code for each compilation unit (CU)
 ⍝# Each tied file is a compilation unit.
  Initialize
@@ -10,10 +10,5 @@
      pathfrag←pathfrag,LC GetOption'pathfrag'
      pathfrag←pathfrag,TargetLanguage,PathDelim
      fragbuf←BufferAllCodeFragments pathfrag
-     :If ×⍴⎕FNUMS
-         EmitOneCU¨⎕FNUMS
-         fnm←⎕FNAMES
-         LastFile←,fnm ⍝ For debug convenience only...
-     :EndIf
+     r←fldr EmitOneCU asts
  :EndIf
- ⎕FUNTIE ⎕FNUMS

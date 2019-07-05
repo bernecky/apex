@@ -28,6 +28,7 @@
  r[astShapeExpn]←E'ShapeExpn'
  r[astShapeGuard]←E'shapeguard'
  r[astSpecCase]←E'speccase'
+ r[astImplicitResult]←E'ImplicitResult'
  p←asttarget,astlarg,astlop,astfn,astrop,astrarg
  dec←ast FindTarget ast[;p]
  decast←ast

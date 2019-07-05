@@ -1,11 +1,9 @@
-﻿ dodfaOneFile tn;y;i;tn;ct;ast2;ast3;ast;genws;cds;cds2;cds3;fnm;i2
- ⍝ Perform dfa on file tn
- fnm←,(⎕FNUMS=tn)⌿⎕FNAMES
- (fts ⎕TS),': Starting dataflow analysis for: ',fnm
- cds←⎕FREAD tn,¯1+1↑1↓⎕FSIZE tn ⍝ Compilation dataset
- cds←MakeBackupAstForCloning¨cds
- i←BuildCallingTree cds ⍝ Calling tree
- i←i DFSortast cds ⍝ Depth-first order for osc2
+﻿r←fldr dodfaOne asts;y;i;tn;ct;ast2;ast3;ast;genws;cds;cds2;cds3;i2
+ ⍝ Perform dfa on asts
+ (fts ⎕TS),': Starting dataflow analysis for: ',fldr
+ asts←MakeBackupAstForCloning¨asts
+ i←BuildCallingTree asts ⍝ Calling tree
+ i←i DFSortast asts ⍝ Depth-first order for osc2
  ct←D i[0] ⋄ cds←D i[1]
  cds←D i[1]
  Checkem¨cds
@@ -21,7 +19,7 @@
  cds3←cds
  :While 1 ⍝ Loop until fix point reached
      cds←cds3
-     cds2←dodfaone¨cds     ⍝ Do one round of dfa
+     cds2←(E fldr) dfa¨cds     ⍝ Do one round of dfa
      Checkem¨cds2
      cds3←dfaUpDown cds2   ⍝ Global dfa propagation
      Checkem¨cds3
@@ -34,5 +32,5 @@
  cds←ct SemiGlobalUnRef cds ⍝ Remove ⎕ct refs from defined fns/calls
  cds←dfaSGFix¨cds           ⍝ Fix up :PHI semiglobal stupidity
  Checkem¨cds
- i←cds fappend tn
- (fts ⎕TS),': Dataflow analysis complete for: ',fnm
+ r←cds
+ (fts ⎕TS),': Dataflow analysis complete for: ',fldr

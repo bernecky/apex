@@ -31,6 +31,7 @@
  args←args,((1↑⍴args),2)⍴astclassVARB,E astscopeL
  i←(astclassNFN,astclassMFN,astclassDFN)[2-+/1↓args[;stname]∊astNoFn]
  st←((fnm,E i),E astscopeL)⍪args ⍝ User-defined fns
+ loc←(~loc[;0]∊st[;0])⌿loc ⍝ no dups in st
  st←st⍪loc⍪(gst[;0]∊ids[;stname])⌿gst ⍝Locals and globals
  ⍝ Labels are local constants
  st←st⍪(mcb D lab[1]),(mcb(⍴D lab[1])⍴clscolon),E astscopeL

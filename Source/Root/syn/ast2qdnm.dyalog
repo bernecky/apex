@@ -2,7 +2,11 @@
 ⍝ System function or variable left of anything
 ⍝ Does not include ⎕ or ⍞
  i←c gett(E src),E tok ⍝ Get purported quadname
- nm←i[3] ⍝ Chicken. See gett
+ nm←i[GettValue]
+ ⍝ gett may give us ast index OR real name
+ :If isnum nm
+     nm←ast[nm;asttarget]
+ :EndIf
 ⍝ Next line for ⎕ct, ⎕io, ⎕pp, ⎕pp, ⎕pw, ⎕rl, ⎕ts, ⎕wa, ⎕av, ⎕ts
 ⍝⍝⍝ :If nm∊systemnfns      ⍝ ⎕ts, ⎕av
 ⍝⍝⍝     ast2fn              ⍝ Treat as primitive fn

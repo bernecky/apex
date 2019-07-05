@@ -3,7 +3,7 @@
  astr←mm astr
  Checkem 2⍴E ast
  p←astr[;astlarg,astrarg]
- :If 0∊p∊NULL,⍳≢ast
+ :If 0∊p∊NULL,⍳(≢ast)+≢astr
      ⎕←'Non-pointer in astlarg, astrarg'
  :EndIf
  astr[;aststmt]←E lineno ⍝ No line #s today

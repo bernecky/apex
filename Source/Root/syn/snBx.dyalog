@@ -22,4 +22,4 @@
  ast←ast append2Ast astr
  state←D stk[stkp;Stkstate]
  'Under confusion or under construction'assert state∊Stf,Stn,Sto,Sta,Stx
- k←((E row),(E clsexpn),E 0)Push Stl ⍝ Result of ref; now left bracket state
+ k←((E ¯1+≢ast),(E clsexpn),E 0)Push Stl ⍝ Result of ref; now left bracket state

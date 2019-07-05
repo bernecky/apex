@@ -11,8 +11,8 @@
  ⍝ Mismatch between predicate and non-Null value?
      cv←~ast[;astvalue]∊NULL
      p←ast[;astPred]
-     'Predicate mismatch'assert∧/i←(D cv/p)[;astPredKnowValue]
-     'Predicate length error'assert (p∊NULL)∨astPredLen∧.=,D⍴¨p
+⍝⍝⍝ DEAD I HOPE    'Predicate mismatch'assert∧/i←(D cv/p)[;astPredKnowValue]
+     'Predicate length error'assert(p∊NULL)∨astPredLen∧.=,D⍴¨p
      b←ast[;astrank]∊E NULL
      'Rank invalid'assert∧/(0=,D⍴¨⍴¨ast[;astrank])∧b∨,D ast[;astrank]≥0
      'Type invalid'assert∧/(,D ast[;asttype])∊NULL,⍳⍴Types
@@ -26,7 +26,7 @@
      'Invalid astparms'assert(i∊NULL)∨(i<1↑⍴ast)∧(i≥0)
  ⍝ (Some) pointers must be legal
      i←ast[;astlarg,astrarg] ⍝ This should be astptrs, but one at a time...
-     'Invalid astlarg or astrarg'assert ∧/,i∊NULL,⍳≢ast
+     'Invalid astlarg or astrarg'assert∧/,i∊NULL,⍳≢ast
      t←dfainit ast
      cv←t/ast[;asttarget]
      cv←∧/(cv∊NULL)∨(cv∊⍳+/~t)∨cv∊t/⍳⍴t

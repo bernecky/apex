@@ -1,15 +1,9 @@
-﻿ r←dfa y;st;oldast;i;j;k;wp;ast;F;src
- ⍝ Perform data flow analysis for ast ⍵ (from buildast).
- ⍝ y is ssa form. cv is optional cv
- ⍝ Result is updated ssa form,
- ⍝ with ST info for each row.
- ⍝ class, type, rank, shape, value,name...
- ⍝ If the value is known, it is enclosed twice.
- ⍝ Otherwise, the contents is <'?'
- ⍝ Ignore symbol table entries
- src←D y[ssasrc]
+﻿ r←fldr dfa asts;st;oldast;i;j;k;wp;ast;F;src
+ ⍝ Perform data flow analysis for one function in fldr
+ ⍝ Result is updated asts
+ src←D asts[ssasrc]
  DrawAPLTextStart src
- wp←dfasee y
+ wp←dfasee asts
  :While 1∊D wp[ssacv]            ⍝ loop until fixpoint reached
      :if trace
        ⎕←'top of dfa loop, examining ',(⍕+/D wp[ssacv]),' items:'

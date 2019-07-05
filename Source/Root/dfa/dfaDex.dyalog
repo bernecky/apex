@@ -1,4 +1,4 @@
-﻿ r←dfaDex wp;ast;wl;i;j;k
+﻿ r←dfaDex asts;ast;wl;i;j;k
  ⍝ dfa for dex primitive
  ast←D wp[ssaast]
  wl←D wp[ssacv]
@@ -12,4 +12,4 @@
      j←astmerge(E ast),(E k),E i
      ast←D j[0] ⋄ wl←wl∨D j[1]
  :EndIf
- r←y ⋄ r[ssaast]←E ast ⋄ r[ssacv]←E wl
+ r←asts ⋄ r[ssaast]←E ast ⋄ r[ssacv]←E wl

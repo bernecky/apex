@@ -1,20 +1,16 @@
-﻿ EmitOneCU tn;cuasts;i;m;cudefinedfns;cufnm;m;fnslop;fnsfn;fnsrop;fnstypes;fnsranks;fnslpar;fnslarg;fnsrarg;fnsrpar;calfn;caltypes;calranks;callpar;callarg;calcomma;calrarg;calrpar;fns;fnstypeslarg;fnstypesrarg;fnstypesz
- ⍝# Emit compiled APL code for one Compilation Unit(CU)
- ⍝# The CU is represented by the function's argument tie number.
- ⍝# Result is written to file in same directory as source.
- ⍝ Our starting data is in the last component of file tn
- cufnm←dtb,(tn=fnums)⌿fnames
- ⎕←(fts ⎕TS),': Starting code generation for: ',cufnm
- cuasts←fread tn,¯1+1↑1↓fsize tn
+﻿ r←fldr EmitOneCU asts;i;m;cudefinedfns;m;fnslop;fnsfn;fnsrop;fnstypes;fnsranks;fnslpar;fnslarg;fnsrarg;fnsrpar;calfn;caltypes;calranks;callpar;callarg;calcomma;calrarg;calrpar;fns;fnstypeslarg;fnstypesrarg;fnstypesz
+ ⍝# Emit compiled APL code for one Compilation Unit(CU), asts
+ ⍝# Result is written to file in fldr
+ ⎕←(fts ⎕TS),': Starting code generation for: ',fldr
  InitializeFns   ⍝ and cal
  ⍝ Build mainline code, identify primitives
- cuasts←SACNames¨cuasts ⍝ Map names to avoid SAC keyword conflicts, etc
- i←EmitOneUserDefinedFn¨cuasts ⍝ Emit all user-defined fns
+ asts←SACNames¨asts ⍝ Map names to avoid SAC keyword conflicts, etc
+ i←EmitOneUserDefinedFn¨asts ⍝ Emit all user-defined fns
  cudefinedfns←D Raze 0⊃¨i
  fns←D nub ER1 D Raze 1⊃¨i
- sis←fns EmitPrimitiveFnDefns cuasts
+ sis←fns EmitPrimitiveFnDefns asts
  sis←D Raze sis,cudefinedfns
- EmitOutputFile(E cuasts),(E sis),E cufnm
- m←D(FileNameBreak cufnm)[1] ⍝ Get filename
- ((-⍴m)↓cufnm)CoverFn tn ⍝ Create cover function for APL ws
- ⎕←(fts ⎕TS),': Code generation complete for: ',cufnm
+ EmitOutputFile(E asts),(E sis),E fldr
+ m←D(FileNameBreak fldr)[1] ⍝ Get filename
+ ((-⍴m)↓fldr)CoverFn fldr ⍝ Create cover function for APL ws
+ ⎕←(fts ⎕TS),': Code generation complete for: ',fldr

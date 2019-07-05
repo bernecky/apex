@@ -1,4 +1,4 @@
-﻿ doidioms fns;genws;TargetLanguage;phasepause;debugidioms;PartialEvaluation;visualizeidioms;PartialEvaluation
+﻿ r←fldr doidioms asts;genws;TargetLanguage;phasepause;debugidioms;PartialEvaluation;visualizeidioms;PartialEvaluation
  Initialize
  initializeAST
  initializeSSA
@@ -7,4 +7,4 @@
  visualizeidioms←LC GetOption'visualizeidioms'
  PartialEvaluation←LC GetOption'partialevaluation'
  TargetLanguage←LC GetOption'output'
- doidiomsOneFile¨⎕FNUMS
+ r←doidiomsOne¨asts

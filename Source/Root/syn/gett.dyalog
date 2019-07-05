@@ -10,5 +10,4 @@
  :EndIf
  nam←E i↑(c+1)↑src
  nm←st stlookup nam
- r←nm,(E tok[c]),(E|i),nam
-⍝ I wanted to make nm be nam, but I'm chicken today...
+ r←nm,(E tok[c]),(E|i)

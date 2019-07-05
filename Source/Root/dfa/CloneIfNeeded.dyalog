@@ -7,6 +7,11 @@
  cv←D y[2]
  callerfn←(D y[3])[0] ⍝ The calling function's cds index
  calleefn←(D y[3])[1] ⍝ The called function's cds index
+
+⍝⍝ IGNORE most of what follows. If we don't clone, we can't do
+⍝⍝ some much-needed DFA, such as TrainZhang calling BackLogistic
+⍝⍝ in pldi2019cnn. So, we should now be propagating values into subfns again.
+
  ⍝ We do not clone on value differences, because of code
  ⍝ blowup (UTThorn ends up with 169 fns...). 2007-04-19
  ⍝ Hence, dfaUpDown must not propagate known values into subfns.

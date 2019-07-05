@@ -12,10 +12,10 @@
  cv[p/dfnlarg,dfnrarg]←1               ⍝ Ignore monadic left arg
  parm←p⌿parm                           ⍝ ditto
  parm[;asttarget]←(cv⌿ast)[;asttarget] ⍝ clobber parm names
- parm[;astvalue]←NULL                  ⍝ Don't prop values into subfns
- ⍝ Code blowup is huge (UTThorn gets to be 169 fns)
- ⍝ Also, SAC inlining should handle this. hohoho
- parm[;astPred]←E astPredLen⍴0
+ ⍝⍝⍝⍝parm[;astvalue]←NULL                  ⍝ Don't prop values into subfns
+ ⍝⍝⍝⍝⍝ Code blowup is huge (UTThorn gets to be 169 fns)
+ ⍝⍝⍝⍝⍝ Also, SAC inlining should handle this. hohoho
+ ⍝⍝⍝⍝parm[;astPred]←E astPredLen⍴0
  k←cds CloneIfNeeded(E ast),(E parm),(E cv),E callerfn,calleefn,callsite
  cds←D k[0]
  calleefn←D k[1]                       ⍝ Callee may have been cloned

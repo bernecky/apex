@@ -1,6 +1,5 @@
-﻿ apex y;opts;fns;TargetLanguage;drive;PartialEvaluation;fns
-⍝ Set up compiler options
- ⎕FUNTIE ⎕FNUMS ⍝ Don't confuse later phases
+﻿ apex fldr;opts;TargetLanguage;drive;PartialEvaluation;asts
+⍝ Set up compiler options for compilation of folder fldr
  Initialize
 ⍝ Partial evaluation is broken as of 1999-04-23./rbe
 ⍝ So is sac output. Well, actually, it ain't writ yet.
@@ -10,10 +9,9 @@
  phasepause←LC GetOption'phasepause' ⍝ Interphase pausing
  trace←'yes'≡3↑LC GetOption'tracesyn'
  debugphase←LC GetOption'debugsyn'
- fns←GetBlistFns y
- syn.dosyn fns
- idioms.doidioms fns
- ssa.dossa
- dfa.dodfa
- sac.dosac ⍝ We call all code generators, for no good reason
- plural9.doplural
+ asts←fldr syn.dosyn GetBlistFns fldr
+ asts←fldr idioms.doidioms asts
+ asts←fldr ssa.dossa asts
+ asts←fldr dfa.dodfa asts
+ asts←fldr sac.dosac asts ⍝ We call all code generators, for no good reason
+ asts←fldr plural9.doplural asts
