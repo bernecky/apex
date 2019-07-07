@@ -1,4 +1,4 @@
-﻿ EmitOutputFile y;wsid;APEXVersion;cuasts;cudefinedfns;cuprolog;code;b;r
+﻿ r←EmitOutputFile y;wsid;APEXVersion;cuasts;cudefinedfns;cuprolog;code;b
  ⍝# Package the generated SAC code for one Compilation Unit(CU)
  ⍝# and write it to a host file..
  ⍝# Result is written to file in same directory as source.
@@ -11,8 +11,8 @@
  cuprolog←cuprolog,(BuildComment APEXVersion,fts ⎕TS),NL
  cuprolog←cuprolog,ReadFile pathfrag,'stdlib.',TargetLanguage
  code←cuprolog,cudefinedfns
- b←toascii AddNL code
- r←cufnm,'.',TargetLanguage
- 'PutFile failed'assert b←b PutFile r
- r←⎕SH'chmod g+w ',r
- ⍝ Halt on write error
+ r←toascii AddNL code
+ b←cufnm,'.',TargetLanguage
+ 'PutFile failed'assert z←r PutFile b
+ z←⎕SH'chmod g+w ',b
+

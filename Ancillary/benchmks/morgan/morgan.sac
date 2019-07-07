@@ -6,7 +6,7 @@ use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
 
-/* Compiled by APEX Version: /home/apex/apex3/wss/sac3013.dws2012-11-07 10:22:41.227 */
+/* Compiled by APEX Version: /home/apex/apex3/wss/sac30142019-07-06 11:36:47.922 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -60,7 +60,11 @@ inline int starIII(int x, int y)
 
 inline bool eqDDB(double x, double y, double QUADct)
 { /* A=B on doubles */
- return((DtoD(x) == DtoD(y)) || APEXFUZZEQ(DtoD(x),DtoD(y),QUADct));
+  /* We use | instead of || on the assumption that
+   * the zero-fuzz case will eliminate the second leg,
+   * and it also eliminate a CONDFUN.
+   */
+ return((DtoD(x) == DtoD(y)) | APEXFUZZEQ(DtoD(x),DtoD(y),QUADct));
 }
 
 
@@ -82,13 +86,13 @@ inline double[+] plusDID(double x, int[+] y)
 
 inline double[+] barDDD(double[+] x, double[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
+         sy = shape(y);
          z = with {
              ( . <= iv <= .) {
                       xel = x[iv];
                    yel = y[iv];
            } : barDDD(xel,yel);
-        } : genarray(sx, 0.0d);
+        } : genarray(sy, 0.0d);
   return(z);
 }
 
@@ -110,13 +114,13 @@ inline double[+] starDID(double[+] x, int y)
 
 inline double[+] mpyDDD(double[+] x, double[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
+         sy = shape(y);
          z = with {
              ( . <= iv <= .) {
                       xel = x[iv];
                    yel = y[iv];
            } : mpyDDD(xel,yel);
-        } : genarray(sx, 0.0d);
+        } : genarray(sy, 0.0d);
   return(z);
 }
 
@@ -149,13 +153,13 @@ inline double[+] starDDD(double[+] x, double y)
 
 inline double[+] plusDDD(double[+] x, double[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
+         sy = shape(y);
          z = with {
              ( . <= iv <= .) {
                       xel = x[iv];
                    yel = y[iv];
            } : plusDDD(xel,yel);
-        } : genarray(sx, 0.0d);
+        } : genarray(sy, 0.0d);
   return(z);
 }
 
@@ -166,13 +170,13 @@ inline double[+] plusDDD(double[+] x, double[+] y)
 
 inline double[+] divDDD(double[+] x, double[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
+         sy = shape(y);
          z = with {
              ( . <= iv <= .) {
                       xel = x[iv];
                    yel = y[iv];
            } : divDDD(xel,yel);
-        } : genarray(sx, 0.0d);
+        } : genarray(sy, 0.0d);
   return(z);
 }
 
