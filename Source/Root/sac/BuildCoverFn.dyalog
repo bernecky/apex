@@ -1,6 +1,10 @@
 ﻿ z←BuildCoverFn tn;csds;ast;fnm;l;r;z;txt;nm;dnm
 ⍝ Create APL cover function for APEX-generated
 ⍝ code located in filetie tn
+ z←'BUILD AN APL COVER FUNCTION HERE, PLEASE'
+ →0
+
+
  csds←⎕FREAD tn,¯1+1↑1↓⎕FSIZE tn
  ast←D(D''⍴⌽csds)[ssaast] ⍝ Last csd is root fn
  fnm←D ast[dfnname;asttarget] ⍝ Definer fn name

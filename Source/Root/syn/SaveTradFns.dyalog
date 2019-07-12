@@ -4,5 +4,6 @@
      ⍝⍝⍝txt[(txt∊NL)/⍳⍴txt]←E CR,LF ⍝ Curse you, Bill
      ⍝⍝⍝txt[(txt∊NL)/⍳⍴txt]←CR
      txt←D Raze txt
-     txt PutFile fnm,'.tradapl'
+     fl←PathFileName (-PathDelim=¯1↑fnm)↓fnm
+     txt PutFile fnm,PathDelim,fl,'.tradapl'
  }

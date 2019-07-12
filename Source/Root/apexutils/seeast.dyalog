@@ -1,9 +1,8 @@
 ﻿ r←{width}seeast ast;dec;decast;p
  ast←mm ast
  :If 0=⎕NC'width'
-     width←¯1↑⍴ast
+     width←⎕PW
  :EndIf
- width←width⌊¯1↑⍴ast
  r←(¯1↑⍴ast)⍴E''
  r[asttarget]←E'target'
  r[astlarg]←E'x'
@@ -33,8 +32,7 @@
  dec←ast FindTarget ast[;p]
  decast←ast
  decast[;p]←dec
- p←-+/∧\⌽ast[;asttarget]∊NULL ⍝ Drop unused rows
- r←r⍪p↓decast
- :If 0≠⎕NC'width'
-     r←r[;⍳width]
- :EndIf
+ ⍝⍝⍝p←-+/∧\⌽ast[;asttarget]∊NULL ⍝ Drop unused rows
+ p←0
+ r←⍕r⍪p↓decast
+ r←(width⌊¯1↑⍴r)↑⍤1⊢r

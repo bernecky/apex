@@ -10,7 +10,7 @@
  :EndFor
  bname←⎕WSID                  ⍝ Benchmark name
  bname←(∧\bname≠'.')/bname    ⍝ drop .dws
- bname←(⌽∧\⌽bname≠'/')/bname  ⍝ drop path
+ bname←(⌽∧\⌽bname≠PathDelim)/bname  ⍝ drop path
  bname←bname,'.dyalogAPL'     ⍝ Identify source of timing
  t←⍕((⍴r),1)⍴(1⌈r)÷1000       ⍝ times in seconds. Sigh.
  LF←⎕AV[2]

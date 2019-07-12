@@ -1,4 +1,4 @@
-﻿ r←x SemiGlobalSGIparms i;ast;cds;asts;astlist;ctx;ct;fns;icall;tar;sgl;sg;j
+﻿ r←x SemiGlobalSGIparms i;ast;cds;asts;astlist;ctx;ct;fns;icall;tar;sgl;sg;j;cs
 ⍝ Update subfunction calls of asts[i] with
 ⍝ semiglobal rows for input parameters.
  ctx←D x[0]

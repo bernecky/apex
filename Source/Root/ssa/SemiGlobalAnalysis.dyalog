@@ -41,8 +41,9 @@
  :EndFor
  ⍝ Amend calls to include semiglobals in and out
  cds←(E(E ctx),E cds)SemiGlobalSGIparms¨⍳⍴cds
+ 'After SemiGlobalSGIparms'TraceSG cds
  cds←(E(E ctx),E cds)SemiGlobalSGOparms¨⍳⍴cds
- 'In-SemiGlobalAnalysis'TraceSG cds
+ 'After SemiGlobalSGOparms'TraceSG cds
  ((E MapSGI+MapSGO),(E fns),E AllVarbs)CheckSGIO cds
  cds←AppendRE¨cds
  cds←SemiGlobalSGOCopy¨cds

@@ -1,0 +1,19 @@
+∇  r←main;outerval;outerval2;⎕io;⎕pp;⎕pw;⎕ct;⎕rl;⎕wa
+⎕io←0
+⎕ct←1E¯13
+⎕pp←10
+⎕pw←80
+⎕rl←16807
+⍝ Test passing of semi-global outerval2 into subfn
+ outerval←42
+ outerval2←666
+ r←subfn( outerval )
+ ⎕←r
+ ⎕←r←1-r≡ 708
+∇
+
+∇  r←subfn omega;val1
+ (val1)←(omega)
+ r←val1+outerval2
+∇
+

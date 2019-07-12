@@ -11,4 +11,6 @@
      pathfrag←pathfrag,TargetLanguage,PathDelim
      fragbuf←BufferAllCodeFragments pathfrag
      r←fldr EmitOneCU asts
+ :else
+  r←asts
  :EndIf

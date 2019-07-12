@@ -1,0 +1,19 @@
+∇  r←main;outerval;outerval2;z1;z2;⎕io;⎕pp;⎕pw;⎕ct;⎕rl;⎕wa
+⎕io←0
+⎕ct←1E¯13
+⎕pp←10
+⎕pw←80
+⎕rl←16807
+⍝ Test passing of semi-global results out of subfn as strand
+ outerval←42
+ outerval2←666
+ (z1 z2)←outerval subfn outerval2
+ r←z1+z2
+ ⎕←r
+ ⎕←r←1-r≡708
+∇
+
+∇  r←alpha subfn omega
+ r←( alpha omega)
+∇
+

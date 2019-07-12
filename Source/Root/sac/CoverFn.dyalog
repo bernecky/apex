@@ -1,7 +1,11 @@
-﻿r← fnm CoverFn fldr;fn;i
+﻿ r←fnm CoverFn fldr;fn;i
 ⍝ Build cover function to allow APL ws
 ⍝ to call APEX-generated code.
 ⍝ Ditto the ⎕na definer function.
+ r←'BUILD CoverFn here, please'
+ →0
+
+
  fn←BuildCoverFn fldr ⍝ This may not be needed
  ⍝⍝ 'PutFile error'assert i←fn PutFile fnm,'coverfn.fn'
  fn←BuildDefinerFn tn

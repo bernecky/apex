@@ -15,7 +15,7 @@
  k←∨/(j⌿ast[;astrank,asttype])∊NULL
  :If 1∊k
      ⎕←'Function',ast[dfnname;asttarget],' is missing rank/type for:'
-     ⎕←9 seeast(j\k)⌿ast
-     ⎕←10 seeast ast
+     ⎕←seeast(j\k)⌿ast
+     ⎕←seeast ast
  :EndIf
  r←∧/~k ⍝ know all var types & ranks
