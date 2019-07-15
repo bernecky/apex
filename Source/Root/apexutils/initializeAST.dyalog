@@ -25,8 +25,8 @@
  astscopeSGI←1     ⍝ Semi-global input to this fn
  astscopeSGO←2     ⍝ Semi-global output from this fn
  astPred←18       ⍝ Boolean vector of predicates for ast row.
- ⍝ astPred may grow in length. Ordering of elements
- ⍝ is fortuitous.
+ ⍝ astPred may grow in length. Ordering of ast elements
+ ⍝ and of astPred elements is fortuitous.
  ⍝ All predicates are evaluated with ⎕ct=0
  astPredPV←0          ⍝ array is permutation vector: ∧/⍵∊⍳⍴⍵
  astPredPVSubset←1    ⍝ array is subset of permutation

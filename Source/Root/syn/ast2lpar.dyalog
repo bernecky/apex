@@ -1,22 +1,27 @@
-﻿ ast2lpar
+﻿ ast2lpar;newsignal
 ⍝ Left parenthesis left of anything
  :Select state
  :Case Stf         ⍝ lpar left of fn:         (f ⍵
      InvokeMonadicFn
-     PopParenthesis
+     newsignal←PopParenthesis
  :Case Stx         ⍝ lpar left of expn:       (⍵
      snPx
+     ⍝⍝⍝ ???? newsignal←PopParenthesis
+     newsignal←clsexpn
  :Case Std         ⍝ lpar left of dyadic fn:  (⍺ f ⍵) b c d 
      InvokeDyadicFn
-     PopParenthesis ⍝ Now have z b c d
+     newsignal←PopParenthesis ⍝ Now have z b c d
+     newsignal←clsexpn
  :Case StV         ⍝ lpar left of naked adv:  ( /
                    ⍝ lpar left of monadic fn: ( monfn) ⍵
-     PopParenthesis
+     newsignal←PopParenthesis
+     newsignal←clsexpn
  :Case StC         ⍝ lpar left of naked conj: ( +.×
      snPC
  :Case StN         ⍝ lpar left of niladic fn: (NiladicFn)
      InvokeNiladicFn Stx
-     PopParenthesis
+     newsignal←PopParenthesis
+     newsignal←clsexpn
  :Case Sto
      ÷0 ⍝ FIXME
  :Case StA
@@ -24,4 +29,4 @@
  :Else
      snerr
  :EndSelect
- PushCursor c gett( E src), E tok ⍝ Skip parenthesis
+

@@ -11,7 +11,7 @@
  astr[asttarget]←E row
  ast←ast append2Ast astr
  stk[stkp;]←(E clsfn),(E row),E clsconj
- stkp←stko+1
+ stkp←stkp+1
  stk[stkp;0]←E clsfn ⍝ Now naked verb from parens
  state←Sto ⍝ Outside the parens, the naked
  ⍝conj is just a conj (op),e . g .,x(+.×) y

@@ -1,3 +1,3 @@
-﻿ Rescan newsig
- stk[stkp;Stkstate]←newsig
+﻿ Rescan newstate
+ stk[stkp;Stkstate]←newstate
  signal←clsrescan

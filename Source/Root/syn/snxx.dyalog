@@ -3,3 +3,4 @@
  ⍝ This is likely a strand, such as:
  ⍝   ((x foo y) c d)
  ⍝⍝⍝⍝⍝⍝⍝⍝ Probably bad idea PushCursor Push Stx
+1÷0
