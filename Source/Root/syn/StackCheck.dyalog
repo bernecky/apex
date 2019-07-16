@@ -1,6 +1,6 @@
 ﻿ r←x StackCheck y;i;k;m
  ⍝ Check stack state for paren/bracket expn
- ⍝ Result stk row that starts innermost nesting level
+ ⍝ Result is stk row that starts innermost nesting level
  i←stackent,y ⍝ Detect syntax error in source program
  k←<\i[;Stkvalue]∊(E,')'),E,']' ⍝ Innermost nesting
  m←''⍴k/⍳⍴k

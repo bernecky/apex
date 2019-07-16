@@ -19,14 +19,13 @@
    ⍝ or
    ⍝       foo_out0←b ⋄ foo_out1←c ⋄ foo_out2←d
    ⍝ These vars are short-lived; they disappear during semi-global analysis
-     i←stkpop sz
+     i←stkpop sz ⍝ Pop (b c d) and the right paren
      dirin←Sta=stk[stkp-1;Stkstate] ⍝ true for (b c d)←omega
                                     ⍝ false for omega←(b c d)
-     (ast astr)←(ast dirin)BuildStrandAssigns i
+     (ast astr stk)←(ast dirin stk)BuildStrandAssigns i
      ast←ast append2Ast astr
  :Else ⍝ Not a strand. Something like (omega). Just remove the parens
-   i←stkpop 2 ⍝ Popped item, previous syntax state
-   PushCursor(i[0;Stkvalue,Stktokcl], E 1) Push D i[1;Stkstate]
-   Rescan clsexpn
+     i←stkpop 2 ⍝ Popped item, previous syntax state
+     PushCursor(i[0;Stkvalue,Stktokcl],E 1)Push D i[1;Stkstate]
+     Rescan clsexpn
  :EndIf
- 

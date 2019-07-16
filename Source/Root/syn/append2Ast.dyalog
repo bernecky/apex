@@ -12,7 +12,7 @@
  :If trace
      ⎕←'Appending to ast: '
      ⎕←y
-     ⎕←⍪src((¯2+-c)↑'^')
+     ⎕←⍪src((¯1+-c)↑'^')
  :EndIf
  row←≢ast
  ast←ast⍪astNewRows i
