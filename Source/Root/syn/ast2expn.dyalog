@@ -14,7 +14,7 @@
      InvokeDyadicFn
  :Case StC           ⍝ Expn left of naked conj:   (⍺)+.×
      snxC
- :Case StA           ⍝ Expn left of assign:       (b c d)←omega
+ :Case Sta           ⍝ Expn left of assign:       (b c d)←omega
      snxxxxx            ⍝ Strand assignment in called fn
  :Case Stx           ⍝ Expression left of expression ((x foo y) c d)
      snxx            ⍝ Stranded again...
