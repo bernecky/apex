@@ -1,5 +1,5 @@
-﻿ snix;i
- ⍝ Identifier left of expression
+﻿ snis;i
+ ⍝ Identifier left of strand
  ⍝ If the id is a defined verb, stack the verb.
  ⍝ Otherwise, syntax error.
 
@@ -7,7 +7,7 @@
 ⍝                                          ↑ here
  i←c gett(E src),E tok ⍝ Get the identifier
  :Select ast[D i[GettValue];astclass]
- :CaseList astclassNFN,astclassMFN,astclassDFN
+ :CaseList astclassNFN,astclassMFN,astclassDFN,astclassnFN,astclassmFN,astclassdFN
      PushCursor Push Stf
  :Case astclassVARB ⍝ id left of expression, I.e., strand
      PushCursor Push Stx

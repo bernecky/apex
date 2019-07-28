@@ -1,6 +1,6 @@
 ﻿r←fldr dodfa asts;genws;PFAT;target;phasepause;debugdfa;PartialEvaluation;visualizedfa
  Initialize
- initializeAST
+ InitializeAST
  initializeSSA
  initializeDEBUG
  InitializeFns

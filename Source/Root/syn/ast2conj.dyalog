@@ -7,9 +7,9 @@
      PushCursor Push Sto ⍝ Push conj
  :Case Std               ⍝ Conj left of dyadic fn w/stacked args: ⍺ f⍵
                          ⍝ E.g., f⍤dimx ⊢ y
-     rop←stkpop 1      ⍝ Pop rop; restore it after ⊢y call
+     rop←StackPop 1      ⍝ Pop rop; restore it after ⊢y call
      InvokeMonadicFn     ⍝ Emit tmp← ⊢ y and stack tmp
-     stkpush rop
+     stk←stk StackPush rop
      PushCursor Push Sto ⍝ Push conj
  :Else
      snerr

@@ -22,7 +22,7 @@
      PushCursor i         ⍝ ...past identifier
      p←i[1]∊(E clsrbr),(E clsid),E clsqdnm
      'Source program syntax error: bad index expression'assert p
-     j←stackent 0 ⍝ Source for assign
+     j←(stkp-1)⌷stk ⍝ Source for assign
      astr←,astNewRows 1
      astr[asttarget]←i[GettValue]
      astr[astfn]←E Copy

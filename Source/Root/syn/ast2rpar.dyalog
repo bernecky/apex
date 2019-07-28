@@ -8,6 +8,8 @@
                        ⍝ Rpar left of bos:       ...)
                        ⍝ Rpar left of fn:        f) ???
      PushCursor Push Stn
+ :Case Sta ⍝ )←   Strand if we have (x y z)←( b c d)
+     PushCursor Push Stn
  ⍝ Need Sto,Std,StV,StC,StA
  :Else
      snerr

@@ -14,6 +14,8 @@
      snaa÷0 ⍝ Very wrong
  :Case Sto     ⍝ Assign left of operator ????
      snao÷0
+ :Case StS     ⍝ Assign left of strand
+     PushCursor Push Sta ⍝ Push assign so have ←(b c d)
  :Case Stz     ⍝ Assign left of error
      snerr
  :Case Std     ⍝ Assign left of dyadic fn and argument (x←⍺ f ⍵)

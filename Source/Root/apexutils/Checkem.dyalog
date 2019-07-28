@@ -1,10 +1,10 @@
-﻿ Checkem asts;ast;cv;i;b;c;d;p
+﻿ Checkem asts;ast;cv;i;b;d;p
 ⍝ This performs various paranoia checks that make
 ⍝ fault isolation faster, supposedly, while also making
 ⍝ you want to buy a faster cpu.
  :If 1  ⍝⍝⍝∨debugphase≡'yes'
      ast←D asts[ssaast]
-     c←ast[;astvalue]∊NULL
+     ⍝⍝⍝ confused c←ast[;astvalue]∊NULL
      d←D(D ast[;astPred])[;astPredKnowValue]
 ⍝ 'dontknownothin'.assert ~∨/d∧c
      'xrho not integral'assert∧/ast[;astxrho]=⌊ast[;astxrho]

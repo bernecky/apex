@@ -9,7 +9,7 @@
  phasepause←LC GetOption'phasepause' ⍝ Interphase pausing
  trace←'yes'≡3↑LC GetOption'tracesyn'
  debugphase←LC GetOption'debugsyn'
- fldr←fldr,(PathDelim≠¯1↑fldr)/PathDelim
+ ⍝⍝⍝fldr←fldr,(PathDelim≠¯1↑fldr)/PathDelim
  asts←fldr syn.dosyn GetBlistFns fldr
  asts←fldr idioms.doidioms asts
  asts←fldr ssa.dossa asts

@@ -5,20 +5,21 @@
  i←i,clsctl,clssemic,clslbr,clsNilFn,clsqdnm,clsnum,clschar
  c←¯1+''⍴⍴src ⍝ The "caret" or cursor.
  ⍝ Syntax analyzer states are:
- Stn←'n' ⍝ New statement, aka BOS (Beginning of statement)
- Stf←'f' ⍝ Function (and right argument) f ⍵
- Stx←'x' ⍝ Expression:           1 2 3   or (evaluated)
- Stl←'l' ⍝ Left bracket:         [
  Sta←'a' ⍝ Assign                ←
- Sto←'o' ⍝ Right operand to conjunction    0 1 ⍵
- Stc←'c' ⍝ Conjunction (dyadic operator)  +.×
- Std←'d' ⍝ Dyadic function w/stacked arguments: ⍺ f ⍵
- StN←'N' ⍝ Niladic function
- StV←'V' ⍝ Naked verb:            f
- StC←'C' ⍝ Naked Conjunction:     .
  StA←'A' ⍝ Naked adverb:          /
+ Stc←'c' ⍝ Conjunction (dyadic operator)  +.×
+ StC←'C' ⍝ Naked Conjunction:     .
+ Std←'d' ⍝ Dyadic function w/stacked arguments: ⍺ f ⍵
+ Stf←'f' ⍝ Function (and right argument) f ⍵
+ Stl←'l' ⍝ Left bracket:         [
+ Stn←'n' ⍝ New statement, aka BOS (Beginning of statement)
+ StN←'N' ⍝ Niladic function
+ Sto←'o' ⍝ Right operand to conjunction    0 1 ⍵
+ StS←'s' ⍝ Strand ( b c d)
+ StV←'V' ⍝ Naked verb:            f
+ Stx←'x' ⍝ Expression:           1 2 3   or (evaluated)
  Stz←'z' ⍝ Error:                 syntax error
- states←Stn,Stf,Stx,Stl,Sta,Sto,Stc,Std,StV,StC,StA,Stz,StN
+ states←Sta,StA,Stc,StC,Std,Stf,Stl,Stn,StN,Sto,StS,StV,Stx,Stz
  state←Stn ⍝ Start of statement
  stkdepth←1+⍴tok ⍝ This is usually overkill
  stk←((stkdepth),3)⍴E'' ⍝ Stack columns are: state, src value, token class

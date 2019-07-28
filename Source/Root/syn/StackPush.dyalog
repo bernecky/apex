@@ -1,5 +1,5 @@
-﻿ stkpush y;i
- ⍝ Push y onto stack.
+﻿ stk←stk StackPush y;i
+ ⍝ Push y onto stk
  i←''⍴⍴y←mm y
  stk[stkp+⍳i;Stkstate,Stkvalue,Stktokcl]←y
  stkp←stkp+i

@@ -1,6 +1,6 @@
 ﻿ snBx;j;n;astr;row
  ⍝ Left bracket [ left of expression
- m←']'StackCheck⍳stkp
+ m←']'StackMatchBracket 0
  ⍝ Replace stacked indices with head of index list generated from same.
  j←stkpop m
  n←''⍴⍴j ⍝ # ast entries for index list

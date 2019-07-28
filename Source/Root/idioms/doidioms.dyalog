@@ -1,6 +1,6 @@
 ﻿ r←fldr doidioms asts;genws;TargetLanguage;phasepause;debugidioms;PartialEvaluation;visualizeidioms;PartialEvaluation
  Initialize
- initializeAST
+ InitializeAST
  initializeSSA
  phasepause←LC GetOption'phasepause'   ⍝ Interphase pausing
  debugidioms←LC GetOption'debugidioms' ⍝ Extensive ast check in idioms

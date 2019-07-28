@@ -5,6 +5,7 @@
      InvokeMonadicFn
      newsignal←PopParenthesis
  :Case Stx         ⍝ lpar left of expn:       (⍵
+                   ⍝ Perhaps a strand (a b c)
      snPx
      ⍝⍝⍝ ???? newsignal←PopParenthesis
      newsignal←clsexpn

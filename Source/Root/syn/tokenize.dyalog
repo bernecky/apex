@@ -20,7 +20,7 @@
  i←b tokenizeDyalog y ⋄ b←b∧~i ⋄ r[i/⍳⍴i]←clsctl
 
  ⍝ Primitive fns and all other 1-element tokens
- tv←'{+-×÷<≤=≥>≠≡*⍟∨∧⍪∊⍷⍴⊖~⍉↑↓⍳⌈⌊⍱⍲⍒⍋⌹€⊣⊂⊃∩∪⊤⊥⍕⍎|⌽,?○∘≢⌶⊢⊣⌷'
+ tv←'+-×÷<≤=≥>≠≡*⍟∨∧⍪∊⍷⍴⊖~⍉↑↓⍳⌈⌊⍱⍲⍒⍋⌹€⊣⊂⊃∩∪⊤⊥⍕⍎|⌽,?○∘≢⌶⊢⊣⌷'
  tc←(⍴tv)⍴clsfn ⍝ Fn token class
 
 ⍝ Space, assign, adverbs
@@ -31,9 +31,9 @@
 tv←tv,'Öö⍣⌺⍤' 
 tc←tc,5⍴clsconj
 
-⍝ Brackets, labels, colon, semicolon, diamond, goto
- tv←tv,'[]():;⋄ →' 
- tc←tc,clslbr,clsrbr,clslpar,clsrpar,clscolon,clssemic,clssep,clsgoto
+⍝ Brackets, labels, colon, semicolon, diamond, goto, curly braces
+ tv←tv,'[]():;⋄ →{}' 
+ tc←tc,clslbr,clsrbr,clslpar,clsrpar,clscolon,clssemic,clssep,clsgoto,clslbr,clsrbr
 
  i←b∧y∊tv
  r[i/⍳⍴i]←tc[tv⍳i/y]

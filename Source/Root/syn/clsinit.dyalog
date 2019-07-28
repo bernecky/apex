@@ -23,7 +23,9 @@
  clsspace←'s'  ⍝ Blank
  clsexpn←'x' ⍝   Evaluated expn already on stack
  clsqdnm←'⎕' ⍝   System function or variable
+ clslbr←'{'    ⍝ Left curly brace
+ clsrbr←'}'    ⍝ Right curly brace
  classes←clsassign,clsrbr,clslbr,clschar,clslamp,clsconj,clssep
  classes←classes,clsfn,clsgoto,clsid,clsctl,clscolon,clssemic
  classes←classes,clsadverb,clsnum,clsNilFn,clslpar,clsqq,clsrpar
- classes←classes,clsrescan,clsspace,clsexpn,clsqdnm
+ classes←classes,clsrescan,clsspace,clsexpn,clsqdnm,clslbr,clsrbr

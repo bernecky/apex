@@ -1,7 +1,7 @@
 ﻿ ast2id
 ⍝ Identifier left of anything
  :Select state
- :Case Stn                ⍝ Id left of bos:        ⍵
+ :Case Stn                ⍝ Id left of strand or bos:        ⍵
      snin
  :Case Stf                ⍝ Id left of fn:         ⍵ f...
      snif
@@ -13,8 +13,10 @@
      sniC
  :Case StA                ⍝ Id left of naked adv:  ⍺ /
      sniA
- :Case Stx                ⍝ Id left of expression
+ :CaseList Stx            ⍝ Id left of expression
      snix
+ :CaseList StS            ⍝ Id left of strand
+     snis
  :Case Stl                ⍝ Id left of left bracket:  ⍺[...] or ⍺[...]←⍵
      snil
  :Case StN                ⍝ Id left of niladic fn: foo Niladicfn

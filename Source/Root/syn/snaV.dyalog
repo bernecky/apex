@@ -2,7 +2,7 @@
  ⍝ Assign name to a naked verb.
  ⍝ No change in state, side effect only.
  i←(c-1)gett(E src),E tok
- j←stackent 0 ⍝ Source for assign(tos)
+ j←(stkp-1)⌷stk ⍝ Source for assign
  astr←,astNewRows 1
  astr[asttarget]←i[GettValue]
  p←ast[D i[GettValue];astclass]∊astclassVARB,NULL,j[Stktokcl]

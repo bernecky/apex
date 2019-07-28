@@ -13,7 +13,7 @@
  tok←src QuadnameNiladicKludge¨tok ⍝ Undo more APL design errors
  f←(E¨src),¨E¨tok
  ⍝ Get class and valence of all source fns
- initializeAST
+ InitializeAST
  gst←D buildgst¨f
  asts←(E(E gst),E f)sntx¨⍳⍴f ⍝ Invoke syntax analyzer
  asts←ComposeKludge¨asts  ⍝ Fix conj/adv rop vs rarg

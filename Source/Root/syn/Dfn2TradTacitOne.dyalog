@@ -8,15 +8,15 @@
      lcls←fns DfnLocals t ⍝ Get variable names for localization
      (t nma nmo)←DfnAlphaOmega t ⍝ Rename our ⍺ and ⍵
 
-⍝⍝⍝ KLUDGE: RESULT IS ALWAYS Z
-⍝⍝⍝nmz←D TempName E'Res'
-
 ⍝ Fn header for new inner Tradfn
      t←dbr UnDiamondize DeleteComments t ⍝ Avoid "Z←⍝ foo"
-     nmz←'Z'
+     ⍝ If last line is apparently a strand (I.e., it begins with '(' )
+     ⍝ We make the strand itself the result.
+     isstrnd←'('=1↑dlb,¯1↑t
+     nmz←D isstrnd⌷(E,'Z'),E,¯1↑t
      z←nmz,'←',nma,' ',fnm,' ',nmo,,D Raze';',¨lcls
      ⍝ Append result assign to last non-comment line
      ⍝ which had better contain Z, with assign
-     t←(¯1↓t)rcat nmz,'←',¯1↑t
-     (isDfn ⍺)⌷⍺(z rcat t)
+     z←z rcat(¯1↓t)rcat(~isstrnd)/nmz,'←',,¯1↑t
+     (isDfn ⍺)⌷⍺ z
  }

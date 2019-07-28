@@ -10,7 +10,7 @@
  fns←D nub ER1 D Raze 1⊃¨i
  sis←fns EmitPrimitiveFnDefns asts
  sis←D Raze sis,cudefinedfns
- r←EmitOutputFile(E asts),(E sis),E fldr
- m←D(FileNameBreak fldr)[1] ⍝ Get filename
+ m←D(FileNameBreak fldr)[1] ⍝ Filename only
+ r←EmitOutputFile(E asts),(E sis),E fldr,PathDelim,m
  ((-⍴m)↓fldr)CoverFn fldr ⍝ Create cover function for APL ws
  ⎕←(fts ⎕TS),': Code generation complete for: ',fldr

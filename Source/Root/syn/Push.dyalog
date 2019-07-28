@@ -6,6 +6,6 @@
  :EndIf
  'rbe is confused'assert(3=¯1↑⍴gettentry)∧(newstate∊states)∧state∊states
  'rbe is even confuseder'assert gettentry[GettClass]∊classes
- stkpush(E state),gettentry[GettValue,GettClass]
+ stk←stk StackPush(E state),gettentry[GettValue,GettClass]
  state←newstate
  r←gettentry

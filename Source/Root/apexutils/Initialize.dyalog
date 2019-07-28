@@ -1,7 +1,7 @@
 ﻿ Initialize
  ⎕IO←0 ⍝ Everyone's index origin
  ⍝ Establish various globals we'll need.
- initializeAST
+ InitializeAST
  initializeSSA
  A1←'abcdefghijklmnopqrstuvwxyz'
  A2←'ABCDEFGHIJKLMNOPQRSTUVWXYZ'

@@ -1,4 +1,4 @@
-﻿ initializeAST
+﻿ InitializeAST
 ⍝ Initialize accessors for Abstract Syntax Tree access
  ⍝ Define ast columns
  asttarget←0      ⍝ Result of function

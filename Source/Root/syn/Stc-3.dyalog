@@ -1,1 +1,0 @@
-﻿⌷Stc←<char>c</char>
