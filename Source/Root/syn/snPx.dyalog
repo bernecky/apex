@@ -1,4 +1,4 @@
-﻿ snPx;i;j;k;m;newsignal;astr;dirin;sz;lhs;rhs;rhsindex
+﻿ snPx;i;j;k;m;newsignal;astr;dirin;sz;lhs;rhs;rhsindex;subfn
  ⍝ Left parenthesis left of expression(s)
  ⍝ E.g.,
  ⍝ Got both args of dyadic fn:      (exp)+exp
@@ -39,7 +39,8 @@
          'Need omega as bottom stack item'assert 0=rhsindex
          ⍝ Build assigns for semi-globals in
          lhs←Stkvalue⌷⍤1⊢StackCopy sz
-         (ast astr stk)←lhs BuildStrandAssigns(ast 1 stk)
+         subfn←ast[dfnname;asttarget]
+         (ast astr stk)←lhs BuildStrandAssigns(ast 1 stk subfn)
          ast←ast append2Ast astr
          state←Stx
          j←StackPop sz+1 ⍝ Pop the lhs strand
