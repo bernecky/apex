@@ -1,8 +1,10 @@
-﻿ InvokeMonadicFn;astr;i;j;cls;row;nms
+﻿ InvokeMonadicFn;astr;i;j;cls;row;nms;stke
  ⍝ Invoke stacked fn monadically, maybe
  :If 2 isStrand stk ⍝ If rarg is strand, destrand it
      nms←')'StrandItems 2
      (ast astr stk)←nms BuildStrandAssigns(ast 1 stk)
+     stke←StackPop 3+⍴nms ⍝ Pop nms, ( ) and the fn
+     stk←stk StackPush stke[2 0;] ⍝ Push (fn dummyarg)
      ast←ast append2Ast astr
  :EndIf
 

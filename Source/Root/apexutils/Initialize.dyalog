@@ -12,7 +12,6 @@
  ⍝ stscope values are astscope values
  NullChar←⎕AV[0]
  NULL←E ¯1
- Copy←,'←'
  asttypeB←E 0 ⋄ asttypeI←E 1 ⋄ asttypeD←E 2
  asttypeZ←E 3 ⋄ asttypeC←E 4 ⋄ asttypeJ←E 5
  ⍝ Following two sets of types must be kept in synch

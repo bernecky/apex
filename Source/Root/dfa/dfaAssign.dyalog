@@ -5,7 +5,7 @@
  i←wl∧isnum ast[;asttarget] ⍝ Numeric targets
  i←i∧~ast[;asttarget]∊NULL
  ⍝ Assign, dex, and the implicit/explicit result assigns
- assigns←(E Copy),(E,'←'),(E,'€'),(E':RE'),(E':RI'),(E'⎕←')
+ assigns←(E astfnCopy),(E,'←'),(E,'€'),(E':RE'),(E':RI'),(E'⎕←')
  i←i∧ast[;astfn]∊assigns
  wl←wl∧~i ⍝ Update worklist
  :If 1∊i ⍝ Any work?

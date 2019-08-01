@@ -80,3 +80,4 @@
  dfnrarg←1+dfnlarg←1+dfnres←1+dfnname←0 ⍝ Fixed ast row defns
  aststz←E' END' ⍝ Marks end of names&constants in ast
  astNoFn←E' -'  ⍝ Mark elided arg/result in fixed part of ast
+ astfnCopy←,'←'

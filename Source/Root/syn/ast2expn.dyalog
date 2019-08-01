@@ -1,4 +1,4 @@
-﻿ ast2expn
+﻿ ast2expn;astr
 ⍝ Expression left of anything
  :Select state
  :Case Stn           ⍝ Expn left of bos:          (⍵)
@@ -14,8 +14,18 @@
      InvokeDyadicFn
  :Case StC           ⍝ Expn left of naked conj:   (⍺)+.×
      snxC
- :Case Sta           ⍝ Expn left of assign:       (b c d)←omega
-     snxxxxx            ⍝ Strand assignment in called fn
+ :Case Sta           ⍝ Strand left of assign:       (b c d)←omega
+     ⍝ Maybe this should be in snax?
+     'Stack confusion'assert 2=stkp
+     ⍝ If we had (val1)←omega, it turned into val1←omeg
+     ⍝ If not, I am confused
+     astr←,astNewRows 1
+     astr[asttarget]←Stkvalue⌷,StackPop 1
+     astr[astrarg]←Stkvalue⌷,StackCopy 1
+     astr[astfn]←E astfnCopy
+     astr[astclass]←astclassVARB
+     ast←ast append2Ast astr
+     state←Stx
  :Case Stx           ⍝ Expression left of expression ((x foo y) c d)
      snxx            ⍝ Stranded again...
  :Else

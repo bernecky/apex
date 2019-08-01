@@ -1,0 +1,1 @@
+isFormalArg←{⍵∊dfnlarg,dfnrarg}

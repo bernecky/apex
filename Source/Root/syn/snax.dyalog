@@ -25,7 +25,7 @@
      j←(stkp-1)⌷stk ⍝ Source for assign
      astr←,astNewRows 1
      astr[asttarget]←i[GettValue]
-     astr[astfn]←E Copy
+     astr[astfn]←E astfnCopy
      astr[astrarg]←j[1]
      astr[astclass]←astclassVARB
      astr←ast QuoteQuadInputKludge2 astr

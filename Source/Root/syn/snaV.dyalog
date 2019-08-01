@@ -9,7 +9,7 @@
  'Source program syntax error: id class change'assert p
  ⍝ Class can only change from unknown or varb to fixed value.
  ast[D i[GettValue];astclass]←j[Stktokcl] ⍝ Now fixed.
- astr[astfn]←E Copy
+ astr[astfn]←E astfnCopy
  astr[astrarg]←j[Stkvalue]
  astr[astclass]←j[Stktokcl]
  PushCursor i

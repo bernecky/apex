@@ -5,9 +5,9 @@
      InvokeMonadicFn
      newsignal←PopParenthesis
  :Case Stx         ⍝ lpar left of expn:       (⍵
-                   ⍝ Perhaps a strand (a b c)
+                   ⍝ Perhaps strand on lhs? (a b c)←⍵
+                   ⍝ or strand on rhs foo( a b c)
      snPx
-     ⍝⍝⍝ ???? newsignal←PopParenthesis
      newsignal←clsexpn
  :Case Std         ⍝ lpar left of dyadic fn:  (⍺ f ⍵) b c d 
      InvokeDyadicFn
