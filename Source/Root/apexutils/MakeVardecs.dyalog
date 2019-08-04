@@ -5,12 +5,12 @@ MakeVardecs←{
  ⍝ Remove new duplicate names. We assume that
  ⍝ SSA will do any renaming that is required.
  nms←,⍵
- (ast stk)←⍺
+ (ast stk scope)←⍺
  nms←(~nms∊ast[;asttarget])⌿nms ⍝ Remove dups
  astr←astNewRows≢nms
  astr[;asttarget]←nms
  astr[;astclass]←astclassVARB
- astr[;astscope]←astscopeL ⍝ Local variables
+ astr[;astscope]←scope ⍝ Local variables vs. semi-globals
  N←ast[;asttarget]⍳aststz  ⍝ End of old vardecs
  ast←(N↑ast)⍪astr⍪N↓ast
  nums←⍳≢ast 

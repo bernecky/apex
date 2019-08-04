@@ -7,12 +7,12 @@ BuildStrandAssigns←{
   sgi←inout StrandSemiGlobalNames (subfn (≢nms)) 
   ⍝⍝ st←StackPop 3+⍴nms ⍝ Pop nms, ( ) and the fn
   ⍝⍝ stk←stk StackPush st[2 0;] ⍝ Push (fn dummyarg)
-  (ast stk sgi)←(ast stk) MakeVardecs sgi
+  (ast stk sgi)←(ast stk (astscopeSGI+astscopeSGO)) MakeVardecs sgi
   astr←astNewRows ≢nms
   astr[;inout⌽astrarg,asttarget]← sgi,⍪nms
   astr[;astfn]←E astfnCopy
   astr[;astclass]←astclassVARB
-  astr[;astscope]←0
+  astr[;astscope]←astscopeSGI+astscopeSGO
   ( ast astr stk)
  }
 

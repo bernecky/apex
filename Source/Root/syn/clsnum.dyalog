@@ -1,1 +1,0 @@
-﻿⌷clsnum←<char>n</char>

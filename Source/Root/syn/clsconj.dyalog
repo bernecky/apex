@@ -1,1 +1,0 @@
-﻿⌷clsconj←<char>d</char>

@@ -1,1 +1,0 @@
-﻿⌷clsadverb←<char>m</char>

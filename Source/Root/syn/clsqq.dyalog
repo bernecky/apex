@@ -1,1 +1,0 @@
-﻿⌷clsqq←<char>q</char>

@@ -1,1 +1,0 @@
-﻿⌷clslpar←<char>P</char>

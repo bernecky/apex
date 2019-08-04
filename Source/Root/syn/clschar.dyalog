@@ -1,1 +1,0 @@
-﻿⌷clschar←<char>c</char>

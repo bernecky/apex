@@ -1,1 +1,0 @@
-﻿⌷clssemic←<char>l</char>

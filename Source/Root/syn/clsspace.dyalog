@@ -1,1 +1,0 @@
-﻿⌷clsspace←<char>s</char>

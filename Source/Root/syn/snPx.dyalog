@@ -26,7 +26,7 @@
          astr[;astrarg]←rhs
          astr[;astfn]←E astfnCopy
          astr[;astclass]←astclassVARB
-         astr[;astscope]←0
+         astr[;astscope]←astscopeL
          ast←ast append2Ast astr
          ⍝ New state is rhs strand
          i←StackPop 1

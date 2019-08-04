@@ -1,3 +1,3 @@
 ﻿ initializeDEBUG
- trace←0
+ trace←1
  stophere←⍳0
