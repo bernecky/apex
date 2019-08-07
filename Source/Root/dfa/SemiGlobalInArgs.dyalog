@@ -11,7 +11,7 @@
  j←astmerge(E nast),(E astr),E(⍳1↑⍴nast)∊tar
  :If trace≠0 ⍝ DEBUG
      :If ~0∊⍴astrow
-         ⎕←'Semiglobals into: ',D sast[0;asttarget]
+         ⎕←'Semiglobals into: ',D nast[0;asttarget]
          ⎕←'before: ' ⋄ nast[tar;asttarget]
          ⎕←'after : ' ⋄ astr[;asttarget]
      :EndIf

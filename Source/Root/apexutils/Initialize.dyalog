@@ -2,7 +2,7 @@
  ⎕IO←0 ⍝ Everyone's index origin
  ⍝ Establish various globals we'll need.
  InitializeAST
- initializeSSA
+ InitializeSSA
  A1←'abcdefghijklmnopqrstuvwxyz'
  A2←'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  digits←'0123456789'

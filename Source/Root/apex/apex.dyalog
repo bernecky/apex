@@ -1,6 +1,7 @@
-﻿ apex fldr;opts;TargetLanguage;drive;PartialEvaluation;asts
+﻿ apex fldr;opts;TargetLanguage;drive;PartialEvaluation;asts;fns;trace
 ⍝ Set up compiler options for compilation of folder fldr
  Initialize
+ trace←1 ⍝ Noisy, eh?
 ⍝ Partial evaluation is broken as of 1999-04-23./rbe
 ⍝ So is sac output. Well, actually, it ain't writ yet.
  drive←GetOption'drive'
@@ -10,7 +11,8 @@
  trace←'yes'≡3↑LC GetOption'tracesyn'
  debugphase←LC GetOption'debugsyn'
  ⍝⍝⍝fldr←fldr,(PathDelim≠¯1↑fldr)/PathDelim
- asts←fldr syn.dosyn GetBlistFns fldr
+ fns←GetBlistFns fldr
+ asts←fldr syn.dosyn fns
  asts←fldr idioms.doidioms asts
  asts←fldr ssa.dossa asts
  asts←fldr dfa.dodfa asts

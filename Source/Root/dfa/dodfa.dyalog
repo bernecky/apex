@@ -1,7 +1,7 @@
-﻿r←fldr dodfa asts;genws;PFAT;target;phasepause;debugdfa;PartialEvaluation;visualizedfa
+﻿ r←fldr dodfa asts;genws;PFAT;target;phasepause;debugdfa;PartialEvaluation;visualizedfa
  Initialize
  InitializeAST
- initializeSSA
+ InitializeSSA
  initializeDEBUG
  InitializeFns
  phasepause←LC GetOption'phasepause' ⍝ Interphase pausing
@@ -9,4 +9,4 @@
  visualizedfa←LC GetOption'visualizedfa'
  PartialEvaluation←LC GetOption'partialevaluation'
  TargetLanguage←LC GetOption'output'
-r←fldr dodfaOne asts
+ r←fldr dodfaOne asts

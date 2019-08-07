@@ -1,4 +1,4 @@
-﻿ r←ctx SemiGlobalAnalysis cds;mysg;fns;ct;callsme;j;SGMaps;i;AllVarbs;MapSGI;MapSGO;ast
+﻿ r←ctx SemiGlobalAnalysis cds;fns;ct;callsme;j;SGMaps;i;AllVarbs;MapSGI;MapSGO;ast;astr
 ⍝ Locate and mark semiglobals
 ⍝ 3 flavors:
 ⍝  SGI: semi-global in:  this fn or a sub-fn references this non-local
@@ -30,14 +30,20 @@
  :For i :In ⍳⍴cds
      ast←D(D cds[i])[ssaast]
      callsme←(×ct[;i])/⍳⍴fns⍝ Who calls me
+     :if trace
+       ⎕←(D ast[dfnname;asttarget]),' has semi-globals IN of:'
+       ⎕←MapSGI[;i]/AllVarbs
+       ⎕←(D ast[dfnname;asttarget]),' has semi-globals OUT of:'
+       ⎕←MapSGO[;i]/AllVarbs
+     :endif
  ⍝ Create new ast rows w/proper scope
-     mysg←astNewRows+/MapSGI[;i]∨MapSGO[;i]
-     mysg[;asttarget]←(MapSGI[;i]∨MapSGO[;i])/AllVarbs
-     j←mysg[;asttarget]⍳MapSGO[;i]/AllVarbs
-     mysg[j;astscope]←mysg[j;astscope]+astscopeSGO
-     j←mysg[;asttarget]⍳MapSGI[;i]/AllVarbs
-     mysg[j;astscope]←mysg[j;astscope]+astscopeSGI
-     cds[callsme]←(E mysg)SemiGlobalMerge¨cds[callsme]
+     astr←astNewRows+/MapSGI[;i]∨MapSGO[;i]
+     astr[;asttarget]←(MapSGI[;i]∨MapSGO[;i])/AllVarbs
+     j←astr[;asttarget]⍳MapSGO[;i]/AllVarbs
+     astr[j;astscope]←astr[j;astscope]+astscopeSGO
+     j←astr[;asttarget]⍳MapSGI[;i]/AllVarbs
+     astr[j;astscope]←astr[j;astscope]+astscopeSGI
+     cds[callsme]←(E astr)SemiGlobalMerge¨cds[callsme]
  :EndFor
  ⍝ Amend calls to include semiglobals in and out
  cds←(E(E ctx),E cds)SemiGlobalSGIparms¨⍳⍴cds

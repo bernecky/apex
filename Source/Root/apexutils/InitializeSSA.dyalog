@@ -1,4 +1,4 @@
-﻿ initializeSSA
+﻿ InitializeSSA
  ⍝ DFA and SSA data structure
  ssaast←1+ssast←0                   ⍝ Symbol table, AST
  ssacfg←1+ssabb←1+ssacv←1+ssaast    ⍝ Control flow graph,
