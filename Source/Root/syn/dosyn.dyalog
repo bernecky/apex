@@ -1,6 +1,7 @@
-﻿ r←fldr dosyn y;f;gst;tn;asts;src;tok;wif
+﻿ r←x dosyn y;f;gst;tn;asts;src;tok;wif;fldr;trace
  ⍝ Perform syntax analysis for the function files named in y.
  ⍝ Result is asts
+ (fldr trace)←x
  ⎕←(fts ⎕TS),': Starting syntax analysis for: ',fldr
  src←GetFn¨,¨y  ⍝ Get all source code
  src←LocalizeSysVars¨src           ⍝ Undo APL design errors

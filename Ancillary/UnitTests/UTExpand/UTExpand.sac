@@ -6,7 +6,7 @@ use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
 
-/* Compiled by APEX Version: /home/apex/apex3/wss/sac3013.dws2012-11-07 10:35:22.986 */
+/* Compiled by APEX Version: /home/apex/apexgit/wss/apex.dws2019-07-25 11:21:11.578 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -38,7 +38,7 @@ inline int barBBI(bool x, bool y)
 
 inline bool[.] comaXBB(bool y)
 { /* Ravel of scalar */
-        return([y]);
+  return([y]);
 }
 
 inline int[*] rhoIII(int[.] x, int[*] y)
@@ -56,7 +56,7 @@ inline int[*] rhoIII(int[.] x, int[*] y)
 
 
 inline bool[.] rhoIBB(int x, bool[*] y)
-{ /* Scalar reshape non-scalar (to vector) */
+{ /* [Scalar reshape non-scalar] (to vector) */
  z = rhoIBB( [toi(x)],y);
  return(z);
 }
@@ -195,7 +195,7 @@ inline bool[.] bslBBB(bool x, bool y)
  /* In practice, one-element left arguments to expand
   * are nearly useless...
   */
-  z = (true == toB(x))  ?  [y]  :  [toB(0)];
+  z = (true == toB(x))  ?  [y]  :  [false];
   return(z);
 }
 
@@ -247,7 +247,7 @@ inline bool[.] bsl1BBB(bool x, bool y)
  /* In practice, one-element left arguments to expand
   * are nearly useless...
   */
-  z = (true == toB(x))  ?  [y]  :  [toB(0)];
+  z = (true == toB(x))  ?  [y]  :  [false];
   return(z);
 }
 
@@ -307,13 +307,13 @@ inline bool andBBB(bool x, bool y)
 
 inline bool[+] eqBBB(bool[+] x, bool[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
+         sy = shape(y);
          z = with {
              ( . <= iv <= .) {
                       xel = x[iv];
                    yel = y[iv];
            } : eqBBB(xel,yel);
-        } : genarray(sx, false);
+        } : genarray(sy, false);
   return(z);
 }
 
@@ -324,13 +324,13 @@ inline bool[+] eqBBB(bool[+] x, bool[+] y)
 
 inline bool[+] eqIIB(int[+] x, int[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
+         sy = shape(y);
          z = with {
              ( . <= iv <= .) {
                       xel = x[iv];
                    yel = y[iv];
            } : eqIIB(xel,yel);
-        } : genarray(sx, false);
+        } : genarray(sy, false);
   return(z);
 }
 
@@ -531,114 +531,114 @@ QUADio_0=toI(( false));
  QUADrl_0=( 16807);
  S0_0=( false);
  S1_0=( true);
- A_93=comaXBB( true);
- V1_0=( A_93);
- A_95=comaXBB( false);
- V0_0=( A_95);
+ A_88=comaXBB( true);
+ V1_0=( A_88);
+ A_90=comaXBB( false);
+ V0_0=( A_90);
  V10100_0=( [true,false,true,false,false]);
  V101011_0=( [true,false,true,false,true,true]);
- A_100=iotaXII( 24,QUADio_0);
- A_101=rhoIII([2, 3, 4],A_100);
- M234_0=( A_101);
- A_103=rhoIBB(20,[false,false,false,true]);
- A_104=rhoIBB(10,[false,true]);
- A_105=rhoIBB(20,[false,true]);
- A_106=bslBBB(A_105,A_104);
- A_108=sameBBB(A_106,A_103);
- r_0=( A_108);
- A_110=comaXBB( S0_0);
- A_111=bslBBB(S0_0,S0_0);
- A_113=sameBBB(A_111,A_110);
- A_114=comaBBB(r_0,A_113);
- r_1=( A_114);
- A_116=comaXBB( S0_0);
- A_117=bslBBB(S1_0,S0_0);
- A_119=sameBBB(A_117,A_116);
- A_120=comaBBB(r_1,A_119);
- r_2=( A_120);
- A_122=comaXBB( S1_0);
- A_123=bslBBB(S1_0,S1_0);
- A_125=sameBBB(A_123,A_122);
- A_126=comaBBB(r_2,A_125);
- r_3=( A_126);
- A_128=comaXBB( S0_0);
- A_129=bslBBB(V0_0,S0_0);
- A_131=sameBBB(A_129,A_128);
- A_132=comaBBB(r_3,A_131);
- r_4=( A_132);
- A_134=comaXBB( S0_0);
- A_135=bslBBB(V1_0,S0_0);
- A_137=sameBBB(A_135,A_134);
- A_138=comaBBB(r_4,A_137);
- r_5=( A_138);
- A_140=comaIBI(M234_0,false);
- A_141=comaBII(false,A_140);
- z_0=( A_141);
- A_143= ABC(toi([1, 0, 2, 0, 3, 4])-QUADio_0,shape(z_0)[2]);
-A_147=indrfr(2,z_0,A_143);
-z_1=( A_147);
- A_149=bslBII(V101011_0,M234_0);
- A_151=sameIIB(A_149,z_1);
- A_152=comaBBB(r_5,A_151);
- r_6=( A_152);
- A_155=iotaXII( 4,QUADio_0);
- A_156=bslBII(V101011_0,A_155);
- A_158=sameIIB(A_156,[0, 0, 1, 0, 2, 3]);
- A_159=comaBBB(r_6,A_158);
- r_7=( A_159);
- A_161=comaXBB( S0_0);
- A_162=bsl1BBB(S0_0,S0_0);
- A_164=sameBBB(A_162,A_161);
- A_165=comaBBB(r_7,A_164);
- r_8=( A_165);
- A_167=comaXBB( S0_0);
- A_168=bsl1BBB(S1_0,S0_0);
- A_170=sameBBB(A_168,A_167);
- A_171=comaBBB(r_8,A_170);
- r_9=( A_171);
- A_173=comaXBB( S1_0);
- A_174=bsl1BBB(S1_0,S1_0);
- A_176=sameBBB(A_174,A_173);
- A_177=comaBBB(r_9,A_176);
- r_10=( A_177);
- A_179=comaXBB( S0_0);
- A_180=bsl1BBB(V0_0,S0_0);
- A_182=sameBBB(A_180,A_179);
- A_183=comaBBB(r_10,A_182);
- r_11=( A_183);
- A_185=comaXBB( S0_0);
- A_186=bsl1BBB(V1_0,S0_0);
- A_188=sameBBB(A_186,A_185);
- A_189=comaBBB(r_11,A_188);
- r_12=( A_189);
- A_191=comaXBB( true);
- A_194= ABC(toi(A_191)-QUADio_0,shape(M234_0)[0]);
-A_196=indr(M234_0,A_194);
- A_197=combIBI(A_196,false);
- A_198=combIBI(A_197,false);
- A_199=combBII(false,A_198);
- A_200=comaXBB( false);
- A_203= ABC(toi(A_200)-QUADio_0,shape(M234_0)[0]);
-A_205=indr(M234_0,A_203);
- A_206=combIII(A_205,A_199);
- z_2=( A_206);
- A_208=bsl1BII(V10100_0,M234_0);
- A_210=sameIIB(A_208,z_2);
- A_211=comaBBB(r_12,A_210);
- r_13=( A_211);
- A_213=rhoIBB(20,[false,false,false,true]);
- A_214=rhoIBB(10,[false,true]);
- A_215=rhoIBB(20,[false,true]);
- A_216=bsl1BBB(A_215,A_214);
- A_218=sameBBB(A_216,A_213);
- A_219=comaBBB(r_13,A_218);
- r_14=( A_219);
- A_223=quadXBB( r_14,QUADpp_0,QUADpw_0);
- A_224=andslXBBQUICKSTOP( r_14);
+ A_95=iotaXII( 24,QUADio_0);
+ A_96=rhoIII([2, 3, 4],A_95);
+ M234_0=( A_96);
+ A_98=rhoIBB(20,[false,false,false,true]);
+ A_99=rhoIBB(10,[false,true]);
+ A_100=rhoIBB(20,[false,true]);
+ A_101=bslBBB(A_100,A_99);
+ A_103=sameBBB(A_101,A_98);
+ r_0=( A_103);
+ A_105=comaXBB( S0_0);
+ A_106=bslBBB(S0_0,S0_0);
+ A_108=sameBBB(A_106,A_105);
+ A_109=comaBBB(r_0,A_108);
+ r_1=( A_109);
+ A_111=comaXBB( S0_0);
+ A_112=bslBBB(S1_0,S0_0);
+ A_114=sameBBB(A_112,A_111);
+ A_115=comaBBB(r_1,A_114);
+ r_2=( A_115);
+ A_117=comaXBB( S1_0);
+ A_118=bslBBB(S1_0,S1_0);
+ A_120=sameBBB(A_118,A_117);
+ A_121=comaBBB(r_2,A_120);
+ r_3=( A_121);
+ A_123=comaXBB( S0_0);
+ A_124=bslBBB(V0_0,S0_0);
+ A_126=sameBBB(A_124,A_123);
+ A_127=comaBBB(r_3,A_126);
+ r_4=( A_127);
+ A_129=comaXBB( S0_0);
+ A_130=bslBBB(V1_0,S0_0);
+ A_132=sameBBB(A_130,A_129);
+ A_133=comaBBB(r_4,A_132);
+ r_5=( A_133);
+ A_135=comaIBI(M234_0,false);
+ A_136=comaBII(false,A_135);
+ z_0=( A_136);
+ A_138= ABC(toi(A_31)-QUADio_0,shape(z_0)[2]);
+A_142=indrfr(2,z_0,A_138);
+ z_1=( A_142);
+ A_144=bslBII(V101011_0,M234_0);
+ A_146=sameIIB(A_144,z_1);
+ A_147=comaBBB(r_5,A_146);
+ r_6=( A_147);
+ A_150=iotaXII( 4,QUADio_0);
+ A_151=bslBII(V101011_0,A_150);
+ A_153=sameIIB(A_151,[0, 0, 1, 0, 2, 3]);
+ A_154=comaBBB(r_6,A_153);
+ r_7=( A_154);
+ A_156=comaXBB( S0_0);
+ A_157=bsl1BBB(S0_0,S0_0);
+ A_159=sameBBB(A_157,A_156);
+ A_160=comaBBB(r_7,A_159);
+ r_8=( A_160);
+ A_162=comaXBB( S0_0);
+ A_163=bsl1BBB(S1_0,S0_0);
+ A_165=sameBBB(A_163,A_162);
+ A_166=comaBBB(r_8,A_165);
+ r_9=( A_166);
+ A_168=comaXBB( S1_0);
+ A_169=bsl1BBB(S1_0,S1_0);
+ A_171=sameBBB(A_169,A_168);
+ A_172=comaBBB(r_9,A_171);
+ r_10=( A_172);
+ A_174=comaXBB( S0_0);
+ A_175=bsl1BBB(V0_0,S0_0);
+ A_177=sameBBB(A_175,A_174);
+ A_178=comaBBB(r_10,A_177);
+ r_11=( A_178);
+ A_180=comaXBB( S0_0);
+ A_181=bsl1BBB(V1_0,S0_0);
+ A_183=sameBBB(A_181,A_180);
+ A_184=comaBBB(r_11,A_183);
+ r_12=( A_184);
+ A_186=comaXBB( true);
+ A_189= ABC(toi(A_186)-QUADio_0,shape(M234_0)[0]);
+A_191=indr(M234_0,A_189);
+A_192=combIBI(A_191,false);
+ A_193=combIBI(A_192,false);
+ A_194=combBII(false,A_193);
+ A_195=comaXBB( false);
+ A_198= ABC(toi(A_195)-QUADio_0,shape(M234_0)[0]);
+A_200=indr(M234_0,A_198);
+A_201=combIII(A_200,A_194);
+ z_2=( A_201);
+ A_203=bsl1BII(V10100_0,M234_0);
+ A_205=sameIIB(A_203,z_2);
+ A_206=comaBBB(r_12,A_205);
+ r_13=( A_206);
+ A_208=rhoIBB(20,[false,false,false,true]);
+ A_209=rhoIBB(10,[false,true]);
+ A_210=rhoIBB(20,[false,true]);
+ A_211=bsl1BBB(A_210,A_209);
+ A_213=sameBBB(A_211,A_208);
+ A_214=comaBBB(r_13,A_213);
+ r_14=( A_214);
+ A_218=quadXBB( r_14,QUADpp_0,QUADpw_0);
+ A_219=andslXBBQUICKSTOP( r_14);
  /* dsf scalar(s) */
-A_228=barBBI(true,A_224);
- r_15=( A_228);
- A_232=quadXII( A_228,QUADpp_0,QUADpw_0);
+A_223=barBBI(true,A_219);
+ r_15=( A_223);
+ A_227=quadXII( A_223,QUADpp_0,QUADpw_0);
  return(r_15);
 }
 

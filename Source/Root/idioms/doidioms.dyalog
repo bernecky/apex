@@ -1,4 +1,5 @@
-﻿ r←fldr doidioms asts;genws;TargetLanguage;phasepause;debugidioms;PartialEvaluation;visualizeidioms;PartialEvaluation
+﻿ r←x doidioms asts;genws;TargetLanguage;phasepause;debugidioms;PartialEvaluation;visualizeidioms;PartialEvaluation;fldr;trace
+ (fldr trace)←x
  Initialize
  InitializeAST
  InitializeSSA

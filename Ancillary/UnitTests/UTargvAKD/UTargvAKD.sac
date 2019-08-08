@@ -6,7 +6,7 @@ use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
 
-/* Compiled by APEX Version: /home/apex/apex3/wss/sac3013.dws2012-11-07 10:35:29.500 */
+/* Compiled by APEX Version: /home/apex/apexgit/wss/apex.dws2019-07-25 11:03:34.417 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -64,12 +64,12 @@ y=CommandLineArgvXBI( true);
  QUADpp_0=( 10);
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
- A_44=quadXII( y,QUADpp_0,QUADpw_0);
+ A_41=quadXII( y,QUADpp_0,QUADpw_0);
  /* dsf scalar(s) */
-A_46=eqIIB(y,42);
+A_43=eqIIB(y,42);
  /* dsf scalar(s) */
-A_47=barBBI(true,A_46);
-r_0=( A_47);
+A_44=barBBI(true,A_43);
+r_0=( A_44);
  return(r_0);
 }
 

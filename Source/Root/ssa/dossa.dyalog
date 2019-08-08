@@ -1,8 +1,8 @@
-﻿r←fldr dossa asts;tn;y;i;ct;ast2;ast3;dfaws;srctok;ast;cds;phasepause;PFAT;tracessa;TargetLanguage
+﻿r←x dossa asts;tn;y;i;ct;ast2;ast3;dfaws;srctok;ast;cds;phasepause;PFAT;TargetLanguage;fldr;trace
  Initialize
+ (fldr trace)←x
  phasepause←LC GetOption'phasepause'
  debugphase←LC GetOption'debugssa'
- tracessa←LC GetOption'tracessa'
  TargetLanguage←GetOption'output'
  PFAT←BuildPFAT TargetLanguage
  ⎕←(⍕⎕TS),': Starting SSA analysis for: ',fldr

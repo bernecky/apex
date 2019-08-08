@@ -1,6 +1,7 @@
-﻿ r←fldr doplural asts;TargetLanguage;pathfrag;fragbuf
+﻿ r←x doplural asts;TargetLanguage;pathfrag;fragbuf;fldr;trace
 ⍝# Emit object code for each compilation unit (CU)
 ⍝# Each tied file is a compilation unit.
+ (fldr trace)←x
  Initialize
  InitializeCodeGen
  InitializeCtl

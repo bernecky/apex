@@ -1,6 +1,6 @@
 StrandSemiGlobalNames←{
-  setref←⍺
+  inout←⍺ ⍝ i or o
   (subfn sz)←⍵
-  subfn,¨( '_sgo' '_sgi')[setref],¨⍕¨⍪⍳sz  ⍝ E.g., foo_sgi42 foo_sgo666
+  subfn,¨(E'_sg',inout),¨⍕¨⍪⍳sz  ⍝ E.g., foo_sgi42 foo_sgo666
 }
 

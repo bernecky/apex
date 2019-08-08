@@ -6,7 +6,7 @@ use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
 
-/* Compiled by APEX Version: /home/apex/apex3/wss/sac3013.dws2012-11-07 10:35:29.054 */
+/* Compiled by APEX Version: /home/apex/apexgit/wss/apex.dws2019-07-25 11:03:39.734 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -90,13 +90,13 @@ inline bool sameCCB(char[+] x, char[+] y)
 
 inline bool[+] eqIIB(int[+] x, int[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
+         sy = shape(y);
          z = with {
              ( . <= iv <= .) {
                       xel = x[iv];
                    yel = y[iv];
            } : eqIIB(xel,yel);
-        } : genarray(sx, false);
+        } : genarray(sy, false);
   return(z);
 }
 
@@ -107,13 +107,13 @@ inline bool[+] eqIIB(int[+] x, int[+] y)
 
 inline bool[+] eqBBB(bool[+] x, bool[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
+         sy = shape(y);
          z = with {
              ( . <= iv <= .) {
                       xel = x[iv];
                    yel = y[iv];
            } : eqBBB(xel,yel);
-        } : genarray(sx, false);
+        } : genarray(sy, false);
   return(z);
 }
 
@@ -124,13 +124,13 @@ inline bool[+] eqBBB(bool[+] x, bool[+] y)
 
 inline bool[+] eqCCB(char[+] x, char[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
+         sy = shape(y);
          z = with {
              ( . <= iv <= .) {
                       xel = x[iv];
                    yel = y[iv];
            } : eqCCB(xel,yel);
-        } : genarray(sx, false);
+        } : genarray(sy, false);
   return(z);
 }
 
@@ -255,8 +255,8 @@ inline bool matchIIB(int[.] x, int[.] y)
 /*
  ?
 */
-A_19=sameIIB(x,y);
-r_0=( A_19);
+A_18=sameIIB(x,y);
+r_0=( A_18);
  return(r_0);
 }
 
@@ -270,19 +270,19 @@ QUADio_0=toI(( false));
  QUADpp_0=( 10);
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
- A_47=iotaXII( 4,QUADio_0);
- A_49=iotaXII( 4,QUADio_0);
- A_50=matchIIB(A_49,A_47);
- r_0=( A_50);
- A_52=matchCLONE2CCB(['a','b','c'],['a','b','c']);
-A_53=comaBBB(r_0,A_52);
- r_1=( A_53);
- A_57=quadXBB( r_1,QUADpp_0,QUADpw_0);
- A_59=sameBBB(r_1,[true,true]);
+ A_42=iotaXII( 4,QUADio_0);
+ A_44=iotaXII( 4,QUADio_0);
+ A_45=matchIIB(A_44,A_42);
+ r_0=( A_45);
+ A_47=matchCLONE2CCB(['a','b','c'],['a','b','c']);
+A_48=comaBBB(r_0,A_47);
+ r_1=( A_48);
+ A_52=quadXBB( r_1,QUADpp_0,QUADpw_0);
+ A_54=sameBBB(r_1,[true,true]);
  /* dsf scalar(s) */
-A_60=barBBI(true,A_59);
- r_2=( A_60);
- A_64=quadXII( A_60,QUADpp_0,QUADpw_0);
+A_55=barBBI(true,A_54);
+ r_2=( A_55);
+ A_59=quadXII( A_55,QUADpp_0,QUADpw_0);
  return(r_2);
 }
 
@@ -291,8 +291,8 @@ inline bool matchCLONE2CCB(char[.] x, char[.] y)
 /*
  ?
 */
-A_19=sameCCB(x,y);
-r_0=( A_19);
+A_18=sameCCB(x,y);
+r_0=( A_18);
  return(r_0);
 }
 

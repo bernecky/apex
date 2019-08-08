@@ -1,4 +1,5 @@
-﻿ r←fldr dodfa asts;genws;PFAT;target;phasepause;debugdfa;PartialEvaluation;visualizedfa
+﻿ r←x dodfa asts;genws;PFAT;target;phasepause;debugdfa;PartialEvaluation;visualizedfa;fldr;trace
+ (fldr trace)←x
  Initialize
  InitializeAST
  InitializeSSA

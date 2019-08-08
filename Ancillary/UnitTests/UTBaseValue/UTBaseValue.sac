@@ -6,7 +6,7 @@ use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
 
-/* Compiled by APEX Version: /home/apex/apex3/wss/sac3014.dws2013-07-29 16:25:50.915 */
+/* Compiled by APEX Version: /home/apex/apexgit/wss/apex.dws2019-07-25 11:03:36.216 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -62,6 +62,12 @@ inline int[.] comaXII(int[.] y)
         return(y);
 }
 
+
+inline int[.] rhoIII(int x, int y)
+{ // [Vector reshape scalar]
+  z = genarray( toi(x),y);
+  return(z);
+}
 
 inline int[*] rhoIII(int[.] x, int[*] y)
 {  /* APEX vector x reshape, with potential item reuse */
@@ -486,28 +492,28 @@ inline int BaseValueIBI(int x, bool[.] y)
 /*
  ?
 */
-A_27=rhoXII( x);
- A_28=mpyslXIIQUICKSTOP( A_27);
+A_26=rhoXII( x);
+ A_27=mpyslXIIQUICKSTOP( A_26);
  /* dsf scalar(s) */
-A_33=eqBIB(true,A_28);
-nx_0=( A_33);
- A_35=comaXII( x);
- A_36=notXBB( nx_0);
- A_37=slBII(A_36,A_35);
- A_38=rhoXBI( y);
- A_39=takeBII(true,A_38);
- A_40=rhoIII(A_39,x);
- A_41=slBII(nx_0,A_40);
- A_42=comaIII(A_41,A_37);
- nx_1=( A_42);
- A_44=dropBII(true,nx_1);
- A_45=comaIBI(A_44,true);
- A_46=rotrXII( A_45);
- A_47=mpybslXII( A_46);
- A_51=rotrXII( A_47);
- wts_0=( A_51);
- A_53=plusdotmpyIBITRANSPOSE(wts_0,y);
- r_0=( A_53);
+A_32=eqBIB(true,A_27);
+nx_0=( A_32);
+ A_34=comaXII( x);
+ A_35=notXBB( nx_0);
+ A_36=slBII(A_35,A_34);
+ A_37=rhoXBI( y);
+ A_38=takeBII(true,A_37);
+ A_39=rhoIII(A_38,x);
+ A_40=slBII(nx_0,A_39);
+ A_41=comaIII(A_40,A_36);
+ nx_1=( A_41);
+ A_43=dropBII(true,nx_1);
+ A_44=comaIBI(A_43,true);
+ A_45=rotrXII( A_44);
+ A_46=mpybslXII( A_45);
+ A_50=rotrXII( A_46);
+ wts_0=( A_50);
+ A_52=plusdotmpyIBITRANSPOSE(wts_0,y);
+ r_0=( A_52);
  return(r_0);
 }
 
@@ -523,43 +529,43 @@ QUADio_0=toI(( false));
  QUADrl_0=( 16807);
  S_0=( 2);
  BV_0=( [true,true,false,true,true,false,true,true]);
- A_84=iotaXII( 999,QUADio_0);
- A_85=rhoIII([2, 3, 4, 5],A_84);
- M4_0=( A_85);
+ A_79=iotaXII( 999,QUADio_0);
+ A_80=rhoIII([2, 3, 4, 5],A_79);
+ M4_0=( A_80);
  Hex_0=( [16, 16]);
  Byte_0=( [256, 256, 256, 256]);
- A_89=BaseValueIBI(S_0,BV_0);
- A_90=dtakIBI(2,BV_0);
+ A_84=BaseValueIBI(S_0,BV_0);
+ A_85=dtakIBI(2,BV_0);
+ A_87=sameIIB(A_85,A_84);
+ r_0=( A_87);
+ A_89=BaseValueCLONE2III(2,1000);
+ A_90=dtakIII(2,1000);
  A_92=sameIIB(A_90,A_89);
- r_0=( A_92);
- A_94=BaseValueCLONE2III(2,1000);
- A_95=dtakIII(2,1000);
- A_97=sameIIB(A_95,A_94);
- A_98=comaBBB(r_0,A_97);
- r_1=( A_98);
- A_101=iotaXII( 10,QUADio_0);
- A_102=BaseValueCLONE3III(2,A_101);
- A_104=iotaXII( 10,QUADio_0);
- A_105=dtakIII(2,A_104);
- A_107=sameIIB(A_105,A_102);
- A_108=comaBBB(r_1,A_107);
- r_2=( A_108);
- A_110=BaseValueCLONE4III([0, 100, 100],[10, 20, 30]);
-A_111=dtakIII([0, 100, 100],[10, 20, 30]);
- A_113=sameIIB(A_111,A_110);
- A_114=comaBBB(r_2,A_113);
- r_3=( A_114);
- A_116=BaseValueCLONE5III([2, 3],M4_0);
- A_117=dtakIII([2, 3],M4_0);
- A_119=sameIIB(A_117,A_116);
- A_120=comaBBB(r_3,A_119);
- r_4=( A_120);
- A_124=quadXBB( r_4,QUADpp_0,QUADpw_0);
- A_125=andslXBBQUICKSTOP( r_4);
+ A_93=comaBBB(r_0,A_92);
+ r_1=( A_93);
+ A_96=iotaXII( 10,QUADio_0);
+ A_97=BaseValueCLONE3III(2,A_96);
+ A_99=iotaXII( 10,QUADio_0);
+ A_100=dtakIII(2,A_99);
+ A_102=sameIIB(A_100,A_97);
+ A_103=comaBBB(r_1,A_102);
+ r_2=( A_103);
+ A_105=BaseValueCLONE4III([0, 100, 100],[10, 20, 30]);
+A_106=dtakIII([0, 100, 100],[10, 20, 30]);
+ A_108=sameIIB(A_106,A_105);
+ A_109=comaBBB(r_2,A_108);
+ r_3=( A_109);
+ A_111=BaseValueCLONE5III([2, 3],M4_0);
+ A_112=dtakIII([2, 3],M4_0);
+ A_114=sameIIB(A_112,A_111);
+ A_115=comaBBB(r_3,A_114);
+ r_4=( A_115);
+ A_119=quadXBB( r_4,QUADpp_0,QUADpw_0);
+ A_120=andslXBBQUICKSTOP( r_4);
  /* dsf scalar(s) */
-A_129=barBBI(true,A_125);
- A_132=quadXII( A_129,QUADpp_0,QUADpw_0);
- r_5=( A_132);
+A_124=barBBI(true,A_120);
+ A_127=quadXII( A_124,QUADpp_0,QUADpw_0);
+ r_5=( A_127);
  return(r_5);
 }
 
@@ -568,28 +574,28 @@ inline int BaseValueCLONE2III(int x, int y)
 /*
  ?
 */
-A_27=rhoXII( x);
- A_28=mpyslXIIQUICKSTOP( A_27);
+A_26=rhoXII( x);
+ A_27=mpyslXIIQUICKSTOP( A_26);
  /* dsf scalar(s) */
-A_33=eqBIB(true,A_28);
-nx_0=( A_33);
- A_35=comaXII( x);
- A_36=notXBB( nx_0);
- A_37=slBII(A_36,A_35);
- A_38=rhoXII( y);
- A_39=takeBII(true,A_38);
- A_40=rhoIII(A_39,x);
- A_41=slBII(nx_0,A_40);
- A_42=comaIII(A_41,A_37);
- nx_1=( A_42);
- A_44=dropBII(true,nx_1);
- A_45=comaIBI(A_44,true);
- A_46=rotrXII( A_45);
- A_47=mpybslXII( A_46);
- A_51=rotrXII( A_47);
- wts_0=( A_51);
- A_53=plusdotmpyIIITRANSPOSE(wts_0,y);
- r_0=( A_53);
+A_32=eqBIB(true,A_27);
+nx_0=( A_32);
+ A_34=comaXII( x);
+ A_35=notXBB( nx_0);
+ A_36=slBII(A_35,A_34);
+ A_37=rhoXII( y);
+ A_38=takeBII(true,A_37);
+ A_39=rhoIII(A_38,x);
+ A_40=slBII(nx_0,A_39);
+ A_41=comaIII(A_40,A_36);
+ nx_1=( A_41);
+ A_43=dropBII(true,nx_1);
+ A_44=comaIBI(A_43,true);
+ A_45=rotrXII( A_44);
+ A_46=mpybslXII( A_45);
+ A_50=rotrXII( A_46);
+ wts_0=( A_50);
+ A_52=plusdotmpyIIITRANSPOSE(wts_0,y);
+ r_0=( A_52);
  return(r_0);
 }
 
@@ -598,28 +604,28 @@ inline int BaseValueCLONE3III(int x, int[.] y)
 /*
  ?
 */
-A_27=rhoXII( x);
- A_28=mpyslXIIQUICKSTOP( A_27);
+A_26=rhoXII( x);
+ A_27=mpyslXIIQUICKSTOP( A_26);
  /* dsf scalar(s) */
-A_33=eqBIB(true,A_28);
-nx_0=( A_33);
- A_35=comaXII( x);
- A_36=notXBB( nx_0);
- A_37=slBII(A_36,A_35);
- A_38=rhoXII( y);
- A_39=takeBII(true,A_38);
- A_40=rhoIII(A_39,x);
- A_41=slBII(nx_0,A_40);
- A_42=comaIII(A_41,A_37);
- nx_1=( A_42);
- A_44=dropBII(true,nx_1);
- A_45=comaIBI(A_44,true);
- A_46=rotrXII( A_45);
- A_47=mpybslXII( A_46);
- A_51=rotrXII( A_47);
- wts_0=( A_51);
- A_53=plusdotmpyIIITRANSPOSE(wts_0,y);
- r_0=( A_53);
+A_32=eqBIB(true,A_27);
+nx_0=( A_32);
+ A_34=comaXII( x);
+ A_35=notXBB( nx_0);
+ A_36=slBII(A_35,A_34);
+ A_37=rhoXII( y);
+ A_38=takeBII(true,A_37);
+ A_39=rhoIII(A_38,x);
+ A_40=slBII(nx_0,A_39);
+ A_41=comaIII(A_40,A_36);
+ nx_1=( A_41);
+ A_43=dropBII(true,nx_1);
+ A_44=comaIBI(A_43,true);
+ A_45=rotrXII( A_44);
+ A_46=mpybslXII( A_45);
+ A_50=rotrXII( A_46);
+ wts_0=( A_50);
+ A_52=plusdotmpyIIITRANSPOSE(wts_0,y);
+ r_0=( A_52);
  return(r_0);
 }
 
@@ -628,28 +634,28 @@ inline int BaseValueCLONE4III(int[.] x, int[.] y)
 /*
  ?
 */
-A_27=rhoXII( x);
- A_28=mpyslXIIQUICKSTOP( A_27);
+A_26=rhoXII( x);
+ A_27=mpyslXIIQUICKSTOP( A_26);
  /* dsf scalar(s) */
-A_33=eqBIB(true,A_28);
-nx_0=( A_33);
- A_35=comaXII( x);
- A_36=notXBB( nx_0);
- A_37=slBII(A_36,A_35);
- A_38=rhoXII( y);
- A_39=takeBII(true,A_38);
- A_40=rhoIII(A_39,x);
- A_41=slBII(nx_0,A_40);
- A_42=comaIII(A_41,A_37);
- nx_1=( A_42);
- A_44=dropBII(true,nx_1);
- A_45=comaIBI(A_44,true);
- A_46=rotrXII( A_45);
- A_47=mpybslXII( A_46);
- A_51=rotrXII( A_47);
- wts_0=( A_51);
- A_53=plusdotmpyIIITRANSPOSE(wts_0,y);
- r_0=( A_53);
+A_32=eqBIB(true,A_27);
+nx_0=( A_32);
+ A_34=comaXII( x);
+ A_35=notXBB( nx_0);
+ A_36=slBII(A_35,A_34);
+ A_37=rhoXII( y);
+ A_38=takeBII(true,A_37);
+ A_39=rhoIII(A_38,x);
+ A_40=slBII(nx_0,A_39);
+ A_41=comaIII(A_40,A_36);
+ nx_1=( A_41);
+ A_43=dropBII(true,nx_1);
+ A_44=comaIBI(A_43,true);
+ A_45=rotrXII( A_44);
+ A_46=mpybslXII( A_45);
+ A_50=rotrXII( A_46);
+ wts_0=( A_50);
+ A_52=plusdotmpyIIITRANSPOSE(wts_0,y);
+ r_0=( A_52);
  return(r_0);
 }
 
@@ -658,28 +664,28 @@ inline int[.,.,.] BaseValueCLONE5III(int[.] x, int[.,.,.,.] y)
 /*
  ?
 */
-A_27=rhoXII( x);
- A_28=mpyslXIIQUICKSTOP( A_27);
+A_26=rhoXII( x);
+ A_27=mpyslXIIQUICKSTOP( A_26);
  /* dsf scalar(s) */
-A_33=eqBIB(true,A_28);
-nx_0=( A_33);
- A_35=comaXII( x);
- A_36=notXBB( nx_0);
- A_37=slBII(A_36,A_35);
- A_38=rhoXII( y);
- A_39=takeBII(true,A_38);
- A_40=rhoIII(A_39,x);
- A_41=slBII(nx_0,A_40);
- A_42=comaIII(A_41,A_37);
- nx_1=( A_42);
- A_44=dropBII(true,nx_1);
- A_45=comaIBI(A_44,true);
- A_46=rotrXII( A_45);
- A_47=mpybslXII( A_46);
- A_51=rotrXII( A_47);
- wts_0=( A_51);
- A_53=plusdotmpyIIITRANSPOSE(wts_0,y);
- r_0=( A_53);
+A_32=eqBIB(true,A_27);
+nx_0=( A_32);
+ A_34=comaXII( x);
+ A_35=notXBB( nx_0);
+ A_36=slBII(A_35,A_34);
+ A_37=rhoXII( y);
+ A_38=takeBII(true,A_37);
+ A_39=rhoIII(A_38,x);
+ A_40=slBII(nx_0,A_39);
+ A_41=comaIII(A_40,A_36);
+ nx_1=( A_41);
+ A_43=dropBII(true,nx_1);
+ A_44=comaIBI(A_43,true);
+ A_45=rotrXII( A_44);
+ A_46=mpybslXII( A_45);
+ A_50=rotrXII( A_46);
+ wts_0=( A_50);
+ A_52=plusdotmpyIIITRANSPOSE(wts_0,y);
+ r_0=( A_52);
  return(r_0);
 }
 

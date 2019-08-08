@@ -40,7 +40,7 @@
          ⍝ Build assigns for semi-globals in
          lhs←Stkvalue⌷⍤1⊢StackCopy sz
          subfn←ast[dfnname;asttarget]
-         (ast astr stk)←lhs BuildStrandAssigns(ast 1 stk subfn)
+         (ast astr stk)←lhs BuildStrandAssigns(ast 1 'i'stk subfn)
          ast←ast append2Ast astr
          state←Stx
          j←StackPop sz+1 ⍝ Pop the lhs strand

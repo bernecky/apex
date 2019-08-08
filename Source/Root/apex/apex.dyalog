@@ -12,9 +12,9 @@
  debugphase←LC GetOption'debugsyn'
  ⍝⍝⍝fldr←fldr,(PathDelim≠¯1↑fldr)/PathDelim
  fns←GetBlistFns fldr
- asts←fldr syn.dosyn fns
- asts←fldr idioms.doidioms asts
- asts←fldr ssa.dossa asts
- asts←fldr dfa.dodfa asts
- asts←fldr sac.dosac asts ⍝ We call all code generators, for no good reason
- asts←fldr plural9.doplural asts
+ asts←(fldr trace) syn.dosyn fns
+ asts←(fldr trace) idioms.doidioms asts
+ asts←(fldr trace) ssa.dossa asts
+ asts←(fldr trace) dfa.dodfa asts
+ asts←(fldr trace) sac.dosac asts ⍝ We call all code generators, for no good reason
+ asts←(fldr trace) plural9.doplural asts
