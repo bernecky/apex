@@ -3,6 +3,6 @@ ListStrand←{
   cur←⍺[⍵;astlarg,astfn,astrarg]
   cur←(NULL≠cur)/cur
   cur←cur,⍺ ListStrand ⍺[⍵;astrarg]      
-  cur←(~isTempName cur)/cur
+  cur←(~isTempName¨cur)/cur
 }                                      
   
