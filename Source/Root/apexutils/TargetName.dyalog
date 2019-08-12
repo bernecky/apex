@@ -1,22 +1,17 @@
-﻿ r←ast TargetName y;cv;nul;ref;p
- ⍝ Generate names of targets
- ⍝ y is potential ast indices and/or names
- ⍝ 4 categories:
- ⍝   y is null: Replace by nasty word
+﻿r←ast TargetName y;n;tt;cv;t;nul        
+ ⍝ Generate names of targets             
+ ⍝ y is potential targets.               
+ ⍝3 categories: named, temp (#), and null
+ n←(dfainit ast)⍳1 ⍝ Mark temp targets   
+ r←,y                                    
+ cv←(~nul←r∊NULL)∧isnum r                
+ t←cv/r                                  
+ tt←n≤,D t ⍝ Temp targets                
+ r[nul/⍳⍴nul]←E'NULL!' ⍝ End, nulls      
+ n←(cv⍀tt)/⍳⍴cv                          
+ r[n]←TempName tt/t                      
+ tt←~tt ⍝ Chase non-temp names           
+ r[(cv⍀tt)/⍳⍴cv]←ast[,D tt/t;asttarget]  
+ r←(⍴y)⍴r                
 
- ⍝   y is named: leave as is
- ⍝   y points to temp (#): Replace by TempName(A_nn)
- ⍝   y points to constant: Replace by TempName
- ⍝
- r←,y
- p←dfainit ast
- nul←r∊NULL
- ⍝ Deal with NULL referents
- r[nul/⍳⍴nul]←E'NULL!'
 
- ⍝ Name each constant, unless already named
- cv←(~nul)∧isnum r
- cv←cv∧isTempName r
- r[cv/⍳⍴cv]←TempName cv/r
-
- r←(⍴y)⍴r
