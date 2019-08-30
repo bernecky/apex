@@ -12,5 +12,5 @@
  :Case astclassVARB ⍝ id left of expression, I.e., strand
      PushCursor Push Stx
  :Else
-     'Source program syntax error: Identifier not function' assert 0
+     'Source program syntax error: Identifier not function'assert 0
  :EndSelect

@@ -21,9 +21,11 @@
      snil
  :Case StN                ⍝ Id left of niladic fn: foo Niladicfn
      InvokeNiladicFn Stx
- :Case Sta                ⍝ Id (?) left of assignment (strand)
-                          ⍝ I think this is for (b c d)←omega only
-     ÷0
+ :Case Sta                ⍝ Id left of assignment (strand)
+                          ⍝ This is not for (b c d)←omega only
+                          ⍝ We also get it for r←(b c d)
+                          ⍝ when r is the function result
+    'strand not assigned to function result' assert 0
 
  :Else
      snerr

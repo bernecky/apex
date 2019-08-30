@@ -9,13 +9,13 @@
  ⍝ (b c d)←omega (Strand)
  ⍝ foo (b c d)   (Strand)
  ⍝ foo (b)       (NOT a strand)
- :If 0 isStrand stk
+ :If 1 isListOfExpns stk
   ⍝ (id id id) or (id n id) or ( id n (2+3)) or (omega)
   ⍝ Case 1: strand assign (b c)← ( d e)
-     sz←')'StackMatchBracket 0
+     sz←')'StackMatchBracket 1
      rhsindex←stkp-sz+2
      :If (Sta=stk[stkp-1+sz;Stkstate])
-     :AndIf ((3+sz)isStrand stk)
+     :AndIf ((3+sz)isListOfExpns stk)
      ⍝ Build strand assigns, an sich
          lhs←(StackPop sz)[;Stkvalue]
          j←StackPop 3 ⍝ Pop the ") ←  ("

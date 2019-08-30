@@ -9,7 +9,7 @@
      InvokeMonadicFn   ⍝ Invoke g monadically
  :Case Std             ⍝ Verb left of dyadic fn
      InvokeDyadicFn
- :Case Stx             ⍝ Verb left of expn:           f ⍵
+ :CaseList Stx,StS     ⍝ Verb left of expn or strand  f ⍵ or  f(a b c)
      k←Push Stf
      PushCursor i      ⍝ Push cursor past verb
  :Case StC             ⍝ Verb left of dyadic conj:    f +.× ⍵

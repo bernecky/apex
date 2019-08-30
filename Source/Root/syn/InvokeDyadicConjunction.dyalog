@@ -1,20 +1,38 @@
-﻿ InvokeDyadicConjunction;astr;lop;conj;rop;rarg;row
+﻿ InvokeDyadicConjunction;astr;lop;conj;rop;rarg;row;larg;nms;subfn
  ⍝ Invoke conjunction dyadically
- larg←stkpop 1 ⍝ Left arg to derived fn
- lop←stkpop 1 ⍝ left operand
- conj←stkpop 1 ⍝ The conjunction
- rop←stkpop 1 ⍝ right operand
- rarg←stkpop 1 ⍝ right arg to derived fn
- astr←,astNewRows 1
- row←≢ast
- astr[asttarget]←E row
- astr[astlarg]←larg[0;Stkvalue]
- astr[astlop]←lop[0;Stkvalue]
- astr[astfn]←conj[0;Stkvalue]
- astr[astrop]←rop[0;Stkvalue]
- astr[astrarg]←rarg[0;Stkvalue]
- astr[astclass]←astclassVARB
- ast←ast append2Ast astr
- stk[stkp;]←(E Stx),(E row),E'x'
- state←Stx
- stkp←stkp+1
+ :If 3 isStrand stk ⍝ Strand rarg?
+     nms←')'StrandItems 5
+     subfn←D Stkvalue⌷,1↓StackCopy 2 ⍝ subfn1 or ⊢
+     ⍝ Sheep vs goats. Skip destranding if subfn is primitive.
+     :If isnum subfn
+         subfn←ast[subfn;dfnname]
+         (ast astr stk)←nms BuildStrandAssigns(ast 0 'i'stk subfn)
+         stke←StackPop 6+⍴nms ⍝ Pop larg, lop, conj, rop, parens, and nms
+         stke[2;Stkstate]←Stx ⍝ No longer a strand
+         stk←stk StackPush stke[(⍳4),4+⍴nms;] ⍝ Push larg,lop,conj,rop, dummy arg
+         ast←ast append2Ast astr
+     :Else ⍝ ⊢ strand
+         ('Verb ',subfn,' does not support strands')assert subfn∊'⊢,⊣'
+         j←StackPop 1÷0 ⍝ Pop the verb; it is an identity
+         state←StS ⍝ State is back to strand
+     :EndIf
+ :Else
+     larg←stkpop 1 ⍝ Left arg to derived fn
+     lop←stkpop 1 ⍝ left operand
+     conj←stkpop 1 ⍝ The conjunction
+     rop←stkpop 1 ⍝ right operand
+     rarg←stkpop 1 ⍝ right arg to derived fn
+     astr←,astNewRows 1
+     row←≢ast
+     astr[asttarget]←E row
+     astr[astlarg]←larg[0;Stkvalue]
+     astr[astlop]←lop[0;Stkvalue]
+     astr[astfn]←conj[0;Stkvalue]
+     astr[astrop]←rop[0;Stkvalue]
+     astr[astrarg]←rarg[0;Stkvalue]
+     astr[astclass]←astclassVARB
+     ast←ast append2Ast astr
+     stk[stkp;]←(E Stx),(E row),E'x'
+     state←Stx
+     stkp←stkp+1
+ :EndIf
