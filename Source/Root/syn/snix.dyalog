@@ -10,7 +10,7 @@
  :CaseList astclassNFN,astclassMFN,astclassDFN
      PushCursor Push Stf
  :Case astclassVARB ⍝ id left of expression, I.e., strand
-     PushCursor Push Stx
+     PushCursor Push StS      ⍝ New state is Strand
  :Else
-     'Source program syntax error: Identifier not function' assert 0
+     'Source program syntax error: Identifier not function'assert 0
  :EndSelect

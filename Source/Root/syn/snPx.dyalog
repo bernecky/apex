@@ -47,7 +47,7 @@
          c←c-1 ⍝ PushCursor
      :Else
          ⍝ Something like foo( b c)
-         PushCursor Push StS ⍝ Push paren/strand onto stack, push cursor
+        ⍝⍝⍝ does not work for pldi2019cnn. PushCursor Push StS ⍝ Push paren/strand onto stack, push cursor
      :EndIf
  :Else ⍝ Not a strand. Something like (omega)+2. Just remove the parens
      i←StackPop 2 ⍝ Popped item, previous syntax state
