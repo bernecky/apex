@@ -10,6 +10,8 @@
      PushCursor Push Stn
  :Case Sta ⍝ )←   Strand if we have (x y z)←( b c d)
      PushCursor Push Stn
+ :Case StS             ⍝ Rpar left of strand. Deal with (...)
+     PushCursor Push Stn
  ⍝ Need Sto,Std,StV,StC,StA
  :Else
      snerr

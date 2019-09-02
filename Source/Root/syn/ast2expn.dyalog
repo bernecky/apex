@@ -28,6 +28,9 @@
      state←Stx
  :Case Stx           ⍝ Expression left of expression ((x foo y) c d)
      snxx            ⍝ Stranded again...
+     ⍝ Above may be wrong now that we have StS
+ :Case StS
+     PushCursor Push StS ⍝ Prepend expn to strand
  :Else
      snerr
  :EndSelect

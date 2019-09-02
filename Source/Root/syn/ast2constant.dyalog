@@ -19,6 +19,8 @@
      snerr
  :CaseList StC,StA ⍝ Constant left of naked conj (x←.) or adverb(x←/)
      snerr
+ :Case StS     ⍝ Constant left of strand
+     PushCursor Push StS ⍝ Extend strand with constant
  :Else
      snerr        ⍝ Syntax error or syntax analyzer bug
  :EndSelect
