@@ -21,7 +21,7 @@
      ⍝ If not, I am confused
      astr←,astNewRows 1
      astr[asttarget]←Stkvalue⌷,StackPop 1
-     astr[astrarg]←Stkvalue⌷,StackCopy 1
+     astr[astrarg]←Stkvalue⌷,1 StackCopy stk
      astr[astfn]←E astfnCopy
      astr[astclass]←astclassVARB
      ast←ast append2Ast astr

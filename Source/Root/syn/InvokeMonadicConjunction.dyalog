@@ -1,9 +1,9 @@
 ﻿ InvokeMonadicConjunction;astr;lop;conj;rop;rarg;row
  ⍝ Invoke conjunction monadically
- lop←stkpop 1 ⍝ left operand
- conj←stkpop 1 ⍝ The conjunction
- rop←stkpop 1 ⍝ right operand
- rarg←stkpop 1 ⍝ right arg to derived fn
+ lop←StackPop 1 ⍝ left operand
+ conj←StackPop 1 ⍝ The conjunction
+ rop←StackPop 1 ⍝ right operand
+ rarg←StackPop 1 ⍝ right arg to derived fn
  astr←,astNewRows 1
  row←≢ast
  astr[asttarget]←E row

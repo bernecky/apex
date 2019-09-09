@@ -2,10 +2,10 @@
  ⍝ Invoke conjunction dyadically
  :If 3 isStrand stk ⍝ Strand rarg?
      nms←')'StrandItems 5
-     subfn←D Stkvalue⌷,1↓StackCopy 2 ⍝ subfn1 or ⊢
+     subfn←D Stkvalue⌷,1↓2 StackCopy stk ⍝ subfn1 or ⊢
      ⍝ Sheep vs goats. Skip destranding if subfn is primitive.
      :If isnum subfn
-         subfn←ast[subfn;dfnname]
+         subfn←D ast[subfn;dfnname]
          (ast astr stk)←nms BuildStrandAssigns(ast 0 'i'stk subfn)
          stke←StackPop 6+⍴nms ⍝ Pop larg, lop, conj, rop, parens, and nms
          stke[2;Stkstate]←Stx ⍝ No longer a strand
@@ -17,11 +17,11 @@
          state←StS ⍝ State is back to strand
      :EndIf
  :Else
-     larg←stkpop 1 ⍝ Left arg to derived fn
-     lop←stkpop 1 ⍝ left operand
-     conj←stkpop 1 ⍝ The conjunction
-     rop←stkpop 1 ⍝ right operand
-     rarg←stkpop 1 ⍝ right arg to derived fn
+     larg←StackPop 1 ⍝ Left arg to derived fn
+     lop←StackPop 1 ⍝ left operand
+     conj←StackPop 1 ⍝ The conjunction
+     rop←StackPop 1 ⍝ right operand
+     rarg←StackPop 1 ⍝ right arg to derived fn
      astr←,astNewRows 1
      row←≢ast
      astr[asttarget]←E row

@@ -2,7 +2,7 @@
  ⍝ Indexed ref: expn or id left of index list:   (2+⍳3)[⍵] or  t[0]
  astr←,astNewRows 1 ⍝ Now build index itself
  astr[astfn]←E,'[' ⍝ Mark as indexed ref
- m←stkpop 3                  ⍝ For x[i], pop x, i and ]
+ m←StackPop 3                  ⍝ For x[i], pop x, i and ]
  astr[astlarg]←m[0;Stkvalue] ⍝ tos is indexee
  astr[asttarget]←E ≢ast
  astr[astrarg]←m[1;Stkvalue] ⍝ 2nd stack el is index list

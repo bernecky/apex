@@ -9,7 +9,7 @@
  :EndIf
  'Source program syntax error'assert c=¯1 ⍝ (:while not root)
  ⍝ Emit :while expression.
- j←stkpop 1 ⍝ Pop the :while argument
+ j←StackPop 1 ⍝ Pop the :while argument
  astr←,astNewRows 1 ⍝ Build ast entry
  astr[asttarget]←E ≢ast
  astr[astfn]←E':While'

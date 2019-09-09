@@ -5,10 +5,10 @@
      ⍝ What follows is inadequate. It works for defined fns,
      ⍝ but fails for primitives. E.g., this expression fails:
      ⍝ te_img TestZhang⍤2⊢ (k1 b1 k2 b2 fc b)
-     subfn←D Stkvalue⌷,StackCopy 1 ⍝ subfn1 or ⊢
+     subfn←D Stkvalue⌷,1 StackCopy stk ⍝ subfn1 or ⊢
      ⍝ Sheep vs goats. Skip destranding if subfn is primitive.
      :If isnum subfn
-         subfn←ast[subfn;dfnname]
+         subfn←D ast[subfn;dfnname]
          (ast astr stk)←nms BuildStrandAssigns(ast 0 'i'stk subfn)
          stke←StackPop 3+⍴nms ⍝ Pop nms, ( ) and the fn
          stke[0;Stkstate]←Stx ⍝ No longer a strand

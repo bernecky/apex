@@ -8,7 +8,7 @@
  ⍝ then assigning the temp to the indexee.
  state←Stx ⍝ new state is expn (after indexing)
  astr←,astNewRows 1 ⍝ Now build index itself
- m←stkpop 3 ⍝ Pop target,index list, arrow
+ m←StackPop 3 ⍝ Pop target,index list, arrow
  ⍝ rhs left on stack as result of indexing
  astr[astrop]←stk[stkp-1;Stkvalue] ⍝ rhs
  astr[astfn]←E,']'

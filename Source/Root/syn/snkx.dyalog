@@ -29,7 +29,7 @@
      PushCursor i ⍝ Push past :for
    ⍝ Need assertion on c=¯1 or only-have-label-left.
    ⍝ Emit :for expression.
-     j←stkpop 1 ⍝ Pop the :in argument
+     j←StackPop 1 ⍝ Pop the :in argument
      astr←,astNewRows 1 ⍝ Build ast entry
      astr[asttarget]←v[GettValue] ⍝ Induction var in :for
      astr[astfn]←i[GettValue] ⍝ :for

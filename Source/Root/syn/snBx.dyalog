@@ -2,7 +2,7 @@
  ⍝ Left bracket [ left of expression
  m←']'StackMatchBracket 0
  ⍝ Replace stacked indices with head of index list generated from same.
- j←stkpop m
+ j←StackPop m
  n←''⍴⍴j ⍝ # ast entries for index list
  c←c-1 ⍝ Push cursor past left bracket
  ⍝ Build ast entries for indexes between brackets

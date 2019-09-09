@@ -20,7 +20,7 @@
          lhs←(StackPop sz)[;Stkvalue]
          j←StackPop 3 ⍝ Pop the ") ←  ("
      ⍝ Leave rhs (result of assign) on stack
-         rhs←(StackCopy sz)[;Stkvalue]
+         rhs←(sz StackCopy stk)[;Stkvalue]
          astr←astNewRows≢rhs
          astr[;asttarget]←lhs
          astr[;astrarg]←rhs
@@ -32,13 +32,13 @@
          i←StackPop 1
          PushCursor(i[0;Stkvalue,Stktokcl],E 1)Push D StS
      :ElseIf (rhsindex≥0)
-     :AndIf isFormalArg(0,Stkvalue)⌷⊖StackCopy sz+2
+     :AndIf isFormalArg(0,Stkvalue)⌷⊖ (sz+2) StackCopy stk
          ⍝ Case 2: omega, aka rhs, is formal argument of defined fn
          ⍝    ∇r←foo omega;b;c
          ⍝     (b c)←omega, and omega an argument
          'Need omega as bottom stack item'assert 0=rhsindex
          ⍝ Build assigns for semi-globals in
-         lhs←Stkvalue⌷⍤1⊢StackCopy sz
+         lhs←Stkvalue⌷⍤1⊢sz StackCopy stk
          subfn←ast[dfnname;asttarget]
          (ast astr stk)←lhs BuildStrandAssigns(ast 1 'i'stk subfn)
          ast←ast append2Ast astr

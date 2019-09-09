@@ -1,10 +1,10 @@
 ﻿ InvokeDyadicAdverb;astr;lop;adv;rarg;rop;row
  ⍝ Invoke adverb dyadically
- larg←stkpop 1 ⍝ left argument to derived fn
- lop←stkpop 1 ⍝ left operand
- adv←stkpop 1 ⍝ The adverb
- rop←stkpop 1 ⍝ The (null) right operand
- rarg←stkpop 1 ⍝ right arg to derived fn
+ larg←StackPop 1 ⍝ left argument to derived fn
+ lop←StackPop 1 ⍝ left operand
+ adv←StackPop 1 ⍝ The adverb
+ rop←StackPop 1 ⍝ The (null) right operand
+ rarg←StackPop 1 ⍝ right arg to derived fn
  'rbe kant kode'assert NULL=D rop[0;Stkvalue]
  astr←,astNewRows 1
  row←≢ast

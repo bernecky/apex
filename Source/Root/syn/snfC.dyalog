@@ -10,7 +10,7 @@
  row←≢ast
  astr[asttarget]←E row
  astr[astlop]←i[0]
- k←stkpop 2 ⍝ Get conjunction and rop
+ k←StackPop 2 ⍝ Get conjunction and rop
  astr[astfn,astrop]←k[;1]
  astr[astclass]←astclassLFN ⍝ Derived fn
  ast←ast append2Ast astr

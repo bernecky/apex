@@ -1,6 +1,6 @@
 ﻿ snaAsub;astr;i;b;k;m;Pop;j;row
  ⍝ Emit the derived function.
- j←stkpop 3 ⍝ Pop the lop, conj, rop
+ j←StackPop 3 ⍝ Pop the lop, conj, rop
  astr←,astNewRows 1
  astr[astlop,astfn,astrop]←j[;1]
  row←≢ast

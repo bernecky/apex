@@ -2,7 +2,7 @@
  ⍝ Left parenthesis left of naked conj
  ⍝ Locate matching right paren, pop intervening stuff,
  ⍝ Emit it, and push the resulting derived fn.
- j←stkpop 1+(⌽stk[⍳stkp;1])⍳E')'
+ j←StackPop 1+(⌽stk[⍳stkp;1])⍳E')'
  'Maybe source program syntax error'assert j[0;0]∊(E StC),E StV
  astr←,astNewRows 1 ⍝ Build new ast row
  astr[astlop,astfn,astrop]←j[0 1 2;1]
