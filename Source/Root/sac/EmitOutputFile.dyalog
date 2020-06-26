@@ -8,7 +8,7 @@
  cuprolog←ReadFile pathfrag,'prolog.',TargetLanguage ⍝ Get prolog code
  cuprolog←'$MAIN'Strepl(E cuprolog),E CUEntryPoint cuasts
  APEXVersion←'Compiled by APEX Version: ',⎕WSID
- cuprolog←cuprolog,(BuildComment APEXVersion,fts ⎕TS),NL
+ cuprolog←cuprolog,(BuildComment APEXVersion,' ',,fts ⎕TS),NL
  cuprolog←cuprolog,ReadFile pathfrag,'stdlib.',TargetLanguage
  code←cuprolog,cudefinedfns
  r←toascii AddNL code
