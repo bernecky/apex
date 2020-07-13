@@ -6,7 +6,7 @@ use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
 
-/* Compiled by APEX Version: /home/apex/apex3/wss/sac3013.dws2012-11-14 12:30:23.039 */
+/* Compiled by APEX Version: /home/apex/apex3/wss/sac30142020-06-24 18:48:46.409 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -117,7 +117,11 @@ inline double plusIDD(int x, double y)
 
 inline bool eqDDB(double x, double y, double QUADct)
 { /* A=B on doubles */
- return((DtoD(x) == DtoD(y)) || APEXFUZZEQ(DtoD(x),DtoD(y),QUADct));
+  /* We use | instead of || on the assumption that
+   * the zero-fuzz case will eliminate the second leg,
+   * and it also eliminate a CONDFUN.
+   */
+ return((DtoD(x) == DtoD(y)) | APEXFUZZEQ(DtoD(x),DtoD(y),QUADct));
 }
 
 

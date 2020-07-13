@@ -1,2 +1,2 @@
 ﻿ r←D y
- r←⊃y
+ r←↑y  ⍝  Stupid APL2

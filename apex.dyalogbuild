@@ -1,7 +1,7 @@
 DyalogBuild: 0.1
 ID         : apexgit, Version=2.0
 Description: APEX compiler as single workspace
-Defaults   : ⎕IO←0 ⋄ ⎕ML←3
+Defaults   : ⎕IO←0 ⋄ ⎕ML←1
 
 EXEC  : #.⎕EX 'Tests' 'OtherTests'
 
