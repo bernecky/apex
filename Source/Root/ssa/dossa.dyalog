@@ -1,7 +1,6 @@
-﻿r←x dossa asts;tn;y;i;ct;ast2;ast3;dfaws;srctok;ast;cds;phasepause;PFAT;TargetLanguage;fldr;trace
+﻿r←x dossa asts;tn;y;i;ct;ast2;ast3;dfaws;srctok;ast;cds;PFAT;TargetLanguage;fldr;trace
  Initialize
  (fldr trace)←x
- phasepause←LC GetOption'phasepause'
  debugphase←LC GetOption'debugssa'
  TargetLanguage←GetOption'output'
  PFAT←BuildPFAT TargetLanguage

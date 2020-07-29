@@ -3,7 +3,7 @@
  ⍝ Argument is something like '[a-h]*'
  b←benchmks nm
  b←b,¨E'blist.cu'
- b←(~isUsesRank¨b)/b ⍝ Eliminate rankly stuff for Dyalog
+⍝⍝ hopefully no longer needed 2020-07-16  b←(~isUsesRank¨b)/b ⍝ Eliminate rankly stuff for Dyalog
  i←∨/¨(E'AKD')∊¨b
  akd←i/b
  aks←(~i)/b

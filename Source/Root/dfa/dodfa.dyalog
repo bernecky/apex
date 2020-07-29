@@ -1,11 +1,10 @@
-﻿ r←x dodfa asts;genws;PFAT;target;phasepause;debugdfa;PartialEvaluation;visualizedfa;fldr;trace
+﻿ r←x dodfa asts;genws;PFAT;target;debugdfa;PartialEvaluation;visualizedfa;fldr;trace
  (fldr trace)←x
  Initialize
  InitializeAST
  InitializeSSA
  initializeDEBUG
  InitializeFns
- phasepause←LC GetOption'phasepause' ⍝ Interphase pausing
  debugdfa←LC GetOption'debugdfa'     ⍝ Extensive ast check in dfa
  visualizedfa←LC GetOption'visualizedfa'
  PartialEvaluation←LC GetOption'partialevaluation'
