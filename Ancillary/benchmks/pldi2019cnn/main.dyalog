@@ -1,4 +1,5 @@
 ﻿ main←{ 
+ ⍝ This requires 1=⎕ml and 0=⎕io
  epochs←10 ⋄ batchsz←1 ⋄ err←0
  trainings←1000 ⋄ tests←10000 ⋄ rate←0.05
  k1←6 5 5⍴÷25 ⋄ b1←6⍴÷6 ⋄ k2←12 6 5 5⍴÷150 ⋄ b2←12⍴÷12 
