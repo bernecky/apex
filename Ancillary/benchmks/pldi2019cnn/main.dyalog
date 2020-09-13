@@ -1,6 +1,6 @@
 ﻿ main←{ 
  ⍝ This requires 1=⎕ml and 0=⎕io
- epochs←10 ⋄ batchsz←1 ⋄ err←0
+ epochs←10 ⋄ batchsz←100 ⋄ err←0
  trainings←1000 ⋄ tests←10000 ⋄ rate←0.05
  k1←6 5 5⍴÷25 ⋄ b1←6⍴÷6 ⋄ k2←12 6 5 5⍴÷150 ⋄ b2←12⍴÷12 
  fc←10 12 1 4 4⍴÷192 ⋄ b←10⍴÷10
@@ -12,8 +12,7 @@
  tests←tests⌊≢te_img
  ⎕←'Running Zhang with ',(⍕epochs),' epochs, batchsz ',⍕batchsz
  ⎕←(⍕trainings),' training images, ',(⍕tests),' tests',' rate ',⍕rate
-t2←trainings-1
- (k1 b1 k2 b2 fc b err)←TrAll (0 k1 b1 k2 b2 fc b tr_img tr_lab err batchsz rate t2)
+ (k1 b1 k2 b2 fc b err)←TrAll (0 k1 b1 k2 b2 fc b tr_img tr_lab err batchsz rate trainings)
 
  out←te_img TestZhang⍤2⊢ (k1 b1 k2 b2 fc b)
  correct←+/,(MaxPos⍤1⊢,⍤5⊢ te_lab)=MaxPos⍤1⊢,⍤5⊢out

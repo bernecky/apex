@@ -1,8 +1,8 @@
 TrainZhang←{
  (tr_lab k1 b1 k2 b2 fc b)←⍵ 
-s1← 2 2 AveragePool⍤2⊢c1←Sigmoid ⍺ MultiConv (k1 b1)
-s2← 2 2 AveragePool⍤2⊢c2←Sigmoid s1 MultiConv (k2 b2)
-out←Sigmoid s2 MultiConv (fc b)
+s1← 2 2 AveragePool⍤2⊢c1←Sigmoid ⍺ MultiConv⍤2⊢(k1 b1)
+s2← 2 2 AveragePool⍤2⊢c2←Sigmoid s1 MultiConv⍤3⊢(k2 b2)
+out←Sigmoid s2 MultiConv⍤4⊢(fc b)
 d_out←out-tr_lab
 error←out MeanSquaredError tr_lab
 (d_s2 d_fc d_b)←BackMultiConv((d_out BackLogistic out) fc s2 b)
