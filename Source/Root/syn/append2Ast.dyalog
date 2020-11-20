@@ -9,7 +9,7 @@
  astr[;aststmt]←E lineno ⍝ No line #s today
  astr[;asttoken]←E c     ⍝ Column # of token
  i←≢astr
- :If trace
+ :If #.globals.TraceSyn
      ⎕←'Appending to ast: '
      ⎕←y
      ⎕←⍪src((¯1+-c)↑'^')

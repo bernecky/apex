@@ -15,7 +15,8 @@
  PFATqrl←1+PFATqpw  ⍝ PFAT fn needs ⎕rl
  PFATuni←1+PFATqrl  ⍝ PFAT fn is uniform
  PFATcols←1+PFATuni ⍝ PFAT table width
- t←ReadFile PathFrag,PathDelim,'pfat.tbl'
+ t←ReadFile #.globals.PathFrag,'pfat.tbl'
+ ÷0
  t←TABtoBlank t
  t←vtom NL,nolf t
  hdr←' ',squeeze 1↓t[(t[;⍳3]∧.='%FN')⍳1;] ⍝ Column identifiers

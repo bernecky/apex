@@ -1,9 +1,6 @@
-﻿r←x dossa asts;tn;y;i;ct;ast2;ast3;dfaws;srctok;ast;cds;PFAT;TargetLanguage;fldr;trace
- Initialize
- (fldr trace)←x
- debugphase←LC GetOption'debugssa'
- TargetLanguage←GetOption'output'
- PFAT←BuildPFAT TargetLanguage
+﻿r←fldr dossa asts;tn;y;i;ct;ast2;ast3;dfaws;srctok;ast;cds;PFAT
+ Initialize 0
+ PFAT←BuildPFAT #.globals.TargetLanguage
  ⎕←(⍕⎕TS),': Starting SSA analysis for: ',fldr
  ct←BuildCallingTree asts
  i←DFSortast(E ct),E asts       ⍝ Depth-first order

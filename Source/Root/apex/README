@@ -1,0 +1,27 @@
+Root namespace for the apex compiler.
+
+Usage:
+  OptionList apex src
+
+OptionList is a blank-delimited text vector of zero
+or more compiler options, in the form X=Y.
+E.g.,
+
+ 'targetlanguage=sac debugdfa=1' apex 'TestsForNow/ipbb'
+
+The first option makes the compiler generate SaC code.
+Plural code could be generated with 'targetlanguage=plural'.
+
+The second option makes the compiler emit debug information 
+during its data flow analysis (dfa) phase. 
+
+src is a relative path to the folder containing
+the APL source code to be compiled, as a set of
+.dyalog functions, whose names appear, one per line,
+in the file blist.cu in that folder.
+
+E.g., blist.cu is:
+
+ipbb.ufn
+main.ufn
+

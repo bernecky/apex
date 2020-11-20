@@ -1,8 +1,5 @@
-﻿ z←benchmks;r
-⍝ Return list of available benchmarks
- (r PathFrag)←InitializePath
- r←GetOption'apexpath'
- r←r,GetOption'benchpath'
- z←ls'-r ',r
+﻿ benchmks←{ ⍝ Return list of available benchmarks in ⍵
+ z←ls'-r ',⍵
  z←(~z∊E'README')/z
- z←(E r),¨z
+ (E r),¨z
+}

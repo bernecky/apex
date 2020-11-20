@@ -1,6 +1,5 @@
-﻿ r←x doidioms asts;genws;fldr;trace
- (fldr trace)←x
- Initialize
+﻿ r←fldr doidioms asts
+ Initialize 0
  InitializeAST
  InitializeSSA
  r←doidiomsOne¨asts

@@ -6,7 +6,7 @@
      signal←tok[c]
      stk[stkp;Stkstate]←E signal
  :EndIf
- :If 1∊trace
+ :If 1∊#.globals.TraceSyn
      src see tok
  :EndIf
  'Compiler bug'assert(0=⍴⍴state)∧0=⍴⍴signal

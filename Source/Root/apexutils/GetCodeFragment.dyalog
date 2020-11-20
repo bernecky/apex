@@ -5,7 +5,7 @@
  ⍝ If fragment has been broken already,
  ⍝ use it. Otherwise, break it up, and
  ⍝ refresh the broken fragment.
- cf←TABtoBlank nolf GetFrag y
+ cf←TABtoBlank nolf ReadFile #.globals.PathFrag,y,'.frg'
  cf←¯1⌽cf,(NL≠¯1↑cf)/NL
  i←1⌽D(cf=NL)PartitionedEnclose cf
  ⍝ Discard pure comments, but leave Fragment and Generate
