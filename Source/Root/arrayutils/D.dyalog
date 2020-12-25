@@ -1,2 +1,2 @@
-﻿ r←D y
- r←↑y  ⍝  Stupid APL2
+﻿D←{⍝  Dyalog APL disclose
+↑⍵}

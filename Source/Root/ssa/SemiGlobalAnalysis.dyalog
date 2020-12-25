@@ -30,7 +30,7 @@
  :For i :In ⍳⍴cds
      ast←D(D cds[i])[ssaast]
      callsme←(×ct[;i])/⍳⍴fns⍝ Who calls me
-     :if trace
+     :if #.globals.TraceSsa
        ⎕←(D ast[dfnname;asttarget]),' has semi-globals IN of:'
        ⎕←MapSGI[;i]/AllVarbs
        ⎕←(D ast[dfnname;asttarget]),' has semi-globals OUT of:'

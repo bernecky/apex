@@ -1,5 +1,8 @@
 ﻿ r←BuildPFAT TargetLanguage;b;n;i;classdefn;class;ct;zt;t;js;hdr
-⍝ Build PFAT table from pfat text
+ ⍝ Build PFAT table from pfat text
+ r←PFATTEMP ⋄ →0
+
+
  PFATfn←0           ⍝ PFAT fn zymbol
  PFATct←1+PFATfn    ⍝ PFAT fn compute type class
  PFATzt←1+PFATct    ⍝ PFAT fn result type class
@@ -16,7 +19,6 @@
  PFATuni←1+PFATqrl  ⍝ PFAT fn is uniform
  PFATcols←1+PFATuni ⍝ PFAT table width
  t←ReadFile #.globals.PathFrag,'pfat.tbl'
- ÷0
  t←TABtoBlank t
  t←vtom NL,nolf t
  hdr←' ',squeeze 1↓t[(t[;⍳3]∧.='%FN')⍳1;] ⍝ Column identifiers

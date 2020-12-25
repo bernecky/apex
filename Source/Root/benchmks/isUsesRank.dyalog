@@ -4,5 +4,5 @@
 ⍝ window-reduce with monadic left operand.).
  blist←ReadFile bm
  ufns←ER1 vtom ¯1⌽blist,(NL≠¯1↑blist)⍴NL
- fntext←ReadFile¨(E Path bm),¨ufns
+ fntext←ReadFile¨(E #.fileutils.Path bm),¨ufns
  r←∨/'⍤'∊¨fntext

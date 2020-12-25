@@ -1,16 +1,12 @@
-﻿ r←x dosac asts;TL;pathfrag;fragbuf;fldr;Options;trace
+﻿ r←fldr dosac asts;TL;pathfrag;fragbuf
 ⍝# Emit object code for each compilation unit (CU)
 ⍝# Each tied file is a compilation unit.
- (fldr Options trace)←x
  Initialize
  InitializeCodeGen
  InitializeCtl
- TL←LC GetOption'output'
+ TL←LC #.globals.TargetLanguage
  :If TL≡'sac'
-     pathfrag←LC GetOption'apexpath'
-     pathfrag←pathfrag,LC GetOption'pathfrag'
-     pathfrag←pathfrag,TL,PathDelim
-     fragbuf←BufferAllCodeFragments pathfrag
+     fragbuf←BufferAllCodeFragments #.globals.PathFrag
      r←fldr EmitOneCU asts
  :else
    r←asts

@@ -2,16 +2,16 @@
 ⍝ Run benchmark in path bm
  blist←ReadFile bm
  ufns←ER1 vtom ¯1⌽blist,(NL≠¯1↑blist)⍴NL
- fntext←ReadFile¨(E Path bm),¨ufns
+ fntext←ReadFile¨(E #.fileutils.Path bm),¨ufns
  :If ∨/'AKD'⍷bm
-     argv←ReadFile(Path bm),'bench.argv'
+     argv←ReadFile(#.fileutils.Path bm),'bench.argv'
      argv←(argv⍳NL)↑argv
  :Else
      argv←''
  :EndIf
  fns←CreateLocalFns(E ufns),E argv
  fntext←vtom¨NL,¨fntext
- p←PathFileName(-1+⍴PathFileName bm)↓bm
+ p←#.fileutils.PathFileName(-1+⍴#.fileutils.PathFileName bm)↓bm
  ⎕←(fts ⎕TS),': Invoking: ',p
  ForceBigWS
  r←E'Start time: ',fts ⎕TS
@@ -22,5 +22,5 @@
  op←'APEXtime.',(2 ⎕NQ'.' 'GetBuildID'),'.'
  op←op,fts ⎕TS ⍝ Output filename
  op[(op=' ')/⍳⍴op]←'_'
- op←(Path bm),op
+ op←(#.fileutils.Path bm),op
  op PutFile r

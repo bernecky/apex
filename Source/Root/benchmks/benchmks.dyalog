@@ -1,4 +1,4 @@
 ﻿ r←benchmks nm
 ⍝ Return list of available benchmarks
- r←(GetOption'apexpath'),GetOption'benchpath'
+ r←(#.globals.ApexPath),#.globals.BenchPath
  r←(E r),¨ls'-r ',r,nm

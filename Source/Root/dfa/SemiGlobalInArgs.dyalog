@@ -9,7 +9,7 @@
  astr←nast[tar;]                   ⍝ Affected rows in subfn
  astr[;astchar]←astrow[;astchar]   ⍝ Update subfn's ast
  j←astmerge(E nast),(E astr),E(⍳1↑⍴nast)∊tar
- :If trace≠0 ⍝ DEBUG
+ :If TraceDfa≠0 ⍝ DEBUG
      :If ~0∊⍴astrow
          ⎕←'Semiglobals into: ',D nast[0;asttarget]
          ⎕←'before: ' ⋄ nast[tar;asttarget]

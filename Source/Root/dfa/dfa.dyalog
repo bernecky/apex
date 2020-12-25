@@ -2,10 +2,10 @@
  ⍝ Perform data flow analysis for one function in fldr
  ⍝ Result is updated asts
  src←D asts[ssasrc]
- DrawAPLTextStart src
+⍝⍝⍝ DrawAPLTextStart src  ⍝ make this work some day
  wp←dfasee asts
  :While 1∊D wp[ssacv]            ⍝ loop until fixpoint reached
-     :if trace
+     :if TraceDfa
        ⎕←'top of dfa loop, examining ',(⍕+/D wp[ssacv]),' items:'
        ⎕←(D wp[ssacv])⌿(D wp[ssaast])[;astfn]
      :endif

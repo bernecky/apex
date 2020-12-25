@@ -9,7 +9,7 @@
  lt←ast[;astlarg,astrarg]
  lt←ast[0⌈lt;asttype],ast[;,asttype]
  lt[k/⍳⍴k;]←NULL
- fns[;fnstypes]←ER1 uc TYPES D lt
+ fns[;fnstypes]←ER1 UC TYPES D lt
  k←~dfainit ast
  rnks←ast[;astlarg,astrarg]
  rnks←ast[0⌈rnks;astrank],ast[;,astrank]
@@ -33,7 +33,7 @@
  fns[;fnsspec]←E,'.'              ⍝ No special cases yet
  ⍝ Gen temp names for derived fns w/non-primitive operands
  i←ast[;astlop,astfn,astrop]
- j←~ast[;astfn]∊,¨E¨'[]\⍀/⌿' ⍝ Ignore index, reduce, scan
+ j←~ast[;astfn]∊,¨E¨'[]\⍀/⌿' ⍝ Ignore index, redduce, scan
  j←j∧astlop isDefinedFn ast
  i←(j⌿ast)[;astfn] ⍝ Don't alter dfn calls
  i←(~isnum i)∨i∊ER0 k/⍳⍴k

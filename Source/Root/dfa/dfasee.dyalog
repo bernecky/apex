@@ -1,6 +1,7 @@
 ﻿ asts←dfasee asts;ast;cv
 ⍝ Display current ast state for programmer
+⍝ Make this work some day...
  Checkem asts
- :If visualizedfa≡'yes'
+ :If #.globals.VisualizeDfa
      asttype ColorAST asts ⍝ Visual following of type determination
  :EndIf

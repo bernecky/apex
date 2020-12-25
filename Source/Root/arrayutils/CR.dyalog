@@ -1,1 +1,2 @@
-﻿⌷CR←⎕ucs 13
+﻿z←CR
+z←⎕ucs 13 ⍝  Carriage return

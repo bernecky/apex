@@ -2,6 +2,8 @@
 ⍝ Perform partial evaluation when we know
 ⍝ primitive function argument values.
  r←asts
+ ⍝ Make this work some day
+ →0
  :If PartialEvaluation≡'yes'
      ast←D asts[ssaast]
  ⍝ Set the result value, if we know the argument values.

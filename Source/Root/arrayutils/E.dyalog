@@ -1,2 +1,2 @@
-﻿ r←E y
- r←⊂y
+﻿E←{⍝ Dyalog APL Enclose
+⊂⍵}
