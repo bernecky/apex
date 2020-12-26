@@ -1,4 +1,4 @@
-﻿ Dfn2TradTacitOne←{
+ Dfn2TradTacitOne←{
 ⍝ ⍵ is (all fn names, this Dfn Function name)
 ⍝ ⍺ is the function body of this Dfn: { ... }, with no nested fns inside
 ⍝ Or maybe, it's a TradFn already
@@ -17,6 +17,6 @@
      z←nmz,'←',nma,' ',fnm,' ',nmo,,D Raze';',¨lcls
      ⍝ Append result assign to last non-comment line
      ⍝ which had better contain Z, with assign
-     z←z rcat(¯1↓t)rcat(~isstrnd)/nmz,'←',,¯1↑t
+     z←z #.arrayutils.rcat(¯1↓t)#.arrayutils.rcat(~isstrnd)/nmz,'←',,¯1↑t
      (isDfn ⍺)⌷⍺ z
  }

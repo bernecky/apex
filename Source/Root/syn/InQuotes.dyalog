@@ -1,1 +1,1 @@
-InQuotes←{ i←⍵='''' ⋄ i∨≠\i}
+../arrayutils/InQuotes.dyalog

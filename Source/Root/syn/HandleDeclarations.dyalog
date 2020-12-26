@@ -4,9 +4,9 @@
  ⍝          ⍝ dcl integer 3 mytensor  (rank-3 integer array)
  ⍝          ⍝ dcl complex vector d
  r←ast
- i←rtnb src
- cv←('⍝'=i[;0])∧(rtnb 0 1↓i)[;⍳4]∧.='dcl ' ⍝ Locate dcls
- i←rtnb 0 4↓rtnb 0 1↓rtnb cv⌿src           ⍝ Locate start of args
+ i←#.arrayutils.rtnb src
+ cv←('⍝'=i[;0])∧(#.arrayutils.rtnb 0 1↓i)[;⍳4]∧.='dcl ' ⍝ Locate dcls
+ i←#.arrayutils.rtnb 0 4↓#.arrayutils.rtnb 0 1↓#.arrayutils.rtnb cv⌿src           ⍝ Locate start of args
  :If ~0∊⍴i
      types←(E'boolean'),(E'integer'),(E'double'),(E'complex'),E'character' ⍝ Legal types
      types[D asttypeB,asttypeI,asttypeD,asttypeZ,asttypeC]←types

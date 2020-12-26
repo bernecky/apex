@@ -1,4 +1,4 @@
-﻿ st←gst Buildst y;src;tok;loc;ids;lab;i;j;fnm;val;con;args;b;hdr;res;hdrtok
+ st←gst Buildst y;src;tok;loc;ids;lab;i;j;fnm;val;con;args;b;hdr;res;hdrtok
 ⍝ Build symbol table for a single function.
 ⍝ A symbol table row is a triple of name, syntax class, scope
 ⍝ First 4 rows are function name, result, larg, rarg
@@ -6,7 +6,7 @@
  i←src[0;]⍳'←'
  i←i×i≠¯1↑⍴src ⍝ possible result
  res←E(i↑src[0;]),(i=0)/astNoFn
- res←squeeze¨res               ⍝ Drop any leading blanks
+ res←#.arrayutils.squeeze¨res               ⍝ Drop any leading blanks
  i←i+×i
  hdr←i↓src[0;] ⋄ hdrtok←i↓tok[0;]
  i←hdr⍳';' ⋄ j←i×i≠⍴hdr ⍝ Extract fn name, args
@@ -17,12 +17,12 @@
  args←1↓args
 ⍝⍝⍝?? 2005-11-04 args←⌽1↓args
  :If fnm≡E'main' ⍝ Localize all system vars for main.wif
-     loc←loc⍪mcb(~systemvars∊loc)/systemvars
+     loc←loc⍪mcb(~#.globals.sysvars∊loc)/#.globals.sysvars
  :EndIf
  ⍝ Result, larg, rarg
  args←mcb res,((2-⍴args)⍴astNoFn),args
  ids←mcb(1 0↓src)getids 1 0↓tok ⍝ Get all ids
- ids←(~,ids∊systemfns,systemconsts,systemnfns,E,'⎕')⌿ids ⍝ Stupid APL\360 ⎕←
+ ids←(~,ids∊#.globals.sysfns,#.globals.sysconsts,#.globals.sysnfns,E,'⎕')⌿ids ⍝ Stupid APL\360 ⎕←
  ⍝ Class unknown, local
  ids←ids,((1↑⍴ids),2)⍴(E'?'),E astscopeL
  loc←loc,((1↑⍴loc),2)⍴NULL,E astscopeL
@@ -46,13 +46,13 @@
  ⍝ but on 1995-12=05, discovered that we do indeed need it.
  ⍝ (nmomain)
  ⍝ Add entries for all non-local system fns and variables. 2004-06-11
- ids←systemvars
+ ids←#.globals.sysvars
  i←st[;stname]∊ids ⍝ Note local system var names
  ids←(~ids∊st[;stname])/ids ⍝ Non-localized sysvar names
  ids←((mcb ids),E astclassVARB),E astscopeSGI+astscopeSGO
  ⍝ Correct stclass of system vars
  st←st⍪ids
- st[(st[;stname]∊systemvars)/⍳1↑⍴st;stclass]←astclassVARB
+ st[(st[;stname]∊#.globals.sysvars)/⍳1↑⍴st;stclass]←astclassVARB
  st[(st[;stname]∊(E'⎕wa'),E'⎕ts')/⍳1↑⍴st;stscope]←astscopeL
  ids←clsnum GetConstants y ⍝ Add entries for constants.
  ids←((mcb ids),E astclassNC),E astscopeL

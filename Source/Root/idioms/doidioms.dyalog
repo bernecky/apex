@@ -1,5 +1,6 @@
 ﻿ r←fldr doidioms asts
- Initialize 0
  InitializeAST
  InitializeSSA
+ InitializeST
+ InitializeTYPES
  r←doidiomsOne¨asts

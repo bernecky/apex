@@ -1,6 +1,5 @@
-StripOuterBrackets←{
-z←('{ ',NL)blanklis ,⍵
-z←('} ',NL)blanktis z
-(⍴⍵)⍴z
-}
-
+ StripOuterBrackets←{
+     z←('{ ',NL)#.arrayutils.blanklis,⍵
+     z←('} ',NL)#.arrayutils.blanktis z
+     (⍴⍵)⍴z
+ }

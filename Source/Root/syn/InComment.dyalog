@@ -1,1 +1,1 @@
-InComment←{ ∨\(⍵='⍝')∧~InQuotes ⍵ }
+../arrayutils/InComment.dyalog

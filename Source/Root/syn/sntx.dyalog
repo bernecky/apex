@@ -1,6 +1,5 @@
 ﻿ r←x sntx n;i;j;k;src;tok;st;m;gst;f;s;ast;etr;cv;sj;wif
  ⍝ Build symbol table and abstract syntax tree from tokenized src
- Initialize 0
  gst←D x[0] ⋄ s←D x[1] ⍝ Global symbol table; tokenized source code
  st←gst Buildst D s[n] ⍝ Build the local symbol table
  src←D(D s[n])[0]

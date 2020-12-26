@@ -16,7 +16,7 @@
          tar←~ast[tar;asttarget]∊nms ⍝ Keep these entries
          nast←(fcv\tar)⌿ast
          :If 1∊tar                   ⍝ Cozy-up any remaining entries
-             links←¯1+fcv pplusreduce fcv\tar ⍝ New links, almost
+             links←¯1+fcv #.arrayutils.pplusreduce fcv\tar ⍝ New links, almost
              'crap if some vanish only'assert∧/tar
              links←(1+fcv/⍳⍴fcv)+¨⍳¨links
              links←D Raze⍉links,¨E NULL

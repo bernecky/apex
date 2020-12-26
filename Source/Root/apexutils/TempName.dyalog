@@ -1,3 +1,3 @@
-﻿ r←TempName y
+ r←TempName y
 ⍝ Generate names of temps
- r←(E APEXPrefix),¨⍕¨y
+ r←(E #.globals.APEXPrefix),¨⍕¨y

@@ -1,4 +1,4 @@
-﻿ r←tokenize y;b;i;j;k;tv;t;tc;m;p;ps;d;rho;bor
+ r←tokenize y;b;i;j;k;tv;t;tc;m;p;ps;d;rho;bor
  ⍝ Tokenize the function whose ⎕cr is y, to give
  ⍝ a character matrix of shape ⍴y,
  ⍝ with tokenization values
@@ -28,11 +28,11 @@
  tc←tc,clsspace,clsassign,6⍴clsadverb
 
 ⍝ Conjunctions
-tv←tv,'Öö⍣⌺⍤' 
-tc←tc,5⍴clsconj
+ tv←tv,'Öö⍣⌺⍤'
+ tc←tc,5⍴clsconj
 
 ⍝ Brackets, labels, colon, semicolon, diamond, goto, curly braces
- tv←tv,'[]():;⋄ →{}' 
+ tv←tv,'[]():;⋄ →{}'
  tc←tc,clslbr,clsrbr,clslpar,clsrpar,clscolon,clssemic,clssep,clsgoto,clslbr,clsrbr
 
  i←b∧y∊tv
@@ -48,24 +48,24 @@ tc←tc,5⍴clsconj
  b←b∧~i←b∧y∊'⍺⍵'
  r[i/⍳⍴i]←clsid
  ⍝ Quad and quote-quad
- i←(y∊'⎕⍞')∧(r='?')∧~1⌽y∊A1,A2
+ i←(y∊'⎕⍞')∧(r='?')∧~1⌽y∊#.globals.A1,#.globals.A2
  r[i/⍳⍴y]←clsqq
 
  ⍝ Ids: letter,{letter|digit|underbar|overbar}
  i←r='?'
  ps←i/i>¯1⌽i ⍝ Partition starts
  d←i/y ⍝ Putative ids
- j←ps∧d∊A1,A2,'∆⍙⎕_' ⍝ First char in ID
- k←(~ps)∧d∊A1,A2,'∆⍙_',digits ⍝ Other chars in ID
+ j←ps∧d∊#.globals.A1,#.globals.A2,'∆⍙⎕_' ⍝ First char in ID
+ k←(~ps)∧d∊#.globals.A1,#.globals.A2,'∆⍙_',#.globals.Digits ⍝ Other chars in ID
  j←ps\ps pandreduce j∨k ⍝ Valid IDs
- j←ps pmaxscan j+ps∧d='⎕' ⍝ System verbs and fns
+ j←ps #.arrayutils.pmaxscan j+ps∧d='⎕' ⍝ System verbs and fns
  r[(i\×j)/⍳⍴r]←('_',clsid,clsqdnm)[(j≠0)/j]
 
  ⍝ Numeric constants.
  i←r='?'
  ps←i/i>¯1⌽i ⍝Partition starts.
  d←i/y ⍝ Putative numeric constants.
- j←ps pmaxscan ps\ps pandreduce d∊digits,'.eEjJ¯ '
+ j←ps #.arrayutils.pmaxscan ps\ps pandreduce d∊#.globals.Digits,'.eEjJ¯ '
  r[(i\j)/⍳⍴r]←clsnum
 
  ⍝ Build numeric vector constants.

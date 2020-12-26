@@ -16,9 +16,9 @@
  j←(1↑⍴i)⍴E''
  i←JsymToPrimitive¨EEW¨ER1 i∘
  r[;PHRASEName]←D¨Raze¨i
- t←rtnb(⍴t)⍴(~,b)\(~,b)/,t ⍝ On to next field
+ t←#.arrayutils.rtnb(⍴t)⍴(~,b)\(~,b)/,t ⍝ On to next field
  i←field1 t
  r[;PHRASEMonadicOut]←dtb¨ER1 i
- t←rtnb(0,¯1↑⍴i)↓t
+ t←#.arrayutils.rtnb(0,¯1↑⍴i)↓t
  i←field1 t
  r[;PHRASEDyadicOut]←dtb¨ER1 i

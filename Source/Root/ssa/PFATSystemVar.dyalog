@@ -2,7 +2,7 @@
 ⍝# Return system variable usage for this fn
 ⍝# Result is list of shape (1↑⍴ast), containing list of
 ⍝# system vars for each line in the ast.
-⍝ Note strong assumption about ordering of systemvars matching j
+⍝ Note strong assumption about ordering of sysvars matching j
  cv←(dfainit ast)∧~ast[;astfn]∊NULL
  fnnm←jsym cv⌿ast[;astfn] ⍝ Compute primitive function names
  fnnm←('dm'[(D cv⌿ast[;astlarg])∊NULL]),¨fnnm

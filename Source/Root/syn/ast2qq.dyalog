@@ -18,8 +18,8 @@
                            ⍝ (⍞/⍳w)     (⎕ts/⍳7)
      i←c gett(E src),E tok
      fn←ast[D i[GettValue];asttarget]
-     'Compiler bug'assert fn∊systemvars,sysQQ
-     :If fn∊systemvars,systemnfns   ⍝ ⎕io, ⎕wa
+     'Compiler bug'assert fn∊#.globals.sysvars,sysQQ
+     :If fn∊#.globals.sysvars,#.globals.sysnfns   ⍝ ⎕io, ⎕wa
          snnn
      :Else                          ⍝ ⎕fi
          ÷0                         ⍝ writeme

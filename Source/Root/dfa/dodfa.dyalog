@@ -1,7 +1,7 @@
 ﻿ r←fldr dodfa asts
- Initialize ''
  InitializeAST
- InitializeSSA
  initializeDEBUG
  InitializeFns
+ InitializeSSA
+ InitializeTYPES
  r←fldr dodfaOne asts

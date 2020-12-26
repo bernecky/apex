@@ -8,10 +8,10 @@
      nm←ast[nm;asttarget]
  :EndIf
 ⍝ Next line for ⎕ct, ⎕io, ⎕pp, ⎕pp, ⎕pw, ⎕rl, ⎕ts, ⎕wa, ⎕av, ⎕ts
-⍝⍝⍝ :If nm∊systemnfns      ⍝ ⎕ts, ⎕av
+⍝⍝⍝ :If nm∊sysnfns      ⍝ ⎕ts, ⎕av
 ⍝⍝⍝     ast2fn              ⍝ Treat as primitive fn
 ⍝⍝⍝ :EndIf
- :If nm∊systemvars,systemconsts
+ :If nm∊#.globals.sysvars,#.globals.sysconsts
      :Select state
      :Case Stf          ⍝ System variable left of fn
          snif
@@ -26,10 +26,10 @@
      :Else              ⍝ More coding needed...
          snerr
      :EndSelect
- :ElseIf nm∊systemfns,systemnfns,systemvars  ⍝ ⎕fd, ⎕nl, ⎕wa, ⎕ts, ⎕av, ⎕io
+ :ElseIf nm∊#.globals.sysfns,#.globals.sysnfns,#.globals.sysvars  ⍝ ⎕fd, ⎕nl, ⎕wa, ⎕ts, ⎕av, ⎕io
      :Select state
      :Case Stn          ⍝ Systemfn left of bos
-         newstate←(StV,StN)[nm∊systemnfns,systemvars] ⍝ ⎕ts ⎕io
+         newstate←(StV,StN)[nm∊#.globals.sysnfns,#.globals.sysvars] ⍝ ⎕ts ⎕io
          PushCursor i Push newstate   ⍝ past systemfn
      :Case Stf ⍝ Systemfn left of function
          snif     ⍝ Treat like id left of function

@@ -1,2 +1,2 @@
-﻿ r←GetFn y
- r←vtom LF,ReadFile y
+ r←GetFn y
+ r←vtom #.arrayutils.LF,#.fileutils.ReadFile y

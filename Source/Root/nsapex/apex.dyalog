@@ -1,10 +1,9 @@
-﻿ asts←Options apex fldr;defaultOpts;Opts
+ asts←Options apex fldr;defaultOpts;Opts
   ⍝  Compile code in folder fldr with Options
   ⍝ Establish default Option settings
  defaultOpts←'targetlanguage=sac trace=0 '
  Opts←defaultOpts,Options
- Initialize Opts
- #.globals.InitializeGlobals Opts
+ #.globals.Initialize Opts
  fns←GetBlistFns fldr
 
  ⍝  Invoke each compiler phase

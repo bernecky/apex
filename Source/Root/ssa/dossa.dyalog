@@ -1,5 +1,6 @@
 ﻿r←fldr dossa asts;tn;y;i;ct;ast2;ast3;dfaws;srctok;ast;cds;PFAT
- Initialize 0
+ InitializeAST
+ InitializeSSA
  PFAT←BuildPFAT #.globals.TargetLanguage
  ⎕←(⍕⎕TS),': Starting SSA analysis for: ',fldr
  ct←BuildCallingTree asts

@@ -48,7 +48,7 @@
   ⍝
   ⍝ Now package up initial values for each :For
   ⍝ (May have different # of them per :For)
-     pv←1↓(1,¯1↓j)pplusreduce pf ⍝ #phi fns/for loop
+     pv←1↓(1,¯1↓j)#.arrayutils.pplusreduce pf ⍝ #phi fns/for loop
      pv←D Raze pv↑¨1
      m←D¨Raze¨pv PartitionedEnclose m
      phiz←pv PartitionedEnclose phiz catenateeach','
