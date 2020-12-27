@@ -1,4 +1,4 @@
-﻿ Checkem asts;ast;cv;i;b;d;p
+ Checkem asts;ast;cv;i;b;d;p
 ⍝ This performs various paranoia checks that make
 ⍝ fault isolation faster, supposedly, while also making
 ⍝ you want to buy a faster cpu.
@@ -15,7 +15,7 @@
      'Predicate length error'assert(p∊NULL)∨astPredLen∧.=,D⍴¨p
      b←ast[;astrank]∊E NULL
      'Rank invalid'assert∧/(0=,D⍴¨⍴¨ast[;astrank])∧b∨,D ast[;astrank]≥0
-     'Type invalid'assert∧/(,D ast[;asttype])∊NULL,⍳⍴Types
+     'Type invalid'assert∧/(,D ast[;asttype])∊NULL,⍳⍴#.globals.Types
      i←ast[;astvalue]
      i←0⍴¨(~i∊NULL)/i ⍝ Non-nulls must be character
      'Non-nulls not character'assert∧/' '=D 1↑¨i

@@ -6,6 +6,7 @@
  InitializeCtl
  InitializeSSA
  InitializeTYPES
+ InitializePFAT
  TL←LC #.globals.TargetLanguage
  :If TL≡'sac'
      fragbuf←BufferAllCodeFragments #.globals.PathFrag

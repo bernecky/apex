@@ -3,4 +3,4 @@
  frg←0 2⍴' '
  jsymbols←JSYM
  InitializeFragments
- PFAT←BuildPFAT #.globals.TargetLanguage
+ PFAT←#.globals.PFAT

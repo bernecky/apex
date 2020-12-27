@@ -3,4 +3,5 @@
  InitializeSSA
  InitializeST
  InitializeTYPES
+ InitializePFAT
  r←doidiomsOne¨asts

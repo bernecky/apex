@@ -1,7 +1,8 @@
-﻿ r←x SSARenameOne y;st;ast;bb;i;j;k;m;n;kv;top;rt;C;S;rt2;v;tar;nms;us
+ r←x SSARenameOne y;st;ast;bb;i;j;k;m;n;kv;top;rt;C;S;rt2;v;tar;nms;us;stophere
  ⍝ Rename one SSA variable
  ⍝ From Michael Wolfe , 1992
  ⍝ "High Performance Compliers", p 182
+ stophere←⍳0 ⍝ DEBUG ONLY
  ast←D y[ssaast] ⋄ bb←D y[ssabb]
  v←x[0] ⋄ tar←x[1] ⍝ Names, index
  top←(⍳v)GenSSANames ast[tar;asttarget]

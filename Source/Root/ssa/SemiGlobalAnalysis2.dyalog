@@ -1,4 +1,4 @@
-﻿ r←ctx SemiGlobalAnalysis2 cds;Refhere;Sethere;Localhere;AllVarbs;MapL;MapSet;MapRef;MapSGI;MapSGO;fns;ct;vars
+ r←ctx SemiGlobalAnalysis2 cds;Refhere;Sethere;Localhere;AllVarbs;MapL;MapSet;MapRef;MapSGI;MapSGO;fns;ct;vars
 ⍝ Locate and mark semiglobals
 ⍝ 3 flavors:
 ⍝  SGI: semi-global in:  this fn or a sub-fn references this non-local
@@ -17,7 +17,7 @@
  MapL←⍉D(E AllVarbs)∊¨Localhere ⍝ Localization map
  MapSet←⍉D(E AllVarbs)∊¨Sethere
  MapRef←⍉D(E AllVarbs)∊¨Refhere
- MapSGI←MapL porscanM MapRef∧~MapL
- MapSGO←MapL porscanM MapSet∧~MapL
+ MapSGI←MapL #.arrayutils.porscanM MapRef∧~MapL
+ MapSGO←MapL #.arrayutils.porscanM MapSet∧~MapL
 ⍝seeem
  r←(E AllVarbs),(E MapL),(E MapSGI),E MapSGO

@@ -4,4 +4,5 @@
  InitializeFns
  InitializeSSA
  InitializeTYPES
+ InitializePFAT
  r←fldr dodfaOne asts

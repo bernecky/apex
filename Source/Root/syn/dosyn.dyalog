@@ -6,6 +6,7 @@
  InitializeSSA
  InitializeST
  InitializeTYPES
+ InitializePFAT
  src←GetFn¨,¨y  ⍝ Get all source code
  src←LocalizeSysVars¨src           ⍝ Undo APL design errors
  src←(E y)Dfn2Trad¨src             ⍝ Convert any Dfns to Tradfns

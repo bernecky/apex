@@ -6,6 +6,7 @@
  InitializeCtl
  InitializeSSA
  InitializeTYPES
+ InitializePFAT
  :If 'plural'≡ #.globals.TargetLanguage
      fragbuf←BufferAllCodeFragments #.globals.PathFrag
      r←fldr EmitOneCU asts

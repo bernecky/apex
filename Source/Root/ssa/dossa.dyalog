@@ -1,8 +1,8 @@
-﻿r←fldr dossa asts;tn;y;i;ct;ast2;ast3;dfaws;srctok;ast;cds;PFAT
+ r←fldr dossa asts;tn;y;i;ct;ast2;ast3;dfaws;srctok;ast;cds;PFAT
+ ⎕←(⍕⎕TS),': Starting SSA analysis for: ',fldr
  InitializeAST
  InitializeSSA
- PFAT←BuildPFAT #.globals.TargetLanguage
- ⎕←(⍕⎕TS),': Starting SSA analysis for: ',fldr
+ InitializePFAT
  ct←BuildCallingTree asts
  i←DFSortast(E ct),E asts       ⍝ Depth-first order
  ct←D i[0] ⋄ asts←D i[1]
