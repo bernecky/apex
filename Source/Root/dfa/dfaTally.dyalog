@@ -3,7 +3,7 @@
  r←y
  ast←D y[ssaast]
  wl←D y[ssacv]
- i←wl∧ast[;astlarg,astfn]matchR1 NULL,E,'≢'
+ i←wl∧ast[;astlarg,astfn]≡⍤1⊢ NULL,E,'≢'
  wl←wl∧~i
  :If 1∊i
      astr←i⌿ast ⍝ Tally result is integer scalar

@@ -2,7 +2,7 @@
  ⍝ dfa for "shape" -- monadic rho.
  ast←D y[ssaast]
  wl←D y[ssacv]
- i←wl∧ast[;astlarg,astfn]matchR1 NULL,E,'⍴'
+ i←wl∧ast[;astlarg,astfn]≡⍤1⊢ NULL,E,'⍴'
  wl←wl∧~i
  i←i∧~(D ast[;astPred])[;astPredKnowValue]
  ⍝ Must know right rank

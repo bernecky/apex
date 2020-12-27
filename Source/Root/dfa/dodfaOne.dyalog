@@ -25,8 +25,11 @@
      Checkem¨cds3
  :Until cds≡cds3
  i←dfaOK¨cds               ⍝ Got enough info to run code generator?
- i2←#.apexutils.astsFnName¨(~i)/cds
- ('missing type or rank information in fns: ',⍕i2)assert 0∊⍴i2
+ ⍝⍝ THis is rubbishhh - iiAPL2 crpola o if ×/i.
+⍝⍝⍝i2←astsFnName¨(~i)/cds
+⍝⍝⍝('missing type or rank information in fns: ',⍕i2)assert 0∊⍴i2
+('missing type or rank information in fns: ',⍕'fixme!')assert ∧/i
+
  cds←KillQUADctInCalls¨cds  ⍝ Remove dead ⎕ct refs from primitive fns
  ct←BuildCallingTree cds    ⍝ All calling trees are the same
  cds←ct SemiGlobalUnRef cds ⍝ Remove ⎕ct refs from defined fns/calls

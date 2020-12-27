@@ -3,7 +3,7 @@
  ⍝ from each line of function.
  c←ast[;astclass]
  rc←(D(E⍴ast)↑¨astr)[;;astclass]
- rc←(~c matchR1 rc)⌿rc ⍝ Ignore those that are OK (thus far)
+ rc←(~c ≡⍤1⊢ rc)⌿rc ⍝ Ignore those that are OK (thus far)
  :For i :In ⍳1↑⍴rc
      j←~rc[i;]∊NULL ⍝ Locate known classes in line
      k←c∊NULL ⍝ that are not known in ast.
@@ -18,5 +18,5 @@
      r[;astclass]←c
      ⎕←(~i)⌿r
      rc←(D(E⍴ast)↑¨astr)[;;astclass] ⍝ Now classes must match
-     'Single assigment bug'assert(rc∊NULL)∨rc matchR0(⍴rc)⍴c
+     'Single assigment bug'assert(rc∊NULL)∨rc ≡⍤0⊢(⍴rc)⍴c
  :EndIf

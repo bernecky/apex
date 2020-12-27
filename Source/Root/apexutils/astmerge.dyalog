@@ -28,7 +28,7 @@
  ⍝ The intent of my change now is to let astPred, astValue, etc.
  ⍝ to be merged if the old value is NULL.
  ⍝ This is to allow UTTakeDrop to pass arguments from main into Take and Drop.
- chg←(~oldrows matchR0 newrows)∧~newrows∊NULL
+ chg←(~oldrows ≡⍤0⊢ newrows)∧~newrows∊NULL
  ⍝⍝k←(astNewRows 1)[;astPred,astPredValues]
  ⍝⍝chg[;astPred]←~newrows[;astPred]∊k[;0]
  ⍝⍝chg[;astPredValues]←~newrows[;astPredValues]∊k[;1]

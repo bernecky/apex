@@ -18,7 +18,7 @@
                            ⍝ (⍞/⍳w)     (⎕ts/⍳7)
      i←c gett(E src),E tok
      fn←ast[D i[GettValue];asttarget]
-     'Compiler bug'assert fn∊#.globals.sysvars,sysQQ
+     'Compiler bug'assert fn∊#.globals.sysvars,#.globals.sysQQ
      :If fn∊#.globals.sysvars,#.globals.sysnfns   ⍝ ⎕io, ⎕wa
          snnn
      :Else                          ⍝ ⎕fi
