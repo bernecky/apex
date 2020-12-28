@@ -1,12 +1,7 @@
-﻿ r←n GetCodeFragment y;cv;i;b;j;cf;cnt;frg
- ⍝ Get code fragment and break it into pieces:
+ r←n BreakCodeFragment cf;cv;i;b;j;cf;cnt;frg
+ ⍝  break code fragment cinto pieces:
  ⍝  Code fragments, names,n types
  ⍝ See msf.sis for more docn on types
- ⍝ If fragment has been broken already,
- ⍝ use it. Otherwise, break it up, and
- ⍝ refresh the broken fragment.
-⍝⍝⍝⍝    DEAD  cf←TABtoBlank nolf ReadFile #.globals.PathFrag,y,'.frg'
- cf←y ⍝ NFIXMEE   :
  cf←¯1⌽cf,(NL≠¯1↑cf)/NL
  i←1⌽D(cf=NL)PartitionedEnclose cf
  ⍝ Discard pure comments, but leave Fragment and Generate
@@ -23,8 +18,7 @@
  j←,D⍴¨r ⋄ r←((j≠0)/r)[¯1↓+\0,j≠0]
  r←⍪r
  cnt←9⌈n ⍝ Maximum field count
-lp:i←rtnb rtb i ⍝ Names or types
+lp:i←#.arrayutils.rtnb #.arrayutils.rtb i ⍝ Names or types
  j←field1 i
  r←r,⍪(+/j≠' ')⍴¨ER1 j ⍝ No blanks
  →(0≤cnt←cnt-1)⍴lp
- r←(E y),E r

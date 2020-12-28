@@ -5,7 +5,7 @@
 ⍝ e.g.,    'i' TypeRank '2'
 ⍝     array[array[integer]]  for SISAL, and
 ⍝     [.,.] for SAC
- :Select TargetLanguage
+ :Select #.globals.TargetLanguage
  :Case 'sisal'
      r←tp SISALTypeRank rk
  :Case 'sac'

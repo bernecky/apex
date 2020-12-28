@@ -1,4 +1,4 @@
-﻿ InitializeGlobals Options
+﻿ InitializeGlobals Options;GITKLUDGE
 ⍝ Not a Dfn, because we set namespace globals
 
  PathDelim←Options GetOption'pathdelim=/'
@@ -12,7 +12,8 @@
  TracePlural←'01'⍳Options GetOption'traceplural=0'
  InlineLimit←'012345'⍳Options GetOption'inlinelimit=2' ⍝ InlineLimit=1 will inline leaves only
  TargetLanguage←Options GetOption'targetlanguage=sac'  ⍝  Or "plural"
- PathFrag←Options GetOption'pathfrag=',PathApex,TargetLanguage,PathDelim,'fragments',PathDelim
+ GITKLUDGE←'Source/Root/' ⍝    FIXME   this won't do for  MyCmds vstuff... 
+ PathFrag←Options GetOption'pathfrag=',PathApex,GITKLUDGE,TargetLanguage,PathDelim,'fragments',PathDelim
  VisualizeDfa←'01'⍳Options GetOption'visualizedfa=0'
  PartialEvaluation←'01'⍳Options GetOption'partialevaluation=0'
  DisplayTemps←'01'⍳Options GetOption'displaytemps=0'
