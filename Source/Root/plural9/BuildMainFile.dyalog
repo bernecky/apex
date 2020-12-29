@@ -16,5 +16,5 @@
  txt←txt,'#define RESULT0 ',D TC D ast[dfnres;asttype] ⍝ Result descriptor
  txt←txt,NL
 ⍝ Pick skeleton based on result rank (ugh!)
- txt←txt,ReadFile pathfrag,'main',((sr=0)/'scal'),'.skl'
+ txt←txt,GetFileChar pathfrag,'main',((sr=0)/'scal'),'.skl'
  z←txt

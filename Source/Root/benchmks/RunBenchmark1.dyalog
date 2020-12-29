@@ -1,10 +1,10 @@
 ﻿ RunBenchmark1 bm;args;blist;argv;ufns;fntext;argfn;Invoke;p;op;fns;r
 ⍝ Run benchmark in path bm
- blist←ReadFile bm
+ blist←GetFileChar bm
  ufns←ER1 vtom ¯1⌽blist,(NL≠¯1↑blist)⍴NL
- fntext←ReadFile¨(E #.fileutils.Path bm),¨ufns
+ fntext←GetFileChar¨(E #.fileutils.Path bm),¨ufns
  :If ∨/'AKD'⍷bm
-     argv←ReadFile(#.fileutils.Path bm),'bench.argv'
+     argv←GetFileChar(#.fileutils.Path bm),'bench.argv'
      argv←(argv⍳NL)↑argv
  :Else
      argv←''

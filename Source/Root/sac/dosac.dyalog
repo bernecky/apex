@@ -1,4 +1,4 @@
-﻿ r←fldr dosac asts;TL;pathfrag;fragbuf
+﻿ r←fldr dosac asts;TL;fragbuf
 ⍝# Emit object code for each compilation unit (CU)
 ⍝# Each tied file is a compilation unit.
  InitializeAST

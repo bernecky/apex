@@ -9,5 +9,5 @@
  txt←'# Makefile built by APEX at: ',(fts ⎕TS),NL
  txt←txt,'# for module: ',(,(⎕FNUMS=tn)/⎕FNAMES),NL
  txt←txt,'TARGET=',fnm,NL
- txt←txt,ReadFile pathfrag,'makefile.skl'
+ txt←txt,GetFileChar pathfrag,'makefile.skl'
  z←txt

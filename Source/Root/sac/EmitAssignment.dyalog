@@ -1,4 +1,4 @@
-﻿ r←cv EmitAssignment y;coer;b;i;typ;cl;ast;cal;nops
+ r←cv EmitAssignment y;coer;b;i;typ;cl;ast;cal;nops
 ⍝ Emit all assignments (not indexed assign...) for cv⌿cal,
 ⍝ and the coercions for the assigns. Coercions are
 ⍝ needed for assigns to system variables, and for
@@ -16,9 +16,9 @@
      cv←~astNops ast           ⍝ DEBUG KLUDGE!!!
      :If 1∊cv   ⍝ Stupid APL2 prototypes
          typ←ast[cv/ast[;asttarget];asttype] ⍝ Target type, if any
-         :If TargetLanguage≡'sisal'
+         :If #.globals.TargetLanguage≡'sisal'
              r←(E':='),¨cal÷0 ⍝ Fix SISAL some other day 2004-07-03
-         :ElseIf TargetLanguage≡'sac'
+         :ElseIf #.globals.TargetLanguage≡'sac'
 ⍝ Coercions
 ⍝ Since APL is (hohoho) untyped, these should not
 ⍝ be needed. However, system variables are typed,

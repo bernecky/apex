@@ -4,7 +4,7 @@
  PHRASEMonadicOut←1
  PHRASEDyadicOut←2
  PHRASECols←3
- t←ReadFile'g:\apex\fragment\phrases.tbl'
+ t←GetFileChar'g:\apex\fragment\phrases.tbl' 
  t←vtom NL,nolf t
  b←,∧\t≠'%' ⍝ Remove comments
  t←(⍴t)⍴b\b/,t ⍝ Ignore comments

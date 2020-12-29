@@ -1,5 +1,5 @@
-﻿ r←{width}seeast ast;dec;decast;p
- ast←mm ast
+ r←{width}seeast ast;dec;decast;p
+ ast←#.arrayutils.mm ast
  :If 0=⎕NC'width'
      width←⎕PW
  :EndIf

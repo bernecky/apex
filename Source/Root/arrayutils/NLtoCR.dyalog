@@ -1,0 +1,5 @@
+﻿ r←NLtoCR y;b
+⍝  Convertt  NL to CR in text vector y 
+⍝ This is to allow Dyalog APL to display the text in clearner form 
+r←y
+ r[(r∊NL,LF)/⍳⍴r]←CR

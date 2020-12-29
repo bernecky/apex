@@ -1,8 +1,8 @@
-﻿ r←BuildComment txt
+ r←BuildComment txt
 ⍝ Build comment from txt
- :If TargetLanguage≡'sac'
+ :If #.globals.TargetLanguage≡'sac'
      r←'/* ',txt,' */'
  :EndIf
- :If TargetLanguage≡'sisal'
+ :If #.globals.TargetLanguage≡'sisal'
      r←'# ',txt
  :EndIf

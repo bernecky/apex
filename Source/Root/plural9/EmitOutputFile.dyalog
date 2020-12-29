@@ -5,11 +5,11 @@
  cuasts←D y[0] ⍝ All asts for the CU
  cudefinedfns←D y[1] ⍝ All defined fns for the CU
  cufnm←D y[2] ⍝ The APL file name for the CU
- cuprolog←ReadFile pathfrag,'prolog.',TargetLanguage ⍝ Get prolog code
+ cuprolog←GetFileChar pathfrag,'prolog.',TargetLanguage ⍝ Get prolog code
  cuprolog←'$MAIN'Strepl(E cuprolog),E CUEntryPoint cuasts
  APEXVersion←'Compiled by APEX Version: ',⎕WSID
  cuprolog←cuprolog,(BuildComment APEXVersion,fts ⎕TS),NL
- cuprolog←cuprolog,ReadFile pathfrag,'stdlib.',TargetLanguage
+ cuprolog←cuprolog,GetFileChar pathfrag,'stdlib.',TargetLanguage
  code←cuprolog,cudefinedfns
  b←toascii AddNL code
  r←cufnm,'.',FileExtension TargetLanguage

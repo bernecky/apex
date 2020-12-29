@@ -1,4 +1,4 @@
-﻿ z←BuildMainFile tn;csds;ast;fnm;txt;sr
+ z←BuildMainFile tn;csds;ast;fnm;txt;sr
 ⍝ This is not supported for SAC. Someday Real Soon Now.. rbe 2004-05-24
  z←''
  →0
@@ -16,5 +16,5 @@
  txt←txt,'#define RESULT0 ',D TC D ast[dfnres;asttype] ⍝ Result descriptor
  txt←txt,NL
 ⍝ Pick skeleton based on result rank (ugh!)
- txt←txt,ReadFile pathfrag,'main',((sr=0)/'scal'),'.skl'
+ txt←txt,GetFileChar #.globals.PathFrag,'main',((sr=0)/'scal'),'.skl'
  z←txt

@@ -1,4 +1,4 @@
-﻿ r←RemoveGenerates sis;cv;g;gen;fns;fn;nl
+ r←RemoveGenerates sis;cv;g;gen;fns;fn;nl
 ⍝# Remove %Generate statements from a code fragment
 ⍝# Result is updated code fragment, Generate statements
  g←'%Generate'
@@ -6,7 +6,7 @@
  fns←(0,fnscols)⍴E'' ⍝ Assume no work
  :If 1∊cv
      nl←sis=NL
-     cv←(~nl)∧(¯1⌽nl)porscan cv
+     cv←(~nl)∧(¯1⌽nl)#.arrayutils.porscan cv
      gen←cv/sis
      gen←D Raze(E','),¨(E⍴g)↓¨(g⍷gen)PartitionedEnclose gen
      gen←squeeze¨1↓¨(gen=',')PartitionedEnclose gen
