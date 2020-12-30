@@ -6,7 +6,7 @@ use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
 
-/* Compiled by APEX Version: /home/apex/apexgit/wss/apex.dws2019-07-25 11:03:39.246 */
+/* Compiled by APEX Version: CLEAR WS 2020-12-30 16:15:42.383 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -40,10 +40,10 @@ inline bool[+] eqIIB(int x, int[+] y)
 { /* SxA scalar function */
   xel = toI(x);
   z = with {
-     ( . <= iv <= .) {
-              yel = toI(y[iv]);
-                    } : eqIIB(xel,yel);
-  } : genarray(shape(y), false);
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : eqIIB(xel,yel);
+	} : genarray(shape(y), false);
   return(z);
 }
 
@@ -160,7 +160,7 @@ QUADio_0=toI(( false));
  A_53=rhoXII( z_0);
  /* dsf scalar(s) */
 A_55=eqIIB(7,A_53);
- A_52= ABC(toi(A_10)-QUADio_1,shape(A_55)[0]);
+ A_52= ABC(toi(false)-QUADio_1,shape(A_55)[0]);
 A_57=A_55[[A_52]];
 /* dsf scalar(s) */
 A_58=barBBI(true,A_57);

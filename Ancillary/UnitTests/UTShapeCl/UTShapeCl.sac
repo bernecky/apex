@@ -6,7 +6,7 @@ use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
 
-/* Compiled by APEX Version: /home/apex/apex3/wss/sac3013.dws2012-11-07 10:35:20.097 */
+/* Compiled by APEX Version: CLEAR WS 2020-12-30 16:39:06.629 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -38,13 +38,13 @@ inline int barBBI(bool x, bool y)
 
 inline int[+] plusIII(int[+] x, int[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
-         z = with {
-             ( . <= iv <= .) {
-                      xel = x[iv];
-                   yel = y[iv];
-           } : plusIII(xel,yel);
-        } : genarray(sx, 0);
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : plusIII(xel,yel);
+        } : genarray(sy, 0);
   return(z);
 }
 
@@ -57,10 +57,10 @@ inline int[+] plusIII(int x, int[+] y)
 { /* SxA scalar function */
   xel = toI(x);
   z = with {
-     ( . <= iv <= .) {
-              yel = toI(y[iv]);
-                    } : plusIII(xel,yel);
-  } : genarray(shape(y), 0);
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : plusIII(xel,yel);
+	} : genarray(shape(y), 0);
   return(z);
 }
 
@@ -69,23 +69,23 @@ inline int[+] modBII(bool x, int[+] y)
 { /* SxA scalar function */
   xel = toI(x);
   z = with {
-     ( . <= iv <= .) {
-              yel = toI(y[iv]);
-                    } : modIII(xel,yel);
-  } : genarray(shape(y), 0);
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : modIII(xel,yel);
+	} : genarray(shape(y), 0);
   return(z);
 }
 
 
 inline int[+] barIII(int[+] x, int[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
-         z = with {
-             ( . <= iv <= .) {
-                      xel = x[iv];
-                   yel = y[iv];
-           } : barIII(xel,yel);
-        } : genarray(sx, 0);
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : barIII(xel,yel);
+        } : genarray(sy, 0);
   return(z);
 }
 
@@ -173,10 +173,10 @@ inline bool andBBB(bool x, bool y)
 inline int[+] plusIII(int[+] x, int y)
 { /* AxS scalar function */
   z = with {
-  ( . <= iv <= .) {
-              xel = x[iv];
-   } : plusIII(xel,y);
-  } : genarray( shape(x), 0);
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : plusIII(xel,y);
+	} : genarray( shape(x), 0);
   return(z);
 }
 
@@ -185,10 +185,10 @@ inline int[+] barIII(int x, int[+] y)
 { /* SxA scalar function */
   xel = toI(x);
   z = with {
-     ( . <= iv <= .) {
-              yel = toI(y[iv]);
-                    } : barIII(xel,yel);
-  } : genarray(shape(y), 0);
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : barIII(xel,yel);
+	} : genarray(shape(y), 0);
   return(z);
 }
 
@@ -196,23 +196,23 @@ inline int[+] barIII(int x, int[+] y)
 inline int[+] barIII(int[+] x, int y)
 { /* AxS scalar function */
   z = with {
-  ( . <= iv <= .) {
-              xel = x[iv];
-   } : barIII(xel,y);
-  } : genarray( shape(x), 0);
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : barIII(xel,y);
+	} : genarray( shape(x), 0);
   return(z);
 }
 
 
 inline bool[+] eqIIB(int[+] x, int[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
-         z = with {
-             ( . <= iv <= .) {
-                      xel = x[iv];
-                   yel = y[iv];
-           } : eqIIB(xel,yel);
-        } : genarray(sx, false);
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : eqIIB(xel,yel);
+        } : genarray(sy, false);
   return(z);
 }
 
@@ -259,10 +259,10 @@ inline bool[+] eqIIB(int x, int[+] y)
 { /* SxA scalar function */
   xel = toI(x);
   z = with {
-     ( . <= iv <= .) {
-              yel = toI(y[iv]);
-                    } : eqIIB(xel,yel);
-  } : genarray(shape(y), false);
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : eqIIB(xel,yel);
+	} : genarray(shape(y), false);
   return(z);
 }
 
@@ -270,10 +270,10 @@ inline bool[+] eqIIB(int x, int[+] y)
 inline bool[+] eqIIB(int[+] x, int y)
 { /* AxS scalar function */
   z = with {
-  ( . <= iv <= .) {
-              xel = x[iv];
-   } : eqIIB(xel,y);
-  } : genarray( shape(x), false);
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : eqIIB(xel,y);
+	} : genarray( shape(x), false);
   return(z);
 }
 
@@ -288,36 +288,36 @@ QUADio_0=toI(( false));
  QUADpp_0=( 10);
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
- A_61=iotaXII( 5,QUADio_0);
- a_0=( A_61);
+ A_56=iotaXII( 5,QUADio_0);
+ a_0=( A_56);
  b_0=( a_0);
  /* dsf clique */
-A_64=plusIII(a_0,b_0);
- c_0=( A_64);
- A_67=iotaXII( 5,QUADio_0);
+A_59=plusIII(a_0,b_0);
+ c_0=( A_59);
+ A_62=iotaXII( 5,QUADio_0);
  /* dsf scalar(s) */
-A_68=plusIII(2,A_67);
+A_63=plusIII(2,A_62);
  /* dsf Check needed */
-A_69=plusIII(a_0,A_68);
-d_0=( A_69);
+A_64=plusIII(a_0,A_63);
+d_0=( A_64);
  /* dsf Check needed */
-A_71=plusIII(d_0,a_0);
- e_0=( A_71);
- A_74=sameIIB([2, 5, 8, 11, 14],e_0);
- r_0=( A_74);
+A_66=plusIII(d_0,a_0);
+ e_0=( A_66);
+ A_69=sameIIB([2, 5, 8, 11, 14],e_0);
+ r_0=( A_69);
  /* dsf scalar(s) */
-A_77=modBII(true,a_0);
+A_72=modBII(true,a_0);
  /* dsf clique */
-A_78=barIII(a_0,A_77);
- A_80=sameIIB(a_0,A_78);
- A_81=comaBBB(r_0,A_80);
- r_1=( A_81);
- A_85=quadXBB( A_81,QUADpp_0,QUADpw_0);
- A_86=andslXBBQUICKSTOP( r_1);
+A_73=barIII(a_0,A_72);
+ A_75=sameIIB(a_0,A_73);
+ A_76=comaBBB(r_0,A_75);
+ r_1=( A_76);
+ A_80=quadXBB( A_76,QUADpp_0,QUADpw_0);
+ A_81=andslXBBQUICKSTOP( r_1);
  /* dsf scalar(s) */
-A_90=barBBI(true,A_86);
- r_2=( A_90);
- A_94=quadXII( A_90,QUADpp_0,QUADpw_0);
+A_85=barBBI(true,A_81);
+ r_2=( A_85);
+ A_89=quadXII( A_85,QUADpp_0,QUADpw_0);
  return(r_2);
 }
 
