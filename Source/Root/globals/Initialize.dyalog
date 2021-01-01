@@ -16,8 +16,8 @@
  ⍝ This value can't appear in ast[;asttarget] elsewhere.
  ⍝ System fns and varbs
  sysfns←(E'⎕fi'),(E'⎕vi'),(E'⎕map')
- sysnfns←,(E'⎕ts'),(E'⎕wa')  ⍝ Niladic system fns
+ sysnfns←,(E'⎕ts'),(E'⎕wa'),E'⎕av' ⍝ Niladic system fns
  sysvars←(E'⎕io'),(E'⎕pp'),(E'⎕pw'),(E'⎕ct'),(E'⎕rl')
- sysconsts←,(E'⎕av')
+ sysconsts←'' 
  sysQQ←(E'⍞'),E'⎕'
  InitializeGlobals Opts ⍝ Maybe can inline this?
