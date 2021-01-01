@@ -1,4 +1,4 @@
-﻿ fsm lineno
+ fsm lineno
  ⍝ Interpret one state rule
  :If signal=clsrescan  ⍝ Rescan for (exp)foo ⍵, etc.
      signal←D stk[stkp;Stkstate]
@@ -6,7 +6,7 @@
      signal←tok[c]
      stk[stkp;Stkstate]←E signal
  :EndIf
- :If 1∊#.globals.TraceSyn
+ :If #.apexutils.isTrace 'syn'
      src see tok
  :EndIf
  'Compiler bug'assert(0=⍴⍴state)∧0=⍴⍴signal

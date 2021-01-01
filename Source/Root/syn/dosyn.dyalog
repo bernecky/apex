@@ -1,12 +1,11 @@
  r←fldr dosyn y;f;gst;tn;asts;src;tok;wif
  ⍝ Perform syntax analysis for the function files named in y.
  ⍝ Result is asts
- ⎕←(fts ⎕TS),': Starting syntax analysis for: ',fldr
  InitializeAST
  InitializeSSA
  InitializeST
  InitializeTYPES
- InitializePFAT
+ Trace (fts ⎕TS),': Starting syntax analysis for: ',fldr
  src←GetFn¨,¨y  ⍝ Get all source code
  src←LocalizeSysVars¨src           ⍝ Undo APL design errors
  src←(E y)Dfn2Trad¨src             ⍝ Convert any Dfns to Tradfns
@@ -24,4 +23,4 @@
  asts←AddPA¨asts          ⍝ Add ast rows for conj/adv operands
  Checkem¨asts             ⍝ Paranoia check
  r←asts
- ⎕←(fts ⎕TS),': Syntax analysis complete for: ',fldr
+Trace ( fts ⎕TS),': Syntax analysis complete for: ',fldr

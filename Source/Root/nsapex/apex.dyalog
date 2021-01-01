@@ -1,7 +1,7 @@
  asts←Options apex fldr;defaultOpts;Opts
   ⍝  Compile code in folder fldr with Options
   ⍝ Establish default Option settings
- defaultOpts←'targetlanguage=sac trace=0 '
+ defaultOpts←'targetlanguage=sac trace= '
  Opts←defaultOpts,Options
  #.globals.Initialize Opts
  fns←GetBlistFns fldr

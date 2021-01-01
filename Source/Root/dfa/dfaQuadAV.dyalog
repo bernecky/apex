@@ -1,4 +1,4 @@
-﻿ r←dfaQuadAV y;i;ast;wl;j;k;p
+ r←dfaQuadAV y;i;ast;wl;j;k;p
  ⍝ Set result type, rank, shape for ⎕av.
  ast←D y[ssaast]
  wl←D y[ssacv]
@@ -6,7 +6,6 @@
  wl←wl∧~i ⍝ Mark work already done.
  i←i∧~(D ast[;astPred])[;astPredKnowValue]
  :If 1∊i ⍝ Any work?
-     /
      k←i⌿ast
      k[;asttype]←asttypeC
      k[;astrank]←E 1

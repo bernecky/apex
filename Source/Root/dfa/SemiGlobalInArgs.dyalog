@@ -9,13 +9,12 @@
  astr←nast[tar;]                   ⍝ Affected rows in subfn
  astr[;astchar]←astrow[;astchar]   ⍝ Update subfn's ast
  j←astmerge(E nast),(E astr),E(⍳1↑⍴nast)∊tar
- :If TraceDfa≠0 ⍝ DEBUG
-     :If ~0∊⍴astrow
-         ⎕←'Semiglobals into: ',D nast[0;asttarget]
-         ⎕←'before: ' ⋄ nast[tar;asttarget]
-         ⎕←'after : ' ⋄ astr[;asttarget]
-     :EndIf
- :EndIf
+ :If ~0∊⍴astrow
+   'dfa' Trace 'Semiglobals into: ',D nast[0;asttarget]
+   'dfa' Trace 'before: '
+   'dfa' Trace  nast[tar;asttarget]
+   'dfa' Trace 'after : ' ⋄ astr[;asttarget]
+  :EndIf
  Checkem(E'?'),j[0]
  nast←D j[0]
  wl←wl∨D j[1]

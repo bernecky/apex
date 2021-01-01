@@ -1,5 +1,6 @@
 ﻿ src see tok;i;j;k;s;st;row
 ⍝⍝ FIXME later SyntaxAnalyzerInit
+ ⍝ This is debug only 
  ⎕←'state=',state,',signal=',D stk[stkp;Stkstate]
  c seecs(E src),E tok
  s←(E'Stkstate'),(E'Stkvalue'),(E'StkValueName'),E'Stktokcl'

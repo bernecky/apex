@@ -1,14 +1,12 @@
-﻿ r←fldr dfa asts;st;oldast;i;j;k;wp;ast;F;src
+ r←fldr dfa asts;st;oldast;i;j;k;wp;ast;F;src
  ⍝ Perform data flow analysis for one function in fldr
  ⍝ Result is updated asts
  src←D asts[ssasrc]
 ⍝⍝⍝ DrawAPLTextStart src  ⍝ make this work some day
  wp←dfasee asts
  :While 1∊D wp[ssacv]            ⍝ loop until fixpoint reached
-     :if TraceDfa
-       ⎕←'top of dfa loop, examining ',(⍕+/D wp[ssacv]),' items:'
-       ⎕←(D wp[ssacv])⌿(D wp[ssaast])[;astfn]
-     :endif
+     Trace'top of dfa loop, examining ',(⍕+/D wp[ssacv]),' items:'
+     Trace(D wp[ssacv])⌿(D wp[ssaast])[;astfn]
      wp←dfasee dfaMsf wp         ⍝ Monadic scalar functions.
      wp←dfasee dfaDsf wp         ⍝ Dyadic scalar functions.
      wp←dfasee dfaLev wp         ⍝ Lev

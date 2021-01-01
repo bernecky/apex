@@ -22,11 +22,11 @@
              m←astsub[m;] ⍝ Semiglobal rows in subfn
              astr←ast[tar;] ⍝ ast rows to be updated
              astr[;astchar]←m[;astchar]
-             :If trace≠0 ⍝ DEBUG
-                 ⎕←'Semiglobals out from: ',(D astsub[0;asttarget]),' to: ',D ast[0;asttarget]
-                 ⎕←'ast[tar;]' ⋄ ast[tar;]
-                 ⎕←'astr' ⋄ astr
-             :EndIf
+             TRACEdfa Trace 'Semiglobals out from: ',(D astsub[0;asttarget]),' to: ',D ast[0;asttarget]
+             TRACEdfa Trace 'ast[tar;]:'
+             TRACEdfa Trace  ast[tar;]
+             TRACEdfa Trace 'astr:'
+             TRACEdfa Trace  astr
              astr←astr[⍋tar;] ⍝ Make sure these are in order!
              r←astmerge(E ast),(E astr),E(⍳1↑⍴ast)∊tar
          :EndIf

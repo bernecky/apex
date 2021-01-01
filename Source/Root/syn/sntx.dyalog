@@ -1,4 +1,4 @@
-﻿ r←x sntx n;i;j;k;src;tok;st;m;gst;f;s;ast;etr;cv;sj;wif
+ r←x sntx n;i;j;k;src;tok;st;m;gst;f;s;ast;etr;cv;sj;wif;fnm
  ⍝ Build symbol table and abstract syntax tree from tokenized src
  gst←D x[0] ⋄ s←D x[1] ⍝ Global symbol table; tokenized source code
  st←gst Buildst D s[n] ⍝ Build the local symbol table
@@ -6,8 +6,8 @@
  tok←D(D s[n])[1]
  ⍝ Should do this rank1, but don't have rank support for defined
  ⍝ fns in this APL system.
- i←src[0;]
- ⎕←'Syntax analysis for: ',(i⍳';')↑i
+ i←src[0;] ⋄ fnm←(i⍳';')↑i
+ Trace'Syntax analysis started for: ',fnm
  ast←st Buildast(E src),E tok
  ast←ast HandleDeclarations src
  Checkem 2⍴E ast ⍝ Pardon the kludge
@@ -26,3 +26,4 @@
  r[ssaast]←E ast
  r[ssasrc]←E src
  r[ssatok]←E tok
+ Trace'Syntax analysis ended for: ',fnm

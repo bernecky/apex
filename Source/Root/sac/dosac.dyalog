@@ -1,8 +1,8 @@
-﻿ r←fldr dosac asts;TL;fragbuf
+ r←fldr dosac asts;TL;fragbuf
 ⍝# Emit object code for each compilation unit (CU)
 ⍝# Each tied file is a compilation unit.
  InitializeAST
- InitializeCodeGen
+ InitializeFragments
  InitializeCtl
  InitializeSSA
  InitializeTYPES
@@ -11,6 +11,6 @@
  :If TL≡'sac'
      fragbuf←BufferAllCodeFragments #.globals.PathFrag
      r←fldr EmitOneCU asts
- :else
-   r←asts
+ :Else
+     r←asts
  :EndIf

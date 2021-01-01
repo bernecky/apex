@@ -1,5 +1,5 @@
 ﻿ msg TraceSG cds;ast;me;mysg;j;i
- :If #.globals.TraceSsa ⍝ DEBUG only
+ :If isTrace 'ssa'
      :For i :In ⍳⍴cds
          ast←D(D cds[i])[ssaast]
          me←D ast[dfnname;asttarget]
