@@ -10,15 +10,30 @@
  te_lab←ConvLab ReadLabels'src/input/t10k-labels-idx1-ubyte'
  trainings←trainings⌊≢tr_img
  tests←tests⌊≢te_img
- ⎕←'Running Zhang with ',(⍕epochs),' epochs, batchsz ',⍕batchsz
- ⎕←(⍕trainings),' training images, ',(⍕tests),' tests',' rate ',⍕rate
- (k1 b1 k2 b2 fc b err)←TrAll (0 k1 b1 k2 b2 fc b tr_img tr_lab err batchsz rate trainings)
 
+ ⎕←'Training Zhang with ',(⍕epochs),' epochs, batchsz ',⍕batchsz
+ ⎕←(⍕trainings),' training images, ',(⍕tests),' tests',' rate ',⍕rate
+
+ ⎕←'Training Zhang started at: ',fts ⎕ts
+ i←0
+ (k1 b1 k2 b2 fc b err)←{
+   t←⎕ai 
+   (k1 b1 k2 b2 fc b err)←TrAll (k1 b1 k2 b2 fc b tr_img tr_lab err batchsz rate trainings)
+   ⎕←'Time for training was ',(⍕1⌷⎕AI-t),'msec'
+   ⎕←'Average error after epoch ',(⍕i),' was ',(⍕err)
+   i←i+1
+      k1 b1 k2 b2 fc b  ⍝  Loop result
+ }⍣epochs⊣(k1 b1 k2 b2 fc b)
+ ⎕←'Training Zhang ended at: ',fts ⎕ts
+
+ ⎕←'Testing Zhang started at: ',fts ⎕ts
  out←te_img TestZhang⍤2⊢ (k1 b1 k2 b2 fc b)
  correct←+/,(MaxPos⍤1⊢,⍤5⊢ te_lab)=MaxPos⍤1⊢,⍤5⊢out
  error←out MeanSquaredError te_lab
  ⎕←(⍕correct),' of ',(⍕tests),' correctly identified!'
  ⎕←'The mean error of ',(⍕tests), ' is ',⍕error÷tests
+ ⎕←'Testing Zhang ended at: ',fts ⎕ts
+
  correct-1028 ⍝ Expected result
 }
  

@@ -1,2 +1,4 @@
-AveragePool←{ avgpool⍤⍺⊢⍵}
+AP←{
+ ⍝    Average Pool
+ avgpool⍤⍺⊢⍵}
 

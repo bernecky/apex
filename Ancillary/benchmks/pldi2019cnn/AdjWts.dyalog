@@ -1,0 +1,2 @@
+AdjWts←{⍺+-⌿rate×⍵÷sz}
+

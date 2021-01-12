@@ -12,8 +12,8 @@
  subfnname←D ast[dfnname;asttarget]
  suffix←'CLONE',⍕⍴cds
  x←'Cloning: ',subfnname,' as: ',subfnname,suffix
- ⎕←x,' called from: ',astcaller[dfnname;asttarget],'[',(⍕callsite),']'
- ast[dfnname;asttarget]←E subfnname,suffix
+ Trace x,' called from: ',astcaller[dfnname;asttarget],'[',(⍕callsite),']'
+ Trace ast[dfnname;asttarget]←E subfnname,suffix
  'Recursive fn - code me'assert~dfnname∊ast[;astfn,astlop,astrop]
  ast←CleanseDFA ast  ⍝ Discard clone's dfa-derived info
  st←D asts[ssast]

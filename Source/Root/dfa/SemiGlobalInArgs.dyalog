@@ -1,4 +1,4 @@
-﻿ r←cds SemiGlobalInArgs astrow;nast;tar;astr;j;wl
+ r←cds SemiGlobalInArgs astrow;nast;tar;astr;j;wl
 ⍝ Propagate Semiglobal dfa info from ast row of caller
 ⍝ to the callee
  nast←D cds[ssaast] ⍝ Callee's ast
@@ -10,11 +10,11 @@
  astr[;astchar]←astrow[;astchar]   ⍝ Update subfn's ast
  j←astmerge(E nast),(E astr),E(⍳1↑⍴nast)∊tar
  :If ~0∊⍴astrow
-   'dfa' Trace 'Semiglobals into: ',D nast[0;asttarget]
-   'dfa' Trace 'before: '
-   'dfa' Trace  nast[tar;asttarget]
-   'dfa' Trace 'after : ' ⋄ astr[;asttarget]
-  :EndIf
+     Trace'Semiglobals into: ',D nast[0;asttarget]
+     Trace'before: '
+     Trace nast[tar;asttarget]
+     Trace'after : ' ⋄ astr[;asttarget]
+ :EndIf
  Checkem(E'?'),j[0]
  nast←D j[0]
  wl←wl∨D j[1]

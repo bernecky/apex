@@ -1,2 +1,2 @@
-isTrace←{1∊⍵⍷#.globals.OPTIONS }
+isTrace←{1∊('trace=',⍵)⍷#.globals.OPTIONS }
 

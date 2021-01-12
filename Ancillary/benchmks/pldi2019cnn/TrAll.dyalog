@@ -1,25 +1,19 @@
-﻿ Z←TrAll omega;i;k1;b1;k2;b2;fc;b;tr_img;tr_lab;err;batchsz;rate;trainings;blk;target;d_k1;d_b1;d_k2;d_b2;d_fc;d_b;error;e
-
- (e k1 b1 k2 b2 fc b tr_img tr_lab err batchsz rate trainings)←omega
-
-⍝ need blk and target in synch over rank conj.
+﻿ Z←TrAll omega;i;k1;b1;k2;b2;fc;b;tr_img;tr_lab;err;batchsz;rate;trainings;blk;target;d_k1;d_b1;d_k2;d_b2;d_fc;d_b;error
+ (k1 b1 k2 b2 fc b tr_img tr_lab err batchsz rate trainings)←omega
+ error←0
  :For i :In batchsz×⍳trainings÷batchsz
-
-     blk←batchsz↑i↓tr_img
-     target←batchsz↑i↓tr_lab
-     ⍝ It would be nice to move the following rank expression into TrainZhang, or even lower
-     (d_k1 d_b1 d_k2 d_b2 d_fc d_b err)←blk TrainZhang (target k1 b1 k2 b2 fc b)
-     k1←k1-rate×d_k1 ⍝ Put AverageOuter calls back when batching works
-     k2←k2-rate×d_k2
-     b1←b1-rate×d_b1
-     b2←b2-rate×d_b2
-     fc←fc-rate×d_fc
-     b←b-rate×d_b
-     error←e++/err
-     ⎕←'Error at iteration ',(⍕i),' is ',⍕error ⍝⍝ ÷trainings
+     sz←batchsz⌊≢tr_img
+     blk←sz↑i↓tr_img
+     target←sz↑i↓tr_lab
+     (d_k1 d_b1 d_k2 d_b2 d_fc d_b err)←blk TrainBatch(target k1 b1 k2 b2 fc b)
+     k1←k1 AdjWts d_k1
+     k2←k2 AdjWts d_k2
+     b1←b1 AdjWts d_b1
+     b2←b2 AdjWts d_b2
+     b←b AdjWts d_b
+     fc←fc AdjWts d_fc
+     error←error++⌿err
  :EndFor
-
- ⍝⍝⍝ (i<trainings): ∇ ((i+batchsz) k1 b1 k2 b2 fc b tr_img tr_lab err batchsz rate trainings)
-
+ ⎕←'Error at end of batch is: ',⍕error ⍝⍝ ÷trainings
  ⎕←'Done training'
  Z←(k1 b1 k2 b2 fc b err)

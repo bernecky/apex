@@ -18,10 +18,10 @@
   ⍝ Propagate caller's array morph into its subfns
      :For j :In ⍳⍴fil              ⍝ One call at a time
          callsite←(CallSites ast)[j] ⍝ Caller ast index of subfn call
-         'TRACEdfa Trace tx←'Propagating astlarg,astrarg from : '
+         Trace tx←'Propagating astlarg,astrarg from : '
          tx←tx,(D ast[dfnname;asttarget]),' into: '
          tx←tx,D ast[ast[callsite;astfn];asttarget]
-         'TRACEdfa Trace tx
+         Trace tx
          lr←D ast[callsite;astlarg,astrarg] ⍝ Left, right subfn args
          n←lr∊NULL                 ⍝ Missing args
          :If 0∊n                   ⍝ Propagate into subfns if any args

@@ -1,2 +1,0 @@
-BackLogistic←{⍺×⍵×1-⍵}
-
