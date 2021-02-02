@@ -1,4 +1,0 @@
-AP←{
- ⍝    Average Pool
- avgpool⍤⍺⊢⍵}
-

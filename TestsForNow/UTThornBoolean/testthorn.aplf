@@ -1,0 +1,15 @@
+ r←testthorn PP;⎕PP;m
+ ⍝ Unit tests for formatter
+ ⎕PP←PP
+ ⍝ Character arguments
+ r←''matchresults⍕''
+ r←r,'x'matchresults⍕'x'
+ r←r,⎕AV matchresults⍕⎕AV
+ r←r,(2 3 4⍴'abc')matchresults⍕2 3 4⍴'abc'
+
+ ⍝ Boolean arguments
+ r←r,(⎕PP thbool 0)matchresults⍕0
+ r←r,(⎕PP thbool 1)matchresults⍕1
+ r←r,(⎕PP thbool 0 1 0)matchresults⍕0 1 0
+ r←r,(⎕PP thbool 2 3 4⍴0 1 0)matchresults⍕2 3 4⍴0 1 0
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTThornBoolean/testthorn.ufn§0§ 2021 1 26 17 53 54 568 §ÀJÔÕ§0

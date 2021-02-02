@@ -1,0 +1,24 @@
+ r←PP thint y;⎕PP;m;widths;maxneg;w;sink;i;j;neg;shpz;psw
+ ⍝ Thorn model for integers with print precision PP
+ ⎕PP←PP ⍝ Of course, integer thorn ignores ⎕PP
+ y←1/y                  ⍝ Scalars become 1-element vectors
+ m←((×/¯1↓⍴y),¯1↑⍴y)⍴y  ⍝ Treat tensor as a rank-2 matrix,
+                        ⍝ vector as 1-row matrix
+ widths←Pmtl 2⌈⌈⌿|m     ⍝ Worst-case width
+ ⍝ A large negative number may need more space
+ maxneg←⌊⌿m
+ neg←maxneg<0
+ maxneg←Pmtl 2⌈|maxneg
+ widths←widths+neg×maxneg≥widths
+ ⍝ Next line is withloop or each or rank-0
+ w←,(⍴y)⍴widths         ⍝ Don't try this in code, folks.
+ psw←+\0,widths+1       ⍝ Result column indices
+ shpz←(⍴m)[0],¯1++/widths+1 ⍝ Result shape
+ r←shpz⍴' '             ⍝ Interelement spaces
+ :For i :In ⍳(⍴m)[0]
+     :For j :In ⍳(⍴m)[1]
+         r[i;psw[j]+⍳w[j]]←(w[j],0)DthornInt m[i;j]
+     :EndFor
+ :EndFor
+ r←((¯1↓⍴y),¯1↑⍴r)⍴r    ⍝ Establish proper result shape
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTThornInt/thint.ufn§0§ 2021 1 26 17 53 54 572 §düâPÁ§0

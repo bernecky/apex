@@ -1,0 +1,10 @@
+ r←testthorn PP;⎕PP;m
+ ⍝ Unit tests for formatter
+ ⎕PP←PP
+ ⍝ Real arguments
+ m←2 3 4 5⍴¯20+⍳999
+ m[;;;0]←1000000000
+ r←(⎕PP threal ¯2.5)≡⍕¯2.5
+ r←r,(⎕PP threal ¯2.5+⍳9)≡⍕¯2.5+⍳9
+ r←r,(⎕PP threal m+0.1)≡⍕m+0.1
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTThornReal/testthorn.ufn§0§ 2021 1 26 17 53 54 572 §éeHE§0

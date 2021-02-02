@@ -1,0 +1,26 @@
+ r←wp DthornInt y;w;p;i;cury;dig;nexty;sig;⎕CT;ld;digits
+⍝ Dyadic thorn of integer scalar
+⍝ wp is field width, # decimal places.
+ w←wp[0]
+ p←wp[1]
+ ⎕CT←0
+⍝⍝ →(p>0)⍴0.1 ⍝Codeme
+ r←w⍴' '
+ r[w-1]←'0' ⍝ Just in case we're doing ⍕0
+ sig←y<0
+ cury←y×¯1 1[sig] ⍝ Use negative numbers to avoid 2s-comp overflow
+ ld←0
+ digits←'0123456789'
+ :For i :In ⌽⍳w       ⍝ This should be :while
+     nexty←⌈cury÷10   ⍝ C-ish divide w/truncate toward zero
+     ld←(ld,i-1)[cury≠0]
+     dig←|cury-nexty×10
+     r[i]←digits[dig]
+     cury←nexty
+     digits[0]←(digits[0],' ')[nexty=0]
+ :EndFor
+ ld←0⌈ld
+ r[ld]←(r[ld],'-')[sig] ⍝ Patch in negative sign if needed
+ r[⍳(cury≠0)×⍴r]←'*'    ⍝ Replace result with * if overflow
+⍝⍝ →(r matchneg wp⍕y)↓0.1 ⍝ Wrong
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTThornInt/DthornInt.ufn§0§ 2021 1 26 17 53 54 572 §côÆLV§0

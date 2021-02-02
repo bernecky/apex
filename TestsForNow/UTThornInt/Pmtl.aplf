@@ -1,0 +1,7 @@
+ r←Pmtl y;Pten
+⍝ Poor man's 10-logarithm for integers
+⍝ We need this because Dyalog APL returns
+⍝ 8.999...999 for  10⍟1e9!
+ Pten←×\1,9⍴10      ⍝ Poor man's powers of ten, too
+ r←+/y∘.≥Pten
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTThornInt/Pmtl.ufn§0§ 2021 1 26 17 53 54 572 §oÁæé§0

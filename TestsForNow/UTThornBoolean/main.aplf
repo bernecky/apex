@@ -1,0 +1,10 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ ⎕RL←16807
+ ⎕PP←15 ⍝ This should be 18, but Dyalog APL gets confused above 15.
+ ⎕PW←80
+ ⎕←r←testthorn ⎕PP
+ ⎕←r←r,testthorn 5
+ r←1-∧/r
+ ⎕←r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTThornBoolean/main.ufn§0§ 2021 1 26 17 53 54 568 §yzÆê§0

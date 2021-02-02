@@ -11,8 +11,8 @@ inline $ZTYPE[.] $FNAME($XTYPE x, $YTYPE y)
 }
 
 %Fragment rho 101 bid bidc bidc .
-inline $ZTYPE[.] $FNAME($XTYPE x, $YTYPE y)
-{ // [Vector reshape scalar] 
+inline $ZTYPE[.] $FNAME($XTYPE[1] x, $YTYPE y)
+{ // [1-element Vector reshape scalar] 
   z = genarray( toi(x),y);
   return(z);
 }

@@ -13,7 +13,8 @@
      Trace'Semiglobals into: ',D nast[0;asttarget]
      Trace'before: '
      Trace nast[tar;asttarget]
-     Trace'after : ' ⋄ astr[;asttarget]
+     Trace'after : ' 
+     Trace astr[;asttarget]
  :EndIf
  Checkem(E'?'),j[0]
  nast←D j[0]

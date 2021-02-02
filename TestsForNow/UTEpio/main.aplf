@@ -1,0 +1,17 @@
+ r←main;y;S0;S1;V0;V1;V10100;M234;V101011;z;Vn
+⍝  # Indexof and set membership unit tests
+ r←(⎕AV∊1↓⌽⎕AV)≡(¯1↓(⍴⎕AV)⍴1),0       ⍝ C∊C
+ r←r,((1↓⌽⎕AV)⍳⌽⎕AV)≡¯1⌽⍳256          ⍝ C⍳C
+ r←r,(⎕AV⍳⌽⎕AV)≡⌽⍳256                 ⍝ ⎕av⍳C
+ r←r,(⎕AV∊⎕AV)≡256⍴1                  ⍝ C∊⎕av
+ r←r,((100⍴0)⍳1)≡100                  ⍝ B⍳B
+ r←r,(((100⍴0),1)⍳1 0)≡100 0          ⍝ B⍳B
+ r←r,((⌽⎕AV)⍳1↓⎕AV)≡1↓⌽⍳⍴⎕AV          ⍝ C⍳C
+ r←r,((2↓⍳10)∊0 3 99)≡0 1 0 0 0 0 0 0 ⍝ PV∊IV
+ r←r,((0 3 2)⍳2↓⍳5)≡2 1 3             ⍝ IV⍳PV
+ r←r,((0 3 99)⍳3 9 ¯3)≡1 3 3          ⍝ I⍳I
+ r←r,((0.5+⍳5)∊3.5 4.5 666)≡0 0 0 1 1 ⍝ DV∊DV
+ r←r,0 0 0≡(⍳0)⍳1 2 3                 ⍝ Empty iota non-empty
+ r←r,0 0 0≡'abc'∊''                   ⍝ Non-empty member empty
+ ⎕←r
+ ⎕←r←1-∧/r

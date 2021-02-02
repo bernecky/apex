@@ -1,0 +1,18 @@
+ r←testthorn PP;⎕PP;m;twop31m1
+ ⍝ Unit tests for formatter
+ ⎕PP←PP
+ ⍝ Integer arguments
+ r←(⎕PP thint 2)matchneg⍕2                     ⍝ S
+ r←r,(⎕PP thint ¯2)matchneg⍕¯2                 ⍝ S
+ r←r,(⎕PP thint 0)matchneg⍕0                   ⍝ S
+ r←r,(⎕PP thint,¯13)matchneg⍕,¯13              ⍝ V
+ r←r,(⎕PP thint m)matchneg⍕m←2 4⍴10 199∘.×⍳4   ⍝ M
+ r←r,(⎕PP thint ¯123)matchneg⍕¯123
+ twop31m1←2147483647    ⍝ ¯1+2*31
+ r←r,(⎕PP thint twop31m1)matchneg⍕twop31m1
+ r←r,(⎕PP thint ¯2+⍳10)matchneg⍕¯2+⍳10
+ m←2 3 4 5⍴¯20+⍳999
+ r←r,(⎕PP thint m)matchneg⍕m
+ m[;;;0]←1000000000
+ r←r,(⎕PP thint m)matchneg⍕m
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTThornInt/testthorn.ufn§0§ 2021 1 26 17 53 54 572 §ceÖÖU§0

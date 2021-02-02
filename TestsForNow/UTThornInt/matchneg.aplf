@@ -1,0 +1,8 @@
+ r←x matchneg y;rx;ry
+⍝ Match, except ignore difference between - and ¯
+ rx←,x
+ rx[(rx='¯')/⍳⍴rx]←'-'
+ ry←,y
+ ry[(ry='¯')/⍳⍴ry]←'-'
+ r←((⍴x)≡⍴y)∧rx≡ry
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTThornInt/matchneg.ufn§0§ 2021 1 26 17 53 54 572 §tuSj§0

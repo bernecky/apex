@@ -1,0 +1,8 @@
+﻿ r←x matchresults y;i
+⍝ Match, but with output if results don't match.
+ r←x≡y
+ :For i :In ⍳~r           ⍝ Poor man's :if
+     ⎕←'Mismatched results!'
+     ⎕←x
+     ⎕←y
+ :EndFor

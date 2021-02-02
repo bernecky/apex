@@ -1,0 +1,6 @@
+ r←PP threal y;⎕PP
+⍝ Format real numbers
+ ⎕PP←PP
+⍝ FIXME: Write this ...
+ r←⍕y
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTThornReal/threal.ufn§0§ 2021 1 26 17 53 54 572 §dÂnI§0
