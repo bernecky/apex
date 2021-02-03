@@ -1,0 +1,26 @@
+ r←NAND;BS0;BS1;BVL;BVR;BVS0;BM234;BM034;BM304;BM230
+⍝ Unit tests for Boolean dyadic functions
+ BS0←0
+ BS1←1
+ BVL←0 0 1 1
+ BVR←0 1 0 1
+ BVS0←0⍴0
+ BM234←2 3 4⍴0 1 0
+ BM034←0 3 4⍴0 1
+ BM304←3 0 4⍴0 1
+ BM230←2 3 0⍴0 1
+ r←(BS0⍲BS0)≡~0
+ r←r,(BS0⍲BS1)≡~0
+ r←r,(BS1⍲BS0)≡~0
+ r←r,(BS1⍲BS1)≡~1
+ r←r,(BVL∘.⍲BVR)≡~4 4⍴0 0 0 0,0 0 0 0,0 1 0 1,0 1 0 1
+ r←r,(BM234⍲BS0)≡~2 3 4⍴0
+ r←r,(BM234⍲BS1)≡~BM234
+ r←r,(BM234⍲~BM234)≡~2 3 4⍴0
+ r←r,(BM034⍲BS1)≡~BM034
+ r←r,(BM034⍲BM034)≡~BM034
+ r←r,(BM304⍲BS1)≡~BM304
+ r←r,(BM304⍲BM304)≡~BM304
+ r←r,(BM230⍲BS1)≡~BM230
+ r←r,(BM230⍲BM230)≡~BM230
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTDScalarB/NAND.ufn§0§ 2020 6 24 17 4 22 832 §cèÉFb§0

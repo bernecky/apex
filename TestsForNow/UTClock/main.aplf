@@ -1,0 +1,9 @@
+ r←main;⎕IO;⎕RL;⎕PP;⎕PW
+ ⎕IO←0
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ z←⎕TS
+ ⎕←z
+ ⎕←r←1-(7=⍴z)[0]
+⍝∇⍣§./TestsForNow/UTClock/main.ufn§0§ 2020 6 24 17 4 22 832 §kzÈy§0

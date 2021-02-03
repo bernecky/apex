@@ -6,7 +6,7 @@ use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
 
-/* Compiled by APEX Version: wss/apex.20210125 2021-02-02 13:18:24.507 */
+/* Compiled by APEX Version: wss/apex.20210202 2021-02-02 15:42:55.965 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler

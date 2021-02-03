@@ -6,7 +6,7 @@ use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
 
-/* Compiled by APEX Version: wss/apex.20210202 2021-02-02 15:20:03.970 */
+/* Compiled by APEX Version: wss/apex.20210202 2021-02-02 15:43:33.227 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -391,7 +391,7 @@ inline int[.]  rhoXII(int[+] y)
 inline char[.] thrnXIC(int y, int QUADpp)
 { /* Monadic format on integer scalar  */
   z = format(y);
- return( z);
+  return( z);
 }
 
 inline char[.] thrnXBC(bool y, int QUADpp)

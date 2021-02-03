@@ -1,0 +1,16 @@
+ r←x BaseValue y;nx;ny;wts
+⍝ APL model of Base Value
+⍝⍝:if 1=×/⍴x ⍝ Extend singleton x
+⍝⍝  nx←(1↑⍴y)⍴x
+⍝⍝:else
+⍝⍝  nx←,x
+ nx←1=×/⍴x
+ nx←(nx/(1↑⍴y)⍴x),(~nx)/,x
+⍝⍝:endif
+⍝⍝if 1=×/⍴y ⍝ Extend singleton y
+⍝⍝ ny←(⍴nx)⍴y
+⍝⍝lse
+⍝⍝ny←y
+⍝⍝:endif
+ wts←⌽×\⌽(1↓nx),1
+ r←wts+.×y

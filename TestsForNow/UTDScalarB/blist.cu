@@ -1,0 +1,11 @@
+AND.aplf
+EQ.aplf
+GE.aplf
+GT.aplf
+LE.aplf
+LT.aplf
+main.aplf
+NAND.aplf
+NE.aplf
+NOR.aplf
+OR.aplf

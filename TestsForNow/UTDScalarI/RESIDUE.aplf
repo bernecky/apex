@@ -1,0 +1,20 @@
+ r←RESIDUE;BS0;BS1;BVL;BVR;BVS0;BM234;BM034;BM304;BM230;z;x;y
+⍝ Unit tests for Residue dyadic functions
+ BS0←0
+ BS1←1
+ BVL←0 0 1 1
+ BVR←0 1 0 1
+ BVS0←0⍴0
+ BM234←2 3 4⍴0 1 0
+ BM034←0 3 4⍴0 1
+ BM304←3 0 4⍴0 1
+ BM230←2 3 0⍴0 1
+ z←¯2 ¯1 0 ¯2147483647,¯2 ¯1 0 ¯2
+ z←z,0 ¯1 0 ¯1,0 0 0 0,¯2 ¯1 0 1
+ z←7 4⍴z,0 0 0 0,0 1 0 1
+ x←(¯2*31),¯3+⍳6
+ y←¯2+⍳4 ⍝Can't use ¯2*31 in y, because APEX returns integer for DFLOOR
+ r←(x∘.|y)≡z
+ ⍝⍝ r←r,(x∘.|y)≡x∘.residueI y
+ ⍝⍝ Disabled until APEX support :if/:then/:else
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTDScalarI/RESIDUE.ufn§0§ 2020 6 24 17 4 22 832 §buyÚz§0

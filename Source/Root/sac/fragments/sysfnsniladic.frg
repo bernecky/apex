@@ -5,15 +5,18 @@
 % --------------- QUADts fragments ----------------------------
 %Fragment quadts xx1  x x i .
 inline $ZTYPE[.] $FNAME()
-{ /* QUADts - system timestamp */
-  /* FIXME: This should be changed to double, so we can report nanoseconds */
- ts, nsec = gettime();
- secs = to_time(ts);
+{ // QUADts - system time-of-day timestamp 
+  // This function provides system time in ISO 8601 format,
+  // via CLOCK_REALTIME.
+  // It may not be the best way to measure elapsed time. For that,
+  // see documentation for clock_gettime, using CLOCK_MONOTONIC.
+ sec, nsec = gettime(); // From Stdlib module RTClock 
+ secs = to_time(toi(sec));
  d = mday(secs);
  m = mon (secs);
  y = year(secs);
  h,mi,s = clock(secs);
- z = [y + 1900, m + 1 , d, h, mi, s, nsec/1000000];
+ z = [y + 1900, m + 1 , d, h, mi, s, toi(nsec)/1000000];
  return(z);
 }
 

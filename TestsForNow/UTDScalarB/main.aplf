@@ -1,0 +1,15 @@
+ r←main
+⍝ Unit tests for Boolean dyadic scalar functions
+ r←AND
+ r←r,OR
+ r←r,NAND
+ r←r,NOR
+ r←r,LT
+ r←r,LE
+ r←r,EQ
+ r←r,GE
+ r←r,GT
+ r←r,NE
+ ⎕←r
+ ⎕←r←1-∧/r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTDScalarB/main.ufn§0§ 2020 6 24 17 4 22 832 §uãkV§0

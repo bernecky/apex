@@ -1,0 +1,22 @@
+use Array: {genarray,++};
+
+bool[.] ORXXB()
+{ 
+ r_1 = [true];
+ r_4 = r_1 ++ r_1;
+ r_4 = r_4 ++ r_4;
+ r_4 = r_4 ++ r_4;
+ r_4 = r_4 ++ r_4;
+ r_13 = r_4;
+ return(r_13);
+}
+
+int main()
+{ 
+
+ m = ORXXB( );
+ StdIO::print(m);
+ StdIO::show(m);
+ return(0);
+}
+
