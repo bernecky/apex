@@ -1,0 +1,8 @@
+ foo;i
+ i←0
+lp:i←i+1
+ v←(1+?100)?1000
+ x←?⍴v
+ ⎕←i,x,⍴v
+ →((x⌽v)≡x rotateInPlace v)⍴lp
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTRotate01/foo.ufn§0§ 2020 6 24 17 4 22 840 §gnqw§0

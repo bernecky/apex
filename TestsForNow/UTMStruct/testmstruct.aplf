@@ -1,0 +1,26 @@
+ r←testmstruct
+⍝ Test cases for mstruct, including
+⍝ ravel, table, reverse, and transpose
+
+ r←(,5)≡1⍴5            ⍝ Ravel scalar
+ r←r,(,4 5)≡4 5        ⍝ Ravel vector
+ r←r,(,2 3 4⍴⍳24)≡⍳24  ⍝ Ravel tensor
+ ⍝
+ r←r,(⍪5)≡1 1⍴5        ⍝ Table on scalar
+ r←r,(⍪2 3)≡2 1⍴2 3   ⍝ Table on vector
+ r←r,(⍪2 3 4⍴⍳24)≡2 12⍴⍳24 ⍝ Table on tensor
+ ⍝
+ r←r,(⍉5)≡5           ⍝ Transpose on scalar
+ r←r,(⍉2 3)≡2 3      ⍝ Transpose on vector
+ r←r,(⍉2 3⍴⍳6)≡3 2⍴0 3 1 4 2 5 ⍝ Transpose on matrix
+ ⍝                   Transpose on tensor
+ r←r,(⍉2 3 4⍴⍳24)≡4 3 2⍴0 12 4 16 8 20 1 13 5 17 9 21 2 14 6 18 10 22 3 15 7 19 11 23
+ ⍝
+ r←r,(⌽5)≡5          ⍝ Reverse on scalar
+ r←r,(⊖5)≡5
+ r←r,(⌽1 2 3)≡3 2 1  ⍝ Reverse on vector
+ r←r,(⊖1 2 3)≡3 2 1
+ r←r,(⌽2 3⍴⍳6)≡2 3⍴2 1 0 5 4 3 ⍝ Reverse on matrix
+ r←r,(⊖2 3⍴⍳6)≡2 3⍴3 4 5 0 1 2
+ r←r,(⌽2 3 4⍴⍳24)≡2 3 4⍴3 2 1 0 7 6 5 4 11 10 9 8 15 14 13 12 19 18 17 16 23 22 21 20
+ r←r,(⊖2 3 4⍴⍳24)≡2 3 4⍴12 13 14 15 16 17 18 19 20 21 22 23 0 1 2 3 4 5 6 7 8 9 10 11

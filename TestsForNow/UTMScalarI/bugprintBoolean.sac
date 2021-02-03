@@ -1,0 +1,40 @@
+use Array: all;
+use StdIO: all;
+
+inline int[+] mpyXII(int[+] y)
+{ /* Monadic scalar functions on array */
+  z = with {
+   ( . <= iv <= .)
+                : mpyXII(y[iv]);
+         } : genarray(shape(y), 0);
+  return(z);
+}
+
+int mpyXII(int y)
+{ /* signum int */
+ if (0 == y)
+        z = 0;
+ else if (0 > y)
+        z = -1;
+ else
+        z = 1;
+ return(z);
+}
+
+int main()
+{ 
+ A_113=iota( 20);
+ A_114=(-10 + A_113);
+ A_115=mpyXII( A_114);
+ A_117 = [0, 1,1,1, 1,1,1, 1,1,1];
+
+ A_118 = [-1, -1, -1, -1, -1,   -1, -1, -1, -1, -1  ];
+ A_119= A_118 ++ toi(A_117);
+ z = match(A_119,A_115);
+ 
+StdIO::print(A_115 == A_119);
+StdIO::show (A_115 == A_119);
+
+ return(0);
+}
+

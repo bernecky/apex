@@ -1,0 +1,25 @@
+ r←x Take y;shpy;zr;lb;ub;vext;shpz;i;iv;ylb;ysel;el
+⍝ APL model of take.
+⍝
+⍝  Includes Bernecky's extension from SHARP APL to allow
+⍝  a short left argument, which is extended to
+⍝  the rank of the right argument with elements from ⍴y.
+⍝
+⍝
+ y←1/y ⍝ Scalar treated as vector
+ x←,x
+ shpy←⍴y
+ zr←0×shpy
+ vext←x,(⍴x)↓⍴y ⍝ Extend left argument
+ lb←zr⌈(vext<0)×(-vext)-shpy
+ ylb←zr⌈(vext<0)×0⌈(shpy+vext)
+ shpz←|vext
+ ub←shpz⌊shpy ⍝ shape of select from y
+ r←(×/shpz)⍴Fill y
+ :For i :In ⍳×/ub
+     iv←ub⊤i
+     el←(,y)[shpy⊥ylb+iv]
+     r[shpz⊥lb+iv]←el
+ :EndFor
+ r←shpz⍴r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTTakeDrop/Take.ufn§0§ 2020 6 24 17 4 22 840 §bSIzS§0

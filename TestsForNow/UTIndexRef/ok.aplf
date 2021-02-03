@@ -1,0 +1,5 @@
+ r←msg ok k
+ r←(2 3⍴'UGHOK ')[k;]
+ ⍝:If VERBOSE
+ ⍝    ⎕←msg,r
+ ⍝:EndIf

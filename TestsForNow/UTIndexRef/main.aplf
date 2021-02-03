@@ -1,0 +1,10 @@
+ r←main;⎕IO;⎕RL;⎕PP;⎕PW;z
+ ⎕IO←0
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←testir
+ ⎕←r
+ r←1-∧/r
+ ⎕←r
+⍝∇⍣§./TestsForNow/UTIndexRef/main.ufn§0§ 2020 6 24 17 4 22 836 §kuäÕ§0

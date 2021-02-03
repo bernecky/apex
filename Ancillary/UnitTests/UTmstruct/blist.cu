@@ -1,2 +1,0 @@
-main.ufn
-testmstruct.ufn

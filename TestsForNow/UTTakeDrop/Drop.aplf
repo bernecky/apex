@@ -1,0 +1,24 @@
+ r←x Drop y;shpy;zr;ub;vext;shpz;i;iv;ylb;ysel;el
+⍝ APL model of drop
+⍝
+⍝  Includes Bernecky's extension from SHARP APL to allow
+⍝  a short left argument, which is extended to
+⍝  the rank of the right argument zeros.
+⍝
+⍝
+ y←1/y ⍝ Scalar treated as vector
+ x←,x
+ shpy←⍴y
+ zr←0×shpy
+ vext←x,(⍴x)↓zr ⍝ Extend left argument w/zeros
+ ylb←vext⌈(vext<0)×zr
+ shpz←0⌈shpy-|vext
+ ub←shpz⌊shpy ⍝ shape of select from y
+ r←(×/shpz)⍴Fill y
+ :For i :In ⍳×/ub
+     iv←ub⊤i
+     el←(,y)[shpy⊥ylb+iv]
+     r[shpz⊥iv]←el
+ :EndFor
+ r←shpz⍴r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTTakeDrop/Drop.ufn§0§ 2020 6 24 17 4 22 840 §böccû§0

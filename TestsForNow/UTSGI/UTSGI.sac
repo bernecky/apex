@@ -1,0 +1,123 @@
+use Array: all;
+use ArrayFormat: all;
+use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
+
+/* Compiled by APEX Version: wss/apex.20210203 2021-02-03 17:58:18.715 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline int plusIII(int x, int y)
+{ return(ItoI(x)+ItoI(y));
+}
+
+inline int mpyIII(int x, int y)
+{ return(ItoI(x)*ItoI(y));
+}
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline bool sameIIB(int x, int y)
+{ /* Scalar match scalar */
+  z = eqIIB(toI(x), toI(y));
+ return(z);
+}
+
+
+
+inline bool eqIIB(int x, int y)
+{ /* A=B on non-doubles */
+ return(ItoI(x) == ItoI(y));
+}
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline int subfnXII(int omega,int outerval2)
+{ 
+/*
+ ?
+*/
+val1_0=( omega);
+ val2_0=( omega);
+ val3_0=( omega);
+ val4_0=( omega);
+ /* dsf scalar(s) */
+A_32=plusIII(val4_0,outerval2);
+/* dsf scalar(s) */
+A_33=plusIII(val3_0,A_32);
+ /* dsf scalar(s) */
+A_34=plusIII(val2_0,A_33);
+ /* dsf scalar(s) */
+A_35=plusIII(val1_0,A_34);
+ r_0=( A_35);
+ return(r_0);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ outerval_0=( 42);
+ outerval2_0=( 666);
+ A_48=subfnXII( outerval_0,outerval2_0);
+ r_0=( A_48);
+ A_52=quadXII( r_0,QUADpp_0,QUADpw_0);
+ /* dsf scalar(s) */
+A_53=mpyIII(4,outerval_0);
+/* dsf scalar(s) */
+A_54=plusIII(666,A_53);
+ A_56=sameIIB(r_0,A_54);
+ /* dsf scalar(s) */
+A_57=barBBI(true,A_56);
+ r_1=( A_57);
+ A_61=quadXII( A_57,QUADpp_0,QUADpw_0);
+ return(r_1);
+}
+

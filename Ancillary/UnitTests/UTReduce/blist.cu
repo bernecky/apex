@@ -1,2 +1,0 @@
-barsl.ufn
-main.ufn

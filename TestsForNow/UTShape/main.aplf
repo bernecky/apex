@@ -1,0 +1,10 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ n←250000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ ⎕←r←testshape n
+ r←1-∧/r
+ ⎕←r
+

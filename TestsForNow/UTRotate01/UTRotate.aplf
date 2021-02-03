@@ -1,0 +1,31 @@
+ r←UTRotate;b
+⍝# Rotate primitive unit tests for rank 0 and 1
+⍝# We break these tests up to keep sac compile times under a week.
+ r←5≡0⌽5                 ⍝ Rotate scalar
+ r←r,5≡23⌽5
+ r←r,5≡¯42⊖5
+ r←r,'x'≡2⌽'x'
+ r←r,'x'≡¯2⊖'x'
+ r←r,0≡2⌽0
+ r←r,0≡¯33⊖0
+ r←r,0.5≡2⌽0.5
+ r←r,0.5≡¯33⊖0.5
+
+ r←r,(,1)≡2⌽,1             ⍝ Rotate one-element vector
+ r←r,(,1)≡¯33⊖,1
+ r←r,(,2)≡0⌽,2
+ r←r,(,2)≡33⊖,2
+ r←r,(,2.5)≡23⌽,2.5
+ r←r,(,2.5)≡¯333⊖,2.5
+ r←r,(,'x')≡12⌽,'x'
+ r←r,(,'x')≡¯10⊖,'x'
+
+ r←r,0 0 0 1≡2⌽0 1 0 0   ⍝ Rotate longer vectors
+ r←r,0 1 0 0≡¯4⊖0 1 0 0
+ r←r,(⍳5)≡10⌽¯20⌽⍳5
+ r←r,(⍳5)≡30⊖⍳5
+ r←r,(0.5+⍳20)≡¯40⌽0.5+⍳20
+ r←r,(0.5+⍳20)≡0⊖0.5+⍳20
+ r←r,'abcde'≡5⌽'abcde'
+ r←r,'abcde'≡¯5⊖'abcde'
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTRotate01/UTRotate.ufn§0§ 2020 6 24 17 4 22 840 §eoyèz§0

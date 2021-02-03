@@ -1,0 +1,52 @@
+ r←testir;i;v;M2;z;M3;k
+⍝ Index reference tests
+ M2←2 3⍴⍳6
+ r←k←M2≡M2[;]                     ⍝ M[;]
+ 'Z[;]: 'ok k
+ v←⍳4
+ r←r,k←v≡v[]                      ⍝ V[]
+ 'V[]: 'ok k
+ r←r,k←(⌽v)≡v[3 2 1 0]            ⍝ V[V]
+ 'V[3 2 1 0]: 'ok k
+⍝ Rank-2 tests
+ r←r,k←M2≡M2[;]                   ⍝ M[;]
+ 'M2[;]:'ok k
+ r←r,k←M2[0;]≡0 1 2               ⍝ M[S;]
+ 'M2[0;]: 'ok k
+ r←r,k←M2[;1]≡1 4                 ⍝ M[;S]
+ 'M2[;1]: 'ok k
+ r←r,k←M2[1 0;]≡2 3⍴3 4 5 0 1 2   ⍝ M[V;]
+ 'M2[1 0;]: 'ok k
+ r←r,k←M2[;2 0 1]≡2 3⍴2 0 1 5 3 4 ⍝ M[;V]
+ 'M2[;2 0 1]: 'ok k
+ r←r,k←M2[0;2]≡2                  ⍝ M[S;S]
+ 'M2[0;2]: 'ok k
+ r←r,k←M2[1 0;2]≡5 2              ⍝ M[V;S]
+ 'M2[1 0;2]: 'ok k
+ r←r,k←M2[1;2 0]≡5 3              ⍝ M[S;V]
+ 'M2[1;2 0]:'ok k
+ r←r,k←M2[1 0;2 1]≡2 2⍴5 4 2 1    ⍝ M[V;V]
+ 'M2[1 0;2 1]: 'ok k
+⍝ Rank-3 tests
+ M3←3 4 5⍴⍳120
+ r←r,k←M3[;2;]≡10 30 50∘.+⍳5      ⍝ M3[;S;]
+ 'M3[;2;]: 'ok k
+ r←r,k←M3[0;1;2]≡7                ⍝ M3[S;S;S]
+ 'M3[0;1;2]: 'ok k
+ r←r,k←M3[0;1;]≡5 6 7 8 9         ⍝ M3[S;S;]
+ 'M3[0;1;]: 'ok k
+ r←r,k←M3[;0;1]≡1 21 41           ⍝ M3[;S;S]
+ 'M3[;0;1]: 'ok k
+ r←r,k←M3[2 1;0;3]≡43 23          ⍝ M3[V;S;S]
+ 'M3[2 1;4;3]: 'ok k
+ r←r,k←M3[2;;]≡(40+5×⍳4)∘.+⍳5     ⍝ M3[S;;]
+ 'M3[2;;]: 'ok k
+ r←r,k←M3[;;2]≡0 20 40∘.+2 7 12 17 ⍝ M3[;;S]
+ 'M3[;;2]: 'ok k
+ r←r,k←M3[;;2 3]≡0 0 2↓0 0 ¯1↓M3  ⍝ M3[;;V]
+ z←10 30 50∘.+0 ¯5∘.+⍳5
+ r←r,k←M3[;2 1;]≡z                ⍝ M3[;V;]
+ r←r,k←M3[2 1;;]≡2 4 5⍴(40+⍳20),20+⍳20 ⍝ M3[V;;]
+ 'M3[2 1;;]: 'ok k
+⍝ More test cases need to be written!
+⍝∇⍣§./TestsForNow/UTIndexRef/testir.ufn§0§ 2020 6 24 17 4 22 836 §ldUúÃ§0

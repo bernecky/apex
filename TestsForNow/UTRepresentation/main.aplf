@@ -1,0 +1,20 @@
+ r←main;y;S;BV;M4;Hex;Byte
+ S←2
+ BV←1 1 0 1 1 0 1 1
+ M4←2 3 4 5⍴⍳999
+ Hex←16 16
+ Byte←256 256 256 256
+ r←(Hex⊤⎕AV⍳⎕AV)≡Hex Represent ⎕AV⍳⎕AV                 ⍝ V⊤IV
+ r←r,((8⍴2)⊤⎕AV⍳⎕AV)≡(8⍴2)Represent ⎕AV⍳⎕AV              ⍝ IV⊤IV
+ r←r,((8⍴2)⊤16 16⍴⍳256)≡(8⍴2)Represent 16 16⍴⍳256        ⍝ IV⊤IM
+ r←r,(2 3⊤M4)≡2 3 Represent M4                           ⍝ IV⊤IM
+ r←r,(10 10 10⊤3247)≡10 10 10 Represent 3247
+ r←r,(0 10 10⊤3247)≡0 10 10 Represent 3247
+ r←r,(10 10 10⊤247.33)≡10 10 10 Represent 247.33
+ r←r,(0 1⊤247.33)≡0 1 Represent 247.33
+ r←r,((4⍴10)⊤¯1)≡(4⍴10)Represent ¯1
+ r←r,(0 1⊤¯247.33)≡0 1 Represent ¯247.33
+ r←r,((4⍴10)⊤1984 2001 ¯44)≡(4⍴10)Represent 1984 2001 ¯44
+ ⎕←r
+ r←⎕←1-∧/r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTRepresentation/main.ufn§0§ 2020 6 24 17 4 22 840 §dhÉJÃ§0

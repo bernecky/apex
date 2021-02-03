@@ -1,0 +1,19 @@
+ z←x Represent y;weights;i;cy;shpy;shpz;⎕CT;yi;zi
+⍝ APL model of Represent.
+ ⎕CT←0
+ shpz←(⍴x),⍴y
+ x←,x
+ weights←1↓⌽×\⌽x,1
+ shpy←⍴y
+ y←,y
+ z←(×/shpz)⍴¯1
+ :For yi :In ⍳×/shpy
+     cy←y[yi]
+     :For i :In ⌽⍳⍴x
+         zi←(i××/shpy)+yi
+         z[zi]←x[i]|cy÷weights[i]
+         cy←cy-z[zi]×weights[i]
+     :EndFor
+ :EndFor
+ z←shpz⍴z
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTRepresentation/Represent.ufn§0§ 2020 6 24 17 4 22 840 §BÅpæ§0

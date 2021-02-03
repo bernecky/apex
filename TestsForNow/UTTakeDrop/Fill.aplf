@@ -1,0 +1,4 @@
+ r←Fill y
+⍝ Fill element for overtake
+ r←''⍴0\0⍴y
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTTakeDrop/Fill.ufn§0§ 2020 6 24 17 4 22 840 §bRÃã§0

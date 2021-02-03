@@ -1,0 +1,6 @@
+ r←barsl y
+⍝# Model of -/vector
+ r←y[0]
+ :For i :In 1↓⍳⍴y
+     r←-y[i]-r
+ :EndFor

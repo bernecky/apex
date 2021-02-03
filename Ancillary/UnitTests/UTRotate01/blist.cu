@@ -1,2 +1,0 @@
-UTRotate.ufn
-main.ufn

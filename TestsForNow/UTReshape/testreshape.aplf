@@ -1,0 +1,11 @@
+ r←testreshape n;b;x
+⍝ Test cases for reshape
+ r←(⍳0)≡0⍴0
+ r←r,4 4≡2⍴4
+ r←r,(⍳24)≡,⌽⌽2 3 4⍴⍳24
+ r←r,6≡(⍳0)⍴6
+ r←r,'x'≡(⍳0)⍴'x'
+ r←r,'x'≡''⍴'x'
+ x←5 5⍴6↑1
+ r←r,(5=+/,x)∧5 0 0 0 0≡+⌿(⍳5)⌽x
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTReshape/testreshape.ufn§0§ 2020 6 24 17 4 22 840 §ùJQa§0

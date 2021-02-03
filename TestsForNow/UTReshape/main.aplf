@@ -1,0 +1,10 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ n←250000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ ⎕←r←testreshape n
+ r←1-∧/r
+ ⎕←r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTReshape/main.ufn§0§ 2020 6 24 17 4 22 840 §mjhU§0

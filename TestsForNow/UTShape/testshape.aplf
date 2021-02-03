@@ -1,0 +1,6 @@
+ r←testshape n
+⍝ Test cases for shape
+ r←(⍴0)≡0⍴0     ⍝ shape of scalar
+ r←r,(⍴4 4)≡,2  ⍝ shape of vector
+ r←r,(⍴2 3 4⍴5)≡2 3 4 ⍝ shape of tensor
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTShape/testshape.ufn§0§ 2020 6 24 17 4 22 840 §nõÒZ§0

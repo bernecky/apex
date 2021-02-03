@@ -1,3 +1,0 @@
-main.dyalog
-subfn.dyalog
-

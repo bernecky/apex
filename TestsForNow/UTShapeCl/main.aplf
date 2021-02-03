@@ -1,0 +1,12 @@
+ r←main;a;b;c;d;e
+⍝ Unit test for Shape Cliques
+ a←⍳5
+ b←a            ⍝ a,b in same clique
+ c←a+b          ⍝ a,b,c in same clique. Clique detected
+⍝ Guarded shape clique
+ d←a+2+⍳5       ⍝ Conform check needed. Set guard
+ e←d+a          ⍝ e,d,a in same clique, guarded by d computation
+ r←2 5 8 11 14≡e
+ ⎕←r←r,a≡a-1|a    ⍝ Should be in same clique, but nmo fails to catch it
+ ⎕←r←1-∧/r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTShapeCl/main.ufn§0§ 2020 6 24 17 4 22 840 §PpJC§0
