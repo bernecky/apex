@@ -1,0 +1,29 @@
+use Array: all;
+use ArrayFormat: all;
+use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
+use mymodule: all;
+
+int main()
+{
+QUADio_0=0;
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=0;
+ n_0=( 50000000);
+ QUADrl_1=( 16807);
+ QUADpp_1=( 16);
+ QUADpw_1=( 80);
+ A_54=mymodule::iotanXID( n_0,QUADio_1);
+ r_0=( A_54);
+ StdIO::show( r_0);
+ return(0);
+}
+

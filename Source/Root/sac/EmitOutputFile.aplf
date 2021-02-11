@@ -1,0 +1,17 @@
+ r←EmitOutputFile y;wsid;APEXVersion;cuasts;cudefinedfns;cuprolog;code;b;cufnm;txt
+ ⍝# Package the generated SAC code for one Compilation Unit(CU)
+ ⍝# and write it to a host file..
+ ⍝#  Generated file is written to file in same directory as source.
+ cuasts←D y[0] ⍝ All asts for the CU
+ cudefinedfns←D y[1] ⍝ All defined fns for the CU
+ cufnm←D y[2] ⍝ The APL file name for the CU
+ cuprolog←GetFileChar #.globals.PathFrag,'prolog.',#.globals.TargetLanguage ⍝ Get prolog code
+ cuprolog←'$MAIN'Strepl(E cuprolog),E CUEntryPoint cuasts
+ APEXVersion←'Compiled by APEX Version: ',⎕WSID
+ cuprolog←cuprolog,(BuildComment APEXVersion,' ',,fts ⎕TS),NL
+ cuprolog←cuprolog,GetFileChar #.globals.PathFrag,'stdlib.',#.globals.TargetLanguage
+ code←cuprolog,cudefinedfns
+ txt←toascii AddNL code
+ r←(D 0⌷⎕SH'pwd'),PathDelim,cufnm,'.',#.globals.TargetLanguage
+ 'PutFile failed'assert z←txt PutFile r
+ z←⎕SH'chmod g+w ',r

@@ -1,0 +1,5 @@
+ r←PP thboolVec y
+ ⍝ Format a Boolean vector, with an eye toward good SAC operation
+ r←(¯1+2×⍴y)⍴' '
+ r[2×⍳⍴y]←'01'[y]
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTThornBoolean/thboolVec.ufn§0§ 2021 1 26 17 53 54 568 §hóyØ§0

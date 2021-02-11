@@ -1,0 +1,11 @@
+use mymodule: all; 
+
+int main()
+{
+ QUADio=0;
+ n_0=( 5000000000);
+ A_54=mymodule::iotanXID( n_0,QUADio);
+ StdIO::show(A_54);
+ return(0);
+}
+

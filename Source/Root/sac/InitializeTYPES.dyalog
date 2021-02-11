@@ -1,1 +1,0 @@
-../globals/InitializeTYPES.dyalog

@@ -1,1 +1,0 @@
-../arrayutils/isnum.dyalog

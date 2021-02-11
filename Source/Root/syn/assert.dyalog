@@ -1,1 +1,0 @@
-../arrayutils/assert.dyalog

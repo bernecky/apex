@@ -1,2 +1,0 @@
-apex←{⍺ nsapex.apex ⍵}
-

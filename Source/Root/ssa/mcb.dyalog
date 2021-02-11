@@ -1,1 +1,0 @@
-../arrayutils/mcb.dyalog

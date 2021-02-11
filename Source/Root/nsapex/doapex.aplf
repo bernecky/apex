@@ -1,0 +1,24 @@
+ fnm←Options doapex fldr;defaultOpts;Opts
+  ⍝ Compile code in folder fldr with Options
+  ⍝ Establish default Option settings
+ defaultOpts←'targetlanguage=sac trace= '
+ Opts←defaultOpts,Options
+ #.globals.Initialize Opts
+ fns←GetBlistFns fldr
+
+ ⍝  Invoke each compiler phase
+ asts←fldr #.syn.dosyn fns
+ asts←fldr #.idioms.doidioms asts
+ asts←fldr #.ssa.dossa asts
+ asts←fldr #.dfa.dodfa asts
+
+ ⍝  Call code generator, then compile same
+ :Select #.globals.TargetLanguage
+ :Case 'sac'
+     fnm←fldr #.sac.dosac asts
+ :Case 'plural'
+     fnm←fldr #.plural9.doplural asts
+ :Else 
+     ⎕←'Unable to generate code in: ',fldr,' for: ', #.globals.TargetLanguage
+     fnm←''
+ :EndSelect
