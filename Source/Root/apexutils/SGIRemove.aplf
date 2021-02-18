@@ -1,4 +1,4 @@
-﻿ r←x SGIRemove ast;cv;nms;p;tar;k;fcv;gis;pv;le;de
+ r←x SGIRemove ast;cv;nms;p;tar;k;fcv;gis;pv;le;de
 ⍝ Remove :GI ast entries for nms from the fncall at cv
  cv←D x[0]
  nms←D x[1]
@@ -6,8 +6,8 @@
  :While 1∊cv
      gis←cv⍳1
      p←ast ParmIndices gis          ⍝ :GI index chain
-     tar←ast UnSSA ast ParmList gis ⍝ :GI names to delete
-     pv←r[tar;asttarget]∊nms
+     tar←ast UnSSA 1↓ast ParmList gis ⍝ :GI names to delete. Ignore fncall
+     pv←0,r[tar;asttarget]∊nms
      de←pv/p                        ⍝ Dead :GI entries
      le←(~pv)/p                     ⍝ Live :GI entries
      r[gis;astparms]←0⌷le,NULL      ⍝ Point fncall at first live :GI, if any

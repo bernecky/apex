@@ -11,7 +11,7 @@
  :If TL≡'sac'
      fragbuf←BufferAllCodeFragments #.globals.PathFrag
      r←fldr EmitOneCU asts
-     TL InvokeCompiler r÷0
+     TL InvokeCompiler r ⍝ Compile sac module
  :Else
      r←asts
  :EndIf

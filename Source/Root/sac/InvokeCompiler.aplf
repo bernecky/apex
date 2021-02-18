@@ -1,0 +1,3 @@
+ InvokeCompiler←{
+     pwd←(-⍴PathFileName ⍵)↓⍵
+     ⎕SH' cd ', pwd,'; sac2c -O3 -doawlf -dopwlf ',⍵}

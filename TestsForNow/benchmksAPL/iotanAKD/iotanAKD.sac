@@ -8,7 +8,7 @@ use RTClock: all;
 use StdIO : all;
 use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: wss/apex.20210211,dws 2021-02-11 17:07:03.980 */
+/* Compiled by APEX Version: wss/apex.20210211,dws 2021-02-11 18:33:44.419 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -94,6 +94,13 @@ inline bool sameDDB(double x, double y,double QUADct)
 
 
 
+inline int CommandLineArgvXBI(bool y)
+{ /* Get Command-line argument element #y as integer scalar */
+  int z;
+  junk, z = sscanf(argv(toi(y)), "%d");
+  return( z);
+}
+
 inline double plusslXDDFOLD(double[.] y)
 { /* First/last axis fold-based reduction of vector */
   lim = shape(y)[0]-1;
@@ -148,32 +155,41 @@ int main()
 /*
  ?
 */
-QUADio_0=toI(( false));
+n=CommandLineArgvXBI( true);
+ QUADio_0=toI(( false));
  QUADct_0=( 1.0e-13);
  QUADpp_0=( 10);
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
  QUADio_1=toI(( false));
- n_0=( 100000000);
  QUADrl_1=( 16807);
  QUADpp_1=( 16);
  QUADpw_1=( 80);
- A_54=iotanXID( n_0,QUADio_1);
- r_0=( A_54);
- A_58=quadXDD( r_0,QUADpp_1,QUADpw_1);
+ A_53=iotanXID( n,QUADio_1);
+ r_0=( A_53);
+ A_57=quadXDD( r_0,QUADpp_1,QUADpw_1);
  /* dsf scalar(s) */
-A_59=barDDD(1.5,0.5);
+A_58=barDDD(1.5,0.5);
  /* dsf scalar(s) */
-A_60=plusIDD(n_0,A_59);
-/* dsf scalar(s) */
-A_61=mpyIDD(n_0,A_60);
+A_59=plusIDD(n,A_58);
  /* dsf scalar(s) */
-A_62=divDID(A_61,2);
- A_64=sameDDB(r_0,A_62,QUADct_0);
+A_60=mpyIDD(n,A_59);
  /* dsf scalar(s) */
-A_65=barBBI(A_64,true);
-r_1=( A_65);
- A_69=quadXII( A_65,QUADpp_1,QUADpw_1);
+A_61=divDID(A_60,2);
+ A_64=quadXDD( A_61,QUADpp_1,QUADpw_1);
+ /* dsf scalar(s) */
+A_65=barDDD(1.5,0.5);
+ /* dsf scalar(s) */
+A_66=plusIDD(n,A_65);
+ /* dsf scalar(s) */
+A_67=mpyIDD(n,A_66);
+ /* dsf scalar(s) */
+A_68=divDID(A_67,2);
+ A_70=sameDDB(r_0,A_68,QUADct_0);
+ /* dsf scalar(s) */
+A_71=barBBI(A_70,true);
+r_1=( A_71);
+ A_75=quadXII( A_71,QUADpp_1,QUADpw_1);
  return(r_1);
 }
 

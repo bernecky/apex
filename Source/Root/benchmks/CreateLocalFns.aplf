@@ -1,5 +1,5 @@
 ﻿ fns←CreateLocalFns(ufns args);hdr;txt;fail
- fns←(-⍴'.ufn')↓¨dtb¨ufns ⍝ The fns to localize
+ fns←(-⍴'.aplf')↓¨dtb¨ufns ⍝ The fns to localize
  hdr←E('r←fns Invoke fntext ;r;fxr;bef;aft',D Raze';',¨fns)
  txt←hdr,E'fxr←⎕fx¨fntext'
  txt←txt,E'''local fn fix failed'' assert fxr≡fns'

@@ -1,7 +1,7 @@
 ﻿ RunBenchmark1 bm;args;blist;argv;ufns;fntext;argfn;Invoke;p;op;fns;r
-⍝ Run benchmark in path bm
+⍝ Run APL interpreter benchmark in path bm
  blist←GetFileChar bm
- ufns←ER1 vtom ¯1⌽blist,(NL≠¯1↑blist)⍴NL
+ ufns←1↓¨PartitionedEnclose ¯1⌽blist
  fntext←GetFileChar¨(E #.fileutils.Path bm),¨ufns
  :If ∨/'AKD'⍷bm
      argv←GetFileChar(#.fileutils.Path bm),'bench.argv'

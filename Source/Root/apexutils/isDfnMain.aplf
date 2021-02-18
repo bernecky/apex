@@ -1,0 +1,1 @@
+ isDfnMain←{'main'≡D asttarget⌷dfnname⌷D ssaast⌷⍵}

@@ -1,3 +1,5 @@
+module iotan;
+
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -8,7 +10,7 @@ use RTClock: all;
 use StdIO : all;
 use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: wss/apex.20210209 2021-02-10 17:21:52.856 */
+/* Compiled by APEX Version: CLEAR WS 2021-02-16 21:10:03.928 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -33,6 +35,8 @@ use String: {to_string,tochar,sscanf};
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+export all;
 
 inline double barDDD(double x, double y)
 { return(DtoD(x)-DtoD(y));
@@ -94,13 +98,6 @@ inline bool sameDDB(double x, double y,double QUADct)
 
 
 
-inline int CommandLineArgvXBI(bool y)
-{ /* Get Command-line argument element #y as integer scalar */
-  int z;
-  junk, z = sscanf(argv(toi(y)), "%d");
-  return( z);
-}
-
 inline double plusslXDDFOLD(double[.] y)
 { /* First/last axis fold-based reduction of vector */
   lim = shape(y)[0]-1;
@@ -150,42 +147,37 @@ A_21=plusslXDDFOLD( A_20);
  return(r_0);
 }
 
-int main()
+inline int iotan_mainXXI()
 { 
 /*
  ?
 */
-n=CommandLineArgvXBI( true);
- QUADio_0=toI(( false));
+QUADio_0=toI(( false));
  QUADct_0=( 1.0e-13);
  QUADpp_0=( 10);
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
  QUADio_1=toI(( false));
+ n_0=( 100000000);
  QUADrl_1=( 16807);
  QUADpp_1=( 16);
  QUADpw_1=( 80);
- A_53=iotanXID( n,QUADio_1);
- r_0=( A_53);
- A_57=quadXDD( r_0,QUADpp_1,QUADpw_1);
+ A_54=iotanXID( n_0,QUADio_1);
+ r_0=( A_54);
+ A_58=quadXDD( r_0,QUADpp_1,QUADpw_1);
  /* dsf scalar(s) */
-A_58=barDDD(1.5,0.5);
+A_59=barDDD(1.5,0.5);
  /* dsf scalar(s) */
-A_59=plusIDD(n,A_58);
+A_60=plusIDD(n_0,A_59);
+/* dsf scalar(s) */
+A_61=mpyIDD(n_0,A_60);
  /* dsf scalar(s) */
-A_60=mpyIDD(n,A_59);
+A_62=divDID(A_61,2);
+ A_64=sameDDB(r_0,A_62,QUADct_0);
  /* dsf scalar(s) */
-A_61=divDID(A_60,2);
- show(r_0);
- show(A_61);
- show(A_61-r_0);
- 
-
- A_63=sameDDB(r_0,A_61,QUADct_0);
- /* dsf scalar(s) */
-A_64=barBBI(A_63,true);
-r_1=( A_64);
- A_68=quadXII( A_64,QUADpp_1,QUADpw_1);
+A_65=barBBI(A_64,true);
+r_1=( A_65);
+ A_69=quadXII( A_65,QUADpp_1,QUADpw_1);
  return(r_1);
 }
 

@@ -1,0 +1,5014 @@
+
+/*-----------------------------------------------*/
+
+/*
+ *  SAC-Program iotanAKD.sac :
+ */
+
+
+/*
+ *  type definitions
+ */
+
+external typedef sacprelude_p::SACarg;
+
+external SACarg SACARGcopy( SACarg);
+external void SACARGfree( SACarg);
+
+external classtype World::World;
+external classtype Terminal::Terminal;
+external classtype TermFile::TermFile;
+external typedef String::string;
+
+external string copy_string( string);
+external void free_string( string);
+
+external classtype CommandLine::CommandLine;
+
+
+/*
+ *  prototypes for externals (FUNDECS)
+ */
+
+external int, ... String::sscanf( enclosed(String::string) S { ,NN } , enclosed(String::string) FORMAT { ,NN } )
+/*
+ *  sscanf ::  ---
+ */;
+
+external hidden *, enclosed(String::string) CommandLine::argv( hidden *_rso_12_TheCommandLine { ,NN } , int N { ,NN } )
+/*
+ *  argv ::  ---
+ */;
+
+external enclosed(String::string) String::to_string( char[.] A { ,NN } , int LENGTH { ,NN } )
+/*
+ *  to_string ::  ---
+ */;
+
+external hidden *, hidden * TermFile::printf( hidden *_rso_69_TheTerminal { ,NN } , hidden *_rso_68_stdout { ,NN } , enclosed(String::string) FORMAT { ,NN } , ...)
+/*
+ *  printf ::  ---
+ */;
+
+
+
+/*
+ *  prototypes for locals (FUNDEFS)
+ */
+
+external /* sticky */
+int[.], int[.], int[.], int[.] sacprelude_p::partitionSlicer( int[*] min { ,NN } , int[*] max { ,NN } , int[*] axis { ,NN } , int[*] lb { ,NN } , int[*] ub { ,NN } )
+/*
+ *  partitionSlicer ::  ---
+ */;
+
+external /* sticky */
+int[.] sacprelude_p::partitionIntersectMax( int[*] PWLbound1 { ,NN } , int[*] ivmin { ,NN } )
+/*
+ *  partitionIntersectMax ::  ---
+ */;
+
+external /* sticky */
+bool[.] sacprelude_p::isPartitionIntersectNull( int[*] idxmin { ,NN } , int[*] idxmax { ,NN } , int[*] bound1 { ,NN } , int[*] bound2 { ,NN } )
+/*
+ *  isPartitionIntersectNull ::  ---
+ */;
+
+external /* sticky */
+int[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , int[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+float[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , float[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+double[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , double[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+bool[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , bool[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+char[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , char[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+byte[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , byte[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+short[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , short[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+long[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , long[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+longlong[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , longlong[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+ubyte[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , ubyte[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+ushort[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , ushort[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+uint[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , uint[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+ulong[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , ulong[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+ulonglong[*] sacprelude_p::_selSxADistmemLocal( int[*] idx { ,NN } , ulonglong[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+int[.] sacprelude_p::partitionIntersectMin( int[*] PWLbound2 { ,NN } , int[*] ivmax { ,NN } )
+/*
+ *  partitionIntersectMin ::  ---
+ */;
+
+external /* sticky */
+int[*] sacprelude_p::adjustLacFunParams( bool[*] p { ,NN } , int[*] i { ,NN } , int[*] iv { ,NN } )
+/*
+ *  adjustLacFunParams ::  ---
+ */;
+
+external /* sticky */
+int sacprelude_p::prod( int[*] v { ,NN } )
+/*
+ *  prod ::  ---
+ */;
+
+external /* sticky */
+int[*] sacprelude_p::adjustLacFunParamsReshape( bool[*] p { ,NN } , int[*] i { ,NN } , int[*] iv { ,NN } , int[*] shp { ,NN } )
+/*
+ *  adjustLacFunParamsReshape ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( int[*] A { ,NN } , int[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( float[*] A { ,NN } , float[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( double[*] A { ,NN } , double[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( bool[*] A { ,NN } , bool[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( char[*] A { ,NN } , char[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( byte[*] A { ,NN } , byte[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( short[*] A { ,NN } , short[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( long[*] A { ,NN } , long[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( longlong[*] A { ,NN } , longlong[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( ubyte[*] A { ,NN } , ubyte[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( ushort[*] A { ,NN } , ushort[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( uint[*] A { ,NN } , uint[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( ulong[*] A { ,NN } , ulong[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( ulonglong[*] A { ,NN } , ulonglong[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */;
+
+external /* sticky */
+int[.], int[.], int[.] sacprelude_p::gridFiller( int[*] lb { ,NN } , int[*] ub { ,NN } , int[*] wdth { ,NN } , int[*] dim { ,NN } , int[*] maxwidth { ,NN } )
+/*
+ *  gridFiller ::  ---
+ */;
+
+external /* sticky */
+bool[.] sacprelude_p::isPartitionIntersect1Part( int[*] idxmin { ,NN } , int[*] idxmax { ,NN } , int[*] bound1 { ,NN } , int[*] bound2 { ,NN } )
+/*
+ *  isPartitionIntersect1Part ::  ---
+ */;
+
+external /* sticky */
+int{0} sacprelude_p::zero( int[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+double{0.0...} sacprelude_p::zero( double[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+float{0.0...} sacprelude_p::zero( float[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+char{ } sacprelude_p::zero( char[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+bool{0} sacprelude_p::zero( bool[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+byte{} sacprelude_p::zero( byte[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+short{0} sacprelude_p::zero( short[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+long{0} sacprelude_p::zero( long[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+longlong{0} sacprelude_p::zero( longlong[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+ubyte{} sacprelude_p::zero( ubyte[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+ushort{0} sacprelude_p::zero( ushort[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+uint{0} sacprelude_p::zero( uint[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+ulong{0} sacprelude_p::zero( ulong[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+ulonglong{0} sacprelude_p::zero( ulonglong[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */;
+
+external /* sticky */
+int sacprelude_p::partitionMax( int[*] x { ,NN } , int[*] y { ,NN } )
+/*
+ *  partitionMax ::  ---
+ */;
+
+external /* sticky */
+int sacprelude_p::partitionMin( int[*] x { ,NN } , int[*] y { ,NN } )
+/*
+ *  partitionMin ::  ---
+ */;
+
+external /* sticky */
+int sacprelude_p::++( int[*] a { ,NN } )
+/*
+ *  ++ ::  ---
+ */;
+
+external /* sticky */
+int[*] sacprelude_p::sel( int[*] idx { ,NN } , int[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+float[*] sacprelude_p::sel( int[*] idx { ,NN } , float[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+double[*] sacprelude_p::sel( int[*] idx { ,NN } , double[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+bool[*] sacprelude_p::sel( int[*] idx { ,NN } , bool[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+char[*] sacprelude_p::sel( int[*] idx { ,NN } , char[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+byte[*] sacprelude_p::sel( int[*] idx { ,NN } , byte[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+short[*] sacprelude_p::sel( int[*] idx { ,NN } , short[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+long[*] sacprelude_p::sel( int[*] idx { ,NN } , long[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+longlong[*] sacprelude_p::sel( int[*] idx { ,NN } , longlong[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+ubyte[*] sacprelude_p::sel( int[*] idx { ,NN } , ubyte[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+ushort[*] sacprelude_p::sel( int[*] idx { ,NN } , ushort[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+uint[*] sacprelude_p::sel( int[*] idx { ,NN } , uint[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+ulong[*] sacprelude_p::sel( int[*] idx { ,NN } , ulong[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+ulonglong[*] sacprelude_p::sel( int[*] idx { ,NN } , ulonglong[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */;
+
+external /* sticky */
+int[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , int[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+float[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , float[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+double[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , double[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+bool[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , bool[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+char[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , char[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+byte[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , byte[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+short[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , short[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+long[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , long[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+longlong[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , longlong[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+ubyte[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , ubyte[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+ushort[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , ushort[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+uint[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , uint[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+ulong[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , ulong[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external /* sticky */
+ulonglong[*] sacprelude_p::_selVxADistmemLocal( int[*] idx { ,NN } , ulonglong[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */;
+
+external hidden * World:_INIT::init_TheWorld( hidden *_OI_object { ,NN } )
+/*
+ *  init_TheWorld ::  ---
+ */;
+
+external hidden *, hidden * Terminal:_INIT::init_TheTerminal( hidden *_rso_5_TheWorld { ,NN } , hidden *_OI_object { ,NN } )
+/*
+ *  init_TheTerminal ::  ---
+ */;
+
+external hidden *, hidden * TermFile:_INIT::init_stdout( hidden *_rso_43_TheTerminal { ,NN } , hidden *_OI_object { ,NN } )
+/*
+ *  init_stdout ::  ---
+ */;
+
+external hidden *, hidden * CommandLine:_INIT::init_TheCommandLine( hidden *_rso_8_TheWorld { ,NN } , hidden *_OI_object { ,NN } )
+/*
+ *  init_TheCommandLine ::  ---
+ */;
+
+external /* sticky */
+int[*] sacprelude_p::adjustLacFunParams( bool[*] p { ,NN } , int[*] i { ,NN } , int[.] iv { ,NN } )
+/*
+ *  adjustLacFunParams ::  ---
+ */;
+
+external /* sticky */
+int[*] sacprelude_p::adjustLacFunParamsReshape( bool[*] p { ,NN } , int[*] i { ,NN } , int[.] iv { ,NN } , int[.] shp { ,NN } )
+/*
+ *  adjustLacFunParamsReshape ::  ---
+ */;
+
+external /* sticky */
+int sacprelude_p::++( int a { ,NN } )
+/*
+ *  ++ ::  ---
+ */;
+
+
+
+/*
+ *  global objects
+ */
+
+external hidden World::TheWorld;
+
+external hidden Terminal::TheTerminal;
+
+external hidden TermFile::stdout;
+
+external hidden CommandLine::TheCommandLine;
+
+
+
+/*
+ *  function definitions (FUNDEFS)
+ */
+
+
+
+/****************************************************************************
+ * Wrapper function:
+ * _MAIN::main(...) [ wrapper ]
+ ****************************************************************************/
+hidden *, hidden *, hidden *, hidden *, int _MAIN::main( hidden *_rso_66_TheCommandLine { ,NN } , hidden *_rso_65_TheTerminal { ,NN } , hidden *_rso_64_stdout { ,NN } , hidden *_rso_63_TheWorld { ,NN } )
+/*
+ *  main ::  ---
+ */
+{ 
+  hidden _cwc_141 { , NN } ; 
+  hidden _cwc_140 { , NN } ; 
+  hidden _cwc_139 { , NN } ; 
+  hidden _cwc_138 { , NN } ; 
+  int _cwc_137 { , NN } ; 
+
+  _cwc_141, _cwc_140, _cwc_139, _cwc_138, _cwc_137 = _MAIN::main( _rso_66_TheCommandLine, _rso_65_TheTerminal, _rso_64_stdout, _rso_63_TheWorld) ; 
+  return( _cwc_141, _cwc_140, _cwc_139, _cwc_138, _cwc_137); 
+}
+
+
+
+/****************************************************************************
+ * _MAIN::plusDDD(...) [ body ]
+ ****************************************************************************/
+inline
+double _MAIN::plusDDD( double x { ,NN } , double y { ,NN } )
+/*
+ *  plusDDD ::  ---
+ */
+{ 
+  double _pinl_1169__flat_116 { , NN } ; 
+
+  _pinl_1169__flat_116 = _add_SxS_( y, x); 
+  return( _pinl_1169__flat_116); 
+}
+
+
+
+/****************************************************************************
+ * _MAIN::main(...) [ body ]
+ ****************************************************************************/
+hidden *, hidden *, hidden *, hidden *, int _MAIN::main( hidden *_rso_78_TheCommandLine { ,NN } , hidden *_rso_77_TheTerminal { ,NN } , hidden *_rso_76_stdout { ,NN } , hidden *_rso_75_TheWorld { ,NN } )
+/*
+ *  main ::  ---
+ */
+{ 
+  int _ivesli_6297 { , NN } ; 
+  int _ivesli_6296 { , NN } ; 
+  int _ivesli_6293 { , NN } ; 
+  int _ivesli_6290 { , NN } ; 
+  int _wlidx_6233__pinl_1420_z { , NN } ; 
+  int _wlidx_6232__pinl_1471_res { , NN } ; 
+  double _esd_4165 { , NN } ; 
+  int{0} _isaa_1887__rso_75_TheWorld { , NN } ; 
+  double _ctz_1717 { , NN } ; 
+  double _ctz_1715 { , NN } ; 
+  int _pinl_1329_junk { , NN } ; 
+  enclosed(String::string) _pinl_1328__flat_22 { , NN } ; 
+  int{1} _pinl_1327__flat_23 { , NN } ; 
+  enclosed(String::string) _pinl_1326__flat_24 { , NN } ; 
+  char[3]{%,d...} _pinl_1325__flat_25 { , NN } ; 
+  int{2} _pinl_1321__flat_29 { , NN } ; 
+  int _pinl_1320_z { , NN } ;  /* declared: int */
+  int[.] _pinl_1471_res { , NN } ; 
+  int _pinl_1470_i { , NN } ; 
+  int[1] _pinl_1469__flat_300 { , NN } ; 
+  int _pinl_1440__flat_68 { , NN } ; 
+  double _pinl_1430__flat_415 { , NN } ; 
+  double _pinl_1429__flat_116 { , NN } ; 
+  int _pinl_1421__eat_84 { , NN } ; 
+  double[.] _pinl_1420_z { , NN } ; 
+  int[1] _pinl_1416_iv { , NN } ; 
+  double{0.0...} _pinl_1415__flat_11 { , NN } ; 
+  double _pinl_1372__flat_149 { , NN } ; 
+  double _pinl_1361__flat_116 { , NN } ; 
+  double _pinl_1352__ea_780_z { , NN } ; 
+  int _pinl_1351__eat_83 { , NN } ; 
+  double _pinl_1350_z { , NN } ; 
+  int[1] _pinl_1347_iv { , NN } ; 
+  double _pinl_1477__flat_415 { , NN } ; 
+  double _pinl_1476__flat_116 { , NN } ; 
+  double _pinl_1480__flat_118 { , NN } ; 
+  bool _pinl_1487__flat_248 { , NN } ; 
+  double _pinl_1485__hce_0 { , NN } ; 
+  double _pinl_1511__flat_123 { , NN } ; 
+  double _pinl_1510__flat_123 { , NN } ; 
+  double _pinl_1509__flat_121 { , NN } ; 
+  double _pinl_1508__flat_118 { , NN } ; 
+  double _pinl_1507__flat_117 { , NN } ; 
+  double _pinl_1506__flat_123 { , NN } ; 
+  bool _pinl_1505__flat_251 { , NN } ; 
+  bool _pinl_1497__flat_248 { , NN } ; 
+  bool _pinl_1496__flat_267 { , NN } ; 
+  int _pinl_1516__flat_295 { , NN } ; 
+  int _pinl_1515__flat_45 { , NN } ; 
+  hidden _rso_76_stdout__SSA0_4 { , NN } ;  /* declared: TermFile::TermFile */
+  hidden _rso_77_TheTerminal__SSA0_4 { , NN } ;  /* declared: Terminal::Terminal */
+  hidden _rso_76_stdout__SSA0_3 { , NN } ;  /* declared: TermFile::TermFile */
+  hidden _rso_77_TheTerminal__SSA0_3 { , NN } ;  /* declared: Terminal::Terminal */
+  hidden _rso_76_stdout__SSA0_2 { , NN } ;  /* declared: TermFile::TermFile */
+  hidden _rso_77_TheTerminal__SSA0_2 { , NN } ;  /* declared: Terminal::Terminal */
+  hidden _rso_78_TheCommandLine__SSA0_2 { , NN } ;  /* declared: CommandLine::CommandLine */
+  hidden _rso_76_stdout__SSA0_1 { , NN } ;  /* declared: TermFile::TermFile */
+  hidden _rso_77_TheTerminal__SSA0_1 { , NN } ;  /* declared: Terminal::Terminal */
+  hidden _rso_78_TheCommandLine__SSA0_1 { , NN } ;  /* declared: CommandLine::CommandLine */
+  hidden _rso_75_TheWorld__SSA0_1 { , NN } ;  /* declared: World::World */
+
+  _isaa_1887__rso_75_TheWorld = 0; 
+  _rso_75_TheWorld__SSA0_1, _rso_78_TheCommandLine__SSA0_1, _rso_77_TheTerminal__SSA0_1, _rso_76_stdout__SSA0_1 = _MAIN:_INIT::init( _rso_75_TheWorld, _rso_78_TheCommandLine, _rso_77_TheTerminal, _rso_76_stdout) ; 
+  _pinl_1321__flat_29 = 2; 
+  _pinl_1325__flat_25 = [ '%', 'd', '\0' ]; 
+  _pinl_1326__flat_24 = String::to_string( _pinl_1325__flat_25, _pinl_1321__flat_29) ; 
+  _pinl_1327__flat_23 = 1; 
+  _rso_78_TheCommandLine__SSA0_2, _pinl_1328__flat_22 = CommandLine::argv( _rso_78_TheCommandLine__SSA0_1, _pinl_1327__flat_23) ; 
+  _pinl_1329_junk, _pinl_1320_z = String::sscanf( _pinl_1328__flat_22, _pinl_1326__flat_24) ; 
+  _pinl_1471_res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        ([ 0 ] <= _pinl_1469__flat_300=[_pinl_1470_i] (IDXS:_wlidx_6232__pinl_1471_res) < [ _pinl_1320_z ] genwidth [ _pinl_1320_z ])
+        { 
+        } : _pinl_1470_i ; 
+         } :
+      genarray( [ _pinl_1320_z ], _isaa_1887__rso_75_TheWorld, IDX(_wlidx_6232__pinl_1471_res)); 
+  _pinl_1415__flat_11 = 0.0; 
+  _pinl_1420_z = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        ([ 0 ] <= _pinl_1416_iv=[_pinl_1421__eat_84] (IDXS:_wlidx_6233__pinl_1420_z) < [ _pinl_1320_z ] genwidth [ _pinl_1320_z ])
+        { 
+          _ivesli_6297 = _idxs2offset_( [ _pinl_1320_z ], _pinl_1421__eat_84); 
+          _pinl_1440__flat_68 = _idx_sel_( _ivesli_6297, _pinl_1471_res); 
+          _pinl_1430__flat_415 = _tod_S_( _pinl_1440__flat_68); 
+          _pinl_1429__flat_116 = _add_SxS_( 1.0, _pinl_1430__flat_415); 
+        } : _pinl_1429__flat_116 ; 
+         } :
+      genarray( [ _pinl_1320_z ], _pinl_1415__flat_11, IDX(_wlidx_6233__pinl_1420_z)); 
+  _ivesli_6290 = _add_SxS_( _pinl_1320_z, -1); 
+  _pinl_1350_z = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 4 (total num refs) **/
+ {
+        /* Partn */
+        ([ 0 ] <= _pinl_1347_iv=[_pinl_1351__eat_83] < [ _pinl_1320_z ] genwidth [ _pinl_1320_z ])
+        { 
+          _pinl_1352__ea_780_z = _accu_( _pinl_1347_iv); 
+          _ivesli_6293 = _neg_S_( _pinl_1351__eat_83); 
+          _ivesli_6296 = _add_SxS_( _ivesli_6290, _ivesli_6293); 
+          _pinl_1372__flat_149 = _idx_sel_( _ivesli_6296, _pinl_1420_z); 
+          _pinl_1361__flat_116 = _add_SxS_( _pinl_1352__ea_780_z, _pinl_1372__flat_149); 
+        } : _pinl_1361__flat_116 ; 
+         } :
+      fold( _MAIN::plusDDD(), _pinl_1415__flat_11); 
+  _rso_77_TheTerminal__SSA0_2, _rso_76_stdout__SSA0_2 = StdIO::show( _rso_77_TheTerminal__SSA0_1, _rso_76_stdout__SSA0_1, _pinl_1350_z) ; 
+  _pinl_1477__flat_415 = _tod_S_( _pinl_1320_z); 
+  _pinl_1476__flat_116 = _add_SxS_( 1.0, _pinl_1477__flat_415); 
+  _pinl_1480__flat_118 = _mul_SxS_( _pinl_1476__flat_116, _pinl_1477__flat_415); 
+  _ctz_1717 = _add_SxS_( -2.0, _pinl_1480__flat_118); 
+  _pinl_1487__flat_248 = _eq_SxS_( _ctz_1717, 0.0); 
+  _pinl_1485__hce_0 = _MAIN::_dup_1489_divDID__Cond_0( _pinl_1480__flat_118, _pinl_1487__flat_248) ; 
+  _rso_77_TheTerminal__SSA0_3, _rso_76_stdout__SSA0_3 = StdIO::show( _rso_77_TheTerminal__SSA0_2, _rso_76_stdout__SSA0_2, _pinl_1485__hce_0) ; 
+  _pinl_1511__flat_123 = _abs_S_( _pinl_1350_z); 
+  _pinl_1510__flat_123 = _abs_S_( _pinl_1485__hce_0); 
+  _pinl_1509__flat_121 = _max_SxS_( _pinl_1510__flat_123, _pinl_1511__flat_123); 
+  _pinl_1508__flat_118 = _mul_SxS_( 1.0000000000000000303737455634003709136034716842278413651001756079494953155517578125e-13, _pinl_1509__flat_121); 
+  _pinl_1507__flat_117 = _sub_SxS_( _pinl_1350_z, _pinl_1485__hce_0); 
+  _pinl_1506__flat_123 = _abs_S_( _pinl_1507__flat_117); 
+  _ctz_1715 = _sub_SxS_( _pinl_1506__flat_123, _pinl_1508__flat_118); 
+  _pinl_1505__flat_251 = _le_SxS_( _ctz_1715, 0.0); 
+  _esd_4165 = _sub_SxS_( _pinl_1485__hce_0, _pinl_1350_z); 
+  _pinl_1497__flat_248 = _eq_SxS_( _esd_4165, 0.0); 
+  _pinl_1496__flat_267 = _or_SxS_( _pinl_1497__flat_248, _pinl_1505__flat_251); 
+  _pinl_1516__flat_295 = _toi_S_( _pinl_1496__flat_267); 
+  _pinl_1515__flat_45 = _add_SxS_( -1, _pinl_1516__flat_295); 
+  _rso_77_TheTerminal__SSA0_4, _rso_76_stdout__SSA0_4 = StdIO::show( _rso_77_TheTerminal__SSA0_3, _rso_76_stdout__SSA0_3, _pinl_1515__flat_45) ; 
+  return( _rso_78_TheCommandLine__SSA0_2, _rso_77_TheTerminal__SSA0_4, _rso_76_stdout__SSA0_4, _rso_75_TheWorld__SSA0_1, _pinl_1515__flat_45); 
+}
+
+
+
+/****************************************************************************
+ * Cond function:
+ * _MAIN::_dup_1489_divDID__Cond_0(...) [ body ]
+ ****************************************************************************/
+double _MAIN::_dup_1489_divDID__Cond_0( double dx { ,NN } , bool _flat_6 { ,NN } )
+/*
+ *  _dup_1489_divDID__Cond_0 ::  ---
+ */
+{ 
+  double _pinl_1040__flat_119 { , NN } ; 
+  double _hce_0__SSA0_2 { , NN } ; 
+  double{1.0...} _hce_0 { , NN } ; 
+
+  if (_flat_6) 
+  { 
+    _hce_0 = 1.0; 
+  }
+  else
+  { 
+    _pinl_1040__flat_119 = _div_SxS_( dx, 2.0); 
+  }
+  _hce_0__SSA0_2 = ( _flat_6 ? _hce_0 : _pinl_1040__flat_119 ); 
+  return( _hce_0__SSA0_2); 
+}
+
+
+
+/****************************************************************************
+ * _MAIN:_INIT::init(...) [ body ]
+ ****************************************************************************/
+hidden *, hidden *, hidden *, hidden * _MAIN:_INIT::init( hidden *_rso_82_TheWorld { ,NN } , hidden *_rso_81_TheCommandLine { ,NN } , hidden *_rso_80_TheTerminal { ,NN } , hidden *_rso_79_stdout { ,NN } )
+/*
+ *  init ::  ---
+ */
+{ 
+  hidden _rso_79_stdout__SSA0_1 { , NN } ;  /* declared: TermFile::TermFile */
+  hidden _rso_80_TheTerminal__SSA0_2 { , NN } ;  /* declared: Terminal::Terminal */
+  hidden _rso_80_TheTerminal__SSA0_1 { , NN } ;  /* declared: Terminal::Terminal */
+  hidden _rso_82_TheWorld__SSA0_3 { , NN } ;  /* declared: World::World */
+  hidden _rso_81_TheCommandLine__SSA0_1 { , NN } ;  /* declared: CommandLine::CommandLine */
+  hidden _rso_82_TheWorld__SSA0_2 { , NN } ;  /* declared: World::World */
+  hidden _rso_82_TheWorld__SSA0_1 { , NN } ;  /* declared: World::World */
+
+  _rso_82_TheWorld__SSA0_1 = World:_INIT::init_TheWorld( _rso_82_TheWorld) ; 
+  _rso_82_TheWorld__SSA0_2, _rso_81_TheCommandLine__SSA0_1 = CommandLine:_INIT::init_TheCommandLine( _rso_82_TheWorld__SSA0_1, _rso_81_TheCommandLine) ; 
+  _rso_82_TheWorld__SSA0_3, _rso_80_TheTerminal__SSA0_1 = Terminal:_INIT::init_TheTerminal( _rso_82_TheWorld__SSA0_2, _rso_80_TheTerminal) ; 
+  _rso_80_TheTerminal__SSA0_2, _rso_79_stdout__SSA0_1 = TermFile:_INIT::init_stdout( _rso_80_TheTerminal__SSA0_1, _rso_79_stdout) ; 
+  return( _rso_82_TheWorld__SSA0_3, _rso_81_TheCommandLine__SSA0_1, _rso_80_TheTerminal__SSA0_2, _rso_79_stdout__SSA0_1); 
+}
+
+
+
+/****************************************************************************
+ * ScalarIO::show(...) [ body ]
+ ****************************************************************************/
+inline
+hidden *, hidden * ScalarIO::show( hidden *_rso_1682_TheTerminal { ,NN } , hidden *_rso_1681_stdout { ,NN } , int n { ,NN } )
+/*
+ *  show ::  ---
+ */
+{ 
+  hidden _rso_1681_stdout__SSA0_1 { , NN } ;  /* declared: TermFile::TermFile */
+  hidden _rso_1682_TheTerminal__SSA0_1 { , NN } ;  /* declared: Terminal::Terminal */
+  enclosed(String::string) _flat_332 { , NN } ; 
+  char[4]{%,d...} _flat_333 { , NN } ; 
+  int{3} _flat_338 { , NN } ; 
+
+  _flat_338 = 3; 
+  _flat_333 = [ '%', 'd', '\n', '\0' ]; 
+  _flat_332 = String::to_string( _flat_333, _flat_338) ; 
+  _rso_1682_TheTerminal__SSA0_1, _rso_1681_stdout__SSA0_1 = TermFile::printf( _rso_1682_TheTerminal, _rso_1681_stdout, _flat_332, n) ; 
+  return( _rso_1682_TheTerminal__SSA0_1, _rso_1681_stdout__SSA0_1); 
+}
+
+
+
+/****************************************************************************
+ * StdIO::show(...) [ body ]
+ ****************************************************************************/
+inline
+hidden *, hidden * StdIO::show( hidden *_rso_581_TheTerminal { ,NN } , hidden *_rso_580_stdout { ,NN } , int n { ,NN } )
+/*
+ *  show ::  ---
+ */
+{ 
+  hidden _rso_580_stdout__SSA0_1 { , NN } ;  /* declared: TermFile::TermFile */
+  hidden _rso_581_TheTerminal__SSA0_1 { , NN } ;  /* declared: Terminal::Terminal */
+
+  _rso_581_TheTerminal__SSA0_1, _rso_580_stdout__SSA0_1 = ScalarIO::show( _rso_581_TheTerminal, _rso_580_stdout, n) ; 
+  return( _rso_581_TheTerminal__SSA0_1, _rso_580_stdout__SSA0_1); 
+}
+
+
+
+/****************************************************************************
+ * ScalarIO::show(...) [ body ]
+ ****************************************************************************/
+inline
+hidden *, hidden * ScalarIO::show( hidden *_rso_1690_TheTerminal { ,NN } , hidden *_rso_1689_stdout { ,NN } , double n { ,NN } )
+/*
+ *  show ::  ---
+ */
+{ 
+  hidden _rso_1689_stdout__SSA0_1 { , NN } ;  /* declared: TermFile::TermFile */
+  hidden _rso_1690_TheTerminal__SSA0_1 { , NN } ;  /* declared: Terminal::Terminal */
+  enclosed(String::string) _flat_361 { , NN } ; 
+  char[4]{%,g...} _flat_362 { , NN } ; 
+  int{3} _flat_367 { , NN } ; 
+
+  _flat_367 = 3; 
+  _flat_362 = [ '%', 'g', '\n', '\0' ]; 
+  _flat_361 = String::to_string( _flat_362, _flat_367) ; 
+  _rso_1690_TheTerminal__SSA0_1, _rso_1689_stdout__SSA0_1 = TermFile::printf( _rso_1690_TheTerminal, _rso_1689_stdout, _flat_361, n) ; 
+  return( _rso_1690_TheTerminal__SSA0_1, _rso_1689_stdout__SSA0_1); 
+}
+
+
+
+/****************************************************************************
+ * StdIO::show(...) [ body ]
+ ****************************************************************************/
+inline
+hidden *, hidden * StdIO::show( hidden *_rso_567_TheTerminal { ,NN } , hidden *_rso_566_stdout { ,NN } , double n { ,NN } )
+/*
+ *  show ::  ---
+ */
+{ 
+  hidden _rso_566_stdout__SSA0_1 { , NN } ;  /* declared: TermFile::TermFile */
+  hidden _rso_567_TheTerminal__SSA0_1 { , NN } ;  /* declared: Terminal::Terminal */
+
+  _rso_567_TheTerminal__SSA0_1, _rso_566_stdout__SSA0_1 = ScalarIO::show( _rso_567_TheTerminal, _rso_566_stdout, n) ; 
+  return( _rso_567_TheTerminal__SSA0_1, _rso_566_stdout__SSA0_1); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulonglong[*] sacprelude_p::sel( int[.] idx { ,NN } , ulonglong[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6298 { , NN } ; 
+  int _wlidx_6234_res { , NN } ; 
+  int[1] _isaa_2074_idx { , NN } ; 
+  int[.] _isaa_2071_array { , NN } ; 
+  ulonglong[*] res { , NN } ; 
+  ulonglong _flat_127 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  ulonglong{0} _flat_124 { , NN } ; 
+  int[.] _flat_125 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_119 { , NN } ; 
+  int{0} _flat_121 { , NN } ; 
+
+  _isaa_2071_array = _shape_A_( array); 
+  _isaa_2074_idx = _shape_A_( idx); 
+  _flat_121 = 0; 
+  _flat_119 = _idx_sel_( _flat_121, _isaa_2074_idx); 
+  new_shape = _drop_SxV_( _flat_119, _isaa_2071_array); 
+  _flat_125 = _mul_SxV_( 0, new_shape); 
+  _flat_124 = 0ULL; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_125 <= iv (IDXS:_wlidx_6234_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6298 = _vect2offset_( _isaa_2071_array, new_idx); 
+          _flat_127 = _idx_sel_( _ivesli_6298, array); 
+        } : _flat_127 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6234_res) ):
+        { 
+        } : _flat_124 ; 
+         } :
+      genarray( new_shape, _flat_124, IDX(_wlidx_6234_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulong[*] sacprelude_p::sel( int[.] idx { ,NN } , ulong[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6299 { , NN } ; 
+  int _wlidx_6235_res { , NN } ; 
+  int[1] _isaa_2106_idx { , NN } ; 
+  int[.] _isaa_2103_array { , NN } ; 
+  ulong[*] res { , NN } ; 
+  ulong _flat_118 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  ulong{0} _flat_115 { , NN } ; 
+  int[.] _flat_116 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_110 { , NN } ; 
+  int{0} _flat_112 { , NN } ; 
+
+  _isaa_2103_array = _shape_A_( array); 
+  _isaa_2106_idx = _shape_A_( idx); 
+  _flat_112 = 0; 
+  _flat_110 = _idx_sel_( _flat_112, _isaa_2106_idx); 
+  new_shape = _drop_SxV_( _flat_110, _isaa_2103_array); 
+  _flat_116 = _mul_SxV_( 0, new_shape); 
+  _flat_115 = 0ul; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_116 <= iv (IDXS:_wlidx_6235_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6299 = _vect2offset_( _isaa_2103_array, new_idx); 
+          _flat_118 = _idx_sel_( _ivesli_6299, array); 
+        } : _flat_118 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6235_res) ):
+        { 
+        } : _flat_115 ; 
+         } :
+      genarray( new_shape, _flat_115, IDX(_wlidx_6235_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+uint[*] sacprelude_p::sel( int[.] idx { ,NN } , uint[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6300 { , NN } ; 
+  int _wlidx_6236_res { , NN } ; 
+  int[1] _isaa_2138_idx { , NN } ; 
+  int[.] _isaa_2135_array { , NN } ; 
+  uint[*] res { , NN } ; 
+  uint _flat_109 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  uint{0} _flat_106 { , NN } ; 
+  int[.] _flat_107 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_101 { , NN } ; 
+  int{0} _flat_103 { , NN } ; 
+
+  _isaa_2135_array = _shape_A_( array); 
+  _isaa_2138_idx = _shape_A_( idx); 
+  _flat_103 = 0; 
+  _flat_101 = _idx_sel_( _flat_103, _isaa_2138_idx); 
+  new_shape = _drop_SxV_( _flat_101, _isaa_2135_array); 
+  _flat_107 = _mul_SxV_( 0, new_shape); 
+  _flat_106 = 0ui; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_107 <= iv (IDXS:_wlidx_6236_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6300 = _vect2offset_( _isaa_2135_array, new_idx); 
+          _flat_109 = _idx_sel_( _ivesli_6300, array); 
+        } : _flat_109 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6236_res) ):
+        { 
+        } : _flat_106 ; 
+         } :
+      genarray( new_shape, _flat_106, IDX(_wlidx_6236_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ushort[*] sacprelude_p::sel( int[.] idx { ,NN } , ushort[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6301 { , NN } ; 
+  int _wlidx_6237_res { , NN } ; 
+  int[1] _isaa_2170_idx { , NN } ; 
+  int[.] _isaa_2167_array { , NN } ; 
+  ushort[*] res { , NN } ; 
+  ushort _flat_100 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  ushort{0} _flat_97 { , NN } ; 
+  int[.] _flat_98 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_92 { , NN } ; 
+  int{0} _flat_94 { , NN } ; 
+
+  _isaa_2167_array = _shape_A_( array); 
+  _isaa_2170_idx = _shape_A_( idx); 
+  _flat_94 = 0; 
+  _flat_92 = _idx_sel_( _flat_94, _isaa_2170_idx); 
+  new_shape = _drop_SxV_( _flat_92, _isaa_2167_array); 
+  _flat_98 = _mul_SxV_( 0, new_shape); 
+  _flat_97 = 0us; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_98 <= iv (IDXS:_wlidx_6237_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6301 = _vect2offset_( _isaa_2167_array, new_idx); 
+          _flat_100 = _idx_sel_( _ivesli_6301, array); 
+        } : _flat_100 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6237_res) ):
+        { 
+        } : _flat_97 ; 
+         } :
+      genarray( new_shape, _flat_97, IDX(_wlidx_6237_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ubyte[*] sacprelude_p::sel( int[.] idx { ,NN } , ubyte[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6302 { , NN } ; 
+  int _wlidx_6238_res { , NN } ; 
+  int[1] _isaa_2202_idx { , NN } ; 
+  int[.] _isaa_2199_array { , NN } ; 
+  ubyte[*] res { , NN } ; 
+  ubyte _flat_91 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  ubyte{} _flat_88 { , NN } ; 
+  int[.] _flat_89 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_83 { , NN } ; 
+  int{0} _flat_85 { , NN } ; 
+
+  _isaa_2199_array = _shape_A_( array); 
+  _isaa_2202_idx = _shape_A_( idx); 
+  _flat_85 = 0; 
+  _flat_83 = _idx_sel_( _flat_85, _isaa_2202_idx); 
+  new_shape = _drop_SxV_( _flat_83, _isaa_2199_array); 
+  _flat_89 = _mul_SxV_( 0, new_shape); 
+  _flat_88 = 0ub; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_89 <= iv (IDXS:_wlidx_6238_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6302 = _vect2offset_( _isaa_2199_array, new_idx); 
+          _flat_91 = _idx_sel_( _ivesli_6302, array); 
+        } : _flat_91 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6238_res) ):
+        { 
+        } : _flat_88 ; 
+         } :
+      genarray( new_shape, _flat_88, IDX(_wlidx_6238_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+longlong[*] sacprelude_p::sel( int[.] idx { ,NN } , longlong[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6303 { , NN } ; 
+  int _wlidx_6239_res { , NN } ; 
+  int[1] _isaa_2234_idx { , NN } ; 
+  int[.] _isaa_2231_array { , NN } ; 
+  longlong[*] res { , NN } ; 
+  longlong _flat_82 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  longlong{0} _flat_79 { , NN } ; 
+  int[.] _flat_80 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_74 { , NN } ; 
+  int{0} _flat_76 { , NN } ; 
+
+  _isaa_2231_array = _shape_A_( array); 
+  _isaa_2234_idx = _shape_A_( idx); 
+  _flat_76 = 0; 
+  _flat_74 = _idx_sel_( _flat_76, _isaa_2234_idx); 
+  new_shape = _drop_SxV_( _flat_74, _isaa_2231_array); 
+  _flat_80 = _mul_SxV_( 0, new_shape); 
+  _flat_79 = 0LL; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_80 <= iv (IDXS:_wlidx_6239_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6303 = _vect2offset_( _isaa_2231_array, new_idx); 
+          _flat_82 = _idx_sel_( _ivesli_6303, array); 
+        } : _flat_82 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6239_res) ):
+        { 
+        } : _flat_79 ; 
+         } :
+      genarray( new_shape, _flat_79, IDX(_wlidx_6239_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+long[*] sacprelude_p::sel( int[.] idx { ,NN } , long[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6304 { , NN } ; 
+  int _wlidx_6240_res { , NN } ; 
+  int[1] _isaa_2266_idx { , NN } ; 
+  int[.] _isaa_2263_array { , NN } ; 
+  long[*] res { , NN } ; 
+  long _flat_73 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  long{0} _flat_70 { , NN } ; 
+  int[.] _flat_71 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_65 { , NN } ; 
+  int{0} _flat_67 { , NN } ; 
+
+  _isaa_2263_array = _shape_A_( array); 
+  _isaa_2266_idx = _shape_A_( idx); 
+  _flat_67 = 0; 
+  _flat_65 = _idx_sel_( _flat_67, _isaa_2266_idx); 
+  new_shape = _drop_SxV_( _flat_65, _isaa_2263_array); 
+  _flat_71 = _mul_SxV_( 0, new_shape); 
+  _flat_70 = 0l; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_71 <= iv (IDXS:_wlidx_6240_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6304 = _vect2offset_( _isaa_2263_array, new_idx); 
+          _flat_73 = _idx_sel_( _ivesli_6304, array); 
+        } : _flat_73 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6240_res) ):
+        { 
+        } : _flat_70 ; 
+         } :
+      genarray( new_shape, _flat_70, IDX(_wlidx_6240_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+short[*] sacprelude_p::sel( int[.] idx { ,NN } , short[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6305 { , NN } ; 
+  int _wlidx_6241_res { , NN } ; 
+  int[1] _isaa_2298_idx { , NN } ; 
+  int[.] _isaa_2295_array { , NN } ; 
+  short[*] res { , NN } ; 
+  short _flat_64 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  short{0} _flat_61 { , NN } ; 
+  int[.] _flat_62 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_56 { , NN } ; 
+  int{0} _flat_58 { , NN } ; 
+
+  _isaa_2295_array = _shape_A_( array); 
+  _isaa_2298_idx = _shape_A_( idx); 
+  _flat_58 = 0; 
+  _flat_56 = _idx_sel_( _flat_58, _isaa_2298_idx); 
+  new_shape = _drop_SxV_( _flat_56, _isaa_2295_array); 
+  _flat_62 = _mul_SxV_( 0, new_shape); 
+  _flat_61 = 0s; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_62 <= iv (IDXS:_wlidx_6241_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6305 = _vect2offset_( _isaa_2295_array, new_idx); 
+          _flat_64 = _idx_sel_( _ivesli_6305, array); 
+        } : _flat_64 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6241_res) ):
+        { 
+        } : _flat_61 ; 
+         } :
+      genarray( new_shape, _flat_61, IDX(_wlidx_6241_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+byte[*] sacprelude_p::sel( int[.] idx { ,NN } , byte[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6306 { , NN } ; 
+  int _wlidx_6242_res { , NN } ; 
+  int[1] _isaa_2330_idx { , NN } ; 
+  int[.] _isaa_2327_array { , NN } ; 
+  byte[*] res { , NN } ; 
+  byte _flat_55 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  byte{} _flat_52 { , NN } ; 
+  int[.] _flat_53 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_47 { , NN } ; 
+  int{0} _flat_49 { , NN } ; 
+
+  _isaa_2327_array = _shape_A_( array); 
+  _isaa_2330_idx = _shape_A_( idx); 
+  _flat_49 = 0; 
+  _flat_47 = _idx_sel_( _flat_49, _isaa_2330_idx); 
+  new_shape = _drop_SxV_( _flat_47, _isaa_2327_array); 
+  _flat_53 = _mul_SxV_( 0, new_shape); 
+  _flat_52 = 0b; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_53 <= iv (IDXS:_wlidx_6242_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6306 = _vect2offset_( _isaa_2327_array, new_idx); 
+          _flat_55 = _idx_sel_( _ivesli_6306, array); 
+        } : _flat_55 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6242_res) ):
+        { 
+        } : _flat_52 ; 
+         } :
+      genarray( new_shape, _flat_52, IDX(_wlidx_6242_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+char[*] sacprelude_p::sel( int[.] idx { ,NN } , char[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6307 { , NN } ; 
+  int _wlidx_6243_res { , NN } ; 
+  int[1] _isaa_2362_idx { , NN } ; 
+  int[.] _isaa_2359_array { , NN } ; 
+  char[*] res { , NN } ; 
+  char _flat_46 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  char{ } _flat_43 { , NN } ; 
+  int[.] _flat_44 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_38 { , NN } ; 
+  int{0} _flat_40 { , NN } ; 
+
+  _isaa_2359_array = _shape_A_( array); 
+  _isaa_2362_idx = _shape_A_( idx); 
+  _flat_40 = 0; 
+  _flat_38 = _idx_sel_( _flat_40, _isaa_2362_idx); 
+  new_shape = _drop_SxV_( _flat_38, _isaa_2359_array); 
+  _flat_44 = _mul_SxV_( 0, new_shape); 
+  _flat_43 = ' '; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_44 <= iv (IDXS:_wlidx_6243_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6307 = _vect2offset_( _isaa_2359_array, new_idx); 
+          _flat_46 = _idx_sel_( _ivesli_6307, array); 
+        } : _flat_46 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6243_res) ):
+        { 
+        } : _flat_43 ; 
+         } :
+      genarray( new_shape, _flat_43, IDX(_wlidx_6243_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[*] sacprelude_p::sel( int[.] idx { ,NN } , bool[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6308 { , NN } ; 
+  int _wlidx_6244_res { , NN } ; 
+  int[1] _isaa_2394_idx { , NN } ; 
+  int[.] _isaa_2391_array { , NN } ; 
+  bool[*] res { , NN } ; 
+  bool _flat_37 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{0} _flat_34 { , NN } ; 
+  int[.] _flat_35 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_29 { , NN } ; 
+  int{0} _flat_31 { , NN } ; 
+
+  _isaa_2391_array = _shape_A_( array); 
+  _isaa_2394_idx = _shape_A_( idx); 
+  _flat_31 = 0; 
+  _flat_29 = _idx_sel_( _flat_31, _isaa_2394_idx); 
+  new_shape = _drop_SxV_( _flat_29, _isaa_2391_array); 
+  _flat_35 = _mul_SxV_( 0, new_shape); 
+  _flat_34 = false; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_35 <= iv (IDXS:_wlidx_6244_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6308 = _vect2offset_( _isaa_2391_array, new_idx); 
+          _flat_37 = _idx_sel_( _ivesli_6308, array); 
+        } : _flat_37 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6244_res) ):
+        { 
+        } : _flat_34 ; 
+         } :
+      genarray( new_shape, _flat_34, IDX(_wlidx_6244_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+double[*] sacprelude_p::sel( int[.] idx { ,NN } , double[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6309 { , NN } ; 
+  int _wlidx_6245_res { , NN } ; 
+  int[1] _isaa_2426_idx { , NN } ; 
+  int[.] _isaa_2423_array { , NN } ; 
+  double[*] res { , NN } ; 
+  double _flat_28 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  double{0.0...} _flat_25 { , NN } ; 
+  int[.] _flat_26 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_20 { , NN } ; 
+  int{0} _flat_22 { , NN } ; 
+
+  _isaa_2423_array = _shape_A_( array); 
+  _isaa_2426_idx = _shape_A_( idx); 
+  _flat_22 = 0; 
+  _flat_20 = _idx_sel_( _flat_22, _isaa_2426_idx); 
+  new_shape = _drop_SxV_( _flat_20, _isaa_2423_array); 
+  _flat_26 = _mul_SxV_( 0, new_shape); 
+  _flat_25 = 0.0; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_26 <= iv (IDXS:_wlidx_6245_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6309 = _vect2offset_( _isaa_2423_array, new_idx); 
+          _flat_28 = _idx_sel_( _ivesli_6309, array); 
+        } : _flat_28 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6245_res) ):
+        { 
+        } : _flat_25 ; 
+         } :
+      genarray( new_shape, _flat_25, IDX(_wlidx_6245_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+float[*] sacprelude_p::sel( int[.] idx { ,NN } , float[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6310 { , NN } ; 
+  int _wlidx_6246_res { , NN } ; 
+  int[1] _isaa_2458_idx { , NN } ; 
+  int[.] _isaa_2455_array { , NN } ; 
+  float[*] res { , NN } ; 
+  float _flat_19 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  float{0.0...} _flat_16 { , NN } ; 
+  int[.] _flat_17 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_11 { , NN } ; 
+  int{0} _flat_13 { , NN } ; 
+
+  _isaa_2455_array = _shape_A_( array); 
+  _isaa_2458_idx = _shape_A_( idx); 
+  _flat_13 = 0; 
+  _flat_11 = _idx_sel_( _flat_13, _isaa_2458_idx); 
+  new_shape = _drop_SxV_( _flat_11, _isaa_2455_array); 
+  _flat_17 = _mul_SxV_( 0, new_shape); 
+  _flat_16 = 0.0f; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_17 <= iv (IDXS:_wlidx_6246_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6310 = _vect2offset_( _isaa_2455_array, new_idx); 
+          _flat_19 = _idx_sel_( _ivesli_6310, array); 
+        } : _flat_19 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6246_res) ):
+        { 
+        } : _flat_16 ; 
+         } :
+      genarray( new_shape, _flat_16, IDX(_wlidx_6246_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[*] sacprelude_p::sel( int[.] idx { ,NN } , int[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _ivesli_6311 { , NN } ; 
+  int _wlidx_6247_res { , NN } ; 
+  int[1] _isaa_2490_idx { , NN } ; 
+  int[.] _isaa_2487_array { , NN } ; 
+  int[*] res { , NN } ; 
+  int _flat_10 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  int[.] _flat_8 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_2 { , NN } ; 
+  int{0} _flat_4 { , NN } ; 
+
+  _isaa_2487_array = _shape_A_( array); 
+  _isaa_2490_idx = _shape_A_( idx); 
+  _flat_4 = 0; 
+  _flat_2 = _idx_sel_( _flat_4, _isaa_2490_idx); 
+  new_shape = _drop_SxV_( _flat_2, _isaa_2487_array); 
+  _flat_8 = _mul_SxV_( 0, new_shape); 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_8 <= iv (IDXS:_wlidx_6247_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6311 = _vect2offset_( _isaa_2487_array, new_idx); 
+          _flat_10 = _idx_sel_( _ivesli_6311, array); 
+        } : _flat_10 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6247_res) ):
+        { 
+        } : _flat_4 ; 
+         } :
+      genarray( new_shape, _flat_4, IDX(_wlidx_6247_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulonglong[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , ulonglong[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6312 { , NN } ; 
+  int _wlidx_6248_res { , NN } ; 
+  int[.] _isaa_2519_array { , NN } ; 
+  ulonglong[*] res { , NN } ; 
+  ulonglong _flat_253 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  ulonglong{0} _flat_250 { , NN } ; 
+  int[.] _flat_251 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_2519_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_2519_array); 
+  _flat_251 = _mul_SxV_( 0, new_shape); 
+  _flat_250 = 0ULL; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_251 <= iv (IDXS:_wlidx_6248_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6312 = _vect2offset_( _isaa_2519_array, new_idx); 
+          _flat_253 = _idx_sel_( _ivesli_6312, array); 
+        } : _flat_253 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6248_res) ):
+        { 
+        } : _flat_250 ; 
+         } :
+      genarray( new_shape, _flat_250, IDX(_wlidx_6248_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulonglong[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , ulonglong[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6313 { , NN } ; 
+  int _wlidx_6249_res { , NN } ; 
+  int[1] _isaa_2547_idx { , NN } ; 
+  int[.] _isaa_2544_array { , NN } ; 
+  ulonglong[*] res { , NN } ; 
+  ulonglong _flat_253 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  ulonglong{0} _flat_250 { , NN } ; 
+  int[.] _flat_251 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_245 { , NN } ; 
+  int{0} _flat_247 { , NN } ; 
+
+  _isaa_2544_array = _shape_A_( array); 
+  _isaa_2547_idx = _shape_A_( idx); 
+  _flat_247 = 0; 
+  _flat_245 = _idx_sel_( _flat_247, _isaa_2547_idx); 
+  new_shape = _drop_SxV_( _flat_245, _isaa_2544_array); 
+  _flat_251 = _mul_SxV_( 0, new_shape); 
+  _flat_250 = 0ULL; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_251 <= iv (IDXS:_wlidx_6249_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6313 = _vect2offset_( _isaa_2544_array, new_idx); 
+          _flat_253 = _idx_sel_( _ivesli_6313, array); 
+        } : _flat_253 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6249_res) ):
+        { 
+        } : _flat_250 ; 
+         } :
+      genarray( new_shape, _flat_250, IDX(_wlidx_6249_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulong[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , ulong[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6314 { , NN } ; 
+  int _wlidx_6250_res { , NN } ; 
+  int[.] _isaa_2576_array { , NN } ; 
+  ulong[*] res { , NN } ; 
+  ulong _flat_244 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  ulong{0} _flat_241 { , NN } ; 
+  int[.] _flat_242 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_2576_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_2576_array); 
+  _flat_242 = _mul_SxV_( 0, new_shape); 
+  _flat_241 = 0ul; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_242 <= iv (IDXS:_wlidx_6250_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6314 = _vect2offset_( _isaa_2576_array, new_idx); 
+          _flat_244 = _idx_sel_( _ivesli_6314, array); 
+        } : _flat_244 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6250_res) ):
+        { 
+        } : _flat_241 ; 
+         } :
+      genarray( new_shape, _flat_241, IDX(_wlidx_6250_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulong[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , ulong[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6315 { , NN } ; 
+  int _wlidx_6251_res { , NN } ; 
+  int[1] _isaa_2604_idx { , NN } ; 
+  int[.] _isaa_2601_array { , NN } ; 
+  ulong[*] res { , NN } ; 
+  ulong _flat_244 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  ulong{0} _flat_241 { , NN } ; 
+  int[.] _flat_242 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_236 { , NN } ; 
+  int{0} _flat_238 { , NN } ; 
+
+  _isaa_2601_array = _shape_A_( array); 
+  _isaa_2604_idx = _shape_A_( idx); 
+  _flat_238 = 0; 
+  _flat_236 = _idx_sel_( _flat_238, _isaa_2604_idx); 
+  new_shape = _drop_SxV_( _flat_236, _isaa_2601_array); 
+  _flat_242 = _mul_SxV_( 0, new_shape); 
+  _flat_241 = 0ul; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_242 <= iv (IDXS:_wlidx_6251_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6315 = _vect2offset_( _isaa_2601_array, new_idx); 
+          _flat_244 = _idx_sel_( _ivesli_6315, array); 
+        } : _flat_244 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6251_res) ):
+        { 
+        } : _flat_241 ; 
+         } :
+      genarray( new_shape, _flat_241, IDX(_wlidx_6251_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+uint[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , uint[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6316 { , NN } ; 
+  int _wlidx_6252_res { , NN } ; 
+  int[.] _isaa_2633_array { , NN } ; 
+  uint[*] res { , NN } ; 
+  uint _flat_235 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  uint{0} _flat_232 { , NN } ; 
+  int[.] _flat_233 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_2633_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_2633_array); 
+  _flat_233 = _mul_SxV_( 0, new_shape); 
+  _flat_232 = 0ui; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_233 <= iv (IDXS:_wlidx_6252_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6316 = _vect2offset_( _isaa_2633_array, new_idx); 
+          _flat_235 = _idx_sel_( _ivesli_6316, array); 
+        } : _flat_235 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6252_res) ):
+        { 
+        } : _flat_232 ; 
+         } :
+      genarray( new_shape, _flat_232, IDX(_wlidx_6252_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+uint[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , uint[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6317 { , NN } ; 
+  int _wlidx_6253_res { , NN } ; 
+  int[1] _isaa_2661_idx { , NN } ; 
+  int[.] _isaa_2658_array { , NN } ; 
+  uint[*] res { , NN } ; 
+  uint _flat_235 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  uint{0} _flat_232 { , NN } ; 
+  int[.] _flat_233 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_227 { , NN } ; 
+  int{0} _flat_229 { , NN } ; 
+
+  _isaa_2658_array = _shape_A_( array); 
+  _isaa_2661_idx = _shape_A_( idx); 
+  _flat_229 = 0; 
+  _flat_227 = _idx_sel_( _flat_229, _isaa_2661_idx); 
+  new_shape = _drop_SxV_( _flat_227, _isaa_2658_array); 
+  _flat_233 = _mul_SxV_( 0, new_shape); 
+  _flat_232 = 0ui; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_233 <= iv (IDXS:_wlidx_6253_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6317 = _vect2offset_( _isaa_2658_array, new_idx); 
+          _flat_235 = _idx_sel_( _ivesli_6317, array); 
+        } : _flat_235 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6253_res) ):
+        { 
+        } : _flat_232 ; 
+         } :
+      genarray( new_shape, _flat_232, IDX(_wlidx_6253_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ushort[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , ushort[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6318 { , NN } ; 
+  int _wlidx_6254_res { , NN } ; 
+  int[.] _isaa_2690_array { , NN } ; 
+  ushort[*] res { , NN } ; 
+  ushort _flat_226 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  ushort{0} _flat_223 { , NN } ; 
+  int[.] _flat_224 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_2690_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_2690_array); 
+  _flat_224 = _mul_SxV_( 0, new_shape); 
+  _flat_223 = 0us; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_224 <= iv (IDXS:_wlidx_6254_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6318 = _vect2offset_( _isaa_2690_array, new_idx); 
+          _flat_226 = _idx_sel_( _ivesli_6318, array); 
+        } : _flat_226 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6254_res) ):
+        { 
+        } : _flat_223 ; 
+         } :
+      genarray( new_shape, _flat_223, IDX(_wlidx_6254_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ushort[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , ushort[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6319 { , NN } ; 
+  int _wlidx_6255_res { , NN } ; 
+  int[1] _isaa_2718_idx { , NN } ; 
+  int[.] _isaa_2715_array { , NN } ; 
+  ushort[*] res { , NN } ; 
+  ushort _flat_226 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  ushort{0} _flat_223 { , NN } ; 
+  int[.] _flat_224 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_218 { , NN } ; 
+  int{0} _flat_220 { , NN } ; 
+
+  _isaa_2715_array = _shape_A_( array); 
+  _isaa_2718_idx = _shape_A_( idx); 
+  _flat_220 = 0; 
+  _flat_218 = _idx_sel_( _flat_220, _isaa_2718_idx); 
+  new_shape = _drop_SxV_( _flat_218, _isaa_2715_array); 
+  _flat_224 = _mul_SxV_( 0, new_shape); 
+  _flat_223 = 0us; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_224 <= iv (IDXS:_wlidx_6255_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6319 = _vect2offset_( _isaa_2715_array, new_idx); 
+          _flat_226 = _idx_sel_( _ivesli_6319, array); 
+        } : _flat_226 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6255_res) ):
+        { 
+        } : _flat_223 ; 
+         } :
+      genarray( new_shape, _flat_223, IDX(_wlidx_6255_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ubyte[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , ubyte[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6320 { , NN } ; 
+  int _wlidx_6256_res { , NN } ; 
+  int[.] _isaa_2747_array { , NN } ; 
+  ubyte[*] res { , NN } ; 
+  ubyte _flat_217 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  ubyte{} _flat_214 { , NN } ; 
+  int[.] _flat_215 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_2747_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_2747_array); 
+  _flat_215 = _mul_SxV_( 0, new_shape); 
+  _flat_214 = 0ub; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_215 <= iv (IDXS:_wlidx_6256_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6320 = _vect2offset_( _isaa_2747_array, new_idx); 
+          _flat_217 = _idx_sel_( _ivesli_6320, array); 
+        } : _flat_217 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6256_res) ):
+        { 
+        } : _flat_214 ; 
+         } :
+      genarray( new_shape, _flat_214, IDX(_wlidx_6256_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ubyte[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , ubyte[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6321 { , NN } ; 
+  int _wlidx_6257_res { , NN } ; 
+  int[1] _isaa_2775_idx { , NN } ; 
+  int[.] _isaa_2772_array { , NN } ; 
+  ubyte[*] res { , NN } ; 
+  ubyte _flat_217 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  ubyte{} _flat_214 { , NN } ; 
+  int[.] _flat_215 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_209 { , NN } ; 
+  int{0} _flat_211 { , NN } ; 
+
+  _isaa_2772_array = _shape_A_( array); 
+  _isaa_2775_idx = _shape_A_( idx); 
+  _flat_211 = 0; 
+  _flat_209 = _idx_sel_( _flat_211, _isaa_2775_idx); 
+  new_shape = _drop_SxV_( _flat_209, _isaa_2772_array); 
+  _flat_215 = _mul_SxV_( 0, new_shape); 
+  _flat_214 = 0ub; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_215 <= iv (IDXS:_wlidx_6257_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6321 = _vect2offset_( _isaa_2772_array, new_idx); 
+          _flat_217 = _idx_sel_( _ivesli_6321, array); 
+        } : _flat_217 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6257_res) ):
+        { 
+        } : _flat_214 ; 
+         } :
+      genarray( new_shape, _flat_214, IDX(_wlidx_6257_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+longlong[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , longlong[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6322 { , NN } ; 
+  int _wlidx_6258_res { , NN } ; 
+  int[.] _isaa_2804_array { , NN } ; 
+  longlong[*] res { , NN } ; 
+  longlong _flat_208 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  longlong{0} _flat_205 { , NN } ; 
+  int[.] _flat_206 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_2804_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_2804_array); 
+  _flat_206 = _mul_SxV_( 0, new_shape); 
+  _flat_205 = 0LL; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_206 <= iv (IDXS:_wlidx_6258_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6322 = _vect2offset_( _isaa_2804_array, new_idx); 
+          _flat_208 = _idx_sel_( _ivesli_6322, array); 
+        } : _flat_208 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6258_res) ):
+        { 
+        } : _flat_205 ; 
+         } :
+      genarray( new_shape, _flat_205, IDX(_wlidx_6258_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+longlong[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , longlong[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6323 { , NN } ; 
+  int _wlidx_6259_res { , NN } ; 
+  int[1] _isaa_2832_idx { , NN } ; 
+  int[.] _isaa_2829_array { , NN } ; 
+  longlong[*] res { , NN } ; 
+  longlong _flat_208 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  longlong{0} _flat_205 { , NN } ; 
+  int[.] _flat_206 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_200 { , NN } ; 
+  int{0} _flat_202 { , NN } ; 
+
+  _isaa_2829_array = _shape_A_( array); 
+  _isaa_2832_idx = _shape_A_( idx); 
+  _flat_202 = 0; 
+  _flat_200 = _idx_sel_( _flat_202, _isaa_2832_idx); 
+  new_shape = _drop_SxV_( _flat_200, _isaa_2829_array); 
+  _flat_206 = _mul_SxV_( 0, new_shape); 
+  _flat_205 = 0LL; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_206 <= iv (IDXS:_wlidx_6259_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6323 = _vect2offset_( _isaa_2829_array, new_idx); 
+          _flat_208 = _idx_sel_( _ivesli_6323, array); 
+        } : _flat_208 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6259_res) ):
+        { 
+        } : _flat_205 ; 
+         } :
+      genarray( new_shape, _flat_205, IDX(_wlidx_6259_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+long[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , long[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6324 { , NN } ; 
+  int _wlidx_6260_res { , NN } ; 
+  int[.] _isaa_2861_array { , NN } ; 
+  long[*] res { , NN } ; 
+  long _flat_199 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  long{0} _flat_196 { , NN } ; 
+  int[.] _flat_197 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_2861_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_2861_array); 
+  _flat_197 = _mul_SxV_( 0, new_shape); 
+  _flat_196 = 0l; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_197 <= iv (IDXS:_wlidx_6260_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6324 = _vect2offset_( _isaa_2861_array, new_idx); 
+          _flat_199 = _idx_sel_( _ivesli_6324, array); 
+        } : _flat_199 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6260_res) ):
+        { 
+        } : _flat_196 ; 
+         } :
+      genarray( new_shape, _flat_196, IDX(_wlidx_6260_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+long[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , long[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6325 { , NN } ; 
+  int _wlidx_6261_res { , NN } ; 
+  int[1] _isaa_2889_idx { , NN } ; 
+  int[.] _isaa_2886_array { , NN } ; 
+  long[*] res { , NN } ; 
+  long _flat_199 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  long{0} _flat_196 { , NN } ; 
+  int[.] _flat_197 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_191 { , NN } ; 
+  int{0} _flat_193 { , NN } ; 
+
+  _isaa_2886_array = _shape_A_( array); 
+  _isaa_2889_idx = _shape_A_( idx); 
+  _flat_193 = 0; 
+  _flat_191 = _idx_sel_( _flat_193, _isaa_2889_idx); 
+  new_shape = _drop_SxV_( _flat_191, _isaa_2886_array); 
+  _flat_197 = _mul_SxV_( 0, new_shape); 
+  _flat_196 = 0l; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_197 <= iv (IDXS:_wlidx_6261_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6325 = _vect2offset_( _isaa_2886_array, new_idx); 
+          _flat_199 = _idx_sel_( _ivesli_6325, array); 
+        } : _flat_199 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6261_res) ):
+        { 
+        } : _flat_196 ; 
+         } :
+      genarray( new_shape, _flat_196, IDX(_wlidx_6261_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+short[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , short[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6326 { , NN } ; 
+  int _wlidx_6262_res { , NN } ; 
+  int[.] _isaa_2918_array { , NN } ; 
+  short[*] res { , NN } ; 
+  short _flat_190 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  short{0} _flat_187 { , NN } ; 
+  int[.] _flat_188 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_2918_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_2918_array); 
+  _flat_188 = _mul_SxV_( 0, new_shape); 
+  _flat_187 = 0s; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_188 <= iv (IDXS:_wlidx_6262_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6326 = _vect2offset_( _isaa_2918_array, new_idx); 
+          _flat_190 = _idx_sel_( _ivesli_6326, array); 
+        } : _flat_190 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6262_res) ):
+        { 
+        } : _flat_187 ; 
+         } :
+      genarray( new_shape, _flat_187, IDX(_wlidx_6262_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+short[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , short[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6327 { , NN } ; 
+  int _wlidx_6263_res { , NN } ; 
+  int[1] _isaa_2946_idx { , NN } ; 
+  int[.] _isaa_2943_array { , NN } ; 
+  short[*] res { , NN } ; 
+  short _flat_190 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  short{0} _flat_187 { , NN } ; 
+  int[.] _flat_188 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_182 { , NN } ; 
+  int{0} _flat_184 { , NN } ; 
+
+  _isaa_2943_array = _shape_A_( array); 
+  _isaa_2946_idx = _shape_A_( idx); 
+  _flat_184 = 0; 
+  _flat_182 = _idx_sel_( _flat_184, _isaa_2946_idx); 
+  new_shape = _drop_SxV_( _flat_182, _isaa_2943_array); 
+  _flat_188 = _mul_SxV_( 0, new_shape); 
+  _flat_187 = 0s; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_188 <= iv (IDXS:_wlidx_6263_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6327 = _vect2offset_( _isaa_2943_array, new_idx); 
+          _flat_190 = _idx_sel_( _ivesli_6327, array); 
+        } : _flat_190 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6263_res) ):
+        { 
+        } : _flat_187 ; 
+         } :
+      genarray( new_shape, _flat_187, IDX(_wlidx_6263_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+byte[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , byte[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6328 { , NN } ; 
+  int _wlidx_6264_res { , NN } ; 
+  int[.] _isaa_2975_array { , NN } ; 
+  byte[*] res { , NN } ; 
+  byte _flat_181 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  byte{} _flat_178 { , NN } ; 
+  int[.] _flat_179 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_2975_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_2975_array); 
+  _flat_179 = _mul_SxV_( 0, new_shape); 
+  _flat_178 = 0b; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_179 <= iv (IDXS:_wlidx_6264_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6328 = _vect2offset_( _isaa_2975_array, new_idx); 
+          _flat_181 = _idx_sel_( _ivesli_6328, array); 
+        } : _flat_181 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6264_res) ):
+        { 
+        } : _flat_178 ; 
+         } :
+      genarray( new_shape, _flat_178, IDX(_wlidx_6264_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+byte[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , byte[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6329 { , NN } ; 
+  int _wlidx_6265_res { , NN } ; 
+  int[1] _isaa_3003_idx { , NN } ; 
+  int[.] _isaa_3000_array { , NN } ; 
+  byte[*] res { , NN } ; 
+  byte _flat_181 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  byte{} _flat_178 { , NN } ; 
+  int[.] _flat_179 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_173 { , NN } ; 
+  int{0} _flat_175 { , NN } ; 
+
+  _isaa_3000_array = _shape_A_( array); 
+  _isaa_3003_idx = _shape_A_( idx); 
+  _flat_175 = 0; 
+  _flat_173 = _idx_sel_( _flat_175, _isaa_3003_idx); 
+  new_shape = _drop_SxV_( _flat_173, _isaa_3000_array); 
+  _flat_179 = _mul_SxV_( 0, new_shape); 
+  _flat_178 = 0b; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_179 <= iv (IDXS:_wlidx_6265_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6329 = _vect2offset_( _isaa_3000_array, new_idx); 
+          _flat_181 = _idx_sel_( _ivesli_6329, array); 
+        } : _flat_181 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6265_res) ):
+        { 
+        } : _flat_178 ; 
+         } :
+      genarray( new_shape, _flat_178, IDX(_wlidx_6265_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+char[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , char[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6330 { , NN } ; 
+  int _wlidx_6266_res { , NN } ; 
+  int[.] _isaa_3032_array { , NN } ; 
+  char[*] res { , NN } ; 
+  char _flat_172 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  char{ } _flat_169 { , NN } ; 
+  int[.] _flat_170 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_3032_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_3032_array); 
+  _flat_170 = _mul_SxV_( 0, new_shape); 
+  _flat_169 = ' '; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_170 <= iv (IDXS:_wlidx_6266_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6330 = _vect2offset_( _isaa_3032_array, new_idx); 
+          _flat_172 = _idx_sel_( _ivesli_6330, array); 
+        } : _flat_172 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6266_res) ):
+        { 
+        } : _flat_169 ; 
+         } :
+      genarray( new_shape, _flat_169, IDX(_wlidx_6266_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+char[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , char[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6331 { , NN } ; 
+  int _wlidx_6267_res { , NN } ; 
+  int[1] _isaa_3060_idx { , NN } ; 
+  int[.] _isaa_3057_array { , NN } ; 
+  char[*] res { , NN } ; 
+  char _flat_172 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  char{ } _flat_169 { , NN } ; 
+  int[.] _flat_170 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_164 { , NN } ; 
+  int{0} _flat_166 { , NN } ; 
+
+  _isaa_3057_array = _shape_A_( array); 
+  _isaa_3060_idx = _shape_A_( idx); 
+  _flat_166 = 0; 
+  _flat_164 = _idx_sel_( _flat_166, _isaa_3060_idx); 
+  new_shape = _drop_SxV_( _flat_164, _isaa_3057_array); 
+  _flat_170 = _mul_SxV_( 0, new_shape); 
+  _flat_169 = ' '; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_170 <= iv (IDXS:_wlidx_6267_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6331 = _vect2offset_( _isaa_3057_array, new_idx); 
+          _flat_172 = _idx_sel_( _ivesli_6331, array); 
+        } : _flat_172 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6267_res) ):
+        { 
+        } : _flat_169 ; 
+         } :
+      genarray( new_shape, _flat_169, IDX(_wlidx_6267_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , bool[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6332 { , NN } ; 
+  int _wlidx_6268_res { , NN } ; 
+  int[.] _isaa_3089_array { , NN } ; 
+  bool[*] res { , NN } ; 
+  bool _flat_163 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{0} _flat_160 { , NN } ; 
+  int[.] _flat_161 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_3089_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_3089_array); 
+  _flat_161 = _mul_SxV_( 0, new_shape); 
+  _flat_160 = false; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_161 <= iv (IDXS:_wlidx_6268_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6332 = _vect2offset_( _isaa_3089_array, new_idx); 
+          _flat_163 = _idx_sel_( _ivesli_6332, array); 
+        } : _flat_163 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6268_res) ):
+        { 
+        } : _flat_160 ; 
+         } :
+      genarray( new_shape, _flat_160, IDX(_wlidx_6268_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , bool[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6333 { , NN } ; 
+  int _wlidx_6269_res { , NN } ; 
+  int[1] _isaa_3117_idx { , NN } ; 
+  int[.] _isaa_3114_array { , NN } ; 
+  bool[*] res { , NN } ; 
+  bool _flat_163 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{0} _flat_160 { , NN } ; 
+  int[.] _flat_161 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_155 { , NN } ; 
+  int{0} _flat_157 { , NN } ; 
+
+  _isaa_3114_array = _shape_A_( array); 
+  _isaa_3117_idx = _shape_A_( idx); 
+  _flat_157 = 0; 
+  _flat_155 = _idx_sel_( _flat_157, _isaa_3117_idx); 
+  new_shape = _drop_SxV_( _flat_155, _isaa_3114_array); 
+  _flat_161 = _mul_SxV_( 0, new_shape); 
+  _flat_160 = false; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_161 <= iv (IDXS:_wlidx_6269_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6333 = _vect2offset_( _isaa_3114_array, new_idx); 
+          _flat_163 = _idx_sel_( _ivesli_6333, array); 
+        } : _flat_163 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6269_res) ):
+        { 
+        } : _flat_160 ; 
+         } :
+      genarray( new_shape, _flat_160, IDX(_wlidx_6269_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+double[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , double[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6334 { , NN } ; 
+  int _wlidx_6270_res { , NN } ; 
+  int[.] _isaa_3146_array { , NN } ; 
+  double[*] res { , NN } ; 
+  double _flat_154 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  double{0.0...} _flat_151 { , NN } ; 
+  int[.] _flat_152 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_3146_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_3146_array); 
+  _flat_152 = _mul_SxV_( 0, new_shape); 
+  _flat_151 = 0.0; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_152 <= iv (IDXS:_wlidx_6270_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6334 = _vect2offset_( _isaa_3146_array, new_idx); 
+          _flat_154 = _idx_sel_( _ivesli_6334, array); 
+        } : _flat_154 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6270_res) ):
+        { 
+        } : _flat_151 ; 
+         } :
+      genarray( new_shape, _flat_151, IDX(_wlidx_6270_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+double[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , double[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6335 { , NN } ; 
+  int _wlidx_6271_res { , NN } ; 
+  int[1] _isaa_3174_idx { , NN } ; 
+  int[.] _isaa_3171_array { , NN } ; 
+  double[*] res { , NN } ; 
+  double _flat_154 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  double{0.0...} _flat_151 { , NN } ; 
+  int[.] _flat_152 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_146 { , NN } ; 
+  int{0} _flat_148 { , NN } ; 
+
+  _isaa_3171_array = _shape_A_( array); 
+  _isaa_3174_idx = _shape_A_( idx); 
+  _flat_148 = 0; 
+  _flat_146 = _idx_sel_( _flat_148, _isaa_3174_idx); 
+  new_shape = _drop_SxV_( _flat_146, _isaa_3171_array); 
+  _flat_152 = _mul_SxV_( 0, new_shape); 
+  _flat_151 = 0.0; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_152 <= iv (IDXS:_wlidx_6271_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6335 = _vect2offset_( _isaa_3171_array, new_idx); 
+          _flat_154 = _idx_sel_( _ivesli_6335, array); 
+        } : _flat_154 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6271_res) ):
+        { 
+        } : _flat_151 ; 
+         } :
+      genarray( new_shape, _flat_151, IDX(_wlidx_6271_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+float[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , float[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6336 { , NN } ; 
+  int _wlidx_6272_res { , NN } ; 
+  int[.] _isaa_3203_array { , NN } ; 
+  float[*] res { , NN } ; 
+  float _flat_145 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  float{0.0...} _flat_142 { , NN } ; 
+  int[.] _flat_143 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+
+  _isaa_3203_array = _shape_A_( array); 
+  new_shape = _drop_SxV_( 1, _isaa_3203_array); 
+  _flat_143 = _mul_SxV_( 0, new_shape); 
+  _flat_142 = 0.0f; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_143 <= iv (IDXS:_wlidx_6272_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6336 = _vect2offset_( _isaa_3203_array, new_idx); 
+          _flat_145 = _idx_sel_( _ivesli_6336, array); 
+        } : _flat_145 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6272_res) ):
+        { 
+        } : _flat_142 ; 
+         } :
+      genarray( new_shape, _flat_142, IDX(_wlidx_6272_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+float[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , float[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6337 { , NN } ; 
+  int _wlidx_6273_res { , NN } ; 
+  int[1] _isaa_3231_idx { , NN } ; 
+  int[.] _isaa_3228_array { , NN } ; 
+  float[*] res { , NN } ; 
+  float _flat_145 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  float{0.0...} _flat_142 { , NN } ; 
+  int[.] _flat_143 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_137 { , NN } ; 
+  int{0} _flat_139 { , NN } ; 
+
+  _isaa_3228_array = _shape_A_( array); 
+  _isaa_3231_idx = _shape_A_( idx); 
+  _flat_139 = 0; 
+  _flat_137 = _idx_sel_( _flat_139, _isaa_3231_idx); 
+  new_shape = _drop_SxV_( _flat_137, _isaa_3228_array); 
+  _flat_143 = _mul_SxV_( 0, new_shape); 
+  _flat_142 = 0.0f; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_143 <= iv (IDXS:_wlidx_6273_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6337 = _vect2offset_( _isaa_3228_array, new_idx); 
+          _flat_145 = _idx_sel_( _ivesli_6337, array); 
+        } : _flat_145 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6273_res) ):
+        { 
+        } : _flat_142 ; 
+         } :
+      genarray( new_shape, _flat_142, IDX(_wlidx_6273_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[*] sacprelude_p::_selVxADistmemLocal( int[1] idx { ,NN } , int[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6338 { , NN } ; 
+  int _wlidx_6274_res { , NN } ; 
+  int[.] _isaa_3260_array { , NN } ; 
+  int[*] res { , NN } ; 
+  int _flat_136 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  int[.] _flat_134 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int{0} _flat_130 { , NN } ; 
+
+  _isaa_3260_array = _shape_A_( array); 
+  _flat_130 = 0; 
+  new_shape = _drop_SxV_( 1, _isaa_3260_array); 
+  _flat_134 = _mul_SxV_( 0, new_shape); 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_134 <= iv (IDXS:_wlidx_6274_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6338 = _vect2offset_( _isaa_3260_array, new_idx); 
+          _flat_136 = _idx_sel_( _ivesli_6338, array); 
+        } : _flat_136 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6274_res) ):
+        { 
+        } : _flat_130 ; 
+         } :
+      genarray( new_shape, _flat_130, IDX(_wlidx_6274_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selVxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[*] sacprelude_p::_selVxADistmemLocal( int[.] idx { ,NN } , int[*] array { ,NN } )
+/*
+ *  _selVxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6339 { , NN } ; 
+  int _wlidx_6275_res { , NN } ; 
+  int[1] _isaa_3288_idx { , NN } ; 
+  int[.] _isaa_3285_array { , NN } ; 
+  int[*] res { , NN } ; 
+  int _flat_136 { , NN } ; 
+  int[.] new_idx { , NN } ; 
+  int[.] iv { , NN } ; 
+  int[.] _flat_134 { , NN } ; 
+  int[.] new_shape { , NN } ; 
+  int _flat_128 { , NN } ; 
+  int{0} _flat_130 { , NN } ; 
+
+  _isaa_3285_array = _shape_A_( array); 
+  _isaa_3288_idx = _shape_A_( idx); 
+  _flat_130 = 0; 
+  _flat_128 = _idx_sel_( _flat_130, _isaa_3288_idx); 
+  new_shape = _drop_SxV_( _flat_128, _isaa_3285_array); 
+  _flat_134 = _mul_SxV_( 0, new_shape); 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_134 <= iv (IDXS:_wlidx_6275_res) < new_shape)
+        { 
+          new_idx = _cat_VxV_( idx, iv); 
+          _ivesli_6339 = _vect2offset_( _isaa_3285_array, new_idx); 
+          _flat_136 = _idx_sel_( _ivesli_6339, array); 
+        } : _flat_136 ; 
+        /* Partn */
+        default partition( iv (IDXS:_wlidx_6275_res) ):
+        { 
+        } : _flat_130 ; 
+         } :
+      genarray( new_shape, _flat_130, IDX(_wlidx_6275_res)); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulonglong[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , ulonglong[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6340 { , NN } ; 
+  int _wlidx_6276__flat_280 { , NN } ; 
+  int[.] _isaa_3317_array { , NN } ; 
+  ulonglong _pinl_1528__flat_253 { , NN } ; 
+  int[.] _pinl_1527_new_idx { , NN } ; 
+  int[.] _pinl_1526_iv { , NN } ; 
+  ulonglong{0} _pinl_1525__flat_250 { , NN } ; 
+  int[.] _pinl_1524__flat_251 { , NN } ; 
+  int[.] _pinl_1523_new_shape { , NN } ; 
+  ulonglong[*] _flat_280 { , NN } ; 
+  int[1] _flat_281 { , NN } ; 
+
+  _isaa_3317_array = _shape_A_( array); 
+  _flat_281 = [ idx ]; 
+  _pinl_1523_new_shape = _drop_SxV_( 1, _isaa_3317_array); 
+  _pinl_1524__flat_251 = _mul_SxV_( 0, _pinl_1523_new_shape); 
+  _pinl_1525__flat_250 = 0ULL; 
+  _flat_280 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1524__flat_251 <= _pinl_1526_iv (IDXS:_wlidx_6276__flat_280) < _pinl_1523_new_shape)
+        { 
+          _pinl_1527_new_idx = _cat_VxV_( _flat_281, _pinl_1526_iv); 
+          _ivesli_6340 = _vect2offset_( _isaa_3317_array, _pinl_1527_new_idx); 
+          _pinl_1528__flat_253 = _idx_sel_( _ivesli_6340, array); 
+        } : _pinl_1528__flat_253 ; 
+        /* Partn */
+        default partition( _pinl_1526_iv (IDXS:_wlidx_6276__flat_280) ):
+        { 
+        } : _pinl_1525__flat_250 ; 
+         } :
+      genarray( _pinl_1523_new_shape, _pinl_1525__flat_250, IDX(_wlidx_6276__flat_280)); 
+  return( _flat_280); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulong[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , ulong[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6341 { , NN } ; 
+  int _wlidx_6277__flat_278 { , NN } ; 
+  int[.] _isaa_3349_array { , NN } ; 
+  ulong _pinl_1539__flat_244 { , NN } ; 
+  int[.] _pinl_1538_new_idx { , NN } ; 
+  int[.] _pinl_1537_iv { , NN } ; 
+  ulong{0} _pinl_1536__flat_241 { , NN } ; 
+  int[.] _pinl_1535__flat_242 { , NN } ; 
+  int[.] _pinl_1534_new_shape { , NN } ; 
+  ulong[*] _flat_278 { , NN } ; 
+  int[1] _flat_279 { , NN } ; 
+
+  _isaa_3349_array = _shape_A_( array); 
+  _flat_279 = [ idx ]; 
+  _pinl_1534_new_shape = _drop_SxV_( 1, _isaa_3349_array); 
+  _pinl_1535__flat_242 = _mul_SxV_( 0, _pinl_1534_new_shape); 
+  _pinl_1536__flat_241 = 0ul; 
+  _flat_278 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1535__flat_242 <= _pinl_1537_iv (IDXS:_wlidx_6277__flat_278) < _pinl_1534_new_shape)
+        { 
+          _pinl_1538_new_idx = _cat_VxV_( _flat_279, _pinl_1537_iv); 
+          _ivesli_6341 = _vect2offset_( _isaa_3349_array, _pinl_1538_new_idx); 
+          _pinl_1539__flat_244 = _idx_sel_( _ivesli_6341, array); 
+        } : _pinl_1539__flat_244 ; 
+        /* Partn */
+        default partition( _pinl_1537_iv (IDXS:_wlidx_6277__flat_278) ):
+        { 
+        } : _pinl_1536__flat_241 ; 
+         } :
+      genarray( _pinl_1534_new_shape, _pinl_1536__flat_241, IDX(_wlidx_6277__flat_278)); 
+  return( _flat_278); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+uint[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , uint[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6342 { , NN } ; 
+  int _wlidx_6278__flat_276 { , NN } ; 
+  int[.] _isaa_3381_array { , NN } ; 
+  uint _pinl_1550__flat_235 { , NN } ; 
+  int[.] _pinl_1549_new_idx { , NN } ; 
+  int[.] _pinl_1548_iv { , NN } ; 
+  uint{0} _pinl_1547__flat_232 { , NN } ; 
+  int[.] _pinl_1546__flat_233 { , NN } ; 
+  int[.] _pinl_1545_new_shape { , NN } ; 
+  uint[*] _flat_276 { , NN } ; 
+  int[1] _flat_277 { , NN } ; 
+
+  _isaa_3381_array = _shape_A_( array); 
+  _flat_277 = [ idx ]; 
+  _pinl_1545_new_shape = _drop_SxV_( 1, _isaa_3381_array); 
+  _pinl_1546__flat_233 = _mul_SxV_( 0, _pinl_1545_new_shape); 
+  _pinl_1547__flat_232 = 0ui; 
+  _flat_276 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1546__flat_233 <= _pinl_1548_iv (IDXS:_wlidx_6278__flat_276) < _pinl_1545_new_shape)
+        { 
+          _pinl_1549_new_idx = _cat_VxV_( _flat_277, _pinl_1548_iv); 
+          _ivesli_6342 = _vect2offset_( _isaa_3381_array, _pinl_1549_new_idx); 
+          _pinl_1550__flat_235 = _idx_sel_( _ivesli_6342, array); 
+        } : _pinl_1550__flat_235 ; 
+        /* Partn */
+        default partition( _pinl_1548_iv (IDXS:_wlidx_6278__flat_276) ):
+        { 
+        } : _pinl_1547__flat_232 ; 
+         } :
+      genarray( _pinl_1545_new_shape, _pinl_1547__flat_232, IDX(_wlidx_6278__flat_276)); 
+  return( _flat_276); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ushort[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , ushort[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6343 { , NN } ; 
+  int _wlidx_6279__flat_274 { , NN } ; 
+  int[.] _isaa_3413_array { , NN } ; 
+  ushort _pinl_1561__flat_226 { , NN } ; 
+  int[.] _pinl_1560_new_idx { , NN } ; 
+  int[.] _pinl_1559_iv { , NN } ; 
+  ushort{0} _pinl_1558__flat_223 { , NN } ; 
+  int[.] _pinl_1557__flat_224 { , NN } ; 
+  int[.] _pinl_1556_new_shape { , NN } ; 
+  ushort[*] _flat_274 { , NN } ; 
+  int[1] _flat_275 { , NN } ; 
+
+  _isaa_3413_array = _shape_A_( array); 
+  _flat_275 = [ idx ]; 
+  _pinl_1556_new_shape = _drop_SxV_( 1, _isaa_3413_array); 
+  _pinl_1557__flat_224 = _mul_SxV_( 0, _pinl_1556_new_shape); 
+  _pinl_1558__flat_223 = 0us; 
+  _flat_274 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1557__flat_224 <= _pinl_1559_iv (IDXS:_wlidx_6279__flat_274) < _pinl_1556_new_shape)
+        { 
+          _pinl_1560_new_idx = _cat_VxV_( _flat_275, _pinl_1559_iv); 
+          _ivesli_6343 = _vect2offset_( _isaa_3413_array, _pinl_1560_new_idx); 
+          _pinl_1561__flat_226 = _idx_sel_( _ivesli_6343, array); 
+        } : _pinl_1561__flat_226 ; 
+        /* Partn */
+        default partition( _pinl_1559_iv (IDXS:_wlidx_6279__flat_274) ):
+        { 
+        } : _pinl_1558__flat_223 ; 
+         } :
+      genarray( _pinl_1556_new_shape, _pinl_1558__flat_223, IDX(_wlidx_6279__flat_274)); 
+  return( _flat_274); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ubyte[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , ubyte[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6344 { , NN } ; 
+  int _wlidx_6280__flat_272 { , NN } ; 
+  int[.] _isaa_3445_array { , NN } ; 
+  ubyte _pinl_1572__flat_217 { , NN } ; 
+  int[.] _pinl_1571_new_idx { , NN } ; 
+  int[.] _pinl_1570_iv { , NN } ; 
+  ubyte{} _pinl_1569__flat_214 { , NN } ; 
+  int[.] _pinl_1568__flat_215 { , NN } ; 
+  int[.] _pinl_1567_new_shape { , NN } ; 
+  ubyte[*] _flat_272 { , NN } ; 
+  int[1] _flat_273 { , NN } ; 
+
+  _isaa_3445_array = _shape_A_( array); 
+  _flat_273 = [ idx ]; 
+  _pinl_1567_new_shape = _drop_SxV_( 1, _isaa_3445_array); 
+  _pinl_1568__flat_215 = _mul_SxV_( 0, _pinl_1567_new_shape); 
+  _pinl_1569__flat_214 = 0ub; 
+  _flat_272 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1568__flat_215 <= _pinl_1570_iv (IDXS:_wlidx_6280__flat_272) < _pinl_1567_new_shape)
+        { 
+          _pinl_1571_new_idx = _cat_VxV_( _flat_273, _pinl_1570_iv); 
+          _ivesli_6344 = _vect2offset_( _isaa_3445_array, _pinl_1571_new_idx); 
+          _pinl_1572__flat_217 = _idx_sel_( _ivesli_6344, array); 
+        } : _pinl_1572__flat_217 ; 
+        /* Partn */
+        default partition( _pinl_1570_iv (IDXS:_wlidx_6280__flat_272) ):
+        { 
+        } : _pinl_1569__flat_214 ; 
+         } :
+      genarray( _pinl_1567_new_shape, _pinl_1569__flat_214, IDX(_wlidx_6280__flat_272)); 
+  return( _flat_272); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+longlong[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , longlong[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6345 { , NN } ; 
+  int _wlidx_6281__flat_270 { , NN } ; 
+  int[.] _isaa_3477_array { , NN } ; 
+  longlong _pinl_1583__flat_208 { , NN } ; 
+  int[.] _pinl_1582_new_idx { , NN } ; 
+  int[.] _pinl_1581_iv { , NN } ; 
+  longlong{0} _pinl_1580__flat_205 { , NN } ; 
+  int[.] _pinl_1579__flat_206 { , NN } ; 
+  int[.] _pinl_1578_new_shape { , NN } ; 
+  longlong[*] _flat_270 { , NN } ; 
+  int[1] _flat_271 { , NN } ; 
+
+  _isaa_3477_array = _shape_A_( array); 
+  _flat_271 = [ idx ]; 
+  _pinl_1578_new_shape = _drop_SxV_( 1, _isaa_3477_array); 
+  _pinl_1579__flat_206 = _mul_SxV_( 0, _pinl_1578_new_shape); 
+  _pinl_1580__flat_205 = 0LL; 
+  _flat_270 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1579__flat_206 <= _pinl_1581_iv (IDXS:_wlidx_6281__flat_270) < _pinl_1578_new_shape)
+        { 
+          _pinl_1582_new_idx = _cat_VxV_( _flat_271, _pinl_1581_iv); 
+          _ivesli_6345 = _vect2offset_( _isaa_3477_array, _pinl_1582_new_idx); 
+          _pinl_1583__flat_208 = _idx_sel_( _ivesli_6345, array); 
+        } : _pinl_1583__flat_208 ; 
+        /* Partn */
+        default partition( _pinl_1581_iv (IDXS:_wlidx_6281__flat_270) ):
+        { 
+        } : _pinl_1580__flat_205 ; 
+         } :
+      genarray( _pinl_1578_new_shape, _pinl_1580__flat_205, IDX(_wlidx_6281__flat_270)); 
+  return( _flat_270); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+long[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , long[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6346 { , NN } ; 
+  int _wlidx_6282__flat_268 { , NN } ; 
+  int[.] _isaa_3509_array { , NN } ; 
+  long _pinl_1594__flat_199 { , NN } ; 
+  int[.] _pinl_1593_new_idx { , NN } ; 
+  int[.] _pinl_1592_iv { , NN } ; 
+  long{0} _pinl_1591__flat_196 { , NN } ; 
+  int[.] _pinl_1590__flat_197 { , NN } ; 
+  int[.] _pinl_1589_new_shape { , NN } ; 
+  long[*] _flat_268 { , NN } ; 
+  int[1] _flat_269 { , NN } ; 
+
+  _isaa_3509_array = _shape_A_( array); 
+  _flat_269 = [ idx ]; 
+  _pinl_1589_new_shape = _drop_SxV_( 1, _isaa_3509_array); 
+  _pinl_1590__flat_197 = _mul_SxV_( 0, _pinl_1589_new_shape); 
+  _pinl_1591__flat_196 = 0l; 
+  _flat_268 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1590__flat_197 <= _pinl_1592_iv (IDXS:_wlidx_6282__flat_268) < _pinl_1589_new_shape)
+        { 
+          _pinl_1593_new_idx = _cat_VxV_( _flat_269, _pinl_1592_iv); 
+          _ivesli_6346 = _vect2offset_( _isaa_3509_array, _pinl_1593_new_idx); 
+          _pinl_1594__flat_199 = _idx_sel_( _ivesli_6346, array); 
+        } : _pinl_1594__flat_199 ; 
+        /* Partn */
+        default partition( _pinl_1592_iv (IDXS:_wlidx_6282__flat_268) ):
+        { 
+        } : _pinl_1591__flat_196 ; 
+         } :
+      genarray( _pinl_1589_new_shape, _pinl_1591__flat_196, IDX(_wlidx_6282__flat_268)); 
+  return( _flat_268); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+short[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , short[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6347 { , NN } ; 
+  int _wlidx_6283__flat_266 { , NN } ; 
+  int[.] _isaa_3541_array { , NN } ; 
+  short _pinl_1605__flat_190 { , NN } ; 
+  int[.] _pinl_1604_new_idx { , NN } ; 
+  int[.] _pinl_1603_iv { , NN } ; 
+  short{0} _pinl_1602__flat_187 { , NN } ; 
+  int[.] _pinl_1601__flat_188 { , NN } ; 
+  int[.] _pinl_1600_new_shape { , NN } ; 
+  short[*] _flat_266 { , NN } ; 
+  int[1] _flat_267 { , NN } ; 
+
+  _isaa_3541_array = _shape_A_( array); 
+  _flat_267 = [ idx ]; 
+  _pinl_1600_new_shape = _drop_SxV_( 1, _isaa_3541_array); 
+  _pinl_1601__flat_188 = _mul_SxV_( 0, _pinl_1600_new_shape); 
+  _pinl_1602__flat_187 = 0s; 
+  _flat_266 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1601__flat_188 <= _pinl_1603_iv (IDXS:_wlidx_6283__flat_266) < _pinl_1600_new_shape)
+        { 
+          _pinl_1604_new_idx = _cat_VxV_( _flat_267, _pinl_1603_iv); 
+          _ivesli_6347 = _vect2offset_( _isaa_3541_array, _pinl_1604_new_idx); 
+          _pinl_1605__flat_190 = _idx_sel_( _ivesli_6347, array); 
+        } : _pinl_1605__flat_190 ; 
+        /* Partn */
+        default partition( _pinl_1603_iv (IDXS:_wlidx_6283__flat_266) ):
+        { 
+        } : _pinl_1602__flat_187 ; 
+         } :
+      genarray( _pinl_1600_new_shape, _pinl_1602__flat_187, IDX(_wlidx_6283__flat_266)); 
+  return( _flat_266); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+byte[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , byte[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6348 { , NN } ; 
+  int _wlidx_6284__flat_264 { , NN } ; 
+  int[.] _isaa_3573_array { , NN } ; 
+  byte _pinl_1616__flat_181 { , NN } ; 
+  int[.] _pinl_1615_new_idx { , NN } ; 
+  int[.] _pinl_1614_iv { , NN } ; 
+  byte{} _pinl_1613__flat_178 { , NN } ; 
+  int[.] _pinl_1612__flat_179 { , NN } ; 
+  int[.] _pinl_1611_new_shape { , NN } ; 
+  byte[*] _flat_264 { , NN } ; 
+  int[1] _flat_265 { , NN } ; 
+
+  _isaa_3573_array = _shape_A_( array); 
+  _flat_265 = [ idx ]; 
+  _pinl_1611_new_shape = _drop_SxV_( 1, _isaa_3573_array); 
+  _pinl_1612__flat_179 = _mul_SxV_( 0, _pinl_1611_new_shape); 
+  _pinl_1613__flat_178 = 0b; 
+  _flat_264 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1612__flat_179 <= _pinl_1614_iv (IDXS:_wlidx_6284__flat_264) < _pinl_1611_new_shape)
+        { 
+          _pinl_1615_new_idx = _cat_VxV_( _flat_265, _pinl_1614_iv); 
+          _ivesli_6348 = _vect2offset_( _isaa_3573_array, _pinl_1615_new_idx); 
+          _pinl_1616__flat_181 = _idx_sel_( _ivesli_6348, array); 
+        } : _pinl_1616__flat_181 ; 
+        /* Partn */
+        default partition( _pinl_1614_iv (IDXS:_wlidx_6284__flat_264) ):
+        { 
+        } : _pinl_1613__flat_178 ; 
+         } :
+      genarray( _pinl_1611_new_shape, _pinl_1613__flat_178, IDX(_wlidx_6284__flat_264)); 
+  return( _flat_264); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+char[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , char[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6349 { , NN } ; 
+  int _wlidx_6285__flat_262 { , NN } ; 
+  int[.] _isaa_3605_array { , NN } ; 
+  char _pinl_1627__flat_172 { , NN } ; 
+  int[.] _pinl_1626_new_idx { , NN } ; 
+  int[.] _pinl_1625_iv { , NN } ; 
+  char{ } _pinl_1624__flat_169 { , NN } ; 
+  int[.] _pinl_1623__flat_170 { , NN } ; 
+  int[.] _pinl_1622_new_shape { , NN } ; 
+  char[*] _flat_262 { , NN } ; 
+  int[1] _flat_263 { , NN } ; 
+
+  _isaa_3605_array = _shape_A_( array); 
+  _flat_263 = [ idx ]; 
+  _pinl_1622_new_shape = _drop_SxV_( 1, _isaa_3605_array); 
+  _pinl_1623__flat_170 = _mul_SxV_( 0, _pinl_1622_new_shape); 
+  _pinl_1624__flat_169 = ' '; 
+  _flat_262 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1623__flat_170 <= _pinl_1625_iv (IDXS:_wlidx_6285__flat_262) < _pinl_1622_new_shape)
+        { 
+          _pinl_1626_new_idx = _cat_VxV_( _flat_263, _pinl_1625_iv); 
+          _ivesli_6349 = _vect2offset_( _isaa_3605_array, _pinl_1626_new_idx); 
+          _pinl_1627__flat_172 = _idx_sel_( _ivesli_6349, array); 
+        } : _pinl_1627__flat_172 ; 
+        /* Partn */
+        default partition( _pinl_1625_iv (IDXS:_wlidx_6285__flat_262) ):
+        { 
+        } : _pinl_1624__flat_169 ; 
+         } :
+      genarray( _pinl_1622_new_shape, _pinl_1624__flat_169, IDX(_wlidx_6285__flat_262)); 
+  return( _flat_262); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , bool[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6350 { , NN } ; 
+  int _wlidx_6286__flat_260 { , NN } ; 
+  int[.] _isaa_3637_array { , NN } ; 
+  bool _pinl_1638__flat_163 { , NN } ; 
+  int[.] _pinl_1637_new_idx { , NN } ; 
+  int[.] _pinl_1636_iv { , NN } ; 
+  bool{0} _pinl_1635__flat_160 { , NN } ; 
+  int[.] _pinl_1634__flat_161 { , NN } ; 
+  int[.] _pinl_1633_new_shape { , NN } ; 
+  bool[*] _flat_260 { , NN } ; 
+  int[1] _flat_261 { , NN } ; 
+
+  _isaa_3637_array = _shape_A_( array); 
+  _flat_261 = [ idx ]; 
+  _pinl_1633_new_shape = _drop_SxV_( 1, _isaa_3637_array); 
+  _pinl_1634__flat_161 = _mul_SxV_( 0, _pinl_1633_new_shape); 
+  _pinl_1635__flat_160 = false; 
+  _flat_260 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1634__flat_161 <= _pinl_1636_iv (IDXS:_wlidx_6286__flat_260) < _pinl_1633_new_shape)
+        { 
+          _pinl_1637_new_idx = _cat_VxV_( _flat_261, _pinl_1636_iv); 
+          _ivesli_6350 = _vect2offset_( _isaa_3637_array, _pinl_1637_new_idx); 
+          _pinl_1638__flat_163 = _idx_sel_( _ivesli_6350, array); 
+        } : _pinl_1638__flat_163 ; 
+        /* Partn */
+        default partition( _pinl_1636_iv (IDXS:_wlidx_6286__flat_260) ):
+        { 
+        } : _pinl_1635__flat_160 ; 
+         } :
+      genarray( _pinl_1633_new_shape, _pinl_1635__flat_160, IDX(_wlidx_6286__flat_260)); 
+  return( _flat_260); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+double[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , double[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6351 { , NN } ; 
+  int _wlidx_6287__flat_258 { , NN } ; 
+  int[.] _isaa_3669_array { , NN } ; 
+  double _pinl_1649__flat_154 { , NN } ; 
+  int[.] _pinl_1648_new_idx { , NN } ; 
+  int[.] _pinl_1647_iv { , NN } ; 
+  double{0.0...} _pinl_1646__flat_151 { , NN } ; 
+  int[.] _pinl_1645__flat_152 { , NN } ; 
+  int[.] _pinl_1644_new_shape { , NN } ; 
+  double[*] _flat_258 { , NN } ; 
+  int[1] _flat_259 { , NN } ; 
+
+  _isaa_3669_array = _shape_A_( array); 
+  _flat_259 = [ idx ]; 
+  _pinl_1644_new_shape = _drop_SxV_( 1, _isaa_3669_array); 
+  _pinl_1645__flat_152 = _mul_SxV_( 0, _pinl_1644_new_shape); 
+  _pinl_1646__flat_151 = 0.0; 
+  _flat_258 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1645__flat_152 <= _pinl_1647_iv (IDXS:_wlidx_6287__flat_258) < _pinl_1644_new_shape)
+        { 
+          _pinl_1648_new_idx = _cat_VxV_( _flat_259, _pinl_1647_iv); 
+          _ivesli_6351 = _vect2offset_( _isaa_3669_array, _pinl_1648_new_idx); 
+          _pinl_1649__flat_154 = _idx_sel_( _ivesli_6351, array); 
+        } : _pinl_1649__flat_154 ; 
+        /* Partn */
+        default partition( _pinl_1647_iv (IDXS:_wlidx_6287__flat_258) ):
+        { 
+        } : _pinl_1646__flat_151 ; 
+         } :
+      genarray( _pinl_1644_new_shape, _pinl_1646__flat_151, IDX(_wlidx_6287__flat_258)); 
+  return( _flat_258); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+float[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , float[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6352 { , NN } ; 
+  int _wlidx_6288__flat_256 { , NN } ; 
+  int[.] _isaa_3701_array { , NN } ; 
+  float _pinl_1660__flat_145 { , NN } ; 
+  int[.] _pinl_1659_new_idx { , NN } ; 
+  int[.] _pinl_1658_iv { , NN } ; 
+  float{0.0...} _pinl_1657__flat_142 { , NN } ; 
+  int[.] _pinl_1656__flat_143 { , NN } ; 
+  int[.] _pinl_1655_new_shape { , NN } ; 
+  float[*] _flat_256 { , NN } ; 
+  int[1] _flat_257 { , NN } ; 
+
+  _isaa_3701_array = _shape_A_( array); 
+  _flat_257 = [ idx ]; 
+  _pinl_1655_new_shape = _drop_SxV_( 1, _isaa_3701_array); 
+  _pinl_1656__flat_143 = _mul_SxV_( 0, _pinl_1655_new_shape); 
+  _pinl_1657__flat_142 = 0.0f; 
+  _flat_256 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1656__flat_143 <= _pinl_1658_iv (IDXS:_wlidx_6288__flat_256) < _pinl_1655_new_shape)
+        { 
+          _pinl_1659_new_idx = _cat_VxV_( _flat_257, _pinl_1658_iv); 
+          _ivesli_6352 = _vect2offset_( _isaa_3701_array, _pinl_1659_new_idx); 
+          _pinl_1660__flat_145 = _idx_sel_( _ivesli_6352, array); 
+        } : _pinl_1660__flat_145 ; 
+        /* Partn */
+        default partition( _pinl_1658_iv (IDXS:_wlidx_6288__flat_256) ):
+        { 
+        } : _pinl_1657__flat_142 ; 
+         } :
+      genarray( _pinl_1655_new_shape, _pinl_1657__flat_142, IDX(_wlidx_6288__flat_256)); 
+  return( _flat_256); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::_selSxADistmemLocal(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[*] sacprelude_p::_selSxADistmemLocal( int idx { ,NN } , int[*] array { ,NN } )
+/*
+ *  _selSxADistmemLocal ::  ---
+ */
+{ 
+  int _ivesli_6353 { , NN } ; 
+  int _wlidx_6289__flat_254 { , NN } ; 
+  int{0} _isaa_3735_idx { , NN } ; 
+  int[.] _isaa_3733_array { , NN } ; 
+  int _pinl_1671__flat_136 { , NN } ; 
+  int[.] _pinl_1670_new_idx { , NN } ; 
+  int[.] _pinl_1669_iv { , NN } ; 
+  int[.] _pinl_1667__flat_134 { , NN } ; 
+  int[.] _pinl_1666_new_shape { , NN } ; 
+  int[*] _flat_254 { , NN } ; 
+  int[1] _flat_255 { , NN } ; 
+
+  _isaa_3733_array = _shape_A_( array); 
+  _isaa_3735_idx = 0; 
+  _flat_255 = [ idx ]; 
+  _pinl_1666_new_shape = _drop_SxV_( 1, _isaa_3733_array); 
+  _pinl_1667__flat_134 = _mul_SxV_( 0, _pinl_1666_new_shape); 
+  _flat_254 = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_pinl_1667__flat_134 <= _pinl_1669_iv (IDXS:_wlidx_6289__flat_254) < _pinl_1666_new_shape)
+        { 
+          _pinl_1670_new_idx = _cat_VxV_( _flat_255, _pinl_1669_iv); 
+          _ivesli_6353 = _vect2offset_( _isaa_3733_array, _pinl_1670_new_idx); 
+          _pinl_1671__flat_136 = _idx_sel_( _ivesli_6353, array); 
+        } : _pinl_1671__flat_136 ; 
+        /* Partn */
+        default partition( _pinl_1669_iv (IDXS:_wlidx_6289__flat_254) ):
+        { 
+        } : _isaa_3735_idx ; 
+         } :
+      genarray( _pinl_1666_new_shape, _isaa_3735_idx, IDX(_wlidx_6289__flat_254)); 
+  return( _flat_254); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulonglong{0} sacprelude_p::zero( ulonglong[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  ulonglong{0} _flat_295 { , NN } ; 
+
+  _flat_295 = 0ULL; 
+  return( _flat_295); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulong{0} sacprelude_p::zero( ulong[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  ulong{0} _flat_294 { , NN } ; 
+
+  _flat_294 = 0ul; 
+  return( _flat_294); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+uint{0} sacprelude_p::zero( uint[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  uint{0} _flat_293 { , NN } ; 
+
+  _flat_293 = 0ui; 
+  return( _flat_293); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ushort{0} sacprelude_p::zero( ushort[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  ushort{0} _flat_292 { , NN } ; 
+
+  _flat_292 = 0us; 
+  return( _flat_292); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ubyte{} sacprelude_p::zero( ubyte[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  ubyte{} _flat_291 { , NN } ; 
+
+  _flat_291 = 0ub; 
+  return( _flat_291); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+longlong{0} sacprelude_p::zero( longlong[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  longlong{0} _flat_290 { , NN } ; 
+
+  _flat_290 = 0LL; 
+  return( _flat_290); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+long{0} sacprelude_p::zero( long[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  long{0} _flat_289 { , NN } ; 
+
+  _flat_289 = 0l; 
+  return( _flat_289); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+short{0} sacprelude_p::zero( short[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  short{0} _flat_288 { , NN } ; 
+
+  _flat_288 = 0s; 
+  return( _flat_288); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+byte{} sacprelude_p::zero( byte[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  byte{} _flat_287 { , NN } ; 
+
+  _flat_287 = 0b; 
+  return( _flat_287); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool{0} sacprelude_p::zero( bool[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  bool{0} _flat_286 { , NN } ; 
+
+  _flat_286 = false; 
+  return( _flat_286); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+char{ } sacprelude_p::zero( char[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  char{ } _flat_285 { , NN } ; 
+
+  _flat_285 = ' '; 
+  return( _flat_285); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+float{0.0...} sacprelude_p::zero( float[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  float{0.0...} _flat_284 { , NN } ; 
+
+  _flat_284 = 0.0f; 
+  return( _flat_284); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+double{0.0...} sacprelude_p::zero( double[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  double{0.0...} _flat_283 { , NN } ; 
+
+  _flat_283 = 0.0; 
+  return( _flat_283); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int{0} sacprelude_p::zero( int[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  int{0} _flat_282 { , NN } ; 
+
+  _flat_282 = 0; 
+  return( _flat_282); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( ulonglong[*] A { ,NN } , ulonglong[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6355 { , NN } ; 
+  int _ivesli_6354 { , NN } ; 
+  int[.] _isaa_3810_A { , NN } ; 
+  int[.] _isaa_3807_B { , NN } ; 
+  ulonglong _ctz_1736 { , NN } ; 
+  bool _pinl_1672__flat_298 { , NN } ; 
+  bool _ea_782_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_408 { , NN } ; 
+  ulonglong _flat_409 { , NN } ; 
+  ulonglong _flat_410 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_403 { , NN } ; 
+  int[.] _flat_404 { , NN } ; 
+
+  _isaa_3807_B = _shape_A_( B); 
+  _isaa_3810_A = _shape_A_( A); 
+  _flat_404 = _mul_SxV_( 0, _isaa_3810_A); 
+  _flat_403 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_404 <= iv < _isaa_3810_A)
+        { 
+          _ea_782_res = _accu_( iv); 
+          _ivesli_6355 = _vect2offset_( _isaa_3807_B, iv); 
+          _flat_410 = _idx_sel_( _ivesli_6355, B); 
+          _ivesli_6354 = _vect2offset_( _isaa_3810_A, iv); 
+          _flat_409 = _idx_sel_( _ivesli_6354, A); 
+          _ctz_1736 = _sub_SxS_( _flat_409, _flat_410); 
+          _flat_408 = _eq_SxS_( _ctz_1736, 0ULL); 
+          _pinl_1672__flat_298 = _and_SxS_( _ea_782_res, _flat_408); 
+        } : _pinl_1672__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_403); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( ulong[*] A { ,NN } , ulong[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6357 { , NN } ; 
+  int _ivesli_6356 { , NN } ; 
+  int[.] _isaa_3821_A { , NN } ; 
+  int[.] _isaa_3818_B { , NN } ; 
+  ulong _ctz_1739 { , NN } ; 
+  bool _pinl_1673__flat_298 { , NN } ; 
+  bool _ea_784_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_400 { , NN } ; 
+  ulong _flat_401 { , NN } ; 
+  ulong _flat_402 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_395 { , NN } ; 
+  int[.] _flat_396 { , NN } ; 
+
+  _isaa_3818_B = _shape_A_( B); 
+  _isaa_3821_A = _shape_A_( A); 
+  _flat_396 = _mul_SxV_( 0, _isaa_3821_A); 
+  _flat_395 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_396 <= iv < _isaa_3821_A)
+        { 
+          _ea_784_res = _accu_( iv); 
+          _ivesli_6357 = _vect2offset_( _isaa_3818_B, iv); 
+          _flat_402 = _idx_sel_( _ivesli_6357, B); 
+          _ivesli_6356 = _vect2offset_( _isaa_3821_A, iv); 
+          _flat_401 = _idx_sel_( _ivesli_6356, A); 
+          _ctz_1739 = _sub_SxS_( _flat_401, _flat_402); 
+          _flat_400 = _eq_SxS_( _ctz_1739, 0ul); 
+          _pinl_1673__flat_298 = _and_SxS_( _ea_784_res, _flat_400); 
+        } : _pinl_1673__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_395); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( uint[*] A { ,NN } , uint[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6359 { , NN } ; 
+  int _ivesli_6358 { , NN } ; 
+  int[.] _isaa_3832_A { , NN } ; 
+  int[.] _isaa_3829_B { , NN } ; 
+  uint _ctz_1742 { , NN } ; 
+  bool _pinl_1674__flat_298 { , NN } ; 
+  bool _ea_786_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_392 { , NN } ; 
+  uint _flat_393 { , NN } ; 
+  uint _flat_394 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_387 { , NN } ; 
+  int[.] _flat_388 { , NN } ; 
+
+  _isaa_3829_B = _shape_A_( B); 
+  _isaa_3832_A = _shape_A_( A); 
+  _flat_388 = _mul_SxV_( 0, _isaa_3832_A); 
+  _flat_387 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_388 <= iv < _isaa_3832_A)
+        { 
+          _ea_786_res = _accu_( iv); 
+          _ivesli_6359 = _vect2offset_( _isaa_3829_B, iv); 
+          _flat_394 = _idx_sel_( _ivesli_6359, B); 
+          _ivesli_6358 = _vect2offset_( _isaa_3832_A, iv); 
+          _flat_393 = _idx_sel_( _ivesli_6358, A); 
+          _ctz_1742 = _sub_SxS_( _flat_393, _flat_394); 
+          _flat_392 = _eq_SxS_( _ctz_1742, 0ui); 
+          _pinl_1674__flat_298 = _and_SxS_( _ea_786_res, _flat_392); 
+        } : _pinl_1674__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_387); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( ushort[*] A { ,NN } , ushort[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6361 { , NN } ; 
+  int _ivesli_6360 { , NN } ; 
+  int[.] _isaa_3843_A { , NN } ; 
+  int[.] _isaa_3840_B { , NN } ; 
+  ushort _ctz_1745 { , NN } ; 
+  bool _pinl_1675__flat_298 { , NN } ; 
+  bool _ea_788_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_384 { , NN } ; 
+  ushort _flat_385 { , NN } ; 
+  ushort _flat_386 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_379 { , NN } ; 
+  int[.] _flat_380 { , NN } ; 
+
+  _isaa_3840_B = _shape_A_( B); 
+  _isaa_3843_A = _shape_A_( A); 
+  _flat_380 = _mul_SxV_( 0, _isaa_3843_A); 
+  _flat_379 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_380 <= iv < _isaa_3843_A)
+        { 
+          _ea_788_res = _accu_( iv); 
+          _ivesli_6361 = _vect2offset_( _isaa_3840_B, iv); 
+          _flat_386 = _idx_sel_( _ivesli_6361, B); 
+          _ivesli_6360 = _vect2offset_( _isaa_3843_A, iv); 
+          _flat_385 = _idx_sel_( _ivesli_6360, A); 
+          _ctz_1745 = _sub_SxS_( _flat_385, _flat_386); 
+          _flat_384 = _eq_SxS_( _ctz_1745, 0us); 
+          _pinl_1675__flat_298 = _and_SxS_( _ea_788_res, _flat_384); 
+        } : _pinl_1675__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_379); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( ubyte[*] A { ,NN } , ubyte[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6363 { , NN } ; 
+  int _ivesli_6362 { , NN } ; 
+  int[.] _isaa_3854_A { , NN } ; 
+  int[.] _isaa_3851_B { , NN } ; 
+  ubyte _ctz_1748 { , NN } ; 
+  bool _pinl_1676__flat_298 { , NN } ; 
+  bool _ea_790_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_376 { , NN } ; 
+  ubyte _flat_377 { , NN } ; 
+  ubyte _flat_378 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_371 { , NN } ; 
+  int[.] _flat_372 { , NN } ; 
+
+  _isaa_3851_B = _shape_A_( B); 
+  _isaa_3854_A = _shape_A_( A); 
+  _flat_372 = _mul_SxV_( 0, _isaa_3854_A); 
+  _flat_371 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_372 <= iv < _isaa_3854_A)
+        { 
+          _ea_790_res = _accu_( iv); 
+          _ivesli_6363 = _vect2offset_( _isaa_3851_B, iv); 
+          _flat_378 = _idx_sel_( _ivesli_6363, B); 
+          _ivesli_6362 = _vect2offset_( _isaa_3854_A, iv); 
+          _flat_377 = _idx_sel_( _ivesli_6362, A); 
+          _ctz_1748 = _sub_SxS_( _flat_377, _flat_378); 
+          _flat_376 = _eq_SxS_( _ctz_1748, 0ub); 
+          _pinl_1676__flat_298 = _and_SxS_( _ea_790_res, _flat_376); 
+        } : _pinl_1676__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_371); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( longlong[*] A { ,NN } , longlong[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6365 { , NN } ; 
+  int _ivesli_6364 { , NN } ; 
+  int[.] _isaa_3865_A { , NN } ; 
+  int[.] _isaa_3862_B { , NN } ; 
+  longlong _ctz_1751 { , NN } ; 
+  bool _pinl_1677__flat_298 { , NN } ; 
+  bool _ea_792_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_368 { , NN } ; 
+  longlong _flat_369 { , NN } ; 
+  longlong _flat_370 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_363 { , NN } ; 
+  int[.] _flat_364 { , NN } ; 
+
+  _isaa_3862_B = _shape_A_( B); 
+  _isaa_3865_A = _shape_A_( A); 
+  _flat_364 = _mul_SxV_( 0, _isaa_3865_A); 
+  _flat_363 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_364 <= iv < _isaa_3865_A)
+        { 
+          _ea_792_res = _accu_( iv); 
+          _ivesli_6365 = _vect2offset_( _isaa_3862_B, iv); 
+          _flat_370 = _idx_sel_( _ivesli_6365, B); 
+          _ivesli_6364 = _vect2offset_( _isaa_3865_A, iv); 
+          _flat_369 = _idx_sel_( _ivesli_6364, A); 
+          _ctz_1751 = _sub_SxS_( _flat_369, _flat_370); 
+          _flat_368 = _eq_SxS_( _ctz_1751, 0LL); 
+          _pinl_1677__flat_298 = _and_SxS_( _ea_792_res, _flat_368); 
+        } : _pinl_1677__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_363); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( long[*] A { ,NN } , long[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6367 { , NN } ; 
+  int _ivesli_6366 { , NN } ; 
+  int[.] _isaa_3877_A { , NN } ; 
+  int[.] _isaa_3874_B { , NN } ; 
+  long _ctz_1755 { , NN } ; 
+  bool _pinl_1678__flat_298 { , NN } ; 
+  bool _ea_794_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_360 { , NN } ; 
+  long _flat_361 { , NN } ; 
+  long _flat_362 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_355 { , NN } ; 
+  int[.] _flat_356 { , NN } ; 
+
+  _isaa_3874_B = _shape_A_( B); 
+  _isaa_3877_A = _shape_A_( A); 
+  _flat_356 = _mul_SxV_( 0, _isaa_3877_A); 
+  _flat_355 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_356 <= iv < _isaa_3877_A)
+        { 
+          _ea_794_res = _accu_( iv); 
+          _ivesli_6367 = _vect2offset_( _isaa_3874_B, iv); 
+          _flat_362 = _idx_sel_( _ivesli_6367, B); 
+          _ivesli_6366 = _vect2offset_( _isaa_3877_A, iv); 
+          _flat_361 = _idx_sel_( _ivesli_6366, A); 
+          _ctz_1755 = _sub_SxS_( _flat_361, _flat_362); 
+          _flat_360 = _eq_SxS_( _ctz_1755, 0l); 
+          _pinl_1678__flat_298 = _and_SxS_( _ea_794_res, _flat_360); 
+        } : _pinl_1678__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_355); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( short[*] A { ,NN } , short[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6369 { , NN } ; 
+  int _ivesli_6368 { , NN } ; 
+  int[.] _isaa_3889_A { , NN } ; 
+  int[.] _isaa_3886_B { , NN } ; 
+  short _ctz_1759 { , NN } ; 
+  bool _pinl_1679__flat_298 { , NN } ; 
+  bool _ea_796_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_352 { , NN } ; 
+  short _flat_353 { , NN } ; 
+  short _flat_354 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_347 { , NN } ; 
+  int[.] _flat_348 { , NN } ; 
+
+  _isaa_3886_B = _shape_A_( B); 
+  _isaa_3889_A = _shape_A_( A); 
+  _flat_348 = _mul_SxV_( 0, _isaa_3889_A); 
+  _flat_347 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_348 <= iv < _isaa_3889_A)
+        { 
+          _ea_796_res = _accu_( iv); 
+          _ivesli_6369 = _vect2offset_( _isaa_3886_B, iv); 
+          _flat_354 = _idx_sel_( _ivesli_6369, B); 
+          _ivesli_6368 = _vect2offset_( _isaa_3889_A, iv); 
+          _flat_353 = _idx_sel_( _ivesli_6368, A); 
+          _ctz_1759 = _sub_SxS_( _flat_353, _flat_354); 
+          _flat_352 = _eq_SxS_( _ctz_1759, 0s); 
+          _pinl_1679__flat_298 = _and_SxS_( _ea_796_res, _flat_352); 
+        } : _pinl_1679__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_347); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( byte[*] A { ,NN } , byte[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6371 { , NN } ; 
+  int _ivesli_6370 { , NN } ; 
+  int[.] _isaa_3901_A { , NN } ; 
+  int[.] _isaa_3898_B { , NN } ; 
+  byte _ctz_1763 { , NN } ; 
+  bool _pinl_1680__flat_298 { , NN } ; 
+  bool _ea_798_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_344 { , NN } ; 
+  byte _flat_345 { , NN } ; 
+  byte _flat_346 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_339 { , NN } ; 
+  int[.] _flat_340 { , NN } ; 
+
+  _isaa_3898_B = _shape_A_( B); 
+  _isaa_3901_A = _shape_A_( A); 
+  _flat_340 = _mul_SxV_( 0, _isaa_3901_A); 
+  _flat_339 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_340 <= iv < _isaa_3901_A)
+        { 
+          _ea_798_res = _accu_( iv); 
+          _ivesli_6371 = _vect2offset_( _isaa_3898_B, iv); 
+          _flat_346 = _idx_sel_( _ivesli_6371, B); 
+          _ivesli_6370 = _vect2offset_( _isaa_3901_A, iv); 
+          _flat_345 = _idx_sel_( _ivesli_6370, A); 
+          _ctz_1763 = _sub_SxS_( _flat_345, _flat_346); 
+          _flat_344 = _eq_SxS_( _ctz_1763, 0b); 
+          _pinl_1680__flat_298 = _and_SxS_( _ea_798_res, _flat_344); 
+        } : _pinl_1680__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_339); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( char[*] A { ,NN } , char[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6373 { , NN } ; 
+  int _ivesli_6372 { , NN } ; 
+  int[.] _isaa_3913_A { , NN } ; 
+  int[.] _isaa_3910_B { , NN } ; 
+  bool _pinl_1681__flat_298 { , NN } ; 
+  bool _ea_800_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_336 { , NN } ; 
+  char _flat_337 { , NN } ; 
+  char _flat_338 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_331 { , NN } ; 
+  int[.] _flat_332 { , NN } ; 
+
+  _isaa_3910_B = _shape_A_( B); 
+  _isaa_3913_A = _shape_A_( A); 
+  _flat_332 = _mul_SxV_( 0, _isaa_3913_A); 
+  _flat_331 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_332 <= iv < _isaa_3913_A)
+        { 
+          _ea_800_res = _accu_( iv); 
+          _ivesli_6373 = _vect2offset_( _isaa_3910_B, iv); 
+          _flat_338 = _idx_sel_( _ivesli_6373, B); 
+          _ivesli_6372 = _vect2offset_( _isaa_3913_A, iv); 
+          _flat_337 = _idx_sel_( _ivesli_6372, A); 
+          _flat_336 = _eq_SxS_( _flat_337, _flat_338); 
+          _pinl_1681__flat_298 = _and_SxS_( _ea_800_res, _flat_336); 
+        } : _pinl_1681__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_331); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( bool[*] A { ,NN } , bool[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6375 { , NN } ; 
+  int _ivesli_6374 { , NN } ; 
+  int[.] _isaa_3923_A { , NN } ; 
+  int[.] _isaa_3920_B { , NN } ; 
+  bool _pinl_1682__flat_298 { , NN } ; 
+  bool _ea_802_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_328 { , NN } ; 
+  bool _flat_329 { , NN } ; 
+  bool _flat_330 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_323 { , NN } ; 
+  int[.] _flat_324 { , NN } ; 
+
+  _isaa_3920_B = _shape_A_( B); 
+  _isaa_3923_A = _shape_A_( A); 
+  _flat_324 = _mul_SxV_( 0, _isaa_3923_A); 
+  _flat_323 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_324 <= iv < _isaa_3923_A)
+        { 
+          _ea_802_res = _accu_( iv); 
+          _ivesli_6375 = _vect2offset_( _isaa_3920_B, iv); 
+          _flat_330 = _idx_sel_( _ivesli_6375, B); 
+          _ivesli_6374 = _vect2offset_( _isaa_3923_A, iv); 
+          _flat_329 = _idx_sel_( _ivesli_6374, A); 
+          _flat_328 = _eq_SxS_( _flat_329, _flat_330); 
+          _pinl_1682__flat_298 = _and_SxS_( _ea_802_res, _flat_328); 
+        } : _pinl_1682__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_323); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( double[*] A { ,NN } , double[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6377 { , NN } ; 
+  int _ivesli_6376 { , NN } ; 
+  int[.] _isaa_3933_A { , NN } ; 
+  int[.] _isaa_3930_B { , NN } ; 
+  double _ctz_1767 { , NN } ; 
+  bool _pinl_1683__flat_298 { , NN } ; 
+  bool _ea_804_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_320 { , NN } ; 
+  double _flat_321 { , NN } ; 
+  double _flat_322 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_315 { , NN } ; 
+  int[.] _flat_316 { , NN } ; 
+
+  _isaa_3930_B = _shape_A_( B); 
+  _isaa_3933_A = _shape_A_( A); 
+  _flat_316 = _mul_SxV_( 0, _isaa_3933_A); 
+  _flat_315 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_316 <= iv < _isaa_3933_A)
+        { 
+          _ea_804_res = _accu_( iv); 
+          _ivesli_6377 = _vect2offset_( _isaa_3930_B, iv); 
+          _flat_322 = _idx_sel_( _ivesli_6377, B); 
+          _ivesli_6376 = _vect2offset_( _isaa_3933_A, iv); 
+          _flat_321 = _idx_sel_( _ivesli_6376, A); 
+          _ctz_1767 = _sub_SxS_( _flat_321, _flat_322); 
+          _flat_320 = _eq_SxS_( _ctz_1767, 0.0); 
+          _pinl_1683__flat_298 = _and_SxS_( _ea_804_res, _flat_320); 
+        } : _pinl_1683__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_315); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( float[*] A { ,NN } , float[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6379 { , NN } ; 
+  int _ivesli_6378 { , NN } ; 
+  int[.] _isaa_3945_A { , NN } ; 
+  int[.] _isaa_3942_B { , NN } ; 
+  float _ctz_1771 { , NN } ; 
+  bool _pinl_1684__flat_298 { , NN } ; 
+  bool _ea_806_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_312 { , NN } ; 
+  float _flat_313 { , NN } ; 
+  float _flat_314 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_307 { , NN } ; 
+  int[.] _flat_308 { , NN } ; 
+
+  _isaa_3942_B = _shape_A_( B); 
+  _isaa_3945_A = _shape_A_( A); 
+  _flat_308 = _mul_SxV_( 0, _isaa_3945_A); 
+  _flat_307 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_308 <= iv < _isaa_3945_A)
+        { 
+          _ea_806_res = _accu_( iv); 
+          _ivesli_6379 = _vect2offset_( _isaa_3942_B, iv); 
+          _flat_314 = _idx_sel_( _ivesli_6379, B); 
+          _ivesli_6378 = _vect2offset_( _isaa_3945_A, iv); 
+          _flat_313 = _idx_sel_( _ivesli_6378, A); 
+          _ctz_1771 = _sub_SxS_( _flat_313, _flat_314); 
+          _flat_312 = _eq_SxS_( _ctz_1771, 0.0f); 
+          _pinl_1684__flat_298 = _and_SxS_( _ea_806_res, _flat_312); 
+        } : _pinl_1684__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_307); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( int[*] A { ,NN } , int[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesli_6381 { , NN } ; 
+  int _ivesli_6380 { , NN } ; 
+  int[.] _isaa_3957_A { , NN } ; 
+  int[.] _isaa_3954_B { , NN } ; 
+  int _ctz_1775 { , NN } ; 
+  bool _pinl_1685__flat_298 { , NN } ; 
+  bool _ea_808_res { , NN } ; 
+  bool res { , NN } ; 
+  bool _flat_304 { , NN } ; 
+  int _flat_305 { , NN } ; 
+  int _flat_306 { , NN } ; 
+  int[.] iv { , NN } ; 
+  bool{1} _flat_299 { , NN } ; 
+  int[.] _flat_300 { , NN } ; 
+
+  _isaa_3954_B = _shape_A_( B); 
+  _isaa_3957_A = _shape_A_( A); 
+  _flat_300 = _mul_SxV_( 0, _isaa_3957_A); 
+  _flat_299 = true; 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        (_flat_300 <= iv < _isaa_3957_A)
+        { 
+          _ea_808_res = _accu_( iv); 
+          _ivesli_6381 = _vect2offset_( _isaa_3954_B, iv); 
+          _flat_306 = _idx_sel_( _ivesli_6381, B); 
+          _ivesli_6380 = _vect2offset_( _isaa_3957_A, iv); 
+          _flat_305 = _idx_sel_( _ivesli_6380, A); 
+          _ctz_1775 = _sub_SxS_( _flat_305, _flat_306); 
+          _flat_304 = _eq_SxS_( _ctz_1775, 0); 
+          _pinl_1685__flat_298 = _and_SxS_( _ea_808_res, _flat_304); 
+        } : _pinl_1685__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_299); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::isPartitionIntersectNull(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[.] sacprelude_p::isPartitionIntersectNull( int[.] idxmin { ,NN } , int[.] idxmax { ,NN } , int[.] bound1 { ,NN } , int[.] bound2 { ,NN } )
+/*
+ *  isPartitionIntersectNull ::  ---
+ */
+{ 
+  int[.] _ctz_1781 { , NN } ; 
+  int[.] _ctz_1779 { , NN } ; 
+  bool[.] z { , NN } ; 
+  bool[.] _flat_459 { , NN } ; 
+  bool[.] _flat_460 { , NN } ; 
+
+  _ctz_1781 = _sub_VxV_( idxmin, bound2); 
+  _flat_460 = _ge_VxS_( _ctz_1781, 0); 
+  _ctz_1779 = _sub_VxV_( idxmax, bound1); 
+  _flat_459 = _lt_VxS_( _ctz_1779, 0); 
+  z = _or_VxV_( _flat_459, _flat_460); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::isPartitionIntersectNull(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[.] sacprelude_p::isPartitionIntersectNull( int idxmin { ,NN } , int idxmax { ,NN } , int[.] bound1 { ,NN } , int[.] bound2 { ,NN } )
+/*
+ *  isPartitionIntersectNull ::  ---
+ */
+{ 
+  int[.] _ctz_1789 { , NN } ; 
+  int[.] _ctz_1787 { , NN } ; 
+  bool[.] z { , NN } ; 
+  bool[.] _flat_461 { , NN } ; 
+  bool[.] _flat_462 { , NN } ; 
+
+  _ctz_1789 = _sub_SxV_( idxmin, bound2); 
+  _flat_462 = _ge_VxS_( _ctz_1789, 0); 
+  _ctz_1787 = _sub_SxV_( idxmax, bound1); 
+  _flat_461 = _lt_VxS_( _ctz_1787, 0); 
+  z = _or_VxV_( _flat_461, _flat_462); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionMin(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int sacprelude_p::partitionMin( int x { ,NN } , int y { ,NN } )
+/*
+ *  partitionMin ::  ---
+ */
+{ 
+  int z { , NN } ; 
+
+  z = _min_SxS_( y, x); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionMax(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int sacprelude_p::partitionMax( int x { ,NN } , int y { ,NN } )
+/*
+ *  partitionMax ::  ---
+ */
+{ 
+  int z { , NN } ; 
+
+  z = _max_SxS_( y, x); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::isPartitionIntersect1Part(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[.] sacprelude_p::isPartitionIntersect1Part( int[.] idxmin { ,NN } , int[.] idxmax { ,NN } , int[.] bound1 { ,NN } , int[.] bound2 { ,NN } )
+/*
+ *  isPartitionIntersect1Part ::  ---
+ */
+{ 
+  int[.] _ctz_1797 { , NN } ; 
+  int[.] _ctz_1795 { , NN } ; 
+  bool[.] z { , NN } ; 
+  bool[.] _flat_463 { , NN } ; 
+  bool[.] _flat_464 { , NN } ; 
+
+  _ctz_1797 = _sub_VxV_( idxmax, bound2); 
+  _flat_464 = _le_VxS_( _ctz_1797, 0); 
+  _ctz_1795 = _sub_VxV_( idxmin, bound1); 
+  _flat_463 = _ge_VxS_( _ctz_1795, 0); 
+  z = _and_VxV_( _flat_463, _flat_464); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::isPartitionIntersect1Part(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[.] sacprelude_p::isPartitionIntersect1Part( int idxmin { ,NN } , int idxmax { ,NN } , int[.] bound1 { ,NN } , int[.] bound2 { ,NN } )
+/*
+ *  isPartitionIntersect1Part ::  ---
+ */
+{ 
+  int[.] _ctz_1805 { , NN } ; 
+  int[.] _ctz_1803 { , NN } ; 
+  bool[.] z { , NN } ; 
+  bool[.] _flat_465 { , NN } ; 
+  bool[.] _flat_466 { , NN } ; 
+
+  _ctz_1805 = _sub_SxV_( idxmax, bound2); 
+  _flat_466 = _le_VxS_( _ctz_1805, 0); 
+  _ctz_1803 = _sub_SxV_( idxmin, bound1); 
+  _flat_465 = _ge_VxS_( _ctz_1803, 0); 
+  z = _and_VxV_( _flat_465, _flat_466); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionIntersectMax(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[.] sacprelude_p::partitionIntersectMax( int[.] PWLbound1 { ,NN } , int[.] ivmin { ,NN } )
+/*
+ *  partitionIntersectMax ::  ---
+ */
+{ 
+  int[.] z { , NN } ; 
+
+  z = _max_VxV_( ivmin, PWLbound1); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionIntersectMax(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[.] sacprelude_p::partitionIntersectMax( int[.] PWLbound1 { ,NN } , int ivmin { ,NN } )
+/*
+ *  partitionIntersectMax ::  ---
+ */
+{ 
+  int[.] z { , NN } ; 
+
+  z = _max_SxV_( ivmin, PWLbound1); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionIntersectMin(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[.] sacprelude_p::partitionIntersectMin( int[.] PWLbound2 { ,NN } , int[.] ivmax { ,NN } )
+/*
+ *  partitionIntersectMin ::  ---
+ */
+{ 
+  int[.] z { , NN } ; 
+
+  z = _min_VxV_( ivmax, PWLbound2); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionIntersectMin(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[.] sacprelude_p::partitionIntersectMin( int[.] PWLbound2 { ,NN } , int ivmax { ,NN } )
+/*
+ *  partitionIntersectMin ::  ---
+ */
+{ 
+  int[.] z { , NN } ; 
+
+  z = _min_SxV_( ivmax, PWLbound2); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::prod(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int sacprelude_p::prod( int[.] v { ,NN } )
+/*
+ *  prod ::  ---
+ */
+{ 
+  int _ivesli_6382 { , NN } ; 
+  int[1] _isaa_4090_v { , NN } ; 
+  int{1} _isaa_4089_v { , NN } ; 
+  int _pinl_1686__flat_411 { , NN } ; 
+  int _wlbsc_874_sc_e { , NN } ; 
+  int _ea_810_res { , NN } ; 
+  int res { , NN } ; 
+  int _flat_417 { , NN } ; 
+  int i { , NN } ; 
+  int[1] _flat_416 { , NN } ; 
+  int{0} _flat_414 { , NN } ; 
+
+  _isaa_4089_v = 1; 
+  _isaa_4090_v = _shape_A_( v); 
+  _flat_414 = 0; 
+  _wlbsc_874_sc_e = _idx_sel_( _flat_414, _isaa_4090_v); 
+  res = with      /** FOLDABLE (all gen's const) **/
+      /** REFERENCED: 1 (total num refs) **/
+ {
+        /* Partn */
+        ([ 0 ] <= _flat_416=[i] < [ _wlbsc_874_sc_e ] genwidth [ _wlbsc_874_sc_e ])
+        { 
+          _ea_810_res = _accu_( _flat_416); 
+          _ivesli_6382 = _idxs2offset_( _isaa_4090_v, i); 
+          _flat_417 = _idx_sel_( _ivesli_6382, v); 
+          _pinl_1686__flat_411 = _mul_SxS_( _ea_810_res, _flat_417); 
+        } : _pinl_1686__flat_411 ; 
+         } :
+      fold( sacprelude_p::*(), _isaa_4089_v); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionSlicer(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[.], int[.], int[.], int[.] sacprelude_p::partitionSlicer( int[.] min { ,NN } , int[.] max { ,NN } , int axis { ,NN } , int[.] lb { ,NN } , int[.] ub { ,NN } )
+/*
+ *  partitionSlicer ::  ---
+ */
+{ 
+  int _pinl_1687_z { , NN } ; 
+  int[.] new_max { , NN } ; 
+  int[.] new_min { , NN } ; 
+  int[.] min_upper { , NN } ; 
+  int[.] max_lower { , NN } ; 
+  int _flat_435 { , NN } ; 
+  int lb_i { , NN } ; 
+
+  lb_i = _idx_sel_( axis, lb); 
+  _flat_435 = _idx_sel_( axis, ub); 
+  _pinl_1687_z = _max_SxS_( _flat_435, lb_i); 
+  max_lower = _idx_modarray_AxSxS_( max, axis, lb_i); 
+  min_upper = _idx_modarray_AxSxS_( min, axis, _pinl_1687_z); 
+  new_min = _idx_modarray_AxSxS_( min, axis, lb_i); 
+  new_max = _idx_modarray_AxSxS_( max, axis, _pinl_1687_z); 
+  return( max_lower, min_upper, new_min, new_max); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::gridFiller(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[.], int[.], int[.] sacprelude_p::gridFiller( int[.] lb { ,NN } , int[.] ub { ,NN } , int[.] wdth { ,NN } , int dim { ,NN } , int[.] maxwidth { ,NN } )
+/*
+ *  gridFiller ::  ---
+ */
+{ 
+  int _pinl_1688_z { , NN } ; 
+  int _pinl_1689_z { , NN } ; 
+  int[.] nmaxwidth { , NN } ; 
+  int[.] nwidth { , NN } ; 
+  int[.] nlb { , NN } ; 
+  int _flat_448 { , NN } ; 
+  int _flat_449 { , NN } ; 
+  int _flat_441 { , NN } ; 
+  int _flat_442 { , NN } ; 
+  int _flat_444 { , NN } ; 
+  int _flat_446 { , NN } ; 
+
+  _flat_446 = _idx_sel_( dim, ub); 
+  _flat_444 = _idx_sel_( dim, wdth); 
+  _flat_442 = _idx_sel_( dim, lb); 
+  _flat_441 = _add_SxS_( _flat_442, _flat_444); 
+  _pinl_1688_z = _min_SxS_( _flat_441, _flat_446); 
+  _flat_449 = _idx_sel_( dim, maxwidth); 
+  _flat_448 = _sub_SxS_( _flat_449, _flat_444); 
+  _pinl_1689_z = _max_SxS_( _flat_448, 0); 
+  nlb = _idx_modarray_AxSxS_( lb, dim, _pinl_1688_z); 
+  nwidth = _idx_modarray_AxSxS_( maxwidth, dim, _pinl_1689_z); 
+  nmaxwidth = _idx_modarray_AxSxS_( maxwidth, dim, _flat_444); 
+  return( nlb, nwidth, nmaxwidth); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::*(...) [ body ]
+ ****************************************************************************/
+inline
+int sacprelude_p::*( int a { ,NN } , int b { ,NN } )
+/*
+ *  * ::  ---
+ */
+{ 
+  int _flat_411 { , NN } ; 
+
+  _flat_411 = _mul_SxS_( b, a); 
+  return( _flat_411); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::and(...) [ body ]
+ ****************************************************************************/
+inline
+bool sacprelude_p::and( bool a { ,NN } , bool b { ,NN } )
+/*
+ *  and ::  ---
+ */
+{ 
+  bool _flat_298 { , NN } ; 
+
+  _flat_298 = _and_SxS_( b, a); 
+  return( _flat_298); 
+}
+
+
+/*-----------------------------------------------*/

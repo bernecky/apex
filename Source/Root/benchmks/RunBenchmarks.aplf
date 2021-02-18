@@ -2,8 +2,7 @@
  ⍝ Run all APEX benchmarks; save results
  ⍝ Argument is something like '[a-h]*'
  b←benchmks nm
- b←b,¨E'blist.cu'
- i←∨/¨(E'AKD')∊¨b
+ i←∨/'AKD'⍷D b
  akd←i/b
  aks←(~i)/b
 ⍝

@@ -1,4 +1,4 @@
- r←EmitOutputFile y;wsid;APEXVersion;cuasts;cudefinedfns;cuprolog;code;b;cufnm;txt
+ r←EmitOutputFile y;wsid;APEXVersion;cuasts;cudefinedfns;cuprolog;code;b;cufnm;txt;mnm
  ⍝# Package the generated SAC code for one Compilation Unit(CU)
  ⍝# and write it to a host file..
  ⍝#  Generated file is written to file in same directory as source.
@@ -10,6 +10,9 @@
  APEXVersion←'Compiled by APEX Version: ',⎕WSID
  cuprolog←cuprolog,(BuildComment APEXVersion,' ',,fts ⎕TS),NL
  cuprolog←cuprolog,GetFileChar #.globals.PathFrag,'stdlib.',#.globals.TargetLanguage
+ mnm←PathFileName fldr
+ cuprolog←((~1∊isDfnMain¨cuasts)/'module ',mnm,';',NL,NL),cuprolog ⍝ If this is SAC module
+ cuprolog←cuprolog,(~1∊isDfnMain¨cuasts)/'export all;',NL,NL
  code←cuprolog,cudefinedfns
  txt←toascii AddNL code
  r←(D 0⌷⎕SH'pwd'),PathDelim,cufnm,'.',#.globals.TargetLanguage

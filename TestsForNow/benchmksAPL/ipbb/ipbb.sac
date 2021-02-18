@@ -1,12 +1,16 @@
+module ipbb;
+
 use Array: all;
-use StdIO : all;
-use Numerical : all;
-use CommandLine: all;
-use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: CLEAR WS2018-10-20 12:00:36.701 */
+/* Compiled by APEX Version: CLEAR WS 2021-02-16 17:44:17.341 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -31,6 +35,8 @@ use Bits: all;
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+export all;
 
 inline bool eqIIB(int x, int y)
 { /* A=B on non-doubles */
@@ -75,7 +81,7 @@ inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
 inline bool[+] ordotandBBBSTARLIKE(bool[+]x, bool[+]y)
 { /* CDC STAR-100 APL Algorithm for inner product */
  /* This computes, for z=x f.g y,
-  *            z[i;] = z[i;]f x[i;j]g y[j;]
+  *		z[i;] = z[i;]f x[i;j]g y[j;]
   *  Thus, it runs stride-1, and we only fetch left argument
   *  elements once. STARLIKE is similar to dotSTAR, except that:
   *   1. "f" is such that we can't avoid the reduce step.
@@ -131,17 +137,19 @@ inline int plusIII(int x, int y)
 { return(ItoI(x)+ItoI(y));
 }
 
-inline bool[+] orBBB(bool[+] x, bool[+] y)
+#ifdef CRUD
+inline bool[+] or	 boolean(?BadType![+] x, ?BadType![+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sy = shape(y);
-         z = with {
-             ( . <= iv <= .) {
-                      xel = x[iv];
-                   yel = y[iv];
-           } : orBBB(xel,yel);
-        } : genarray(sy, false);
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : orBBB(xel,yel);
+        } : genarray(sy, 0);
   return(z);
 }
+#endif // CRUD
 
 
 
@@ -187,37 +195,37 @@ inline int plusslXBIFOLD(bool[.] y)
 }
 
 
-inline bool orBBB(bool x, bool y)
-{ return(BtoB(x) | BtoB(y));
-}
-
-inline bool[+] orBBB(bool x, bool[+] y)
+inline bool[+] or??B(?BadType! x, ?BadType![+] y)
 { /* SxA scalar function */
   xel = toB(x);
   z = with {
-     ( . <= iv <= .) {
-              yel = toB(y[iv]);
-                    } : orBBB(xel,yel);
-  } : genarray(shape(y), false);
+	( . <= iv <= .) {
+        	yel = toB(y[iv]);
+      		} : orBBB(xel,yel);
+	} : genarray(shape(y), 0);
   return(z);
 }
 
 
-inline bool[+] orBBB(bool[+] x, bool y)
+inline bool[+] or??B(?BadType![+] x, ?BadType! y)
 { /* AxS scalar function */
   z = with {
-  ( . <= iv <= .) {
-              xel = x[iv];
-   } : orBBB(xel,y);
-  } : genarray( shape(x), false);
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : or??B(xel,y);
+	} : genarray( shape(x), 0);
   return(z);
 }
 
 
-inline bool[.] comaXBB(bool[+] y)
+inline ?BadType![.] comaX??(?BadType![+] y)
 { /* Ravel of anything with rank>1 */
   z = reshape([prod(shape(y))],y);
   return(z);
+}
+
+inline bool orBBB(bool x, bool y)
+{ return(BtoB(x) | BtoB(y));
 }
 
 inline int ipbbXII(int siz)
@@ -225,18 +233,18 @@ inline int ipbbXII(int siz)
 /*
  ?
 */
-A_23=rhoIII(2,siz);
- A_24=rhoIBB(A_23,[false,true,true,false,false,false]);
-m_0=( A_24);
- A_26=tranXBB( m_0);
- A_27=ordotandBBBSTARLIKE(m_0,A_26);
- A_34=plusslXBIFOLD( A_27);
- A_38=plusslXIIFOLD( A_34);
- r_0=( A_38);
+A_20=rhoIII(2,siz);
+ A_21=rhoIBB(A_20,[false,true,true,false,false,false]);
+m_0=( A_21);
+ A_23=tranXBB( m_0);
+ A_24=ordotandBBBSTARLIKE(m_0,A_23);
+ A_31=plusslXBIFOLD( A_24);
+ A_35=plusslXIIFOLD( A_31);
+ r_0=( A_35);
  return(r_0);
 }
 
-int main()
+inline int ipbb_mainXXI()
 { 
 /*
  ?
@@ -247,19 +255,19 @@ QUADio_0=toI(( false));
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
  QUADio_1=toI(( false));
- n_0=( 4000);
+ n_0=( 15000);
  QUADrl_1=( 16807);
  QUADpp_1=( 16);
  QUADpw_1=( 80);
- A_56=ipbbXII( n_0);
- r_0=( A_56);
- A_60=quadXII( r_0,QUADpp_1,QUADpw_1);
+ A_51=ipbbXII( n_0);
+ r_0=( A_51);
+ A_55=quadXII( r_0,QUADpp_1,QUADpw_1);
  /* dsf scalar(s) */
-A_62=eqIIB(r_0,5333334);
+A_57=eqIIB(r_0,225000000);
 /* dsf scalar(s) */
-A_63=barBBI(true,A_62);
- r_1=( A_63);
- A_67=quadXII( A_63,QUADpp_1,QUADpw_1);
+A_58=barBBI(true,A_57);
+ r_1=( A_58);
+ A_62=quadXII( A_58,QUADpp_1,QUADpw_1);
  return(r_1);
 }
 

@@ -1,4 +1,5 @@
-﻿ r←benchmks nm
-⍝ Return list of available benchmarks
- r←(#.globals.ApexPath),#.globals.BenchPath
- r←(E r),¨ls'-r ',r,nm
+﻿ r←benchmks nm;sfx
+⍝ Return list of available benchmarks below folder nm
+⍝ e.g., benchmks 'Ancillary/benchmksPerf'
+ sfx←'/blist.cu'
+ r←⎕SH'ls ',nm,'/*',sfx

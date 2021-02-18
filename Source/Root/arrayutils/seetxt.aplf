@@ -1,0 +1,1 @@
+ seetxt←{b←⍵∊NL ⋄ z←⍵ ⋄ z[b/⍳⍴b]←CR ⋄ z}
