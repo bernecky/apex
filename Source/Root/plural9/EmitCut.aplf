@@ -1,4 +1,4 @@
-﻿ r←ssadat EmitCut fns;ast;ctl;frag;fn;n;loc;rnk;sis;cv;t;i;j;fns2
+ r←ssadat EmitCut fns;ast;ctl;frag;fn;n;loc;rnk;sis;cv;t;i;j;fns2
  ⍝ Emit code for cut
  sis←''
 

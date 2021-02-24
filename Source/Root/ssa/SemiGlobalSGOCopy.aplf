@@ -1,4 +1,4 @@
-﻿ r←SemiGlobalSGOCopy cds;ast;cv;astr
+ r←SemiGlobalSGOCopy cds;ast;cv;astr
 ⍝# Copy SGOs to end of ast, so that we can
 ⍝# find their SSA name at the exit from the fn.
  ast←D cds[ssaast]

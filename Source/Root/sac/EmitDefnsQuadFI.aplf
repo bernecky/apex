@@ -1,4 +1,4 @@
-﻿ r←EmitDefnsQuadFI fns;cv;sis;fn;cvm;ctl
+ r←EmitDefnsQuadFI fns;cv;sis;fn;cvm;ctl
  ⍝# Emit ⎕fi, ⎕vi definitions
  sis←''
  :If ~0∊⍴fns

@@ -1,4 +1,4 @@
-﻿ ast2lbr
+ ast2lbr
 ⍝ Left bracket left of anything
  :Select state
  :Case Stn     ⍝ lbr left of bos         x[;⍵]  x[]

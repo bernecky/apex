@@ -1,4 +1,4 @@
-﻿ r←APLHeader ast;res;larg;fn;rarg;lcls;p;ptrs;gbls;vars;cv
+ r←APLHeader ast;res;larg;fn;rarg;lcls;p;ptrs;gbls;vars;cv
 ⍝# Generate APL fn header from ast. Generate globals list, too
  res←D ast[dfnres;asttarget]
  r←res,(×⍴res)/'←'

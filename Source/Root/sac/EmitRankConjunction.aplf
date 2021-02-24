@@ -1,4 +1,4 @@
-﻿ r←EmitRankConjunction fns;sis;ctl;cvm;cv;fn;fns2;crks;frks;case;u;zcshp
+ r←EmitRankConjunction fns;sis;ctl;cvm;cv;fn;fns2;crks;frks;case;u;zcshp
  ⍝# Emit Rank conjunctions, both monadic and dyadic
  sis←,E''
  ctl←7 FragmentCode'mdrank'

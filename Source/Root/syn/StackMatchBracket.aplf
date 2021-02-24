@@ -1,4 +1,4 @@
-﻿ r←pb StackMatchBracket s;i;k
+ r←pb StackMatchBracket s;i;k
  ⍝ Find matching innermost paren/bracket (pb) at offset s from stkp
  ⍝ Result is the stk row with the pb that starts innermost nesting level
  ⍝ or ¯1 if not found.

@@ -1,4 +1,4 @@
-﻿ r←EmitDyadicInnerProduct fns;cv;n;k;j;sis
+ r←EmitDyadicInnerProduct fns;cv;n;k;j;sis
  ⍝ Emit Dyadic conj fn SAC code
  ⍝ Kludge for inner product, outer product:
  ⍝ frags assume limited set of astlop values

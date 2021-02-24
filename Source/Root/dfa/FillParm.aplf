@@ -1,4 +1,4 @@
-﻿ r←parm FillParm y;ast;k;cv;p;asts;fil;j;cds;callerfn;calleefn;callsite
+ r←parm FillParm y;ast;k;cv;p;asts;fil;j;cds;callerfn;calleefn;callsite
  ⍝ Fill function arg list ast chars from caller's ast rows
  cds←D y[0]
  fil←D y[1]

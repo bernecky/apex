@@ -1,4 +1,4 @@
-﻿ r←dfaQuadMAP y;ast;wl;i;tar;nast;j;nms
+ r←dfaQuadMAP y;ast;wl;i;tar;nast;j;nms
  ⍝  z←83 ¯1 ⎕map filename  ⍝ Dyalog APL only
  ⍝ Today, the result is an 8-bit integer vector
  ⍝ We should check that ⍺≡83 ¯1

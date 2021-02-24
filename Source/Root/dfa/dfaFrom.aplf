@@ -1,4 +1,4 @@
-﻿ r←dfaFrom y;ast;wl;i;j;k;astr;p;lh;rh;cv
+ r←dfaFrom y;ast;wl;i;j;k;astr;p;lh;rh;cv
  ⍝ Handle From
  ast←D y[ssaast]
  wl←D y[ssacv]

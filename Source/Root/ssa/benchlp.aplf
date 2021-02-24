@@ -1,4 +1,4 @@
-﻿ r←benchlp n;i;j
+ r←benchlp n;i;j
  ⍝ Simple counter loop
  ⍝ dcl integer scalar n
  ⍝ dcl integer scalar i

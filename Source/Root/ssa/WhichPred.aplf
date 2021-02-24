@@ -1,4 +1,4 @@
-﻿ j←domt WhichPred wv;w;v;n
+ j←domt WhichPred wv;w;v;n
  ∘ ⍝ Probably wrong.
  ⍝ jTH predecessor of w is v in dominator tree
  ⍝ It shouldn't be too hard to precompute this

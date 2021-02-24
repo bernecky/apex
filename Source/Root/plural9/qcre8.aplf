@@ -1,4 +1,4 @@
-﻿ tn←qcre8 fnm;⎕TRAP
+ tn←qcre8 fnm;⎕TRAP
  ⍝ Create file fnm. If it already
  ⍝ exists, delete all components from it
  tn←1+⌈/0,⎕FNUMS

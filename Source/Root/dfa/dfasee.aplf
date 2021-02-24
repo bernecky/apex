@@ -1,4 +1,4 @@
-﻿ asts←dfasee asts;ast;cv
+ asts←dfasee asts;ast;cv
 ⍝ Display current ast state for programmer
 ⍝ Make this work some day...
  Checkem asts

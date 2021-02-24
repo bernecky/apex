@@ -1,4 +1,4 @@
-﻿ r←dfaEbar y;ast;wl;i;j;k;p
+ r←dfaEbar y;ast;wl;i;j;k;p
  ⍝ Handle dyadic epsilon bar
  ast←D y[ssaast]
  wl←D y[ssacv]

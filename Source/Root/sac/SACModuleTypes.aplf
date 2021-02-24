@@ -1,0 +1,4 @@
+ SACModuleTypes←{z←('?',¯1⌽TypesBig)[2+⍵[dfnlarg,dfnrarg,dfnres;asttype]]
+     z
+⍝∇⍣§./Source/Root/sac/SACModuleName.aplf§0§ 2021 2 17 19 24 9 821 §Rjô§0
+ }

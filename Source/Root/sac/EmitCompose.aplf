@@ -1,4 +1,4 @@
-﻿ r←ssa EmitCompose fns;ast;i;j;k;sis;m;fn;wiu;ssa;tar;def;fwd;cv
+ r←ssa EmitCompose fns;ast;i;j;k;sis;m;fn;wiu;ssa;tar;def;fwd;cv
  ⍝ Emit code for compose
  ⍝ We define one function per composition.
  ⍝ Today, this only handles currying of an array

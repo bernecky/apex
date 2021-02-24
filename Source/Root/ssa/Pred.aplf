@@ -1,3 +1,3 @@
-﻿ r←Pred cfgy
+ r←Pred cfgy
  ⍝ Predecessors of cfgy
  r←⍉cfgy

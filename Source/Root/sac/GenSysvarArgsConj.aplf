@@ -1,4 +1,4 @@
-﻿ r←fnsloprop GenSysvarArgsConj fns;b;ct
+ r←fnsloprop GenSysvarArgsConj fns;b;ct
 ⍝# Get extra args for sysvars for part of a conjunction/adverb
  b←(1↑⍴fns)⍴0  ⍝ The no-sysvars-needed case
  fns[;fnsfn]←fns[;fnsloprop]

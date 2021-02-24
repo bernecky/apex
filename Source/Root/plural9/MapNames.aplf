@@ -1,4 +1,4 @@
-﻿ r←MapNames ids;b
+ r←MapNames ids;b
 ⍝ Map APL identifiers into SAC identifiers
 ⍝  - Map system varbs to other names.
 ⍝  - Map delta and deltaunderbar to... umm. something

@@ -1,4 +1,4 @@
-﻿ r←dfaBase y;ast;wl;i;j;k;m;n;p
+ r←dfaBase y;ast;wl;i;j;k;m;n;p
  ⍝ Handle Base value
  ast←D y[ssaast]
  wl←D y[ssacv]

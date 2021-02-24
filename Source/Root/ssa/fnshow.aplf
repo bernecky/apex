@@ -1,4 +1,4 @@
-﻿ r←fnshow y;i;j;k;m
+ r←fnshow y;i;j;k;m
  ⍝ Show all occurences of y in workspace.
  i←⎕NL 3
  r←0⍴''

@@ -1,4 +1,4 @@
-﻿ ast2expn;astr
+ ast2expn;astr
 ⍝ Expression left of anything
  :Select state
  :Case Stn           ⍝ Expn left of bos:          (⍵)

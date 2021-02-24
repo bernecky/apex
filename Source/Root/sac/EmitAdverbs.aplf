@@ -1,4 +1,4 @@
-﻿ r←ssadat EmitAdverbs fns;sis;j
+ r←ssadat EmitAdverbs fns;sis;j
  ⍝# Emit adverb definitions
  j←EmitReplicate fns             ⍝ Emit replicate and expand
  sis←Checksis D j[0]

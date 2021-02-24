@@ -1,4 +1,4 @@
-﻿ r←DerivedFnCallTree ast;i;oldr
+ r←DerivedFnCallTree ast;i;oldr
  ⍝ Compute calling tree for ast within itself.
  ⍝ This is for derived fns
  i←ast[;astlop,astfn,astrop]

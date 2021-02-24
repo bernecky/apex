@@ -1,4 +1,4 @@
-﻿ r←EmitConjunctions fns;j;sis
+ r←EmitConjunctions fns;j;sis
  ⍝# Emit conjunction code
 ⍝⍝ later...  j←ssadat EmitCompose fns ⍝ MUST be first
 ⍝⍝ sis←D j[0]

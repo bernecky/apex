@@ -1,4 +1,4 @@
-﻿ r←ast SGList i;p
+ r←ast SGList i;p
  ⍝ Get list of indices for semiglobals-in at
  ⍝ row i of ast. The semiglobals stuff SHOULD be
  ⍝ reworked to allow use of IndexList here, but

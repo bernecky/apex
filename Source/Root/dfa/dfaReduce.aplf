@@ -1,4 +1,4 @@
-﻿ r←dfaReduce y;ast;wl;i;j;k;m;b;la;ra;n;c;p;pa;nast;op;shpf;shpc;opfn;cellrank
+ r←dfaReduce y;ast;wl;i;j;k;m;b;la;ra;n;c;p;pa;nast;op;shpf;shpc;opfn;cellrank
  ⍝# Handles monadic reductions with primitive operand only
  ast←D y[ssaast]
  wl←D y[ssacv]

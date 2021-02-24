@@ -1,4 +1,4 @@
-﻿ r←EmitUtilityFns fns;ctl;cv;cvm;sis;filly
+ r←EmitUtilityFns fns;ctl;cv;cvm;sis;filly
  ⍝ Emit Utility functions
  sis←''
  :If ~0∊⍴fns

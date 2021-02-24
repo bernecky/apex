@@ -1,4 +1,4 @@
-﻿ r←color Highlight txt
+ r←color Highlight txt
 ⍝ Generate RTF highlighting for txt
 ⍝ BillWare(tm)'s stupid color mapping is:
 ⍝ black=1,     blue=2,         cyan=3,        green=4

@@ -1,4 +1,4 @@
-﻿ r←fn EmitFnCallsIndexIBC y;X;I;m;mil;ck;k;fnc;dmil;p;i;axs
+ r←fn EmitFnCallsIndexIBC y;X;I;m;mil;ck;k;fnc;dmil;p;i;axs
 ⍝# Emit code for I part of indexed reference
 ⍝# X[I]←Y
  X←D y[0]

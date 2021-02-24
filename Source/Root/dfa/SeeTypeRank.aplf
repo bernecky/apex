@@ -1,4 +1,4 @@
-﻿ r←SeeTypeRank ast;tp;rk;cv;val
+ r←SeeTypeRank ast;tp;rk;cv;val
 ⍝ Human-readable display of type, rank, value for ast
  r←AstToAPL ast
  cv←(dfainit ast)∧~isAstGarbage ast

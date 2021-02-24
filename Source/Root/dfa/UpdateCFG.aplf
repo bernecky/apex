@@ -1,4 +1,4 @@
-﻿ r←ct UpdateCFG cds
+ r←ct UpdateCFG cds
 ⍝ Update one cds entry's control flow graph
  r←cds
  r[ssacfg]←E ct

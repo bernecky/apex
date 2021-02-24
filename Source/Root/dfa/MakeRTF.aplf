@@ -1,4 +1,4 @@
-﻿ r←color MakeRTF qcr;hdr;font;blue;green;red;txt;trlr;colorNames;l0;lz;c;black;rb;gb;rgb128;prefix;yellow;cyan;magenta
+ r←color MakeRTF qcr;hdr;font;blue;green;red;txt;trlr;colorNames;l0;lz;c;black;rb;gb;rgb128;prefix;yellow;cyan;magenta
  ⍝ Create RTF to display qcr text in one color per character
  hdr←'{\rtf1\ansi\ansicpg1252\deff0\deflang2057',LF,LF
  font←'{\fonttbl{\f0\fswiss\fcharset0 Arial;}'

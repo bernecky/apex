@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsPA y;fns;cv;lht;rht;zt;cal;t;ast
+ r←EmitFnCallsPA y;fns;cv;lht;rht;zt;cal;t;ast
 ⍝# Emit function calls for adv/conj :PA entries
  ast←D y[0] ⍝ ast
  fns←D y[2] ⍝ All fn names

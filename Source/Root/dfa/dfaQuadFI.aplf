@@ -1,4 +1,4 @@
-﻿ r←dfaQuadFI y;ast;wl;i;tar;nast;j;nms
+ r←dfaQuadFI y;ast;wl;i;tar;nast;j;nms
  ⍝ ⎕fi, ⎕vi for SHARP APL
  ast←D y[ssaast]
  wl←D y[ssacv]

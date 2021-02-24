@@ -1,4 +1,4 @@
-﻿ r←SGSystemVars cds;ast;sg;sysv;cs;nonlocal
+ r←SGSystemVars cds;ast;sg;sysv;cs;nonlocal
 ⍝ Set up the system variables used/set by this function.
  ast←D cds[ssaast]
  ⍝ Handle Uses first

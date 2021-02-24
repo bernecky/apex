@@ -1,3 +1,3 @@
-﻿ r←cfg Predecessor i
+ r←cfg Predecessor i
  ⍝ Predecessor(s) of i
  r←cfg[;i]

@@ -1,4 +1,4 @@
-﻿ snif;i
+ snif;i
  ⍝ State is function, signal is identifier.
  ⍝ If the identifier is a fn w/argument, execute the
  ⍝ stacked fn monadically

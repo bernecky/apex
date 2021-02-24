@@ -1,4 +1,4 @@
-﻿ r←ast GenFragNamesIndex fns;cv;tr;tp;rk
+ r←ast GenFragNamesIndex fns;cv;tr;tp;rk
 ⍝ Gen function names for indexed ref/assign
  cv←ast[;astfn]∊(E,'['),E,']' ⍝ Locate all index calls
  :If 1∊cv ⍝ Any work?

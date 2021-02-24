@@ -1,4 +1,4 @@
-﻿ r←PlacePhiFunctions y;i;j;st;ast;bb;phi;n;p;k
+ r←PlacePhiFunctions y;i;j;st;ast;bb;phi;n;p;k
  ⍝ From Michael Wolfe , 1992
  ⍝ "High Performance Compliers", p 182
  ast←D y[ssaast]

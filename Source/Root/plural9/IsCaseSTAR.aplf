@@ -1,4 +1,4 @@
-﻿ r←IsCaseSTAR fns;fnsf;fnsg;g0;g1;p;xr
+ r←IsCaseSTAR fns;fnsf;fnsg;g0;g1;p;xr
 ⍝# Mark fns w/special case to use inner product STAR algorithm f.g
  fnsf←fns                      ⍝ fns entry for f
  fnsf[;fnsfn]←fnsf[;fnslop]

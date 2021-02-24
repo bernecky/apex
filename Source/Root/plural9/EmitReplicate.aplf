@@ -1,4 +1,4 @@
-﻿ r←EmitReplicate fns;cv;ctl;i;t;cvm;sis
+ r←EmitReplicate fns;cv;ctl;i;t;cvm;sis
  ⍝ Emit code for replicate and expand
  sis←''
  :If ~0∊⍴fns

@@ -1,4 +1,4 @@
-﻿ r←ast SemiGlobalSGOparmsOne y;astr;tar;n;rv;pv;msg;cs;sg
+ r←ast SemiGlobalSGOparmsOne y;astr;tar;n;rv;pv;msg;cs;sg
 ⍝# Mark sub-function calls in this ast w/their SGO entries
  cs←D y[0]
  sg←D y[1]

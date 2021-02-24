@@ -1,4 +1,4 @@
-﻿ r←ast IndexList i;p;j
+ r←ast IndexList i;p;j
  ⍝ Get list of indices for index
  ⍝ expression at row i of ast
  r←⍳0

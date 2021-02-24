@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsNiladicMisc y;ast;fns;cal;cv;ctl
+ r←EmitFnCallsNiladicMisc y;ast;fns;cal;cv;ctl
 ⍝# Emit calls for niladic fns (⎕av, ⎕ts)
  ast←D y[0] ⍝ ast
  fns←D y[2] ⍝ All fn names

@@ -1,4 +1,4 @@
-﻿ InvokeDyadicFn;i;astr;lf;fn;ro;op;row
+ InvokeDyadicFn;i;astr;lf;fn;ro;op;row
  ⍝ Call function dyadically.
  :If (D stk[stkp-3;Stktokcl])∊clsadverb
      InvokeDyadicAdverb

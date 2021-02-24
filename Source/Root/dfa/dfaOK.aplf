@@ -1,4 +1,4 @@
-﻿ r←dfaOK y;ast;j;k;ptr
+ r←dfaOK y;ast;j;k;ptr
  ⍝ Ensure we have sufficient info to gen code.
  ⍝ We need type and rank for all operations.
  ast←D y[ssaast]

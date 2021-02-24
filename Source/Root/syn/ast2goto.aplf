@@ -1,4 +1,4 @@
-﻿ ast2goto
+ ast2goto
 ⍝ GOTO (branch arrow) left of anything
  :Select state
  :CaseList Stn         ⍝ GOTO left of bos:         →

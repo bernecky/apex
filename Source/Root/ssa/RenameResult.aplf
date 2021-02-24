@@ -1,4 +1,4 @@
-﻿ r←RenameResult y;ast;i
+ r←RenameResult y;ast;i
 ⍝ In Tagast, we appended z←z to the
 ⍝ ast (where z is the explicit result of the
 ⍝ function). Now, that has been renamed,

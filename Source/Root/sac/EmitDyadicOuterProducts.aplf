@@ -1,4 +1,4 @@
-﻿ r←EmitDyadicOuterProducts fns;cv;fns2;sis;ctl;cvm;fnm
+ r←EmitDyadicOuterProducts fns;cv;fns2;sis;ctl;cvm;fnm
  sis←''
  :If ~0∊⍴fns
      ctl←7 FragmentCode'jotdot'

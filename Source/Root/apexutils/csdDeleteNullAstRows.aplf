@@ -1,4 +1,4 @@
-﻿ r←csdDeleteNullAstRows cds;cv;nasts;bb
+ r←csdDeleteNullAstRows cds;cv;nasts;bb
 ⍝ Delete Null rows from cds
 ⍝ We do this for two reaons:
 ⍝ a. It speeds up later phases of compilation

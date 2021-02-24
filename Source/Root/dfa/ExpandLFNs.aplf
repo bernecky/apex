@@ -1,4 +1,4 @@
-﻿ r←ExpandLFNs csd;cv;i;j;ast;wl;k;n;rj
+ r←ExpandLFNs csd;cv;i;j;ast;wl;k;n;rj
  ⍝ Add a row to ast for each local fn
  ⍝ invocation. This gives a place to
  ⍝ store lfn morphology by invocation.

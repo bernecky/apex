@@ -1,4 +1,4 @@
-﻿ r←AddNL y;i;t
+ r←AddNL y;i;t
  ⍝ Convert CRs to CRLFs for DOS
  ⍝ We don't need no steenking Windows.
  r←y

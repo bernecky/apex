@@ -1,4 +1,4 @@
-﻿ r←MarkAdvConjFns ast;cv;tar
+ r←MarkAdvConjFns ast;cv;tar
 ⍝# Mark ast rows that are adverbs or conjunctions
 ⍝# This allows disambiguation of them vs replicate/expand
 ⍝# and also gives us correct fns naming

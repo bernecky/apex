@@ -1,4 +1,4 @@
-﻿ r←{sep}TABtoBlank txt;b;pl
+ r←{sep}TABtoBlank txt;b;pl
 ⍝ Replace tabs by blanks in txt
 ⍝ Tabs are 8 apart; tab in column 0 puts us in column 8.
 ⍝ Each tab introduces 1-8 blanks

@@ -1,4 +1,4 @@
-﻿ r←m LFNast ast;i;j;k;nast;iv;m;n;b;sr;b;v;ar;cv;di;f
+ r←m LFNast ast;i;j;k;nast;iv;m;n;b;sr;b;v;ar;cv;di;f
  ⍝ Tinker ast for local fn invocation
  di←dfainit ast ⍝ Handy item
  ast[;asttag]←ER0⍳1↑⍴ast ⍝ Tag for caller

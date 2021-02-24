@@ -1,4 +1,4 @@
-﻿ r←mil EmitDefnsIndexAssignEpilog fns;tps;rks;cv;nul;p
+ r←mil EmitDefnsIndexAssignEpilog fns;tps;rks;cv;nul;p
 ⍝# Emit FOR loop closure code for indexed assign
 ⍝ mil[;k]>0: Loop over Ik
 ⍝ mil[;k]=0: nothing

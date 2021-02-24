@@ -1,4 +1,4 @@
-﻿ r←ast FindReferent y;j;cv
+ r←ast FindReferent y;j;cv
 ⍝ y is ast targets.
 ⍝ May be ast index, variable name,
 ⍝ constant, or NULL

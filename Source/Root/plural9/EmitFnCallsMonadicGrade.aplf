@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsMonadicGrade y;ast;fns;cal;cv;cvm;ctl;fn;sc
+ r←EmitFnCallsMonadicGrade y;ast;fns;cal;cv;cvm;ctl;fn;sc
 ⍝# Emit calls for monadic upgrade and downgrade
 ⍝# This tinkers function name for
 ⍝# special cases, like ⍋permutation vector

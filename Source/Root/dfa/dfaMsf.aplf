@@ -1,4 +1,4 @@
-﻿ r←dfaMsf y;ast;wl;i;j;k;m;types;t;rt;rarg
+ r←dfaMsf y;ast;wl;i;j;k;m;types;t;rt;rarg
  ⍝ Handle monadic scalar functions.
  ast←D y[ssaast]
  wl←D y[ssacv]

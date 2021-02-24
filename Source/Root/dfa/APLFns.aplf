@@ -1,4 +1,4 @@
-﻿ r←ast APLFns roots;cv
+ r←ast APLFns roots;cv
 ⍝# Expand APL fn calls
  cv←~ast[;astlarg]∊NULL ⍝ Left argument present
  r←(⍴roots)⍴E''

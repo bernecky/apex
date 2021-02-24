@@ -1,4 +1,4 @@
-﻿ r←ast TypeDefn y;j;n;l
+ r←ast TypeDefn y;j;n;l
 ⍝ Return SAC type definition for ast[y;]
  j←TypesSAC[D ast[y;asttype]]
  n←D ast[y;astrank]

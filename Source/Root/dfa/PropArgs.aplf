@@ -1,4 +1,4 @@
-﻿ r←cv PropArgs ast;lr;t;b;rr
+ r←cv PropArgs ast;lr;t;b;rr
  r←ast
  →0
 ⍝ Dead code now?

@@ -1,4 +1,4 @@
-﻿ r←ICallFns y;i;ast;ic
+ r←ICallFns y;i;ast;ic
  ⍝ Get fn name, names of fns called by ast, #calls
  ast←D y[ssaast]
  ic←ICalln ast

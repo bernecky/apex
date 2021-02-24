@@ -1,4 +1,4 @@
-﻿ r←astNops ast;nops;p
+ r←astNops ast;nops;p
  ⍝ ast entries that don't generate any code
  nops←NULL,(E,';'),(E':for'),(E':endfor'),(E':while'),(E':endwhile')
  nops←nops,(E':if'),(E':endif')

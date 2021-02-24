@@ -1,4 +1,4 @@
-﻿ doindexass;astr;m;row
+ doindexass;astr;m;row
 ⍝ Indexed assign
  ⍝ 1995-07-08. We are having troubles with FOR loops
  ⍝ vs indexed assign vs ssa. The result array is

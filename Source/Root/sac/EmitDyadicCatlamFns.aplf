@@ -1,4 +1,4 @@
-﻿ r←EmitDyadicCatlamFns fns;ctl;sis;cvm;cv
+ r←EmitDyadicCatlamFns fns;ctl;sis;cvm;cv
  ⍝# Emit Dyadic catenate/laminate functions
  ⍝# r=genned code, new fns
  ⍝# Handles x,y  x⍪y   - no support for axis brackets

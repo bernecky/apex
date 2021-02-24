@@ -1,1 +1,1 @@
-isFormalArg←{⍵∊dfnlarg,dfnrarg}
+ isFormalArg←{⍵∊dfnlarg,dfnrarg}

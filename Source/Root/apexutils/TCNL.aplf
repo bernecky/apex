@@ -1,2 +1,2 @@
-﻿ r←TCNL
- r←⎕ucs 13
+ r←TCNL
+ r←⎕UCS 13

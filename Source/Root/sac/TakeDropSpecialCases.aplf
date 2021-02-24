@@ -1,4 +1,4 @@
-﻿ r←cv TakeDropSpecialCases ast;lh;p;b;case;val;cv2;sign
+ r←cv TakeDropSpecialCases ast;lh;p;b;case;val;cv2;sign
 ⍝ Find special cases for take and drop
 ⍝ We look for the following:
 ⍝

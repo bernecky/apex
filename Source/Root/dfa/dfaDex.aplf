@@ -1,4 +1,4 @@
-﻿ r←dfaDex asts;ast;wl;i;j;k
+ r←dfaDex asts;ast;wl;i;j;k
  ⍝ dfa for dex primitive
  ast←D wp[ssaast]
  wl←D wp[ssacv]

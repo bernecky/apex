@@ -1,4 +1,4 @@
-﻿ r←IsCaseSTARLIKE fns;fnsf;fnsg;g0;g1;p;xr;lid;rid;fnsg
+ r←IsCaseSTARLIKE fns;fnsf;fnsg;g0;g1;p;xr;lid;rid;fnsg
 ⍝# Mark fns for inner product STARLIKE algorithm f.g
 ⍝ This is identical to IsCaseSTAR, except
 ⍝ that we need x[i;j] to be an identity

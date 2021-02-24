@@ -1,4 +1,4 @@
-﻿ r←c dfaRankOne y;ast;rop;lh;rh;i;j;lr;rr;astr;wl;tar;fl;fr;cv
+ r←c dfaRankOne y;ast;rop;lh;rh;i;j;lr;rr;astr;wl;tar;fl;fr;cv
  ⍝ Handle rank conjunction at ast[c;]
  ast←D y[ssaast]
  wl←D y[ssacv]

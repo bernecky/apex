@@ -1,4 +1,4 @@
-﻿ r←x ack y
+ r←x ack y
  →(x=0)⍴la
  →(y=0)⍴lb
  r←(x-1)ack x ack y-1

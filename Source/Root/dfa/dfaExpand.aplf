@@ -1,4 +1,4 @@
-﻿ r←dfaExpand y;ast;wl;i;j;k;larg;rarg;p;astr;zs
+ r←dfaExpand y;ast;wl;i;j;k;larg;rarg;p;astr;zs
  ⍝# DFA for expand.
  ast←D y[ssaast]
  wl←D y[ssacv]

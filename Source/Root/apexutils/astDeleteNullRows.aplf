@@ -1,4 +1,4 @@
-﻿ r←astDeleteNullRows ast;cv
+ r←astDeleteNullRows ast;cv
 ⍝ Delete Null rows from ast
 ⍝ We do this for two reaons:
 ⍝ a. It speeds up later phases of compilation

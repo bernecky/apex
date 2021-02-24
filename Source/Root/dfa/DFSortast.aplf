@@ -1,4 +1,4 @@
-﻿ r←ct DFSortast asts;newast;cm;leaf;work;pv
+ r←ct DFSortast asts;newast;cm;leaf;work;pv
  ⍝ Sort asts vector into Depth-First order.
  ⍝ This is required for OSC to work.
  ⍝ If you get it wrong, osc fails with the

@@ -1,4 +1,4 @@
-﻿ r←DeadVarbRemoval cds;ast;cv;cv2
+ r←DeadVarbRemoval cds;ast;cv;cv2
 ⍝# Remove dead varbs from ast
  ast←D cds[ssaast]
  cv←~dfainit ast

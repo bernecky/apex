@@ -1,4 +1,4 @@
-﻿ InitializeFns
+ InitializeFns
  fnslop←0        ⍝ Left operand of conjunction
  fnsfn←1        ⍝ Function/conj/adverb name being called
  fnsrop←2        ⍝ Right operand of conjunction/adverb

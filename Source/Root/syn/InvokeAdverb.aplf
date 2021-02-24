@@ -1,4 +1,4 @@
-﻿ InvokeAdverb;astr;i;j;cls;row
+ InvokeAdverb;astr;i;j;cls;row
  ⍝ Invoke stacked adverb
  ÷0
  i←StackPop 2 ⍝Pop two stack elements

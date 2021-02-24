@@ -1,4 +1,4 @@
-﻿ r←ast IsTemp p
+ r←ast IsTemp p
 ⍝ Determine which elements of ast[p;] are temps.
 ⍝ That is, they have only 1 referent, and do not
 ⍝ have side effects.

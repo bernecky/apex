@@ -1,4 +1,4 @@
-﻿ r←isUsesRank bm;blist;ufns;fntext
+ r←isUsesRank bm;blist;ufns;fntext
 ⍝ Predicate to mark a benchmark if it uses the rank conjunction,
 ⍝ or even hints that it does (e.g., it uses APEX-only
 ⍝ window-reduce with monadic left operand.).

@@ -1,4 +1,4 @@
-﻿ r←VarNamesAndScope cds;ast
+ r←VarNamesAndScope cds;ast
 ⍝# Get variable names and scope for one function
  ast←D cds[ssaast]
  r←(~dfainit ast)∧ast[;astclass]∊astclassVARB

@@ -1,4 +1,4 @@
-﻿ r←cv EmitAssignment y;coer;b;i;typ;cl;ast;cal;nops;st
+ r←cv EmitAssignment y;coer;b;i;typ;cl;ast;cal;nops;st
 ⍝ Emit all assignments (not indexed assign...) for cv⌿cal,
 ⍝ and the coercions for the assigns. Coercions are
 ⍝ needed for assigns to system variables, and for

@@ -1,4 +1,4 @@
-﻿ r←dfaQuadts y;i;ast;wl;k
+ r←dfaQuadts y;i;ast;wl;k
  ⍝ Set result type, rank, shape for ⎕ts
  ast←D y[ssaast]
  wl←D y[ssacv]

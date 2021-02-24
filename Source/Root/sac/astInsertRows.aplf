@@ -1,4 +1,4 @@
-﻿ r←astp astInsertRows y;k;ast;astr
+ r←astp astInsertRows y;k;ast;astr
 ⍝ Insert new rows astr into ast at row
  ast←D y[0]
  astr←D y[1]

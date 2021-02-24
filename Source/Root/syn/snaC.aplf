@@ -1,4 +1,4 @@
-﻿ snaC;astr;i;j;b;k;m
+ snaC;astr;i;j;b;k;m
  ⍝ State is naked conjunction, signal is assignment.
  ⍝ Check to see if we have left argument to conj stacked
  'Compiler bug or source program syntax error'assert state≡D stk[stkp-1;0]

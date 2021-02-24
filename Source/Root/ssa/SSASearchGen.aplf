@@ -1,4 +1,4 @@
-﻿ r←x SSASearchGen yy;ast;tar;X;y;cv;b;i;j;jj;y;S;nms;bb
+ r←x SSASearchGen yy;ast;tar;X;y;cv;b;i;j;jj;y;S;nms;bb
  ⍝ SSA Search Gen: Replace gen V by Vi
  X←D x[0] ⋄ tar←D x[1] ⍝ Vars,target varb
  y←D yy[0] ⍝ SSA Stuff

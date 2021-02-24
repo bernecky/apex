@@ -1,4 +1,4 @@
-﻿ r←ast FunctionName y
+ r←ast FunctionName y
 ⍝# Find name of function (y is ast[;astfn])
 ⍝ Name may be defined, derived, or primitive
  :If isnum y           ⍝ Defined

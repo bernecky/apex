@@ -18,6 +18,6 @@
  sysfns←(E'⎕fi'),(E'⎕vi'),(E'⎕map')
  sysnfns←,(E'⎕ts'),(E'⎕wa'),E'⎕av' ⍝ Niladic system fns
  sysvars←(E'⎕io'),(E'⎕pp'),(E'⎕pw'),(E'⎕ct'),(E'⎕rl')
- sysconsts←'' 
+ sysconsts←''
  sysQQ←(E'⍞'),E'⎕'
  InitializeGlobals Opts ⍝ Maybe can inline this?

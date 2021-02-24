@@ -1,4 +1,4 @@
-﻿ r←dfaReduceDerived y;ast;i;j;k;wl;c;astPA;tar;op;opargs;astop;opnd
+ r←dfaReduceDerived y;ast;i;j;k;wl;c;astPA;tar;op;opargs;astop;opnd
  ⍝# Window reduce w/primitive operand
  ast←D y[ssaast]
  wl←D y[ssacv]

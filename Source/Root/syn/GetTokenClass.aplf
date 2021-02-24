@@ -1,4 +1,4 @@
-﻿ r←GetTokenClass stkentry
+ r←GetTokenClass stkentry
  ⍝ Get the token class for a stack entry.
  r←stkentry[Stktokcl] ⍝ If primitive, then it's the token class
  :If clsid=r

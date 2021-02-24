@@ -1,4 +1,4 @@
-﻿ r←cv ExtractSubFn ast;refs;new;lns;n;i;m
+ r←cv ExtractSubFn ast;refs;new;lns;n;i;m
  ⍝ Mark the subset of an ast needed to
  ⍝ analyze the ast rows marked by cv.
  ⍝ Result is new cv.

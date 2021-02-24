@@ -1,4 +1,4 @@
-﻿ snax;i;j;astr;k;m;p
+ snax;i;j;astr;k;m;p
  ⍝ Assignment left of expression
  c←c-1                 ⍝ Push cursor past "←"
  i←c gett(E src),E tok ⍝ Get token left of arrow

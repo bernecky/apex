@@ -1,4 +1,4 @@
-﻿ r←dfaSubFunctions y;ast;wl;i;cv
+ r←dfaSubFunctions y;ast;wl;i;cv
  ⍝ Handle function calls in a fn
  ast←D y[ssaast]
  wl←D y[ssacv]

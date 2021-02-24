@@ -1,4 +1,4 @@
-﻿ r←dfaIp y;ast;wl;i;k;m;n;p;f;g;fAP;gPA;nast;fnsf;args;op
+ r←dfaIp y;ast;wl;i;k;m;n;p;f;g;fAP;gPA;nast;fnsf;args;op
  ⍝# DFA for inner products f.g
  ast←D y[ssaast]
  wl←D y[ssacv]

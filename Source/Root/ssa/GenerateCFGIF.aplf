@@ -1,4 +1,4 @@
-﻿ r←GenerateCFGIF y;st;ast;cv;bb;i;f;ef;mf;d;cfg;elf;j;ifbb;elsebb;rngif
+ r←GenerateCFGIF y;st;ast;cv;bb;i;f;ef;mf;d;cfg;elf;j;ifbb;elsebb;rngif
  ⍝ Generate control flow graph for ast :If :Else :EndIf
  ast←D y[ssaast]
  cv←D y[ssacv]

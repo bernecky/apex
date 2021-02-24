@@ -1,4 +1,4 @@
-﻿ r←PropagateAdvConjParms ast;cv;loprop;parms;b
+ r←PropagateAdvConjParms ast;cv;loprop;parms;b
 ⍝ Propagate SGI and SGO parameters/results in/out of adverb
 ⍝ and conjunctions.
  cv←ast[;astfn]∊ER1⍪'.ö⍤' ⍝ All adverbs and conjunctions

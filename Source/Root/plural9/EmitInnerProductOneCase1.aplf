@@ -1,4 +1,4 @@
-﻿ r←EmitInnerProductOneCase1 sis
+ r←EmitInnerProductOneCase1 sis
   ⍝ Special case1 for x f.g y
   ⍝   x[1] is a boolean selector for rows of
   ⍝   y, with (~x[i]) being an identity for g.

@@ -1,4 +1,4 @@
-﻿ ast2rpar
+ ast2rpar
 ⍝ Right parenthesis left of anything
  :Select state
  :CaseList Stx,Stl,Sto,Stn,Stf

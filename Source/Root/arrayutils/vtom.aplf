@@ -1,4 +1,4 @@
-﻿ matrix←{element}vtom vector;b;c;l;t
+ matrix←{element}vtom vector;b;c;l;t
  ⍝ returns a left-justified matrix with one string per row, where each string in <vector> is preceded by 1↑vector.  [...]
  ⍝ <element> specifies the fill element for justification; default <element> is 1↑0⍴vector (i.e. 0 or ' ').  ⎕io-independent.
  ⍝ (sauce/vtom.1 from the sharp apl utility library)

@@ -1,4 +1,4 @@
-﻿ r←CleanseDFA ast;pv
+ r←CleanseDFA ast;pv
 ⍝ Discard all dfa-derived information in newly cloned fn
  r←ast
  pv←~ast[;astclass]∊astclassCC,astclassNC ⍝ Constants are OK

@@ -1,4 +1,4 @@
-﻿ r←dfaRank y;ast;wl;i;j;newy
+ r←dfaRank y;ast;wl;i;j;newy
  ⍝ Handle rank conjunction
  ast←D y[ssaast]
  wl←D y[ssacv]

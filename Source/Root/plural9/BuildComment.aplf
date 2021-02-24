@@ -1,4 +1,4 @@
-﻿ r←BuildComment txt
+ r←BuildComment txt
 ⍝ Build comment from txt
  :Select TargetLanguage
  :Case 'sac'

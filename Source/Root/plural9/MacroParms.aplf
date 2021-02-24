@@ -1,4 +1,4 @@
-﻿ r←MacroParms y;i
+ r←MacroParms y;i
  ⍝ Break {this}{and}{that} into
  ⍝ a vector of vectors
  ⍝ For better or worse, we delete text between

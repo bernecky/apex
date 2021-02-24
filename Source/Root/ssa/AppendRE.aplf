@@ -1,4 +1,4 @@
-﻿ r←AppendRE asts;ast;i
+ r←AppendRE asts;ast;i
  ⍝# Append fake ast row to capture explicit result
  ⍝# Ugly, but no better idea just now.
  r←asts

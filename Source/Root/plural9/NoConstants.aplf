@@ -1,4 +1,4 @@
-﻿ r←ast NoConstants y;p
+ r←ast NoConstants y;p
 ⍝ Replace constants by their ast index
 ⍝ This is used for naming assigns to constants
  r←y

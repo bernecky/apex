@@ -1,4 +1,4 @@
-﻿ r←MarkSpecialCasesInnerProduct fns
+ r←MarkSpecialCasesInnerProduct fns
 ⍝ Mark special cases for inner product
  r←IsCaseTRANSPOSE fns
  r←IsCaseSTAR r

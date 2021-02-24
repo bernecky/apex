@@ -19,7 +19,7 @@
      fnm←fldr #.sac.dosac asts
  :Case 'plural'
      fnm←fldr #.plural9.doplural asts
- :Else 
+ :Else
      ⎕←'Unable to generate code in: ',fldr,' for: ',TL
      fnm←''
  :EndSelect

@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsCommandLineFns y;fns;cv;cal;ast;sc;ctl
+ r←EmitFnCallsCommandLineFns y;fns;cv;cal;ast;sc;ctl
 ⍝# Emit calls for command-line fns
  r←y
  ast←D y[0] ⍝ ast

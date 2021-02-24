@@ -1,4 +1,4 @@
-﻿ r←ControlStructuresDyalog
+ r←ControlStructuresDyalog
  ⍝ List Dyalog ctl structure keywords
  r←(E':if'),E':endif'
  r←r,(E':else'),(E':elseif'),(E':andif'),(E':orif')

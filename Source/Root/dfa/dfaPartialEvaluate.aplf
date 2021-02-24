@@ -1,4 +1,4 @@
-﻿ r←dfaPartialEvaluate asts;pe;i;fns;ast;astr
+ r←dfaPartialEvaluate asts;pe;i;fns;ast;astr
 ⍝ Perform partial evaluation when we know
 ⍝ primitive function argument values.
  r←asts

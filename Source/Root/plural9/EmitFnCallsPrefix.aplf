@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsPrefix y;fns;cv;cal;ast;sc;ctl
+ r←EmitFnCallsPrefix y;fns;cv;cal;ast;sc;ctl
 ⍝# Eliminate prefix for non-constants
  r←y
  ast←D y[0] ⍝ ast

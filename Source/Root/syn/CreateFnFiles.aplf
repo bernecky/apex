@@ -1,4 +1,4 @@
-﻿ p CreateFnFiles n;lg
+ p CreateFnFiles n;lg
 ⍝ Create function paging file with n hash buckets
 ⍝ in directory p
  (⍕n)PutFile p,'dir-hash'

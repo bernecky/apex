@@ -1,4 +1,4 @@
-﻿ r←ast FindTarget p;cv
+ r←ast FindTarget p;cv
 ⍝ Find targets for astptrs p
  r←,p
  cv←r∊⍳≢ast

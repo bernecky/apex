@@ -1,4 +1,4 @@
-﻿ r←APLBody ast;cv;nms;roots;fn;temps
+ r←APLBody ast;cv;nms;roots;fn;temps
 ⍝# Build APL function body from ast
  cv←(dfainit ast)∧~ast[;asttarget]∊NULL
  temps←asttarget APLTemps ast ⍝ Temp assigns

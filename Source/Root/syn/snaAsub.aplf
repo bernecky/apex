@@ -1,4 +1,4 @@
-﻿ snaAsub;astr;i;b;k;m;Pop;j;row
+ snaAsub;astr;i;b;k;m;Pop;j;row
  ⍝ Emit the derived function.
  j←StackPop 3 ⍝ Pop the lop, conj, rop
  astr←,astNewRows 1

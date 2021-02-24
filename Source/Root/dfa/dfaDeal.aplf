@@ -1,4 +1,4 @@
-﻿ r←dfaDeal y;ast;wl;i;j;k
+ r←dfaDeal y;ast;wl;i;j;k
  ⍝ dfa for deal
  ast←D y[ssaast]
  wl←D y[ssacv]

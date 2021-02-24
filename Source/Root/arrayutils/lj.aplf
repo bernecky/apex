@@ -1,4 +1,4 @@
-﻿ r←lj y;i
+ r←lj y;i
  ⍝ Left justify y
  i←+/∧\' '=y
  r←i⌽y

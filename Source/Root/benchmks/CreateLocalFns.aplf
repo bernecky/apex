@@ -1,4 +1,4 @@
-﻿ fns←CreateLocalFns(ufns args);hdr;txt;fail
+ fns←CreateLocalFns(ufns args);hdr;txt;fail
  fns←(-⍴'.aplf')↓¨dtb¨ufns ⍝ The fns to localize
  hdr←E('r←fns Invoke fntext ;r;fxr;bef;aft',D Raze';',¨fns)
  txt←hdr,E'fxr←⎕fx¨fntext'

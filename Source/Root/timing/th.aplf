@@ -1,2 +1,2 @@
-﻿ r←th y
+ r←th y
  r←⍕y,¨CR

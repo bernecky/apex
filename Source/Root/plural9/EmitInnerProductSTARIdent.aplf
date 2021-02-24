@@ -1,4 +1,4 @@
-﻿ r←sis EmitInnerProductSTARIdent fns;ffns;gfns;flid;zer
+ r←sis EmitInnerProductSTARIdent fns;ffns;gfns;flid;zer
  ⍝# Complete code gen for STAR algorithm inner product x f.g y
  ⍝ The STAR-100 APL algorithm was first used, to my knowledge,
  ⍝ in the APL interpreter for the CDC STAR-100 computer,

@@ -1,4 +1,4 @@
-﻿ r←dfaCut y;ast;wl;i;j;rk;b;astb;m;cv;stcv;n;cv2;st
+ r←dfaCut y;ast;wl;i;j;rk;b;astb;m;cv;stcv;n;cv2;st
  ⍝ Handle cut conjunction
  ast←D y[ssaast]
  wl←D y[ssacv]

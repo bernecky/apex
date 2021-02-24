@@ -1,4 +1,4 @@
-﻿ r←dfaLev asts;ast;wl;i;j;k
+ r←dfaLev asts;ast;wl;i;j;k
  ⍝ dfa for lev primitive
  ast←D asts[ssaast]
  wl←D asts[ssacv]

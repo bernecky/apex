@@ -1,4 +1,4 @@
-﻿ ast2semic
+ ast2semic
 ⍝ Semicolon left of anything
  :Select state
  :Case Stn          ⍝ semic left of bos:    x[;i] x[i;]

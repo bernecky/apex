@@ -1,4 +1,4 @@
-﻿ r←AddPA cds;ast;cv;cvl;cvr;ast1;ast2;op;m;i;b;t
+ r←AddPA cds;ast;cv;cvl;cvr;ast1;ast2;op;m;i;b;t
 ⍝# Add :PA and function invocation entries for
 ⍝# adverbs and conjunctions on derived or defined fns.
 ⍝# :PA entries represent the operand for the adv/conj,

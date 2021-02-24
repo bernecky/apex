@@ -1,4 +1,4 @@
-﻿ r←fns FunctionWrapper ast;hd;fn;fd
+ r←fns FunctionWrapper ast;hd;fn;fd
  ⍝ Generate fn header for defined fn
  fn←D ast[dfnname;asttarget] ⍝ Defined fn name
  fd fns ast←fns FnDefn ast

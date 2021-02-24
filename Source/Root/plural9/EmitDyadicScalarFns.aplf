@@ -1,4 +1,4 @@
-﻿ r←EmitDyadicScalarFns fns;cv;p;ctl;cvm;sis
+ r←EmitDyadicScalarFns fns;cv;p;ctl;cvm;sis
 ⍝# Generate SxS,SxA, AxS, AxA scalar fn code
  sis←''
  ctl←6 FragmentCode'dscalar'

@@ -1,4 +1,4 @@
-﻿ r←ConstantsSAC ast;cv;c;i;astb;j;tp
+ r←ConstantsSAC ast;cv;c;i;astb;j;tp
  ⍝ Convert APL constants to SAC format
  cv←ast[;astclass]∊astclassNC,astclassCC
  astb←ConstantsSACDouble ast

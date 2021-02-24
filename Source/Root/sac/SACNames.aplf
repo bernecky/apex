@@ -1,4 +1,4 @@
-﻿ r←SACNames csd;ast;b;st;cls
+ r←SACNames csd;ast;b;st;cls
 ⍝ Map names in csd to legal SAC names.
  ast←D csd[ssaast]
  cls←astclassDFN,astclassVARB,astclassGFN,astclassMFN,astclassNFN

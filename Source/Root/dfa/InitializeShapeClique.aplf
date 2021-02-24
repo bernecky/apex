@@ -1,4 +1,4 @@
-﻿ r←ct InitializeShapeClique asts;ast;fn;ndx;msg;maxlines
+ r←ct InitializeShapeClique asts;ast;fn;ndx;msg;maxlines
 ⍝ Clique values are of the form: cti.line, where
 ⍝ cti is calling-tree index (a unique numeric function identifier)
 ⍝ and line is ast row#

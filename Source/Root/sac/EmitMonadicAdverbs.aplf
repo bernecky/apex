@@ -1,4 +1,4 @@
-﻿ r←EmitMonadicAdverbs fns;cv;sis;ctl;prim;fn;f;fns2;cvm;rnk;tp;sc;sov;lid
+ r←EmitMonadicAdverbs fns;cv;sis;ctl;prim;fn;f;fns2;cvm;rnk;tp;sc;sov;lid
  ⍝ Emit scan and reduce derived functions for primitive operands only
  sis←'' ⍝ Assume no work
  :If ~0∊⍴fns

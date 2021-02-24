@@ -1,4 +1,4 @@
-﻿ r←SetSystemVarbTypes cds;i;ast;svn;svt;j;nm
+ r←SetSystemVarbTypes cds;i;ast;svn;svt;j;nm
  ⍝ Force system varb types to their "real" values
  ast←D cds[ssaast]
 ⍝ First, do real ⎕vars.

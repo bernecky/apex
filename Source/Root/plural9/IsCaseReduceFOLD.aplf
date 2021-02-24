@@ -1,4 +1,4 @@
-﻿ r←IsCaseReduceFOLD fns;cv
+ r←IsCaseReduceFOLD fns;cv
 ⍝# Mark reductions that can use SAC "fold" notation
  r←fns
  :If TargetLanguage≡'sac'

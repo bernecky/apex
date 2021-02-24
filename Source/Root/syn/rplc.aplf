@@ -1,4 +1,4 @@
-﻿ rinp←rinp rplc a;b;c;d;⎕IO
+ rinp←rinp rplc a;b;c;d;⎕IO
  ⍝ general replace of one string by another in <rinp>.
  ⍝ the right argument <a> is a two-element nested array specifying the old
  ⍝ string followed by the new string.

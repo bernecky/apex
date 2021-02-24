@@ -1,4 +1,4 @@
-﻿ r←sis EmitPrimitiveFnDefnsTemplateFiller fns;i;typ;TYP;fn;s
+ r←sis EmitPrimitiveFnDefnsTemplateFiller fns;i;typ;TYP;fn;s
  ⍝# Template filler for code fragments sis
  s←fns[;fnsspec]
  fns[(s∊E,'.')/⍳⍴s;fnsspec]←E''

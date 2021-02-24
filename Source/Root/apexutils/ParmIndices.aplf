@@ -1,4 +1,4 @@
-﻿ r←ast ParmIndices i;p
+ r←ast ParmIndices i;p
  ⍝ Get list of ast indices for :GI SemiGlobals starting at ast row i
  r←⍳0
  p←i

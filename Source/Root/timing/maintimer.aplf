@@ -1,4 +1,4 @@
-﻿ maintimer;t;bname;j;LF;r;i
+ maintimer;t;bname;j;LF;r;i
 ⍝ Timer for APL benchmarks
  r←⍳0
  :For i :In ⍳5

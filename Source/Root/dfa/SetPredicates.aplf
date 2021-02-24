@@ -1,4 +1,4 @@
-﻿ r←SetPredicates astr;val;⎕CT;q
+ r←SetPredicates astr;val;⎕CT;q
 ⍝ Set predicates for known value in astr
  ⎕CT←0 ⍝ All predicates are exact
  r←astPredLen⍴0

@@ -1,2 +1,2 @@
-﻿ x fcreate y
- x ⎕create  y
+ x fcreate y
+ x ⎕create y

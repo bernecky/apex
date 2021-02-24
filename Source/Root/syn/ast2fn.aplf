@@ -1,4 +1,4 @@
-﻿ ast2fn;i;k
+ ast2fn;i;k
 ⍝ Verb left of anything
  i←c gett(E src),E tok
  :Select state

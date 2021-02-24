@@ -1,4 +1,4 @@
-﻿ newcsd←dfaSGFix csd;ast;cv
+ newcsd←dfaSGFix csd;ast;cv
 ⍝ Remove superfluous astscope info that will
 ⍝ otherwise screw up code generation
  ast←D csd[ssaast]

@@ -1,4 +1,4 @@
-﻿ newsignal←PopParenthesis;sz;sbp
+ newsignal←PopParenthesis;sz;sbp
  ⍝ State is function. Signal is usually left parenthesis.
  sz←1+')'StackMatchBracket 0 ⍝ Pop everything up to, and including the )
  sbp←StackPop sz ⍝ Stuff between parens

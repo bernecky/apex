@@ -1,2 +1,2 @@
-﻿E←{⍝ Dyalog APL Enclose
-⊂⍵}
+ E←{⍝ Dyalog APL Enclose
+     ⊂⍵}

@@ -1,4 +1,4 @@
-﻿ r←nn RenumberAst ast;t;i;j;k
+ r←nn RenumberAst ast;t;i;j;k
  ⍝ Renumber ast pointers
  ⍝ A pointer i in the ast is replaced by nn[i].
  t←asttarget,astptrs

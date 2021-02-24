@@ -1,4 +1,4 @@
-﻿ r←nfn QuadNameNiladicKludgeOne y;src;tok;loc;hit;row;col;rowcol
+ r←nfn QuadNameNiladicKludgeOne y;src;tok;loc;hit;row;col;rowcol
 ⍝ Replace tokenclass for one nfn (⎕ts or ⎕av today)
  src←D y[0]
  tok←D y[1]

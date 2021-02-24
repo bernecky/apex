@@ -1,4 +1,4 @@
-﻿ r←Dominator cfg;dom;sz;i;olddom;idm
+ r←Dominator cfg;dom;sz;i;olddom;idm
  ⍝ Gen dominator tree for ctl flow graph cfg
  idm←id sz←1⍴⍴cfg
  dom←idm∨1 ⋄ dom[0;]←sz↑1

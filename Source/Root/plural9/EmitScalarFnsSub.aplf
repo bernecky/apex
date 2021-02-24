@@ -1,4 +1,4 @@
-﻿ r←frag EmitScalarFnsSub fns;sis;ctl;cvm;cv
+ r←frag EmitScalarFnsSub fns;sis;ctl;cvm;cv
 ⍝# Subfn that actually emits scalar fn code (SxA, AxS, AxA)
 ⍝# Called for scalar fns, inner products, etc.
 ⍝# Result is vector of sis, updated fns

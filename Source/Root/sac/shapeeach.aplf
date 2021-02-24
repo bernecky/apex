@@ -1,2 +1,2 @@
-﻿ r←shapeeach y
+ r←shapeeach y
  r←⍴¨y

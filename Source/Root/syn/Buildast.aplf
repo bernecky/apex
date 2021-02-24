@@ -1,4 +1,4 @@
-﻿ ast←st Buildast y;src;tok;cv
+ ast←st Buildast y;src;tok;cv
  ⍝ Build initial ast with astsz rows, using st.
  ⍝ y is src⊃tok
  ast←astNewRows 1+1↑⍴st ⍝ Allocate it

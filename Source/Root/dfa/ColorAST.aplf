@@ -1,4 +1,4 @@
-﻿ r←astcol ColorAST asts;d;src;ast;stmt;tok;col;colors;pv;loc
+ r←astcol ColorAST asts;d;src;ast;stmt;tok;col;colors;pv;loc
 ⍝ Display source with colored stuff
  ast←D asts[ssaast]
  d←ast[;astcol]     ⍝ asttype or astrank, typically

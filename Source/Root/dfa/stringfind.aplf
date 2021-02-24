@@ -1,4 +1,4 @@
-﻿ indices←vector stringfind substring;l;r
+ indices←vector stringfind substring;l;r
  ⍝ returns the index of the beginning of each occurrence of <substring> in <vector>.  ⎕io-responsive.
  indices←(substring⍷vector)/⍳⍴vector
  →0

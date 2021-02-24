@@ -1,4 +1,4 @@
-﻿ r←ApexExtractOptionIs y;f;b;op
+ r←ApexExtractOptionIs y;f;b;op
 ⍝ Predicate for APEX option set (one option only)
  f←,ApexExtractOption y ⍝ Left-justify
  f←(1+⍴y)↓f ⍝ delete option name

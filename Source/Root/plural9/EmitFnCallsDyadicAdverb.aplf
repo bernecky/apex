@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsDyadicAdverb y;ast;nms;ctl;prim;fn;n;f;lp;gfn;grt;i;loc;nc;nl;lt;fn;rnk;j;t;kt;cv;nm;sis;ast;cv;fns;cal
+ r←EmitFnCallsDyadicAdverb y;ast;nms;ctl;prim;fn;n;f;lp;gfn;grt;i;loc;nc;nl;lt;fn;rnk;j;t;kt;cv;nm;sis;ast;cv;fns;cal
  r←y
  →0 ⍝⍝⍝⍝⍝⍝⍝⍝ DEAD
  ⍝ Emit dyadic adverb calls for NON-primitive

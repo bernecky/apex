@@ -1,4 +1,4 @@
-﻿ r←mil EmitDefnsIndexAssignFors fns;tps;rks;cv;nul;nms;cols;ndxsize;p
+ r←mil EmitDefnsIndexAssignFors fns;tps;rks;cv;nul;nms;cols;ndxsize;p
 ⍝# Emit FOR loop headers for indexed assign
 ⍝ mil[;k]>0: Loop over Ik ( X[I0;I1;...]
 ⍝ mil[;k]=0: nothing (garbage trailing axis)

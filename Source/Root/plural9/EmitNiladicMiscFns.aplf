@@ -1,4 +1,4 @@
-﻿ r←EmitNiladicMiscFns fns;cv;sis;fn;cvm;ctl
+ r←EmitNiladicMiscFns fns;cv;sis;fn;cvm;ctl
  ⍝ Emit Monadic Miscellaneous fn SAC code
  ⍝ Handles ⎕av, ⎕ts
  sis←''

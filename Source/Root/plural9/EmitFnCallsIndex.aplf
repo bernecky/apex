@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsIndex y;ast;cv;fns;cal;j
+ r←EmitFnCallsIndex y;ast;cv;fns;cal;j
  ⍝# Emit fn calls for indexed reference: X[I] and
  ⍝# Indexed assign: X[I]←Y
  r←EmitFnCallsIndexRef y

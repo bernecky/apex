@@ -1,4 +1,4 @@
-﻿ r←astn SemiGlobalMerge y;cv;myn;ncv;ast
+ r←astn SemiGlobalMerge y;cv;myn;ncv;ast
 ⍝ Merge new semi-globals in astn into ast
 ⍝ astn is our callee's semiglobal list
  ast←D y[ssaast]

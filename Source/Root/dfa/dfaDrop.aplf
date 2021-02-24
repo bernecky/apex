@@ -1,4 +1,4 @@
-﻿ r←dfaDrop y;ast;wl;i;j;m;n;t;p;args;os
+ r←dfaDrop y;ast;wl;i;j;m;n;t;p;args;os
  ⍝ Handle x drop y.
  ast←D y[ssaast]
  wl←D y[ssacv]

@@ -1,4 +1,4 @@
-﻿ r←qt n
+ r←qt n
  ⍝ Quick tie of file n to an available tie #
  r←tied n
  :If 0∊⍴r

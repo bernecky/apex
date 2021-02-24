@@ -1,4 +1,4 @@
-﻿ result←boolean pplusscan array;t
+ result←boolean pplusscan array;t
 ⍝ partitioned +\array.  each 1 in <boolean> designates
 ⍝ the beginning of a part.  ⎕io-independent.
 ⍝ (sauce/pplusscan.1 from the sharp apl utility library)

@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsIndexDirect y;mil;ast;si;refs;k;sis;m;lhs;rhs;com;mt;m2
+ r←EmitFnCallsIndexDirect y;mil;ast;si;refs;k;sis;m;lhs;rhs;com;mt;m2
 ⍝# Generate index ref ops that don't require a loop
 ⍝# These are those where all indices are scalar, and
 ⍝# where NULLs only appear in trailing axes

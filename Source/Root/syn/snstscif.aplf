@@ -1,4 +1,4 @@
-﻿ snstscif;astr;j
+ snstscif;astr;j
  ⍝state is expression. signal is stsc :if
  ⍝ Fails to catch  syntax erros such as 2+:if...∘
  j←StackPop 1 ⍝ Pop the :if argument

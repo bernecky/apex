@@ -1,4 +1,4 @@
-﻿ z←type y;⎕CT
+ z←type y;⎕CT
 ⍝ Return type of array as:
 ⍝ b,i,d,c for boolean, integer, double, character
  ⎕CT←0

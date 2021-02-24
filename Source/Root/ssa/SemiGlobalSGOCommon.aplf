@@ -1,4 +1,4 @@
-﻿ r←ast SemiGlobalSGOCommon cvsg;cv;sg;msg;astr;tar;n;rv;pv
+ r←ast SemiGlobalSGOCommon cvsg;cv;sg;msg;astr;tar;n;rv;pv
 ⍝ Decorate ast with implicit results.
 ⍝ annotations. The arguments are:
 ⍝  - sg:  the list of lists of semi-global names.

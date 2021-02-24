@@ -1,4 +1,4 @@
-﻿ r←ast SemiGlobalSGICommon cvsg;cv;sg;msg;astr;tar;n;rv;pv
+ r←ast SemiGlobalSGICommon cvsg;cv;sg;msg;astr;tar;n;rv;pv
 ⍝ This actually decorates the ast with the global-in
 ⍝ annotations. The arguments are:
 ⍝  - sg:  the list of lists of semi-global names.

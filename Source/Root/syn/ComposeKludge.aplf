@@ -1,4 +1,4 @@
-﻿ r←ComposeKludge y;i;ast
+ r←ComposeKludge y;i;ast
 ⍝ Compose argument is in wrong place for f&id,
 ⍝ because we may not know syntax class of id at
 ⍝ syntax time.

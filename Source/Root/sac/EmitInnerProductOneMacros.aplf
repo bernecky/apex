@@ -1,4 +1,4 @@
-﻿ r←sis EmitInnerProductOneMacros fns;f;sis;sis2;fnsf;fnsg;gc;fnm;gnm;dfnm;fct;fzt;gct;gzt;k;fnsred;rednm
+ r←sis EmitInnerProductOneMacros fns;f;sis;sis2;fnsf;fnsg;gc;fnm;gnm;dfnm;fct;fzt;gct;gzt;k;fnsred;rednm
  ⍝# Perform common inner product macro-expansion
  fnsg←fnsrop ConjToFns fns ⍝ g in f.g
  gct←,PFATct PFATProperty fnsg

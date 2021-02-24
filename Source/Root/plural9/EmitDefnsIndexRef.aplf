@@ -1,4 +1,4 @@
-﻿ r←frg EmitDefnsIndexRef fns;ctl;cv;cvm;tp;fns2;sis;rk
+ r←frg EmitDefnsIndexRef fns;ctl;cv;cvm;tp;fns2;sis;rk
  ⍝ Emit SAC function defns for indexed reference: X[i]
  sis←''
  :If ~0∊⍴fns

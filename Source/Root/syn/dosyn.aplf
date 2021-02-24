@@ -5,7 +5,7 @@
  InitializeSSA
  InitializeST
  InitializeTYPES
- Trace (fts ⎕TS),': Starting syntax analysis for: ',fldr
+ Trace(fts ⎕TS),': Starting syntax analysis for: ',fldr
  src←GetFn¨,¨y  ⍝ Get all source code
  src←LocalizeSysVars¨src           ⍝ Undo APL design errors
  src←(E y)Dfn2Trad¨src             ⍝ Convert any Dfns to Tradfns
@@ -23,4 +23,4 @@
  asts←AddPA¨asts          ⍝ Add ast rows for conj/adv operands
  Checkem¨asts             ⍝ Paranoia check
  r←asts
-Trace ( fts ⎕TS),': Syntax analysis complete for: ',fldr
+ Trace(fts ⎕TS),': Syntax analysis complete for: ',fldr

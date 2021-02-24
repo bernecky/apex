@@ -1,0 +1,13 @@
+ GenerateMainFn←{
+  ⍝ Generate main() function for invoking module
+  ⍝ ⍺ is new name of main() in module
+  ⍝ ⍵ is name of folder with source code, module, etc.
+     mnm←PathFileName ⍵
+     r←'use ',mnm,': all;',NL,NL
+     r←r,'int main()',NL,'{',NL
+ ⍝ WHAT ABOUT ⎕io and N?
+     r←r,'  z=',mnm,'::',⍺,'();',NL
+     r←r,'  StdIO::show(z);',NL
+     r←r,'  return(0);',NL,'}',NL
+     r
+ }

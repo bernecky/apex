@@ -1,4 +1,4 @@
-﻿ snxC
+ snxC
  ⍝ Expression left of naked conjunction
  ⍝ expn left operand to conj,
  ⍝ OR right operand to a leftmore conj.

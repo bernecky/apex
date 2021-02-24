@@ -1,4 +1,4 @@
-﻿ r←ast IndexRank i;p;j;cv
+ r←ast IndexRank i;p;j;cv
  ⍝ Attempt to determine result rank of index
  ⍝ expression at row i of ast
  p←D ast IndexList i

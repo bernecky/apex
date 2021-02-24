@@ -1,4 +1,4 @@
-﻿ r←ast AddArgcArgv fd
+ r←ast AddArgcArgv fd
  ⍝ Fix parameter list for main()
  r←fd
  :If isMain ast

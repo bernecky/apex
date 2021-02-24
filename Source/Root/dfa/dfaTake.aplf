@@ -1,4 +1,4 @@
-﻿ r←dfaTake y;ast;wl;b;i;j;k;m;n;p;rarg
+ r←dfaTake y;ast;wl;b;i;j;k;m;n;p;rarg
  ⍝ Handle take.
  ast←D y[ssaast]
  wl←D y[ssacv]

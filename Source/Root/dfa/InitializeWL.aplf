@@ -1,4 +1,4 @@
-﻿ r←InitializeWL asts;ast
+ r←InitializeWL asts;ast
 ⍝ Initialize the worklist for one asts.
  r←asts
  ast←D asts[ssaast]

@@ -1,4 +1,4 @@
-﻿ r←cv FilterParms parms;b
+ r←cv FilterParms parms;b
  ⍝ Filter astparms entries for adv/conj calls
  parms←nub¨ER1 parms          ⍝ Remove duplicates
  parms←(~parms∊¨NULL)/¨parms  ⍝ Remove NULLS

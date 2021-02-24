@@ -1,4 +1,4 @@
-﻿ r←dfaReplicate y;ast;wl;i;j;k;cv;p;n
+ r←dfaReplicate y;ast;wl;i;j;k;cv;p;n
  ⍝ Handle replicate.
  ast←D y[ssaast]
  wl←D y[ssacv]

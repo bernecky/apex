@@ -1,4 +1,4 @@
-﻿ r←astloprop AddPAEntry ast;cv;b;cvr;ast1;op;m;i;nast;k
+ r←astloprop AddPAEntry ast;cv;b;cvr;ast1;op;m;i;nast;k
 ⍝# Add :PA and function invocation entries for f or g of d conj g.
 ⍝ 2006-02-04 Link adv/conj operands
 ⍝ to new f and g entries. This will permit those

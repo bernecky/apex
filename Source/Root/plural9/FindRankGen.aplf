@@ -1,4 +1,4 @@
-﻿ r←ctl FindRankGen fns;i;j
+ r←ctl FindRankGen fns;i;j
 ⍝ r←incidence matrix for ctl, fns
 ⍝ r← ctl[;ctlranks]∘.≡fns[;fnsranks]∘.≡ctl[;ctlranks], but
 ⍝ with general rank match

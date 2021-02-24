@@ -1,4 +1,4 @@
-﻿ r←FileExtension TargetLanguage
+ r←FileExtension TargetLanguage
  ⍝ Plural is fussy
  :Select TargetLanguage
  :Case 'plural'

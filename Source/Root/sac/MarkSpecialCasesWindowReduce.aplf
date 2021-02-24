@@ -1,4 +1,4 @@
-﻿ r←ast MarkSpecialCasesWindowReduce fns;cv;larg;cv2
+ r←ast MarkSpecialCasesWindowReduce fns;cv;larg;cv2
 ⍝# Mark window reduce w/1-element window width
 ⍝# Also mark ¯2 f/⍵
  cv←fns[;fnsfn]∊(E'sl'),E'sl1'

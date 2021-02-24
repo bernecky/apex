@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsDyadicConjunction y;ast;cv;fns;cal
+ r←EmitFnCallsDyadicConjunction y;ast;cv;fns;cal
  ⍝# Emit function calls for inner products
  ast←D y[0]
  cv←D y[1]

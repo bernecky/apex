@@ -1,4 +1,4 @@
-﻿ r←cv SGIMark ast;i
+ r←cv SGIMark ast;i
 ⍝ Mark semiglobal-in lists at cv
 ⍝ This SHOULD trace the pointers from astparms
 ⍝ but this will work for now... 1996-04-24

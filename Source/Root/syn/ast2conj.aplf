@@ -1,4 +1,4 @@
-﻿ ast2conj;rop
+ ast2conj;rop
 ⍝ Conjunction left of anything
  :Select state
  :Case Stf               ⍝ Conj left of Verb:  .g ⍵

@@ -1,4 +1,4 @@
-﻿ r←x FindMatchingBracket y;cv
+ r←x FindMatchingBracket y;cv
  ⍝ In an expression such as {this {and} that}{and this}
  ⍝we want matching bracket mask, to extract
  ⍝ {this {and} that}

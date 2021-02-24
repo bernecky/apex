@@ -1,4 +1,4 @@
-﻿ astok ast;t
+ astok ast;t
 ⍝ VERY SLOW!
 ⍝ Check ast for validity sort of...
  t←astlarg,astrarg,asttarget,astlop,astrop

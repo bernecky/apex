@@ -1,4 +1,4 @@
-﻿ r←mil EmitFnCallsIndexDirectOK ast;refs;dmil
+ r←mil EmitFnCallsIndexDirectOK ast;refs;dmil
 ⍝# Mark index ref ops that don't require a loop
  dmil←D mil
  refs←ast IndexAstLarg ast FindReferent dmil ⍝ Actual index arrays

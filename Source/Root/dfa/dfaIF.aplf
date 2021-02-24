@@ -1,4 +1,4 @@
-﻿ r←dfaIF y;ast;wl;i;j;k;b;n
+ r←dfaIF y;ast;wl;i;j;k;b;n
  ⍝ Handle Dyalog :if/:else/:endif
  ast←D y[ssaast]
  wl←D y[ssacv]

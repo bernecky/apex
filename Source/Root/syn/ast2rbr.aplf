@@ -1,4 +1,4 @@
-﻿ ast2rbr
+ ast2rbr
 ⍝ Right bracket left of anything
  :Select state
  :CaseList Stn,Stf,Sta,Sto     ⍝ rbr left of bos, fn, adv, conj  ...[i]

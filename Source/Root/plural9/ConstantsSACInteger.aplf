@@ -1,4 +1,4 @@
-﻿ r←ConstantsSACInteger ast;cv;c;i;j
+ r←ConstantsSACInteger ast;cv;c;i;j
  ⍝ Convert Integer APL constants to SAC format
  cv←ast[;astclass]∊astclassNC
  cv←cv∧ast[;asttype]∊asttypeI ⍝ Just the integers

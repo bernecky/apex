@@ -1,4 +1,4 @@
-﻿ r←c gett srctok;i;src;tok;prim;nm;nam
+ r←c gett srctok;i;src;tok;prim;nm;nam
  ⍝ Get next token as [src;tok;srclength]
  src←D srctok[0]
  tok←D srctok[1]

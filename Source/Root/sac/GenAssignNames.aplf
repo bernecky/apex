@@ -1,4 +1,4 @@
-﻿ r←ast GenAssignNames fns;cv;typ
+ r←ast GenAssignNames fns;cv;typ
 ⍝ "Generate" assign names.
 ⍝ We merely delete all indication that a
 ⍝ function is involved, so that SISAL generates

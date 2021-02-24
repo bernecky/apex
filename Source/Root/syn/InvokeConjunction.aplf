@@ -1,4 +1,4 @@
-﻿ InvokeConjunction;i;astr;lf;fn;ro;op;row
+ InvokeConjunction;i;astr;lf;fn;ro;op;row
  ⍝ Invoke conjunction
  ÷0
  lf←StackPop 1 ⍝Pop larg

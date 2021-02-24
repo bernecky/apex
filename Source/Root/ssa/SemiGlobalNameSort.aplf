@@ -1,4 +1,4 @@
-﻿ r←SemiGlobalNameSort ast;cv;pv;uv;astr
+ r←SemiGlobalNameSort ast;cv;pv;uv;astr
 ⍝ Sort semiglobal names in ast
 ⍝ The idea here is to have all asts with their
 ⍝ semiglobals sorted the same way, so that

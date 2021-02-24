@@ -1,4 +1,4 @@
-﻿ r←crks EmitRankZCellShape fns;class;cv;case
+ r←crks EmitRankZCellShape fns;class;cv;case
 ⍝# Return cell shape generators for uniform fns
 ⍝# crks is cell ranks for left and right arguments
  r←(1↑⍴fns)⍴E'?'

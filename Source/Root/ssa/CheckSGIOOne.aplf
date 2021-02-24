@@ -1,4 +1,4 @@
-﻿ r←x CheckSGIOOne cds;ast;fi;vars;vars2;MapSGIO;fns;AllVarbs
+ r←x CheckSGIOOne cds;ast;fi;vars;vars2;MapSGIO;fns;AllVarbs
  ⍝ Check one function's SGI entries
  MapSGIO←D x[0]
  fns←D x[1]

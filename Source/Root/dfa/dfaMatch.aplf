@@ -1,4 +1,4 @@
-﻿ r←dfaMatch y;ast;wl;i;j;astr
+ r←dfaMatch y;ast;wl;i;j;astr
  ⍝ Handle dyadic ≡ -- match
  ast←D y[ssaast]
  wl←D y[ssacv]

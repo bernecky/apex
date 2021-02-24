@@ -1,2 +1,2 @@
-﻿ r←isbool y
+ r←isbool y
  r←y∊0 1

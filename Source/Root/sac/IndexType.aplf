@@ -1,4 +1,4 @@
-﻿ r←ast IndexType mil;i;il;j
+ r←ast IndexType mil;i;il;j
 ⍝ Type of each index in index list mil
  i←,~mil∊0,D NULL
  il←i/,mil ⍝ Valid ast indices

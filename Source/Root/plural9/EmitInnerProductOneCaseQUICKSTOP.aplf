@@ -1,4 +1,4 @@
-﻿ r←EmitInnerProductOneCaseQUICKSTOP sis;i;t
+ r←EmitInnerProductOneCaseQUICKSTOP sis;i;t
  ⍝ Generate quickstop code
  sis←(E'$CASEBL')MacroKill¨sis ⍝ Kill
  sis←(E'$CASETRAN')MacroKill¨sisp ⍝ Kill

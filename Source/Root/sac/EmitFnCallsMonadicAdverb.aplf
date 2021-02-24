@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsMonadicAdverb y;fns;cv;cvm;cal;ast;ctl
+ r←EmitFnCallsMonadicAdverb y;fns;cv;cvm;cal;ast;ctl
 ⍝ Emit calls for monadic adverbs: +/⍵ +\⍵ b/⍵ b\⍵
  r←y
  ast←D y[0] ⍝ ast

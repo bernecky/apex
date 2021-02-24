@@ -1,4 +1,4 @@
-﻿ r←EmitDyadicMiscFns fns;ctl;n;cv;sis
+ r←EmitDyadicMiscFns fns;ctl;n;cv;sis
  ⍝ Emit Dyadic Miscellaneous fn SISAL code
  ⍝ r=genned code, new fns
  ⍝ Handles x€y x⌹y x?y x⊥y x⊤y x⍕y x≡y

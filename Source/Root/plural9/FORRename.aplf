@@ -1,4 +1,4 @@
-﻿ r←FORRename y;ast;bf;phi;phiz;k;newnm;astr;m;cv;phimark;phit;ef;nd;mns;OLD
+ r←FORRename y;ast;bf;phi;phiz;k;newnm;astr;m;cv;phimark;phit;ef;nd;mns;OLD
  ⍝ Rename variables for X vs OLD X in :For loops
  ⍝ Rename the :PHI variables so that they refer to
  ⍝ the loop-carried name rather than the SSA name

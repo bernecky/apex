@@ -1,4 +1,4 @@
-﻿ r←ConstantsSACBoolean ast;cv;i;astb
+ r←ConstantsSACBoolean ast;cv;i;astb
  ⍝ Convert APL Bool constants to SAC format
  cv←ast[;astclass]∊astclassNC
  cv←cv∧asttypeB=D ast[;asttype] ⍝ Booleans

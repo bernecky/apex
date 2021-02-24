@@ -1,4 +1,4 @@
-﻿ r←ast FindValue y;d;i;j
+ r←ast FindValue y;d;i;j
 ⍝ y is an ast index.
 ⍝ Find the ast row where the item obtains its value
 ⍝ This is VERY different from FindReferent! 1996-04-18

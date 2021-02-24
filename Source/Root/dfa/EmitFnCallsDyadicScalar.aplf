@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsDyadicScalar y;fns;cv;nf;gf;cal;t;ast;j;i
+ r←EmitFnCallsDyadicScalar y;fns;cv;nf;gf;cal;t;ast;j;i
 ⍝# Emit function calls for dyadic scalar functions
 ⍝# The generic stuff is already done. All we
 ⍝# do here is to pick up special cases.

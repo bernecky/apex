@@ -1,4 +1,4 @@
-﻿ InvokeDyadicAdverb;astr;lop;adv;rarg;rop;row
+ InvokeDyadicAdverb;astr;lop;adv;rarg;rop;row
  ⍝ Invoke adverb dyadically
  larg←StackPop 1 ⍝ left argument to derived fn
  lop←StackPop 1 ⍝ left operand

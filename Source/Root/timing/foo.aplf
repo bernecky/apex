@@ -1,4 +1,4 @@
-﻿ foo;t;n;P;z
+ foo;t;n;P;z
  ⍝ Extract benchmark timings for use by spreadsheet
  files←GetFiles'sandbox'
  times←D GetTimes¨files ⍝ Times in seconds

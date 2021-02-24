@@ -1,1 +1,1 @@
-GetAstsFnName←{D(0,asttarget)⌷ssaast⌷⍵}
+ GetAstsFnName←{D(0,asttarget)⌷ssaast⌷⍵}

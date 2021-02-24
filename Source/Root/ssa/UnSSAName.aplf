@@ -1,4 +1,4 @@
-﻿ r←UnSSAName y;cv;i;j
+ r←UnSSAName y;cv;i;j
 ⍝ Remove ssa appendages from name y.
 ⍝ KLUDGE: We remove trailing numbers preceeded
 ⍝ by an underbar. Also value errors with "?"

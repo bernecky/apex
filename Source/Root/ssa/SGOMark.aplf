@@ -1,4 +1,4 @@
-﻿ r←cv SGOMark ast;i;list
+ r←cv SGOMark ast;i;list
 ⍝ Mark semiglobal-out lists for fn call at cv
 ⍝ The :GO lists are, ahem, not lists, just stuff glued
 ⍝ into the ast after each call. They SHOULD be a list, like :GI

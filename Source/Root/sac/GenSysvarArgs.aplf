@@ -1,4 +1,4 @@
-﻿ r←GenSysvarArgs fns;b
+ r←GenSysvarArgs fns;b
 ⍝# Get extra args for sysvars used by fns
 ⍝# Result order is (in) f g f.g (out) f g f.g.
 ⍝# g entry is for function-only invocation

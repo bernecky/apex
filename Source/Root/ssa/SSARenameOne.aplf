@@ -8,7 +8,7 @@
  top←(⍳v)GenSSANames ast[tar;asttarget]
  top←top,E(D ast[tar;asttarget]),'?' ⍝ Value error
  us←D ast[tar;asttarget]
- Trace 'SSARenameOne is renaming: ',(D ast[0;asttarget]),':',us
+ Trace'SSARenameOne is renaming: ',(D ast[0;asttarget]),':',us
  ⍝ Provision of the value error name permits us to
  ⍝ detect use before set. It also simplifies
  ⍝ Gen logic in SSASearch. 1995-09-17

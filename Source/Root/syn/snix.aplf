@@ -1,4 +1,4 @@
-﻿ snix;i
+ snix;i
  ⍝ Identifier left of expression
  ⍝ If the id is a defined verb, stack the verb.
  ⍝ Otherwise, syntax error.

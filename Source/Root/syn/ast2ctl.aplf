@@ -1,4 +1,4 @@
-﻿ ast2ctl
+ ast2ctl
 ⍝ Control structure (:if :for, etc.) left of anything
  :Select state
  :Case Stn           ⍝ ctl struct left of bos

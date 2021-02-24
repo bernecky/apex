@@ -1,4 +1,4 @@
-﻿ r←InlineCompose asts;cv;ast;lr;f;v;b;di;t;i;a2
+ r←InlineCompose asts;cv;ast;lr;f;v;b;di;t;i;a2
  ⍝ Replace compositions with their inlined expansions
  ast←D asts[1]
  cv←ast[;astfn]∊E,'&'

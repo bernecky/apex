@@ -1,4 +1,4 @@
-﻿ InvokeMonadicFn;astr;i;j;cls;row;nms;stke;subfn
+ InvokeMonadicFn;astr;i;j;cls;row;nms;stke;subfn
  ⍝ Invoke stacked fn monadically, maybe
  :If 1 isStrand stk ⍝ If rarg is strand, destrand it
      nms←')'StrandItems 2

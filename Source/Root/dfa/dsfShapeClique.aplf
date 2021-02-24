@@ -1,4 +1,4 @@
-﻿ r←i dsfShapeClique ast;rnks;args;nsa;cv;cliq
+ r←i dsfShapeClique ast;rnks;args;nsa;cv;cliq
  ⍝ Handle dyadic scalar function shape cliques
  ⍝ If one arg scalar, result is in same shape clique as other arg
  ⍝ If both args nonscalar and both in same SC, result is in same SC

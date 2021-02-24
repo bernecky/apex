@@ -1,4 +1,4 @@
-﻿ r←mainconvo2 y;tr;wz;r1;r2
+ r←mainconvo2 y;tr;wz;r1;r2
  ⍝ Execute convolution problems and compare results
  wz←0.1 0.3 0.6 0.8 1 0.8 0.6 0.3 0.1
  tr←0.1+⍳y

@@ -1,4 +1,4 @@
-﻿ r←SemiGlobalsMarkIn ast;cv;nm
+ r←SemiGlobalsMarkIn ast;cv;nm
 ⍝ Mark incoming semi-globals for this fn
  cv←ast[;astscope]∊astscopeSGI+0,astscopeSGO
  cv[0]←0 ⍝ Ignore fn itself

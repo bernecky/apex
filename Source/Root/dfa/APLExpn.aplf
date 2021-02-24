@@ -1,4 +1,4 @@
-﻿ r←ast APLExpn roots;p;fn;ctl;exp
+ r←ast APLExpn roots;p;fn;ctl;exp
 ⍝  Build APL expressions rooted at roots
  r←(1↑⍴ast)⍴E''
  cv←~ast[;astfn]∊(E':GI'),(E':GO'),(E':PHI'),(E':RI'),(E':RE')

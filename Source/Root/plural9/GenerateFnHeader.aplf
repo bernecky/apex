@@ -1,4 +1,4 @@
-﻿ r←ast GenerateFnHeader i;j;def
+ r←ast GenerateFnHeader i;j;def
  j←i⌿D(GenFragNames ast)[0] ⍝ Fn name
  j←Raze⍉j[;⍳5]
  def←ast GenDefns i ⍝ Gen parm defns for i⌿ast.

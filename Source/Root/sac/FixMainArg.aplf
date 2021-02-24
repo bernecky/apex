@@ -1,4 +1,4 @@
-﻿ r←largrarg FixMainArg y;ast;fns;lr;rowno;argv;onetwo;nr;newfns;ren
+ r←largrarg FixMainArg y;ast;fns;lr;rowno;argv;onetwo;nr;newfns;ren
 ⍝ Repair left/right argument to <Mmain> function.
 ⍝ 1. Introduce new local definition for argument.
 ⍝ 2. Remove argument from function header.

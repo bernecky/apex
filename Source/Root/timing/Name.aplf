@@ -1,2 +1,2 @@
-﻿ r←Name y
+ r←Name y
  r←(∧\y≠'.')/y

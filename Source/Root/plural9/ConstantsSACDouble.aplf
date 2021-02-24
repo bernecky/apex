@@ -1,4 +1,4 @@
-﻿ r←ConstantsSACDouble ast;cv;c;i;j
+ r←ConstantsSACDouble ast;cv;c;i;j
  ⍝ Convert Double APL constants to SISAL format
  cv←ast[;astclass]∊astclassNC
  cv←cv∧ast[;asttype]∊asttypeD ⍝ Just the floats

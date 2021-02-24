@@ -1,4 +1,4 @@
-﻿ r←ast IndexList plnk;nextp;lnk;p
+ r←ast IndexList plnk;nextp;lnk;p
  ⍝ Get list of indices for index
  ⍝ expression at row p of ast, linking w/lnk
  ⍝ typically astrarg, astparm, or astImplicitResult

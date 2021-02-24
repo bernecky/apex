@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsDyadicGenericPrimitive y;fns;cv;cal;ast;ctl;cvm
+ r←EmitFnCallsDyadicGenericPrimitive y;fns;cv;cal;ast;ctl;cvm
 ⍝# Emit calls for generic dyadic fns with no fancy needs.
  r←y
  ast←D y[0] ⍝ ast

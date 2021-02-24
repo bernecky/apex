@@ -1,4 +1,4 @@
-﻿ clsinit
+ clsinit
 ⍝ Initialize token classes
  clsassign←'a' ⍝ Left arrow (assignment)
  clsrbr←'b' ⍝    Right square bracket

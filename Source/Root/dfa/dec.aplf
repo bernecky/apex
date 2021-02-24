@@ -1,4 +1,4 @@
-﻿ r←dec y
+ r←dec y
  ⍝
  ⍝ decorate y to make it a comment.
  ⍝

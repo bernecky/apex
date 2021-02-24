@@ -1,4 +1,4 @@
-﻿ r←GetBlistFns nm;p;fnm
+ r←GetBlistFns nm;p;fnm
 ⍝ Return fully-qualified function names in directory nm
  p←#.fileutils.Path nm ⍝ Path only
  fns←#.fileutils.GetFileChar nm,#.globals.PathDelim,'blist.cu'

@@ -1,2 +1,2 @@
-﻿ r←x thorneach y
+ r←x thorneach y
  r←x⍕¨y

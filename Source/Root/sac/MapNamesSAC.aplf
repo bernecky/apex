@@ -1,4 +1,4 @@
-﻿ r←MapNamesSAC y
+ r←MapNamesSAC y
 ⍝ Map vector of vector of identifiers into names that
 ⍝ are legal in SAC, but which won't conflict with names
 ⍝ in the APL compilation unit.

@@ -1,4 +1,4 @@
-﻿ r←nast TypePromote oast;b;nt;ot
+ r←nast TypePromote oast;b;nt;ot
 ⍝ Check type promotion troubles
 ⍝ If new type≠old type, and both not NULL,
 ⍝ give warning. and ignore set

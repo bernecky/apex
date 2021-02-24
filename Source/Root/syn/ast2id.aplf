@@ -1,4 +1,4 @@
-﻿ ast2id;id;astr;callerfn;rhs;id;lhs
+ ast2id;id;astr;callerfn;rhs;id;lhs
 ⍝ Identifier left of anything
  :Select state
  :Case Stn                ⍝ Id left of strand or bos:        ⍵

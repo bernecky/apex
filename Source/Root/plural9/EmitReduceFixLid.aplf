@@ -1,4 +1,4 @@
-﻿ r←EmitReduceFixLid fns;typ;i;b
+ r←EmitReduceFixLid fns;typ;i;b
  r←PFATlid PFATProperty fns
  ⍝ Correct maxbool(), minbool()
  typ←(D fns[;fnstypes])[;fnstypesrarg] ⍝ YTYPE

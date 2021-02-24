@@ -1,4 +1,4 @@
-﻿ r←dfaLfn y;ast;wl;i;j;k;m;nn;di;cv
+ r←dfaLfn y;ast;wl;i;j;k;m;nn;di;cv
  ⍝ Handle local fns, e.g., f←fi&(+.×)
  ast←D y[ssaast]
  wl←D y[ssacv]

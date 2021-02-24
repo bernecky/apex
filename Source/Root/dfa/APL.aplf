@@ -1,4 +1,4 @@
-﻿ r←APL ast;hdr;body;SGIN;SGOUT
+ r←APL ast;hdr;body;SGIN;SGOUT
 ⍝# Generate APL from ast
  hdr←APLHeader ast
  body←APLBody ast

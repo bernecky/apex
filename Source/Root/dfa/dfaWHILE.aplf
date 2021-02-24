@@ -1,4 +1,4 @@
-﻿ r←dfaWHILE y;ast;wl;i;j;k;b;n;p
+ r←dfaWHILE y;ast;wl;i;j;k;b;n;p
  ⍝ Handle Dyalog :while loop
  ast←D y[ssaast]
  wl←D y[ssacv]

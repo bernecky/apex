@@ -1,3 +1,12 @@
  InvokeCompiler←{
-     pwd←(-⍴PathFileName ⍵)↓⍵
-     ⎕SH' cd ', pwd,'; sac2c -O3 -doawlf -dopwlf ',⍵}
+     ismod←'module'≡6⍴GetFileChar ⍵ ⍝ Module vs. main()
+     fldr←⍺
+     ⎕←'Compiling ',(ismod⌷(E'main(): '),E'module: '),⍵
+     opts←(E ⍵,'.exe'),0⌷FileNameBreak ⍵
+     opts←'-o ',D ismod⌷opts
+     ⍝ The .exe is there only to simplify my folder cleanup work,
+     ⍝ so get rid of it if you don't like it
+     cmd←'sac2c -O3 -doawlf -dopwlf ',opts,' ',⍵
+     z←⎕SH 'cd ',fldr,'; ',cmd
+     z
+ }

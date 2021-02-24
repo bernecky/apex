@@ -1,5 +1,4 @@
-﻿StackDrop←{
+ StackDrop←{
 ⍝ Drop ⍺ elements from Stack ⍵
-(stkp-⍺)↑⍵
-}
-
+     (stkp-⍺)↑⍵
+ }

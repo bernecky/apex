@@ -1,4 +1,4 @@
-﻿ EmitOutputFile y;wsid;APEXVersion;cuasts;cudefinedfns;cuprolog;code;b;r
+ EmitOutputFile y;wsid;APEXVersion;cuasts;cudefinedfns;cuprolog;code;b;r
  ⍝# Package the generated SAC code for one Compilation Unit(CU)
  ⍝# and write it to a host file..
  ⍝# Result is written to file in same directory as source.

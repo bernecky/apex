@@ -1,4 +1,4 @@
-﻿ r←mil EmitDefnsIndexAssignBody fns;cv;hdr;trlr;rks;ndx;nul;ndxp;rhs;p;k;lhs;eta
+ r←mil EmitDefnsIndexAssignBody fns;cv;hdr;trlr;rks;ndx;nul;ndxp;rhs;p;k;lhs;eta
 ⍝# Emit body code indexed assign X[I0;I1...In]←Y[i0;i1...in]
  cv←mil≠0
  nul←cv∧mil=NULL ⍝ Mark elided indices

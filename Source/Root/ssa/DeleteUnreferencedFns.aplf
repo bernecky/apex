@@ -1,4 +1,4 @@
-﻿ r←DeleteUnreferencedFns y;ct;asts;cv;df
+ r←DeleteUnreferencedFns y;ct;asts;cv;df
   ⍝ Delete unreferenced defined fns from the
   ⍝ Compilation unit. This keeps dfaOK from
   ⍝ complaining and also speeds up compilation

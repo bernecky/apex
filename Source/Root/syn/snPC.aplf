@@ -1,4 +1,4 @@
-﻿ snPC;j;astr;row
+ snPC;j;astr;row
  ⍝ Left parenthesis left of naked conj
  ⍝ Locate matching right paren, pop intervening stuff,
  ⍝ Emit it, and push the resulting derived fn.

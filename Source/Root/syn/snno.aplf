@@ -1,4 +1,4 @@
-﻿ snno;i;op;rk;j
+ snno;i;op;rk;j
  ⍝ State is operator(conj or adv).
  ⍝ Signal is numeric constant.
  ⍝ Constant is left operand to conj

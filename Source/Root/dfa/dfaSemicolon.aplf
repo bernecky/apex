@@ -1,4 +1,4 @@
-﻿ r←dfaSemicolon y;ast;wl;i
+ r←dfaSemicolon y;ast;wl;i
  ⍝ Handle index propagation so indexing works
  ast←D y[ssaast]
  wl←D y[ssacv]

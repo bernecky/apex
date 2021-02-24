@@ -1,4 +1,4 @@
-﻿ r←mil EmitDefnsIndexAssignResh fns;cv;p;gen
+ r←mil EmitDefnsIndexAssignResh fns;cv;p;gen
 ⍝# Emit reshape-Y statements for indexed assign w/scalar Y
  cv←'0'=(D fns[;fnsranks])[;fnsranksrarg] ⍝ Y is scalar
  p←(⍴mil)⍴EmitDefnsIndexAssignMarkElidedTrailingAxes mil

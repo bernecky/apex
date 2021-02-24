@@ -1,4 +1,4 @@
-﻿ r←cv APLFormatPrimitive ast;p
+ r←cv APLFormatPrimitive ast;p
 ⍝# Simple APL primitives, ctl structs, etc.
  p←~(cv⌿ast[;astlarg])∊NULL  ⍝ Dyadic fns
  r←((cv\p)⌿ast)TargetName(cv\p)⌿ast[;astlarg]

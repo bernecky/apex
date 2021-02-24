@@ -1,4 +1,4 @@
-﻿ r←ast IndexTypeRank i;il;ir;it;lhs;rhs;rk;tp;j;k;m
+ r←ast IndexTypeRank i;il;ir;it;lhs;rhs;rk;tp;j;k;m
 ⍝ Get Index ref and assign types and ranks
 ⍝ for bracketed info ,etc
  il←(E ast)IndexList¨(i/⍳⍴i),¨astrarg ⍝ Collect all index lists I

@@ -1,4 +1,7 @@
- r←fldr EmitOneCU asts;i;mn;cudefinedfns;m;fnslop;fnsfn;fnsrop;fnstypes;fnsranks;fnslpar;fnslarg;fnsrarg;fnsrpar;calfn;caltypes;calranks;callpar;callarg;calcomma;calrarg;calrpar;fns;fnstypeslarg;fnstypesrarg;fnstypesz;z;fnm;smn
+ r←fldr EmitOneCU asts;i;mn;cudefinedfns;m;fnslop;fnsfn;fnsrop
+ ;fnstypes;fnsranks;fnslpar;fnslarg;fnsrarg;fnsrpar;calfn
+ ;caltypes;calranks;callpar;callarg;calcomma;calrarg
+ ;calrpar;fns;fnstypeslarg;fnstypesrarg;fnstypesz;z;fnm;smn
  ⍝ Emit compiled APL code for one Compilation Unit(CU), asts
  ⍝ Genned module code written to file r in fldr
  ⍝ Result is r, and the generated main() filename
@@ -15,7 +18,7 @@
  m←D(FileNameBreak fldr)[1] ⍝ Filename only
  fnm←fldr,PathDelim,m
  r←EmitOutputFile(E asts),(E sis),E fnm
-  ((-⍴m)↓fldr)CoverFn fldr ⍝ Create cover function for APL ws
- mn←smn GenerateMainFn fldr
+ ((-⍴m)↓fldr)CoverFn fldr ⍝ Create cover function for APL ws
+ mn←smn WriteMainFn fldr
  r←(E r),E mn
  Trace(fts ⎕TS),': Code generation complete for: ',fldr

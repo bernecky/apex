@@ -1,4 +1,4 @@
- r←fldr dosac asts;TL;fragbuf
+ r←fldr dosac asts;TL;fragbuf;ipt
 ⍝# Emit object code for each compilation unit (CU)
 ⍝# Each tied file is a compilation unit.
  InitializeAST
@@ -8,10 +8,6 @@
  InitializeTYPES
  InitializePFAT
  TL←LC #.globals.TargetLanguage
- :If TL≡'sac'
-     fragbuf←BufferAllCodeFragments #.globals.PathFrag
-     r←fldr EmitOneCU asts
-     TL InvokeCompiler r ⍝ Compile sac module
- :Else
-     r←asts
- :EndIf
+ fragbuf←BufferAllCodeFragments #.globals.PathFrag
+ ipt←fldr EmitOneCU asts ⍝ module and generated caller
+ r←(E fldr) InvokeCompiler¨ipt ⍝ Compile sac module, caller

@@ -1,4 +1,4 @@
-﻿ r←ph PhraseRecognizer1 ast;cv;pc;pn;tar;i;j;t
+ r←ph PhraseRecognizer1 ast;cv;pc;pn;tar;i;j;t
 ⍝ Recognize the single phrase ph,
 ⍝ a series of monadic functions
 ⍝ chained together. The leftmost may be dyadic or

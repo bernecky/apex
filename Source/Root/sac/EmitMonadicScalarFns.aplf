@@ -1,4 +1,4 @@
-﻿ r←EmitMonadicScalarFns fns;cv;sis;ctl;cvm
+ r←EmitMonadicScalarFns fns;cv;sis;ctl;cvm
 ⍝# Generate XxS,XxA monadic scalar fn code
  sis←''
  :If ~0∊⍴fns

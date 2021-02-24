@@ -1,4 +1,4 @@
-﻿ z←BuildDefinerFn tn;csds;ast;fnm;l;r;z;txt;nm;dnm;er
+ z←BuildDefinerFn tn;csds;ast;fnm;l;r;z;txt;nm;dnm;er
 ⍝ Create APL definer function for APEX-generated
 ⍝ code located in filetie tn
  csds←⎕FREAD tn,¯1+1↑1↓⎕FSIZE tn

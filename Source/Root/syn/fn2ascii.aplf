@@ -1,4 +1,4 @@
-﻿ r←fn2ascii fn;b
+ r←fn2ascii fn;b
 ⍝ Generate the APLASCII representation of the
 ⍝ function named fn
  r←APL2ASCII ⎕CR fn

@@ -1,4 +1,4 @@
-﻿ r←ctl FindRankIndex fns;i;j
+ r←ctl FindRankIndex fns;i;j
 ⍝ find incidence matrix for ctl, fns for indexing
 ⍝ Based on first index
  i←(D ctl[;2])[;3]

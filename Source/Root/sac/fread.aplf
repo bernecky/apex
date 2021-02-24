@@ -1,2 +1,2 @@
-﻿ r←fread y
+ r←fread y
  r←⎕FREAD y

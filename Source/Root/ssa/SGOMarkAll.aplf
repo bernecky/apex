@@ -1,4 +1,4 @@
-﻿ r←cv SGOMarkAll ast;fcv;f
+ r←cv SGOMarkAll ast;fcv;f
  ⍝ Mark all :GO entries for fn calls marked by cv
  r←cv∧0
  fcv←cv

@@ -1,4 +1,4 @@
-﻿ r←MarkSpecialCasesCatlam fns;cv;spec;cases;cv2
+ r←MarkSpecialCasesCatlam fns;cv;spec;cases;cv2
 ⍝# Generate special case names for catenate/laminate
  cv←(ast[;astfn]∊ER1⍪',⍪')∧IsDyadic fns
  spec←(D cv⌿fns[;fnsranks])[;fnsrankslarg,fnsranksrarg]

@@ -1,4 +1,4 @@
-﻿ r←dfaMonadicThorn y;ast;wl;i;astn;rarg;tpc
+ r←dfaMonadicThorn y;ast;wl;i;astn;rarg;tpc
  ⍝ Monadic thorn
  ast←D y[ssaast]
  wl←D y[ssacv]

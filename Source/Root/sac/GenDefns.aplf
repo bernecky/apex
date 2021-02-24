@@ -1,4 +1,4 @@
-﻿ r←ast GenDefns cv;tp;rk;k
+ r←ast GenDefns cv;tp;rk;k
 ⍝ Generate parameter defns for cv⌿ast
 ⍝ E.g., "double[.]" for real vector.
  k←(cv⌿ast)[;astlarg,astrarg]

@@ -1,4 +1,4 @@
-﻿ ast2lpar;newsignal
+ ast2lpar;newsignal
 ⍝ Left parenthesis left of anything
  :Select state
  :Case Stf         ⍝ lpar left of fn:         (f ⍵

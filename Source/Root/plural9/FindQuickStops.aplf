@@ -1,4 +1,4 @@
-﻿ r←ctl FindQuickStops fns;qs;qsb;b;s
+ r←ctl FindQuickStops fns;qs;qsb;b;s
 ⍝# Mark reductions that can quick-stop
  qs←(E'mpy')                          ⍝ Quick-stop integer/double
  qsb←(E'and'),(E'or'),(E'min'),E'max' ⍝ Quick-stop Boolean

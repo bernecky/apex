@@ -1,4 +1,4 @@
-﻿ r←x SSASearchRenameNonPhi yy;ast;X;cv;tar;y;S;m;b;p;j;n;q;i;k
+ r←x SSASearchRenameNonPhi yy;ast;X;cv;tar;y;S;m;b;p;j;n;q;i;k
  ⍝ SSA Search from Wolfe 1992, p. 183
  ⍝ This only handles ONE target verb, tar
  X←D x[0] ⋄ tar←D x[1] ⍝ Vars,target varb

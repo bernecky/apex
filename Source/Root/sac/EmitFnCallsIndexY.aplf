@@ -1,4 +1,4 @@
-﻿ r←ast EmitFnCallsIndexY cv;cv2;rnk
+ r←ast EmitFnCallsIndexY cv;cv2;rnk
 ⍝# Find right arguments to indexed assigns
 ⍝# Get argument ranks, too.
  r←cv⌿ast[;astrop]

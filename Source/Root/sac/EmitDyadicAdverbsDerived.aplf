@@ -1,4 +1,4 @@
-﻿ r←ssadat EmitDyadicAdverbsDerived fns;ctl;n;f;fn;t;cv;nm;sis;ssa;sg;sgn;sgl;ast
+ r←ssadat EmitDyadicAdverbsDerived fns;ctl;n;f;fn;t;cv;nm;sis;ssa;sg;sgn;sgl;ast
  ⍝# Emit Dyadic adverb fn SAC code, e.g., Window-reduce
  ⍝# This function supports ONLY derived and defined operands
  sis←''

@@ -1,4 +1,4 @@
-﻿ r←cds CloneIfNeeded y;ast;parm;cv;k;callerfn;calleefn;callername;clr;clt
+ r←cds CloneIfNeeded y;ast;parm;cv;k;callerfn;calleefn;callername;clr;clt
 ⍝ Determine if astmerge arguments force a clone to be
 ⍝ made of a function and, if so, generate the clone fn,
 ⍝ and correct the calling site.

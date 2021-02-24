@@ -1,1 +1,1 @@
-FullPathName←{((PathDelim≠0⌷⍵)/D 0⌷ ⎕sh 'echo $HOME'),PathDelim,⍵}
+ FullPathName←{((PathDelim≠0⌷⍵)/D 0⌷⎕SH'echo $PWD'),PathDelim,⍵}

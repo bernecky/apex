@@ -1,4 +1,4 @@
-﻿ r←EmitLocalFns ast;cv;i;j;k;if1;c
+ r←EmitLocalFns ast;cv;i;j;k;if1;c
  ⍝ Emit code for local fns
  ⍝ We emit the function naked. Curried args,
  ⍝ as in f&(+.×) are done by the invocation.

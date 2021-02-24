@@ -1,4 +1,4 @@
-﻿ r←dfaIndexRef y;ast;wl;i;j;k;astr;p
+ r←dfaIndexRef y;ast;wl;i;j;k;astr;p
  ⍝ Handle indexed reference
  ast←D y[ssaast]
  wl←D y[ssacv]

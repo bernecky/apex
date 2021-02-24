@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsMonadicGenericPrimitive y;fns;cv;cal;ast
+ r←EmitFnCallsMonadicGenericPrimitive y;fns;cv;cal;ast
 ⍝# Emit calls for monadic generic fns with no fancy needs.
  r←y
  ast←D y[0] ⍝ ast

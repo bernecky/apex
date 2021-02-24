@@ -1,4 +1,4 @@
-﻿ r←PhraseRecognizerDyadic ast;ph;tars
+ r←PhraseRecognizerDyadic ast;ph;tars
 ⍝ Recognize dyadic phrases
 ⍝ These are a series of monadic functions
 ⍝ chained together, with the leftmost one dyadic.

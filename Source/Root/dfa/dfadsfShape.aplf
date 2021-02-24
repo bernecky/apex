@@ -1,4 +1,4 @@
-﻿ r←ast dfadsfShape i;b;larg;rarg;ls;rs;lx;rx;pr
+ r←ast dfadsfShape i;b;larg;rarg;ls;rs;lx;rx;pr
  ⍝ Get result shape of dyadic scalar fn for ast[i;]
  ⍝ Rules for picking result shape
  ⍝   Shapes match: Either argument

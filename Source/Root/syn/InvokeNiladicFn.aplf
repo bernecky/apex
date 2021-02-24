@@ -1,4 +1,4 @@
-﻿ InvokeNiladicFn ns;astr;i;j;row
+ InvokeNiladicFn ns;astr;i;j;row
  ⍝ Call stacked verb niladically, set new state ns
  i←StackPop 1 ⍝ Pop stack element
  astr←,astNewRows 1 ⍝ Build new ast entry

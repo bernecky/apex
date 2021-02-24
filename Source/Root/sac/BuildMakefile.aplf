@@ -1,4 +1,4 @@
-﻿ z←BuildMakefile tn;csds;ast;fnm;txt
+ z←BuildMakefile tn;csds;ast;fnm;txt
 ⍝ Create Makefile for APEX-generated
 ⍝ code located in filetie tn
  z←''

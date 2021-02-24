@@ -1,4 +1,4 @@
-﻿ r←ast ConjOpName y;cv;astloprop;tar;cv3;cv2;fnm
+ r←ast ConjOpName y;cv;astloprop;tar;cv3;cv2;fnm
 ⍝ Return operand names for ast rows.
 ⍝ This may be a jsym (e.g., "eq" for "="),
 ⍝ a constant (e.g., "01" for nuax 0 1),

@@ -1,4 +1,4 @@
-﻿ ast2adverb;i
+ ast2adverb;i
 ⍝ Adverb (monadic operator) left of anything
  :Select state
  :Case Stf                   ⍝ Adverb left of function:    /f ⍵

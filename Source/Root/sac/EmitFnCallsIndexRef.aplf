@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsIndexRef y;tar;ast;cv;fns;i;mil;cal;I;X;sis;k;p
+ r←EmitFnCallsIndexRef y;tar;ast;cv;fns;i;mil;cal;I;X;sis;k;p
  ast←D y[0]
  cv←D y[1]
  fns←D y[2]

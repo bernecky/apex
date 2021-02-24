@@ -1,4 +1,4 @@
-﻿ r←cv SafeEvaluate ast;larg;rarg;fn;li;ri;row;z;j;ncv
+ r←cv SafeEvaluate ast;larg;rarg;fn;li;ri;row;z;j;ncv
 ⍝ Evaluate rows of this ast marked by cv.
 ⍝ If something goes wrong, tell the user, ignore
 ⍝ the error, and keep going.
@@ -20,7 +20,7 @@
      ast[j;]←row
  :EndFor
  →lz
-oops:⎕elx  ←'' ⍝ ⎕elx goes here supposedly
+oops:⎕elx←'' ⍝ ⎕elx goes here supposedly
  ⎕←dm←⎕DM
  ∘ ⍝ Stop here and think about corrective action
 lz:r←ast

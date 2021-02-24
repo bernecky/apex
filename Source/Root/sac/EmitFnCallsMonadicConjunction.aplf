@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsMonadicConjunction y;ast;cv;fns;sis;nm;ctl;prim;fn;rnk;loc;t;i;nj;cvm;j;n
+ r←EmitFnCallsMonadicConjunction y;ast;cv;fns;sis;nm;ctl;prim;fn;rnk;loc;t;i;nj;cvm;j;n
  ⍝ Emit Monadic conjunction SISAL code for defined
  ⍝ and derived operands only. Reduce and scan
  ⍝ Primitives are generated earlier.

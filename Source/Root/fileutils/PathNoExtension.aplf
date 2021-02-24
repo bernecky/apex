@@ -1,5 +1,4 @@
-PathNoExtension←{
- ⍝ Blindly remove last .xxx 
- (-1+(⌽⍵)⍳'.')↓⍵
-}
-  
+ PathNoExtension←{
+ ⍝ Blindly remove last .xxx
+     (-1+(⌽⍵)⍳'.')↓⍵
+ }

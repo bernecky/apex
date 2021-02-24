@@ -1,4 +1,4 @@
-﻿ r←ssadat EmitDyadicAdverbs fns;ctl;prim;cv;cvm;sis;f
+ r←ssadat EmitDyadicAdverbs fns;ctl;prim;cv;cvm;sis;f
  ⍝# Emit Dyadic adverb fn SAC code
  ⍝# Window reduce
  sis←''

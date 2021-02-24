@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsLevDex y;ast;fns;cal;cv;i
+ r←EmitFnCallsLevDex y;ast;fns;cal;cv;i
 ⍝ Emit calls for lex and dex
  ast←D y[0] ⍝ ast
  fns←D y[2] ⍝ All fn names

@@ -6,7 +6,7 @@
      signal←tok[c]
      stk[stkp;Stkstate]←E signal
  :EndIf
- :If #.apexutils.isTrace 'syn'
+ :If #.apexutils.isTrace'syn'
      src see tok
  :EndIf
  'Compiler bug'assert(0=⍴⍴state)∧0=⍴⍴signal

@@ -1,4 +1,4 @@
-﻿ r←strs strrepquad src;tok;old;new;i;n
+ r←strs strrepquad src;tok;old;new;i;n
 ⍝ Replace quadly names at source level
  r←' ',src ⍝ Fake NL
  tok←,tokenize r

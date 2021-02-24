@@ -1,4 +1,4 @@
-﻿ r←dfaOp y;ast;wl;i;j;k;m;n;pa;larg;rarg;nast;op;upd;grank;glarg;grarg;lrank
+ r←dfaOp y;ast;wl;i;j;k;m;n;pa;larg;rarg;nast;op;upd;grank;glarg;grarg;lrank
  ⍝# Outer product dataflow analysis z←x ∘.g y
  ⍝# We define outer product as "x g rank (0 ¯) y"
  ast←D y[ssaast]

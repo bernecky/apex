@@ -1,4 +1,4 @@
-﻿ r←dfaScan y;ast;wl;i;j;k;astr;cv;tar;b;tarp
+ r←dfaScan y;ast;wl;i;j;k;astr;cv;tar;b;tarp
  ⍝ Handles all scans
  ast←D y[ssaast]
  wl←D y[ssacv]

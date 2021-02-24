@@ -1,4 +1,4 @@
-﻿ r←dfaPA y;ast;wl;i
+ r←dfaPA y;ast;wl;i
  ⍝# Clean up after conj/adv expns
  ast←D y[ssaast]
  wl←D y[ssacv]

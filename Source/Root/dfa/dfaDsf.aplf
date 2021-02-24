@@ -1,8 +1,8 @@
-﻿ r←dfaDsf y;ast;wl;i;k;m;n;b;args;rnks;astr;nsa;j;cv
+ r←dfaDsf y;ast;wl;i;k;m;n;b;args;rnks;astr;nsa;j;cv
  ⍝ Handle dyadic scalar functions.
  ast←D y[ssaast]
  wl←D y[ssacv]
- i←wl∧(~ast[;astlarg]∊NULL)∧ast[;astfn]∊ER1 ⍪'+-÷×*○⌈⌊⍟|~≤=≥⍟≠<>∧∨⍱⍲'
+ i←wl∧(~ast[;astlarg]∊NULL)∧ast[;astfn]∊ER1⍪'+-÷×*○⌈⌊⍟|~≤=≥⍟≠<>∧∨⍱⍲'
  wl←wl∧~i ⍝ Mark work done
  i←i∧~(D ast[;astPred])[;astPredKnowValue]
  ⍝ We could only handle if we knew both args, but
@@ -23,11 +23,11 @@
      n←⌈/asttypeB,m⌿k
      astr[m/⍳⍴m;asttype]←n ⍝ Normal type.
  ⍝ Some ops have minimum int result type, e.g., Bool+Bool
-     b←m∧astr[;astfn]∊ER1 ⍪'+-÷'
+     b←m∧astr[;astfn]∊ER1⍪'+-÷'
      b←b/⍳⍴b
      astr[b;asttype]←⌈/asttypeI,astr[b;,asttype]
-     astr[(astr[;astfn]∊ER1 ⍪'÷⍟○')/⍳1↑⍴astr;asttype]←asttypeD ⍝ floats
-     astr[(astr[;astfn]∊ER1 ⍪'<≤=≥>≠∨∧⍱⍲')/⍳1↑⍴astr;asttype]←asttypeB
+     astr[(astr[;astfn]∊ER1⍪'÷⍟○')/⍳1↑⍴astr;asttype]←asttypeD ⍝ floats
+     astr[(astr[;astfn]∊ER1⍪'<≤=≥>≠∨∧⍱⍲')/⍳1↑⍴astr;asttype]←asttypeB
      astr[;astshape]←k←ast dfadsfShape i/⍳⍴i ⍝ Result shape
      b←(~k∊NULL)/⍳⍴k              ⍝ Set known ones only
      :If ×⍴b                      ⍝ Stupid APL2 empty arrays

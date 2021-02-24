@@ -1,4 +1,4 @@
-﻿ r←EmitDyadicScalarFnCallsArgumentSwap y;i;new;fns;cal;j;k;ast
+ r←EmitDyadicScalarFnCallsArgumentSwap y;i;new;fns;cal;j;k;ast
 ⍝ For any dyadic scalar function that is commutative,
 ⍝ swap the arguments to place a scalar right arg
 ⍝ on the left. We do this for scalars because OSC

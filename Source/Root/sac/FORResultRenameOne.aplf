@@ -1,4 +1,4 @@
-﻿ r←cv FORResultRenameOne ast;phimark;phi;phiz;k;astr;newnm;phit;cv2;m;k2
+ r←cv FORResultRenameOne ast;phimark;phi;phiz;k;astr;newnm;phit;cv2;m;k2
  ⍝ Rename :For loop result references for SAC only.
  ⍝ This could probably be done easier by avoiding
  ⍝ the renaming in the SSA phase, but languages

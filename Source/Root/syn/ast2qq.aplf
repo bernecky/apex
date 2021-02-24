@@ -1,4 +1,4 @@
-﻿ ast2qq;i;fn
+ ast2qq;i;fn
 ⍝ quad, quote-quad
  :Select state
  :CaseList Stn,Stf,Stl,Sto ⍝ ⍞   ⍞f⍵  ⍞[0]  ⍞/⍵

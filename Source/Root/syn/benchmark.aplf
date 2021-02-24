@@ -1,4 +1,4 @@
-﻿ r←benchmark y;p;nms
+ r←benchmark y;p;nms
  p←path,y,'\'
  nms←ls p,'*.wif' ⍝ All wif files in this dir are
  ⍝ fair game.

@@ -1,4 +1,4 @@
-﻿ r←EmitMonadicMiscFns fns;cv;sis;fn;cvm;ctl
+ r←EmitMonadicMiscFns fns;cv;sis;fn;cvm;ctl
  ⍝ Emit Monadic Miscellaneous fn SAC code
  ⍝ r=genned code, new fns list
  ⍝ Handles ⍋y  ⍒y ⍳y ⎕← ,⍵ ⍴⍵ ⍕⍵  ←⍞

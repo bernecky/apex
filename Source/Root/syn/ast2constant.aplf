@@ -1,4 +1,4 @@
-﻿ ast2constant
+ ast2constant
 ⍝ Constant to left of anything
  :Select state
  :CaseList Stn,Stf ⍝ Constant left of new statement or function

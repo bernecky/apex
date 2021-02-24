@@ -1,4 +1,4 @@
-﻿ r←dfaGrade y;i;ast;wl;j;k;p
+ r←dfaGrade y;i;ast;wl;j;k;p
  ⍝ "Known result characteristics"
  ⍝ Set result rank and type of grade.
  ast←D y[ssaast]

@@ -1,4 +1,4 @@
-﻿ r←ctl FindType fns;ltn;lts;rtn;rts;lt;rt;typ;ztn;zts;zt
+ r←ctl FindType fns;ltn;lts;rtn;rts;lt;rt;typ;ztn;zts;zt
  ⍝ Find fragments for rank
  ⍝ r= incidence matrix for prim, nms
  typ←UC D fns[;fnstypes]

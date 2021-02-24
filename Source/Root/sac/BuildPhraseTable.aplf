@@ -1,4 +1,4 @@
-﻿ r←BuildPhraseTable;t;b;i;j
+ r←BuildPhraseTable;t;b;i;j
 ⍝ Build Phrase table from textual description
  PHRASEName←0       ⍝ Column definitions
  PHRASEMonadicOut←1

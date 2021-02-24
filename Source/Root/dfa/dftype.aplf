@@ -1,4 +1,4 @@
-﻿ r←x dftype y;i
+ r←x dftype y;i
  ⍝ dyadic scalar function result type.
  ⍝ x is functions, y is argument types.
  ⍝ Ya know, this oughta drive off pfat.tbl

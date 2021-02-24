@@ -1,2 +1,2 @@
-﻿ r←TCLF
- r←⎕ucs 10
+ r←TCLF
+ r←⎕UCS 10

@@ -1,4 +1,4 @@
-﻿ r←seemon;fns;pv
+ r←seemon;fns;pv
  ⍝ A See monitor data, sorted by CPU time
  fns←⎕NL 3
  r←D ⎕MONITOR¨ER1 fns

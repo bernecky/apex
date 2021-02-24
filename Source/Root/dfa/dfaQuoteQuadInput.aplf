@@ -1,4 +1,4 @@
-﻿ r←dfaQuoteQuadInput y;ast;wl;i;nast;j
+ r←dfaQuoteQuadInput y;ast;wl;i;nast;j
  ⍝ Quote-quad input produces character vector result
  ast←D y[ssaast]
  wl←D y[ssacv]

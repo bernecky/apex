@@ -1,4 +1,4 @@
-﻿ r←wsdocOne fn;fns;files;z
+ r←wsdocOne fn;fns;files;z
 ⍝ Generate postscript for fn in this ws
  fns←fn
  fns←ER1(~∨/fns∊'∆⍙')⌿fns ⍝ No evil characters, please

@@ -1,4 +1,4 @@
-﻿ r←EmitMonadicStructuralFns fns;ctl;cv;cvm;sis
+ r←EmitMonadicStructuralFns fns;ctl;cv;cvm;sis
  ⍝ Emit Monadic Structural fn SAC code
  ⍝ Result is new code, new (shorter) fns list
  ⍝ Handles ⍉y ⌽y ⊖y ⍪y ,y

@@ -1,4 +1,4 @@
-﻿ r←JSYM
+ r←JSYM
  r←'diamon      3             ⋄     end-of-statement.          ',TCNL
  r←r,'doll        9             $     dollar sign                ',TCNL
  r←r,'cent        11            ¢     cent sign                  ',TCNL

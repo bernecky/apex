@@ -1,4 +1,4 @@
-﻿ r←dfaRepresentType ast;b;p
+ r←dfaRepresentType ast;b;p
 ⍝ Get result type for x⊤y
 ⍝ This is maxtype, except when x is
 ⍝ all 2s, in which case it's boolean

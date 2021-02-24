@@ -1,4 +1,4 @@
-﻿ snPx;i;j;k;m;newsignal;astr;dirin;sz;lhs;rhs;rhsindex;subfn
+ snPx;i;j;k;m;newsignal;astr;dirin;sz;lhs;rhs;rhsindex;subfn
  ⍝ Left parenthesis left of expression(s)
  ⍝ E.g.,
  ⍝ Got both args of dyadic fn:      (exp)+exp
@@ -32,7 +32,7 @@
          i←StackPop 1
          PushCursor(i[0;Stkvalue,Stktokcl],E 1)Push D StS
      :ElseIf (rhsindex≥0)
-     :AndIf isFormalArg(0,Stkvalue)⌷⊖ (sz+2) StackCopy stk
+     :AndIf isFormalArg(0,Stkvalue)⌷⊖(sz+2)StackCopy stk
          ⍝ Case 2: omega, aka rhs, is formal argument of defined fn
          ⍝    ∇r←foo omega;b;c
          ⍝     (b c)←omega, and omega an argument

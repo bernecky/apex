@@ -1,4 +1,4 @@
-﻿ r←GetArgument astr
+ r←GetArgument astr
 ⍝ Extract value of this row as array of
 ⍝ proper type, shape, rank
  r←D astr[astvalue]

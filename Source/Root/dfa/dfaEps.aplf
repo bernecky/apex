@@ -1,4 +1,4 @@
-﻿ r←dfaEps y;ast;wl;i;j;k;p
+ r←dfaEps y;ast;wl;i;j;k;p
  ⍝ Handle set membership
  ast←D y[ssaast]
  wl←D y[ssacv]

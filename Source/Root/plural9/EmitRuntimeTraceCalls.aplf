@@ -1,4 +1,4 @@
-﻿ r←EmitRuntimeTraceCalls y;cal;ast;cv;marktemps;vars
+ r←EmitRuntimeTraceCalls y;cal;ast;cv;marktemps;vars
  ast←D y[0]
  cal←D y[1]
  marktemps←(dfainit ast)⍳1            ⍝ Sheep vs goats

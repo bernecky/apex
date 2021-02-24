@@ -1,4 +1,4 @@
-﻿ r←EmitUserDefinedFunctionBody y;ast;fns;rap;j;ct;tcv;sis;cds;cv
+ r←EmitUserDefinedFunctionBody y;ast;fns;rap;j;ct;tcv;sis;cds;cv
  ⍝# Emit code for a user-defined function's body.
  ⍝# Function header is handled elsewhere.
  cds←y

@@ -1,4 +1,4 @@
-﻿ rules
+ rules
  'all functions must return results'
  'the only data type supported is floating point'
  'all branches must be to labels'

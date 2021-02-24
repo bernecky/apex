@@ -1,4 +1,4 @@
-﻿ r←EmitDyadicTakeDropFns fns;ctl;cvm;sis;cv
+ r←EmitDyadicTakeDropFns fns;ctl;cvm;sis;cv
  ⍝ Emit take and drop functions
  ⍝ No changes in right argument type, as in the
  ⍝ Structural fns. Perhaps this can be merged

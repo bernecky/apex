@@ -1,4 +1,4 @@
-﻿ r←k FindTail ast;p
+ r←k FindTail ast;p
 ⍝# Find end of linked-list astparms chains starting at ast row indices k
 ⍝# Result is ast indices that have null astparms.
  r←k

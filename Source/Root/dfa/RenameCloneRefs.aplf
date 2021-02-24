@@ -1,4 +1,4 @@
-﻿ r←x RenameCloneRefs astscaller;callee;suffix;callsite;pv;np;refs;target;cv;astcaller;p
+ r←x RenameCloneRefs astscaller;callee;suffix;callsite;pv;np;refs;target;cv;astcaller;p
 ⍝ Rename one call of a subfn by a call to the subfn clone
  callee←D x[0]                    ⍝ Subfn being called
  suffix←D x[1]                    ⍝ Suffix for subfn clone

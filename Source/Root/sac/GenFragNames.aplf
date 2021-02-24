@@ -1,4 +1,4 @@
-﻿ r←GenFragNames ast;i;j;k;fns;cv;lt;rnks
+ r←GenFragNames ast;i;j;k;fns;cv;lt;rnks
  ⍝# Generate function names for all fns to be called by genned code
  i←⍴j←ast[;astlop,astfn,astrop] ⍝ Derived fn names
  j←,j

@@ -1,4 +1,4 @@
-﻿ r←MoveLopToLarg csd;cv2;i;ast;astr;cv;b
+ r←MoveLopToLarg csd;cv2;i;ast;astr;cv;b
 ⍝ Move replicate/expand left operands to left arguments
  ast←D csd[ssaast]
  cv←ast[;astfn]∊ER1⍪'/⌿\⍀' ⍝ scan/reduce/expand/replicate

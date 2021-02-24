@@ -1,4 +1,4 @@
-﻿ r←cv FORRenameOne ast;phimark;phi;phiz;k;astr;newnm;phit;cv2;m;bf
+ r←cv FORRenameOne ast;phimark;phi;phiz;k;astr;newnm;phit;cv2;m;bf
  ⍝ Rename variables for X vs OLD X in a single
  ⍝ :For loop. Work within the scope of the loop only.
  ⍝ Rename the :PHI variable so that it refers to

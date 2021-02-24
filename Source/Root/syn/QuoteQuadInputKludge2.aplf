@@ -1,4 +1,4 @@
-﻿ r←ast QuoteQuadInputKludge2 astr;row
+ r←ast QuoteQuadInputKludge2 astr;row
  ⍝ If we have '←...⍞', generate single token
  r←astr
  :If astr[astfn,astrarg]≡(E,'←'),E'⍞'

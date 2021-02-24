@@ -1,4 +1,4 @@
-﻿ r←MarkBasicBlocks y;ast;b;b2;i;b3;b4
+ r←MarkBasicBlocks y;ast;b;b2;i;b3;b4
  ⍝ Mark basic blocks in ast
  ⍝ Builds a partition vector for the ast
  ⍝ and inserts it into the ast.

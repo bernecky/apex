@@ -1,4 +1,4 @@
-﻿ r←pb StrandItems s;i;p
+ r←pb StrandItems s;i;p
  ⍝ Strand or index list items from offset s into stk
  ⍝ Empty if not a strand
  i←⊖s StackDrop stk ⍝ Detect syntax error in source program

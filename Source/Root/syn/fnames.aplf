@@ -1,2 +1,2 @@
-﻿ r←fnames
+ r←fnames
  r←⎕FNAMES

@@ -1,5 +1,5 @@
  r←fldr dossa asts;tn;y;i;ct;ast2;ast3;dfaws;srctok;ast;cds;PFAT
- Trace (⍕⎕TS),': Starting SSA analysis for: ',fldr
+ Trace(⍕⎕TS),': Starting SSA analysis for: ',fldr
  InitializeAST
  InitializeSSA
  InitializePFAT
@@ -28,4 +28,4 @@
  cds←csdDeleteNullAstRows¨DeadVarbRemoval¨cds       ⍝ Kill unref'd vars
  Checkem¨cds
  r←cds
- Trace (fts ⎕TS),': SSA analysis complete for: ',fldr
+ Trace(fts ⎕TS),': SSA analysis complete for: ',fldr

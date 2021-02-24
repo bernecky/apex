@@ -1,4 +1,4 @@
-﻿ r←GenFragNamesSGO y;cal;ast;ptr;lst;tar;sz
+ r←GenFragNamesSGO y;cal;ast;ptr;lst;tar;sz
 ⍝ Modify invocation of subfns called from here
 ⍝ to include semiglobals from the subfn to here.
  cal←D y[0]

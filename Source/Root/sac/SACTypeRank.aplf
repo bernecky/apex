@@ -1,4 +1,4 @@
-﻿ r←tp SACTypeRank rk;lft;dots;rt
+ r←tp SACTypeRank rk;lft;dots;rt
 ⍝ This uses ast or fns arguments.
 ⍝ Return SAC type and rank specifier for
 ⍝ arguments of type tp and rank rk,

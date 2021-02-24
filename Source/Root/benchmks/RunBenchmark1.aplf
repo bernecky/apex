@@ -1,4 +1,4 @@
-﻿ RunBenchmark1 bm;args;blist;argv;ufns;fntext;argfn;Invoke;p;op;fns;r
+ RunBenchmark1 bm;args;blist;argv;ufns;fntext;argfn;Invoke;p;op;fns;r
 ⍝ Run APL interpreter benchmark in path bm
  blist←GetFileChar bm
  ufns←1↓¨PartitionedEnclose ¯1⌽blist

@@ -1,4 +1,4 @@
-﻿ r←InitializeCtl
+ r←InitializeCtl
 ⍝ Initialize column names of ctl array
  ctlfrag←0            ⍝ Code fragment
  ctlfn←1              ⍝ Function/fragment name

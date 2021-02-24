@@ -1,4 +1,4 @@
-﻿ r←ast GenFragNamesAdvConj fns;cv;tar
+ r←ast GenFragNamesAdvConj fns;cv;tar
 ⍝# Generate fragment names for adverbs and conjunctions
  cv←MarkAdvConjFns ast
  :If 1∊cv

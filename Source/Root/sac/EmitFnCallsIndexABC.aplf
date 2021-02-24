@@ -1,4 +1,4 @@
-﻿ r←cal EmitFnCallsIndexABC y;ast;mil;i;cv;mili;expn;nmI;nmX;nmT;ni;axis;dmil;cv;qio
+ r←cal EmitFnCallsIndexABC y;ast;mil;i;cv;mili;expn;nmI;nmX;nmT;ni;axis;dmil;cv;qio
 ⍝# Generate array-bounds checks for indexed ref and indexed assign
  ast←D y[0]
  mil←D y[1]            ⍝ Index lists I

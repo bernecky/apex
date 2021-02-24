@@ -1,4 +1,4 @@
-﻿ r←GetFile fnm;ntn;nm
+ r←GetFile fnm;ntn;nm
  ⍝ Get contents of dos file ⍵ as a character vec
  nm←dtb dlb fnm ⍝ Avoid mystery "file name error"
  nm ⎕NTIE ntn←¯1

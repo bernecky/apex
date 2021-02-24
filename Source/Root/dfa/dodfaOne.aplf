@@ -1,6 +1,6 @@
  r←fldr dodfaOne asts;y;i;tn;ct;ast2;ast3;ast;genws;cds;cds2;cds3;i2
  ⍝ Perform dfa on asts
- Trace (fts ⎕TS),': Starting dataflow analysis for: ',fldr
+ Trace(fts ⎕TS),': Starting dataflow analysis for: ',fldr
  asts←MakeBackupAstForCloning¨asts
  i←BuildCallingTree asts ⍝ Calling tree
  i←i DFSortast asts ⍝ Depth-first order for osc2
@@ -36,4 +36,4 @@
  cds←dfaSGFix¨cds           ⍝ Fix up :PHI semiglobal stupidity
  Checkem¨cds
  r←cds
- Trace (fts ⎕TS),': Dataflow analysis complete for: ',fldr
+ Trace(fts ⎕TS),': Dataflow analysis complete for: ',fldr

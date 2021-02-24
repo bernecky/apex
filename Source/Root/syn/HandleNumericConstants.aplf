@@ -1,4 +1,4 @@
-﻿ r←ast HandleNumericConstants st;cv;i;shp;p;j;cur;pd;astrow;xr
+ r←ast HandleNumericConstants st;cv;i;shp;p;j;cur;pd;astrow;xr
  ⍝ Build ast entries for numeric constants
  ⍝ This function fills in the type, rank, shape, and value.
  ⍝ Locate constants

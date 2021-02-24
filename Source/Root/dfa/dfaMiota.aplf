@@ -1,4 +1,4 @@
-﻿ r←dfaMiota y;ast;wl;i;j;k;m;b
+ r←dfaMiota y;ast;wl;i;j;k;m;b
  ⍝ Handle monadic iota.
  ast←D y[ssaast]
  wl←D y[ssacv]

@@ -1,4 +1,4 @@
-﻿ ast2NilFn;ns;oldstate
+ ast2NilFn;ns;oldstate
 ⍝ Niladic fn left of something
 ⍝ Execute the function and stack the result
  :Select state

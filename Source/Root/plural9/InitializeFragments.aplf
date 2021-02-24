@@ -1,4 +1,4 @@
-﻿ InitializeFragments
+ InitializeFragments
  fragbuf←0 2⍴'' ⍝ No fragments buffered
  frgdsfrg←0 ⍝ Fragment
  frgdsfnm←1 ⋄ frgdsflht←2 ⋄ frgdsfrht←3

@@ -1,4 +1,4 @@
-﻿ r←dfaFromDyalog y;ast;wl;i;j;k;astr;p;lh;rh;cv
+ r←dfaFromDyalog y;ast;wl;i;j;k;astr;p;lh;rh;cv
  ⍝ Handle Dyalog version of From (I do not know how it compares to the
  ⍝ J/SHARP APL From, so here is a fresh start.
  ast←D y[ssaast]

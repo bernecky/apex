@@ -1,4 +1,4 @@
-﻿ r←DeadPHIRemoval cds;ast;cv;tar;dead
+ r←DeadPHIRemoval cds;ast;cv;tar;dead
 ⍝ Kill :PHI entries that have unreferenced targets
  ast←D cds[ssaast]
  cv←ast[;astfn]∊E':PHI'

@@ -1,4 +1,4 @@
-﻿ r←IsCaseQuickStop0 fns;cv;zer;fn
+ r←IsCaseQuickStop0 fns;cv;zer;fn
  ⍝ Identify quickstop on inner product zero cases,
  ⍝ in which a zero g causes f to immediately go to a fixpoint
  ⍝ E.g., 'abcde'^.='abxyz' reaches 'c'='x'.

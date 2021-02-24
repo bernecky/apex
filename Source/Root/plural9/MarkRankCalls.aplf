@@ -1,4 +1,4 @@
-﻿ r←MarkRankCalls ast;rop;b
+ r←MarkRankCalls ast;rop;b
 ⍝ Mark ast rows that are rank conjunction invocations
  r←ast[;astfn]∊E,'⍤
  rop←r/ast[;astrop]

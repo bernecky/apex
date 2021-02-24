@@ -1,4 +1,4 @@
-﻿ r←md EmitScalarFnsKernels fns;sis;ctl;cv;cvm
+ r←md EmitScalarFnsKernels fns;sis;ctl;cv;cvm
 ⍝# Subfn that actually emits SxS code
 ⍝# Result is vector of sis, updated fns
  sis←''

@@ -1,4 +1,4 @@
-﻿ r←FileNameBreak y;p;n
+ r←FileNameBreak y;p;n
 ⍝ Break dos filename into path,name, suffix.
  p←(⌽∨\⌽y∊':',PathDelim)/y ⍝ drive and path
  r←(⍴p)↓y

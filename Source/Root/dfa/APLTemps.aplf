@@ -1,4 +1,4 @@
-﻿ r←astloprop APLTemps ast;p;cv
+ r←astloprop APLTemps ast;p;cv
 ⍝# Mark temps in ast
  p←ast[;astloprop]
  r←(isnum p)∧~p∊NULL  ⍝ Real pointers

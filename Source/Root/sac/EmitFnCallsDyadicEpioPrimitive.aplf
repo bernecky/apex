@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsDyadicEpioPrimitive y;fns;cv;nf;lht;rht;zt;cal;ast;ctl
+ r←EmitFnCallsDyadicEpioPrimitive y;fns;cv;nf;lht;rht;zt;cal;ast;ctl
 ⍝# Emit calls for dyadic epsilon and dyadic iota
  r←y
  ast←D y[0] ⍝ ast

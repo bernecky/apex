@@ -1,4 +1,4 @@
-﻿ r←m EmitFnCallsIndexSetScalars y;sis;lhs;rhs
+ r←m EmitFnCallsIndexSetScalars y;sis;lhs;rhs
 ⍝# Generate code for X[I;J;;]←Y
  sis←D y[0]
  lhs←D y[1]

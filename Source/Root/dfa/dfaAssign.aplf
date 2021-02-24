@@ -1,4 +1,4 @@
-﻿ r←dfaAssign y;i;j;k;m;ast;wl;b;c;src;assigns
+ r←dfaAssign y;i;j;k;m;ast;wl;b;c;src;assigns
  ⍝ Handle straight assignment, and ⎕←
  ast←D y[ssaast]
  wl←D y[ssacv]

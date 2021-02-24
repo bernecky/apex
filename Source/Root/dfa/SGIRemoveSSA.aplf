@@ -1,4 +1,4 @@
-﻿ r←x SGIRemoveSSA ast;cv;nms;p;tar;k
+ r←x SGIRemoveSSA ast;cv;nms;p;tar;k
 ⍝ Delete :GI ast entries from the fncall at cv
  cv←D x[0]
  nms←D x[1]

@@ -1,4 +1,4 @@
-﻿ r←dfaDyadicThorn y;ast;wl;i;astn;rarg
+ r←dfaDyadicThorn y;ast;wl;i;astn;rarg
  ⍝ Dyadic thorn
  ast←D y[ssaast]
  wl←D y[ssacv]

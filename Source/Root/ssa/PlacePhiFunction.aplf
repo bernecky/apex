@@ -1,4 +1,4 @@
-﻿ r←y PlacePhiFunction m;hasphi;inwork;wl;ast;bb;st;w;v;cfg;dom;df;i;ww
+ r←y PlacePhiFunction m;hasphi;inwork;wl;ast;bb;st;w;v;cfg;dom;df;i;ww
  ⍝ Place SSA phi functions for variable m
  ⍝ Michael Wolfe P182
  ast←D y[ssaast] ⋄ bb←D y[ssabb]

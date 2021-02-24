@@ -1,4 +1,4 @@
-﻿ (outerfn innerfns fns)←Dfn2TradTacit(outerfn innerfns fnm fns);cv;t;ifnm;nfns;dfns;newfn
+ (outerfn innerfns fns)←Dfn2TradTacit(outerfn innerfns fnm fns);cv;t;ifnm;nfns;dfns;newfn
 ⍝ outerfn may be a TradFn already, or
 ⍝ dfn is the function body of this Dfn: { ... }
 ⍝ It may contain inner Dfns
@@ -17,8 +17,8 @@
      innerfns←innerfns,newfn
      outerfn←cv Dfn2TradReplaceDfn(outerfn ifnm)
      fns←nub fns,E ifnm
-     :if 1∊MarkFirstInnerDfn outerfn ⍝ Handle any other local fns
-       (outerfn innerfns fns)← Dfn2TradTacit(outerfn innerfns fnm fns)
-     :endif 
+     :If 1∊MarkFirstInnerDfn outerfn ⍝ Handle any other local fns
+         (outerfn innerfns fns)←Dfn2TradTacit(outerfn innerfns fnm fns)
+     :EndIf
  :EndIf
 

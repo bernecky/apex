@@ -1,4 +1,4 @@
-﻿ r←CSACChar y;cv
+ r←CSACChar y;cv
 ⍝# Turn 'abc' into SAC constants  'a','b','c'
 ⍝# Turn non-printables into hex constants
  y←,y

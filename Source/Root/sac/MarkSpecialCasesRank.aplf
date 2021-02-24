@@ -1,4 +1,4 @@
-﻿ r←ast MarkSpecialCasesRank fns;ctl;cvm;cv;frks;case;crks;opnd;cellrk;rks
+ r←ast MarkSpecialCasesRank fns;ctl;cvm;cv;frks;case;crks;opnd;cellrk;rks
  ctl←7 FragmentCode'mdrank'
  cvm←(ctl FindFnOnly fns)∧ctl FindRankGen fns
  cv←∨/<\cvm

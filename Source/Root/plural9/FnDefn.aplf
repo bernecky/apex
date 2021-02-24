@@ -1,4 +1,4 @@
-﻿ r←fns FnDefn ast;tp;dy;fn;fd;sg;tps;fr;hdr;fnrks;inlineme
+ r←fns FnDefn ast;tp;dy;fn;fd;sg;tps;fr;hdr;fnrks;inlineme
  ⍝ Gen SAC fn defn for defined fn
  ast fns←fns FixMainArgs ast
  fn←D ast[dfnname;asttarget] ⍝ Defined fn name

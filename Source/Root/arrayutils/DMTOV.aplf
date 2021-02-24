@@ -1,4 +1,4 @@
-﻿ Z←{A}DMTOV B
+ Z←{A}DMTOV B
  ⍝Converts matrix ⍵ to an ⍺-delimited vector
  ⍝ ⍺ starts each row
  :If 0=⎕NC'A'

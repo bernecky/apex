@@ -1,4 +1,4 @@
-﻿ snfC;i;j;k;astr;row
+ snfC;i;j;k;astr;row
  ⍝ Function to left of naked conjunction
  PushCursor Push state  ⍝ Push function onto stack, same state
  j←c gett(E src),E tok ⍝ Peek at token left of fn

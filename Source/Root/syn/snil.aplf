@@ -1,4 +1,4 @@
-﻿ snil;k;idcls
+ snil;k;idcls
  ⍝ identifier left of index list
  k←stk[stkp-2;Stkstate] ⍝ ref vs assign
  PushCursor Push state

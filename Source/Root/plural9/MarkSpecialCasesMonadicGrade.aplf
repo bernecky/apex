@@ -1,4 +1,4 @@
-﻿ r←ast MarkSpecialCasesMonadicGrade fns;cv;b
+ r←ast MarkSpecialCasesMonadicGrade fns;cv;b
 ⍝# Generate special case names for upgrade/downgrade
  r←fns
  cv←ast[;astfn]∊(E,'⍒'),E,'⍋'

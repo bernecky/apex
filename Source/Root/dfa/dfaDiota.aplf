@@ -1,4 +1,4 @@
-﻿ r←dfaDiota y;ast;wl;i;j;k;p
+ r←dfaDiota y;ast;wl;i;j;k;p
  ⍝ Handle dyadic iota.
  ast←D y[ssaast]
  wl←D y[ssacv]

@@ -1,4 +1,4 @@
-﻿ r←RemoveDeadPhi y;ast;b;i
+ r←RemoveDeadPhi y;ast;b;i
 ⍝ Remove a PHI if its result is never used.
 ⍝ This typically arises when a variable is
 ⍝ set within a loop. The PHI at the loop

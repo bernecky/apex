@@ -1,4 +1,4 @@
-﻿ r←ast HandleCharacterConstants st;cv;i;shp;j;p;pd
+ r←ast HandleCharacterConstants st;cv;i;shp;j;p;pd
  ⍝ Build ast entries for character constants
  ⍝ This function fills in the type, rank, shape, and value.
  r←ast

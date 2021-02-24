@@ -1,4 +1,4 @@
-﻿ ast2assign
+ ast2assign
 ⍝ Assignment arrow to left of anything
  :Select state
  :Case Stn,Stz ⍝ New statement or error

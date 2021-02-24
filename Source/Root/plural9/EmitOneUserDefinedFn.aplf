@@ -1,4 +1,4 @@
-﻿ r←EmitOneUserDefinedFn asts;ast;fnm;rap;s;newasts;j;fns;wif;sis
+ r←EmitOneUserDefinedFn asts;ast;fnm;rap;s;newasts;j;fns;wif;sis
  ⍝ Emit code for one user-defined function
  ⍝ Result is code & required library fns
  ast←D asts[ssaast]

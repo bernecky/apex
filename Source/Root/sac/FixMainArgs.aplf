@@ -1,4 +1,4 @@
-﻿ r←fns FixMainArgs ast
+ r←fns FixMainArgs ast
 ⍝ SAC generates niladic main() function. APEX may not,
 ⍝ depending on the valence of <main>.
 ⍝ This function alters non-niladic main functions in two ways:

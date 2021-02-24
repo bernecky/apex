@@ -1,4 +1,4 @@
-﻿ r←x SSASearch yy;X;tar;yy2;S;yy3;yy4
+ r←x SSASearch yy;X;tar;yy2;S;yy3;yy4
  X←D x[0] ⋄ tar←D x[1] ⍝ bb #,target varb
 ⍝ yy[0] ⍝ SSA Stuff
  S←D yy[1] ⍝ S is rename stack.

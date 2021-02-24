@@ -1,4 +1,4 @@
-﻿ r←mac MacroInsert frag;cv
+ r←mac MacroInsert frag;cv
  ⍝ Macro Inserter.
  ⍝ Find macro mac in frag. Remove macro name
  ⍝ and matching curly braces.

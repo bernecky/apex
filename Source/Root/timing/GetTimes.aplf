@@ -1,4 +1,4 @@
-﻿ r←GetTimes txt;t;b
+ r←GetTimes txt;t;b
 ⍝ Get cpu times from txt file.
  t←(∨/'user'⍷txt)⌿txt
  b←,∧\t≠'u' ⍝ Drop "user..."

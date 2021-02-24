@@ -1,4 +1,4 @@
-﻿ r←dfaRepresent y;ast;wl;i;j;k;m;n;p
+ r←dfaRepresent y;ast;wl;i;j;k;m;n;p
  ⍝ Handle Represent (x⊤y)
  ast←D y[ssaast]
  wl←D y[ssacv]

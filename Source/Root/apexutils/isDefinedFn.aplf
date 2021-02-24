@@ -1,4 +1,4 @@
-﻿ r←astloprop isDefinedFn ast
+ r←astloprop isDefinedFn ast
 ⍝# Predicate for defined/derived fn invocations.
 ⍝ This is mostly used for separating +/⍵ from plus/⍵, and the like
  r←ast[;astloprop]

@@ -1,4 +1,4 @@
-﻿ r←dfaRotr y;ast;wl;i;j;k;astr;p;s;rarg
+ r←dfaRotr y;ast;wl;i;j;k;astr;p;s;rarg
  ⍝ Handle rotate and reverse.
  ⍝ Type, rank & shape match right arg.
  ast←D y[ssaast]

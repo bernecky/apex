@@ -1,4 +1,4 @@
-﻿ SyntaxAnalyzerInit;i;stkdepth;astrows
+ SyntaxAnalyzerInit;i;stkdepth;astrows
  ⍝ Initialize syntax analyzer locals
  clsinit
  i←clsassign,clsconj,clsfn,clsgoto,clsadverb,clsqq

@@ -1,4 +1,4 @@
-﻿ snkn;w;astr;j;v
+ snkn;w;astr;j;v
  ⍝state is new stmt. signal is stsc kwd
  w←(c gett(E src),E tok)[0] ⍝ Get the keyword
  ⍝ Make sure kwd should be naked

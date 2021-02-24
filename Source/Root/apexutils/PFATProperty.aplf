@@ -1,4 +1,4 @@
-﻿ r←p PFATProperty fns;t;i;cv;f;fi;m;tp;j;tx;ty;val
+ r←p PFATProperty fns;t;i;cv;f;fi;m;tp;j;tx;ty;val
 ⍝ Get primitive function property.
 ⍝ p is a column index into PFAT
  r←(1↑⍴fns)⍴0

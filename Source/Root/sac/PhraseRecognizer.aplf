@@ -1,4 +1,4 @@
-﻿ r←PhraseRecognizer ast
+ r←PhraseRecognizer ast
 ⍝ This code recognizes phrases in the ast
 ⍝ and generates an updated ast that handles them.
  r←PhraseRecognizerMonadic ast ⍝ Do the monadic ones

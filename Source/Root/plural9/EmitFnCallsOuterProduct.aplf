@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsOuterProduct y;ast;cv;fns;cal
+ r←EmitFnCallsOuterProduct y;ast;cv;fns;cal
  ⍝# Emit outer product calls
  ast←D y[0] ⋄ fns←D y[2] ⋄ cal←D y[3]
  cv←ast[;astfn]∊ER1 mcb'.' ⍝ Not many of these today

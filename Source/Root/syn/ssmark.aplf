@@ -1,4 +1,4 @@
-﻿ r←x ssmark y
+ r←x ssmark y
  ⍝ String search and mark strings
  ⍝ Assumes no overlapping strings
  r←y⍷x

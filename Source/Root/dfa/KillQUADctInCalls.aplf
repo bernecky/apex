@@ -1,4 +1,4 @@
-﻿ r←KillQUADctInCalls cds;ast;cv;ltyp;rtyp;typ;parms;qcti;ndx;p
+ r←KillQUADctInCalls cds;ast;cv;ltyp;rtyp;typ;parms;qcti;ndx;p
 ⍝# Remove spurious ⎕ct references from primitive fn calls
  ast←D cds[ssaast]
  cv←~ast[;astparms]∊NULL           ⍝ Calls w/potential sysvars

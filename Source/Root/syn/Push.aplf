@@ -1,4 +1,4 @@
-﻿ r←{gettentry}Push newstate
+ r←{gettentry}Push newstate
 ⍝ Push current state, token value. & token class onto stack; set new state
 ⍝ gettentry is token value, token class
  :If 0=⎕NC'gettentry'

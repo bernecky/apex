@@ -1,4 +1,4 @@
-﻿ r←dfaCompose y;ast;wl;i;j;rk;b;k
+ r←dfaCompose y;ast;wl;i;j;rk;b;k
  ⍝ Handle composition w/array
  ast←D y[ssaast]
  wl←D y[ssacv]

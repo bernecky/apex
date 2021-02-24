@@ -1,4 +1,4 @@
-﻿ r←ast MarkSpecialCases fns
+ r←ast MarkSpecialCases fns
  r←MarkSpecialCasesReduce fns
  r←ast MarkSpecialCasesWindowReduce r
  r←MarkSpecialCasesInnerProduct r

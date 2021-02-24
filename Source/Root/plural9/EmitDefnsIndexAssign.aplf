@@ -1,4 +1,4 @@
-﻿ r←frg EmitDefnsIndexAssign fns;ctl;cv;sis;tp;tx;ty;tz;cvm;ravs;fors;indices;fnms;mil;epis;bodies;rks;resh;rk
+ r←frg EmitDefnsIndexAssign fns;ctl;cv;sis;tp;tx;ty;tz;cvm;ravs;fors;indices;fnms;mil;epis;bodies;rks;resh;rk
  ⍝ Emit PLURAL function defns for indexed assign: X[i]←Y
  sis←''
  :If ~0∊⍴fns

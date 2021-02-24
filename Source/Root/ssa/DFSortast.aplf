@@ -1,4 +1,4 @@
-﻿ r←DFSortast ctasts;newast;cm;leaf;work;pv;ct;asts
+ r←DFSortast ctasts;newast;cm;leaf;work;pv;ct;asts
  ⍝# Sort asts vector into Depth-First order.
  ⍝ This is required for ssa SemiGlobalAnalysis to work properly
  ct←D ctasts[0]

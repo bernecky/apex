@@ -1,4 +1,4 @@
-﻿ r←EmitDyadicSelectFns fns;ctl;f;sis;cvm;cv
+ r←EmitDyadicSelectFns fns;ctl;f;sis;cvm;cv
  ⍝ Emit Dyadic Selection and Search fn SAC code
  ⍝ Result is new code, new (shorter) fns list
  ⍝ Handles x⍴y x∊y x⍳y x⍷y x≡y

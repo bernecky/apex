@@ -1,4 +1,4 @@
-﻿ r←ctx SemiGlobalAnalysis cds;fns;ct;callsme;j;SGMaps;i;AllVarbs;MapSGI;MapSGO;ast;astr
+ r←ctx SemiGlobalAnalysis cds;fns;ct;callsme;j;SGMaps;i;AllVarbs;MapSGI;MapSGO;ast;astr
 ⍝ Locate and mark semiglobals
 ⍝ 3 flavors:
 ⍝  SGI: semi-global in:  this fn or a sub-fn references this non-local
@@ -30,12 +30,12 @@
  :For i :In ⍳⍴cds
      ast←D(D cds[i])[ssaast]
      callsme←(×ct[;i])/⍳⍴fns⍝ Who calls me
-     :if isTrace 'ssa'
-       ⎕←(D ast[dfnname;asttarget]),' has semi-globals IN of:'
-       ⎕←MapSGI[;i]/AllVarbs
-       ⎕←(D ast[dfnname;asttarget]),' has semi-globals OUT of:'
-       ⎕←MapSGO[;i]/AllVarbs
-     :endif
+     :If isTrace'ssa'
+         ⎕←(D ast[dfnname;asttarget]),' has semi-globals IN of:'
+         ⎕←MapSGI[;i]/AllVarbs
+         ⎕←(D ast[dfnname;asttarget]),' has semi-globals OUT of:'
+         ⎕←MapSGO[;i]/AllVarbs
+     :EndIf
  ⍝ Create new ast rows w/proper scope
      astr←astNewRows+/MapSGI[;i]∨MapSGO[;i]
      astr[;asttarget]←(MapSGI[;i]∨MapSGO[;i])/AllVarbs

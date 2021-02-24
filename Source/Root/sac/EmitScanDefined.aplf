@@ -1,4 +1,4 @@
-﻿ r←ssa EmitScanDefined fns;ast;i;j;k;if1;c;fns;inv;astf;cv;ssa;y
+ r←ssa EmitScanDefined fns;ast;i;j;k;if1;c;fns;inv;astf;cv;ssa;y
  ⍝# Emit code for scan on user-defined operands
  sis←''
  :If ~0∊⍴fns

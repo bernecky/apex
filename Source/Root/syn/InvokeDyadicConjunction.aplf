@@ -1,4 +1,4 @@
-﻿ InvokeDyadicConjunction;astr;lop;conj;rop;rarg;row;larg;nms;subfn
+ InvokeDyadicConjunction;astr;lop;conj;rop;rarg;row;larg;nms;subfn
  ⍝ Invoke conjunction dyadically
  :If 3 isStrand stk ⍝ Strand rarg?
      nms←')'StrandItems 5

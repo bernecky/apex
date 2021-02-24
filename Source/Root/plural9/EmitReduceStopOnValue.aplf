@@ -1,4 +1,4 @@
-﻿ r←EmitReduceStopOnValue fns;fn
+ r←EmitReduceStopOnValue fns;fn
 ⍝ Compute stop-on values for foldfix reductions
 ⍝ For example, we can stop when we hit a 0 when doing and-reduce
 ⍝ Min and max only on Booleans, of course

@@ -1,4 +1,4 @@
-﻿ r←RemoveGenerates sis;cv;g;gen;fns;fn;nl
+ r←RemoveGenerates sis;cv;g;gen;fns;fn;nl
 ⍝# Remove %Generate statements from a code fragment
 ⍝# Result is updated code fragment, Generate statements
  g←'%Generate'

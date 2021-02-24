@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsConjunction y;j
+ r←EmitFnCallsConjunction y;j
  ⍝ Emit conjunction code for inline calls
  j←EmitFnCallsMonadicConjunction y ⍝ ??
  j←EmitFnCallsDyadicConjunction j  ⍝ ⍺ +.× ⍵

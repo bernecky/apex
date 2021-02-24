@@ -1,4 +1,4 @@
-﻿ r←dfaTransposeMonadic y;ast;wl;i;j;k;newrows;m;la;n;p
+ r←dfaTransposeMonadic y;ast;wl;i;j;k;newrows;m;la;n;p
  ⍝ Handle monadic transpose
  ast←D y[ssaast]
  wl←D y[ssacv]

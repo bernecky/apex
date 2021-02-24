@@ -1,4 +1,4 @@
-﻿ sngx;i
+ sngx;i
  ⍝ State is expression, signal is goto
  ⍝ Can't use gett because it'll get -⍳ as a fn.
  ⍝ goto must be root of statement.
@@ -7,7 +7,7 @@
  'Compiler bug'assert stkp=1 ⍝ Only one item on stack, please.
  ⍝ GOTO looks like monadic function invocation from here.
  astr←,astNweRows 1 ⍝ Build new ast entry
- astr[asttarget]←E ≢ast
+ astr[asttarget]←E≢ast
  astr[astfn]←E src[,c] ⍝ The goto an sich
  i←StackPop 1 ⍝ The branch argument
  'Source program syntax error: GOTO arg not expn'assert i[0;0]∊(E Stx),E Stn

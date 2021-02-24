@@ -1,4 +1,4 @@
-﻿ r←vars Ref asts;ast;tar;cv
+ r←vars Ref asts;ast;tar;cv
 ⍝# Return vars that this fn references
  ast←D asts[ssaast]
  tar←(ast[;asttarget]∊vars[;0])/⍳1↑⍴ast

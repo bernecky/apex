@@ -1,4 +1,4 @@
-﻿ r←ast GenerateTraceStatements y;vars;cv;txt;rk
+ r←ast GenerateTraceStatements y;vars;cv;txt;rk
  ⍝ Run-time trace display
  cv←D y[0]
  vars←D y[1]

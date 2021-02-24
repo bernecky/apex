@@ -1,4 +1,4 @@
-﻿ r←astn SemiGlobalNamescope ast;sgi;sgo;tar
+ r←astn SemiGlobalNamescope ast;sgi;sgo;tar
 ⍝ Correct namescope in caller for semiglobals. 3 cases:
 ⍝ 1. Names not ref/set in this fn retain callee's namescope,
 ⍝    as they must be localized by one of our callers, e.g.,

@@ -1,4 +1,4 @@
-﻿ r←GenFragNamesSGI y;cal;ast;cv;mil;nms;com
+ r←GenFragNamesSGI y;cal;ast;cv;mil;nms;com
 ⍝ Modify invocation of subfns called from here
 ⍝ to include semiglobals into the subfn from here.
  cal←D y[0]

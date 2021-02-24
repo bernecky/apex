@@ -1,4 +1,4 @@
-﻿ snaV;i;j;astr;p
+ snaV;i;j;astr;p
  ⍝ Assign name to a naked verb.
  ⍝ No change in state, side effect only.
  i←(c-1)gett(E src),E tok
@@ -14,7 +14,7 @@
  astr[astclass]←j[Stktokcl]
  PushCursor i
  :If !(D j[Stkvalue])∊¯1+≢ast
-     ast← ast append2Ast astr
+     ast←ast append2Ast astr
  :Else
   ⍝ Replace temp w/id; set ast class
      i←D j[Stkvalue] ⍝ Target ast row

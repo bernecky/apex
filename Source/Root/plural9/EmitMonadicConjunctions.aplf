@@ -1,4 +1,4 @@
-﻿ r←EmitMonadicConjunctions fns;ast;nms;ctl;prim;pt;fn;n;f;sis;gfn;grt;cn;i;loc;nc;nl;gl;lt;rnk;fn;cv;t;rt;glt;cvm
+ r←EmitMonadicConjunctions fns;ast;nms;ctl;prim;pt;fn;n;f;sis;gfn;grt;cn;i;loc;nc;nl;gl;lt;rnk;fn;cv;t;rt;glt;cvm
  ⍝ Emit Monadic conj SAC code
  ⍝ r=genned code, new fns
  ⍝ None of these today, except determinant operator

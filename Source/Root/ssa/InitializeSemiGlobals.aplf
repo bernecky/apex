@@ -1,4 +1,4 @@
-﻿ r←InitializeSemiGlobals cds;st;ast;sg;tar;bin;bout;i;cv;sysv;k
+ r←InitializeSemiGlobals cds;st;ast;sg;tar;bin;bout;i;cv;sysv;k
 ⍝ Initialize semi-globals in each ast
 ⍝ A semi-global IN is a name ref'd in this fn, but not local to it.
 ⍝ A semi-global OUT is a name set in this fn, but not local to it.

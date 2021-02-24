@@ -1,4 +1,4 @@
-﻿ r←dfaCatenate y;ast;wl;i;j;k;m;n;p;s;b;c
+ r←dfaCatenate y;ast;wl;i;j;k;m;n;p;s;b;c
  ⍝ Handle catenation.
  ast←D y[ssaast]
  wl←D y[ssacv]

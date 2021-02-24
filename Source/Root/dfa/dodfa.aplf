@@ -1,4 +1,4 @@
-﻿ r←fldr dodfa asts
+ r←fldr dodfa asts
  InitializeAST
  initializeDEBUG
  InitializeFns

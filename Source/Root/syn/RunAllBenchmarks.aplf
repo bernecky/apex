@@ -1,4 +1,4 @@
-﻿ RunAllBenchmarks;aks;akd;b;i;N
+ RunAllBenchmarks;aks;akd;b;i;N
  ⍝ Run all APEX benchmarks; save results
  b←benchmks
  i←∨/¨(E'AKD')∊¨b

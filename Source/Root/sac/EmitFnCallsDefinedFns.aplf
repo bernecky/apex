@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsDefinedFns y;ast;cv;fns;cal;j;ret
+ r←EmitFnCallsDefinedFns y;ast;cv;fns;cal;j;ret
  ⍝# Emit function calls to a user-defined fn AND straight assignment
  ast←D y[0]
  cv←D y[1]

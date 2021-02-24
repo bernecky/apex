@@ -1,2 +1,2 @@
-﻿ r←fnums
+ r←fnums
  r←⎕FNUMS

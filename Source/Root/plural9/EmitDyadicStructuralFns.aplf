@@ -1,4 +1,4 @@
-﻿ r←EmitDyadicStructuralFns fns;ctl;cvm;cv;sis
+ r←EmitDyadicStructuralFns fns;ctl;cvm;cv;sis
  ⍝ Emit Dyadic Structural fn SISAL code
  ⍝ r=genned code, new fns
  ⍝ Handles x€y x⌹y x?y x⊥y x⊤y x⍕y and don't forget rotate

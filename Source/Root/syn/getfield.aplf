@@ -1,4 +1,4 @@
-﻿ r←getfield y;i
+ r←getfield y;i
  ⍝ Extract leading field from matrix y. The field starts at col 1 and
  ⍝ extends to the first blank, but doesn't include the blank.
  i←∧\y≠' '

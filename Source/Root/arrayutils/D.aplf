@@ -1,2 +1,2 @@
-﻿D←{⍝  Dyalog APL disclose
-↑⍵}
+ D←{⍝  Dyalog APL disclose
+     ↑⍵}

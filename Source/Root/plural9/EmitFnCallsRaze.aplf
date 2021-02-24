@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsRaze y;ast;cv;fns;cal
+ r←EmitFnCallsRaze y;ast;cv;fns;cal
  ⍝ Turn matrix-values cal into text vector
  ast←D y[0]
  cv←D y[1]

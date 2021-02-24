@@ -1,4 +1,4 @@
-﻿ snkx;i;w;wds;v;j;astr
+ snkx;i;w;wds;v;j;astr
  ⍝ state is expression. signal is stsc kwd
  w←c gett(E src),E tok ⍝ Get the keyword
  PushCursor w

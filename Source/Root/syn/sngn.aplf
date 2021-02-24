@@ -1,4 +1,4 @@
-﻿ sngn;v;astr;i
+ sngn;v;astr;i
  ⍝ Naked right arrow left of start of stmt
  ⍝ Verify that nothing left of arrow, except maybe
  ⍝ white space and stmt label.

@@ -1,4 +1,4 @@
-﻿ r←EmitDyadicConjunctions fns;sis
+ r←EmitDyadicConjunctions fns;sis
 ⍝ Emit Dyadic Conjunction SAC code for primitive operands only
  r←EmitDyadicOuterProducts fns
  sis←D r[0] ⋄ fns←D r[1]

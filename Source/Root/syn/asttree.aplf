@@ -1,4 +1,4 @@
-﻿ r←astp asttree ast;fn;i;j
+ r←astp asttree ast;fn;i;j
  ⍝ Build asttree starting at astp-1
  r←''
  →(astp=D NULL)⍴0 ⍝ Left arg of monadic function

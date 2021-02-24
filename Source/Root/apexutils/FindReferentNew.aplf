@@ -1,4 +1,4 @@
-﻿ r←ast FindReferentNew y;j;cv
+ r←ast FindReferentNew y;j;cv
 ⍝ y is ast index list
 ⍝ Find the ast row where the item obtains its value
  r←,D y

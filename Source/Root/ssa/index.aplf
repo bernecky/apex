@@ -1,4 +1,4 @@
-﻿ r←d index m;a;b
+ r←d index m;a;b
  ⍝------- simulates r←1 1 2⍉d[;m]
  b←1↓⍴d
  a←⍴m

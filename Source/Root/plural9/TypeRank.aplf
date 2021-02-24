@@ -1,4 +1,4 @@
-﻿ r←tp TypeRank rk;lft;rt;rks;tps
+ r←tp TypeRank rk;lft;rt;rks;tps
 ⍝ This uses ast or fns arguments.
 ⍝ Return TargetLanguage type and rank specifier for
 ⍝ arguments of type tp and rank rk,

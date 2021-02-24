@@ -1,2 +1,2 @@
-﻿r←LF
-r←⎕ucs 10
+ r←LF
+ r←⎕UCS 10

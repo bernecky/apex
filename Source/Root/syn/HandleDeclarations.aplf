@@ -1,4 +1,4 @@
-﻿ r←ast HandleDeclarations src;cv;types;ranks;arg;t;rk;tr;i;nms;j;k
+ r←ast HandleDeclarations src;cv;types;ranks;arg;t;rk;tr;i;nms;j;k
  ⍝ Handle declarations in source code
  ⍝  E.g.,   ⍝ dcl type rank name
  ⍝          ⍝ dcl integer 3 mytensor  (rank-3 integer array)

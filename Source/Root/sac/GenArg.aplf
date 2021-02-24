@@ -1,4 +1,4 @@
-﻿ r←tn GenArg p;cv
+ r←tn GenArg p;cv
  ⍝ Generate argument names for pointers p and names tn
  ⍝ Returns cv for valid names, names
  cv←~p∊NULL

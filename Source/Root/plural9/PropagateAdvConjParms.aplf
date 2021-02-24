@@ -1,7 +1,7 @@
-﻿ r←PropagateAdvConjParms ast;cv;loprop;parms;b
+ r←PropagateAdvConjParms ast;cv;loprop;parms;b
 ⍝ Propagate SGI and SGO parameters/results in/out of adverb
 ⍝ and conjunctions.
- cv←ast[;astfn]∊ER1 mcb'.ö⍤ ⍝ All adverbs and conjunctions
+ cv←ast[;astfn]∊ER1 mcb '.ö⍤ ⍝ All adverbs and conjunctions
  cv←cv∨IsReduceScan ast
  'already been here'assert∧/,(cv⌿ast[;astparms,astImplicitResult])∊NULL
  loprop←D cv⌿ast[;astlop,astrop]

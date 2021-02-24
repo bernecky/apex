@@ -1,4 +1,4 @@
-﻿ r←ast SemiGlobalsOut y;j;k;i;astsub;tar;m;t;astr;cv
+ r←ast SemiGlobalsOut y;j;k;i;astsub;tar;m;t;astr;cv
 ⍝ Update ast with semiglobal
 ⍝ results from the fn called at ast[i;]
 ⍝ Result is (E new ast),E new wl
@@ -22,11 +22,11 @@
              m←astsub[m;] ⍝ Semiglobal rows in subfn
              astr←ast[tar;] ⍝ ast rows to be updated
              astr[;astchar]←m[;astchar]
-             TRACEdfa Trace 'Semiglobals out from: ',(D astsub[0;asttarget]),' to: ',D ast[0;asttarget]
-             TRACEdfa Trace 'ast[tar;]:'
-             TRACEdfa Trace  ast[tar;]
-             TRACEdfa Trace 'astr:'
-             TRACEdfa Trace  astr
+             TRACEdfa Trace'Semiglobals out from: ',(D astsub[0;asttarget]),' to: ',D ast[0;asttarget]
+             TRACEdfa Trace'ast[tar;]:'
+             TRACEdfa Trace ast[tar;]
+             TRACEdfa Trace'astr:'
+             TRACEdfa Trace astr
              astr←astr[⍋tar;] ⍝ Make sure these are in order!
              r←astmerge(E ast),(E astr),E(⍳1↑⍴ast)∊tar
          :EndIf

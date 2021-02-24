@@ -1,4 +1,4 @@
-﻿ r←BuildCallingTree asts;fns;al;af;cts;ct;caller;callee
+ r←BuildCallingTree asts;fns;al;af;cts;ct;caller;callee
  ⍝ Extract calling tree from asts
  ⍝ Result is caller set, and adjacency matrix of #calls,
  ⍝ with one caller per row, and callees in columns

@@ -1,4 +1,4 @@
-﻿ r←x SGIRemoveSSAAll ast;cv;nms;cv2
+ r←x SGIRemoveSSAAll ast;cv;nms;cv2
 ⍝ Delete :GI ast entries from the fncalls at cv
  cv←D x[0]
  nms←D x[1]

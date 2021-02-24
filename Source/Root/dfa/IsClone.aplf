@@ -1,4 +1,4 @@
-﻿ r←asts1 IsClone asts2;ast1;ast2
+ r←asts1 IsClone asts2;ast1;ast2
 ⍝ Predicate for determining if two
 ⍝ functions are clones
  ast1←D asts1[ssaast]

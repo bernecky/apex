@@ -1,4 +1,4 @@
-﻿ r←dfaRoll y;ast;wl;i;j;k
+ r←dfaRoll y;ast;wl;i;j;k
  ⍝ dfa for roll
  ast←D y[ssaast]
  wl←D y[ssacv]

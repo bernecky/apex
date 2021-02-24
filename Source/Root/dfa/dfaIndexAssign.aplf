@@ -1,4 +1,4 @@
-﻿ r←dfaIndexAssign y;ast;wl;i;j;k;astr;p;rhs;lhs
+ r←dfaIndexAssign y;ast;wl;i;j;k;astr;p;rhs;lhs
  ⍝ Handle indexed assign
  ⍝ astlarg[astrarg...]←astrop
  ast←D y[ssaast]

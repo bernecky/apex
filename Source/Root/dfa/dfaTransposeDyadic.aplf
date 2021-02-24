@@ -1,4 +1,4 @@
-﻿ r←dfaTransposeDyadic y;ast;wl;i;j;k;newrows;m;la;n;p
+ r←dfaTransposeDyadic y;ast;wl;i;j;k;newrows;m;la;n;p
  ⍝ Handle dyadic transpose
  ast←D y[ssaast]
  wl←D y[ssacv]

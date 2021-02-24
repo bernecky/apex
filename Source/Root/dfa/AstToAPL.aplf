@@ -1,4 +1,4 @@
-﻿ r←AstToAPL ast;hdr;cv;tar;larg;fn;rarg;arr
+ r←AstToAPL ast;hdr;cv;tar;larg;fn;rarg;arr
 ⍝ Generate APL code from ast
  hdr←APLHeader ast
  cv←dfainit ast

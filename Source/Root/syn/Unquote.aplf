@@ -1,4 +1,4 @@
-﻿ r←Unquote y;i
+ r←Unquote y;i
  ⍝ Remove leading & trailing quotes from constant y
  ⍝ Also remove double embedded quotes
  i←''''''⍷y ⍝ Undouble quotes

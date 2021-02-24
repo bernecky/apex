@@ -1,4 +1,4 @@
-﻿ r←dfaConstantProp y;ast;wl;cv
+ r←dfaConstantProp y;ast;wl;cv
  ⍝ Perform constant propagation
  ast←D y[ssaast]
  wl←D y[ssacv]

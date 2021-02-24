@@ -1,4 +1,4 @@
-﻿ r←dfaReshape y;ast;wl;i;j;k;b;m;t;astr;p;v
+ r←dfaReshape y;ast;wl;i;j;k;b;m;t;astr;p;v
  ⍝ Handle reshape.
  ast←D y[ssaast]
  Checkem y

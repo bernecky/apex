@@ -1,4 +1,4 @@
-﻿ r←dfaPHI y;ast;wl;i;j;k;m;n;phil;phir;pl;pr;p;cols
+ r←dfaPHI y;ast;wl;i;j;k;m;n;phil;phir;pl;pr;p;cols
  ⍝ Handle SSA PHI Functions
  ast←D y[ssaast]
  wl←D y[ssacv]

@@ -1,4 +1,4 @@
-﻿ r←m EmitFnCallsIndexSetElided y;sis;lhs;rhs;rnk
+ r←m EmitFnCallsIndexSetElided y;sis;lhs;rhs;rnk
 ⍝# Generate code for X[;;;]←Y
 ⍝# Two cases: Y is scalar, Y is non-scalar
  sis←D y[0]

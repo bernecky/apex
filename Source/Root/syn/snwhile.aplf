@@ -1,4 +1,4 @@
-﻿ snwhile;j;astr;i
+ snwhile;j;astr;i
  ⍝ state is expression. signal is stsc kwd
  ⍝ This is a :while expression.
  ⍝ Next token must be root of statement or label.
@@ -11,7 +11,7 @@
  ⍝ Emit :while expression.
  j←StackPop 1 ⍝ Pop the :while argument
  astr←,astNewRows 1 ⍝ Build ast entry
- astr[asttarget]←E ≢ast
+ astr[asttarget]←E≢ast
  astr[astfn]←E':While'
  astr[astrarg]←j[0;1] ⍝ Argument to :while
  astr[astclass]←NULL

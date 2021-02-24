@@ -1,4 +1,4 @@
-﻿ r←FragBuffered y;b;d
+ r←FragBuffered y;b;d
  ⍝ If fragment y is buffered, return it and
  ⍝ its dir entry. Otherwise, just the directory entry
  b←fragbuf[;0]∊E y ⍝ Do we have fragment?

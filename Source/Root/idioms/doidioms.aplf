@@ -1,4 +1,4 @@
-﻿ r←fldr doidioms asts
+ r←fldr doidioms asts
  InitializeAST
  InitializeSSA
  InitializeST

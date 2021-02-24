@@ -1,4 +1,4 @@
-﻿ r←ct SemiGlobalUnRef cds;asts;ast;sgi;cv;i;k;callers;weare;cs;csgi;astr;nums;nms;pv;pl;nl;npl;scp;keep;burn;p;oldcds;tar
+ r←ct SemiGlobalUnRef cds;asts;ast;sgi;cv;i;k;callers;weare;cs;csgi;astr;nums;nms;pv;pl;nl;npl;scp;keep;burn;p;oldcds;tar
 ⍝ Correct over-enthusiastic definitions of
 ⍝ semi-globals. The initial definition assumes that
 ⍝ any variable SG that is referenced as a non-local

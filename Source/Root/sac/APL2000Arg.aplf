@@ -1,4 +1,4 @@
-﻿ r←ast APL2000Arg n;t
+ r←ast APL2000Arg n;t
 ⍝ Build APL2000 ⎕na argument/result descriptor for
 ⍝ ast[n;]
  r←''

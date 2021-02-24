@@ -1,4 +1,4 @@
-﻿ RunBenchmarks nm;aks;akd;b;i;N
+ RunBenchmarks nm;aks;akd;b;i;N
  ⍝ Run all APEX benchmarks; save results
  ⍝ Argument is something like '[a-h]*'
  b←benchmks nm

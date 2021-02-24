@@ -1,4 +1,4 @@
-﻿ r←x SGORemove ast;cv;nms;p;tar;links;nast;fcv
+ r←x SGORemove ast;cv;nms;p;tar;links;nast;fcv
 ⍝ Delete :GO ast entries from fncalls at cv
 ⍝ These are for calls of a single function.
 ⍝ It would likely make more sense to blow away ALL the

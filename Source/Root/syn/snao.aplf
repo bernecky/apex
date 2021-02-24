@@ -1,4 +1,4 @@
-﻿ r←snao
+ r←snao
  ∘
 ⍝ Assign to left of operator expn
 ⍝ This is probably  x←(b)/c

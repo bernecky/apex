@@ -1,4 +1,4 @@
-﻿ r←fns EmitPrimitiveFnDefns ssadat;sis;i;fns2;sis2
+ r←fns EmitPrimitiveFnDefns ssadat;sis;i;fns2;sis2
  ⍝# Emit SAC code to define all APL primitives used
  ⍝# in this application. This is, effectively, a customized stdlib.
  sis←E''

@@ -1,2 +1,2 @@
-﻿r←TAB
-r←⎕ucs 9
+ r←TAB
+ r←⎕UCS 9

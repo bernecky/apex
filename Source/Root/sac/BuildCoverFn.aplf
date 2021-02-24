@@ -1,4 +1,4 @@
-﻿ z←BuildCoverFn tn;csds;ast;fnm;l;r;z;txt;nm;dnm
+ z←BuildCoverFn tn;csds;ast;fnm;l;r;z;txt;nm;dnm
 ⍝ Create APL cover function for APEX-generated
 ⍝ code located in filetie tn
  z←'BUILD AN APL COVER FUNCTION HERE, PLEASE'

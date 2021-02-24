@@ -1,4 +1,4 @@
-﻿ r←Twop31Kludge c;p;kludge
+ r←Twop31Kludge c;p;kludge
  ⍝ SAC can't handle ¯2*31, so we fake it.
  r←,⍎c
  p←(r=¯2*31)/⍳⍴r

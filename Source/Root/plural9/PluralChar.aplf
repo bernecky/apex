@@ -1,4 +1,4 @@
-﻿ r←PluralChar y;cv
+ r←PluralChar y;cv
 ⍝# Turn 'abc' into Plural constants  'a','b','c'
 ⍝# Turn non-printables into hex constants
  y←,y

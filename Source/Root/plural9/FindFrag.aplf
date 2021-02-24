@@ -1,4 +1,4 @@
-﻿ r←prim FindFrag fns;lt;f
+ r←prim FindFrag fns;lt;f
  ⍝ Find best primitive fragment in prim
  ⍝ to use for computing pt
  ⍝ Result is incidence matrix for pt,prim

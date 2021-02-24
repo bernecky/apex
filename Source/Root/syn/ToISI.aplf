@@ -1,2 +1,2 @@
-﻿ r←ToISI y
+ r←ToISI y
  r←∆stsc[⎕AV⍳y]

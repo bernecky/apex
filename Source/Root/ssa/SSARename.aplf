@@ -1,4 +1,4 @@
-﻿ r←SSARename y;i;v;ast;tar;ny;k
+ r←SSARename y;i;v;ast;tar;ny;k
  ⍝ From Michael Wolfe , 1992
  ⍝ "High Performance Compliers", p 182
  ⍝ We do renames one at a time, even though

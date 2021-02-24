@@ -1,4 +1,4 @@
-﻿ r←cv EmitFnCalls y;ast;tn;cal;d;i;fo;fns;cvz;j;ssa;k
+ r←cv EmitFnCalls y;ast;tn;cal;d;i;fo;fns;cvz;j;ssa;k
  ⍝# Emit function calls for one user-defined function
  ssa←D y[0]
  fns←D y[1]

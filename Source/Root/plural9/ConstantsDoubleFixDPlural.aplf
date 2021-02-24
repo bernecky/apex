@@ -1,4 +1,4 @@
-﻿ r←ConstantsDoubleFixDPlural c;i;b
+ r←ConstantsDoubleFixDPlural c;i;b
  ⍝ c is a double constant in APL character form, e.g., ".5 2 4.5 4."
  ⍝ Turn it into a Plural double constant.
  i←' ',squeeze c

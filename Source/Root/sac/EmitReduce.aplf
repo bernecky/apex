@@ -1,4 +1,4 @@
-﻿ r←wl EmitReduce y;ast;i;j;k;if1;c;fns;inv;astf;cv;ssa
+ r←wl EmitReduce y;ast;i;j;k;if1;c;fns;inv;astf;cv;ssa
  ⍝ Emit code for reduce w/derived operands
  ssa←D y[0] ⋄ fns←D y[1] ⋄ ast←D ssa[ssaast]
  r←(E''),(E ssa),E wl ⋄ →(0=∨/wl)⍴0 ⍝ No work

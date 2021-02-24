@@ -1,4 +1,4 @@
-﻿ r←EmitReturns y;ast;cal;i;j
+ r←EmitReturns y;ast;cal;i;j
  ⍝# Emit function calls for one user-defined function
  ast←D y[0]
  cal←D y[1]

@@ -1,4 +1,4 @@
-﻿ r←mn DoMacro y;frag;lp;cv;mi;mp;ctl;mac;cvz;m;i;x
+ r←mn DoMacro y;frag;lp;cv;mi;mp;ctl;mac;cvz;m;i;x
  ⍝ Macro Expander.
  ⍝ This extracts everything up to
  ⍝ the closing "}" of the macro defn in the

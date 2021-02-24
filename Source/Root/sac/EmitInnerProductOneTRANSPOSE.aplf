@@ -1,4 +1,4 @@
-﻿ r←sis EmitInnerProductOneTRANSPOSE fns;f;sis;sis2;fnsf;fnsg;gc;fnm;gnm;dfnm;fct;fzt;gct;gzt;k;fnsred;rednm;gen
+ r←sis EmitInnerProductOneTRANSPOSE fns;f;sis;sis2;fnsf;fnsg;gc;fnm;gnm;dfnm;fct;fzt;gct;gzt;k;fnsred;rednm;gen
  ⍝# Emit one inner product using transpose algorithm
  fnsg←fnsrop ConjToFns fns ⍝ g in f.g
  fnsg[;fnstypes]←fns[;fnstypes] ⍝  Undo type damage caused by ConjToFns

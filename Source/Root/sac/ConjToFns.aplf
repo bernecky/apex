@@ -1,4 +1,4 @@
-﻿ r←loprop ConjToFns fns;tps
+ r←loprop ConjToFns fns;tps
 ⍝# Gen derived fn fns entry from conjunction/adverb fns entry
  r←fns
  :If ~0∊⍴fns ⍝ Stupid APL2 prototypes

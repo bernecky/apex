@@ -1,4 +1,4 @@
-﻿ r←nolf y;b
+ r←nolf y;b
 ⍝ delete any LF following a CR. Then replace both by NL
 ⍝ This is intended to be nilpotent in Linux and
 ⍝ necessary for Windoze.

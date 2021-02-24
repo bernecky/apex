@@ -1,4 +1,4 @@
-﻿ r←x SSASearchRenameDomChildren yy;X;tar;S;domt;domtc;d
+ r←x SSASearchRenameDomChildren yy;X;tar;S;domt;domtc;d
  ⍝ SSA Search from Wolfe 1992, p. 183
  X←D x[0] ⋄ tar←D x[1] ⍝ Vars,target varb
  domt←D(D yy[0])[ssadomt]

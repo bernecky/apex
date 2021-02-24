@@ -1,4 +1,4 @@
-﻿ DrawAPLTextStart qcr;k
+ DrawAPLTextStart qcr;k
  ⍝ Set up APL Text window
  :If visualizedfa≡'yes'
      ulc←0 0 ⍝ Upper-left corner

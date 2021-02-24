@@ -1,5 +1,4 @@
-DeleteComments←{
- p←,~∨\(InComment ⍵) ∧~InQuotes ⍵
- (⍴⍵)⍴p\p/,⍵
-}
- 
+ DeleteComments←{
+     p←,~∨\(InComment ⍵)∧~InQuotes ⍵
+     (⍴⍵)⍴p\p/,⍵
+ }

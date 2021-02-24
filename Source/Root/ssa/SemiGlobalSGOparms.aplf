@@ -1,4 +1,4 @@
-﻿ r←x SemiGlobalSGOparms i;ast;ctx;fns;ct;cds;astlist;asts;icall;tar;cs;j;sg;rl
+ r←x SemiGlobalSGOparms i;ast;ctx;fns;ct;cds;astlist;asts;icall;tar;cs;j;sg;rl
 ⍝ Add ast rows to subfns asts[i] for semiglobal outputs
  ctx←D x[0]
  fns←D ctx[0]

@@ -1,4 +1,4 @@
-﻿ r←st QuoteQuadInputKludge i
+ r←st QuoteQuadInputKludge i
 ⍝ ⍞ input in APL is just plain wrong, syntactically.
 ⍝ snax will replace '← ... ⍞' by '←⍞' as a single function.
  r←st stlookup i[stname]

@@ -1,4 +1,4 @@
-﻿ r←mac MacroLocate frag;cv;cvz;i
+ r←mac MacroLocate frag;cv;cvz;i
  ⍝ Macro Finder
  ⍝ Marks everything up to
  ⍝ the closing "}" of macro defn mac in

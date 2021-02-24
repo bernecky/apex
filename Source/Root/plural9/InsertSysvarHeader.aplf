@@ -1,4 +1,4 @@
-﻿ r←sis InsertSysvarHeader b;qdecl;qcall;fin;gin;fgin;fout;gout;fgout
+ r←sis InsertSysvarHeader b;qdecl;qcall;fin;gin;fgin;fout;gout;fgout
 ⍝# Gen extra args for sysvars used by fns.
 ⍝ This supports conjunctions, adverbs, and primitives.
 ⍝ b is list of substitutions

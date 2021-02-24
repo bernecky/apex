@@ -1,4 +1,4 @@
-﻿ r←HandleQuoteQuadInput ast
+ r←HandleQuoteQuadInput ast
 ⍝ Set ←⍞'s type and rank
  i←ast[;asttarget]⍳E,'⍞'
  r←ast

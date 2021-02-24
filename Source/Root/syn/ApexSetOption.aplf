@@ -1,4 +1,4 @@
-﻿ ApexSetOption y;opts
+ ApexSetOption y;opts
 ⍝ Set APEX compiler option y
 ⍝ These are defined as:
 ⍝ 'option1=value1' 'option2=value2' ...

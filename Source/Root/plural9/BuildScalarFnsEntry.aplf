@@ -1,4 +1,4 @@
-﻿ r←fn BuildScalarFnsEntry fns
+ r←fn BuildScalarFnsEntry fns
 ⍝ Build fake scalar fn fns entry for fn, using fns as template.
 ⍝ AHEM. Always dyadic scalar fns!
  r←fns

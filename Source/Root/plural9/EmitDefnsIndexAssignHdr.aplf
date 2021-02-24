@@ -1,4 +1,4 @@
-﻿ r←mil EmitDefnsIndexAssignHdr fns;tps;rks;cv;nul
+ r←mil EmitDefnsIndexAssignHdr fns;tps;rks;cv;nul
 ⍝# Emit Index list header types for indexed assign
  tps←0 3↓D fns[;fnstypes]
  rks←0 3↓D fns[;fnsranks]

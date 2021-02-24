@@ -1,4 +1,4 @@
-﻿ snin;i;j;k;newstate;s
+ snin;i;j;k;newstate;s
  ⍝ Identifier left of start of stmt
  i←c gett(E src),E tok ⍝ SOS, Identifier
  j←D i[GettValue]

@@ -1,4 +1,4 @@
-﻿ r←ast FindPA y;astloprop;ind
+ r←ast FindPA y;astloprop;ind
 ⍝# Find PA entries associated with conjs/advs at ind
  astloprop←D y[0] ⍝ Pick f or g in f.g, etc.
  ind←D y[1]

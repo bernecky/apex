@@ -1,4 +1,4 @@
-﻿ z←BuildMainFile tn;csds;ast;fnm;txt;sr
+ z←BuildMainFile tn;csds;ast;fnm;txt;sr
 ⍝ This is not supported for SAC. Someday Real Soon Now.. rbe 2004-05-24
  z←''
  →0

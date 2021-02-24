@@ -1,4 +1,4 @@
-﻿ ast2colon;i;p
+ ast2colon;i;p
 ⍝ Colon left of anything
  :Select state
  :Case Stf           ⍝ colon left of function

@@ -1,4 +1,4 @@
-﻿ r←IsCaseTRANSPOSE fns;cv;zer;fn
+ r←IsCaseTRANSPOSE fns;cv;zer;fn
  ⍝ Identify transpose cases for inner product.
  ⍝ This is the default case, so we mark everything.
  r←fns

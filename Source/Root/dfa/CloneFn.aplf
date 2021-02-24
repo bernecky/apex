@@ -1,4 +1,4 @@
-﻿ r←cds CloneFn y;ast;parm;cv;callerfn;calleefn;callsite;ct;asts;ast;subfnname;suffix;st;x;astcaller;astscaller
+ r←cds CloneFn y;ast;parm;cv;callerfn;calleefn;callsite;ct;asts;ast;subfnname;suffix;st;x;astcaller;astscaller
 ⍝ Clone the callee function, at calling site.
  ast←D y[0]
  parm←D y[1]

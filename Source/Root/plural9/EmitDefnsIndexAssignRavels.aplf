@@ -1,4 +1,4 @@
-﻿ r←mil EmitDefnsIndexAssignRavels fns;tps;cv;nul;nms;cols;rks
+ r←mil EmitDefnsIndexAssignRavels fns;tps;cv;nul;nms;cols;rks
 ⍝# Emit ravel statements for indexed assign index lists
 ⍝ mil[;k]>0: real index list
 ⍝ mil[;k]=0: dummy trailing entry

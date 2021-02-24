@@ -1,1 +1,1 @@
-PutFile←{⍺ ⎕nput ⍵  1}
+ PutFile←{⍺ ⎕NPUT ⍵ 1}

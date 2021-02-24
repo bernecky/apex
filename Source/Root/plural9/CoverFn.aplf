@@ -1,4 +1,4 @@
-﻿ fnm CoverFn tn;fn;i
+ fnm CoverFn tn;fn;i
 ⍝ Build cover function to allow APL ws
 ⍝ to call APEX-generated code.
 ⍝ Ditto the ⎕na definer function.

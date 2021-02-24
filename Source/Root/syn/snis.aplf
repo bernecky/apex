@@ -1,4 +1,4 @@
-﻿ snis;i
+ snis;i
  ⍝ Identifier left of strand
  ⍝ If the id is a defined verb, stack the verb.
  ⍝ Otherwise, syntax error.

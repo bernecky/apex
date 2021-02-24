@@ -1,4 +1,4 @@
-﻿ r←ast HandleLabels y;cv;i;shp;src;tok;lbl;lin;p;pd;k
+ r←ast HandleLabels y;cv;i;shp;src;tok;lbl;lin;p;pd;k
  ⍝ Build ast entries for line labels.
  ⍝ This function fills in the type, rank, shape, and value.
  src←D y[0] ⋄ tok←D y[1]

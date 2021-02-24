@@ -1,4 +1,4 @@
-﻿ r←GenerateCFG y;bb;cfg;i;j
+ r←GenerateCFG y;bb;cfg;i;j
  ⍝ Generate control flow graph for ast
  bb←D y[ssabb] ⍝ Basic Block list
  i←+/bb

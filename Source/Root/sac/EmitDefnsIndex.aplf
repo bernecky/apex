@@ -1,4 +1,4 @@
-﻿ r←EmitDefnsIndex fns;j;sis
+ r←EmitDefnsIndex fns;j;sis
  ⍝ Emit indexing code
  j←'indr'EmitDefnsIndexRef fns ⍝ Indexed reference
  sis←D j[0] ⋄ fns←D j[1]

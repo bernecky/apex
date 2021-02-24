@@ -1,4 +1,4 @@
-﻿ InvokeMonadicAdverb;astr;lop;adv;rarg;rop;row
+ InvokeMonadicAdverb;astr;lop;adv;rarg;rop;row
  ⍝ Invoke adverb monadically
  lop←StackPop 1 ⍝ left operand
  adv←StackPop 1 ⍝ The adverb

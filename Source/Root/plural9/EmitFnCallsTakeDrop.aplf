@@ -1,4 +1,4 @@
-﻿ r←EmitFnCallsTakeDrop y;fns;cv;cal;ast;sc;ctl
+ r←EmitFnCallsTakeDrop y;fns;cv;cal;ast;sc;ctl
 ⍝# Emit calls for take and drop (at least)
 ⍝# The generic stuff is already done. All we
 ⍝# do here is to pick up special cases.

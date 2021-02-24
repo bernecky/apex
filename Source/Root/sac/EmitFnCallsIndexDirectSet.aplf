@@ -1,4 +1,4 @@
-﻿ r←qio EmitFnCallsIndexDirectSet y;i;j;mil;ast;refs;k;sis;m;lhs;rhs;sis2;rnk;I;mt;si
+ r←qio EmitFnCallsIndexDirectSet y;i;j;mil;ast;refs;k;sis;m;lhs;rhs;sis2;rnk;I;mt;si
 ⍝# These are those where all indices are all-scalar or all-NULL
 ⍝# All-scalar items gen "modarray([i,j,k],X)", with
 ⍝# suitable error checks on the ⎕io-corrected indices

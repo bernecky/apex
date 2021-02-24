@@ -1,4 +1,4 @@
-﻿ r←ast WindowReduce fns;cv;larg;spec;cases
+ r←ast WindowReduce fns;cv;larg;spec;cases
 ⍝ Detect width-2 special case for window reduce
  cv←(ast[;astfn]∊ER1⍪'/⌿')∧~ast[;astlarg]∊NULL
  larg←cv⌿ast[;astlarg] ⍝ Window size

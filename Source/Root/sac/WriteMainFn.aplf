@@ -1,0 +1,16 @@
+ WriteMainFn←{
+  ⍝ Gen and write main() function for invoking module
+  ⍝ ⍺ is new name of main() in module
+  ⍝ ⍵ is name of folder with source code, module, etc.
+  ⍝ Result is filename for main().
+     mnm←PathFileName ⍵
+     r←'use ',mnm,': all;',NL,NL
+     r←r,'int main()',NL,'{',NL
+ ⍝ WHAT ABOUT ⎕io and N?
+     r←r,'  z=',mnm,'::',⍺,'();',NL
+     r←r,'  StdIO::show(z);',NL ⍝ KLUDGE of the day
+     r←r,'  return(0);',NL,'}',NL
+     mnm←FullPathName fldr,PathDelim,⍺,'.sac'
+     k←r PutFile mnm
+     mnm
+ }

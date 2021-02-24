@@ -1,18 +1,18 @@
-﻿ InitializePFAT
- PFATfn←0            ⍝ PFAT fn zymbol                            
- PFATct←1+PFATfn     ⍝ PFAT fn compute type class                
- PFATzt←1+PFATct     ⍝ PFAT fn result type class                 
- PFATcfun←1+PFATzt   ⍝ PFAT commuting function                  
- PFATfncl←1+PFATcfun ⍝ PFAT function class                      
- PFATlid←1+PFATfncl  ⍝ PFAT left-identity                        
- PFATl0←1+PFATlid    ⍝ PFAT left-zero                            
- PFATl1←1+PFATl0     ⍝ PFAT left-one                             
- PFATqct←1+PFATl1    ⍝ PFAT fn needs ⎕ct                         
- PFATqio←1+PFATqct   ⍝ PFAT fn needs ⎕io                         
- PFATqpp←1+PFATqio   ⍝ PFAT fn needs ⎕pp                         
- PFATqpw←1+PFATqpp   ⍝ PFAT fn needs ⎕pw                         
- PFATqrl←1+PFATqpw   ⍝ PFAT fn needs ⎕rl                         
- PFATuni←1+PFATqrl   ⍝ PFAT fn is uniform                        
- PFATcols←1+PFATuni  ⍝ PFAT table width              
+ InitializePFAT
+ PFATfn←0            ⍝ PFAT fn zymbol
+ PFATct←1+PFATfn     ⍝ PFAT fn compute type class
+ PFATzt←1+PFATct     ⍝ PFAT fn result type class
+ PFATcfun←1+PFATzt   ⍝ PFAT commuting function
+ PFATfncl←1+PFATcfun ⍝ PFAT function class
+ PFATlid←1+PFATfncl  ⍝ PFAT left-identity
+ PFATl0←1+PFATlid    ⍝ PFAT left-zero
+ PFATl1←1+PFATl0     ⍝ PFAT left-one
+ PFATqct←1+PFATl1    ⍝ PFAT fn needs ⎕ct
+ PFATqio←1+PFATqct   ⍝ PFAT fn needs ⎕io
+ PFATqpp←1+PFATqio   ⍝ PFAT fn needs ⎕pp
+ PFATqpw←1+PFATqpp   ⍝ PFAT fn needs ⎕pw
+ PFATqrl←1+PFATqpw   ⍝ PFAT fn needs ⎕rl
+ PFATuni←1+PFATqrl   ⍝ PFAT fn is uniform
+ PFATcols←1+PFATuni  ⍝ PFAT table width
  PFAT←#.globals.PFAT
- 
+

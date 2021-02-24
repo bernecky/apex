@@ -1,4 +1,4 @@
-﻿ r←ct SemiGlobalUnSet cds;cds;sgi;cv;i;k;callers;weare;cs;csgi;astr;nums;nms;pv;pl;nl;npl;scp;fn;asts
+ r←ct SemiGlobalUnSet cds;cds;sgi;cv;i;k;callers;weare;cs;csgi;astr;nums;nms;pv;pl;nl;npl;scp;fn;asts
 ⍝ Remove semi-globals (:RI) that are not set within a fn.
 ⍝ Percolate any such removals up through calling tree.
 ⍝ Fundamental idea: If a semi-global is not set w/in a fn AND

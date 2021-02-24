@@ -1,2 +1,2 @@
-﻿ r←x diotaeach y
+ r←x diotaeach y
  r←x⍳¨y

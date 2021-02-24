@@ -1,4 +1,4 @@
-﻿ r←ast FORReorder phiomega;b;e;nd;cv;i;j;bi;ei
+ r←ast FORReorder phiomega;b;e;nd;cv;i;j;bi;ei
 ⍝ Reorder phiomega entries to match nesting level
 ⍝ of :For loops.
  b←ast[;astfn]∊E':For'

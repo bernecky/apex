@@ -1,3 +1,4 @@
- SACModuleName←{(PathFileName ⍺),'_',D ⍵[dfnname;asttarget]
+ SACModuleName←{z←(PathFileName ⍺),'_',D ⍵[dfnname;asttarget]
+     z
 ⍝∇⍣§./Source/Root/sac/SACModuleName.aplf§0§ 2021 2 17 19 24 9 821 §Rjô§0
  }

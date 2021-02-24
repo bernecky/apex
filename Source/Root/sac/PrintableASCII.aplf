@@ -1,4 +1,4 @@
-﻿ r←PrintableASCII
+ r←PrintableASCII
 ⍝# Printable (for SAC) ASCII characters
  r←' ,./<>?;'':"[]\{}∣‘~!@#$%^&*()_+-='
  r←r,26↑(⎕AV⍳'a')↓⎕AV
