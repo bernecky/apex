@@ -1,12 +1,16 @@
+module UTDScalarB;
+
 use Array: all;
-use StdIO : all;
-use Numerical : all;
-use CommandLine: all;
-use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: CLEAR WS 2020-12-30 15:57:57.817 */
+/* Compiled by APEX Version: CLEAR WS 2021-02-24 18:57:25.939 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -31,6 +35,8 @@ use Bits: all;
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+export all;
 
 inline bool notXBB(bool y)
 { /* Boolean NOT */
@@ -1755,7 +1761,7 @@ A_163=orBBB(BM230_0,BM230_0);
  return(r_13);
 }
 
-int main()
+inline int UTDScalarB_mainXXI()
 { 
 /*
  ?
@@ -1765,41 +1771,41 @@ QUADio_0=toI(( false));
  QUADpp_0=( 10);
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
- A_59=ANDXXB( QUADio_0,QUADpp_0,QUADpw_0,QUADct_0,QUADrl_0);
- r_0=( A_59);
- A_66=ORXXB( QUADio_0,QUADpp_0,QUADpw_0,QUADct_0,QUADrl_0);
- A_67=comaBBB(r_0,A_66);
- r_1=( A_67);
- A_74=NANDXXB( QUADio_0,QUADpp_0,QUADpw_0,QUADct_0,QUADrl_0);
-A_75=comaBBB(r_1,A_74);
- r_2=( A_75);
- A_82=NORXXB( QUADio_0,QUADpp_0,QUADpw_0,QUADct_0,QUADrl_0);
- A_83=comaBBB(r_2,A_82);
- r_3=( A_83);
- A_90=LTXXB( QUADio_0,QUADpp_0,QUADpw_0,QUADct_0,QUADrl_0);
- A_91=comaBBB(r_3,A_90);
- r_4=( A_91);
- A_98=LEXXB( QUADio_0,QUADpp_0,QUADpw_0,QUADct_0,QUADrl_0);
- A_99=comaBBB(r_4,A_98);
- r_5=( A_99);
- A_106=EQXXB( QUADio_0,QUADpp_0,QUADpw_0,QUADct_0,QUADrl_0);
- A_107=comaBBB(r_5,A_106);
- r_6=( A_107);
- A_114=GEXXB( QUADio_0,QUADpp_0,QUADpw_0,QUADct_0,QUADrl_0);
- A_115=comaBBB(r_6,A_114);
- r_7=( A_115);
- A_122=GTXXB( QUADio_0,QUADpp_0,QUADpw_0,QUADct_0,QUADrl_0);
- A_123=comaBBB(r_7,A_122);
- r_8=( A_123);
- A_130=NEXXB( QUADio_0,QUADpp_0,QUADpw_0,QUADct_0,QUADrl_0);
- A_131=comaBBB(r_8,A_130);
- r_9=( A_131);
- A_135=quadXBB( r_9,QUADpp_0,QUADpw_0);
- A_136=andslXBBQUICKSTOP( r_9);
+ A_54=ANDXXB( );
+ r_0=( A_54);
+ A_56=ORXXB( );
+ A_57=comaBBB(r_0,A_56);
+ r_1=( A_57);
+ A_59=NANDXXB( );
+ A_60=comaBBB(r_1,A_59);
+ r_2=( A_60);
+ A_62=NORXXB( );
+ A_63=comaBBB(r_2,A_62);
+ r_3=( A_63);
+ A_65=LTXXB( );
+ A_66=comaBBB(r_3,A_65);
+ r_4=( A_66);
+ A_68=LEXXB( );
+ A_69=comaBBB(r_4,A_68);
+ r_5=( A_69);
+ A_71=EQXXB( );
+ A_72=comaBBB(r_5,A_71);
+ r_6=( A_72);
+ A_74=GEXXB( );
+ A_75=comaBBB(r_6,A_74);
+ r_7=( A_75);
+ A_77=GTXXB( );
+ A_78=comaBBB(r_7,A_77);
+ r_8=( A_78);
+ A_80=NEXXB( );
+ A_81=comaBBB(r_8,A_80);
+ r_9=( A_81);
+ A_85=quadXBB( r_9,QUADpp_0,QUADpw_0);
+ A_86=andslXBBQUICKSTOP( r_9);
  /* dsf scalar(s) */
-A_140=barBBI(true,A_136);
- r_10=( A_140);
- A_144=quadXII( A_140,QUADpp_0,QUADpw_0);
+A_90=barBBI(true,A_86);
+r_10=( A_90);
+ A_94=quadXII( A_90,QUADpp_0,QUADpw_0);
  return(r_10);
 }
 

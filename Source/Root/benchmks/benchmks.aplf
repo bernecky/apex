@@ -1,5 +1,7 @@
- r←benchmks nm;sfx
-⍝ Return list of available benchmarks below folder nm
+ r←benchmks nm;pd
+⍝ Return list of folders in folder nm
 ⍝ e.g., benchmks 'Ancillary/benchmksPerf'
- sfx←'/blist.cu'
- r←⎕SH'ls ',nm,'/*',sfx
+⍝ Does not return non-folder file names, e.g., README
+ pd←PathDelim
+ r←⎕SH'ls -dD $PWD',pd,nm,pd,'*',pd
+ r←¯1↓¨r ⍝ Drop trailing pd

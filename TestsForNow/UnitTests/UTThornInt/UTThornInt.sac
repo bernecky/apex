@@ -1,12 +1,16 @@
+module UTThornInt;
+
 use Array: all;
-use StdIO : all;
-use Numerical : all;
-use CommandLine: all;
-use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: wss/apex.20210202 2021-02-02 15:43:33.227 */
+/* Compiled by APEX Version: CLEAR WS 2021-02-24 18:59:00.530 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -31,6 +35,8 @@ use Bits: all;
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+export all;
 
 inline int maxXDI(double y, double QUADct)
 { /* Ceiling */
@@ -1589,7 +1595,7 @@ m_2=( A_165);
  return(r_9);
 }
 
-int main()
+inline int UTThornInt_mainXXI()
 { 
 /*
  ?

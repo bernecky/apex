@@ -4,14 +4,14 @@
  *
  **********************************************************************
  *
- * Automatically generated on Wed 03 Feb 2021 04:18:53 PM EST
+ * Automatically generated on Wed 24 Feb 2021 06:53:47 PM EST
  *
  * using sac2c 1.3.3-MijasCosta-566-gc4c42
  * built 2021-01-02T09:19:53.
  * by user sac on host boa.
  *
  * The compiler was called by
- *  sac2c -dopogo -check c UTReplicate.sac -v4
+ *  sac2c -O3 -doawlf -dopwlf -o /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/ /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/UTReplicate.sac
  *
  * The compiler crashed in
  *  phase: opt (Running SAC optimizations)
@@ -19,19 +19,23 @@
  *  cycle phase: cse (Eliminating common subexpressions)
  *  cycle instance: 2
  *
- * What follows is the contents of UTReplicate.sac.
+ * What follows is the contents of /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/UTReplicate.sac.
  *
  **********************************************************************/
 
+module UTReplicate;
+
 use Array: all;
-use StdIO : all;
-use Numerical : all;
-use CommandLine: all;
-use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: CLEAR WS 2020-12-30 16:34:27.068 */
+/* Compiled by APEX Version: wss/apex.20210224 2021-02-24 18:51:22.257 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -56,6 +60,8 @@ use Bits: all;
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+export all;
 
 inline int barBBI(bool x, bool y)
 { return(BtoI(x)-BtoI(y));
@@ -450,7 +456,7 @@ inline bool[+] eqIIB(int[+] x, int y)
 }
 
 
-int main()
+inline int UTReplicate_mainXXI()
 { 
 /*
  ?

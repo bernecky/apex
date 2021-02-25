@@ -15,6 +15,6 @@
  cuprolog←cuprolog,(~1∊isDfnMain¨cuasts)/'export all;',NL,NL
  code←cuprolog,cudefinedfns
  txt←toascii AddNL code
- r←(D 0⌷⎕SH'pwd'),PathDelim,cufnm,'.',#.globals.TargetLanguage
+ r←FullPathName cufnm,'.',#.globals.TargetLanguage
  'PutFile failed'assert z←txt PutFile r
  z←⎕SH'chmod g+w ',r

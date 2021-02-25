@@ -1,3 +1,5 @@
+module UTTakeDrop;
+
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -8,7 +10,7 @@ use RTClock: all;
 use StdIO : all;
 use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: wss/apex.20210203 2021-02-03 18:16:04.974 */
+/* Compiled by APEX Version: CLEAR WS 2021-02-24 18:58:53.959 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -33,6 +35,8 @@ use String: {to_string,tochar,sscanf};
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+export all;
 
 inline int[+] modXII(int[+] y)
 { /* Monadic scalar functions on array */
@@ -1357,7 +1361,7 @@ A_116=inds0(r_2,A_114,el_0);
  return(r_3);
 }
 
-int main()
+inline int UTTakeDrop_mainXXI()
 { 
 /*
  ?

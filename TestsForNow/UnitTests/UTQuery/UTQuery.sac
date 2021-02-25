@@ -1,12 +1,16 @@
+module UTQuery;
+
 use Array: all;
-use StdIO : all;
-use Numerical : all;
-use CommandLine: all;
-use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: /home/apex/apex3/wss/sac3014.dws2012-11-15 10:12:52.041 */
+/* Compiled by APEX Version: CLEAR WS 2021-02-24 18:57:43.876 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -31,6 +35,8 @@ use Bits: all;
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+export all;
 
 inline int minXDI(double y,double QUADct)
 { return(DFLOOR(y,QUADct));
@@ -109,10 +115,10 @@ inline int[+] plusBII(bool x, int[+] y)
 { /* SxA scalar function */
   xel = toI(x);
   z = with {
-     ( . <= iv <= .) {
-              yel = toI(y[iv]);
-                    } : plusIII(xel,yel);
-  } : genarray(shape(y), 0);
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : plusIII(xel,yel);
+	} : genarray(shape(y), 0);
   return(z);
 }
 
@@ -121,10 +127,10 @@ inline int[+] barIII(int x, int[+] y)
 { /* SxA scalar function */
   xel = toI(x);
   z = with {
-     ( . <= iv <= .) {
-              yel = toI(y[iv]);
-                    } : barIII(xel,yel);
-  } : genarray(shape(y), 0);
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : barIII(xel,yel);
+	} : genarray(shape(y), 0);
   return(z);
 }
 
@@ -137,15 +143,14 @@ inline int[.] comaXII(int[.] y)
 
 inline int[.] comaXII(int y)
 { /* Ravel of scalar */
-        return([y]);
+  return([y]);
 }
 
-inline int[.] rhoIII(int x, int[*] y)
-{ /* Scalar reshape non-scalar (to vector) */
- z = rhoIII( [toi(x)],y);
- return(z);
+inline int[.] rhoIII(int x, int y)
+{ // [Scalar reshape scalar]
+  z = genarray( [toi(x)],y);
+  return(z);
 }
-
 
 inline int[*] rhoIII(int[.] x, int[*] y)
 {  /* APEX vector x reshape, with potential item reuse */
@@ -333,13 +338,13 @@ inline bool andBBB(bool x, bool y)
 
 inline bool[+] eqIIB(int[+] x, int[+] y)
 { /* AxA Dyadic scalar fn, shapes may or may not match */
-         sx = shape(y);
-         z = with {
-             ( . <= iv <= .) {
-                      xel = x[iv];
-                   yel = y[iv];
-           } : eqIIB(xel,yel);
-        } : genarray(sx, false);
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : eqIIB(xel,yel);
+        } : genarray(sy, false);
   return(z);
 }
 
@@ -486,10 +491,10 @@ inline bool[+] eqIIB(int x, int[+] y)
 { /* SxA scalar function */
   xel = toI(x);
   z = with {
-     ( . <= iv <= .) {
-              yel = toI(y[iv]);
-                    } : eqIIB(xel,yel);
-  } : genarray(shape(y), false);
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : eqIIB(xel,yel);
+	} : genarray(shape(y), false);
   return(z);
 }
 
@@ -497,10 +502,10 @@ inline bool[+] eqIIB(int x, int[+] y)
 inline bool[+] eqIIB(int[+] x, int y)
 { /* AxS scalar function */
   z = with {
-  ( . <= iv <= .) {
-              xel = x[iv];
-   } : eqIIB(xel,y);
-  } : genarray( shape(x), false);
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : eqIIB(xel,y);
+	} : genarray( shape(x), false);
   return(z);
 }
 
@@ -528,8 +533,8 @@ inline int STSCfloorXDI(double y ,double QUADct)
 /*
  ?
 */
-A_19=minXDI( y,QUADct);
-r_0=( A_19);
+A_16=minXDI( y,QUADct);
+r_0=( A_16);
  return(r_0);
 }
 
@@ -539,16 +544,16 @@ inline int lehmerXXI(int QUADRL)
  ?
 */
 /* dsf scalar(s) */
-A_27=mpyIII(16807,QUADRL);
+A_21=mpyIII(16807,QUADRL);
 /* dsf scalar(s) */
-A_28=starIII(2,31);
+A_22=starIII(2,31);
  /* dsf scalar(s) */
-A_29=plusIII(-1,A_28);
+A_23=plusIII(-1,A_22);
  /* dsf scalar(s) */
-A_31=modIII(A_29,A_27);
- A_32=STSCfloorCLONE9XII( A_31);
- QUADRL_0=( A_32);
- r_0=( A_32);
+A_25=modIII(A_23,A_21);
+ A_26=STSCfloorCLONE9XII( A_25);
+ QUADRL_0=( A_26);
+ r_0=( A_26);
  return(r_0);
 }
 
@@ -557,20 +562,20 @@ inline int rollScalarXII(int y ,int QUADRL,double QUADct,int QUADio)
 /*
  ?
 */
-A_25=lehmerXXI( QUADRL);
- r_0=( A_25);
+A_22=lehmerXXI( QUADRL);
+ r_0=( A_22);
  /* dsf scalar(s) */
-A_27=starIII(2,31);
+A_24=starIII(2,31);
  /* dsf scalar(s) */
-A_28=plusIII(-1,A_27);
+A_25=plusIII(-1,A_24);
  /* dsf scalar(s) */
-A_29=mpyIII(r_0,y);
+A_26=mpyIII(r_0,y);
  /* dsf scalar(s) */
-A_30=divIID(A_29,A_28);
- A_32=minXDI( A_30,QUADct);
+A_27=divIID(A_26,A_25);
+ A_29=minXDI( A_27,QUADct);
  /* dsf scalar(s) */
-A_33=plusIII(QUADio,A_32);
-r_1=( A_33);
+A_30=plusIII(QUADio,A_29);
+r_1=( A_30);
  return(r_1);
 }
 
@@ -579,29 +584,29 @@ inline int[.] rollXII(int[.] y ,int QUADRL,double QUADct,int QUADio)
 /*
  ?
 */
-A_31=rhoXII( y);
- A_32=mpyslXIIQUICKSTOP( A_31);
- A_36=rhoIII(A_32,-1);
- r_0=( A_36);
- A_38=comaXII( y);
- ry_0=( A_38);
- A_40=rhoXII( ry_0);
- A_42=iotaXII( A_40,QUADio);
- A_CTR43_= 0;
-A_CTR43z_ = (shape(A_42)[[0]])-1;
+A_28=rhoXII( y);
+ A_29=mpyslXIIQUICKSTOP( A_28);
+ A_33=rhoIII(A_29,-1);
+ r_0=( A_33);
+ A_35=comaXII( y);
+ ry_0=( A_35);
+ A_37=rhoXII( ry_0);
+ A_39=iotaXII( A_37,QUADio);
+ A_CTR40_= 0;
+A_CTR40z_ = (shape(A_39)[[0]])-1;
 r_2=toI(r_0);
-for(; A_CTR43_ <= A_CTR43z_; A_CTR43_++){
-i_0 = A_42[[A_CTR43_]];
- A_45= ABC(toi(i_0)-QUADio,shape(ry_0)[0]);
-A_47=ry_0[[A_45]];
- A_51=rollScalarXII( A_47,QUADRL,QUADct,QUADio);
- A_52= ABC(toi(i_0)-QUADio,shape(r_2)[0]);
-A_54=inds0(r_2,A_52,A_51);
- r_2=( A_54);
+for(; A_CTR40_ <= A_CTR40z_; A_CTR40_++){
+i_0 = A_39[[A_CTR40_]];
+ A_42= ABC(toi(i_0)-QUADio,shape(ry_0)[0]);
+A_44=ry_0[[A_42]];
+ A_48=rollScalarXII( A_44,QUADRL,QUADct,QUADio);
+ A_49= ABC(toi(i_0)-QUADio,shape(r_2)[0]);
+A_51=inds0(r_2,A_49,A_48);
+ r_2=( A_51);
  }
- A_57=rhoXII( y);
- A_58=rhoIII(A_57,r_2);
- r_3=( A_58);
+ A_54=rhoXII( y);
+ A_55=rhoIII(A_54,r_2);
+ r_3=( A_55);
  return(r_3);
 }
 
@@ -612,19 +617,19 @@ inline bool[.] UTRollXIB(int n ,double QUADct,int QUADio)
 */
 QUADrl_0=( 16807);
  QUADRL_0=( QUADrl_0);
- A_40=iotaXII( n,QUADio);
+ A_37=iotaXII( n,QUADio);
  /* dsf scalar(s) */
-A_41=plusBII(true,A_40);
- d_0=( A_41);
- A_46,QUADrl_2=querXII( d_0,QUADio,QUADrl_0);
- r1_0=( A_46);
- A_52=rollXII( d_0,QUADRL_0,QUADct,QUADio);
- r2_0=( A_52);
+A_38=plusBII(true,A_37);
+ d_0=( A_38);
+ A_43,QUADrl_2=querXII( d_0,QUADio,QUADrl_0);
+ r1_0=( A_43);
+ A_49=rollXII( d_0,QUADRL_0,QUADct,QUADio);
+ r2_0=( A_49);
  /* dsf scalar(s) */
-A_55=eqIIB(QUADrl_2,QUADRL_0);
- A_57=sameIIB(r1_0,r2_0);
- A_58=comaBBB(A_57,A_55);
- r_0=( A_58);
+A_52=eqIIB(QUADrl_2,QUADRL_0);
+ A_54=sameIIB(r1_0,r2_0);
+ A_55=comaBBB(A_54,A_52);
+ r_0=( A_55);
  return(r_0);
 }
 
@@ -633,38 +638,38 @@ inline int[.] dealIII(int a, int b,int QUADRL,double QUADct,int QUADio)
 /*
  ?
 */
-A_39=iotaXII( b,QUADio);
- L_0=( A_39);
- A_42=iotaXII( a,QUADio);
- A_CTR43_= 0;
-A_CTR43z_ = (shape(A_42)[[0]])-1;
+A_37=iotaXII( b,QUADio);
+ L_0=( A_37);
+ A_40=iotaXII( a,QUADio);
+ A_CTR41_= 0;
+A_CTR41z_ = (shape(A_40)[[0]])-1;
 L_3=toI(L_0);
-for(; A_CTR43_ <= A_CTR43z_; A_CTR43_++){
-i_0 = A_42[[A_CTR43_]];
+for(; A_CTR41_ <= A_CTR41z_; A_CTR41_++){
+i_0 = A_40[[A_CTR41_]];
  /* dsf scalar(s) */
-A_45=barIII(b,i_0);
- A_49=rollCLONE8XII( A_45,QUADRL,QUADct,QUADio);
+A_43=barIII(b,i_0);
+ A_47=rollCLONE8XII( A_43,QUADRL,QUADct,QUADio);
  /* dsf scalar(s) */
-A_50=plusIII(i_0,A_49);
- loc_0=( A_50);
- A_52= ABC(toi(i_0)-QUADio,shape(L_3)[0]);
-A_54=L_3[[A_52]];
- c_0=( A_54);
- A_56= ABC(toi(loc_0)-QUADio,shape(L_3)[0]);
-A_58=L_3[[A_56]];
- A_59= ABC(toi(i_0)-QUADio,shape(L_3)[0]);
-A_61=inds0(L_3,A_59,A_58);
- L_2=( A_61);
- A_63= ABC(toi(loc_0)-QUADio,shape(L_2)[0]);
-A_65=inds0(L_2,A_63,c_0);
- L_3=( A_65);
+A_48=plusIII(i_0,A_47);
+ loc_0=( A_48);
+ A_50= ABC(toi(i_0)-QUADio,shape(L_3)[0]);
+A_52=L_3[[A_50]];
+ c_0=( A_52);
+ A_54= ABC(toi(loc_0)-QUADio,shape(L_3)[0]);
+A_56=L_3[[A_54]];
+ A_57= ABC(toi(i_0)-QUADio,shape(L_3)[0]);
+A_59=inds0(L_3,A_57,A_56);
+ L_2=( A_59);
+ A_61= ABC(toi(loc_0)-QUADio,shape(L_2)[0]);
+A_63=inds0(L_2,A_61,c_0);
+ L_3=( A_63);
  }
- A_68=takeIII(a,L_3);
+ A_66=takeIII(a,L_3);
  /* dsf scalar(s) */
-A_69=barIBI(b,true);
+A_67=barIBI(b,true);
  /* dsf scalar(s) */
-A_70=barIII(A_69,A_68);
- z_0=( A_70);
+A_68=barIII(A_67,A_66);
+ z_0=( A_68);
  return(z_0);
 }
 
@@ -676,24 +681,24 @@ inline bool[.] UTDealXIB(int n ,double QUADct,int QUADio)
 QUADrl_0=( 16807);
  QUADRL_0=( QUADrl_0);
  /* dsf scalar(s) */
-A_37=divIID(n,2);
- A_39=STSCfloorXDI( A_37,QUADct);
- A_43,QUADrl_2=querIII(A_39,n,QUADio,QUADrl_0);
- r1_0=( A_43);
+A_34=divIID(n,2);
+ A_36=STSCfloorXDI( A_34,QUADct);
+ A_40,QUADrl_2=querIII(A_36,n,QUADio,QUADrl_0);
+ r1_0=( A_40);
  /* dsf scalar(s) */
-A_46=divIID(n,2);
- A_48=STSCfloorXDI( A_46,QUADct);
- A_52=dealIII(A_48,n,QUADRL_0,QUADct,QUADio);
- r2_0=( A_52);
+A_43=divIID(n,2);
+ A_45=STSCfloorXDI( A_43,QUADct);
+ A_49=dealIII(A_45,n,QUADRL_0,QUADct,QUADio);
+ r2_0=( A_49);
  /* dsf scalar(s) */
-A_55=eqIIB(QUADrl_2,QUADRL_0);
- A_57=sameIIB(r1_0,r2_0);
- A_58=comaBBB(A_57,A_55);
- r_0=( A_58);
+A_52=eqIIB(QUADrl_2,QUADRL_0);
+ A_54=sameIIB(r1_0,r2_0);
+ A_55=comaBBB(A_54,A_52);
+ r_0=( A_55);
  return(r_0);
 }
 
-int main()
+inline int UTQuery_mainXXI()
 { 
 /*
  ?
@@ -703,17 +708,17 @@ QUADio_0=toI(( false));
  QUADpp_0=( 10);
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
- A_47=UTRollXIB( 1000,QUADct_0,QUADio_0);
- r_0=( A_47);
- A_51=UTDealXIB( 1000,QUADct_0,QUADio_0);
- A_52=comaBBB(r_0,A_51);
- r_1=( A_52);
- A_56=quadXBB( r_1,QUADpp_0,QUADpw_0);
- A_57=andslXBBQUICKSTOP( r_1);
+ A_42=UTRollXIB( 1000,QUADct_0,QUADio_0);
+ r_0=( A_42);
+ A_46=UTDealXIB( 1000,QUADct_0,QUADio_0);
+ A_47=comaBBB(r_0,A_46);
+ r_1=( A_47);
+ A_51=quadXBB( r_1,QUADpp_0,QUADpw_0);
+ A_52=andslXBBQUICKSTOP( r_1);
  /* dsf scalar(s) */
-A_61=plusBBI(true,A_57);
-r_2=( A_61);
- A_65=quadXII( A_61,QUADpp_0,QUADpw_0);
+A_56=plusBBI(true,A_52);
+r_2=( A_56);
+ A_60=quadXII( A_56,QUADpp_0,QUADpw_0);
  return(r_2);
 }
 
@@ -722,29 +727,29 @@ inline int rollCLONE8XII(int y ,int QUADRL,double QUADct,int QUADio)
 /*
  ?
 */
-A_31=rhoXII( y);
- A_32=mpyslXIIQUICKSTOP( A_31);
- A_36=rhoIII(A_32,-1);
- r_0=( A_36);
- A_38=comaXII( y);
- ry_0=( A_38);
- A_40=rhoXII( ry_0);
- A_42=iotaXII( A_40,QUADio);
- A_CTR43_= 0;
-A_CTR43z_ = (shape(A_42)[[0]])-1;
+A_28=rhoXII( y);
+ A_29=mpyslXIIQUICKSTOP( A_28);
+ A_33=rhoIII(A_29,-1);
+ r_0=( A_33);
+ A_35=comaXII( y);
+ ry_0=( A_35);
+ A_37=rhoXII( ry_0);
+ A_39=iotaXII( A_37,QUADio);
+ A_CTR40_= 0;
+A_CTR40z_ = (shape(A_39)[[0]])-1;
 r_2=toI(r_0);
-for(; A_CTR43_ <= A_CTR43z_; A_CTR43_++){
-i_0 = A_42[[A_CTR43_]];
- A_45= ABC(toi(i_0)-QUADio,shape(ry_0)[0]);
-A_47=ry_0[[A_45]];
- A_51=rollScalarXII( A_47,QUADRL,QUADct,QUADio);
- A_52= ABC(toi(i_0)-QUADio,shape(r_2)[0]);
-A_54=inds0(r_2,A_52,A_51);
- r_2=( A_54);
+for(; A_CTR40_ <= A_CTR40z_; A_CTR40_++){
+i_0 = A_39[[A_CTR40_]];
+ A_42= ABC(toi(i_0)-QUADio,shape(ry_0)[0]);
+A_44=ry_0[[A_42]];
+ A_48=rollScalarXII( A_44,QUADRL,QUADct,QUADio);
+ A_49= ABC(toi(i_0)-QUADio,shape(r_2)[0]);
+A_51=inds0(r_2,A_49,A_48);
+ r_2=( A_51);
  }
- A_57=rhoXII( y);
- A_58=rhoIII(A_57,r_2);
- r_3=( A_58);
+ A_54=rhoXII( y);
+ A_55=rhoIII(A_54,r_2);
+ r_3=( A_55);
  return(r_3);
 }
 
@@ -753,8 +758,8 @@ inline int STSCfloorCLONE9XII(int y )
 /*
  ?
 */
-A_19=minXII( y);
-r_0=( A_19);
+A_16=minXII( y);
+r_0=( A_16);
  return(r_0);
 }
 

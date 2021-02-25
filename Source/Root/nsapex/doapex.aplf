@@ -5,6 +5,7 @@
  Opts←defaultOpts,Options
  #.globals.Initialize Opts
  fns←GetBlistFns fldr
+ ⎕←(fts ⎕ts),' Compiling ',fldr
 
  ⍝  Invoke each compiler phase
  asts←fldr #.syn.dosyn fns

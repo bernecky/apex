@@ -1,3 +1,5 @@
+module UTReplicate;
+
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -8,7 +10,7 @@ use RTClock: all;
 use StdIO : all;
 use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: wss/apex.20210203 2021-02-03 16:21:13.922 */
+/* Compiled by APEX Version: CLEAR WS 2021-02-24 18:57:44.857 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -33,6 +35,8 @@ use String: {to_string,tochar,sscanf};
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+export all;
 
 inline int barBBI(bool x, bool y)
 { return(BtoI(x)-BtoI(y));
@@ -427,7 +431,7 @@ inline bool[+] eqIIB(int[+] x, int y)
 }
 
 
-int main()
+inline int UTReplicate_mainXXI()
 { 
 /*
  ?

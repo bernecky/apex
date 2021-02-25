@@ -1,12 +1,16 @@
+module UTClone;
+
 use Array: all;
-use StdIO : all;
-use Numerical : all;
-use CommandLine: all;
-use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: wss/apex.20210202 2021-02-02 18:17:36.874 */
+/* Compiled by APEX Version: CLEAR WS 2021-02-24 18:57:21.136 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -31,6 +35,8 @@ use Bits: all;
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+export all;
 
 inline int barBBI(bool x, bool y)
 { return(BtoI(x)-BtoI(y));
@@ -260,7 +266,7 @@ r_0=( A_18);
  return(r_0);
 }
 
-int main()
+inline int UTClone_mainXXI()
 { 
 /*
  ?

@@ -1,12 +1,16 @@
+module UTThornBoolean;
+
 use Array: all;
-use StdIO : all;
-use Numerical : all;
-use CommandLine: all;
-use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: wss/apex.20210202 2021-02-02 15:42:29.702 */
+/* Compiled by APEX Version: CLEAR WS 2021-02-24 18:58:55.030 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -31,6 +35,8 @@ use Bits: all;
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+export all;
 
 inline bool notXBB(bool y)
 { /* Boolean NOT */
@@ -515,7 +521,7 @@ A_115=comaBBB(r_6,A_114);
  return(r_7);
 }
 
-int main()
+inline int UTThornBoolean_mainXXI()
 { 
 /*
  ?

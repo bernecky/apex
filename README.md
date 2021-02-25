@@ -15,7 +15,7 @@ To generate the compiler from github, clone the repository, say to apexgit, then
   ```
       '' apex 'TestsForNow/ipbb'
   ```    
-  The left argument to the "apex" verb is a set of space-delimited
+  If specified, the left argument to the "apex" verb is a set of space-delimited
   compiler options, e.g. ``` 'option0=x option1=y...' ```
   
   Default options are:
@@ -58,8 +58,7 @@ To generate the compiler from github, clone the repository, say to apexgit, then
  the Boolean inner product ∨.∧ of a Boolean matrix of shape 4000 4000.
  The result (r) of executing main should be 0 if the result is correct,
  and 0 otherwise.
- 
- 
+
  
 
     

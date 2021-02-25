@@ -1,3 +1,5 @@
+module UTRepresentation;
+
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -8,7 +10,7 @@ use RTClock: all;
 use StdIO : all;
 use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: wss/apex.20210203 2021-02-03 16:27:49.662 */
+/* Compiled by APEX Version: CLEAR WS 2021-02-24 18:57:46.908 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -33,6 +35,8 @@ use String: {to_string,tochar,sscanf};
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+export all;
 
 inline int mpyIII(int x, int y)
 { return(ItoI(x)*ItoI(y));
@@ -907,7 +911,7 @@ A_128=barDDD(cy_3,A_127);
  return(z_4);
 }
 
-int main()
+inline int UTRepresentation_mainXXI()
 { 
 /*
  ?

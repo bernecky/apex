@@ -1,3 +1,5 @@
+module UTSGI;
+
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -8,7 +10,7 @@ use RTClock: all;
 use StdIO : all;
 use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: wss/apex.20210203 2021-02-03 17:58:18.715 */
+/* Compiled by APEX Version: CLEAR WS 2021-02-24 18:57:49.518 */
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -33,6 +35,8 @@ use String: {to_string,tochar,sscanf};
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+export all;
 
 inline int plusIII(int x, int y)
 { return(ItoI(x)+ItoI(y));
@@ -94,7 +98,7 @@ A_35=plusIII(val1_0,A_34);
  return(r_0);
 }
 
-int main()
+inline int UTSGI_mainXXI()
 { 
 /*
  ?
