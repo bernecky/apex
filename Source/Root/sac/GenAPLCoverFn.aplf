@@ -1,0 +1,5 @@
+ r←GenAPLCoverFn fldr
+⍝ Build cover function to allow APL 
+⍝ to call APEX-generated code.
+⍝ Ditto the ⎕na definer function.
+ r←'BUILD CoverFn here, please'

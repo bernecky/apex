@@ -10,7 +10,9 @@
      r←r,'  z=',mnm,'::',⍺,'();',NL
      r←r,'  StdIO::show(z);',NL ⍝ KLUDGE of the day
      r←r,'  return(0);',NL,'}',NL
-     mnm←FullPathName fldr,PathDelim,⍺,'.sac'
+     mnm←D 1⌷FileNameBreak fldr
+     ⍝ KLudge: _ to let Makefile tell main() from module
+     mnm←FullPathName fldr,PathDelim,,'_',mnm,'.sac'
      k←r PutFile mnm
      mnm
  }

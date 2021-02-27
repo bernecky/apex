@@ -1,7 +1,5 @@
- r←fldr EmitOneCU asts;i;mn;cudefinedfns;m;fnslop;fnsfn;fnsrop
- ;fnstypes;fnsranks;fnslpar;fnslarg;fnsrarg;fnsrpar;calfn
- ;caltypes;calranks;callpar;callarg;calcomma;calrarg
- ;calrpar;fns;fnstypeslarg;fnstypesrarg;fnstypesz;z;fnm;smn
+ r←fldr EmitOneCU asts;fnm1;fnm2;fnm3
+ ;smn;astsmod
  ⍝ Emit compiled APL code for one Compilation Unit(CU), asts
  ⍝ Genned module code written to file r in fldr
  ⍝ Result is r, and the generated main() filename
@@ -9,16 +7,13 @@
  InitializeFns   ⍝ and cal
  ⍝ Build mainline code, identify primitives
  asts←SACNames¨asts ⍝ Map names to avoid SAC keyword conflicts, etc
- (asts smn)←fldr SACModuleRenameMain asts ⍝ Rename main() so we can gen .so/.dll
- i←EmitOneUserDefinedFn¨asts ⍝ Emit all user-defined fns
- cudefinedfns←D Raze 0⊃¨i
- fns←D nub ER1 D Raze 1⊃¨i
- sis←fns EmitPrimitiveFnDefns asts
- sis←D Raze sis,cudefinedfns
- m←D(FileNameBreak fldr)[1] ⍝ Filename only
- fnm←fldr,PathDelim,m
- r←EmitOutputFile(E asts),(E sis),E fnm
- ((-⍴m)↓fldr)CoverFn fldr ⍝ Create cover function for APL ws
- mn←smn WriteMainFn fldr
- r←(E r),E mn
+ ⍝ Generate vanilla executable
+ fnm1←((E fldr),E'nonmodule')GenCode asts
+ ⍝ Generate .so/.dll module, with renamed main()
+ (astsmod smn)←fldr SACModuleRenameMain asts
+ fnm2←((E fldr),E'module')GenCode astsmod
+ ⍝ Generate driver fn for module
+ fnm3←smn WriteMainFn fldr
+ GenAPLCoverFn fnm2 ⍝ for calling module
+ r←⍪(E fnm1),(E fnm2),E fnm3
  Trace(fts ⎕TS),': Code generation complete for: ',fldr
