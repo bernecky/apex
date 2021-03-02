@@ -8,7 +8,7 @@
 SAC2C = sac2c
 # define any compile-time flags
 CFLAGS = -Wall -g -O3
-SACFLAGS = -doawlf -dopwlf -dopogo -O3 -v1
+SACFLAGS = -doawlf -dopwlf -O3 -v1
 
 # define any directories containing header files other than /usr/include
 #INCLUDES = -I/home/newhall/include  -I../include
@@ -24,47 +24,50 @@ SACFLAGS = -doawlf -dopwlf -dopogo -O3 -v1
 #LIBS = -lmylib -lm
 
 # define the SAC source files
-# NB := not = !!
+# NB := not = !! (but I don't know why...)
 SACSRCS := $(wildcard */*.sac)
-SACMODS := $(wildcard */_*.sac)
-
-# define the SAC object files 
-#
-# This uses Suffix Replacement within a macro:
-#   $(name:string1=string2)
-#         For each word in 'name' replace 'string1' with 'string2'
-# Below we are replacing the suffix .c of all words in the macro SACSRCS
-# with the .o suffix
-#
-#
-OBJS = $(SACSRCS:.sac=.o)
-
-# define the executable files
-EXES = $(SACSRCS:.sac=.exe)
+SACEXES = $(SACSRCS:.sac=.exe)
+SACFOLDERx := $(SACSRCS:.sac=)
+SACFOLDER := $(lastword $(SACSRCS:.sac=))
+SACMODULES := $(wildcard */module/*.sac)
+SACNONMODULES := $(wildcard */nonmodule/*.sac)
+SACMODULECALLERS := $(wildcard */*.sac)
+SACTREELIBS := $(SACMODULES:/tree/host/lib.sac=%Tree.so)
 
 # define the root filenames
 ROOTS = $(SACSRCS:.sac=)
 
-#
-# The following part of the makefile is generic; it can be used to 
-# build any executable just by changing the definitions above and by
-# deleting dependencies appended to the file from 'make depend'
-#
-
 .PHONY: depend clean
 
-all:    $(EXES)
-	@echo  SAC sources $(SACSRCS) 
-	@echo  SAC EXES are $(EXES)
-	@echo  SAC ROOTS are $(ROOTS)
-	@echo  SAC OBJS are $(OBJS)
+all:    $(SACEXES) $(SACMODULES) 
+	@echo  SACFOLDERx is $(SACFOLDERx) 
+	@echo  SACFOLDER is $(SACFOLDER) 
+	@echo  SACSRCS are $(SACSRCS) 
+	@echo  SACEXES are $(SACEXES)
+	@echo  SACMODULES are $(SACMODULES)
+	@echo  SACNONMODULES are $(SACNONMODULES)
+	@echo  SACTREELIBS are $(SACTREELIBS)
+	@echo  SACHOSTLIBS are $(SACHOSTLIBS)
+	@echo  SACMODULECALLERS are $(SACMODULECALLERS)
 
-%.exe: $(SACSRCS) 
-	@echo  making $(EXES) from $(SACSRCS) 
+%.exe: $(SACSRCS) $(SACMODULES) 
+	@echo  making non-module binary $(SACEXES) 
+	@echo  ... from $(SACSRCS) 
 	$(SAC2C) $(SACFLAGS) $(INCLUDES) $<  -o $<.exe
 
+##%.so: $(SACMODULES)  
+lib:    $(SACMODULES)  
+	@echo  SACMODULES are $(SACMODULES)
+	@echo  making modules $(SACMODULES)
+	@echo  ... from $(SACMODULES) 
+	$(SAC2C) $(SACFLAGS) $(INCLUDES) $< 
+
 clean:
-	@echo CLEANING!! Also removing $(EXES)
-	$(RM) *.o *~ $(EXES) 
-	$(RM) *.o *~ $(EXES) 
+	@echo CLEANING $(SACEXES) 
+	$(RM) -r *.o $(SACEXES)  a.out a.out.c tree host
+	@echo CLEANING SACMODULES SACMODULECALLERS and SACNONMODULES
+	$(RM) $(SACMODULES) $(SACMODULECALLERS) $(SACNONMODULES)
+	@echo CLEANING SAC LIBS
+	@echo OOPSIE $(RM) -r $(SACTREELIBS) $(SACHOSTLIBS)
+
 

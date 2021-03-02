@@ -12,7 +12,7 @@
      r←r,'  return(0);',NL,'}',NL
      mnm←D 1⌷FileNameBreak fldr
      ⍝ KLudge: _ to let Makefile tell main() from module
-     mnm←FullPathName fldr,PathDelim,,'_',mnm,'.sac'
+     mnm←FullPathName fldr,PathDelim,mnm,'.sac'
      k←r PutFile mnm
      mnm
  }
