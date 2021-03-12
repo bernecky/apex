@@ -1,0 +1,12 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW;⎕CT
+⍝ dcl integer scalar n
+ ⎕IO←0
+ ⎕PP←16
+ ⎕PW←80
+ ⎕CT←1E¯13
+⍝⍝ n←5000000
+ ⎕RL←16807
+ n←n⌈1
+ r←loopfs n
+ ⎕←r
+ ⎕←r←1-r≡(n×n-(0.5+0.5))÷2

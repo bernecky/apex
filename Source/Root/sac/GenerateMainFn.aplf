@@ -4,6 +4,8 @@
   ⍝ ⍵ is name of folder with source code, module, etc.
      mnm←PathFileName ⍵
      r←'use ',mnm,': all;',NL,NL
+     ⍝ SaC does not accept formal arguments to
+     ⍝ main(), we use the CommandLine module's argv() fn
      r←r,'int main()',NL,'{',NL
  ⍝ WHAT ABOUT ⎕io and N?
      r←r,'  z=',mnm,'::',⍺,'();',NL

@@ -1,4 +1,6 @@
 
+# This makefile goes in each UnitTest and benchmark folder
+
 # 'make'        build executable file xx.bin, and .so file from fldr/*.sacs file
 #               in folder fldr
 #               E.g., run "make" in UnitTests or benchmksAPL
@@ -24,50 +26,47 @@ SACFLAGS = -doawlf -dopwlf -O3 -v1
 #LIBS = -lmylib -lm
 
 # define the SAC source files
-# NB := not = !! (but I don't know why...)
-SACSRCS := $(wildcard */*.sac)
+SACSRCS := $(wildcard *.sac)
 SACEXES = $(SACSRCS:.sac=.exe)
-SACFOLDERx := $(SACSRCS:.sac=)
-SACFOLDER := $(lastword $(SACSRCS:.sac=))
-SACMODULES := $(wildcard */module/*.sac)
-SACNONMODULES := $(wildcard */nonmodule/*.sac)
-SACMODULECALLERS := $(wildcard */*.sac)
-SACTREELIBS := $(SACMODULES:/tree/host/lib.sac=%Tree.so)
+SACMODULES := $(wildcard module/*.sac)
 
-# define the root filenames
-ROOTS = $(SACSRCS:.sac=)
+SACPREREQ1 := $(SACMODULES:.sac=Tree.so)
+SACPREREQ2 := $(notdir $(SACPREREQ1))
+SACPREREQS := $(addprefix /tree/host/lib,$(SACPREREQ2))
+
+SACNONMODULES := $(wildcard nonmodule/*.sac)
 
 .PHONY: depend clean
 
-all:    $(SACEXES) $(SACMODULES) 
-	@echo  SACFOLDERx is $(SACFOLDERx) 
-	@echo  SACFOLDER is $(SACFOLDER) 
+all:    #$(SACPREREQS) 
+	@echo  SACPREREQS are $(SACPREREQS)
 	@echo  SACSRCS are $(SACSRCS) 
 	@echo  SACEXES are $(SACEXES)
 	@echo  SACMODULES are $(SACMODULES)
 	@echo  SACNONMODULES are $(SACNONMODULES)
-	@echo  SACTREELIBS are $(SACTREELIBS)
 	@echo  SACHOSTLIBS are $(SACHOSTLIBS)
-	@echo  SACMODULECALLERS are $(SACMODULECALLERS)
+	$(MAKE) %.so
 
-%.exe: $(SACSRCS) $(SACMODULES) 
+%.exe: $(SACSRCS) $(SACPREREQS) 
 	@echo  making non-module binary $(SACEXES) 
 	@echo  ... from $(SACSRCS) 
 	$(SAC2C) $(SACFLAGS) $(INCLUDES) $<  -o $<.exe
 
-##%.so: $(SACMODULES)  
-lib:    $(SACMODULES)  
-	@echo  SACMODULES are $(SACMODULES)
-	@echo  making modules $(SACMODULES)
+%.so: $(SACMODULES)  
+	@echo  SACPREREQS are $(SACPREREQS)
+	@echo  making modules $(SACPREREQS)
 	@echo  ... from $(SACMODULES) 
 	$(SAC2C) $(SACFLAGS) $(INCLUDES) $< 
 
 clean:
 	@echo CLEANING $(SACEXES) 
-	$(RM) -r *.o $(SACEXES)  a.out a.out.c tree host
+	$(RM) $(SACEXES)  a.out a.out.c tree host
 	@echo CLEANING SACMODULES SACMODULECALLERS and SACNONMODULES
 	$(RM) $(SACMODULES) $(SACMODULECALLERS) $(SACNONMODULES)
 	@echo CLEANING SAC LIBS
-	@echo OOPSIE $(RM) -r $(SACTREELIBS) $(SACHOSTLIBS)
 
+depend: $(SACMODULES)
+	@echo  making depend for $(SACMODULES) 
+	$(RM) $@.d
+	$(SAC2C) $(SACFLAGS) $(INCLUDES) $<  -M  > $<.d
 

@@ -42,7 +42,7 @@ inline $ZTYPE[*] $FNAME($XTYPE[.] x, $YTYPE[*] y)
    z = with {
          ( . <= iv <= .) {
            offset = V2O( toi( x), iv);
-           offset = _mod_SxS_( offset, prod( shape(y)));
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
            el = y[ O2V( shape( y), offset)];
           } : el;
        } : genarray( toi(x), $OTFILL);

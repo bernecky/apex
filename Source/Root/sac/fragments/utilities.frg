@@ -148,7 +148,7 @@ inline int Lehmer(int qrl)
 
 %Fragment sacmod 000 d d d . D
 inline double sacmod(double x, double y)
-{ /* SAC _mod_ for floats */
+{ /* SAC _aplmod_ for floats */
  if ( 0.0 == y) {
         t = 1.0;
  } else {
@@ -234,9 +234,9 @@ inline int VectorRotateAmount(int x, int y)
 if ((0==x) || (0==y))
   z = 0;
 else if (x>0)
-        z = _mod_SxS_(x,y);
+        z = _aplmod_SxS_(x,y);
      else
-        z = y - _mod_SxS_(abs(x),y);
+        z = y - _aplmod_SxS_(abs(x),y);
  return(z);
 }
 
@@ -345,7 +345,7 @@ inline int[.] O2V( int[.] shp, int offset)
   }
 
   for( i=shape(shp)[0]-1; i>=0; i--) {
-    iv[i] = _mod_SxS_( offset/wts[i], shp[i]);
+    iv[i] = _aplmod_SxS_( offset/wts[i], shp[i]);
     offset = offset - (iv[i]*wts[i]);
   }
   return( iv);

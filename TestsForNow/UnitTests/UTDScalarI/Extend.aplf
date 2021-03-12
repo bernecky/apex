@@ -1,7 +1,0 @@
- r←Extend
-⍝ Scalar Extension tests
-⍝ APEX does not support (1 1⍴1)+(1 1 1 1⍴1) stuff.
-⍝ Sadly, though, we have to support (1↑⍴M)+⍳k, though.
- ⍝⍝Maybe later... r←((,4)+⍳3)≡4 5 6
- r←1
-⍝∇⍣§/home/apex/apexgit/TestsForNow/UTDScalarI/Extend.ufn§0§ 2020 6 24 17 4 22 832 §sVáÉ§0
