@@ -1,0 +1,8 @@
+use ipbb: all;
+
+int main()
+{
+  z=ipbb::ipbb_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

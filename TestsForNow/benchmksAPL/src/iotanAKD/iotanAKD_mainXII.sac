@@ -1,0 +1,8 @@
+use iotanAKD: all;
+
+int main()
+{
+  z=iotanAKD::iotanAKD_mainXII();
+  StdIO::show(z);
+  return(0);
+}

@@ -1,3 +1,20 @@
 These benchmarks are mostly useful for comparing the performance
 of APEX-generated code against that of interpreted APL.
 
+To compile these benchmarks:
+
+   mkdir build
+   cd build
+   cmake ..
+   make -j
+
+To execute these benchmarks:
+
+Sequential:
+
+   make test-seq
+
+Multi-thread, using pthreads:
+
+   make test-mt_pth
+

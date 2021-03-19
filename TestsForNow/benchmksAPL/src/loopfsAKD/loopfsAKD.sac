@@ -1,0 +1,8 @@
+use loopfsAKD: all;
+
+int main()
+{
+  z=loopfsAKD::loopfsAKD_mainXII();
+  StdIO::show(z);
+  return(0);
+}
