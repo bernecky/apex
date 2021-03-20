@@ -16,9 +16,9 @@ INCLUDE ("cmake-common/misc-macros.cmake")
 
 # For every target run CMakeLists.txt in src
 FOREACH (TARGET IN ITEMS ${TARGETS})
-#    ADD_SUBDIRECTORY (src/iotan            iotan-${TARGET})
-#    ADD_SUBDIRECTORY (src/iotan/module     iotan/module-${TARGET})
-    ADD_SUBDIRECTORY (src/iotan/nonmodule  iotan/nonmodule-${TARGET})
+    ADD_SUBDIRECTORY (src/iotan            src-${TARGET})
+#    ADD_SUBDIRECTORY (src/iotan.nomodu    iotan.nomodu-${TARGET})
+#   ADD_SUBDIRECTORY (src/iotan.modu       iotan.mod-${TARGET})
 
 #    ADD_SUBDIRECTORY (iotanAKD         iotanAKD-${TARGET})
 #    ADD_SUBDIRECTORY (ipbb             ipbb-${TARGET})

@@ -109,7 +109,7 @@ FUNCTION (RESOLVE_SAC_DEPENDENCIES file_name local_sources ret_name)
                 IF (NOT lib)
                     UNSET (lib CACHE) # otherwise we never update the variable
                     MESSAGE (FATAL_ERROR
-                             "Exteral SAC ${libtype} file `${n}' which is required "
+                             "External SAC ${libtype} file `${n}' which is required "
                              "to build `${file_name}' is not found!")
                 ENDIF ()
                 UNSET (lib CACHE) # otherwise we never update the variable

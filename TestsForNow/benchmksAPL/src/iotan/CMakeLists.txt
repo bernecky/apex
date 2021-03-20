@@ -4,14 +4,14 @@ INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/resolve-sac2c-dependencies.cmake")
 INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/build-sac2c-program.cmake")
 INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/sac2c-prog-with-versions.cmake")
 
-ADD_LIBRARY(iotan module/iotan.sac)
-TARGET_LINK_LIBRARIES(iotan SHARED iotan)
+##ADD_LIBRARY(iotan iotan.modu.sac)
+##TARGET_LINK_LIBRARIES(iotan SHARED iotan)
 
 # SaC files, relative to this CMakeLists.txt
 SET (SAC_PROG_SRC
-    nonmodule/iotan.sac
-    module/iotan.sac
-    iotan.sac
+      iotan.modu.sac
+      iotan.nomodu.sac
+      iotan.sac
 )
 
 # For every sac file, generated Tree and Mod files

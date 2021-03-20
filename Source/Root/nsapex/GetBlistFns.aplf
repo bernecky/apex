@@ -1,7 +1,14 @@
  r←GetBlistFns nm;p;fnm
 ⍝ Return fully-qualified function names in directory nm
+⍝ We use contents of blist.cu if it exists
+⍝ else we pick all *.aplf files
  p←#.fileutils.Path nm ⍝ Path only
- fns←#.fileutils.GetFileChar nm,#.globals.PathDelim,'blist.cu'
- fns←vtom NL,(fns≠CR)/fns ⍝ Kill BillWare(tm) CR
- fns←(fns∨.≠' ')⌿fns ⍝ Ignore blank lines
- r←dtb¨(E nm,#.globals.PathDelim),¨ER1 fns
+ fnm←nm,#.globals.PathDelim
+ :If ⎕NEXISTS fnm,'blist.cu'
+     fns←#.fileutils.GetFileChar fnm,'blist.cu'
+     fns←vtom NL,(fns≠CR)/fns ⍝ Kill BillWare(tm) CR
+     fns←(fns∨.≠' ')⌿fns ⍝ Ignore blank lines
+     r←dtb¨(E nm,#.globals.PathDelim),¨ER1 fns
+ :Else
+     r←#.fileutils.ls fnm,'*.aplf'
+ :EndIf
