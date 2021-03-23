@@ -35,8 +35,7 @@ Individual files have the following functionality:
 
   * `check-sac2c-feature-support.cmake` contains a collection of macros/functions
     which check for supported features in `sac2c`. The results are intended to
-    be exposed via the generated `config.h` file, but may also affect whether or
-    not certain build options can be used.
+    be exposed via the generated `config.h` file.
 
   * `build-sac2c-module.cmake` provides macros to create targets to build SaC
     modules (with dependency resolution provided by `resolve-sac2c-dependencies.cmake`)
