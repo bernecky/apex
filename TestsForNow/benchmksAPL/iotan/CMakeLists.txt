@@ -1,18 +1,27 @@
 CMAKE_MINIMUM_REQUIRED (VERSION 3.3)
-INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/sac2c-variables.cmake")
-INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/resolve-sac2c-dependencies.cmake")
-INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/build-sac2c-program.cmake")
-INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/sac2c-prog-with-versions.cmake")
+PROJECT(apex-iotan VERSION 1.0.0)
 
-# SaC files, relative to this CMakeLists.txt
-SET (SAC_PROG_SRC
-      iotan.modu.sac
-      iotan.nomodu.sac
-      iotan.sac
-)
+##ADD_EXECUTABLE(iotan.nomodu.exe iotan.nomodu.sac)
+##ADD_LIBRARY(Liotan SHARED iotan.modu.sac)
+##ADD_EXECUTABLE(iotan iotan.sac)
 
-# For every sac file, compile Tree and Mod files.
-FOREACH (name ${SAC_PROG_SRC})
-    COMPILE_SAC2C_WITH_VER (${name} "" "${SAC2C_DEF_FLAGS}")
-ENDFOREACH (name)
+##TARGET_LINK_LIBRARIES(iotan PRIVATE Liotan)
+
+
+# Where to put compiled sac modules
+SET (DLL_BUILD_DIR  "${PROJECT_BINARY_DIR}")
+
+# For what targets we build modules
+SET (TARGETS            seq mt_pth  CACHE STRING "Build flavors")
+SET (SAC2C_EXEC                     CACHE STRING "A path to sac2c compiler")
+SET (LINKSETSIZE        "0"         CACHE STRING "Set a value for -linksetsize parameter of sac2c")
+SET (SAC2C_EXTRA_INC    ""          CACHE STRING "Extra include files that should be used by sac2c")
+
+# Check whether sac2c is operational
+INCLUDE ("cmake-common/check-sac2c.cmake")
+
+# Run src/CMakeLists.txt for each target
+FOREACH (TARGET IN ITEMS ${TARGETS})
+    ADD_SUBDIRECTORY (src src-${TARGET})
+ENDFOREACH ()
 
