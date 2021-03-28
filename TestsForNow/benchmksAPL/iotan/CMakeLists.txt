@@ -17,7 +17,7 @@ SET (SAC2C_EXEC                     CACHE STRING "A path to sac2c compiler")
 SET (LINKSETSIZE        "0"         CACHE STRING "Set a value for -linksetsize parameter of sac2c")
 SET (SAC2C_EXTRA_INC    ""          CACHE STRING "Extra include files that should be used by sac2c")
 
-# Check whether sac2c is operational
+# Check if sac2c exists and is operational
 INCLUDE ("cmake-common/check-sac2c.cmake")
 
 # Run src/CMakeLists.txt for each target
