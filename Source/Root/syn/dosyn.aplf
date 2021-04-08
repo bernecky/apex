@@ -1,15 +1,14 @@
- r←fldr dosyn y;f;gst;tn;asts;src;tok;wif
- ⍝ Perform syntax analysis for the function files named in y.
+ r←dosyn fldr;f;gst;asts;tok
+ ⍝ Perform syntax analysis for the
  ⍝ Result is asts
  InitializeAST
  InitializeSSA
  InitializeST
  InitializeTYPES
  Trace(fts ⎕TS),': Starting syntax analysis for: ',fldr
- src←GetFn¨,¨y  ⍝ Get all source code
+ src←GetSrc fldr  ⍝ Get all source code
  src←LocalizeSysVars¨src           ⍝ Undo APL design errors
- src←(E y)Dfn2Trad¨src             ⍝ Convert any Dfns to Tradfns
- src←D,/src                        ⍝ Flatten new subfns into src list
+ src←Dfn2Trad¨src                  ⍝ Convert any Dfns to Tradfns
  src←UnDiamondize¨src              ⍝ Remove diamond statement separators
   ⍝⍝⍝   SaveTradFns(src fldr)             ⍝ Just for debugging Dfn2Trad
  tok←tokenize¨src                  ⍝ tokenize it

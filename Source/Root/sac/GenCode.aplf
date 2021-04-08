@@ -1,11 +1,11 @@
- r←larg GenCode asts;i;mn;fns;sis;m;fldr;subfldr;j;p
+ r←larg GenCode asts;i;mn;fns;sis;m;fldr;subfldr;j;p;fnm
  (fldr subfldr)←larg
  i←EmitOneUserDefinedFn¨asts ⍝ Emit all user-defined fns
  fns←D nub ER1 D Raze 1⊃¨i
  sis←fns EmitPrimitiveFnDefns asts
  sis←D Raze sis,D Raze 0⊃¨i
- p←FullPathName fldr,PathDelim,subfldr
+ p←FullPathName fldr,PathDelim,'src'
  j←⎕SH'mkdir -p ',p ⍝ create subfldr if need be
  m←D 1⌷FileNameBreak fldr ⍝ Filename only
- fnm←p,PathDelim,m
+ fnm←p,PathDelim,m,subfldr
  r←EmitOutputFile(E asts),(E sis),E fnm

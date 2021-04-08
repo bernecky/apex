@@ -20,6 +20,13 @@ int main()
  A_316 = cell++toi(M);
  A_318=sameIIB(A_316,A_315);
  z=r_22 ++ [A_318];
+StdIO::show("r_22 is:"); 
+ StdIO::print(r_22);
+StdIO::show("A_318 is:"); 
+ StdIO::print(A_318);
+
+ z=r_22 ++ [A_318];
+StdIO::show("z is:"); 
  StdIO::print(z);
  return(0);
 }

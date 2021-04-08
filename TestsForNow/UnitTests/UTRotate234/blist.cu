@@ -1,2 +1,0 @@
-main.aplf
-UTRotate.aplf

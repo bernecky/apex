@@ -4,11 +4,9 @@
  defaultOpts←'targetlanguage=sac trace= '
  Opts←defaultOpts,Options
  #.globals.Initialize Opts
- fns←GetBlistFns fldr
- ⎕←(fts ⎕ts),' Compiling ',fldr
-
+ ⎕←(fts ⎕TS),' Compiling ',fldr
  ⍝  Invoke each compiler phase
- asts←fldr #.syn.dosyn fns
+ asts←#.syn.dosyn fldr
  asts←fldr #.idioms.doidioms asts
  asts←fldr #.ssa.dossa asts
  asts←fldr #.dfa.dodfa asts

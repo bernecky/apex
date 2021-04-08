@@ -1,5 +1,8 @@
  Dfn2Trad←{
  ⍝ Convert Dfn to TradFn
+ ⎕←'FIXME Dfn2Trad'
+ ⍵
+ ⍝ DO We need ⍺ really?
      fnm←DfnName ⍵ ⍝ Get function name, if any
      fns←PathNoExtension¨PathFileName¨⍺ ⍝ Need all fn names as global, non-locals
      outerfn←dbr ⍵

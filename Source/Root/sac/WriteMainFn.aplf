@@ -1,11 +1,11 @@
- WriteMainFn←{
+ GenCallerFn←{
   ⍝ Gen and write main() function for invoking module
   ⍝ ⍺ is new name of main() in module
   ⍝ ⍵ is function text for main()
   ⍝ Result is filename for main().
-  r←⍺ GenerateMainFn ⍵
-  mnm←D 1⌷FileNameBreak fldr
-  mnm←FullPathName fldr,PathDelim,mnm,'.sac'
-  k←r PutFile mnm
-  mnm
+     r←⍺ GenerateMainFn ⍵
+     mnm←'Call',D 1⌷FileNameBreak fldr
+     mnm←FullPathName fldr,PathDelim,'src',PathDelim,mnm,'.sac'
+     k←r PutFile mnm
+     mnm
  }

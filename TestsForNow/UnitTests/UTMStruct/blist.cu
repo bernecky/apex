@@ -1,2 +1,0 @@
-main.aplf
-testmstruct.aplf

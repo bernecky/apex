@@ -1,0 +1,308 @@
+/* This is a hand-carved version of ipdd, using the CDC STAR-100 matrix product code.
+ */
+
+use Array: all;
+use Numerical : all;
+use StdIO : all;
+use CommandLine: all;
+use String: {tochar,sscanf};
+use ArrayFormat: all;
+use Bits: all;
+
+/* Compiled by APEX Version: /home/apex/apex2003/wss/sac3004.dws2009-04-24 18:08:53.984 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+inline int mpyIII(int x, int y)
+{ return(toI(x)*toI(y));
+}
+
+inline bool eqDDB(double x, double y, double QUADct)
+{ /* A=B on doubles */
+ return((toD(x) == toD(y)) || APEXFUZZEQ(toD(x),toD(y),QUADct));
+}
+
+
+inline int plusBBI(bool x, bool y)
+{ return(toI(x)+toI(y));
+}
+
+inline double[+] plusDID(double x, int[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : plusDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline double[.,.] tranXDD(double[.,.] y)
+{ /* Transpose on rank-2 */
+   z = { [i,j] -> y[j,i] };
+       return(z);
+}
+
+inline int[.] rhoIII(int x, int y)
+{ /* Scalar reshape scalar to vector) */
+      z = genarray([toi(x)], y);
+     return(z);
+}
+
+inline double[*] rhoIDD(int[.] x, double[+] y)
+{ /* APEX vector x reshape, with item reuse */
+  ix = toi(x);
+  ry = comaXDD(y);
+  zxrho = prod(ix); /* THIS NEEDS XRHO FOR CODE SAFETY!! */
+  yxrho = shape(ry)[[0]];
+  if( zxrho <= yxrho) { /* No element resuse case */
+        z = take([zxrho],ry);
+ } else {
+        ncopies = zxrho/yxrho; /* # complete copies of y. */
+        /* FIXME: y empty case !*/
+        z = with {
+          (. <= [i] <= .)
+                        : ry;
+          } : genarray( [ncopies], ry);
+        /* Now append the leftover bits */
+        z = comaXDD(z) ++ take([zxrho-(ncopies*yxrho)],ry);
+ }
+ return(reshape(ix,z));
+}
+
+
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline double[*] quadXDD(double[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+  show(y);
+       return(y);
+}
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+  show(y);
+       return(y);
+}
+inline double[+] plusdotmpyDDDTRANSPOSE(double[+] x, double[+] y)
+{ /* Generic case of inner product z = x f.g y */
+ yt = toD(TRANSPOSE(y));
+ xct = toD(x);
+ shp = drop([-1],shape(x)) ++ drop([1], shape(y));
+ z = with {
+      (. <= iv <= .) {
+               vx = xct[take([dim(x)-1], iv)];
+                vy = yt[ reverse(take([1-dim(y)], iv))];
+       } : plusslXDDFOLD(mpyDDDsl(vx,vy));
+       } : genarray(shp, 0.0d);
+ return(z);
+}
+
+inline double[+] plusdotmpyDDDSTAR(double[+]x, double[+]y)
+{ /* CDC STAR-100 APL Algorithm for inner product */
+
+ /* This computes, for z=x f.g y,
+  *                z[i;] = z[i;]f x[i;j]g y[j;]
+  *  Thus, it runs stride-1, and we only fetch left argument
+  *  elements once. It includes skipping a g row iteration and
+  *  an f row-reduce iteration when x[i;j] generates an identity for f.
+  *  R. Bernecky 2005-11-24
+  */
+  rowsx = drop([-1],shape(x));
+  colsx = shape(x)[[dim(x)-1]];
+  colsy = shape(y)[[dim(y)-1]];
+  Zrow = genarray([colsy],0.0d);
+  /* Parallel over rows of x */
+  z = with {
+      (. <= row <= .) {
+              Crow = Zrow;
+           for (colx=0; colx<colsx; colx++) {
+                     xrow = x[row];
+                         xel = toD(xrow[[colx]]);
+                    if (toD(0) != xel) { /* Skip iteration if it's an identity */
+                           VEC = mpyDDD(xel,toD(y[[colx]]));
+                          Crow = Crow + toD(VEC);
+                    }
+                      }
+      } : Crow;
+      } : genarray( rowsx, Zrow);
+  return(z);
+}
+
+
+
+inline double[+] plusslXDDFOLD(double[+] y)
+{ /* last axis reduce rank-2 or greater matrix w/folding */
+  sy = shape(y);
+  zrho = drop([-1], sy);
+  z = with {
+        (. <= iv <= .)
+               : plusslXDDFOLD(y[iv]);
+   } : genarray(zrho, 0.0d);
+  return(z);
+}
+
+
+inline double plusslXDDFOLD(double[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+     (0*shape(y) <= iv < shape(y))
+                 : toD(y[lim-iv]);
+       } :  fold( plusDDD, toD(0));
+  return(z);
+}
+
+
+inline double plusDDD(double x, double y)
+{ return(toD(x)+toD(y));
+}
+
+inline double[+] mpyDDDsl(double[+] x, double[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+   sx = DSFLenErrorCheck(shape(x), shape(y),tochar("mpyDDDsl(double[+],double[+]"));
+        z = with {
+             ( . <= iv <= .) {
+                      xel = toD(x[iv]);
+                    yel = toD(y[iv]);
+            } : mpyDDD(xel,yel);
+        } : genarray(sx, 0.0d);
+  return(z);
+}
+
+
+
+
+
+
+
+inline double[.] comaXDD(double[+] y)
+{ /* Ravel of anything with rank>1 */
+     z = reshape([prod(shape(y))],y);
+       return(z);
+}
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline double[+] TRANSPOSE(double[+] y)
+{ /* Generic monadic transpose */
+  z = with {
+        ( . <= iv <= .)
+                 : y[reverse( iv)];
+    }: genarray( reverse( shape(y)), 0.0d);
+  return(z);
+}
+
+inline double mpyDDD(double x, double y)
+{ return(toD(x)*toD(y));
+}
+
+inline double[+] mpyDDD(double x, double[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : mpyDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline double[+] mpyDDD(double[+] x, double y)
+{ /* AxS scalar function */
+  yel = toD(y);
+  z = with {
+        ( . <= iv <= .) {
+              xel = toD(x[iv]);
+    } : mpyDDD(xel,yel);
+  } : genarray( shape(x), 0.0d);
+  return(z);
+}
+
+
+inline int[.] DSFLenErrorCheck(int[.] sx, int[.] sy, char[.] whodunit)
+{ /* Dyadic scalar fn length error check */
+     z = sx;
+#ifdef GENME
+/* SAC bug #306 - side effect kills fold!  */
+    if (any(sx != sy)) { /* Check that shapes match */
+   show(tochar("APEX dyadic scalar function length error in function"));
+  show(whodunit);
+        show(sx); show(sy);
+    }
+#endif
+     return(z);
+}
+
+inline double ipddXID(int siz,int QUADio)
+{ 
+/*
+ ?
+*/
+/* dsf Scalar & clique */
+A_26=mpyIII(siz,siz);
+ A_28=iotaXII( A_26,QUADio);
+ /* dsf scalar(s) */
+A_29=plusDID(0.5,A_28);
+ A_30=rhoIII(2,siz);
+ A_31=rhoIDD(A_30,A_29);
+ m_0=( A_31);
+ A_33=tranXDD( m_0);
+ A_34=plusdotmpyDDDSTAR(m_0,A_33);
+ A_41=plusslXDDFOLD( A_34);
+ A_45=plusslXDDFOLD( A_41);
+ r_0=( A_45);
+ return(r_0);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+QUADio_0=toi(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toi(( false));
+ n_0=( 5000);
+ QUADrl_1=( 16807);
+ QUADpp_1=( 17);
+ QUADpw_1=( 80);
+ A_60=ipddXID( n_0,QUADio_1);
+ r_0=( A_60);
+ A_64=quadXDD( r_0,QUADpp_1,QUADpw_1);
+ /* dsf scalar(s) */
+A_66=eqDDB(r_0,1.9531276041562524e18,QUADct_0);
+/* dsf scalar(s) */
+A_67=plusBBI(true,A_66);
+ A_70=quadXII( A_67,QUADpp_1,QUADpw_1);
+ r_1=( A_70);
+ return(r_1);
+}
+

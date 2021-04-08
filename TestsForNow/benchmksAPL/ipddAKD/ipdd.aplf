@@ -1,0 +1,4 @@
+ r←ipdd siz;m
+⍝ Test of matrix product and transpose
+ m←(2⍴siz)⍴0.5+⍳siz×siz
+ r←+/+/m+.×⍉m

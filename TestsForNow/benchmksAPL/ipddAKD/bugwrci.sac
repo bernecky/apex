@@ -1,0 +1,25 @@
+use Array: all;
+
+inline double[+] plusdotmpyDDDTRANSPOSE(double[+] x, double[+] y)
+{ /* Generic case of inner product z = x f.g y */
+ z = with {
+   (. <= iv <= .) {
+     vx = x[ iv[0] ];
+     vy = y[ iv[1] ];
+   } : sum(vx * vy);
+ } : genarray( [10, 10], 0.0d);
+ return(z);
+}
+
+int main()
+{ 
+  x = genarray( [10, 10], 1.5);
+  y = genarray( [10, 10], 6.5);
+ A_31=plusdotmpyDDDTRANSPOSE(x, y);
+ StdIO::print(A_31);
+  r_0 = sum( A_31);
+ StdIO::print( r_0);
+  
+ return(0);
+}
+
