@@ -1,0 +1,1 @@
+sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/build/ -L /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/build/ -T /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/build/ /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/src/UTReplicate.sac

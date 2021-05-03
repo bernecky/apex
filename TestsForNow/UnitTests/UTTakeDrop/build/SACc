@@ -1,0 +1,1 @@
+sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UnitTests/UTTakeDrop/build/CallUTTakeDrop.sac.exe -L /home/apex/apexgit/TestsForNow/UnitTests/UTTakeDrop/build/ -T /home/apex/apexgit/TestsForNow/UnitTests/UTTakeDrop/build/ /home/apex/apexgit/TestsForNow/UnitTests/UTTakeDrop/src/CallUTTakeDrop.sac

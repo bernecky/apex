@@ -1,0 +1,8 @@
+use UTShapeCl: all;
+
+int main()
+{
+  z=UTShapeCl::UTShapeCl_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

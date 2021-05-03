@@ -1,0 +1,8 @@
+use UTTakeDrop: all;
+
+int main()
+{
+  z=UTTakeDrop::UTTakeDrop_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

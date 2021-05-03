@@ -1,0 +1,1 @@
+sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UnitTests/UTExpand/build/CallUTExpand.sac.exe -L /home/apex/apexgit/TestsForNow/UnitTests/UTExpand/build/ -T /home/apex/apexgit/TestsForNow/UnitTests/UTExpand/build/ /home/apex/apexgit/TestsForNow/UnitTests/UTExpand/src/CallUTExpand.sac

@@ -1,0 +1,8 @@
+use UTEpio: all;
+
+int main()
+{
+  z=UTEpio::UTEpio_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

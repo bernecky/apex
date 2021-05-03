@@ -1,0 +1,1 @@
+sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UnitTests/UTSGI/build/CallUTSGI.sac.exe -L /home/apex/apexgit/TestsForNow/UnitTests/UTSGI/build/ -T /home/apex/apexgit/TestsForNow/UnitTests/UTSGI/build/ /home/apex/apexgit/TestsForNow/UnitTests/UTSGI/src/CallUTSGI.sac

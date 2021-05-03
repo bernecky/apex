@@ -1,0 +1,10 @@
+use ArrayArith:{all};
+
+int main()
+{ 
+BS0_0= false;
+ A_80 = _neq_SxS_(BS0_0, BS0_0);
+ r_10 = _toi_S_(all(A_80));
+ return(r_10);
+}
+

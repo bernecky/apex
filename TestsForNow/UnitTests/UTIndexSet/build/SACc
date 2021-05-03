@@ -1,0 +1,1 @@
+sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UnitTests/UTIndexSet/build/CallUTIndexSet.sac.exe -L /home/apex/apexgit/TestsForNow/UnitTests/UTIndexSet/build/ -T /home/apex/apexgit/TestsForNow/UnitTests/UTIndexSet/build/ /home/apex/apexgit/TestsForNow/UnitTests/UTIndexSet/src/CallUTIndexSet.sac

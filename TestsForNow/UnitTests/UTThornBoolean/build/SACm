@@ -1,0 +1,1 @@
+sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UnitTests/UTThornBoolean/build/ -L /home/apex/apexgit/TestsForNow/UnitTests/UTThornBoolean/build/ -T /home/apex/apexgit/TestsForNow/UnitTests/UTThornBoolean/build/ /home/apex/apexgit/TestsForNow/UnitTests/UTThornBoolean/src/UTThornBoolean.sac

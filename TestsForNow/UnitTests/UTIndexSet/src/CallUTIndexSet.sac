@@ -1,0 +1,8 @@
+use UTIndexSet: all;
+
+int main()
+{
+  z=UTIndexSet::UTIndexSet_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

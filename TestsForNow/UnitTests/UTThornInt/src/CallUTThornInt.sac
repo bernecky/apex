@@ -1,0 +1,8 @@
+use UTThornInt: all;
+
+int main()
+{
+  z=UTThornInt::UTThornInt_mainXXI();
+  StdIO::show(z);
+  return(0);
+}
