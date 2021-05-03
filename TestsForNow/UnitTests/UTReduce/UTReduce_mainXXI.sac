@@ -1,0 +1,8 @@
+use UTReduce: all;
+
+int main()
+{
+  z=UTReduce::UTReduce_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

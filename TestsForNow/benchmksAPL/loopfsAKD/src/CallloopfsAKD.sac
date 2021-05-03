@@ -2,8 +2,7 @@ use loopfsAKD: all;
 
 int main()
 {
-  n =10000;
-  z=loopfsAKD::loopfsAKD_mainXII(n);
+  z=loopfsAKD::loopfsAKD_mainXII();
   StdIO::show(z);
   return(0);
 }

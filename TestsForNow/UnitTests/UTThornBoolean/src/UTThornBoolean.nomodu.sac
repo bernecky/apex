@@ -1,0 +1,666 @@
+use Array: all;
+use ArrayFormat: all;
+use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
+
+// Compiled by APEX Version: CLEAR WS 2021-04-21 12:49:56.036
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline bool notXBB(bool y)
+{ /* Boolean NOT */
+  return(!toB(y));
+}
+
+inline int[+] barXII(int[+] y)
+{ /* Monadic scalar functions on array */
+  z = with {
+        ( . <= iv <= .)
+                : barXII(toI(y[iv]));
+        } : genarray(shape(y), 0);
+  return(z);
+}
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline char[*] rhoICC(int[.] x, char[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), ' ');
+   return( z);
+}
+
+
+
+inline bool[*] rhoIBB(int[.] x, bool[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), false);
+   return( z);
+}
+
+
+
+inline int[.] takeIII(int x, int[.] y)
+{ /* Scalar take vector */
+  return(take([toi(x)], y));
+}
+
+inline int[*] dropIII(int x, int[*] y)
+{ /* Scalar drop non-scalar */
+  return(drop([toi(x)], y));
+}
+
+inline int[*] takeIII(int[.] x, int y)
+{ /* Vector take scalar */
+  return(take(toi(x),[y]));
+}
+
+inline char[*] dropICC(int[.] x, char[*] y)
+{ /* Vector drop non-scalar */
+  /* FIXME: Assert  dim(y)  == shape(x)[0]; */
+  /* e.g, (,5)drop iota 5  */
+  return(drop(toi(x), y));
+}
+
+inline int[.] iotaXBI(bool y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline char[*] quadXCC(char[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[.]  rhoXCI(char[+] y)
+{ /* Shape of non-scalar */
+ return(shape(y));
+}
+
+inline int[.]  rhoXII(int[+] y)
+{ /* Shape of non-scalar */
+ return(shape(y));
+}
+
+inline char[*] thrnXCC(char[*] y, int QUADpp)
+{ /* Monadic format on characters */
+  return( y);
+}
+
+
+inline char[.] thrnXBC(bool y, int QUADpp)
+{ /* Monadic format on Boolean scalar  */
+  z = y ? '1' : '0';
+  return([z]);
+}
+
+inline char[+] thrnXBC(bool[+] y, int QUADpp)
+{ /* Monadic format on Boolean non-scalars */
+  z = format(y);
+  return(z);
+}
+
+
+inline bool[*] quadXBB(bool[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline char[256] quadavXXC()
+{ /* QUADav - system character set */
+ z = with{
+        ([0] <= [i] < [256]) : _toc_S_(i);
+        } : genarray( [256], ' ');
+ return(z);
+}
+
+inline int[.] comaIII(int[.] x, int y)
+{/* VxS catenate first (or last) axis */
+ return(toI(x)++[toI(y)]);
+}
+
+inline bool[2] comaBBB(bool x, bool y)
+{/* SxS catenate first (or last) axis */
+ return([toB(x)]++[toB(y)]);
+}
+
+inline bool[.] comaBBB(bool[.] x, bool y)
+{/* VxS catenate first (or last) axis */
+ return(toB(x)++[toB(y)]);
+}
+
+inline bool[.] comaBBB(bool[.] x, bool[.] y)
+{ /* VxV catenate first or last axis */
+ return(toB(x)++toB(y));
+}
+
+inline bool sameCCB(char[+] x, char[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqCCB(toC( x),  toC( y)))));
+  return(z);
+}
+
+
+
+inline bool sameCCB(char x, char y)
+{ /* Scalar match scalar */
+  z = eqCCB(toC(x), toC(y));
+ return(z);
+}
+
+
+
+inline char[*] indr(char[+] X, int[+] I)
+{ /* X[nonscalarI;;;] */
+ defcell = genarray(drop([1],shape(X)),' ');
+ z = with {
+        (. <= iv <= .)
+                : X[[I[iv]]];
+        } : genarray(shape(I), defcell);
+ return(z);
+}
+
+
+
+
+
+inline bool[.] slBBB(bool x, bool y)
+{ /* Scalar replicate scalar */
+ z = with {
+        (. <= iv <= .)
+                : y;
+        } : genarray([toi(x)]);
+ return(z);
+}
+
+inline bool[.] slBBB(bool x, bool[.] y)
+{ /* Scalar replicate vector */
+ cell = genarray([toi(x)], false);
+ z = with {
+        (. <= iv <= .)
+                : genarray([toi(x)], y[iv]);
+        } : genarray(shape(y), cell);
+ return(comaXBB(z));
+}
+
+
+inline bool[+] slBBB(bool x, bool[+] y)
+{ /* Boolean scalar compress non-scalar */
+  sy = shape(y);
+  z = (true == toB(x)) ?  y  : genarray(drop([-1],sy)++[0],false);
+  return(z);
+}
+
+inline int mpyslXIIQUICKSTOP(int[.] y)
+{ /* First/last axis reduction of vector with quick stop*/
+  z = with {
+         (0*shape(y) <= iv < shape(y))
+                : ItoI(y[iv]);
+        } : foldfix( mpyIII, ItoI(1), ItoI(0));
+  return(z);
+}
+
+
+inline bool andslXBBQUICKSTOP(bool[.] y)
+{ /* First/last axis reduction of vector with quick stop*/
+  z = with {
+         (0*shape(y) <= iv < shape(y))
+                : BtoB(y[iv]);
+        } : foldfix( andBBB, ItoB(1), ItoB(0));
+  return(z);
+}
+
+
+inline int barXII(int y)
+{ return(-y);
+}
+
+inline bool eqCCB(char x, char y)
+{ /* A=B on non-doubles */
+ return(CtoC(x) == CtoC(y));
+}
+
+inline int mpyIII(int x, int y)
+{ return(ItoI(x)*ItoI(y));
+}
+
+inline bool andBBB(bool x, bool y)
+{ return(BtoB(x)&BtoB(y));
+}
+
+inline bool[+] eqCCB(char[+] x, char[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : eqCCB(xel,yel);
+        } : genarray(sy, false);
+  return(z);
+}
+
+
+
+
+
+
+inline bool[.] comaXBB(bool[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline char[*] indrfr(int fr, char[+] X, int[+] I)
+{ /* X[;;;I;;;], where I has fr (framerank) semicolons to its left */
+  /* This is actually "I from"fr X" */
+  frameshape = take([fr], shape(X));
+  cellshape =  shape(I)++drop([fr+1], shape(X));
+  cell = genarray(cellshape, ' ');
+ z = with {
+        (. <= iv <= .)
+                : indrfr0(X[iv], I);
+        } : genarray(frameshape, cell);
+ return(z);
+}
+
+inline char[*] indrfr0(char[+] X, int[+] I)
+{ /* X[I;;;] or    I from X */
+  cellshape =  drop([1], shape(X));
+  cell = genarray(cellshape, ' ');
+ z = with {
+        (. <= iv <= .)
+                : sel( I[iv], X);
+        } : genarray(shape(I), cell);
+ return(z);
+}
+
+
+
+inline char[*] indrfr(int fr, char[+] X, int I)
+{ /* X[;;;I;;;], where I has fr (framerank) semicolons to its left */
+  /* This is actually "I from"fr X" */
+ frameshape = take([fr], shape(X));
+ cellshape = drop([1+fr],shape(X));
+ cell = genarray(cellshape,' ');
+ z = with {
+        (. <= iv <= .)
+                : sel( I, X[iv]);
+        } : genarray(frameshape, cell);
+ return(z);
+}
+
+
+inline int V2O( int[.] shp, int[.] iv)
+{ /* Vector iv to offset into array of shape shp */
+  /* See V2O.dws workspace */
+  offset = 0;
+  wt = 1;
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    offset = offset + ( wt * iv[i]);
+    wt = wt * shp[i];
+  }
+  return( offset);
+}
+
+inline int[.] O2V( int[.] shp, int offset)
+{ /* Offset into array of shape shp to index vector */
+  /* See V2O.dws workspace */
+  iv = genarray( shape(shp), 1);
+  wts = iv;
+  for( i=shape(shp)[0]-2; i>=0; i--) {
+    wts[i] = wts[i+1] * shp[i+1];
+  }
+
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    iv[i] = _aplmod_SxS_( offset/wts[i], shp[i]);
+    offset = offset - (iv[i]*wts[i]);
+  }
+  return( iv);
+}
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline int[+] ABC(int[+] I, int Xshape)
+{ /* (OLD) Array bounds check for indexed ref X[nonscalarI] & indexed assign */
+ z = I;
+ return(z);
+}
+
+inline int ABC(int I, int Xshape)
+{ /* (OLD) Array bounds check for indexed ref X[scalarI] & indexed assign */
+ z = I;
+ return(z);
+}
+
+inline bool[+] eqCCB(char x, char[+] y)
+{ /* SxA scalar function */
+  xel = toC(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toC(y[iv]);
+      		} : eqCCB(xel,yel);
+	} : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqCCB(char[+] x, char y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : eqCCB(xel,y);
+	} : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline char[.] comaXCC(char[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline bool matchresultsCCB(char[.] x, char[.] y,int QUADio,int QUADpp,int QUADpw)
+{ 
+/*
+ ?
+*/
+A_22=sameCCB(x,y);
+ r_0=( A_22);
+ A_24=notXBB( r_0);
+ A_26=iotaXBI( A_24,QUADio);
+ A_CTR27_= 0;
+A_CTR27z_ = (shape(A_26)[[0]])-1;
+for(; A_CTR27_ <= A_CTR27z_; A_CTR27_++){
+i_0 = A_26[[A_CTR27_]];
+ A_30=quadXCC( ['M','i','s','m','a','t','c','h','e','d',' ','r','e','s','u','l','t','s','!'],QUADpp,QUADpw);
+ A_33=quadXCC( x,QUADpp,QUADpw);
+ A_36=quadXCC( y,QUADpp,QUADpw);
+ }
+ return(r_0);
+}
+
+inline char[.] thboolIBC(int PP, bool y ,int QUADio)
+{ 
+/*
+ ?
+*/
+QUADpp_0=( PP);
+ A_28=slBBB(true,y);
+ y_0=( A_28);
+ A_32=rhoICC([2, 2],['0',' ','1',' ']);
+ A_31= ABC(toi(y_0)-QUADio,shape(A_32)[0]);
+A_34=indr(A_32,A_31);
+r_0=( A_34);
+ A_36=rhoXCI( r_0);
+ A_37=takeIII(-2,A_36);
+ A_38=mpyslXIIQUICKSTOP( A_37);
+ A_42=rhoXCI( r_0);
+ A_43=dropIII(-2,A_42);
+ A_44=comaIII(A_43,A_38);
+ A_45=rhoICC(A_44,r_0);
+ r_1=( A_45);
+ A_47=rhoXCI( r_1);
+ A_48=rhoXII( A_47);
+ A_49=barXII( A_48);
+ A_50=takeIII(A_49,-1);
+ A_51=dropICC(A_50,r_1);
+ r_2=( A_51);
+ return(r_2);
+}
+
+inline bool[.] testthornXIB(int PP,int QUADio,int QUADpw)
+{ 
+/*
+ ?
+*/
+QUADpp_0=( PP);
+ A_41=thrnXCC( [:char],QUADpp_0);
+ A_45=matchresultsCCB([:char],A_41,QUADio,QUADpp_0,QUADpw);
+ r_0=( A_45);
+ A_48=thrnXCC( 'x',QUADpp_0);
+ A_52=matchresultsCLONE4CCB('x',A_48,QUADio,QUADpp_0,QUADpw);
+ A_53=comaBBB(r_0,A_52);
+ r_1=( A_53);
+ A_55=quadavXXC( );
+ A_57=thrnXCC( A_55,QUADpp_0);
+ A_58=quadavXXC( );
+ A_62=matchresultsCCB(A_58,A_57,QUADio,QUADpp_0,QUADpw);
+ A_63=comaBBB(r_1,A_62);
+ r_2=( A_63);
+ A_65=rhoICC([2, 3, 4],['a','b','c']);
+ A_67=thrnXCC( A_65,QUADpp_0);
+ A_68=rhoICC([2, 3, 4],['a','b','c']);
+ A_72=matchresultsCLONE5CCB(A_68,A_67,QUADio,QUADpp_0,QUADpw);
+ A_73=comaBBB(r_2,A_72);
+ r_3=( A_73);
+ A_76=thrnXBC( false,QUADpp_0);
+ A_78=thboolIBC(QUADpp_0,false,QUADio);
+ A_82=matchresultsCCB(A_78,A_76,QUADio,QUADpp_0,QUADpw);
+ A_83=comaBBB(r_3,A_82);
+ r_4=( A_83);
+ A_86=thrnXBC( true,QUADpp_0);
+ A_88=thboolIBC(QUADpp_0,true,QUADio);
+ A_92=matchresultsCCB(A_88,A_86,QUADio,QUADpp_0,QUADpw);
+ A_93=comaBBB(r_4,A_92);
+ r_5=( A_93);
+ A_96=thrnXBC( [false,true,false],QUADpp_0);
+ A_98=thboolCLONE6IBC(QUADpp_0,[false,true,false],QUADio);
+ A_102=matchresultsCCB(A_98,A_96,QUADio,QUADpp_0,QUADpw);
+ A_103=comaBBB(r_5,A_102);
+ r_6=( A_103);
+ A_105=rhoIBB([2, 3, 4],[false,true,false]);
+ A_107=thrnXBC( A_105,QUADpp_0);
+ A_108=rhoIBB([2, 3, 4],[false,true,false]);
+ A_110=thboolCLONE7IBC(QUADpp_0,A_108,QUADio);
+ A_114=matchresultsCLONE8CCB(A_110,A_107,QUADio,QUADpp_0,QUADpw);
+A_115=comaBBB(r_6,A_114);
+ r_7=( A_115);
+ return(r_7);
+}
+
+int main()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toI(( false));
+ QUADrl_1=( 16807);
+ QUADpp_1=( 15);
+ QUADpw_1=( 80);
+ A_50=testthornXIB( QUADpp_1,QUADio_1,QUADpw_1);
+r_0=( A_50);
+ A_54=quadXBB( A_50,QUADpp_1,QUADpw_1);
+ A_57=testthornXIB( 5,QUADio_1,QUADpw_1);
+ A_58=comaBBB(r_0,A_57);
+ r_1=( A_58);
+ A_62=quadXBB( A_58,QUADpp_1,QUADpw_1);
+ A_63=andslXBBQUICKSTOP( r_1);
+ // dsf scalar(s)
+A_67=barBBI(true,A_63);
+ r_2=( A_67);
+ A_71=quadXII( r_2,QUADpp_1,QUADpw_1);
+ return(r_2);
+}
+
+inline bool matchresultsCLONE4CCB(char x, char y,int QUADio,int QUADpp,int QUADpw)
+{ 
+/*
+ ?
+*/
+A_22=sameCCB(x,y);
+ r_0=( A_22);
+ A_24=notXBB( r_0);
+ A_26=iotaXBI( A_24,QUADio);
+ A_CTR27_= 0;
+A_CTR27z_ = (shape(A_26)[[0]])-1;
+for(; A_CTR27_ <= A_CTR27z_; A_CTR27_++){
+i_0 = A_26[[A_CTR27_]];
+ A_30=quadXCC( ['M','i','s','m','a','t','c','h','e','d',' ','r','e','s','u','l','t','s','!'],QUADpp,QUADpw);
+ A_33=quadXCC( x,QUADpp,QUADpw);
+ A_36=quadXCC( y,QUADpp,QUADpw);
+ }
+ return(r_0);
+}
+
+inline bool matchresultsCLONE5CCB(char[.,.,.] x, char[.,.,.] y,int QUADio,int QUADpp,int QUADpw)
+{ 
+/*
+ ?
+*/
+A_22=sameCCB(x,y);
+ r_0=( A_22);
+ A_24=notXBB( r_0);
+ A_26=iotaXBI( A_24,QUADio);
+ A_CTR27_= 0;
+A_CTR27z_ = (shape(A_26)[[0]])-1;
+for(; A_CTR27_ <= A_CTR27z_; A_CTR27_++){
+i_0 = A_26[[A_CTR27_]];
+ A_30=quadXCC( ['M','i','s','m','a','t','c','h','e','d',' ','r','e','s','u','l','t','s','!'],QUADpp,QUADpw);
+ A_33=quadXCC( x,QUADpp,QUADpw);
+ A_36=quadXCC( y,QUADpp,QUADpw);
+ }
+ return(r_0);
+}
+
+inline char[.] thboolCLONE6IBC(int PP, bool[.] y ,int QUADio)
+{ 
+/*
+ ?
+*/
+QUADpp_0=( PP);
+ A_28=slBBB(true,y);
+ y_0=( A_28);
+ A_32=rhoICC([2, 2],['0',' ','1',' ']);
+ A_31= ABC(toi(y_0)-QUADio,shape(A_32)[0]);
+A_34=indr(A_32,A_31);
+r_0=( A_34);
+ A_36=rhoXCI( r_0);
+ A_37=takeIII(-2,A_36);
+ A_38=mpyslXIIQUICKSTOP( A_37);
+ A_42=rhoXCI( r_0);
+ A_43=dropIII(-2,A_42);
+ A_44=comaIII(A_43,A_38);
+ A_45=rhoICC(A_44,r_0);
+ r_1=( A_45);
+ A_47=rhoXCI( r_1);
+ A_48=rhoXII( A_47);
+ A_49=barXII( A_48);
+ A_50=takeIII(A_49,-1);
+ A_51=dropICC(A_50,r_1);
+ r_2=( A_51);
+ return(r_2);
+}
+
+inline char[.,.,.] thboolCLONE7IBC(int PP, bool[.,.,.] y ,int QUADio)
+{ 
+/*
+ ?
+*/
+QUADpp_0=( PP);
+ A_28=slBBB(true,y);
+ y_0=( A_28);
+ A_32=rhoICC([2, 2],['0',' ','1',' ']);
+ A_31= ABC(toi(y_0)-QUADio,shape(A_32)[0]);
+A_34=indr(A_32,A_31);
+r_0=( A_34);
+ A_36=rhoXCI( r_0);
+ A_37=takeIII(-2,A_36);
+ A_38=mpyslXIIQUICKSTOP( A_37);
+ A_42=rhoXCI( r_0);
+ A_43=dropIII(-2,A_42);
+ A_44=comaIII(A_43,A_38);
+ A_45=rhoICC(A_44,r_0);
+ r_1=( A_45);
+ A_47=rhoXCI( r_1);
+ A_48=rhoXII( A_47);
+ A_49=barXII( A_48);
+ A_50=takeIII(A_49,-1);
+ A_51=dropICC(A_50,r_1);
+ r_2=( A_51);
+ return(r_2);
+}
+
+inline bool matchresultsCLONE8CCB(char[.,.,.] x, char[.,.,.] y,int QUADio,int QUADpp,int QUADpw)
+{ 
+/*
+ ?
+*/
+A_22=sameCCB(x,y);
+ r_0=( A_22);
+ A_24=notXBB( r_0);
+ A_26=iotaXBI( A_24,QUADio);
+ A_CTR27_= 0;
+A_CTR27z_ = (shape(A_26)[[0]])-1;
+for(; A_CTR27_ <= A_CTR27z_; A_CTR27_++){
+i_0 = A_26[[A_CTR27_]];
+ A_30=quadXCC( ['M','i','s','m','a','t','c','h','e','d',' ','r','e','s','u','l','t','s','!'],QUADpp,QUADpw);
+ A_33=quadXCC( x,QUADpp,QUADpw);
+ A_36=quadXCC( y,QUADpp,QUADpw);
+ }
+ return(r_0);
+}
+

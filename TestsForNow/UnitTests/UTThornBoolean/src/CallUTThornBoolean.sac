@@ -1,0 +1,8 @@
+use UTThornBoolean: all;
+
+int main()
+{
+  z=UTThornBoolean::UTThornBoolean_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

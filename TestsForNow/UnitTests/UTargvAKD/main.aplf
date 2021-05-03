@@ -1,6 +1,0 @@
- r←main y
- ⍝ Function to echo command line, sort of
- ⍝  dcl integer scalar y
- ⎕←y
- r←1-y=42
-⍝∇⍣§./TestsForNow/UTargvAKD/main.ufn§0§ 2020 6 24 17 4 22 844 §dSÃI§0

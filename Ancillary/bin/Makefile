@@ -10,7 +10,8 @@
 SAC2C = sac2c
 # define any compile-time flags
 CFLAGS = -Wall -g -O3
-SACFLAGS = -doawlf -dopwlf -O3 -v1
+# maybe later when we fix sac2c performance   SACFLAGS = -doawlf -dopwlf -O3 -v1
+SACFLAGS = -O3 -v1
 
 # define any directories containing header files other than /usr/include
 #INCLUDES = -I/home/newhall/include  -I../include

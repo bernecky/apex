@@ -1,8 +1,0 @@
-use UTExpand: all;
-
-int main()
-{
-  z=UTExpand::UTExpand_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

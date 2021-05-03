@@ -1,0 +1,6 @@
+﻿ r←buildv y;i
+ r←⍳0
+ :For i :In ⍳y
+     r←r,⍳i
+ :EndFor
+ r←+/r+(0.5-0.5)

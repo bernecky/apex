@@ -1,8 +1,0 @@
-use UTReverse: all;
-
-int main()
-{
-  z=UTReverse::UTReverse_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

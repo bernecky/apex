@@ -1,0 +1,1 @@
+chmod←{ ⎕sh 'chmod ugo+x ', ⍵}

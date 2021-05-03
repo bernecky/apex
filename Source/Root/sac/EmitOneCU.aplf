@@ -2,18 +2,21 @@
  ;smn;astsmod
  ⍝ Emit compiled APL code for one Compilation Unit(CU), asts
  ⍝ Genned module code written to file r in fldr
- ⍝ Result is r, and the generated main() filename
- Trace(fts ⎕TS),': Starting code generation for: ',fldr
+ ⍝ Result is r, and the generated main() filenames
+ ⎕←Trace(fts ⎕TS),': Starting code generation for: ',fldr
  InitializeFns   ⍝ and cal
  ⍝ Build mainline code, identify primitives
  asts←SACNames¨asts ⍝ Map names to avoid SAC keyword conflicts, etc
+ ⍝ We no longer generate vanilla executable, but remain paranoid,
+ ⍝ so the code is still here!
  ⍝ Generate vanilla executable
- fnm1←((E fldr),E'.nomodu')GenCode asts
+ ⍝⍝fnm1←((E fldr),E'.nomodu')GenCode asts
+
  ⍝ Generate .so/.dll module, with renamed main()
  (astsmod smn)←fldr SACModuleRenameMain asts
  fnm2←((E fldr),E'')GenCode astsmod
  ⍝ Generate Caller fn for module
  fnm3←smn GenCallerFn fldr
  GenAPLCoverFn fnm2 ⍝ for calling module
- r←⍪(E fnm1),(E fnm2),E fnm3
- Trace(fts ⎕TS),': Code generation complete for: ',fldr
+ r←⍪(E fnm2),E fnm3
+ ⎕←Trace(fts ⎕TS),': Code generation complete for: ',fldr

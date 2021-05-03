@@ -1,0 +1,8 @@
+use UTSGI: all;
+
+int main()
+{
+  z=UTSGI::UTSGI_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

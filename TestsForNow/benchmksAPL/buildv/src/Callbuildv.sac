@@ -1,0 +1,8 @@
+use buildv: all;
+
+int main()
+{
+  z=buildv::buildv_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

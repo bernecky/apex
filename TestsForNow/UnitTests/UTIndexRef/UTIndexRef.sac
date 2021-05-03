@@ -1,8 +1,0 @@
-use UTIndexRef: all;
-
-int main()
-{
-  z=UTIndexRef::UTIndexRef_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

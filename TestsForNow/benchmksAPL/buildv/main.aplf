@@ -1,0 +1,13 @@
+﻿ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW;⎕CT
+ ⍝ README: build integer vector by repeated catenation
+ ⍝ The vector is converted to real before the sum reduction
+ ⎕IO←0
+⍝⍝⎕←'Enter 5000 or other test size'
+⍝⍝n←⎕fi ⍞ ⍝ 5000 works OK
+ n←5000
+ ⎕RL←16807
+ ⎕PP←20
+ ⎕PW←80
+ ⎕CT←1E¯10
+ ⎕←r←buildv n
+ ⎕←r←1-r≡20820835000

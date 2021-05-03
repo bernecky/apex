@@ -1,0 +1,4 @@
+ z←Singular y;j
+⍝ We expect a Boolean scalar y
+ j←1÷y
+ z←j=1

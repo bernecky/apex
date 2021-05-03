@@ -4,14 +4,14 @@
  *
  **********************************************************************
  *
- * Automatically generated on Wed 24 Feb 2021 06:53:47 PM EST
+ * Automatically generated on Mon 03 May 2021 03:09:41 PM EDT
  *
- * using sac2c 1.3.3-MijasCosta-566-gc4c42
- * built 2021-01-02T09:19:53.
+ * using sac2c 1.3.3-MijasCosta-583-g93687
+ * built 2021-05-03T12:00:23.
  * by user sac on host boa.
  *
  * The compiler was called by
- *  sac2c -O3 -doawlf -dopwlf -o /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/ /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/UTReplicate.sac
+ *  sac2c -v3 -O3 -doawlf -dopwlf -o /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/build/ -L /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/build/ -T /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/build/ /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/src/UTReplicate.sac
  *
  * The compiler crashed in
  *  phase: opt (Running SAC optimizations)
@@ -19,7 +19,7 @@
  *  cycle phase: cse (Eliminating common subexpressions)
  *  cycle instance: 2
  *
- * What follows is the contents of /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/UTReplicate.sac.
+ * What follows is the contents of /home/apex/apexgit/TestsForNow/UnitTests/UTReplicate/src/UTReplicate.sac.
  *
  **********************************************************************/
 
@@ -35,7 +35,7 @@ use RTClock: all;
 use StdIO : all;
 use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: wss/apex.20210224 2021-02-24 18:51:22.257 */
+// Compiled by APEX Version: CLEAR WS 2021-05-03 15:09:07.508
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler
@@ -88,7 +88,7 @@ inline int[*] rhoIII(int[.] x, int[*] y)
    z = with {
          ( . <= iv <= .) {
            offset = V2O( toi( x), iv);
-           offset = _mod_SxS_( offset, prod( shape(y)));
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
            el = y[ O2V( shape( y), offset)];
           } : el;
        } : genarray( toi(x), 0);
@@ -392,7 +392,7 @@ inline int[.] O2V( int[.] shp, int offset)
   }
 
   for( i=shape(shp)[0]-1; i>=0; i--) {
-    iv[i] = _mod_SxS_( offset/wts[i], shp[i]);
+    iv[i] = _aplmod_SxS_( offset/wts[i], shp[i]);
     offset = offset - (iv[i]*wts[i]);
   }
   return( iv);
@@ -502,7 +502,7 @@ QUADio_0=toI(( false));
  A_129=comaBBB(r_4,A_128);
  r_5=( A_129);
  z_0=( [0, 0, 2, 3, 3, 3, 4, 4, 6, 7, 7, 7, 8, 8, 10, 11, 11, 11]);
- /* dsf scalar(s) */
+ // dsf scalar(s)
 A_132=plusIII(z_0,12);
  A_133=comaIII(z_0,A_132);
  A_134=rhoIII([2, 3, 6],A_133);
@@ -546,7 +546,7 @@ A_180=sl1III(V2013_0,z_2);
  r_13=( A_183);
  A_187=quadXBB( r_13,QUADpp_0,QUADpw_0);
  A_188=andslXBBQUICKSTOP( r_13);
- /* dsf scalar(s) */
+ // dsf scalar(s)
 A_192=barBBI(true,A_188);
  r_14=( A_192);
  A_196=quadXII( A_192,QUADpp_0,QUADpw_0);

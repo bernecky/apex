@@ -1,0 +1,6 @@
+ z←mmd2 a;sz;id
+⍝Computes inverse by calling dmd with an
+⍝ identity matrix as left argument.
+ sz←(⍴a)[0]
+ id←(2⍴sz)⍴(1+sz)↑1
+ z←id dmd2 a

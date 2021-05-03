@@ -1,0 +1,54 @@
+ z←b ls a;i;j;sigma;alfa;aii;pp;pi;np;factor;eps;mv;m;n;u;ta;tb;tc;td;p;sink;t1
+⍝#pragma noline
+⍝# Above because inlining kills sac2c 2006-07-30
+⍝ M.A. Jenkins.
+⍝IBM Tech Report 320-2989
+⍝ Modified for formatting and
+⍝ to avoid use of globals, glueing.
+⍝ Householder triangularization
+⍝of m×n matrix for linear
+⍝ systems and least squares.
+⍝ Does row, column interchanges,
+⍝scales columns near unity.
+⍝ assumes (⍴⍴a)=(⍴⍴b)=2
+⍝ Modified 1995-05-22 to be origin 0/rbe
+ p←1↓⍴b
+ m←1↑⍴a
+ n←''⍴¯1↑⍴a  ⍝ Make scalar. rbe 2006-09-18
+ pp←⍳n
+ factor←÷⌈⌿|a÷⍉(⌽⍴a)⍴mv←⌈/|a
+ a←a×(⍴a)⍴factor
+ a←(m,np←n+p)↑a
+ a[;n+⍳p]←b
+ eps←(16*¯13)×⌈/mv
+ :For i :In ⍳n
+     mv←⌈⌿|(0,-p)↓(i,i)↓a
+     sink←Singular eps≤⌈/mv
+     pi←i+mv⍳⌈/mv
+     pp[i,pi]←pp[pi,i]
+     a[;i,pi]←a[;pi,i]
+     pi←i+(|i↓a[;i])⍳⌈/|i↓a[;i]
+     a[i,pi;]←a[pi,i;]
+     sigma←+/(i↓a[;i])*2
+     aii←a[i;i]
+     alfa←(1-2×0≤aii)×sigma*0.5
+     u←a[i;i]-alfa
+     ta←(u,(i+1)↓a[;i])+.×(i+0 1)↓a
+     tb←÷sigma-aii×alfa
+     tc←(u,(i+1)↓a[;i])∘.×tb×ta
+     td←((i+0 1)↓a)-tc
+     a[i↓⍳m;(i+1)↓⍳np]←td
+     a[i;i]←alfa
+ :EndFor
+⍝
+ z←(n,p)⍴0
+⍝
+ :For i :In ⌽⍳n
+ ⍝⍝⍝⍝⍝⍝ circumvent osc bug 1995-10-28
+ ⍝⍝⍝⍝⍝t1←(n↓a[i;])-(n↑a[i;])+.×z
+     t1←(n↓a[i;])-(a[i;⍳n])+.×z
+     z[i;]←t1÷a[i;i]
+ :EndFor
+⍝
+ z[pp;]←z ⍝ Previously used upgrade. 1995-10-21
+ z←z×⍉(⌽⍴z)⍴factor

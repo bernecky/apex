@@ -1,5 +1,4 @@
- Trace y;we
- we←2↓⍕⎕THIS
- :If isTrace we
-     ⎕←y
- :EndIf
+ Trace←{
+     isTrace 2↓⎕THIS:⍵
+     0 0⍴' '
+ }

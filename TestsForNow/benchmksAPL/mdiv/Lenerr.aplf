@@ -1,0 +1,5 @@
+ z←Lenerr y;i
+ z←y
+ :For i :In ⍳~y
+     z←1 2÷3 4 5
+ :EndFor

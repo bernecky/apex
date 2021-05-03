@@ -1,8 +1,0 @@
-use UTargvAKD: all;
-
-int main()
-{
-  z=UTargvAKD::UTargvAKD_mainXII();
-  StdIO::show(z);
-  return(0);
-}

@@ -1,12 +1,23 @@
  InvokeCompiler←{
      ismod←'module'≡6⍴GetFileChar ⍵ ⍝ Module vs. main()
      fldr←⍺
-     ⎕←'Compiling ',(ismod⌷(E'main(): '),E'module: '),⍵
-     opts←(E ⍵,'.exe'),0⌷FileNameBreak ⍵
-     opts←'-o ',D ismod⌷opts
-     ⍝ The .exe is there only to simplify my folder cleanup work,
+     ⎕←Trace(fts ⎕TS),': Starting to compile ',(D ismod⌷(E'main(): '),E'module: '),⍵
+     bld←fldr,PathDelim,'build',PathDelim
+     z←⎕SH'mkdir -p ',bld ⍝ Put genned code in build folder
+     ⍝ This is not the same build folder that cmake uses,
+     ⍝ but this can be changed if that is problematic
+     exe←bld,(PathFileName ⍵),'.exe'
+     obj←D ismod⌷(E exe),E bld
+     obj←'-o ',obj
+     ⍝ The .exe is there only to simplify automated folder cleanup,
      ⍝ so get rid of it if you don't like it
-     cmd←'sac2c -O3 -doawlf -dopwlf ',opts,' ',⍵
-     z←⎕SH 'cd ',fldr,'; ',cmd
+     lnk←' -L ',bld,' -T ',bld,' '
+     ⍝ FIXME: find better home for sac2c options readd -doawlf -dopwlf
+     cmd←'sac2c -v3 -O3 ',obj,lnk,⍵
+     ⍝⍝⍝ sac2c TOO SLOW!!! z←⎕SH'cd ',fldr,'; ',cmd
+     z←bld,'SAC',ismod⌷'cm'
+     junk←cmd PutFile z
+     junk←chmod z
+     ⎕←Trace(fts ⎕TS),': Finished compiling ',(D ismod⌷(E'main(): '),E'module: '),⍵
      z
  }

@@ -1,0 +1,10 @@
+ r←main;⎕PP;n
+ ⍝ README: build integer vector by indexed assign
+ ⎕PP←16
+⍝⍝⎕←'Enter 5000 or other test size'
+⍝⍝n←⎕fi ⍞
+ n←5000
+ ⎕←r←buildv2 n
+ ⎕←r←1-r=12518327083750
+
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/buildv2/main.ufn§0§ 2021 4 19 16 16 28 241 §vÙÕx§0

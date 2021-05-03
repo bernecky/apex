@@ -1,0 +1,4 @@
+ z←mmd a
+⍝Computes inverse by calling dmd with an
+⍝ identity matrix as left argument.
+ z←((⍳1↑⍴a)∘.=⍳1↑⍴a)dmd a

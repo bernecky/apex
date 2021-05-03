@@ -1,0 +1,14 @@
+ r←buildv2 y;i;j;k
+ r←0
+ :For i :In ⍳y
+     r←r+(⍴⍳i)[0]
+ :EndFor
+ r←r⍴0
+ j←0
+ :For i :In ⍳y
+     k←1000000+⍳i
+     r[j+⍳i]←k
+     j←j+i
+ :EndFor
+ r←+/r+0.5
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/buildv2/buildv2.ufn§0§ 2021 4 13 15 25 15 914 §ohNW§0

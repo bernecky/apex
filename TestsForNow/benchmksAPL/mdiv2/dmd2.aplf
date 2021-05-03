@@ -1,0 +1,5 @@
+ z←b dmd2 a;v;m;n
+⍝ Dyadic matrix divide using Householder
+⍝ triangularization.
+ b←(2↑(⍴b),1)⍴b
+ z←b ls2 a
