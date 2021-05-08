@@ -1,0 +1,4 @@
+ r←tobin c
+⍝ Convert character vector to binary representation (vector)
+ r←,⍉2 2 2 2 2 2 2 2⊤⎕AV⍳c
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/crc/tobin.ufn§0§ 2020 6 24 17 4 22 848 §fzfX§0

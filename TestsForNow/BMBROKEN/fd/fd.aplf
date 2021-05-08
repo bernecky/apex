@@ -1,0 +1,4 @@
+ r←fd y
+⍝ First difference function
+ r←y≠¯1⌽y
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/fd/fd.ufn§0§ 2020 6 24 17 4 22 852 §bENÈ§0

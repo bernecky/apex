@@ -1,0 +1,980 @@
+module UTEpio;
+
+use Array: all;
+use ArrayFormat: all;
+use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
+
+// Compiled by APEX Version: wss/apex.20210504 2021-05-04 14:44:29.797
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+export all;
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline double[+] plusDID(double x, int[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toD(y[iv]);
+      		} : plusDDD(xel,yel);
+	} : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline char[.] rotrXCC(char[.] y)
+{ /* Vector reverse */
+  z = Array::reverse( 0, y);
+  return( z);
+}
+
+inline int[.] rotrXII(int[.] y)
+{ /* Vector reverse */
+  z = Array::reverse( 0, y);
+  return( z);
+}
+
+inline int[.] rotrIII(int x, int[.] y)
+{ /* Scalar rotate first/last axis vector */
+ ix = toi(x);
+ rows = shape(y)[0];
+ k = VectorRotateAmount(ix,rows); /* Normalize rotate count */
+ z = drop( [k], y) ++ take( [k], y);
+ return(z);
+}
+
+
+inline bool[.] rhoIBB(int[1] x, bool y)
+{ // [One-element vector reshape scalar]
+  z = genarray( toi(x),y);
+  return(z);
+}
+
+inline bool[+] epsCCB(char[+] x, char[+] y)
+{ /* character membership AxA*/
+ ry = comaXCC(y);
+ tbl = genarray([256],false);
+ for(i=0; i<shape(ry)[[0]]; i++) {
+  tbl[[toi(ry[[i]])]] = true;
+ }
+
+ z = with {
+        (. <= iv <= .)
+                : tbl[[toi(x[iv])]];
+        } : genarray(shape(x), false);
+ return(z);
+}
+
+
+inline int[*] iotaCCI(char[.] x, char[+] y,int QUADio)
+{ /* Character vector iota character non-scalar */
+ table = genarray([256],shape(x)[[0]]); /* Not found */
+ for(i=shape(x)[[0]]-1; i>=0; i--)
+        table[toi(x[[i]])] = i;
+ z = with {
+        (. <= iv <= .)
+                : table[[toi(y[iv])]];
+        }: genarray(shape(y), 0);
+ return(z+QUADio);
+}
+
+inline int[*] iotaCCIQUADAV(char[256] x, char[+] y,int QUADio)
+{ /* QUADav iota character non-scalar */
+ z = with {
+        (. <= iv <= .)
+                : toi(y[iv]);
+        } : genarray(shape(y), 0);
+ return(z+QUADio);
+}
+
+inline bool[.] rhoIBB(int x, bool y)
+{ // [Scalar reshape scalar]
+  z = genarray( [toi(x)],y);
+  return(z);
+}
+
+inline bool[*] epsCCBQUADAV(char[*] x, char[256] y)
+{ /* A member QUADav. This is kinda silly... */
+ z = genarray(shape(x), true);
+ return(z);
+}
+
+inline int iotaBBI(bool[.] x, bool y,int QUADio)
+{ /* Non-fuzzy Vector iota Scalar */
+ sx = shape(x)[[0]];
+ z = sx;
+ for(i=0; i<sx; i++) {
+        if (toB(x[[i]]) == toB(y)){
+                z = i;
+                i = sx;
+        }
+ }
+ return(z+QUADio);
+}
+
+inline int[+] iotaBBI(bool[.] x, bool[+] y,int QUADio)
+{ /* Boolean iota number */
+  /* Right argument almost always scalar */
+  /* However, we'll do more work for the nonce, because it's easy */
+  sx = shape(x)[[0]];
+  table = [sx, sx, sx];
+  table[[0]] = BooleanIotaScalar(x, false);
+  table[[1]] = BooleanIotaScalar(x, true);
+  z = with {
+        (. <= iv <= .){
+                if (toi( y[iv]) == 0) {
+                        index = 0;
+                } else if (toi( y[iv]) == 1) {
+                        index = 1;
+                } else {
+                        index = 2;
+                }
+                } : table[[index]];
+        } : genarray( shape(y), -666);
+  return(z + QUADio);
+}
+
+
+inline bool[+] epsIIB(int[+] x, int[+] y)
+{ /*  Fuzzy, non-fuzzy Membership AxA*/
+/* General case: uses HeapGrade */
+ sy = (shape(y))[[0]];
+ PV = UpgradeHeap(y); /* faster to search y if its sorted! */
+ PV = EPIORemoveDups(y, PV); /* This could be in UpgradeHeap, probably */
+ z = with {
+        (. <= iv <= .) {
+                P = BinarySearch(y, x[iv], PV);
+                /* Binary search could quickstop on a match here... */
+                }: P != sy;
+        }: genarray( shape(x), false);
+ return(z);
+}
+
+
+
+
+
+
+inline int[+] iotaIII(int[.] x, int[+] y,int QUADio)
+{
+/* General case uses HeapGrade */
+ sx = (shape(x))[[0]];
+ PV = UpgradeHeap(x); /* faster to search x if its sorted! */
+ PV = EPIORemoveDups(x, PV); /* This could be in UpgradeHeap, probably */
+ z = with {
+        (. <= iv <= .) {
+                P = BinarySearch(x, y[iv], PV);
+                /* following for real/complex when quadct != 0
+                }: (P == sx) ? sx : PV[[ MinMatch( x, PV, P)]];
+                */
+                }: (P == sx) ? sx : PV[[P]];
+        }: genarray( shape(y), sx);
+ return(z+QUADio);
+}
+
+
+
+
+
+inline bool[+] epsDDB(double[+] x, double[+] y,double QUADct)
+{ /*  Fuzzy, non-fuzzy Membership AxA*/
+/* General case: uses HeapGrade */
+ sy = (shape(y))[[0]];
+ PV = UpgradeHeap(y); /* faster to search y if its sorted! */
+ PV = EPIORemoveDups(y, PV); /* This could be in UpgradeHeap, probably */
+ z = with {
+        (. <= iv <= .) {
+                P = BinarySearch(y, x[iv], PV);
+                /* Binary search could quickstop on a match here... */
+                }: P != sy;
+        }: genarray( shape(x), false);
+ return(z);
+}
+
+
+
+
+
+
+inline bool[*] dropIBB(int x, bool[*] y)
+{ /* Scalar drop non-scalar */
+  return(drop([toi(x)], y));
+}
+
+inline char[*] dropBCC(bool x, char[*] y)
+{ /* Scalar drop non-scalar */
+  return(drop([toi(x)], y));
+}
+
+inline int[*] dropBII(bool x, int[*] y)
+{ /* Scalar drop non-scalar */
+  return(drop([toi(x)], y));
+}
+
+inline int[*] dropIII(int x, int[*] y)
+{ /* Scalar drop non-scalar */
+  return(drop([toi(x)], y));
+}
+
+inline int[.]  rhoXCI(char[+] y)
+{ /* Shape of non-scalar */
+ return(shape(y));
+}
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline int[.] iotaXII(int[1] y, int QUADio)
+{ /* Index generator on 1-element vector */
+ /* HELP! Needs length error check */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y[[0]]));
+  return( z);
+}
+
+inline int[.] iotaXBI(bool y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline bool[*] quadXBB(bool[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline char[256] quadavXXC()
+{ /* QUADav - system character set */
+ z = with{
+        ([0] <= [i] < [256]) : _toc_S_(i);
+        } : genarray( [256], ' ');
+ return(z);
+}
+
+inline bool[.] comaBBB(bool[.] x, bool y)
+{/* VxS catenate first (or last) axis */
+ return(toB(x)++[toB(y)]);
+}
+
+inline bool[2] comaBBB(bool x, bool y)
+{/* SxS catenate first (or last) axis */
+ return([toB(x)]++[toB(y)]);
+}
+
+inline bool sameBBB(bool[+] x, bool[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqBBB(toB( x),  toB( y)))));
+  return(z);
+}
+
+
+
+inline bool sameIIB(int[+] x, int[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqIIB(toI( x),  toI( y)))));
+  return(z);
+}
+
+
+
+inline bool sameIIB(int x, int y)
+{ /* Scalar match scalar */
+  z = eqIIB(toI(x), toI(y));
+ return(z);
+}
+
+
+
+inline bool sameBIB(bool[+] x, int[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqIIB(toI( x),  toI( y)))));
+  return(z);
+}
+
+
+
+inline bool andslXBBQUICKSTOP(bool[.] y)
+{ /* First/last axis reduction of vector with quick stop*/
+  z = with {
+         (0*shape(y) <= iv < shape(y))
+                : BtoB(y[iv]);
+        } : foldfix( andBBB, ItoB(1), ItoB(0));
+  return(z);
+}
+
+
+inline double plusDDD(double x, double y)
+{ return(DtoD(x)+DtoD(y));
+}
+
+inline bool eqIIB(int x, int y)
+{ /* A=B on non-doubles */
+ return(ItoI(x) == ItoI(y));
+}
+
+inline bool andBBB(bool x, bool y)
+{ return(BtoB(x)&BtoB(y));
+}
+
+inline bool[+] eqBBB(bool[+] x, bool[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : eqBBB(xel,yel);
+        } : genarray(sy, false);
+  return(z);
+}
+
+
+
+
+
+
+inline bool[+] eqIIB(int[+] x, int[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : eqIIB(xel,yel);
+        } : genarray(sy, false);
+  return(z);
+}
+
+
+
+
+
+
+inline char[.] comaXCC(char[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline int  BooleanIotaScalar( bool[.] x, bool y)
+{
+ sx = (shape(x))[[0]];
+ z = sx;
+ for (i=0; i<sx; i++) {
+        if ( x[[i]] == y) {
+                z = i;
+                i = sx;
+        }
+ }
+  return(z);
+}
+
+inline int BinarySearch(int[+] x, int y, int[.] PV)
+{ /* Binary search x[PV] for y
+   * PV is a permutation vector guaranteed to bring y into
+   * non-descending order
+   * If not-found, result is shape(x)
+   */
+ found = false;
+ first = 0;
+ sx  = (shape(PV))[[0]];
+ indx = -1;                   /* Bobbo kant kode if this appears! */
+ last = sx - 1;
+ while ((first <= last) && !found) {
+        indx = (first+last)/2;  /* index of middle entry */
+        xval = toI(x[[PV[[indx]]]]);
+        yval = toI(y); /* This is wrong - type coercion may fail! */
+        if (    yval == xval) {
+                found = true;
+        } else if (yval < xval) {
+                last = indx - 1;
+        } else {
+                first = indx + 1;
+        }
+ }
+ z = found ? indx : sx;
+ return(z);
+}
+
+inline int MinMatch (int[+] x, int[.] PV, int i)
+{ /* Search permutation vector for minimum match.
+   * i is an index into PV. PV is a permutation vector for
+   * x that places x in non-descending order.
+   *  We want minimum index into x that matches x[[PV[[i]]]]
+   *  Because upgrade is stable, we only have to look left
+   *  (except for real/complex x with non-zero {quad}ct)
+   */
+ v = x[[PV[[i]]]];
+ j = i - 1;
+ r = i;
+ while (j >= 0) {
+        if ( v == x[[PV[[j]]]]) {
+                r = j;        /* new minimum index */
+        } else {
+                j = -1;       /* no more matches. Stop */
+        }
+        j = j - 1;
+ }
+ return(r);
+}
+
+inline int[.] EPIORemoveDups (int[+] x, int[.] PV)
+{ /* Remove dups from PV of sorted left argument to indexof(right arg of membership */
+ z = PV;
+ shp = (shape(PV))[[0]];
+ if (0 != shp) {
+        sink = 0;
+        source = 1;
+        while (source < shp) {
+                if ( x[[z[[sink]]]] != x[[PV[[source]]]]) {
+                        sink++;
+                        z[[sink]] = PV[[source]];
+                }
+                source++;
+        }
+ z = take([sink+1], z);
+ }
+ return(z);
+}
+
+inline int BinarySearch(double[+] x, double y, int[.] PV)
+{ /* Binary search x[PV] for y
+   * PV is a permutation vector guaranteed to bring y into
+   * non-descending order
+   * If not-found, result is shape(x)
+   */
+ found = false;
+ first = 0;
+ sx  = (shape(PV))[[0]];
+ indx = -1;                   /* Bobbo kant kode if this appears! */
+ last = sx - 1;
+ while ((first <= last) && !found) {
+        indx = (first+last)/2;  /* index of middle entry */
+        xval = toD(x[[PV[[indx]]]]);
+        yval = toD(y); /* This is wrong - type coercion may fail! */
+        if (    yval == xval) {
+                found = true;
+        } else if (yval < xval) {
+                last = indx - 1;
+        } else {
+                first = indx + 1;
+        }
+ }
+ z = found ? indx : sx;
+ return(z);
+}
+
+inline int MinMatch (double[+] x, int[.] PV, int i)
+{ /* Search permutation vector for minimum match.
+   * i is an index into PV. PV is a permutation vector for
+   * x that places x in non-descending order.
+   *  We want minimum index into x that matches x[[PV[[i]]]]
+   *  Because upgrade is stable, we only have to look left
+   *  (except for real/complex x with non-zero {quad}ct)
+   */
+ v = x[[PV[[i]]]];
+ j = i - 1;
+ r = i;
+ while (j >= 0) {
+        if ( v == x[[PV[[j]]]]) {
+                r = j;        /* new minimum index */
+        } else {
+                j = -1;       /* no more matches. Stop */
+        }
+        j = j - 1;
+ }
+ return(r);
+}
+
+inline int[.] EPIORemoveDups (double[+] x, int[.] PV)
+{ /* Remove dups from PV of sorted left argument to indexof(right arg of membership */
+ z = PV;
+ shp = (shape(PV))[[0]];
+ if (0 != shp) {
+        sink = 0;
+        source = 1;
+        while (source < shp) {
+                if ( x[[z[[sink]]]] != x[[PV[[source]]]]) {
+                        sink++;
+                        z[[sink]] = PV[[source]];
+                }
+                source++;
+        }
+ z = take([sink+1], z);
+ }
+ return(z);
+}
+
+inline int[.] UpgradeHeap(int[+] y)
+{
+/*    Do APL upgrade of array y using heapsort.
+      This is a sub-function shared by upgrade/downgrade/indexof, etc.
+      This version adapted from the Sara Baase "Computer Algorithms"
+      version of heapsort.
+     Robert Bernecky 2006-11-14
+     Knuth, Vol. III, pp. 145-148 gives a good example.
+     APL model: (See workspace apex2003/wss/upgrade or
+                 apex2003/wif/upgrade)
+                Also UTGrade.dws
+r{<-}upgradeHeap v;#io;N;heap
+@ Upgrade vector using heapsort
+#io{<-}0
+N{<-}{rho}v
+:if N{<=}1
+  r{<-}{iota}N
+:else
+  heap{<-}MakeHeap(v)
+  r{<-}(UnHeap(heap))
+:endif
+*/
+
+ N = shape(y)[[0]];
+ if (N <= 1)
+        z = iota(N);
+ else{
+        heap = MakeHeap(y);
+        z = UnHeap(heap,y);
+ }
+ return(z);
+}
+
+
+inline int[.] MakeHeap(int[+] v)
+{ /* Build heap from array v. v has at least two elements */
+/*
+r{<-}MakeHeap v;i;n;heap;biggest
+@ Build heap from v
+@ We know v has at least two elements
+N{<-}{rho}v
+heap{<-}{iota}N
+:for i :in {reverse}{iota}{floor}N{divide}2
+  y FixHeap i,heap[i],n
+:endfor
+r{<-}heap
+*/
+ n = shape(v)[[0]];
+ heap = iota(n);
+ lim = n/2;
+ for(i=lim-1; i>=0; i--) {
+        heap = FixHeap(heap, v, i, heap[[i]], n);
+ }
+ return(heap);
+}
+
+inline int[.] UnHeap(int[.] heap, int[+]v)
+{ /* Extract heap elements in top-to-bottom order */
+  n = shape(v)[[0]];
+  for(heapsize= n-1; heapsize>0; heapsize--){
+        biggest = heap[[0]];
+        heap = FixHeap(heap,v,0,heap[[heapsize]],heapsize);
+        heap[[heapsize]] = biggest;
+  }
+ return(heap);
+}
+
+inline int[.] FixHeap(int[.] heap, int[+] v, int root,
+        int heapitem, int heapsize)
+{ /* Restore heap invariant: parent>= both children */
+ vacant = root;
+ lchild = 1+vacant+vacant;
+ while( lchild < heapsize) {
+        bigC = lchild;      /* Identify larger child, if any */
+        rchild = lchild+1;
+        if ((lchild<(heapsize-1))){
+                li = heap[[lchild]];
+                ri = heap[[rchild]];
+                if ((GradeGT(v[[ri]],v[[li]])) |
+                        (match(v[[ri]], v[[li]]) & (ri>li))){ /* Stability */
+                bigC = rchild; /* right child larger */
+                }
+        }
+        /* parent vs big kid*/
+        li = heap[[bigC]];
+        if ((GradeGT( v[[li]], v[[heapitem]])) |
+                (match(v[[li]], v[[heapitem]]) & (li>heapitem))) {
+                        heap[[vacant]] = heap[[bigC]];
+                        vacant = bigC;
+                        lchild = 1+vacant+vacant;
+        } else lchild = heapsize;   /* exitloop */
+ }
+ heap[[vacant]] = heapitem;
+ return(heap);
+}
+
+
+
+inline int[.] UpgradeHeap(double[+] y)
+{
+/*    Do APL upgrade of array y using heapsort.
+      This is a sub-function shared by upgrade/downgrade/indexof, etc.
+      This version adapted from the Sara Baase "Computer Algorithms"
+      version of heapsort.
+     Robert Bernecky 2006-11-14
+     Knuth, Vol. III, pp. 145-148 gives a good example.
+     APL model: (See workspace apex2003/wss/upgrade or
+                 apex2003/wif/upgrade)
+                Also UTGrade.dws
+r{<-}upgradeHeap v;#io;N;heap
+@ Upgrade vector using heapsort
+#io{<-}0
+N{<-}{rho}v
+:if N{<=}1
+  r{<-}{iota}N
+:else
+  heap{<-}MakeHeap(v)
+  r{<-}(UnHeap(heap))
+:endif
+*/
+
+ N = shape(y)[[0]];
+ if (N <= 1)
+        z = iota(N);
+ else{
+        heap = MakeHeap(y);
+        z = UnHeap(heap,y);
+ }
+ return(z);
+}
+
+
+inline int[.] MakeHeap(double[+] v)
+{ /* Build heap from array v. v has at least two elements */
+/*
+r{<-}MakeHeap v;i;n;heap;biggest
+@ Build heap from v
+@ We know v has at least two elements
+N{<-}{rho}v
+heap{<-}{iota}N
+:for i :in {reverse}{iota}{floor}N{divide}2
+  y FixHeap i,heap[i],n
+:endfor
+r{<-}heap
+*/
+ n = shape(v)[[0]];
+ heap = iota(n);
+ lim = n/2;
+ for(i=lim-1; i>=0; i--) {
+        heap = FixHeap(heap, v, i, heap[[i]], n);
+ }
+ return(heap);
+}
+
+inline int[.] UnHeap(int[.] heap, double[+]v)
+{ /* Extract heap elements in top-to-bottom order */
+  n = shape(v)[[0]];
+  for(heapsize= n-1; heapsize>0; heapsize--){
+        biggest = heap[[0]];
+        heap = FixHeap(heap,v,0,heap[[heapsize]],heapsize);
+        heap[[heapsize]] = biggest;
+  }
+ return(heap);
+}
+
+inline int[.] FixHeap(int[.] heap, double[+] v, int root,
+        int heapitem, int heapsize)
+{ /* Restore heap invariant: parent>= both children */
+ vacant = root;
+ lchild = 1+vacant+vacant;
+ while( lchild < heapsize) {
+        bigC = lchild;      /* Identify larger child, if any */
+        rchild = lchild+1;
+        if ((lchild<(heapsize-1))){
+                li = heap[[lchild]];
+                ri = heap[[rchild]];
+                if ((GradeGT(v[[ri]],v[[li]])) |
+                        (match(v[[ri]], v[[li]]) & (ri>li))){ /* Stability */
+                bigC = rchild; /* right child larger */
+                }
+        }
+        /* parent vs big kid*/
+        li = heap[[bigC]];
+        if ((GradeGT( v[[li]], v[[heapitem]])) |
+                (match(v[[li]], v[[heapitem]]) & (li>heapitem))) {
+                        heap[[vacant]] = heap[[bigC]];
+                        vacant = bigC;
+                        lchild = 1+vacant+vacant;
+        } else lchild = heapsize;   /* exitloop */
+ }
+ heap[[vacant]] = heapitem;
+ return(heap);
+}
+
+
+
+inline int VectorRotateAmount(int x, int y)
+{ /* Normalize x rotate for array of shape y on selected axis */
+ /* normalize rotation count */
+
+if ((0==x) || (0==y))
+  z = 0;
+else if (x>0)
+        z = _aplmod_SxS_(x,y);
+     else
+        z = y - _aplmod_SxS_(abs(x),y);
+ return(z);
+}
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline bool eqBBB(bool x, bool y)
+{ /* A=B on non-doubles */
+ return(BtoB(x) == BtoB(y));
+}
+
+inline bool[+] eqBBB(bool x, bool[+] y)
+{ /* SxA scalar function */
+  xel = toB(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toB(y[iv]);
+      		} : eqBBB(xel,yel);
+	} : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqBBB(bool[+] x, bool y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : eqBBB(xel,y);
+	} : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline bool[+] eqIIB(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : eqIIB(xel,yel);
+	} : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqIIB(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : eqIIB(xel,y);
+	} : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline bool[.] comaXBB(bool[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline int[.] comaXII(int[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline bool GradeGT(int x, int y)
+{ /* Integer Comparator for upgrade */
+ return(x>y);
+}
+
+inline bool GradeGT(int[+] x, int[+] y)
+{ /* Integer Array Comparator for upgrade */
+  /* The ravels of the two arrays are compared.  */
+ z = with {
+       (0*shape(x) <= iv < shape(x))
+                : x[iv] > y[iv];
+        }: foldfix( &, true,false);
+ return(z);
+}
+
+inline bool GradeGT(double x, double y)
+{ /* Double Comparator for upgrade */
+ return(x>y);
+}
+
+inline bool GradeGT(double[+] x, double[+] y)
+{ /* Double Array Comparator for upgrade */
+  /* The ravels of the two arrays are compared.  */
+ z = with {
+       (0*shape(x) <= iv < shape(x))
+                : x[iv] > y[iv];
+        }: foldfix( &, true,false);
+ return(z);
+}
+
+inline int UTEpio_mainXXI()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ A_82=quadavXXC( );
+ A_83=rhoXCI( A_82);
+ A_84=rhoIBB(A_83,true);
+ A_85=dropIBB(-1,A_84);
+ A_86=comaBBB(A_85,false);
+ A_87=quadavXXC( );
+ A_88=rotrXCC( A_87);
+ A_89=dropBCC(true,A_88);
+ A_90=quadavXXC( );
+ A_92=epsCCB(A_90,A_89);
+ A_94=sameBBB(A_92,A_86);
+ r_0=( A_94);
+ A_97=iotaXII( 256,QUADio_0);
+ A_98=rotrIII(-1,A_97);
+ A_99=quadavXXC( );
+ A_100=rotrXCC( A_99);
+ A_101=quadavXXC( );
+ A_102=rotrXCC( A_101);
+ A_103=dropBCC(true,A_102);
+ A_106=iotaCCI(A_103,A_100,QUADio_0);
+ A_108=sameIIB(A_106,A_98);
+ A_109=comaBBB(r_0,A_108);
+ r_1=( A_109);
+ A_112=iotaXII( 256,QUADio_0);
+ A_113=rotrXII( A_112);
+ A_114=quadavXXC( );
+ A_115=rotrXCC( A_114);
+ A_116=quadavXXC( );
+ A_119=iotaCCIQUADAV(A_116,A_115,QUADio_0);
+ A_121=sameIIB(A_119,A_113);
+ A_122=comaBBB(r_1,A_121);
+ r_2=( A_122);
+ A_124=rhoIBB(256,true);
+ A_125=quadavXXC( );
+ A_126=quadavXXC( );
+ A_128=epsCCBQUADAV(A_126,A_125);
+ A_130=sameBBB(A_128,A_124);
+ A_131=comaBBB(r_2,A_130);
+ r_3=( A_131);
+ A_133=rhoIBB(100,false);
+ A_136=iotaBBI(A_133,true,QUADio_0);
+ A_138=sameIIB(A_136,100);
+ A_139=comaBBB(r_3,A_138);
+ r_4=( A_139);
+ A_141=rhoIBB(100,false);
+ A_142=comaBBB(A_141,true);
+ A_145=iotaBBI(A_142,[true,false],QUADio_0);
+ A_147=sameIIB(A_145,[100, 0]);
+ A_148=comaBBB(r_4,A_147);
+ r_5=( A_148);
+ A_150=quadavXXC( );
+ A_151=rhoXCI( A_150);
+ A_153=iotaXII( A_151,QUADio_0);
+ A_154=rotrXII( A_153);
+ A_155=dropBII(true,A_154);
+ A_156=quadavXXC( );
+ A_157=dropBCC(true,A_156);
+ A_158=quadavXXC( );
+ A_159=rotrXCC( A_158);
+ A_162=iotaCCI(A_159,A_157,QUADio_0);
+ A_164=sameIIB(A_162,A_155);
+ A_165=comaBBB(r_5,A_164);
+ r_6=( A_165);
+ A_168=iotaXII( 10,QUADio_0);
+ A_169=dropIII(2,A_168);
+ A_171=epsIIB(A_169,[0, 3, 99]);
+ A_173=sameBBB(A_171,[false,true,false,false,false,false,false,false]);
+A_174=comaBBB(r_6,A_173);
+ r_7=( A_174);
+ A_177=iotaXII( 5,QUADio_0);
+ A_178=dropIII(2,A_177);
+ A_181=iotaIII([0, 3, 2],A_178,QUADio_0);
+ A_183=sameIIB(A_181,[2, 1, 3]);
+ A_184=comaBBB(r_7,A_183);
+ r_8=( A_184);
+ A_188=iotaIII([0, 3, 99],[3, 9, -3],QUADio_0);
+ A_190=sameIIB(A_188,[1, 3, 3]);
+ A_191=comaBBB(r_8,A_190);
+ r_9=( A_191);
+ A_194=iotaXII( 5,QUADio_0);
+ // dsf scalar(s)
+A_195=plusDID(0.5,A_194);
+ A_197=epsDDB(A_195,[3.5, 4.5, 666.0],QUADct_0);
+ A_199=sameBBB(A_197,[false,false,false,true,true]);
+ A_200=comaBBB(r_9,A_199);
+ r_10=( A_200);
+ A_203=iotaXBI( false,QUADio_0);
+ A_206=iotaIII(A_203,[1, 2, 3],QUADio_0);
+ A_208=sameBIB([false,false,false],A_206);
+ A_209=comaBBB(r_10,A_208);
+ r_11=( A_209);
+ A_212=epsCCB(['a','b','c'],[:char]);
+ A_214=sameBBB([false,false,false],A_212);
+ A_215=comaBBB(r_11,A_214);
+ r_12=( A_215);
+ A_219=quadXBB( r_12,QUADpp_0,QUADpw_0);
+ A_220=andslXBBQUICKSTOP( r_12);
+ // dsf scalar(s)
+A_224=barBBI(true,A_220);
+ r_13=( A_224);
+ A_228=quadXII( A_224,QUADpp_0,QUADpw_0);
+ return(r_13);
+}
+

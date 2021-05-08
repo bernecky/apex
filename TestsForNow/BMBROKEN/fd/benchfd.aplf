@@ -1,0 +1,4 @@
+ r←benchfd n
+ r←fd testdata n
+ r←r+.×⍳⍴r ⍝ Handy result verifier
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/fd/benchfd.ufn§0§ 2020 6 24 17 4 22 852 §ceÆY§0

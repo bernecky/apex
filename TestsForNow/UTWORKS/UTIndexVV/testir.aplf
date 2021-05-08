@@ -1,0 +1,5 @@
+ r←testir n;x
+⍝ Indexed ref test
+ x←10+⍳10
+ r←x[1 8 3 2 1]
+ r←r≡10+1 8 3 2 1

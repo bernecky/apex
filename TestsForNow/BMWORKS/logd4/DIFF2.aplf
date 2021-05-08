@@ -1,0 +1,5 @@
+ RES←DIFF2 SIG
+⍝ differentiation function
+ RES←SIG-¯1⌽SIG
+ RES[0]←SIG[0]
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/logd4/DIFF2.ufn§0§ 2020 6 24 17 4 22 860 §cuùZ§0

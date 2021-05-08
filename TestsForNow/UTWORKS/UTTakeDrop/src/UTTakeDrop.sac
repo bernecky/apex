@@ -1,0 +1,4018 @@
+module UTTakeDrop;
+
+use Array: all;
+use ArrayFormat: all;
+use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
+
+// Compiled by APEX Version: wss/apex.20210504 2021-05-04 14:44:54.905
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+export all;
+
+inline int[+] modXII(int[+] y)
+{ /* Monadic scalar functions on array */
+  z = with {
+        ( . <= iv <= .)
+                : modXII(toI(y[iv]));
+        } : genarray(shape(y), 0);
+  return(z);
+}
+
+inline int[+] barXII(int[+] y)
+{ /* Monadic scalar functions on array */
+  z = with {
+        ( . <= iv <= .)
+                : barXII(toI(y[iv]));
+        } : genarray(shape(y), 0);
+  return(z);
+}
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline int[+] mpyBII(bool x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : mpyIII(xel,yel);
+	} : genarray(shape(y), 0);
+  return(z);
+}
+
+
+inline bool[+] ltIBB(int[+] x, bool y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : ltIBB(xel,y);
+	} : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline int[+] mpyBII(bool[+] x, int[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : mpyBII(xel,yel);
+        } : genarray(sy, 0);
+  return(z);
+}
+
+
+
+
+
+
+inline int[+] maxIII(int[+] x, int[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : maxIII(xel,yel);
+        } : genarray(sy, 0);
+  return(z);
+}
+
+
+
+
+
+
+inline int[+] barIII(int[+] x, int[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : barIII(xel,yel);
+        } : genarray(sy, 0);
+  return(z);
+}
+
+
+
+
+
+
+inline int[+] maxBII(bool x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : maxIII(xel,yel);
+	} : genarray(shape(y), 0);
+  return(z);
+}
+
+
+inline int[+] minIII(int[+] x, int[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : minIII(xel,yel);
+        } : genarray(sy, 0);
+  return(z);
+}
+
+
+
+
+
+
+inline int[+] plusIII(int[+] x, int[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : plusIII(xel,yel);
+        } : genarray(sy, 0);
+  return(z);
+}
+
+
+
+
+
+
+inline bool[.] comaXBB(bool y)
+{ /* Ravel of scalar */
+  return([y]);
+}
+
+inline bool[.] comaXBB(bool[.] y)
+{ /* Ravel of vector is NOP */
+        return(y);
+}
+
+
+inline int[.] comaXII(int[.] y)
+{ /* Ravel of vector is NOP */
+        return(y);
+}
+
+
+inline int[.] comaXII(int y)
+{ /* Ravel of scalar */
+  return([y]);
+}
+
+inline char[.] comaXCC(char[.] y)
+{ /* Ravel of vector is NOP */
+        return(y);
+}
+
+
+inline int[.] comaXII(int[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline bool[.] rhoBBB(bool x, bool[*] y)
+{ /* [Scalar reshape non-scalar] (to vector) */
+ z = rhoIBB( [toi(x)],y);
+ return(z);
+}
+
+
+inline bool[*] rhoCBB(char[.] x, bool[*] y)
+{  /* Character-vector reshape anything. */
+   /* Left argument must be empty vector! */
+  if( 0 != shape(x)[[0]]) {
+    show(tochar("reshape domain error in rhoCBB"));
+  }
+  z = y[ 0 * shape(y)];
+  return(z);
+}
+
+inline bool[.] rhoIBB(int x, bool y)
+{ // [Scalar reshape scalar]
+  z = genarray( [toi(x)],y);
+  return(z);
+}
+
+inline bool[*] rhoIBB(int[.] x, bool[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), false);
+   return( z);
+}
+
+
+
+inline int[*] rhoIII(int[.] x, int[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), 0);
+   return( z);
+}
+
+
+
+inline int[.] rhoIII(int x, int y)
+{ // [Scalar reshape scalar]
+  z = genarray( [toi(x)],y);
+  return(z);
+}
+
+inline char[.] rhoICC(int x, char y)
+{ // [Scalar reshape scalar]
+  z = genarray( [toi(x)],y);
+  return(z);
+}
+
+inline char[*] rhoICC(int[.] x, char[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), ' ');
+   return( z);
+}
+
+
+
+inline int[.] rhoBII(bool x, int[*] y)
+{ /* [Scalar reshape non-scalar] (to vector) */
+ z = rhoIII( [toi(x)],y);
+ return(z);
+}
+
+
+inline int[*] rhoCII(char[.] x, int[*] y)
+{  /* Character-vector reshape anything. */
+   /* Left argument must be empty vector! */
+  if( 0 != shape(x)[[0]]) {
+    show(tochar("reshape domain error in rhoCII"));
+  }
+  z = y[ 0 * shape(y)];
+  return(z);
+}
+
+inline char[.] rhoBCC(bool x, char[*] y)
+{ /* [Scalar reshape non-scalar] (to vector) */
+ z = rhoICC( [toi(x)],y);
+ return(z);
+}
+
+
+inline char[*] rhoCCC(char[.] x, char[*] y)
+{  /* Character-vector reshape anything. */
+   /* Left argument must be empty vector! */
+  if( 0 != shape(x)[[0]]) {
+    show(tochar("reshape domain error in rhoCCC"));
+  }
+  z = y[ 0 * shape(y)];
+  return(z);
+}
+
+inline int[*] dropIII(int[.] x, int[*] y)
+{ /* Vector drop non-scalar */
+  /* FIXME: Assert  dim(y)  == shape(x)[0]; */
+  /* e.g, (,5)drop iota 5  */
+  return(drop(toi(x), y));
+}
+
+
+inline bool[.] takeBBB(bool x, bool y)
+{ /* Scalar take scalar */
+  return(take([toi(x)],[y]));
+}
+
+inline int[.] takeBII(bool x, int[.] y)
+{ /* Scalar take vector */
+  return(take([toi(x)], y));
+}
+
+
+inline int[.] takeIII(int x, int y)
+{ /* Scalar take scalar */
+  return(take([toi(x)],[y]));
+}
+
+inline char[.] takeICC(int x, char[.] y)
+{ /* Scalar take vector */
+  return(take([toi(x)], y));
+}
+
+inline int[.] takeIII(int x, int[.] y)
+{ /* Scalar take vector */
+  return(take([toi(x)], y));
+}
+
+inline bool[*] dropBBB(bool x, bool[*] y)
+{ /* Scalar drop scalar */
+  return(drop([toi(x)], [y]));
+}
+
+inline int[*] dropIII(int x, int[*] y)
+{ /* Scalar drop non-scalar */
+  return(drop([toi(x)], y));
+}
+
+inline int[.,.] takeIII(int[.] x, int[.,.] y)
+{ /* vector take matrix */
+  return(take(toi(x),y));
+}
+
+inline int[.]  rhoXBI(bool[+] y)
+{ /* Shape of non-scalar */
+ return(shape(y));
+}
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline int[.] iotaXBI(bool y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline bool[*] quadXBB(bool[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[.]  rhoXII(int[+] y)
+{ /* Shape of non-scalar */
+ return(shape(y));
+}
+
+inline int[.]  rhoXCI(char[+] y)
+{ /* Shape of non-scalar */
+ return(shape(y));
+}
+
+inline int[.] comaBII(bool[.] x, int[.] y)
+{ /* VxV catenate first or last axis */
+ return(toI(x)++toI(y));
+}
+
+inline bool[2] comaBBB(bool x, bool y)
+{/* SxS catenate first (or last) axis */
+ return([toB(x)]++[toB(y)]);
+}
+
+inline bool[.] comaBBB(bool[.] x, bool y)
+{/* VxS catenate first (or last) axis */
+ return(toB(x)++[toB(y)]);
+}
+
+inline int[.] comaIBI(int[.] x, bool[.] y)
+{ /* VxV catenate first or last axis */
+ return(toI(x)++toI(y));
+}
+
+inline int[.] comaIII(int[.] x, int[.] y)
+{ /* VxV catenate first or last axis */
+ return(toI(x)++toI(y));
+}
+
+inline int[.] utakIII(int[.] x, int y)
+{ /* Non-floating Vector represent scalar */
+  /* Taken from ISO Extended APL standard Draft N93.03, page 155 */
+  wts = genarray(shape(x),toI(1));
+  for(i=shape(x)[[0]]-2; i>=0; i--)
+        wts[[i]] = wts[[i+1]] * toI(x[[i+1]]);
+  z = genarray(shape(x),0);
+  cy = toI(y);
+  for(i=shape(x)[[0]]-1; i>=0; i--){
+        z[[i]] = modIII(toI(x[[i]]),cy/wts[[i]]);
+        /* Must use fuzz-less call to mod!! */
+        /* Represent is NOT fuzzy (SAPL Ref Man p.6-47, 1991 */
+        cy = cy - z[[i]] * wts[[i]];
+  }
+ return(z);
+}
+
+
+
+inline int dtakIII(int[.] x, int[.] y)
+{ /* Vector basevalue vector */
+  /* 3 cases - all give 22200:
+   *    10 10 10 basevalue 200 200 200
+   *    10 10 10 basevalue 200
+   *    (,10) basevalue 200 200 200
+   */
+ ycols = (shape(y))[[0]];
+ if (1 == ycols){       /* Maybe extend y */
+        ycols = shape(x)[[0]];
+        y = genarray([ycols],y[[0]]);
+ }
+ if (1 == shape(x)[[0]]){       /* Maybe extend x */
+        x = genarray([ycols], x[[0]]);
+ }
+ weights = genarray([ycols], toI(1));
+ for (i=ycols-2; i>=0; i--)
+        weights[[i]]= weights[[i+1]]*toI(x[[i+1]]);
+ z = with {
+        ([0] <= iv < [ycols])
+                : weights[iv] * toI(y[iv]);
+        } : fold(+, 0);
+ return(z);
+}
+
+inline bool sameBIB(bool[+] x, int[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqIIB(toI( x),  toI( y)))));
+  return(z);
+}
+
+
+
+inline bool sameBBB(bool[+] x, bool[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqBBB(toB( x),  toB( y)))));
+  return(z);
+}
+
+
+
+inline bool sameIBB(int[+] x, bool[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqIIB(toI( x),  toI( y)))));
+  return(z);
+}
+
+
+
+inline bool sameIIB(int[+] x, int[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqIIB(toI( x),  toI( y)))));
+  return(z);
+}
+
+
+
+inline bool sameCCB(char[+] x, char[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqCCB(toC( x),  toC( y)))));
+  return(z);
+}
+
+
+
+inline bool[*] indr(bool[+] X, int I)
+{ /* X[scalarI;;;] */
+  /* Used only in conjunction with other indexing, e.g.,
+   * X[scalarI;;j;]
+   */
+ z = X[[I]];
+ return(z);
+}
+
+
+
+
+inline int[*] indr(int[+] X, int I)
+{ /* X[scalarI;;;] */
+  /* Used only in conjunction with other indexing, e.g.,
+   * X[scalarI;;j;]
+   */
+ z = X[[I]];
+ return(z);
+}
+
+
+
+
+inline char[*] indr(char[+] X, int I)
+{ /* X[scalarI;;;] */
+  /* Used only in conjunction with other indexing, e.g.,
+   * X[scalarI;;j;]
+   */
+ z = X[[I]];
+ return(z);
+}
+
+
+
+
+inline bool[+] inds0(bool[+] X, int  I0, bool Yin)
+{ /* X[;;nonscalarI;;;]<- scalarY */
+ 
+ z = BtoB(X);
+ Y = Yin;
+
+ 
+ z[[I0]]=BtoB((Y));
+
+ 
+ return(z);
+}
+
+
+
+inline int[+] inds0(int[+] X, int  I0, int Yin)
+{ /* X[;;nonscalarI;;;]<- scalarY */
+ 
+ z = ItoI(X);
+ Y = Yin;
+
+ 
+ z[[I0]]=ItoI((Y));
+
+ 
+ return(z);
+}
+
+
+
+inline char[+] inds0(char[+] X, int  I0, char Yin)
+{ /* X[;;nonscalarI;;;]<- scalarY */
+ 
+ z = CtoC(X);
+ Y = Yin;
+
+ 
+ z[[I0]]=CtoC((Y));
+
+ 
+ return(z);
+}
+
+
+
+inline bool[.] bslBBB(bool x, bool[.] y)
+{/* Scalar expand scalar (first or last axis) */
+ /* In practice, one-element left arguments to expand
+  * are nearly useless...
+  */
+  z = (true == toB(x))  ?  y  :  [false];
+  return(z);
+}
+
+
+inline bool[.] slBBB(bool x, bool y)
+{ /* Scalar replicate scalar */
+ z = with {
+        (. <= iv <= .)
+                : y;
+        } : genarray([toi(x)]);
+ return(z);
+}
+
+inline int[.] slBII(bool x, int[.] y)
+{ /* Scalar replicate vector */
+ cell = genarray([toi(x)], 0);
+ z = with {
+        (. <= iv <= .)
+                : genarray([toi(x)], y[iv]);
+        } : genarray(shape(y), cell);
+ return(comaXII(z));
+}
+
+
+inline int[.] slBII(bool x, int y)
+{ /* Scalar replicate scalar */
+ z = with {
+        (. <= iv <= .)
+                : y;
+        } : genarray([toi(x)]);
+ return(z);
+}
+
+inline char[.] slBCC(bool x, char[.] y)
+{ /* Scalar replicate vector */
+ cell = genarray([toi(x)], ' ');
+ z = with {
+        (. <= iv <= .)
+                : genarray([toi(x)], y[iv]);
+        } : genarray(shape(y), cell);
+ return(comaXCC(z));
+}
+
+
+inline int[+] slBII(bool x, int[+] y)
+{ /* Boolean scalar compress non-scalar */
+  sy = shape(y);
+  z = (true == toB(x)) ?  y  : genarray(drop([-1],sy)++[0],0);
+  return(z);
+}
+
+inline int[.] bslBII(bool x, int[.] y)
+{/* Scalar expand scalar (first or last axis) */
+ /* In practice, one-element left arguments to expand
+  * are nearly useless...
+  */
+  z = (true == toB(x))  ?  y  :  [0];
+  return(z);
+}
+
+
+inline char[.] bslBCC(bool x, char[.] y)
+{/* Scalar expand scalar (first or last axis) */
+ /* In practice, one-element left arguments to expand
+  * are nearly useless...
+  */
+  z = (true == toB(x))  ?  y  :  [' '];
+  return(z);
+}
+
+
+inline int mpyslXIIQUICKSTOP(int[.] y)
+{ /* First/last axis reduction of vector with quick stop*/
+  z = with {
+         (0*shape(y) <= iv < shape(y))
+                : ItoI(y[iv]);
+        } : foldfix( mpyIII, ItoI(1), ItoI(0));
+  return(z);
+}
+
+
+inline bool andslXBBQUICKSTOP(bool[.] y)
+{ /* First/last axis reduction of vector with quick stop*/
+  z = with {
+         (0*shape(y) <= iv < shape(y))
+                : BtoB(y[iv]);
+        } : foldfix( andBBB, ItoB(1), ItoB(0));
+  return(z);
+}
+
+
+inline int modXII(int y)
+{ return(abs(toI(y)));
+}
+
+inline int barXII(int y)
+{ return(-y);
+}
+
+inline int mpyIII(int x, int y)
+{ return(ItoI(x)*ItoI(y));
+}
+
+inline bool ltIBB(int x, bool y)
+{ /* A<B on Boot/Int/Char */
+  return(ItoI(x)<BtoI(y));
+}
+
+inline int mpyBII(bool x, int y)
+{ return(BtoI(x)*ItoI(y));
+}
+
+inline int maxIII(int x, int y)
+{ /* x max y */
+ return (max(ItoI(x),ItoI(y)));
+}
+
+inline int barIII(int x, int y)
+{ return(ItoI(x)-ItoI(y));
+}
+
+inline int minIII(int x, int y)
+{ /* x min y */
+ return (min(ItoI(x),ItoI(y)));
+}
+
+inline int plusIII(int x, int y)
+{ return(ItoI(x)+ItoI(y));
+}
+
+inline int modIII(int x, int y)
+{ /* SxS residue (aka modulo) */
+  /* (x residue y) <-->   y-x times floor y divide x + 0 = x  */
+  /* See model residueI in workspace UTDScalarI.dws */
+  x = ItoI(x);
+  y = ItoI(y);
+  if( 0 != x) {
+    q = y / x;
+    z = y - ( x * q);
+  } else {
+    z = y;
+  }
+
+  if( z != 0) {
+    if( mpyXII( x) != mpyXII( y)) {
+      z = z + x;
+    }
+  }
+ return(z);
+}
+
+
+inline bool andBBB(bool x, bool y)
+{ return(BtoB(x)&BtoB(y));
+}
+
+inline int[+] mpyBII(bool[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : mpyBII(xel,y);
+	} : genarray( shape(x), 0);
+  return(z);
+}
+
+
+inline int[+] maxIII(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : maxIII(xel,yel);
+	} : genarray(shape(y), 0);
+  return(z);
+}
+
+
+inline int[+] maxIII(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : maxIII(xel,y);
+	} : genarray( shape(x), 0);
+  return(z);
+}
+
+
+inline int[+] barIII(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : barIII(xel,yel);
+	} : genarray(shape(y), 0);
+  return(z);
+}
+
+
+inline int[+] barIII(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : barIII(xel,y);
+	} : genarray( shape(x), 0);
+  return(z);
+}
+
+
+inline int[+] minIII(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : minIII(xel,yel);
+	} : genarray(shape(y), 0);
+  return(z);
+}
+
+
+inline int[+] minIII(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : minIII(xel,y);
+	} : genarray( shape(x), 0);
+  return(z);
+}
+
+
+inline int[+] plusIII(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : plusIII(xel,yel);
+	} : genarray(shape(y), 0);
+  return(z);
+}
+
+
+inline int[+] plusIII(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : plusIII(xel,y);
+	} : genarray( shape(x), 0);
+  return(z);
+}
+
+
+inline bool[+] eqIIB(int[+] x, int[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : eqIIB(xel,yel);
+        } : genarray(sy, false);
+  return(z);
+}
+
+
+
+
+
+
+inline bool[+] eqBBB(bool[+] x, bool[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : eqBBB(xel,yel);
+        } : genarray(sy, false);
+  return(z);
+}
+
+
+
+
+
+
+inline bool[+] eqCCB(char[+] x, char[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : eqCCB(xel,yel);
+        } : genarray(sy, false);
+  return(z);
+}
+
+
+
+
+
+
+inline bool[.] comaXBB(bool[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline char[.] comaXCC(char[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline bool[*] indrfr(int fr, bool[+] X, int[+] I)
+{ /* X[;;;I;;;], where I has fr (framerank) semicolons to its left */
+  /* This is actually "I from"fr X" */
+  frameshape = take([fr], shape(X));
+  cellshape =  shape(I)++drop([fr+1], shape(X));
+  cell = genarray(cellshape, false);
+ z = with {
+        (. <= iv <= .)
+                : indrfr0(X[iv], I);
+        } : genarray(frameshape, cell);
+ return(z);
+}
+
+inline bool[*] indrfr0(bool[+] X, int[+] I)
+{ /* X[I;;;] or    I from X */
+  cellshape =  drop([1], shape(X));
+  cell = genarray(cellshape, false);
+ z = with {
+        (. <= iv <= .)
+                : sel( I[iv], X);
+        } : genarray(shape(I), cell);
+ return(z);
+}
+
+
+
+inline bool[*] indrfr(int fr, bool[+] X, int I)
+{ /* X[;;;I;;;], where I has fr (framerank) semicolons to its left */
+  /* This is actually "I from"fr X" */
+ frameshape = take([fr], shape(X));
+ cellshape = drop([1+fr],shape(X));
+ cell = genarray(cellshape,false);
+ z = with {
+        (. <= iv <= .)
+                : sel( I, X[iv]);
+        } : genarray(frameshape, cell);
+ return(z);
+}
+
+
+inline int[*] indrfr(int fr, int[+] X, int[+] I)
+{ /* X[;;;I;;;], where I has fr (framerank) semicolons to its left */
+  /* This is actually "I from"fr X" */
+  frameshape = take([fr], shape(X));
+  cellshape =  shape(I)++drop([fr+1], shape(X));
+  cell = genarray(cellshape, 0);
+ z = with {
+        (. <= iv <= .)
+                : indrfr0(X[iv], I);
+        } : genarray(frameshape, cell);
+ return(z);
+}
+
+inline int[*] indrfr0(int[+] X, int[+] I)
+{ /* X[I;;;] or    I from X */
+  cellshape =  drop([1], shape(X));
+  cell = genarray(cellshape, 0);
+ z = with {
+        (. <= iv <= .)
+                : sel( I[iv], X);
+        } : genarray(shape(I), cell);
+ return(z);
+}
+
+
+
+inline int[*] indrfr(int fr, int[+] X, int I)
+{ /* X[;;;I;;;], where I has fr (framerank) semicolons to its left */
+  /* This is actually "I from"fr X" */
+ frameshape = take([fr], shape(X));
+ cellshape = drop([1+fr],shape(X));
+ cell = genarray(cellshape,0);
+ z = with {
+        (. <= iv <= .)
+                : sel( I, X[iv]);
+        } : genarray(frameshape, cell);
+ return(z);
+}
+
+
+inline char[*] indrfr(int fr, char[+] X, int[+] I)
+{ /* X[;;;I;;;], where I has fr (framerank) semicolons to its left */
+  /* This is actually "I from"fr X" */
+  frameshape = take([fr], shape(X));
+  cellshape =  shape(I)++drop([fr+1], shape(X));
+  cell = genarray(cellshape, ' ');
+ z = with {
+        (. <= iv <= .)
+                : indrfr0(X[iv], I);
+        } : genarray(frameshape, cell);
+ return(z);
+}
+
+inline char[*] indrfr0(char[+] X, int[+] I)
+{ /* X[I;;;] or    I from X */
+  cellshape =  drop([1], shape(X));
+  cell = genarray(cellshape, ' ');
+ z = with {
+        (. <= iv <= .)
+                : sel( I[iv], X);
+        } : genarray(shape(I), cell);
+ return(z);
+}
+
+
+
+inline char[*] indrfr(int fr, char[+] X, int I)
+{ /* X[;;;I;;;], where I has fr (framerank) semicolons to its left */
+  /* This is actually "I from"fr X" */
+ frameshape = take([fr], shape(X));
+ cellshape = drop([1+fr],shape(X));
+ cell = genarray(cellshape,' ');
+ z = with {
+        (. <= iv <= .)
+                : sel( I, X[iv]);
+        } : genarray(frameshape, cell);
+ return(z);
+}
+
+
+inline int V2O( int[.] shp, int[.] iv)
+{ /* Vector iv to offset into array of shape shp */
+  /* See V2O.dws workspace */
+  offset = 0;
+  wt = 1;
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    offset = offset + ( wt * iv[i]);
+    wt = wt * shp[i];
+  }
+  return( offset);
+}
+
+inline int[.] O2V( int[.] shp, int offset)
+{ /* Offset into array of shape shp to index vector */
+  /* See V2O.dws workspace */
+  iv = genarray( shape(shp), 1);
+  wts = iv;
+  for( i=shape(shp)[0]-2; i>=0; i--) {
+    wts[i] = wts[i+1] * shp[i+1];
+  }
+
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    iv[i] = _aplmod_SxS_( offset/wts[i], shp[i]);
+    offset = offset - (iv[i]*wts[i]);
+  }
+  return( iv);
+}
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline int ABC(int I, int Xshape)
+{ /* (OLD) Array bounds check for indexed ref X[scalarI] & indexed assign */
+ z = I;
+ return(z);
+}
+
+inline int[+] ABC(int[+] I, int Xshape)
+{ /* (OLD) Array bounds check for indexed ref X[nonscalarI] & indexed assign */
+ z = I;
+ return(z);
+}
+
+inline int mpyXII(int y)
+{ /* signum int/double */
+   if( toI(0) == y) {
+    z = 0;
+  } else {
+    if( toI(0) < y) {
+      z = 1;
+    } else {
+      z = -1;
+    }
+  }
+  return(z);
+}
+
+inline bool eqIIB(int x, int y)
+{ /* A=B on non-doubles */
+ return(ItoI(x) == ItoI(y));
+}
+
+inline bool eqBBB(bool x, bool y)
+{ /* A=B on non-doubles */
+ return(BtoB(x) == BtoB(y));
+}
+
+inline bool eqCCB(char x, char y)
+{ /* A=B on non-doubles */
+ return(CtoC(x) == CtoC(y));
+}
+
+inline bool[+] eqIIB(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : eqIIB(xel,yel);
+	} : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqIIB(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : eqIIB(xel,y);
+	} : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline bool[+] eqBBB(bool x, bool[+] y)
+{ /* SxA scalar function */
+  xel = toB(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toB(y[iv]);
+      		} : eqBBB(xel,yel);
+	} : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqBBB(bool[+] x, bool y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : eqBBB(xel,y);
+	} : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline bool[+] eqCCB(char x, char[+] y)
+{ /* SxA scalar function */
+  xel = toC(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toC(y[iv]);
+      		} : eqCCB(xel,yel);
+	} : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqCCB(char[+] x, char y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : eqCCB(xel,y);
+	} : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline bool FillXBB(bool[.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBBB(false,y);
+ A_18=bslBBB(false,A_17);
+ A_19=rhoCBB([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline bool[.] DropBBB(bool x, bool y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBBB(true,y);
+ y_0=( A_54);
+ A_56=comaXBB( x);
+ x_0=( A_56);
+ A_58=rhoXBI( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXBI( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaBII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_68=mpyBII(A_67,zr_0);
+ // dsf scalar(s)
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf scalar(s)
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf scalar(s)
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillXBB( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIBB(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toB(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf scalar(s)
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXBB( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIBB(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline bool[.] TakeBBB(bool x, bool y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBBB(true,y);
+ y_0=( A_57);
+ A_59=comaXBB( x);
+ x_0=( A_59);
+ A_61=rhoXBI( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXBI( y_0);
+ A_66=rhoXBI( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaBII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf scalar(s)
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_74=mpyBII(A_73,A_71);
+ // dsf scalar(s)
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf scalar(s)
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_81=mpyBII(A_80,A_78);
+ // dsf scalar(s)
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf scalar(s)
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillXBB( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIBB(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toB(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf scalar(s)
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXBB( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf scalar(s)
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIBB(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int UTTakeDrop_mainXXI()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ S0_0=( false);
+ S1_0=( true);
+ A_215=comaXBB( true);
+ V1_0=( A_215);
+ A_217=comaXBB( false);
+ V0_0=( A_217);
+ A_220=iotaXBI( false,QUADio_0);
+ Vn_0=( A_220);
+ V10100_0=( [true,false,true,false,false]);
+ V101011_0=( [true,false,true,false,true,true]);
+ A_225=iotaXII( 24,QUADio_0);
+ A_226=rhoIII([2, 3, 4],A_225);
+ M234_0=( A_226);
+ A_229=iotaXBI( false,QUADio_0);
+ A_230=takeBBB(false,true);
+ A_232=sameBIB(A_230,A_229);
+ r_0=( A_232);
+ A_235=TakeBBB(false,true,QUADio_0);
+ A_236=takeBBB(false,true);
+ A_238=sameBBB(A_236,A_235);
+ r_1=( A_238);
+ A_240=comaXBB( false);
+ A_242=iotaXBI( false,QUADio_0);
+ A_243=takeBII(true,A_242);
+ A_245=sameIBB(A_243,A_240);
+ A_246=comaBBB(r_1,A_245);
+ r_2=( A_246);
+ A_249=iotaXBI( false,QUADio_0);
+ A_251=TakeCLONE4BII(true,A_249,QUADio_0);
+ A_253=iotaXBI( false,QUADio_0);
+ A_254=takeBII(true,A_253);
+ A_256=sameIIB(A_254,A_251);
+ A_257=comaBBB(r_2,A_256);
+ r_3=( A_257);
+ A_259=takeIII(3,2);
+ A_261=sameIIB(A_259,[2, 0, 0]);
+ A_262=comaBBB(r_3,A_261);
+ r_4=( A_262);
+ A_265=TakeCLONE5III(3,2,QUADio_0);
+ A_266=takeIII(3,2);
+ A_268=sameIIB(A_266,A_265);
+ A_269=comaBBB(r_4,A_268);
+ r_5=( A_269);
+ A_271=takeIII(-3,5);
+ A_273=sameIIB(A_271,[0, 0, 5]);
+ A_274=comaBBB(r_5,A_273);
+ r_6=( A_274);
+ A_277=TakeCLONE6III(-3,5,QUADio_0);
+ A_278=takeIII(-3,5);
+ A_280=sameIIB(A_278,A_277);
+ A_281=comaBBB(r_6,A_280);
+ r_7=( A_281);
+ A_283=takeICC(4,['x','y']);
+ A_285=sameCCB(A_283,['x','y',' ',' ']);
+ A_286=comaBBB(r_7,A_285);
+ r_8=( A_286);
+ A_289=TakeCLONE7ICC(4,['x','y'],QUADio_0);
+ A_290=takeICC(4,['x','y']);
+ A_292=sameCCB(A_290,A_289);
+ A_293=comaBBB(r_8,A_292);
+ r_9=( A_293);
+ A_295=takeICC(-4,['x','y']);
+ A_297=sameCCB(A_295,[' ',' ','x','y']);
+ A_298=comaBBB(r_9,A_297);
+ r_10=( A_298);
+ A_301=TakeCLONE8ICC(-4,['x','y'],QUADio_0);
+ A_302=takeICC(-4,['x','y']);
+ A_304=sameCCB(A_302,A_301);
+ A_305=comaBBB(r_10,A_304);
+ r_11=( A_305);
+ A_307=takeICC(3,['a','b','c','d']);
+ A_309=sameCCB(A_307,['a','b','c']);
+ A_310=comaBBB(r_11,A_309);
+ r_12=( A_310);
+ A_313=TakeCLONE9ICC(3,['a','b','c','d'],QUADio_0);
+ A_314=takeICC(3,['a','b','c','d']);
+ A_316=sameCCB(A_314,A_313);
+ A_317=comaBBB(r_12,A_316);
+ r_13=( A_317);
+ A_319=takeIII(-3,[1, 3, 8, 9]);
+ A_321=sameIIB(A_319,[3, 8, 9]);
+ A_322=comaBBB(r_13,A_321);
+ r_14=( A_322);
+ A_325=TakeCLONE10III(-3,[1, 3, 8, 9],QUADio_0);
+ A_326=takeIII(-3,[1, 3, 8, 9]);
+ A_328=sameIIB(A_326,A_325);
+ A_329=comaBBB(r_14,A_328);
+ r_15=( A_329);
+ A_331=comaXBB( false);
+ A_332=dropBBB(false,false);
+ A_334=sameBBB(A_332,A_331);
+ A_335=comaBBB(r_15,A_334);
+ r_16=( A_335);
+ A_337=comaXBB( false);
+ A_339=DropBBB(false,false,QUADio_0);
+ A_341=sameBBB(A_339,A_337);
+ A_342=comaBBB(r_16,A_341);
+ r_17=( A_342);
+ A_345=iotaXII( 4,QUADio_0);
+ A_346=dropIII(2,A_345);
+ A_348=sameIIB(A_346,[2, 3]);
+ A_349=comaBBB(r_17,A_348);
+ r_18=( A_349);
+ A_352=iotaXII( 4,QUADio_0);
+ A_354=DropCLONE11III(2,A_352,QUADio_0);
+ A_356=sameIIB(A_354,[2, 3]);
+ A_357=comaBBB(r_18,A_356);
+ r_19=( A_357);
+ A_360=iotaXII( 4,QUADio_0);
+ A_361=dropIII(-1,A_360);
+ A_363=sameIIB(A_361,[0, 1, 2]);
+ A_364=comaBBB(r_19,A_363);
+ r_20=( A_364);
+ A_367=iotaXII( 4,QUADio_0);
+ A_369=DropCLONE12III(-1,A_367,QUADio_0);
+ A_371=sameIIB(A_369,[0, 1, 2]);
+ A_372=comaBBB(r_20,A_371);
+ r_21=( A_372);
+ A_375=iotaXBI( false,QUADio_0);
+ A_377=iotaXII( 5,QUADio_0);
+ A_378=dropIII(6,A_377);
+ A_380=sameIIB(A_378,A_375);
+ A_381=comaBBB(r_21,A_380);
+ r_22=( A_381);
+ A_384=iotaXBI( false,QUADio_0);
+ A_386=iotaXII( 5,QUADio_0);
+ A_388=DropCLONE13III(6,A_386,QUADio_0);
+ A_390=sameIIB(A_388,A_384);
+ A_391=comaBBB(r_22,A_390);
+ r_23=( A_391);
+ A_394=iotaXBI( false,QUADio_0);
+ A_396=iotaXII( 5,QUADio_0);
+ A_397=dropIII(-6,A_396);
+ A_399=sameIIB(A_397,A_394);
+ A_400=comaBBB(r_23,A_399);
+ r_24=( A_400);
+ A_403=iotaXBI( false,QUADio_0);
+ A_405=iotaXII( 5,QUADio_0);
+ A_406=dropIII(-6,A_405);
+ A_408=sameIIB(A_406,A_403);
+ A_409=comaBBB(r_24,A_408);
+ r_25=( A_409);
+ A_411=comaIBI([0, 0, 2, 3],[false,false,false,false]);
+A_412=comaBII([false,false,false,true],A_411);
+ A_413=rhoIII([3, 4],A_412);
+ A_415=iotaXII( 4,QUADio_0);
+ A_416=rhoIII([2, 2],A_415);
+ A_417=takeIII([3, -4],A_416);
+ A_419=sameIIB(A_417,A_413);
+ A_420=comaBBB(r_25,A_419);
+ r_26=( A_420);
+ A_423=iotaXII( 4,QUADio_0);
+ A_424=rhoIII([2, 2],A_423);
+ A_426=TakeCLONE14III([3, -4],A_424,QUADio_0);
+ A_428=iotaXII( 4,QUADio_0);
+ A_429=rhoIII([2, 2],A_428);
+ A_430=takeIII([3, -4],A_429);
+ A_432=sameIIB(A_430,A_426);
+ A_433=comaBBB(r_26,A_432);
+ r_27=( A_433);
+ A_436=iotaXII( 4,QUADio_0);
+ A_437=rhoIII([2, 2],A_436);
+ A_439=TakeCLONE15III([3, 4],A_437,QUADio_0);
+ A_441=iotaXII( 4,QUADio_0);
+ A_442=rhoIII([2, 2],A_441);
+ A_443=takeIII([3, 4],A_442);
+ A_445=sameIIB(A_443,A_439);
+ A_446=comaBBB(r_27,A_445);
+ r_28=( A_446);
+ A_449=iotaXII( 4,QUADio_0);
+ A_450=rhoIII([2, 2],A_449);
+ A_452=TakeCLONE16III([-3, 4],A_450,QUADio_0);
+ A_454=iotaXII( 4,QUADio_0);
+ A_455=rhoIII([2, 2],A_454);
+ A_456=takeIII([-3, 4],A_455);
+ A_458=sameIIB(A_456,A_452);
+ A_459=comaBBB(r_28,A_458);
+ r_29=( A_459);
+ A_462=iotaXII( 4,QUADio_0);
+ A_463=rhoIII([2, 2],A_462);
+ A_465=TakeCLONE17III([-3, -4],A_463,QUADio_0);
+ A_467=iotaXII( 4,QUADio_0);
+ A_468=rhoIII([2, 2],A_467);
+ A_469=takeIII([-3, -4],A_468);
+ A_471=sameIIB(A_469,A_465);
+ A_472=comaBBB(r_29,A_471);
+ r_30=( A_472);
+ A_475=iotaXII( 20,QUADio_0);
+ A_476=rhoIII([4, 5],A_475);
+ A_478=TakeCLONE18III([2, 3],A_476,QUADio_0);
+ A_480=iotaXII( 20,QUADio_0);
+ A_481=rhoIII([4, 5],A_480);
+ A_482=takeIII([2, 3],A_481);
+ A_484=sameIIB(A_482,A_478);
+ A_485=comaBBB(r_30,A_484);
+ r_31=( A_485);
+ A_488=iotaXII( 20,QUADio_0);
+ A_489=rhoIII([4, 5],A_488);
+ A_491=TakeCLONE19III([2, -3],A_489,QUADio_0);
+ A_493=iotaXII( 20,QUADio_0);
+ A_494=rhoIII([4, 5],A_493);
+ A_495=takeIII([2, -3],A_494);
+ A_497=sameIIB(A_495,A_491);
+ A_498=comaBBB(r_31,A_497);
+ r_32=( A_498);
+ A_501=iotaXII( 20,QUADio_0);
+ A_502=rhoIII([4, 5],A_501);
+ A_504=TakeCLONE20III([-2, 3],A_502,QUADio_0);
+ A_506=iotaXII( 20,QUADio_0);
+ A_507=rhoIII([4, 5],A_506);
+ A_508=takeIII([-2, 3],A_507);
+ A_510=sameIIB(A_508,A_504);
+ A_511=comaBBB(r_32,A_510);
+ r_33=( A_511);
+ A_514=iotaXII( 20,QUADio_0);
+ A_515=rhoIII([4, 5],A_514);
+ A_517=TakeCLONE21III([-2, -3],A_515,QUADio_0);
+ A_519=iotaXII( 20,QUADio_0);
+ A_520=rhoIII([4, 5],A_519);
+ A_521=takeIII([-2, -3],A_520);
+ A_523=sameIIB(A_521,A_517);
+ A_524=comaBBB(r_33,A_523);
+ r_34=( A_524);
+ A_527=iotaXII( 12,QUADio_0);
+ A_528=rhoIII([3, 4],A_527);
+ A_530=DropCLONE22III([2, 2],A_528,QUADio_0);
+ A_532=iotaXII( 12,QUADio_0);
+ A_533=rhoIII([3, 4],A_532);
+ A_534=dropIII([2, 2],A_533);
+ A_536=sameIIB(A_534,A_530);
+ A_537=comaBBB(r_34,A_536);
+ r_35=( A_537);
+ A_540=iotaXII( 12,QUADio_0);
+ A_541=rhoIII([3, 4],A_540);
+ A_543=DropCLONE23III([2, -2],A_541,QUADio_0);
+ A_545=iotaXII( 12,QUADio_0);
+ A_546=rhoIII([3, 4],A_545);
+ A_547=dropIII([2, -2],A_546);
+ A_549=sameIIB(A_547,A_543);
+ A_550=comaBBB(r_35,A_549);
+ r_36=( A_550);
+ A_553=iotaXII( 12,QUADio_0);
+ A_554=rhoIII([3, 4],A_553);
+ A_556=DropCLONE24III([-2, 2],A_554,QUADio_0);
+ A_558=iotaXII( 12,QUADio_0);
+ A_559=rhoIII([3, 4],A_558);
+ A_560=dropIII([-2, 2],A_559);
+ A_562=sameIIB(A_560,A_556);
+ A_563=comaBBB(r_36,A_562);
+ r_37=( A_563);
+ A_566=iotaXII( 12,QUADio_0);
+ A_567=rhoIII([3, 4],A_566);
+ A_569=DropCLONE25III([-2, -2],A_567,QUADio_0);
+ A_571=iotaXII( 12,QUADio_0);
+ A_572=rhoIII([3, 4],A_571);
+ A_573=dropIII([-2, -2],A_572);
+ A_575=sameIIB(A_573,A_569);
+ A_576=comaBBB(r_37,A_575);
+ r_38=( A_576);
+ A_579=iotaXII( 12,QUADio_0);
+ A_580=rhoIII([3, 4],A_579);
+ A_582=DropCLONE26III(2,A_580,QUADio_0);
+ A_584=iotaXII( 12,QUADio_0);
+ A_585=rhoIII([3, 4],A_584);
+ A_586=dropIII(2,A_585);
+ A_588=sameIIB(A_586,A_582);
+ A_589=comaBBB(r_38,A_588);
+ r_39=( A_589);
+ A_592=iotaXII( 12,QUADio_0);
+ A_593=rhoIII([3, 4],A_592);
+ A_595=DropCLONE27III(-2,A_593,QUADio_0);
+ A_597=iotaXII( 12,QUADio_0);
+ A_598=rhoIII([3, 4],A_597);
+ A_599=dropIII(-2,A_598);
+ A_601=sameIIB(A_599,A_595);
+ A_602=comaBBB(r_39,A_601);
+ r_40=( A_602);
+ A_605=iotaXII( 12,QUADio_0);
+ A_606=rhoIII([3, 4],A_605);
+ A_608=DropCLONE28III([3, 2],A_606,QUADio_0);
+ A_610=iotaXII( 12,QUADio_0);
+ A_611=rhoIII([3, 4],A_610);
+ A_612=dropIII([3, 2],A_611);
+ A_614=sameIIB(A_612,A_608);
+ A_615=comaBBB(r_40,A_614);
+ r_41=( A_615);
+ A_618=iotaXII( 12,QUADio_0);
+ A_619=rhoIII([3, 4],A_618);
+ A_621=DropCLONE29III([2, 4],A_619,QUADio_0);
+ A_623=iotaXII( 12,QUADio_0);
+ A_624=rhoIII([3, 4],A_623);
+ A_625=dropIII([2, 5],A_624);
+ A_627=sameIIB(A_625,A_621);
+ A_628=comaBBB(r_41,A_627);
+ r_42=( A_628);
+ A_631=iotaXII( 12,QUADio_0);
+ A_632=rhoIII([3, 4],A_631);
+ A_634=DropCLONE30III([-3, 2],A_632,QUADio_0);
+ A_636=iotaXII( 12,QUADio_0);
+ A_637=rhoIII([3, 4],A_636);
+ A_638=dropIII([-3, 2],A_637);
+ A_640=sameIIB(A_638,A_634);
+ A_641=comaBBB(r_42,A_640);
+ r_43=( A_641);
+ A_644=iotaXII( 12,QUADio_0);
+ A_645=rhoIII([3, 4],A_644);
+ A_647=DropCLONE31III([2, -5],A_645,QUADio_0);
+ A_649=iotaXII( 12,QUADio_0);
+ A_650=rhoIII([3, 4],A_649);
+ A_651=dropIII([2, -5],A_650);
+ A_653=sameIIB(A_651,A_647);
+ A_654=comaBBB(r_43,A_653);
+ r_44=( A_654);
+ A_658=quadXBB( r_44,QUADpp_0,QUADpw_0);
+ A_659=andslXBBQUICKSTOP( r_44);
+ // dsf scalar(s)
+A_663=barBBI(true,A_659);
+ r_45=( A_663);
+ A_667=quadXII( A_663,QUADpp_0,QUADpw_0);
+ return(r_45);
+}
+
+inline int[.] TakeCLONE4BII(bool x, int[.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBII(true,y);
+ y_0=( A_57);
+ A_59=comaXBB( x);
+ x_0=( A_59);
+ A_61=rhoXII( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXII( y_0);
+ A_66=rhoXBI( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaBII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf scalar(s)
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_74=mpyBII(A_73,A_71);
+ // dsf scalar(s)
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf scalar(s)
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_81=mpyBII(A_80,A_78);
+ // dsf scalar(s)
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf scalar(s)
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE32XII( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIII(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf scalar(s)
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXII( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf scalar(s)
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIII(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int[.] TakeCLONE5III(int x, int y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBII(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXII( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXII( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf scalar(s)
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_74=mpyBII(A_73,A_71);
+ // dsf scalar(s)
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf scalar(s)
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_81=mpyBII(A_80,A_78);
+ // dsf scalar(s)
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf scalar(s)
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE33XII( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIII(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf scalar(s)
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXII( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf scalar(s)
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIII(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int[.] TakeCLONE6III(int x, int y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBII(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXII( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXII( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf scalar(s)
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_74=mpyBII(A_73,A_71);
+ // dsf scalar(s)
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf scalar(s)
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_81=mpyBII(A_80,A_78);
+ // dsf scalar(s)
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf scalar(s)
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE34XII( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIII(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf scalar(s)
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXII( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf scalar(s)
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIII(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline char[.] TakeCLONE7ICC(int x, char[.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBCC(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXCI( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXCI( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf scalar(s)
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_74=mpyBII(A_73,A_71);
+ // dsf scalar(s)
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf scalar(s)
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_81=mpyBII(A_80,A_78);
+ // dsf scalar(s)
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf scalar(s)
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE35XCC( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoICC(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toC(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf scalar(s)
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXCC( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf scalar(s)
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoICC(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline char[.] TakeCLONE8ICC(int x, char[.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBCC(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXCI( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXCI( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf scalar(s)
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_74=mpyBII(A_73,A_71);
+ // dsf scalar(s)
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf scalar(s)
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_81=mpyBII(A_80,A_78);
+ // dsf scalar(s)
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf scalar(s)
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE36XCC( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoICC(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toC(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf scalar(s)
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXCC( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf scalar(s)
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoICC(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline char[.] TakeCLONE9ICC(int x, char[.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBCC(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXCI( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXCI( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf scalar(s)
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_74=mpyBII(A_73,A_71);
+ // dsf scalar(s)
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf scalar(s)
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_81=mpyBII(A_80,A_78);
+ // dsf scalar(s)
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf scalar(s)
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE37XCC( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoICC(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toC(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf scalar(s)
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXCC( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf scalar(s)
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoICC(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int[.] TakeCLONE10III(int x, int[.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBII(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXII( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXII( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf scalar(s)
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_74=mpyBII(A_73,A_71);
+ // dsf scalar(s)
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf scalar(s)
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_81=mpyBII(A_80,A_78);
+ // dsf scalar(s)
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf scalar(s)
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE38XII( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIII(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf scalar(s)
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXII( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf scalar(s)
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIII(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int[.] DropCLONE11III(int x, int[.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_68=mpyBII(A_67,zr_0);
+ // dsf scalar(s)
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf scalar(s)
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf scalar(s)
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE39XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf scalar(s)
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int[.] DropCLONE12III(int x, int[.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_68=mpyBII(A_67,zr_0);
+ // dsf scalar(s)
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf scalar(s)
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf scalar(s)
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE40XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf scalar(s)
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int[.] DropCLONE13III(int x, int[.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf scalar(s)
+A_68=mpyBII(A_67,zr_0);
+ // dsf scalar(s)
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf scalar(s)
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf scalar(s)
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE41XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf scalar(s)
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int[.,.] TakeCLONE14III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBII(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXII( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXII( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf Check needed
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf Check needed
+A_74=mpyBII(A_73,A_71);
+ // dsf Check needed
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf Check needed
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf Check needed
+A_81=mpyBII(A_80,A_78);
+ // dsf Check needed
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf Check needed
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE42XII( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIII(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf Check needed
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXII( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf Check needed
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIII(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int[.,.] TakeCLONE15III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBII(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXII( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXII( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf Check needed
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf Check needed
+A_74=mpyBII(A_73,A_71);
+ // dsf Check needed
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf Check needed
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf Check needed
+A_81=mpyBII(A_80,A_78);
+ // dsf Check needed
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf Check needed
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE43XII( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIII(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf Check needed
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXII( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf Check needed
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIII(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int[.,.] TakeCLONE16III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBII(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXII( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXII( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf Check needed
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf Check needed
+A_74=mpyBII(A_73,A_71);
+ // dsf Check needed
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf Check needed
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf Check needed
+A_81=mpyBII(A_80,A_78);
+ // dsf Check needed
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf Check needed
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE44XII( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIII(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf Check needed
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXII( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf Check needed
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIII(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int[.,.] TakeCLONE17III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBII(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXII( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXII( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf Check needed
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf Check needed
+A_74=mpyBII(A_73,A_71);
+ // dsf Check needed
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf Check needed
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf Check needed
+A_81=mpyBII(A_80,A_78);
+ // dsf Check needed
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf Check needed
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE45XII( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIII(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf Check needed
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXII( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf Check needed
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIII(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int[.,.] TakeCLONE18III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBII(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXII( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXII( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf Check needed
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf Check needed
+A_74=mpyBII(A_73,A_71);
+ // dsf Check needed
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf Check needed
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf Check needed
+A_81=mpyBII(A_80,A_78);
+ // dsf Check needed
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf Check needed
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE46XII( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIII(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf Check needed
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXII( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf Check needed
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIII(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int[.,.] TakeCLONE19III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBII(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXII( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXII( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf Check needed
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf Check needed
+A_74=mpyBII(A_73,A_71);
+ // dsf Check needed
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf Check needed
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf Check needed
+A_81=mpyBII(A_80,A_78);
+ // dsf Check needed
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf Check needed
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE47XII( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIII(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf Check needed
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXII( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf Check needed
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIII(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int[.,.] TakeCLONE20III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBII(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXII( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXII( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf Check needed
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf Check needed
+A_74=mpyBII(A_73,A_71);
+ // dsf Check needed
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf Check needed
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf Check needed
+A_81=mpyBII(A_80,A_78);
+ // dsf Check needed
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf Check needed
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE48XII( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIII(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf Check needed
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXII( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf Check needed
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIII(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int[.,.] TakeCLONE21III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_57=slBII(true,y);
+ y_0=( A_57);
+ A_59=comaXII( x);
+ x_0=( A_59);
+ A_61=rhoXII( y_0);
+ shpy_0=( A_61);
+ // dsf scalar(s)
+A_63=mpyBII(false,shpy_0);
+ zr_0=( A_63);
+ A_65=rhoXII( y_0);
+ A_66=rhoXII( x_0);
+ A_67=dropIII(A_66,A_65);
+ A_68=comaIII(x_0,A_67);
+ vext_0=( A_68);
+ A_70=barXII( vext_0);
+ // dsf Check needed
+A_71=barIII(A_70,shpy_0);
+ // dsf scalar(s)
+A_73=ltIBB(vext_0,false);
+ // dsf Check needed
+A_74=mpyBII(A_73,A_71);
+ // dsf Check needed
+A_75=maxIII(zr_0,A_74);
+ lb_0=( A_75);
+ // dsf Check needed
+A_77=plusIII(shpy_0,vext_0);
+ // dsf scalar(s)
+A_78=maxBII(false,A_77);
+ // dsf scalar(s)
+A_80=ltIBB(vext_0,false);
+ // dsf Check needed
+A_81=mpyBII(A_80,A_78);
+ // dsf Check needed
+A_82=maxIII(zr_0,A_81);
+ ylb_0=( A_82);
+ A_84=modXII( vext_0);
+ shpz_0=( A_84);
+ // dsf Check needed
+A_86=minIII(shpz_0,shpy_0);
+ ub_0=( A_86);
+ A_88=FillCLONE49XII( y_0);
+ A_89=mpyslXIIQUICKSTOP( shpz_0);
+ A_93=rhoIII(A_89,A_88);
+ r_0=( A_93);
+ A_95=mpyslXIIQUICKSTOP( ub_0);
+ A_100=iotaXII( A_95,QUADio);
+ A_CTR101_= 0;
+A_CTR101z_ = (shape(A_100)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR101_ <= A_CTR101z_; A_CTR101_++){
+i_0 = A_100[[A_CTR101_]];
+ A_103=utakIII(ub_0,i_0);
+ iv_0=( A_103);
+ // dsf Check needed
+A_105=plusIII(ylb_0,iv_0);
+ A_106=dtakIII(shpy_0,A_105);
+ A_108=comaXII( y_0);
+ A_107= ABC(toi(A_106)-QUADio,shape(A_108)[0]);
+A_110=A_108[[A_107]];
+ el_0=( A_110);
+ // dsf Check needed
+A_112=plusIII(lb_0,iv_0);
+ A_113=dtakIII(shpz_0,A_112);
+ A_114= ABC(toi(A_113)-QUADio,shape(r_2)[0]);
+A_116=inds0(r_2,A_114,el_0);
+ r_2=( A_116);
+ }
+ A_119=rhoIII(shpz_0,r_2);
+ r_3=( A_119);
+ return(r_3);
+}
+
+inline int[.,.] DropCLONE22III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf Check needed
+A_68=mpyBII(A_67,zr_0);
+ // dsf Check needed
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf Check needed
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf Check needed
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE50XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf Check needed
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int[.,.] DropCLONE23III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf Check needed
+A_68=mpyBII(A_67,zr_0);
+ // dsf Check needed
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf Check needed
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf Check needed
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE51XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf Check needed
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int[.,.] DropCLONE24III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf Check needed
+A_68=mpyBII(A_67,zr_0);
+ // dsf Check needed
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf Check needed
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf Check needed
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE52XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf Check needed
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int[.,.] DropCLONE25III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf Check needed
+A_68=mpyBII(A_67,zr_0);
+ // dsf Check needed
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf Check needed
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf Check needed
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE53XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf Check needed
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int[.,.] DropCLONE26III(int x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf Check needed
+A_68=mpyBII(A_67,zr_0);
+ // dsf Check needed
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf Check needed
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf Check needed
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE54XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf Check needed
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int[.,.] DropCLONE27III(int x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf Check needed
+A_68=mpyBII(A_67,zr_0);
+ // dsf Check needed
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf Check needed
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf Check needed
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE55XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf Check needed
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int[.,.] DropCLONE28III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf Check needed
+A_68=mpyBII(A_67,zr_0);
+ // dsf Check needed
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf Check needed
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf Check needed
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE56XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf Check needed
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int[.,.] DropCLONE29III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf Check needed
+A_68=mpyBII(A_67,zr_0);
+ // dsf Check needed
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf Check needed
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf Check needed
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE57XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf Check needed
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int[.,.] DropCLONE30III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf Check needed
+A_68=mpyBII(A_67,zr_0);
+ // dsf Check needed
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf Check needed
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf Check needed
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE58XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf Check needed
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int[.,.] DropCLONE31III(int[.] x, int[.,.] y,int QUADio)
+{ 
+/*
+ ?
+*/
+A_54=slBII(true,y);
+ y_0=( A_54);
+ A_56=comaXII( x);
+ x_0=( A_56);
+ A_58=rhoXII( y_0);
+ shpy_0=( A_58);
+ // dsf scalar(s)
+A_60=mpyBII(false,shpy_0);
+ zr_0=( A_60);
+ A_62=rhoXII( x_0);
+ A_63=dropIII(A_62,zr_0);
+ A_64=comaIII(x_0,A_63);
+ vext_0=( A_64);
+ // dsf scalar(s)
+A_67=ltIBB(vext_0,false);
+ // dsf Check needed
+A_68=mpyBII(A_67,zr_0);
+ // dsf Check needed
+A_69=maxIII(vext_0,A_68);
+ ylb_0=( A_69);
+ A_71=modXII( vext_0);
+ // dsf Check needed
+A_72=barIII(shpy_0,A_71);
+ // dsf scalar(s)
+A_73=maxBII(false,A_72);
+ shpz_0=( A_73);
+ // dsf Check needed
+A_75=minIII(shpz_0,shpy_0);
+ ub_0=( A_75);
+ A_77=FillCLONE59XII( y_0);
+ A_78=mpyslXIIQUICKSTOP( shpz_0);
+ A_82=rhoIII(A_78,A_77);
+ r_0=( A_82);
+ A_84=mpyslXIIQUICKSTOP( ub_0);
+ A_89=iotaXII( A_84,QUADio);
+ A_CTR90_= 0;
+A_CTR90z_ = (shape(A_89)[[0]])-1;
+r_2=toI(r_0);
+for(; A_CTR90_ <= A_CTR90z_; A_CTR90_++){
+i_0 = A_89[[A_CTR90_]];
+ A_92=utakIII(ub_0,i_0);
+ iv_0=( A_92);
+ // dsf Check needed
+A_94=plusIII(ylb_0,iv_0);
+ A_95=dtakIII(shpy_0,A_94);
+ A_97=comaXII( y_0);
+ A_96= ABC(toi(A_95)-QUADio,shape(A_97)[0]);
+A_99=A_97[[A_96]];
+ el_0=( A_99);
+ A_101=dtakIII(shpz_0,iv_0);
+ A_102= ABC(toi(A_101)-QUADio,shape(r_2)[0]);
+A_104=inds0(r_2,A_102,el_0);
+ r_2=( A_104);
+ }
+ A_107=rhoIII(shpz_0,r_2);
+ r_3=( A_107);
+ return(r_3);
+}
+
+inline int FillCLONE32XII(int[.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE33XII(int[.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE34XII(int[.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline char FillCLONE35XCC(char[.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBCC(false,y);
+ A_18=bslBCC(false,A_17);
+ A_19=rhoCCC([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline char FillCLONE36XCC(char[.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBCC(false,y);
+ A_18=bslBCC(false,A_17);
+ A_19=rhoCCC([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline char FillCLONE37XCC(char[.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBCC(false,y);
+ A_18=bslBCC(false,A_17);
+ A_19=rhoCCC([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE38XII(int[.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE39XII(int[.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE40XII(int[.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE41XII(int[.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE42XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE43XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE44XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE45XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE46XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE47XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE48XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE49XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE50XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE51XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE52XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE53XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE54XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE55XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE56XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE57XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE58XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+
+inline int FillCLONE59XII(int[.,.] y )
+{ 
+/*
+ ?
+*/
+A_17=rhoBII(false,y);
+ A_18=bslBII(false,A_17);
+ A_19=rhoCII([:char],A_18);
+r_0=( A_19);
+ return(r_0);
+}
+

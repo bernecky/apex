@@ -1,0 +1,8 @@
+use UTRollDeal: all;
+
+int main()
+{
+  z=UTRollDeal::UTRollDeal_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

@@ -1,0 +1,4 @@
+ r←ipape siz;m
+⍝ inner product and point equal
+ m←(2⍴siz)⍴'abcdefghijk'
+ r←+/+/m∧.=⍉m

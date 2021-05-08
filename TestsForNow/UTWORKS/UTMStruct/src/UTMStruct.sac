@@ -1,0 +1,451 @@
+module UTMStruct;
+
+use Array: all;
+use ArrayFormat: all;
+use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
+
+// Compiled by APEX Version: wss/apex.20210504 2021-05-04 14:44:35.931
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+export all;
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline int[.] comaXII(int y)
+{ /* Ravel of scalar */
+  return([y]);
+}
+
+inline int[.] comaXII(int[.] y)
+{ /* Ravel of vector is NOP */
+        return(y);
+}
+
+
+inline int[.] comaXII(int[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline int[1,1] combXII(int y)
+{ /* Table of scalar */
+ z = reshape([1,1],y);
+ return(z);
+}
+
+inline int[.,.] combXII(int[.] y)
+{ /* Table on vector */
+  shpz = shape(y) ++ [1];
+  z = reshape(shpz, y);
+  return(z);
+}
+
+inline int[.,.] combXII(int[+] y)
+{ /* Table on matrix */
+ shpy = shape(y);
+ shpz = take([1],shpy) ++ [prod(drop([1],shpy))];
+ z = reshape( shpz, y);
+ return(z);
+}
+
+inline int tranXII(int y)
+{ /* Transpose and reverse on scalars are NOPs */
+  return(y);
+}
+
+inline int[.] tranXII(int[.] y)
+{ /* Transpose on vectors is NOP */
+        return(y);
+}
+
+inline int[.,.] tranXII(int[.,.] y)
+{ /* Transpose on rank-2 */
+        z = { [i,j] -> y[j,i] };
+        return(z);
+}
+
+inline int[+] tranXII(int[+] y)
+{ /* General transpose */
+        z = TRANSPOSE(y);
+        return(z);
+}
+
+
+inline int rotrXII(int y)
+{ /* Transpose and reverse on scalars are NOPs */
+  return(y);
+}
+
+inline int rot1XII(int y)
+{ /* Transpose and reverse on scalars are NOPs */
+  return(y);
+}
+
+inline int[.] rotrXII(int[.] y)
+{ /* Vector reverse */
+  z = Array::reverse( 0, y);
+  return( z);
+}
+
+inline int[+] rot1XII(int[+] y)
+{ /* First axis reverse on anything */
+  z = Array::reverse( 0, y);
+  return( z);
+}
+
+inline int[+] rotrXII(int[+] y)
+{/* Last axis reverse on rank>1 */
+  axis = _dim_A_( y) - 1;
+  z = Array::reverse( axis, y);
+  return( z);
+}
+
+inline int[.] rhoBII(bool x, int y)
+{ // [Scalar reshape scalar]
+  z = genarray( [toi(x)],y);
+  return(z);
+}
+
+inline int[*] rhoIII(int[.] x, int[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), 0);
+   return( z);
+}
+
+
+
+inline int[*] rhoBII(bool[.] x, int[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), 0);
+   return( z);
+}
+
+
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline bool[*] quadXBB(bool[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline bool[2] comaBBB(bool x, bool y)
+{/* SxS catenate first (or last) axis */
+ return([toB(x)]++[toB(y)]);
+}
+
+inline bool[.] comaBBB(bool[.] x, bool y)
+{/* VxS catenate first (or last) axis */
+ return(toB(x)++[toB(y)]);
+}
+
+inline bool sameIIB(int[+] x, int[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqIIB(toI( x),  toI( y)))));
+  return(z);
+}
+
+
+
+inline bool sameIIB(int x, int y)
+{ /* Scalar match scalar */
+  z = eqIIB(toI(x), toI(y));
+ return(z);
+}
+
+
+
+inline bool andslXBBQUICKSTOP(bool[.] y)
+{ /* First/last axis reduction of vector with quick stop*/
+  z = with {
+         (0*shape(y) <= iv < shape(y))
+                : BtoB(y[iv]);
+        } : foldfix( andBBB, ItoB(1), ItoB(0));
+  return(z);
+}
+
+
+inline bool eqIIB(int x, int y)
+{ /* A=B on non-doubles */
+ return(ItoI(x) == ItoI(y));
+}
+
+inline bool andBBB(bool x, bool y)
+{ return(BtoB(x)&BtoB(y));
+}
+
+inline bool[+] eqIIB(int[+] x, int[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+	sy = shape(y);
+	z = with {
+		( . <= iv <= .) {
+			xel = x[iv];
+			yel = y[iv];
+		} : eqIIB(xel,yel);
+        } : genarray(sy, false);
+  return(z);
+}
+
+
+
+
+
+
+inline int[+] TRANSPOSE(int[+] y)
+{ /* Generic monadic transpose */
+  z = with {
+        ( . <= iv <= .)
+                : y[reverse( iv)];
+        }: genarray( reverse( shape(y)), 0);
+  return(z);
+}
+
+inline int V2O( int[.] shp, int[.] iv)
+{ /* Vector iv to offset into array of shape shp */
+  /* See V2O.dws workspace */
+  offset = 0;
+  wt = 1;
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    offset = offset + ( wt * iv[i]);
+    wt = wt * shp[i];
+  }
+  return( offset);
+}
+
+inline int[.] O2V( int[.] shp, int offset)
+{ /* Offset into array of shape shp to index vector */
+  /* See V2O.dws workspace */
+  iv = genarray( shape(shp), 1);
+  wts = iv;
+  for( i=shape(shp)[0]-2; i>=0; i--) {
+    wts[i] = wts[i+1] * shp[i+1];
+  }
+
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    iv[i] = _aplmod_SxS_( offset/wts[i], shp[i]);
+    offset = offset - (iv[i]*wts[i]);
+  }
+  return( iv);
+}
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline bool[+] eqIIB(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+	( . <= iv <= .) {
+        	yel = toI(y[iv]);
+      		} : eqIIB(xel,yel);
+	} : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqIIB(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+	( . <= iv <= .) {
+		xel = x[iv];
+	} : eqIIB(xel,y);
+	} : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline bool[.] testmstructXXB(int QUADio)
+{ 
+/*
+ ?
+*/
+A_60=rhoBII(true,5);
+ A_61=comaXII( 5);
+ A_63=sameIIB(A_61,A_60);
+ r_0=( A_63);
+ A_65=comaXII( [4, 5]);
+ A_67=sameIIB(A_65,[4, 5]);
+ A_68=comaBBB(r_0,A_67);
+ r_1=( A_68);
+ A_71=iotaXII( 24,QUADio);
+ A_73=iotaXII( 24,QUADio);
+ A_74=rhoIII([2, 3, 4],A_73);
+ A_75=comaXII( A_74);
+ A_77=sameIIB(A_75,A_71);
+ A_78=comaBBB(r_1,A_77);
+ r_2=( A_78);
+ A_80=rhoBII([true,true],5);
+ A_81=combXII( 5);
+ A_83=sameIIB(A_81,A_80);
+ A_84=comaBBB(r_2,A_83);
+ r_3=( A_84);
+ A_86=rhoIII([2, 1],[2, 3]);
+ A_87=combXII( [2, 3]);
+ A_89=sameIIB(A_87,A_86);
+ A_90=comaBBB(r_3,A_89);
+ r_4=( A_90);
+ A_93=iotaXII( 24,QUADio);
+ A_94=rhoIII([2, 12],A_93);
+ A_96=iotaXII( 24,QUADio);
+ A_97=rhoIII([2, 3, 4],A_96);
+ A_98=combXII( A_97);
+ A_100=sameIIB(A_98,A_94);
+ A_101=comaBBB(r_4,A_100);
+ r_5=( A_101);
+ A_103=tranXII( 5);
+ A_105=sameIIB(A_103,5);
+ A_106=comaBBB(r_5,A_105);
+ r_6=( A_106);
+ A_108=tranXII( [2, 3]);
+ A_110=sameIIB(A_108,[2, 3]);
+ A_111=comaBBB(r_6,A_110);
+ r_7=( A_111);
+ A_113=rhoIII([3, 2],[0, 3, 1, 4, 2, 5]);
+ A_115=iotaXII( 6,QUADio);
+ A_116=rhoIII([2, 3],A_115);
+ A_117=tranXII( A_116);
+ A_119=sameIIB(A_117,A_113);
+ A_120=comaBBB(r_7,A_119);
+ r_8=( A_120);
+ A_122=rhoIII([4, 3, 2],[0, 12, 4, 16, 8, 20, 1, 13, 5, 17, 9, 21, 2, 14, 6, 18, 10, 22, 3, 15, 7, 19, 11, 23]);
+ A_124=iotaXII( 24,QUADio);
+ A_125=rhoIII([2, 3, 4],A_124);
+ A_126=tranXII( A_125);
+ A_128=sameIIB(A_126,A_122);
+ A_129=comaBBB(r_8,A_128);
+ r_9=( A_129);
+ A_131=rotrXII( 5);
+ A_133=sameIIB(A_131,5);
+ A_134=comaBBB(r_9,A_133);
+ r_10=( A_134);
+ A_136=rot1XII( 5);
+ A_138=sameIIB(A_136,5);
+ A_139=comaBBB(r_10,A_138);
+ r_11=( A_139);
+ A_141=rotrXII( [1, 2, 3]);
+ A_143=sameIIB(A_141,[3, 2, 1]);
+ A_144=comaBBB(r_11,A_143);
+ r_12=( A_144);
+ A_146=rot1XII( [1, 2, 3]);
+ A_148=sameIIB(A_146,[3, 2, 1]);
+ A_149=comaBBB(r_12,A_148);
+ r_13=( A_149);
+ A_151=rhoIII([2, 3],[2, 1, 0, 5, 4, 3]);
+ A_153=iotaXII( 6,QUADio);
+ A_154=rhoIII([2, 3],A_153);
+ A_155=rotrXII( A_154);
+ A_157=sameIIB(A_155,A_151);
+ A_158=comaBBB(r_13,A_157);
+ r_14=( A_158);
+ A_160=rhoIII([2, 3],[3, 4, 5, 0, 1, 2]);
+ A_162=iotaXII( 6,QUADio);
+ A_163=rhoIII([2, 3],A_162);
+ A_164=rot1XII( A_163);
+ A_166=sameIIB(A_164,A_160);
+ A_167=comaBBB(r_14,A_166);
+ r_15=( A_167);
+ A_169=rhoIII([2, 3, 4],[3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8, 15, 14, 13, 12, 19, 18, 17, 16, 23, 22, 21, 20]);
+ A_171=iotaXII( 24,QUADio);
+ A_172=rhoIII([2, 3, 4],A_171);
+ A_173=rotrXII( A_172);
+ A_175=sameIIB(A_173,A_169);
+ A_176=comaBBB(r_15,A_175);
+ r_16=( A_176);
+ A_178=rhoIII([2, 3, 4],[12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+ A_180=iotaXII( 24,QUADio);
+ A_181=rhoIII([2, 3, 4],A_180);
+ A_182=rot1XII( A_181);
+ A_184=sameIIB(A_182,A_178);
+ A_185=comaBBB(r_16,A_184);
+ r_17=( A_185);
+ return(r_17);
+}
+
+inline int UTMStruct_mainXXI()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toI(( false));
+ n_0=( 250000);
+ QUADrl_1=( 16807);
+ QUADpp_1=( 16);
+ QUADpw_1=( 80);
+ A_51=testmstructXXB( QUADio_1);
+ r_0=( A_51);
+ A_55=quadXBB( A_51,QUADpp_1,QUADpw_1);
+ A_56=andslXBBQUICKSTOP( r_0);
+ // dsf scalar(s)
+A_60=barBBI(true,A_56);
+r_1=( A_60);
+ A_64=quadXII( r_1,QUADpp_1,QUADpw_1);
+ return(r_1);
+}
+

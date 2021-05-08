@@ -1,0 +1,8 @@
+use UTCompress: all;
+
+int main()
+{
+  z=UTCompress::UTCompress_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

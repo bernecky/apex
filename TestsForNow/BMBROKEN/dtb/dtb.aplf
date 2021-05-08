@@ -1,0 +1,5 @@
+ r←dtb y;x
+⍝ Remove trailing blanks from matrix y
+⍝ AKA "removetrail" in Retrieve
+ x←+/∨\⌽∨⌿y≠' '
+ r←((1↑⍴y),x)↑y

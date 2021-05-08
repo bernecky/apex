@@ -1,0 +1,55 @@
+use Array: {shape,sel,modarray,genarray,toi,iota,++,match,-,+,<,<=};
+
+int main()
+{ 
+ A_132=iota( 24);
+ M=_reshape_VxA_([2, 3, 4],A_132);
+ A_293=iota( 48);
+ A_294=_reshape_VxA_([4, 3, 4],A_293);
+ A_295 = M++ M;
+ r_21=[sameIIB(A_295,A_294)];
+ z_3 =_reshape_VxA_([3, 3, 4],iota(36));
+
+ z_4=inds0xx(z_3,2,5);
+ cell = genarray([1,3,4], 666);
+ A_310 = ((M)++cell);
+ A_312=sameIIB(A_310,z_4);
+ r_22=r_21 ++[A_312];
+ A_315=rot1III(-1,z_4);
+ cell = genarray( [1,3,4], 42);
+ A_316 = cell++toi(M);
+ A_318=sameIIB(A_316,A_315);
+ z=r_22 ++ [A_318];
+StdIO::show("r_22 is:"); 
+ StdIO::print(r_22);
+StdIO::show("A_318 is:"); 
+ StdIO::print(A_318);
+
+ z=r_22 ++ [A_318];
+StdIO::show("z is:"); 
+ StdIO::print(z);
+ return(0);
+}
+
+inline bool sameIIB(int[+] x, int[+] y)
+{ /* Non-scalar match non-scalar */
+ return(match((x),toi(y)));
+}
+
+inline int[+] inds0xx(int[+] X, int  I0, int Yin)
+{ /* X[;;nonscalarI;;;]<- scalarY */
+ z = toi(X);
+ Y = genarray([3,4 ],Yin);
+ z[[I0]]=toi(Y);
+ return(z);
+}
+
+inline int[+] rot1III(int k, int[+] y)
+{ /* Scalar rotate first axis non-scalar */
+ defcell = genarray([3,4], 0);
+ z = with {
+        (. <= [i] <= .) : y[[i]];
+         } : genarray([3], defcell);
+ return(z);
+}
+

@@ -1,4 +1,4 @@
  Trace←{
-     isTrace 2↓⎕THIS:⍵
+     isTrace 2↓⍕⎕THIS:⍵
      0 0⍴' '
  }

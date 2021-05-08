@@ -1,0 +1,8 @@
+use UTClone: all;
+
+int main()
+{
+  z=UTClone::UTClone_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

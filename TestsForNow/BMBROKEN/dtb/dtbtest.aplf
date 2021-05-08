@@ -1,0 +1,5 @@
+ r←dtbtest n;d
+⍝ Test dtb with arguments of shape n
+ n←2⍴n
+ r←⍴dtb d←n⍴'x' ⍝ All
+ r←r,⍴dtb d←n⍴' ' ⍝ or nothing

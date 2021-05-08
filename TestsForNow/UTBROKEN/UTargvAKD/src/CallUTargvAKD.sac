@@ -1,0 +1,9 @@
+use UTargvAKD: all;
+
+int main()
+{
+  arg = 5;
+  z=UTargvAKD::UTargvAKD_mainXII( arg);
+  StdIO::show(z);
+  return(0);
+}

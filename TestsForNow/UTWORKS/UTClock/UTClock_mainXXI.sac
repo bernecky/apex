@@ -1,0 +1,8 @@
+use UTClock: all;
+
+int main()
+{
+  z=UTClock::UTClock_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

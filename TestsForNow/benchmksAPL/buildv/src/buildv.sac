@@ -10,7 +10,7 @@ use RTClock: all;
 use StdIO : all;
 use String: {to_string,tochar,sscanf};
 
-// Compiled by APEX Version: wss/apex.20210401 2021-04-19 16:19:05.586
+// Compiled by APEX Version: wss/apex.20210504 2021-05-04 15:17:45.001
 /*
 % This is the APEX stdlib.sis include file.
 % Standard equates and constants for APL compiler

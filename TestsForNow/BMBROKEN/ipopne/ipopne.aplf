@@ -1,0 +1,4 @@
+ r←ipopne siz;m
+⍝ inner product or point not equal
+ m←(2⍴siz)⍴'abcdefghijk'
+ r←(×/⍴m)-+/+/m∨.≠⍉m

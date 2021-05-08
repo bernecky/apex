@@ -1,0 +1,3 @@
+ r←rg bhistop n
+⍝ Time outer product histogram
+ r←+/histop n⍴⍳rg

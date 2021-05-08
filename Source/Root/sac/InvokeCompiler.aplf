@@ -2,7 +2,7 @@
      ismod←'module'≡6⍴GetFileChar ⍵ ⍝ Module vs. main()
      fldr←⍺
      ⎕←Trace(fts ⎕TS),': Starting to compile ',(D ismod⌷(E'main(): '),E'module: '),⍵
-     bld←fldr,PathDelim,'build',PathDelim
+     bld←FullPathName fldr,PathDelim,'build',PathDelim
      z←⎕SH'mkdir -p ',bld ⍝ Put genned code in build folder
      ⍝ This is not the same build folder that cmake uses,
      ⍝ but this can be changed if that is problematic
@@ -15,7 +15,7 @@
      ⍝ FIXME: find better home for sac2c options readd -doawlf -dopwlf
      cmd←'sac2c -v3 -O3 ',obj,lnk,⍵
      ⍝⍝⍝ sac2c TOO SLOW!!! z←⎕SH'cd ',fldr,'; ',cmd
-     z←bld,'SAC',ismod⌷'cm'
+     z←bld,'sac',ismod⌷'CM'
      junk←cmd PutFile z
      junk←chmod z
      ⎕←Trace(fts ⎕TS),': Finished compiling ',(D ismod⌷(E'main(): '),E'module: '),⍵

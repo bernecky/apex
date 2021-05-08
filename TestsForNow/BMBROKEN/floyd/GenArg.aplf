@@ -1,0 +1,4 @@
+ r←GenArg siz
+ ⍝ Argument generator for Floyd.
+ r←siz⍴0.5+⍳100
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/floyd/GenArg.ufn§0§ 2020 6 24 17 4 22 852 §cmwô§0

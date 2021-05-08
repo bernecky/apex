@@ -1,0 +1,8 @@
+use compiota: all;
+
+int main()
+{
+  z=compiota::compiota_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

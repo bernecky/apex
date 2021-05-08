@@ -1,0 +1,6 @@
+ r←x divideI y;⎕CT
+⍝# C-like "x/y" integer-integer divide
+ ⎕CT←0
+ r←floor|x÷y
+ r←r×(×x)××y
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTDScalarI/divideI.ufn§0§ 2020 6 24 17 4 22 832 §dVÖØ§0

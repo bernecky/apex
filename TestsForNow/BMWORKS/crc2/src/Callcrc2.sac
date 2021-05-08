@@ -1,0 +1,8 @@
+use crc2: all;
+
+int main()
+{
+  z=crc2::crc2_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

@@ -1,0 +1,24 @@
+// print(boolean vector) produces rubbish
+
+int main()
+{ 
+ b = [true, false, true, false, true, true]; // vector
+ StdIO::print(b);
+ StdIO::show(b);
+
+ s = _sel_VxA_([0], b);  // Scalar
+ StdIO::print(s);
+ StdIO::show(s);
+
+ v = _sel_VxA_([0], b);  // 1-el vector
+ v = [v];
+ StdIO::print(v);
+ StdIO::show(v);
+
+
+ m = _reshape_VxA_([2,3], b); // Matrix
+ StdIO::print(m);
+ StdIO::show(m);
+
+ return(0);
+}

@@ -1,0 +1,4 @@
+ r←a lcm b
+⍝ Least-common multiple
+ r←a×b÷a gcd b
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTRotate01/lcm.ufn§0§ 2020 6 24 17 4 22 840 §Srê§0

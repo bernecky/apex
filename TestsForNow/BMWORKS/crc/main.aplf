@@ -1,0 +1,13 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⍝ README: CRC computation
+ ⎕IO←0
+⍝⍝⎕←'Enter 1000000 or other problem size'
+⍝⍝n←''⍴⎕fi ⍞
+ n←1000000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ ⎕←r←crctest n
+ ⎕←r←(3.5-1.5)⊥r ⍝ Avoid int overflow
+ ⎕←r←1-r=3604692541.5-0.5
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/crc/main.ufn§0§ 2020 6 24 17 4 22 848 §äØFÈ§0

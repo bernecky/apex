@@ -1,0 +1,4 @@
+ r←benlogd siz
+⍝ Bench Bates' LOGDERIV function
+ r←+/LOGDERIV⍤1⊢(0.5+siz⍴⍳100)
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/logdrank1/benlogd.ufn§0§ 2020 6 24 17 4 22 860 §dwoT§0

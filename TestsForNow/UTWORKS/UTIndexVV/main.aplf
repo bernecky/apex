@@ -1,0 +1,10 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW;z
+ ⎕IO←0
+ n←5
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←testir n
+ ⎕←r
+ r←1-∧/r
+ ⎕←r

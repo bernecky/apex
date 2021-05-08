@@ -1,0 +1,9 @@
+ r←histlp y;i;ndx
+⍝ Generate histogram of y, where
+⍝ y is non-negative integers
+⍝ This version loops
+ r←(1+⌈/y)⍴0
+ :For i :In ⍳⍴y
+     ndx←y[i]
+     r[ndx]←r[ndx]+1
+ :EndFor

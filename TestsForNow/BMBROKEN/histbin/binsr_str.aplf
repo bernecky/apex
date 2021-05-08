@@ -1,0 +1,11 @@
+ Binvalue←NRange binsr_str Xdata;N;Scale;Integer;Bincount;I;Range;Count;T2;⎕IO
+⍝ Beau Webber "binning algorithm" (histogram)
+ ⎕IO←1 ⍝ Homage to Gitte
+ N←NRange[1]
+ Range←NRange[2 3]
+ Xdata←((Range[1]≤Xdata)∧(Range[2]>Xdata))/Xdata
+ Integer←⌊N×(Xdata-Range[1])÷-/Range[2 1]
+ Integer←(0≠Integer)/Integer
+ Bincount←N⍴0
+ Bincount[Integer]+←1
+ Binvalue←(Range[1]+(-/Range[2 1])×(¯0.5+⍳N)÷N),[1.5]Bincount

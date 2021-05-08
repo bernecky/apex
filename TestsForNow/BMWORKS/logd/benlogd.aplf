@@ -1,0 +1,5 @@
+ r←benlogd siz
+⍝ Bench Bates' LOGDERIV function
+⍝ Try data that may be more "typical"
+ r←LOGDERIV 0.5+siz⍴⍳100
+ r←+/r

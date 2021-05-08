@@ -1,0 +1,8 @@
+use csbench: all;
+
+int main()
+{
+  z=csbench::csbench_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

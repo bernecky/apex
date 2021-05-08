@@ -1,0 +1,17 @@
+ z←MKO2 n;i;j;⎕IO;⎕RL;v
+ ⍝ Input data generator, from Wai-Mee Ching
+ ⍝ 2012-02-21
+ ⍝ Slightly modified for esthetics...
+ ⍝ doubles, to avoid Dyalog short int
+ ⎕IO←0
+ z←(n,n)⍴0
+ ⎕RL←16807 ⍝ seed
+ :For i :In ⍳n
+     z[i;i]←0.5+10000000
+     :For j :In (i+1)↓⍳n
+         v←0.5+?1000
+         z[i;j]←v
+         z[j;i]←v
+     :EndFor
+ :EndFor
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/floyd/MKO2.ufn§0§ 2020 6 24 17 4 22 852 §öÚbC§0

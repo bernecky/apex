@@ -1,0 +1,4 @@
+ r←rg bhistlp n;Range
+⍝ Time Beau's histBin histogram
+ Range←1000 0,rg
+ r←+/Range binsr_str n⍴⍳rg

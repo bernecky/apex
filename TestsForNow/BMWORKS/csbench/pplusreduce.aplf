@@ -1,0 +1,8 @@
+ result←boolean pplusreduce array;t
+ ⍝ partitioned +/array.
+ ⍝ Each 1 in <boolean> designates the beginning of a part.
+ ⍝ ⎕io-independent.
+ ⍝ (sauce/pplusreduce.1 from the sharp apl utility library)
+ t←(1⌽boolean)/+\array
+ result←t-((-⍴⍴t)↑¯1)↓0,t
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/csbench/pplusreduce.ufn§0§ 2020 6 24 17 4 22 848 §zwLj§0

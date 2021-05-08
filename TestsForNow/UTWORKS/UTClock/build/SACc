@@ -1,0 +1,1 @@
+sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UTWORKS/UTClock/build/CallUTClock.sac.exe -L /home/apex/apexgit/TestsForNow/UTWORKS/UTClock/build/ -T /home/apex/apexgit/TestsForNow/UTWORKS/UTClock/build/ /home/apex/apexgit/TestsForNow/UTWORKS/UTClock/src/CallUTClock.sac

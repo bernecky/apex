@@ -1,0 +1,4 @@
+ r←testdata n
+⍝ Create Hui-designed test data
+ r←(10/n)/⍳10
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/fd/testdata.ufn§0§ 2020 6 24 17 4 22 852 §bæaz§0

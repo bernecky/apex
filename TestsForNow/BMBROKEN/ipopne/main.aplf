@@ -1,0 +1,9 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ n←2000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←ipopne n
+ ⎕←r
+ ⎕←r←1-r=363638

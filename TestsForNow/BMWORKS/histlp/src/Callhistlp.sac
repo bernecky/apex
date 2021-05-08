@@ -1,0 +1,8 @@
+use histlp: all;
+
+int main()
+{
+  z=histlp::histlp_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

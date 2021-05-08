@@ -1,0 +1,11 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+⍝ Downgrade permutation vector
+ ⎕IO←0
+ n←10⌽⍳50000000 ⍝ NB. Permutation vector!
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←⍒n
+ r←1-r≡20⌽⌽n
+ ⎕←r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/downgradePV/main.ufn§0§ 2020 6 24 17 4 22 852 §àéüÀ§0

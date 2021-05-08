@@ -1,0 +1,6 @@
+ r←dtbtest2 n;d
+⍝ Test dtb with arguments of shape n
+ n←2⍴n
+ r←⍴dtb2 d←n⍴'x' ⍝ All
+ r←r,⍴dtb2 d←n⍴' ' ⍝ or nothing
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/dtb2/dtbtest2.ufn§0§ 2020 6 24 17 4 22 852 §kXÃW§0

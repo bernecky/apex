@@ -1,0 +1,8 @@
+use logd2: all;
+
+int main()
+{
+  z=logd2::logd2_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

@@ -1,0 +1,3 @@
+ r←x minus y
+⍝ APL2 needs dyadic function here. r←y[1]-y[0]
+ r←y-x

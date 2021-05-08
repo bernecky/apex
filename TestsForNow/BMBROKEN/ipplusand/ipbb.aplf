@@ -1,0 +1,4 @@
+ r←ipbb siz;m
+⍝ Inner product Boolean ∨.∧ Boolean
+ m←(2⍴siz)⍴0 1 1 0 0 0
+ r←+/+/m+.∧⍉m

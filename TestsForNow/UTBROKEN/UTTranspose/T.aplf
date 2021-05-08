@@ -1,0 +1,25 @@
+ z←x T y;wts;rankz;cwts;cp;ry;i;j;shpz;idx
+ ⍝ Dyadic transpose model.
+ x←,x
+ z←y
+ :If 0≠⍴⍴y
+     wts←⌽×\⌽1↓(⍴y),1
+     rankz←1+⌈/0,x-⎕IO
+     shpz←rankz⍴×/⍴y ⍝ Force min to work
+     cwts←shpz×0
+     :For i :In ⌽⍳⍴⍴y
+         j←x[i]-⎕IO
+         shpz[j]←shpz[j]⌊(⍴y)[i]
+         cwts[j]←cwts[j]+wts[i]
+     :EndFor
+     cp←cwts CartProdPlus shpz
+     ry←,y
+     z←(×/shpz)⍴y
+     :For i :In ⍳⍴cp
+         idx←cp[i]
+         z[i]←ry[idx]
+     :EndFor
+     shpz←((⍴shpz)⌊⍴⍴y)⍴shpz ⍝ Scalar y
+     z←shpz⍴z
+ :EndIf
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTTranspose/T.ufn§0§ 2020 6 24 17 4 22 844 §bûLBE§0

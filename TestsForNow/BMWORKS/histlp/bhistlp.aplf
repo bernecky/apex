@@ -1,0 +1,3 @@
+ r←rg bhistlp n
+⍝ Time loop histogram
+ r←+/histlp n⍴⍳rg

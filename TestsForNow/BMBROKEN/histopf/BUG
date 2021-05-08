@@ -1,0 +1,3 @@
+Assertion "size >= 0" failed at /home/sac/sac2c.AprilFool/sac2c/src/libsac2c/codegen/icm2c_std.c:1250 -- array with size <0 found!
+
+Maybe wsfull from 2*50 element array?

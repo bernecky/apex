@@ -1,0 +1,8 @@
+use UTQuery: all;
+
+int main()
+{
+  z=UTQuery::UTQuery_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

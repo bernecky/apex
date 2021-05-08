@@ -1,0 +1,1 @@
+sac2c -v3 -O3 -o TestsForNow/benchmksAPL/compiotad/build/ -L TestsForNow/benchmksAPL/compiotad/build/ -T TestsForNow/benchmksAPL/compiotad/build/ /home/apex/apexgit/TestsForNow/benchmksAPL/compiotad/src/compiotad.sac

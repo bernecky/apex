@@ -1,0 +1,4 @@
+ r←x CShiftl y
+⍝ C shiftl function. Works on integers x,y
+ r←Bool2Int y↓(Int2Bool x),y⍴0
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/crc2/CShiftl.ufn§0§ 2020 6 24 17 4 22 848 §cÕÁà§0

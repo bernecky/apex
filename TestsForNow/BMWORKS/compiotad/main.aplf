@@ -1,0 +1,14 @@
+ r←main;n;⎕IO;⎕CT;⎕PP;⎕PW
+ ⍝ README: WLF performance of compress-iota on doubles
+ ⎕IO←0
+ ⎕CT←1E¯13
+ ⎕PP←16
+ ⎕PW←80
+⍝⍝⎕←'Enter 40000000 or problem size'
+⍝⍝n←1↑(⎕fi ⍞),40000000
+ n←40000000
+ r←compiota n
+ ⎕←r
+ r←1-3124985000000=r ⍝ Is answer correct?
+ ⎕←r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/compiotad/main.ufn§0§ 2020 6 24 17 4 22 848 §æiãf§0

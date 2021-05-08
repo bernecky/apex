@@ -1,0 +1,26 @@
+ r←table32 p;gl;gl31;g;i;j
+⍝
+⍝ Create table (256×32, really four tables)
+⍝ for fast CRC algorithm
+⍝ given order-32 polynomial as a 32-element
+⍝ boolean coefficient vector
+⍝ Algorithm adapted from 'Computation of Cyclic
+⍝ Redundancy Checks via
+⍝ Table Lookup', CACM Aug 1988, volume 31 Number 8
+⍝
+ g←1 64⍴p←64↑⌽p ⍝ x0,x1,,,,x63
+ :For j :In ⍳7
+     gl←g[¯1+(⍴g)[0];]
+     gl31←gl[31] ⍝ GL31 is x↑31 term.
+     g←g⍪(¯1↓0,gl)≠gl31∧p
+ :EndFor
+ g←⊖⌽g
+⍝
+⍝ g is now the generating polynomial;
+⍝ now just make the table
+⍝
+ i←⍉32 8 256⍴2 2 2 2 2 2 2 2⊤⍳256 ⍝ Generator for tables
+ r←i∧256 8 32⍴g[;32+⍳32] ⍝ 256×32 table
+⍝⍝⍝ r←≠/[1] r ⍝ Temp kludge for APEX
+ r←1=2|+/0 2 1⍉r ⍝  Temp kludge for APEX
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/crc2/table32.ufn§0§ 2020 6 24 17 4 22 848 §cYÂÜC§0

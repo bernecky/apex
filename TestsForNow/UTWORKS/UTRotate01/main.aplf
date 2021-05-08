@@ -1,0 +1,6 @@
+ r←main
+⍝# Rotate rank 0 and 1 unit tests
+ r←UTRotate
+ ⎕←r
+ ⎕←r←1-∧/r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTRotate01/main.ufn§0§ 2020 6 24 17 4 22 840 §ePJm§0

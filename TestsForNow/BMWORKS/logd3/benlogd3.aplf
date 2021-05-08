@@ -1,0 +1,3 @@
+ r←benlogd3 siz
+⍝ Bench Bates' LOGDERIV function
+ r←+/logd3 0.5+siz⍴⍳100

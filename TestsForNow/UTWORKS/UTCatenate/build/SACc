@@ -1,0 +1,1 @@
+sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UTWORKS/UTCatenate/build/CallUTCatenate.sac.exe -L /home/apex/apexgit/TestsForNow/UTWORKS/UTCatenate/build/ -T /home/apex/apexgit/TestsForNow/UTWORKS/UTCatenate/build/ /home/apex/apexgit/TestsForNow/UTWORKS/UTCatenate/src/CallUTCatenate.sac

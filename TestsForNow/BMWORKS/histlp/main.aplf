@@ -1,0 +1,9 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ n←5000000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←+/1000 bhistlp n
+ ⎕←r
+ ⎕←r←1-r=n ⍝ fake result

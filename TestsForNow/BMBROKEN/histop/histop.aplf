@@ -1,0 +1,5 @@
+ r←histop y
+⍝ Generate histogram of y, where
+⍝ y is non-negative integers
+⍝ This version uses outer product
+ r←+/(⍳1+⌈/y)∘.=y

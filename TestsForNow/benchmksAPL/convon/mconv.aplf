@@ -1,0 +1,6 @@
+ r←x mconv y;tr;wz
+⍝ Execute convolution problem using big temps
+ wz←0.01×1+⍳x
+ tr←0.01×1+⍳y
+ r←+/wz conv tr
+ ⎕←'using conv1/convn',+/wz convn tr
