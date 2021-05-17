@@ -1,0 +1,14 @@
+ dno←tjck ymd;yr;mo;day;a;coeff;mlen
+ yr←+/1 0 0/ymd
+ mo←+/0 1 0/ymd
+ day←+/0 0 1/ymd
+ coeff←365 0.25 0.01 0.0025 0.00025
+⍝coeff←365, ÷ 4 100 400 4000
+ mlen←0 31 61 92 122 153 184 214 245 275 306 337
+⍝mlen←+\0 31 30 31 30 31 31 30 31 30 31 31
+ yr←yr+(mo>2)+¯1+(yr<100)×100×STSCfloor 1066÷100
+⍝yr←yr+(mo>2)-1
+ dno←(STSCfloor yr∘.×coeff)+.×1 1 ¯1 1 ¯1
+⍝dno←+/dno×(⍴dno←STSCfloor yr∘.×coeff)⍴1 1 ¯1 1 ¯1
+ dno←dno+day+mlen[12|mo-3]
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/tjckAKD/tjck.ufn§0§ 2020 6 24 17 4 23 36 §Pémä§0

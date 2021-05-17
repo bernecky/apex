@@ -1,0 +1,6 @@
+ r←rx correct x;n
+⍝ Return x at edges, otherwise rx+x
+ r←x
+ n←1+⍳¯2+(⍴x)[1]
+ r[n;n]←rx+r[n;n]
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatvInlined/correct.ufn§0§ 2020 6 24 17 4 23 40 §euDô§0

@@ -1,0 +1,14 @@
+ r←x datay n;yin;yij;nod
+⍝ Tomcatv benchmark
+⍝ Model based on John Feo's SISAL 1.2 benchmark
+⍝ This is transpose (sort of) of fortran version
+⍝ Initial field for x(i,j)
+⍝ with stretch factor alfa
+⍝ Following code corresponds to DO loop 1
+⍝ in the Fortran version.
+ yin←,(1-0.9×x[0;])×x[0;n-1]
+ r←x[0;]∘.×0.9-0.81×x[0;]
+ r[;n-1]←0.1×x[0;]
+ r[;0]←x[0;]
+ r[n-1;]←yin
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatv2/datay.ufn§0§ 2020 6 24 17 4 23 40 §ófÕL§0

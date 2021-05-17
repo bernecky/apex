@@ -1,5 +1,4 @@
  gcd←{       ⍝ Greatest common divisor.
      ⍵=0:⍺
      ⍵ ∇ ⍵|⍺
-⍝∇⍣§/home/apex/apexgit/TestsForNow/UTRotate01/gcd.ufn§0§ 2020 6 24 17 4 22 840 §dÜzò§0
  }

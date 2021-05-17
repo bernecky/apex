@@ -1,0 +1,8 @@
+ r←loopfs n;i
+⍝ Same as loopis, but floating point scalar value
+ r←2.5-2.5    ⍝ Stop Dyalog from turning 0.0 into 0
+ :For i :In ⍳n
+     r←r+i
+ :EndFor
+ r←+/r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/loopfs/loopfs.ufn§0§ 2020 6 24 17 4 22 860 §hwÂB§0

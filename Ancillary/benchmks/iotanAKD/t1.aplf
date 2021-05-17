@@ -1,0 +1,9 @@
+ r←t1 y;i
+⍝ +/ the hard way
+ testr←0
+ i←y
+lp:→(0>i←i-1)⍴lz
+ r←r+i
+ →lp
+lz:r←r,+/⍳y
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/iotanAKD/t1.ufn§0§ 2020 6 24 17 4 22 856 §fÅvà§0

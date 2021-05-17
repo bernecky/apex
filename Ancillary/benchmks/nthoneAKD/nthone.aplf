@@ -1,0 +1,9 @@
+ r←d nthone siz;b;r3;r4;last;⎕IO
+⍝ locate nTH one in boolean vector of siz elements, of density 1 in d
+ ⎕IO←0
+ b←d genboolean siz
+ last←⎕IO+(+/b)-1
+ r3←last nthonegrade b
+ r4←last nthonecompress b
+ r←r3,r4
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/nthoneAKD/nthone.ufn§0§ 2020 6 24 17 4 22 868 §oGts§0

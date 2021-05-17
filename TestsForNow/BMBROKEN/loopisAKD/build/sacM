@@ -1,0 +1,1 @@
+sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/benchmksAPL/loopisAKD/build/ -L /home/apex/apexgit/TestsForNow/benchmksAPL/loopisAKD/build/ -T /home/apex/apexgit/TestsForNow/benchmksAPL/loopisAKD/build/ /home/apex/apexgit/TestsForNow/benchmksAPL/loopisAKD/src/loopisAKD.sac

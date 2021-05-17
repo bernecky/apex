@@ -1,1 +1,0 @@
-sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UnitTests/UTJotDot/build/ -L /home/apex/apexgit/TestsForNow/UnitTests/UTJotDot/build/ -T /home/apex/apexgit/TestsForNow/UnitTests/UTJotDot/build/ /home/apex/apexgit/TestsForNow/UnitTests/UTJotDot/src/UTJotDot.sac

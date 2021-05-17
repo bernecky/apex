@@ -1,0 +1,6 @@
+ r←x mconv y;tr;wz
+⍝ Execute convolution problem using big temps
+ wz←0.01×1+⍳x
+ tr←0.01×1+⍳y
+ r←+/wz conv tr
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/mconvAKD/mconv.ufn§0§ 2020 6 24 17 4 22 864 §fucÕ§0

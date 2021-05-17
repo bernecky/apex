@@ -1,0 +1,9 @@
+ r←main;⎕IO;n;pct;t
+ ⎕IO←0
+ n←18000000
+ pct←90
+ r←pct meshtest n
+ ⎕←t←+/r='#'
+ t←t=n×pct÷100
+ r←t-1
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/mesh/main.ufn§0§ 2020 6 24 17 4 22 864 §gãXM§0

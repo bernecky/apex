@@ -1,0 +1,10 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ n←4000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←ipbb n
+ ⎕←r
+ ⎕←r←1-r=5333334
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/ipbb/main.ufn§0§ 2020 6 24 17 4 22 856 §kRâh§0

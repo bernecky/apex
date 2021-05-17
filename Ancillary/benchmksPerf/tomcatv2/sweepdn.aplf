@@ -1,0 +1,12 @@
+ j←aa sweepdn dd;r;lim
+⍝ Updates nrx,nry
+ lim←¯1+(⍴dd)[0]
+ nrx[lim;]←nrx[lim;]×dd[lim;]
+ nry[lim;]←nry[lim;]×dd[lim;]
+⍝
+ :For j :In ⌽⍳lim
+     nrx[j;]←(nrx[j;]-(aa[j;]×nrx[j+1;]))×dd[j;]
+     nry[j;]←(nry[j;]-(aa[j;]×nry[j+1;]))×dd[j;]
+ :EndFor
+ j←lim ⍝ Garbage result
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatv2/sweepdn.ufn§0§ 2020 6 24 17 4 23 40 §tÃUk§0

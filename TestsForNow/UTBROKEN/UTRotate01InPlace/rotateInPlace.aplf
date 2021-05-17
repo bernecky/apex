@@ -10,4 +10,3 @@
      r[¯1↓iv]←r[1↓iv]
      r[¯1↑iv]←tmp
  :EndFor
-⍝∇⍣§/home/apex/apexgit/TestsForNow/UTRotate01/rotateInPlace.ufn§0§ 2020 6 24 17 4 22 840 §õUMÔ§0

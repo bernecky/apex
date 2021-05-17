@@ -1,0 +1,12 @@
+ r←testlcv n;i;j
+⍝ Test loop-carried variable
+⍝ and non-carried variable
+⍝ dcl double scalar r
+ r←0
+ j←9
+ :For i :In ⍳n
+     r←r+i
+     j←r+1
+ :EndFor
+ r←r+j
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/testlcvAKD/testlcv.ufn§0§ 2020 6 24 17 4 23 36 §kyÖÂ§0

@@ -1,0 +1,10 @@
+ r←main n;⎕PP
+ ⍝ README: build integer vector by indexed assign
+ ⍝ dcl integer scalar n
+ ⎕PP←16
+⍝⍝⎕←'Enter 5000 or other test size'
+⍝⍝n←⎕fi ⍞
+ n←n⌈1 ⍝ Avoid negative shapes
+ ⎕←r←buildv2 n
+ ⎕←r←1-r=12518327083750
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/buildv2AKD/main.ufn§0§ 2020 6 24 17 4 22 848 §éÁqÉ§0

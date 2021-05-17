@@ -1,0 +1,11 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW;⎕CT
+ ⎕IO←0
+ n←257
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ ⎕CT←1E¯10
+ r←tomcatv n
+ ⎕←r
+ r←1-0.00001>46925.08357691774-|r
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatv/main.ufn§0§ 2020 6 24 17 4 23 36 §mbÔg§0

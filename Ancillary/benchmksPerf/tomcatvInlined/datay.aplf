@@ -1,0 +1,16 @@
+ r←x datay n;alfa;rown;col0x;colny;row0x;col0y;rowny;e1;e2;m
+⍝ Tomcatv benchmark input data y
+ x←⍉x
+ alfa←0.1
+ col0x←x[;0]
+ colny←alfa×x[n-1;]
+ rowny←colny
+ row0x←x[0;]
+ col0y←row0x
+ e1←(1-row0x)∘.×col0y
+ e2←row0x∘.×rowny
+ m←(⍴x)⍴0,((n-2)⍴0.9),1
+ r←m×e1+e2
+ r[0;]←row0x
+ r[n-1;]←colny
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatvInlined/datay.ufn§0§ 2020 6 24 17 4 23 40 §ùNûú§0

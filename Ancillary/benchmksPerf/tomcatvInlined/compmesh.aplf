@@ -1,0 +1,23 @@
+ r←x compmesh y;xx;yx;xy;yy;a;b;c;pxx;pxy;qxx;qxy;pyy;qyy;ry
+ xx←(2 1↓0 ¯1↓x)-0 1↓¯2 ¯1↓x
+ yx←(2 1↓0 ¯1↓y)-0 1↓¯2 ¯1↓y
+ xy←(1 2↓¯1 0↓x)-1 0↓¯1 ¯2↓x
+ yy←(1 2↓¯1 0↓y)-1 0↓¯1 ¯2↓y
+⍝
+ a←0.25×(xy×xy)+yy×yy
+ b←0.25×(yx×yx)+xx×xx
+ c←0.125×(xy×xx)+yx×yy
+⍝
+ pxx←(2 1↓0 ¯1↓x)-(2×1 1↓¯1 ¯1↓x)-0 1↓¯2 ¯1↓x
+ qxx←(2 1↓0 ¯1↓y)-(2×1 1↓¯1 ¯1↓y)-0 1↓¯2 ¯1↓y
+ pyy←(1 2↓¯1 0↓x)-(2×1 1↓¯1 ¯1↓x)-1 0↓¯1 ¯2↓x
+ qyy←(1 2↓¯1 0↓y)-(2×1 1↓¯1 ¯1↓y)-1 0↓¯1 ¯2↓y
+⍝
+ pxy←((2 2↓x)-2 ¯2↓x)+(¯2 ¯2↓x)-¯2 2↓x ⍝ signs
+ qxy←((2 2↓y)-2 ¯2↓y)+(¯2 ¯2↓y)-¯2 2↓y
+⍝ GLOBALS OUT:
+ aa←-b
+ dd←b+b+(2÷0.98)×a
+ rx←(a×pxx)+(b×pyy)-c×pxy
+ r←(a×qxx)+(b×qyy)-c×qxy
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatvInlined/compmesh.ufn§0§ 2020 6 24 17 4 23 40 §cDÂmR§0

@@ -1,0 +1,8 @@
+use lowertri: all;
+
+int main()
+{
+  z=lowertri::lowertri_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

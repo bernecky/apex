@@ -1,0 +1,24 @@
+ r←s SR2ctl y;si;sj;i;j;k;b
+⍝ Recursive string shuffler w/ctl structs
+ b←1+((1⍴y)=1↓y)⍳1 ⍝ Break /si/sj into substrings
+ si←1↓b↑y
+ sj←(2+⍴si)↓y
+ j←k←0
+ :If 1=⍴s
+     r←s=si,sj
+ :Else
+     :If 0≠⍴si
+         :If (1⍴s)=1⍴si
+             j←(1↓s)SR2ctl(1⍴y),(1↓si),(1⍴y),sj
+         :EndIf
+     :EndIf
+
+     :If 0≠⍴sj
+         :If (1⍴s)=1⍴sj
+             k←(1↓s)SR2ctl(1⍴y),si,(1⍴y),1↓sj
+         :EndIf
+     :EndIf
+     r←j+k
+ :EndIf
+
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/scs/SR2ctl.ufn§0§ 2020 6 24 17 4 23 32 §ÕGÕk§0

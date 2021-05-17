@@ -1,0 +1,6 @@
+ r←STSCfloor y
+⍝ This because APL+Linux has a nasty bug, whereby
+⍝ ⌊5÷2 starts to return 3, instead of 2! 2005-12-08/rbe
+⍝r←y-1|y
+ r←⌊y
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/tjckAKD/STSCfloor.ufn§0§ 2020 6 24 17 4 23 36 §hÖáH§0

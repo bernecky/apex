@@ -1,22 +1,36 @@
- r←fldr EmitOneCU asts;fnm1;fnm2;fnm3
- ;smn;astsmod
+ r←fldr EmitOneCU asts;fnmexe;fnmso
+ ;ismn;astsmod;astsm
  ⍝ Emit compiled APL code for one Compilation Unit(CU), asts
  ⍝ Genned module code written to file r in fldr
  ⍝ Result is r, and the generated main() filenames
+ ⍝
+ ⍝ We have three cases, based on asts contents:
+ ⍝  1. main() is the only user-defined fn: generate exe file
+ ⍝     E.g., UTargvAKD or other trivial code.
+ ⍝  2. main() does not exist: Generate shared library (.so) only.
+ ⍝      E.g., perhaps we are compiling a namespace.
+ ⍝  3. main() has sub-functions: Generate .so and .exe.
+ ⍝     The .exe and other code can call the .so, a
  ⎕←Trace(fts ⎕TS),': Starting code generation for: ',fldr
  InitializeFns   ⍝ and cal
  ⍝ Build mainline code, identify primitives
  asts←SACNames¨asts ⍝ Map names to avoid SAC keyword conflicts, etc
- ⍝ We no longer generate vanilla executable, but remain paranoid,
- ⍝ so the code is still here!
- ⍝ Generate vanilla executable
- ⍝⍝fnm1←((E fldr),E'.nomodu')GenCode asts
-
- ⍝ Generate .so/.dll module, with renamed main()
- (astsmod smn)←fldr SACModuleRenameMain asts
- fnm2←((E fldr),E'')GenCode astsmod
- ⍝ Generate Caller fn for module
- fnm3←smn GenCallerFn fldr
- GenAPLCoverFn fnm2 ⍝ for calling module
- r←⍪(E fnm2),E fnm3
+ ismn←isDfnMain¨asts
+ fnmexe←fnmso←fnmcall←''
+ :If (1∊ismn)∧1=⍴ismn ⍝ Case 1: if main() exists, but no subfns, generate .exe
+     fnmexe←((E fldr),E ismn)GenCode asts
+ :EndIf
+ :If ~1∊ismn ⍝ Case 2: no main(): Generate .so file only
+     fnmso←((E fldr),E ismn)GenCode asts
+ :EndIf
+ :If (1∊ismn)∧1<⍴ismn ⍝ Case 3: main() w/subfns. Gen .so & main() for .so call
+     (astsmod smn)←fldr SACModuleRenameMain asts
+     fnmexe←((E fldr),E ismn)GenCode asts ⍝ Gen main ()
+     fnmso←((E fldr),E~ismn)GenCode astsmod ⍝  Gen .so
+ :EndIf
+⍝⍝ ⍝ Generate Caller fn for module
+⍝⍝ ⍝⍝fnm3←smn GenCallerFn fldr
+ GenAPLCoverFn fnmexe ⍝ for calling module
+ r←(E fnmexe),(E fnmso)
+ r←(×≢¨r)/r
  ⎕←Trace(fts ⎕TS),': Code generation complete for: ',fldr

@@ -1,0 +1,22 @@
+ r←s SDyn4 y;m;i;si;sj;b;d;j
+⍝ DP string shuffler w/ctl structs
+⍝ Compilable version of SDyn3
+ b←1+(y[0]=1↓y)⍳1 ⍝ Make substrings
+ si←1↓b↑y
+ sj←(2+⍴si)↓y ⍝ Now build dp matrix
+ m←(' ',s)[(⍳1+⍴si)∘.+⍳1+⍴sj]
+ b←m=⍉(⌽⍴m)⍴' ',si
+ b←m←(m=(⍴m)⍴' ',sj)∨b
+ b[0;]←b[;0]←0
+ b←,b
+ b←b/⍳⍴b
+ m[;0]←∧\m[;0]
+ m[0;]←∧\m[0;]
+ m←,m
+ d←1+0,⍴sj ⍝ Distance to next row, column
+ :For i :In ⍳⍴b
+     j←b[i]
+     m[j]←∨/m[j-d]
+ :EndFor
+ r←¯1↑m
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/scs/SDyn4.ufn§0§ 2020 6 24 17 4 23 32 §bôaVr§0

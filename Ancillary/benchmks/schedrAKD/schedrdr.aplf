@@ -1,0 +1,5 @@
+ r←schedrdr n;x;y
+ x←⍳n
+ y←⌽x
+ r←+/x schedr y
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/schedrAKD/schedrdr.ufn§0§ 2020 6 24 17 4 23 32 §bAzû§0

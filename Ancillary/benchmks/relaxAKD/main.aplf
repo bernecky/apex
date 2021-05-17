@@ -1,0 +1,18 @@
+ z←main mn;⎕IO;⎕RL;m;n;⎕PP;⎕PW;A;left_A;inner_B;r
+ ⍝ APL version of relax from S.B. Scholz'
+ ⍝  "WLF in SAC - Condensing Consecutive Array Operations"
+ ⍝
+ ⍝ dcl integer vector mn
+ ⎕IO←0
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ ⍝ m←20 ⋄ n←10
+ ⍝m←20
+ ⍝n←10
+ A←mn⍴0.5+⍳×/mn
+ r←relax A
+ ⎕←r
+ z←54=r[1;3]
+ ⎕←z←z-1
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/relaxAKD/main.ufn§0§ 2020 6 24 17 4 23 28 §ÀBTu§0

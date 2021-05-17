@@ -1,0 +1,11 @@
+ r←main;⎕IO
+ ⍝ This is Walter Fil's version of the Ulam primes spiral
+ ⍝ taken from Tim Budd's APL compiler book./rbe 2007-07-07
+ ⍝ The index origin has been changed to
+ ⍝ zero to make me stop going crazy.
+ ⍝
+ ⍝ 2009-07-19: All variables localized
+ ⎕IO←0
+ ⎕←r←+/,'*'=FOO 100
+ ⎕←r←1-r=1229
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/ulam/main.ufn§0§ 2020 6 24 17 4 23 40 §ëÂSÀ§0

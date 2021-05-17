@@ -1,0 +1,9 @@
+ r←BenchSCS n;s;ss
+⍝ Benchmark dynamic programming string shuffle
+ s←MakeArgs n ⍝ Generate argument
+ ss←(s⍳'/')↓s
+ s←(s⍳'/')↑s
+ r←s SCS ss ⍝ Success
+ s[¯1+1↑⍴s]←'?' ⍝ Failure
+ r←(10×''⍴¯1 ¯1↑r)+''⍴¯1 ¯1↑s SCS ss ⍝ Result should be 10
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/scsAKD/BenchSCS.ufn§0§ 2020 6 24 17 4 23 32 §êDHü§0

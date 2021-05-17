@@ -1,0 +1,12 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW;⎕CT;z
+⍝ dcl double vector z
+ ⎕IO←0
+ n←500000
+ ⎕CT←1E¯13
+ ⎕RL←16807
+ ⎕PP←17
+ ⎕PW←80
+ z←rle3 n
+ ⎕←z
+ r←⎕←1-z≡0.5+4692500 23306610191937 4692508 24533408209181-0.5
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/rle3/main.ufn§0§ 2020 6 24 17 4 23 28 §vvÜv§0

@@ -1,0 +1,18 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW;⎕CT;iter;v;res;i
+ ⎕IO←0
+ iter←100000
+ n←100001
+ ⎕RL←16807
+ ⎕CT←1E¯10
+ ⎕PP←16
+ ⎕PW←80
+ v←n⍴3.5-1.5 ⍝ Force double
+ v[⌊n÷2]←500
+ res←v
+ :For i :In ⍳iter
+     res←kernel v
+     v←res
+ :EndFor
+ ⎕←r←+/res
+ ⎕←r←1-r=200499.9999999998
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/wlcondoRotate/main.ufn§0§ 2020 6 24 17 4 23 44 §údÁw§0

@@ -1,1 +1,0 @@
-sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UnitTests/UTDScalarB/build/ -L /home/apex/apexgit/TestsForNow/UnitTests/UTDScalarB/build/ -T /home/apex/apexgit/TestsForNow/UnitTests/UTDScalarB/build/ /home/apex/apexgit/TestsForNow/UnitTests/UTDScalarB/src/UTDScalarB.sac

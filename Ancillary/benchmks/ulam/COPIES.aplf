@@ -1,0 +1,4 @@
+ C←A COPIES B
+ ⍝ This is "B replicate A", the hard way
+ C←A[¯1++\(⍳+/B)∊¯1↓+\0,B]
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/ulam/COPIES.ufn§0§ 2020 6 24 17 4 23 40 §dèÙä§0

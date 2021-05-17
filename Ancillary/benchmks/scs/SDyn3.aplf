@@ -1,0 +1,15 @@
+ r←s SDyn3 y;m;i;si;sj;b;d;j
+⍝ DP string shuffler w/ctl structs
+ si←D y[0] ⋄ sj←D y[1]
+ m←(' ',s)[(⍳1+⍴si)∘.+⍳1+⍴sj] ⍝ Build DP matrix
+ b←m←(m=(⍴m)⍴' ',sj)∨m=⍉(⌽⍴m)⍴' ',si
+ b[0;]←b[;0]←0 ⋄ b←,b ⋄ b←b/⍳⍴b
+ m[;0]←∧\m[;0] ⋄ m[0;]←∧\m[0;] ⋄ m←,m
+ d←1+0,⍴sj ⍝ Distance to next row, column
+ :For i :In ⍳⍴b
+     j←b[i]
+     m[j]←∨/m[j-d]
+ :EndFor
+ r←¯1↑m
+
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/scs/SDyn3.ufn§0§ 2020 6 24 17 4 23 32 §baûla§0

@@ -1,0 +1,10 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ n←500
+ ⎕RL←16807
+ ⎕PP←17
+ ⎕PW←80
+ r←ipdd n
+ ⎕←r
+ r←⎕←1-r=1953127604156252400
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/ipdd/main.ufn§0§ 2020 6 24 17 4 22 856 §kOqg§0

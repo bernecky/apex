@@ -1,8 +1,0 @@
-use UTJotDot: all;
-
-int main()
-{
-  z=UTJotDot::UTJotDot_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

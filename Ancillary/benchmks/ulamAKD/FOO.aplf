@@ -1,0 +1,4 @@
+ R←FOO N;⎕IO
+ ⎕IO←1 ⍝ Stupid
+ R←' *'[1+PRIMES N SPIRAL 2 4⍴¯1 0 1 0 0 1 0 ¯1]
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/ulamAKD/FOO.ufn§0§ 2020 6 24 17 4 23 40 §bÕvj§0

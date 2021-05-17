@@ -1,0 +1,4 @@
+ r←prim b
+ b←⍳b
+ r←(2=+/0=b∘.|b)/b
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/primes/prim.ufn§0§ 2020 6 24 17 4 23 28 §Êfâ§0

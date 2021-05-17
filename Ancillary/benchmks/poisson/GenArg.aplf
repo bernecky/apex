@@ -1,0 +1,4 @@
+ r←GenArg siz
+ ⍝ Argument generator for Poisson
+ r←1.5+siz⍴⍳100
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/poisson/GenArg.ufn§0§ 2020 6 24 17 4 23 28 §cuEâ§0

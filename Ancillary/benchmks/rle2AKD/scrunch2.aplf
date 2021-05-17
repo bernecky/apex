@@ -1,0 +1,19 @@
+ z←scrunch2 r;neg;sign;width;i
+⍝ Reuters Retrieve numeric compressor
+⍝ Modified to use control structures
+⍝ Uses transposed representation to speed up
+⍝ APEX and mainframe.
+ neg←∨/sign←r<0
+ :For i :In ⍳neg ⍝ A disguised IF
+⍝⍝⍝⍝⍝⍝→(~neg)⍴l0
+     r[sign/⍳⍴sign]←|1+sign/r
+ :EndFor
+l0:width←1+⌊2⍟1⌈⌈/r
+ z←⍉((neg+width)⍴2)⊤r
+ :For i :In ⍳neg
+     z[;0]←sign
+ :EndFor
+⍝ "1" in next line allows us to tell one
+⍝ representation from another
+l2:z←(¯8↑1,neg,(5⍴2)⊤width),z←,z
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/rle2AKD/scrunch2.ufn§0§ 2020 6 24 17 4 23 28 §bàxæø§0

@@ -1,0 +1,13 @@
+ r←main k;⎕IO;⎕RL;⎕PP;⎕PW;⎕RL;n
+⍝ dcl integer scalar k
+ ⎕IO←0
+ ⎕RL←16807 ⍝ Make this test reproducible
+ ⍝⍝⍝ k←200000
+ n←(k,20)⍴⎕AV[32+⍳95] ⍝ Typical(?) data with some dups
+ ⎕PP←16
+ ⎕PW←80
+ r←n MATIOTA n⍪⌽100 20↑n
+ ⎕←r←+/r×(0.5-0.5)+⍳⍴r
+ r←r+⎕←n MATIOTA 20⍴n ⍝ Vector ⍵ case [BROKEN]
+ ⎕←r←1-r[0]≡4180987299974.5-0.5
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/matiotaAKD/main.ufn§0§ 2020 6 24 17 4 22 864 §ÃNkT§0

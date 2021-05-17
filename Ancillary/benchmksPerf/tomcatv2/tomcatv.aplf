@@ -1,0 +1,36 @@
+ r←tomcatv n;x;y;nrx;nry;aa;d;dd;rx;ry;ll;irxm;jrxm;rxm;irym;jrym;rym;i;j;rx1;ry1;sr;junk;z
+⍝ Tomcatv using John Feo's
+⍝ SISAL 1.2 algorithm
+⍝ Modified to row-major order by
+⍝ Robert Bernecky 1996-05-27
+ x←datax n
+ y←x datay n
+ ll←irxm←jrxm←irym←jrym←0
+ rxm←rym←0
+⍝ll←¯1
+⍝:while 100>ll←ll+1
+ z←666 ⍝ panic sets in
+ :For ll :In ⍳100
+     junk←x compmesh y
+⍝ n is global in; aa,dd,rx,ry out
+     z←ll
+⍝ Find maximum residual & its location
+     rxm←fma rx
+     irxm←j
+     jrxm←i
+     rym←fma ry
+     irym←j
+     jrym←i
+⍝ Solve tridiagonal system
+     d←aa sweepup dd
+⍝ sweepup uses rx,ry, sets nrx,nry
+     junk←aa sweepdn d
+⍝ sweepdn uses &sets nrx,nry
+⍝ Add corrections
+     x←nrx correct x
+     y←nry correct y
+ :EndFor
+⍝⍝:until .5E¯7>(|rxm)⌈|rym
+⍝ No :until support yet
+ r←(z+1),(2+irxm,jrxm),rxm,(2+irym,jrym),rym
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatv2/tomcatv.ufn§0§ 2020 6 24 17 4 23 40 §cåÆõÆ§0

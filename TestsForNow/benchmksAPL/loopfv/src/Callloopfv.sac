@@ -1,0 +1,8 @@
+use loopfv: all;
+
+int main()
+{
+  z=loopfv::loopfv_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

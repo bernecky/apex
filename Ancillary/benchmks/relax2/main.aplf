@@ -1,0 +1,27 @@
+ z←main;⎕IO;⎕RL;m;n;⎕PP;⎕PW;A;left_A;inner_B;r;olda;k;i
+ ⍝ APL version of relax from S.B. Scholz'
+ ⍝  "WLF in SAC - Condensing Consecutive Array Operations"
+ ⍝
+ ⍝ This one repeats the relax call
+ ⍝ until the result stabilizes.
+ ⍝
+ ⎕IO←0
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ m←120
+ n←120
+ A←0.5+?(m,n)⍴1000000
+ k←0
+ ⍝⍝:Repeat
+ :For i :In ⍳80737 ⍝ KLUDGE
+     olda←A
+     A←relax olda
+     k←k+1
+ :EndFor          ⍝ KLUDGE
+ ⍝⍝ :Until 1E¯10>+/|,olda-A
+ ⎕←k
+ ⎕←z←+/,A
+ z←z=6837769297.21721
+ ⎕←z←z-1
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/relax2/main.ufn§0§ 2020 6 24 17 4 23 28 §bûyaP§0

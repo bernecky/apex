@@ -1,0 +1,7 @@
+ r←mesh y;b
+⍝ Mesh benchmark for apex
+⍝ Convert blanks to #
+ b←y=' '
+ r←y
+ r[b/⍳⍴b]←'#'
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/mesh/mesh.ufn§0§ 2020 6 24 17 4 22 864 §eØøT§0

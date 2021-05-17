@@ -1,0 +1,13 @@
+ r←datax n;xij
+⍝ Tomcatv benchmark
+⍝ Model based on John Feo's SISAL 1.2 benchmark
+⍝ Initial field for x(i,j)
+⍝ This is transpose (sort of) of fortran version
+⍝ with stretch factor alfa
+⍝ Following code corresponds to DO loop 1
+⍝ in the Fortran version.
+ xij←1,((n-2)⍴0.9),1
+ r←(n,n)⍴(xij×⍳n)÷n-1
+ r[0;]←(⍳n)÷n-1
+ r[n-1;]←(⍳n)÷n-1
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatv2/datax.ufn§0§ 2020 6 24 17 4 23 40 §úâeM§0

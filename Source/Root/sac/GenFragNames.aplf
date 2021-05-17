@@ -42,7 +42,7 @@
  ⍝ They're OK as is. 1996-06-08
  j←j/⍳⍴j
  fns[j;fnslop,fnsrop]←E''
- fns[j;fnsfn]←TempName lj⍕⍪j
+ fns[j;fnsfn]←TempName j
  fns←ast GenAssignNames fns
  fns←ast GenFragNamesIndex fns      ⍝ Index names are hard
  fns←ast GenFragNamesAdvConj fns    ⍝ Adverb/conj names

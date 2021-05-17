@@ -1,0 +1,5 @@
+ r←sumscan n
+⍝ Perform +\⍵ on array of shape n,n
+ r←(n,n)⍴0.01×⍳n+1
+ r←+/,+\r
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/sumscan/sumscan.ufn§0§ 2020 6 24 17 4 23 32 §dåeu§0

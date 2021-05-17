@@ -1,0 +1,20 @@
+ Z←A MATIOTA B;C;F;N;P;R;T
+⍝ Returns origin-0 row indices of names ⍵ in lookup table ⍺,
+⍝ ala indexof. Rbe changed defn on not-found items.
+ C←A OVER B ⍝join arguments
+ C←C[P←⎕AV⍋C;] ⍝alphabetize the rows
+⍝ mark the first occurrence of each different row
+ F←∨/C≠¯1⊖C
+ F[⍳×⍴F]←1 ⍝insure that the first element is 1
+ T←F/P ⍝indices of where the firsts occur
+ N←T-¯1↓0,T ⍝number of occurrences of each distinct row
+ Z←+\F\N ⍝make (N[1]⍴N[1]),(N[2]⍴N[2]),...
+ Z[P]←Z ⍝return to original ordering
+ R←1↑¯2↑1 1,⍴A ⍝number of rows in A
+ Z←R↓Z ⍝drop off answers for rows of A
+ Z←Z⌊''⍴⍴A ⍝ Correct not-found results
+⍝ return scalar if B was a vector
+⍝⍝⍝⍝ BROKEN 2005-11-21  Z←((1<⍴⍴B)/⍴Z)⍴Z
+⍝⍝⍝⍝ BROKEN needs function cloning./rbe
+⍝ Copyright (c) 1994 Jim Weigang
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/matiotaAKD/MATIOTA.ufn§0§ 2020 6 24 17 4 22 864 §dnÜhÛ§0

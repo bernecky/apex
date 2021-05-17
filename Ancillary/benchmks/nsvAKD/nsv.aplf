@@ -1,0 +1,4 @@
+ r←nsv y
+⍝ Nubsieve on vector
+ r←(⍳⍴y)=y⍳y
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/nsvAKD/nsv.ufn§0§ 2020 6 24 17 4 22 868 §bÀSÓ§0

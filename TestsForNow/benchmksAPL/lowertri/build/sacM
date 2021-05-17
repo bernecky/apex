@@ -1,0 +1,1 @@
+sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/benchmksAPL/lowertri/build/ -L /home/apex/apexgit/TestsForNow/benchmksAPL/lowertri/build/ -T /home/apex/apexgit/TestsForNow/benchmksAPL/lowertri/build/ /home/apex/apexgit/TestsForNow/benchmksAPL/lowertri/src/lowertri.sac

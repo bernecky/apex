@@ -1,0 +1,10 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ n←2000000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←benchnsv n
+ ⎕←r
+ ⎕←r←1-r=90000000
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/nsv/main.ufn§0§ 2020 6 24 17 4 22 868 §léOp§0

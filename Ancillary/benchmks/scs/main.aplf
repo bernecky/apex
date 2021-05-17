@@ -1,0 +1,10 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ n←3000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←BenchSCS n
+ ⎕←r
+ ⎕←r←1-r=10
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/scs/main.ufn§0§ 2020 6 24 17 4 23 32 §kÔéÓ§0

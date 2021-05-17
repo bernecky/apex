@@ -1,0 +1,11 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW
+⍝ dcl integer scalar n
+ ⎕IO←0
+ ⎕PP←17
+ ⎕PW←80
+⍝⍝ n←6000
+ ⎕RL←16807
+ r←+/(0.5-0.5)+testfor n
+ ⎕←r
+ ⎕←r←1-r=31504498000
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/testforAKD/main.ufn§0§ 2020 6 24 17 4 23 32 §råZã§0

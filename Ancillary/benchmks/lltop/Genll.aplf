@@ -1,0 +1,4 @@
+ r←Genll y
+⍝ Generate linked list of y elements
+ r←¯1+⍳y ⍝ Rather simple, eh?
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/lltop/Genll.ufn§0§ 2020 6 24 17 4 22 856 §cuÄk§0

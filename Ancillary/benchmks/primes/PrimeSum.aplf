@@ -1,0 +1,4 @@
+ r←PrimeSum n
+⍝ Sum of first n primes
+ r←+/prim n
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/primes/PrimeSum.ufn§0§ 2020 6 24 17 4 23 28 §WCp§0

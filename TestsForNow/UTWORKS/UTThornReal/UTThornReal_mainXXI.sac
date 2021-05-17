@@ -1,8 +1,0 @@
-use UTThornReal: all;
-
-int main()
-{
-  z=UTThornReal::UTThornReal_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

@@ -1,0 +1,12 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW
+ ⍝ README: build integer vector by repeated catenation
+ ⍝ dcl integer scalar n
+ ⎕IO←0
+ n←n⌈1 ⍝ Ensure legal shape
+⍝⍝⎕←'Enter 2000 or other test size'
+⍝⍝n←⎕fi ⍞ ⍝ 2000 works OK
+ ⎕PP←17
+ ⎕PW←80
+ ⎕←r←buildv n
+ ⎕←r←1-r≡2000332333500
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/buildvAKD/main.ufn§0§ 2020 6 24 17 4 22 848 §Hósx§0

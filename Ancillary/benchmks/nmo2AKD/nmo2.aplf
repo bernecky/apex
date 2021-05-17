@@ -1,0 +1,53 @@
+ r←nmo2 k;j;vstk;dx;dt;n;d;to;wz;x;jl
+⍝ demo for mrdc Normal Move Out
+⍝
+⍝ functions supplied by george moeckel.
+⍝ k is number of traces, normally we use 16
+⍝
+ dx←350
+⍝⍝⍝⍝⍝⍝⍝j←40 ⍝ depth. 40 for shallow,
+⍝⍝⍝⍝⍝⍝⍝⍝ 125 for middle, 180 for deep.
+⍝ 1995-12-11. KLUDGE to avoid having to clone copies
+⍝ of "setup". dfa complains about changing values
+⍝ of left argument k. Right fix is to clone setup.
+⍝ For now, we'll just cheat so that dfa can't propagate
+⍝ the scalars into setup.
+⍝ KLUDGE: Change to ⎕io←0
+ jl←40 125 180
+ dt←0.008 ⍝ t∆
+ n←280 ⍝ samples per trace
+⍝⍝⍝⍝⍝⍝⍝⍝k←16 ⍝ number of traces
+ vstk←6500 ⍝ velocity
+ wz←¯0.00032 ¯0.00245 ¯0.00474
+ wz←wz,¯0.00432 ¯0.001 ¯0.00131
+ wz←wz,¯0.00214 ¯0.01171 ¯0.02134
+ wz←wz,¯0.02297 ¯0.01427 ¯0.0027
+ wz←wz,¯0.00059 ¯0.01438 ¯0.03697
+ wz←wz,¯0.05144 ¯0.04486 ¯0.0212
+ wz←wz,¯0.00106 ¯0.00593 ¯0.03859
+ wz←wz,¯0.07704 ¯0.08979 ¯0.06265
+ wz←wz,¯0.01483 0.01209 ¯0.0127
+ wz←wz,¯0.07947 ¯0.13847 ¯0.13609
+ wz←wz,¯0.06186 0.03243 0.0635
+ wz←wz,¯0.01827 ¯0.17623 ¯0.29204
+ wz←wz,¯0.23488 0.04578 0.46794
+ wz←wz,0.84769 1 0.84769
+ wz←wz,0.46794 0.04578 ¯0.23488
+ wz←wz,¯0.29204 ¯0.17623 ¯0.01827
+ wz←wz,0.0635 0.03243 ¯0.06186
+ wz←wz,¯0.13609 ¯0.13847 ¯0.07947
+ wz←wz,¯0.0127 0.01209 ¯0.01483
+ wz←wz,¯0.06265 ¯0.08979 ¯0.07704
+ wz←wz,¯0.03859 ¯0.00593 ¯0.00106
+ wz←wz,¯0.0212 ¯0.04486 ¯0.05144
+ wz←wz,¯0.03697 ¯0.01438 ¯0.00059
+ wz←wz,¯0.0027 ¯0.01427 ¯0.02297
+ wz←wz,¯0.02134 ¯0.01171 ¯0.00214
+ wz←wz,0.00131 ¯0.001 ¯0.00432
+ wz←wz,¯0.00474 ¯0.00245 ¯0.00032
+ j←125 ⍝ medium depth
+ r←k setup n
+ r←(k,n)⍴wz
+ r←r nmo to ⍝ Perform moveout
+ r←(+/,r),+/0=,r ⍝ KLUDGE for quick verification of output.
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/nmo2AKD/nmo2.ufn§0§ 2020 6 24 17 4 22 868 §hZFÅú§0

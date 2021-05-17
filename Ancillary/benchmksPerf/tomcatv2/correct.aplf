@@ -1,0 +1,7 @@
+ r←rx correct x;n
+⍝ Return x at edges, otherwise rx+x
+⍝r←x+0.0⍪(0.0,rx,0.0)⍪0.0 ⍝ faster?
+ n←1+⍳¯2+(⍴x)[1]
+ r←x
+ r[n;n]←rx+r[n;n]
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatv2/correct.ufn§0§ 2020 6 24 17 4 23 40 §kcèÂ§0

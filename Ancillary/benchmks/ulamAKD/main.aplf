@@ -1,0 +1,8 @@
+ r←main n
+ ⍝ dcl integer scalar n
+ ⍝ n←100
+ ⍝ This is Walter Fil's version of the Ulam primes spiral
+ ⍝ taken from Tim Budd's APL compiler book./rbe 2007-07-07
+ ⎕←r←+/,'*'=FOO n
+ ⎕←r←1-r=1229
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/ulamAKD/main.ufn§0§ 2020 6 24 17 4 23 40 §pcyh§0

@@ -1,0 +1,9 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ ⎕PP←16
+ ⎕PW←80
+ n←12000000
+ ⎕RL←16807
+ r←loopis n
+ ⎕←r
+ ⎕←r←1-r≡n

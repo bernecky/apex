@@ -1,0 +1,12 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW;d
+ ⎕IO←0
+ d←100
+ n←20000000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←d nthone n
+ ⎕←r
+ r←1-r≡19999900 19999900
+ ⎕←r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/nthone/main.ufn§0§ 2020 6 24 17 4 22 868 §oÙóá§0

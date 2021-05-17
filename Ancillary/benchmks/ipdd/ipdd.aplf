@@ -1,0 +1,5 @@
+ r←ipdd siz;m
+⍝ Test of matrix product and transpose
+ m←(2⍴siz)⍴0.5+⍳siz×siz
+ r←+/+/m+.×⍉m
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/ipdd/ipdd.ufn§0§ 2020 6 24 17 4 22 856 §ffjò§0

@@ -1,0 +1,12 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW;⎕CT
+ ⍝ dcl integer scalar n
+ ⎕IO←0
+ ⎕CT←1E¯13
+⍝⍝  n←3000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←n Bjkc 2006 4 1 12 34 56
+ ⎕←r
+ ⎕←r←¯1+r=3296086938000.5-0.5
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/tjkcAKD/main.ufn§0§ 2020 6 24 17 4 23 36 §wáÈZ§0

@@ -1,1 +1,0 @@
-sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UnitTests/UTRotate01/build/ -L /home/apex/apexgit/TestsForNow/UnitTests/UTRotate01/build/ -T /home/apex/apexgit/TestsForNow/UnitTests/UTRotate01/build/ /home/apex/apexgit/TestsForNow/UnitTests/UTRotate01/src/UTRotate01.sac

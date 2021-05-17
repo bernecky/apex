@@ -1,0 +1,11 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW
+ ⍝ dcl integer scalar n
+ ⎕IO←0
+⍝⍝  n←20000000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←benlogd2 n
+ ⎕←r
+ ⎕←r←1-r=35594874.59054118
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/logd4AKD/main.ufn§0§ 2020 6 24 17 4 22 860 §rMrt§0

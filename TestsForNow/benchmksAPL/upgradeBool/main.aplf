@@ -1,0 +1,11 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ n←10000000
+ ⎕RL←16807
+ ⎕PP←17
+ ⎕PW←80
+ r←⍋n⍴200↑1
+ ⎕←r←+/r+0.5-0.5 ⍝  Avoid integer overflow
+ r←1-r=0.5××/n×n-1.5-0.5
+ ⎕←r
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/upgradeBool/main.ufn§0§ 2020 6 24 17 4 23 44 §stÆä§0

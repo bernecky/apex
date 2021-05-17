@@ -1,0 +1,30 @@
+ r←tomcatv n;x;y;nrx;nry;aa;d;dd;rx;ry;ll;irxm;jrxm;rxm;irym;jrym;rym;i;j;rx1;ry1;sr;junk;loops
+⍝ Tomcatv ala John Feo's SISAL 1.2 algorithm
+ x←datax n ⍝ x,y transposed from f77
+ y←x datay n
+ irxm←jrxm←irym←jrym←0
+ rxm←rym←0
+⍝⍝⍝ll←¯1
+⍝⍝⍝:while 100>ll←ll+1
+ loops←100
+ :For ll :In ⍳loops
+     ry←x compmesh y ⍝ n is global in; aa,dd,rx,ry out
+ ⍝ Find maximum residual & its location
+     rxm←fma rx
+     irxm←i
+     jrxm←j
+     rym←fma ry
+     irym←i
+     jrym←j
+ ⍝ Solve tridiagonal system
+     d←aa sweepup dd
+ ⍝ sweepup uses x,y, sets nrx,nry
+     junk←aa sweepdn d ⍝ sweepdn uses &sets nrx,nry
+ ⍝ Add corrections
+     x←nrx correct x
+     y←nry correct y
+ :EndFor
+⍝⍝:until .5E¯7>(|rxm)⌈|rym  ⍝ No :until support yet
+⍝⍝⍝⍝lz:r←(loops+1),(2+irxm,jrxm),rxm,(2+irym,jrym),rym
+ r←(+/,x)++/,y
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatv/tomcatv.ufn§0§ 2020 6 24 17 4 23 40 §cüTóx§0

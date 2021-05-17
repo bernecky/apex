@@ -1,0 +1,4 @@
+ r←benchnsv n
+ r←nsv testdata n
+ r←r+.×⍳⍴r ⍝ Handy result verifier
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/nsv/benchnsv.ufn§0§ 2020 6 24 17 4 22 868 §cpæÉ§0

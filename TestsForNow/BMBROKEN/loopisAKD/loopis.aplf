@@ -1,0 +1,9 @@
+ r←loopis n;i
+⍝this function is intended to exercise the syntax analyzer.
+⍝it should be heavy on l,a,st,b,tm.
+⍝ Same as loopis, but floating point scalar value
+ r←0
+ :For i :In ⍳n
+     r←r+i
+ :EndFor
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/loopisAKD/loopis.ufn§0§ 2020 6 24 17 4 22 860 §jRTU§0

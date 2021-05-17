@@ -1,0 +1,8 @@
+use loopfs: all;
+
+int main()
+{
+  z=loopfs::loopfs_mainXXI();
+  StdIO::show(z);
+  return(0);
+}

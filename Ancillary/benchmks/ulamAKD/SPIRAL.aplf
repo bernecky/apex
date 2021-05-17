@@ -1,0 +1,7 @@
+ Z←N SPIRAL L;A;C;E;G
+ A←⍳N×2
+ C←4|A COPIES|-\A
+ G←⌊0.5+N÷2
+ E←L[;(¯1+N×N)↑C+4×0=C]
+ Z←(2⍴N)⍴⍋N LINEAR 1 1 2⍉(2⍴G)∘.++\0,E
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/ulamAKD/SPIRAL.ufn§0§ 2020 6 24 17 4 23 40 §läôú§0

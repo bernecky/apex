@@ -1,0 +1,11 @@
+ b←L substfwd b;n;i
+⍝ row oriented forward substitution.
+⍝ given lower triangular L∊R(n×n) and b∊R(n),
+⍝   return the solution to L x=b.
+⍝ algorithm 3.1.1 of Golub and Van Loan (2nd ed.).
+ n←(⍴b)[0] ⍝n←1⊃⍴b
+ b[1]←b[1]÷L[1;1]
+ :For i :In (2 to n)
+     b[i]←(b[i]-+/L[i;1 to(i-1)]×b[1 to(i-1)])÷L[i;i]
+ :EndFor
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatv/substfwd.ufn§0§ 2020 6 24 17 4 23 36 §áàJË§0

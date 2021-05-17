@@ -1,1 +1,0 @@
-sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UnitTests/UTReverse/build/CallUTReverse.sac.exe -L /home/apex/apexgit/TestsForNow/UnitTests/UTReverse/build/ -T /home/apex/apexgit/TestsForNow/UnitTests/UTReverse/build/ /home/apex/apexgit/TestsForNow/UnitTests/UTReverse/src/CallUTReverse.sac

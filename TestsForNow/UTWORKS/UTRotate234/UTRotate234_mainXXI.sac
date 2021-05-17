@@ -1,8 +1,0 @@
-use UTRotate234: all;
-
-int main()
-{
-  z=UTRotate234::UTRotate234_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

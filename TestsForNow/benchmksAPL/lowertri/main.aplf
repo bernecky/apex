@@ -1,0 +1,12 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⍝ Lower-triangular order-n matrix creator
+ ⎕IO←0
+ n←10240
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←(⍳n)∘.≥⍳n
+ r←+/,r
+ ⎕←r
+ ⎕←r←1-r=(n×n+1)÷2
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/lowertri/main.ufn§0§ 2020 6 24 17 4 22 860 §zIQZ§0

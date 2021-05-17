@@ -1,0 +1,11 @@
+ z←fma y;t;ay;v
+⍝ value and xy-index of maximum
+⍝ absolute value in y
+⍝ Sets xy-index in i,j as side effects. Ugh.
+ ay←|y
+ v←⌈/ay
+ t←⌈/v
+ i←v⍳t
+ j←ay[i;]⍳t
+ z←y[i;j]
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatv2/fma.ufn§0§ 2020 6 24 17 4 23 40 §râÔY§0

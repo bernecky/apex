@@ -1,0 +1,6 @@
+ r←d meshtest n;vec
+⍝ Test mesh with arguments of shape n
+⍝ and density d ( % blanks)
+ vec←n⍴100↑(100-d)⍴'x'
+ r←mesh vec
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/mesh/meshtest.ufn§0§ 2020 6 24 17 4 22 864 §gÂÙÛ§0

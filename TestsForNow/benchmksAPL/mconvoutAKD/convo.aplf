@@ -1,0 +1,9 @@
+ r←wz convo tr;n;h;n
+⍝ Convo performs standard convolution
+⍝ wz is the filter/wavelet vector (usually shorter than tr)
+⍝ tr is the seis trace or other vector to be filtered
+⍝ convo uses the outer prpduct and plus reduction
+⍝ Output r is a vector, the filtered/convolved trace.
+ h←wz∘.×tr,(¯1+n←⍴wz)⍴0
+ r←(⍴tr)↑+⌿(⍳n)⌽h
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/mconvoutAKD/convo.ufn§0§ 2020 6 24 17 4 22 864 §AdmØ§0

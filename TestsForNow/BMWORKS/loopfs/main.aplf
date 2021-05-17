@@ -1,0 +1,12 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW;⎕CT
+ ⎕IO←0
+ ⎕PP←17
+ ⎕PW←80
+ ⎕CT←1E¯13
+ n←5000000
+ ⎕RL←16807
+ r←loopfs n
+ ⎕←r
+ ⍝ Force n×n-1 to real numbers
+ ⎕←r←1-r≡(n×n-(0.5+0.5))÷2
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/loopfs/main.ufn§0§ 2020 6 24 17 4 22 860 §sàûu§0

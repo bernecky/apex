@@ -1,0 +1,172 @@
+ r←metaphone omega;b;c;drop;frontv;isFirst;isLast;isVowel;x;z;j
+⍝ Author: Andy Neilson
+⍝ Date:   23-Sep-1994
+⍝ This is an implementation of the Metaphone algorithm developed
+⍝ by Lawrence Phillips.  The APL version is based on public domain
+⍝ code written by Gary A. Parker.
+⍝ Generates a metaphone encoding of the string in omega.
+⍝ <omega> is a character matrix of words to be encoded.
+⍝ <r> is a character matrix of Metaphone encoded words.
+⍝⍝⎕signal(2≠⍴⍴omega)⍴11
+⍝⍝⎕signal(' '≠1↑0⍴omega)⍴11
+ r←omega
+ :For j :In ⍳~0∊⍴omega ⍝ One loop or none
+⍝⍝⎕io←0+0
+     x←256⍴' '
+     x[,(⎕AV⍳'aA')∘.+⍳26]←52⍴⎕AV[(⎕AV⍳'A')+⍳26]
+     omega←x[⎕AV⍳omega] ⍝
+⍝⍝omega←x translate omega ⍝ uppercase, replace non-alpha with blanks
+⍝ Add null as delimiter to cut it up again, blanks as padding
+     omega←2⌽,(((1↑⍴omega),6)⍴¯6↑4↑1↑⎕AV),omega ⍝⍝⍝ rotating in wrong direction???
+     isFirst←(~omega∊' ',1↑⎕AV)∧¯1⌽omega=' '
+⍝
+⍝ --------------------------------------------------------------------
+⍝ These encodings are done to the initial string
+⍝ The second letter of initial PN KN GN AE is silent.
+⍝ PN (eg, PNEUMATIC)
+⍝ KN (eg, KNOT)
+⍝ GN (eg, GNAT)
+⍝ WR (eg, WRIST)
+⍝ What about 'RH' (as in RHYME)??  Oxford dict thinks so.
+     b←('PN'⍷omega)∨('KN'⍷omega)∨'GN'⍷omega
+     b←b∨('AE'⍷omega)∨('WR'⍷omega)∨'WH'⍷omega
+     b←isFirst∧b
+⍝
+⍝ WH (eg, WHITE) - Initial W is silent
+     b←~b∨¯1⌽isFirst∧'WH'⍷omega
+⍝
+⍝ Initial X → S (eg, XYLENE).
+     omega[QIOR x←isFirst∧omega='X']←'S'
+⍝
+     omega←b/omega ⍝ Compress out slient ones so far
+⍝ Drop duplicates except CC (this lets CC → K)
+     omega←((omega∊'C ')∨omega≠1⌽omega)/omega ⍝ leave padding blanks in too
+⍝
+     r←,omega
+     isFirst←(~omega∊' ',1↑⎕AV)∧¯1⌽omega=' '
+     isLast←(~omega∊' ',1↑⎕AV)∧1⌽omega=' '
+     isVowel←omega∊'AEIOU'
+     frontv←omega∊'EIY' ⍝ These change sound w/ vowels in front of vowels ???
+     drop←(⍴omega)⍴0
+⍝
+⍝ --------------------------------------------------------------------
+⍝ Vowels (except for initial) are dropped
+     drop←drop∨isVowel∧~isFirst
+⍝
+⍝ B silent at the end of a word or when preceded by M (eg, BOMB)
+     drop←drop∨(omega='B')∧isLast∨'M'=¯1⌽omega
+⍝
+⍝ C
+⍝ Only transform C if ~SC or C~<frontv> (what does this mean???)
+     c←(omega='C')∧('S'≠¯1⌽omega)∨~1⌽frontv
+⍝ CIA → XIA  (eg, association)
+     r[QIOR b←c∧'CIA'⍷omega]←'X'
+     x←b
+⍝ C<frontv> → S  (eg, CYAN)
+     r[QIOR z←c∧(~x)∧1⌽frontv]←'S'
+     x←x∨z
+⍝ CH
+     b←c∧(~x)∧'H'=1⌽omega
+⍝ Initial CH~<vowel> → 'K' (eg, CHLORINE)
+⍝ SCH → K (eg, SCHOOL)
+⍝ CH → X  (eg, CHURCH, ANCHOVY) as in the Greek letter Chi.
+     z←b∧(isFirst∧~2⌽isVowel)∨(¯1⌽omega)='S'
+     r[QIOR b]←'XK'[b/z]
+     drop←drop∨¯1⌽b
+     x←x∨b
+⍝ otherwise the C is hard, C → K
+     r[QIOR(c∧~x)]←'K'
+     b←z←x←''
+⍝
+⍝ D
+⍝ DG<frontv> → J (eg, HEDGE)
+⍝ otherwise, → T (D and T sound alike)
+     x←'D'=omega
+     b←x∧'G'=1⌽omega
+     r[QIOR b]←'J'
+     drop←drop∨¯1⌽x
+     r[QIOR(x∧~b)]←'T'
+     x←b←''
+⍝
+⍝ G
+⍝ G before EIY is soft and = J (eg, age,gin,orgy,gybe), else hard (=K)
+⍝ This is a bit of a mystery to me - I just copied it verbatim (I hope!)
+     z←omega='G'
+     x←omega≠'D'
+     b←z∧(1⌽omega≠'H')∨2⌽isVowel
+     b←b∧(1⌽omega≠'N')∨(~1⌽isLast)∧(2⌽omega≠'E')∨3⌽x
+     b←b∧(¯1⌽x)∨~1⌽frontv
+     r[QIOR b]←'KJ'[b/(1⌽frontv)∧~2⌽z]
+⍝ GH sounds like F sometimes (eg, DRAUGHT)
+     x←z∧(~b)∧(1⌽omega='H')∧(¯3⌽~omega∊'BDH')∧¯4⌽omega≠'H'
+     r[QIOR x]←'F'
+     drop←drop∨¯1⌽x
+⍝ Otherwise, G is silent (??)
+     drop←drop∨z∧~b∨x
+     b←x←z←''
+⍝
+⍝ H
+⍝ H is silent when it is preceded by a vowel (eg, ??)
+⍝ or when it is not followed by a vowel.
+⍝ When preceded by C G P S T, H is silent.  This is handled
+⍝ by the section for these letters since H modifies them.
+     drop←drop∨(omega='H')∧(¯1⌽isVowel)∧~1⌽isVowel
+⍝
+⍝ K
+⍝ CK → K (compress out K since C already has K sound) (eg, CLOCK)
+     drop←drop∨¯1⌽'CK'⍷omega
+⍝
+⍝ PH → F (eg, telephone)
+     r[QIOR b←'PH'⍷omega]←'F'
+     drop←drop∨¯1⌽b
+⍝
+⍝ Q → K (eg, quality).  More like KW really - close enough, I guess.
+     r[QIOR(omega='Q')]←'K'
+⍝
+⍝ SH → X (eg, SHIP)
+     r[QIOR b←'SH'⍷omega]←'X'
+     drop←drop∨¯1⌽b
+⍝
+⍝ SIO → XIO (eg, VISION)
+⍝ SIA → XIA (eg, ASIA)
+⍝ TIO → XIO (eg, NATION)
+     b←('SIO'⍷omega)∨('SIA'⍷omega)∨('TIO'⍷omega)∨'TIA'⍷omega
+⍝ TIA → XIA (eg, SCOTIA)
+     r[QIOR b]←'X'
+⍝
+⍝ TH → 0 (zero) '0' represents special TH sound (eg, PATH)
+     r[QIOR b←'TH'⍷omega]←'0'
+     drop←drop∨¯1⌽b
+⍝
+⍝ T is silent if followed by C (eg, Tchaikovsky)
+⍝ or when followed by any letter then H (eg, ??)
+     drop←drop∨(omega='T')∧(1⌽omega='C')∨2⌽omega='H'
+⍝
+⍝ V → F
+⍝ True for English, but not necessarily for Spanish (??)
+     r[QIOR(omega='V')]←'F'
+⍝
+⍝ WY, drop if not followed by <vowel> (eg, OWN, ??)
+     drop←drop∨(omega∊'WY')∧1⌽~isVowel
+⍝
+⍝ Z → S (eg, AZIMUTH)
+     r[QIOR(omega='Z')]←'S'
+⍝
+     r[QIOR drop]←' '
+     drop←''
+⍝
+⍝ non-initial X → KS (eg, MOXY).
+⍝ This is the one case of a sound being expanded.
+⍝ (b+1) will be large - might want to rewrite to avoid it.
+     b←(omega='X')∧~isFirst
+     r←(b+1)/r
+     b←(b+1)/b
+     r[QIOR b]←(+/b)⍴'KS'
+⍝
+⍝ Remove padding at either end and recut it into
+     b←''
+     r←(r≠' ')/r
+⍝ cut up on initial delimiters (REMOVED)
+     r←vtom r
+ :EndFor
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/metaph2AKD/metaphone.ufn§0§ 2020 6 24 17 4 22 864 §bêÀÁNE§0

@@ -1,0 +1,20 @@
+ r←s SCS y;t;m;i;j;mi;mj;si;sj;ti;tj;cc;b
+⍝ Dyn Prog string shuffler w/ctl strucs
+ b←1+(y[0]=1↓y)⍳1 ⍝ Make substrings
+ si←1↓b↑y
+ sj←(2+⍴si)↓y ⍝ Now build dp matrix
+ m←(1+(⍴si),⍴sj)⍴0 ⍝ DP matrix.
+⍝ The matrix has a 1 in position m[i;j] iff
+⍝ s[⍳i+j] StrshuffleDyn si[⍳i] CWE sj[⍳j]
+ m[;0]←1,∧\si=(⍴si)↑s ⍝ Prime the pump
+ m[0;]←1,∧\sj=(⍴sj)↑s
+ :For j :In 1+⍳⍴sj
+     :For i :In 1+⍳⍴si
+         cc←s[i+j-1] ⍝ Current character in string
+         ti←m[i-1;j]∧cc=si[i-1] ⍝ Match on si
+         tj←m[i;j-1]∧cc=sj[j-1] ⍝ Match on sj
+         m[i;j]←ti∨tj
+     :EndFor
+ :EndFor
+ r←¯1 ¯1↑m
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/scs/SCS.ufn§0§ 2020 6 24 17 4 23 32 §bSÒBá§0

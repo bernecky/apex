@@ -1,0 +1,12 @@
+ R←N morgan A;X;Y;SX;SX2;SY;SY2;SXY
+ ⍝ N is an integer
+ ⍝ ⍴A is 2 1510 2010 of doubles
+ X←A[0;;]
+ Y←A[1;;]
+ SX←N MSUM X
+ SY←N MSUM Y
+ SX2←N MSUM X*2
+ SY2←N MSUM Y*2
+ SXY←N MSUM X×Y
+ R←((SXY÷N)-(SX×SY)÷N*2)÷(|((SX2÷N)+(SX÷N)*2)*0.5)×(|(SY2÷N)-(SY÷N)*2)*0.5
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/morganAKD/morgan.ufn§0§ 2020 6 24 17 4 22 868 §pJgx§0

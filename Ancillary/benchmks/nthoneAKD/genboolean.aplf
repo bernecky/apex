@@ -1,0 +1,4 @@
+ r←d genboolean siz
+⍝ Generate test data -- boolean with a 1 every d elements
+ r←siz⍴d↑1
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/nthoneAKD/genboolean.ufn§0§ 2020 6 24 17 4 22 868 §dãûL§0

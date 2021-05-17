@@ -1,8 +1,0 @@
-use UTMStruct: all;
-
-int main()
-{
-  z=UTMStruct::UTMStruct_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

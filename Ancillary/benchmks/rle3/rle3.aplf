@@ -1,0 +1,9 @@
+ r←rle3 n;i;j;oflow
+⍝ Benchmark Reuters ∆scrunch2 function
+⍝ dcl double vector i
+ oflow←0.5-0.5
+ i←scrunch3⍳n
+ r←(+/i),+/i/oflow+⍳⍴i
+ i←scrunch3 ¯4,(⍳n),¯99
+ r←r,(+/i),+/i/oflow+⍳⍴i
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/rle3/rle3.ufn§0§ 2020 6 24 17 4 23 28 §sCäø§0

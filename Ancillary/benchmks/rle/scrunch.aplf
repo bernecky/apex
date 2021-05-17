@@ -1,0 +1,17 @@
+ z←scrunch r;neg;sign;width;i
+⍝ Reuters Retrieve numeric compressor
+⍝ Modified to use control structures
+ neg←∨/sign←r<0
+ :For i :In ⍳neg ⍝ A disguised IF
+⍝⍝⍝⍝⍝⍝→(~neg)⍴l0
+     r[sign/⍳⍴sign]←|1+sign/r
+ :EndFor
+l0:width←1+⌊2⍟1⌈⌈/r
+ width←(⍳32)[width] ⍝ Poor man's real-to-int converter
+ z←(width⍴2)⊤r
+ :For i :In ⍳neg
+⍝⍝⍝→(~neg)⍴l2
+     z←sign⍪z
+ :EndFor
+l2:z←(¯8↑neg,(5⍴2)⊤width),z←,z
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/rle/scrunch.ufn§0§ 2020 6 24 17 4 23 28 §bqYoB§0

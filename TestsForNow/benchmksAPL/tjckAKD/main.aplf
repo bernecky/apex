@@ -1,0 +1,11 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW
+ ⍝ dcl integer scalar n
+ ⎕IO←0
+⍝⍝⍝  n←3000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←n Bjck 2005 11 24 ⍝ Turkey Day
+ ⎕←r
+ ⎕←r←1-r=3295511130000.5-0.5
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/tjckAKD/main.ufn§0§ 2020 6 24 17 4 23 36 §uùSÅ§0

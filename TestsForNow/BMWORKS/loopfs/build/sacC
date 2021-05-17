@@ -1,0 +1,1 @@
+sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/benchmksAPL/loopfs/build/Callloopfs.sac.exe -L /home/apex/apexgit/TestsForNow/benchmksAPL/loopfs/build/ -T /home/apex/apexgit/TestsForNow/benchmksAPL/loopfs/build/ /home/apex/apexgit/TestsForNow/benchmksAPL/loopfs/src/Callloopfs.sac

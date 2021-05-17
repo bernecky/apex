@@ -1,0 +1,5 @@
+ r←kernel y;N;m
+ N←⍴y
+ m←(0=⍳N)∨(N-1)=⍳N
+ r←(m×y)+(~m)×((1 shift y)+¯1 shift y)÷2
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/wlcondoShift/kernel.ufn§0§ 2020 6 24 17 4 23 44 §cEÊM§0

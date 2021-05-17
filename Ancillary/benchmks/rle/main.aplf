@@ -1,0 +1,13 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW;⎕CT
+ ⎕IO←0
+⍝⍝⎕←'Enter 1000000 or problem size'
+⍝⍝n←¯1↑1000000,⎕fi ⍞
+ n←1000000
+ ⎕RL←16807
+ ⎕CT←1E¯12
+ ⎕PP←16
+ ⎕PW←80
+ r←rle n
+ ⎕←r
+ r←⎕←1-209736365304552.5=+/r+0.5
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/rle/main.ufn§0§ 2020 6 24 17 4 23 28 §èzùê§0

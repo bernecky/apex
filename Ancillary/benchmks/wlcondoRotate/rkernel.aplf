@@ -1,0 +1,4 @@
+ rkernel←{N←⍴⍵
+     m←(0=⍳N)∨(N-1)=⍳N
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/wlcondoRotate/rkernel.ufn§0§ 2020 6 24 17 4 23 44 §fiGX§0
+     (m×⍵)+(~m)×((1⌽⍵)+¯1⌽⍵)÷2}

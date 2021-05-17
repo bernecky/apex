@@ -1,0 +1,12 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW
+⍝ dcl integer scalar n
+ ⎕IO←0
+⍝⎕←'Enter 40000000 or other problem size'
+⍝n←''⍴¯1↑40000000,⎕fi ⍞
+ ⍝n←40000000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←lltop n
+ ⎕←r←1-r≡⌽⍳n
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/lltopAKD/main.ufn§0§ 2020 6 24 17 4 22 856 §ôBMP§0

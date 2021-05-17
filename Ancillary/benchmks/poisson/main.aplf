@@ -1,0 +1,7 @@
+ r←main;⎕PP;dat
+ ⎕PP←16
+ dat←MKD 300
+ r←poisson dat
+ ⎕←r
+ ⎕←r←(r=449597.4516121251)-1
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/poisson/main.ufn§0§ 2020 6 24 17 4 23 28 §eHpq§0

@@ -1,0 +1,12 @@
+ z←Deal n;a;i;p
+⍝ This from Mike Kent, via comp.lang.apl 1998-03-26
+⍝ Deal produces all !n deals of n-of-n items
+⍝ with equal probability.
+⍝ (given that ? produces a sample from
+⍝ a uniform distribution)
+ p←?n⍴n
+ :For i :In a←⍳n
+     a[i,p[i]]←a[p[i],i]
+ :EndFor
+ z←a
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/unirand/Deal.ufn§0§ 2020 6 24 17 4 23 40 §xJõb§0

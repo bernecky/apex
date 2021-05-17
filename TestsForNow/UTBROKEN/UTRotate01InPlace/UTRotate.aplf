@@ -28,4 +28,3 @@
  r←r,(0.5+⍳20)≡0⊖0.5+⍳20
  r←r,'abcde'≡5⌽'abcde'
  r←r,'abcde'≡¯5⊖'abcde'
-⍝∇⍣§/home/apex/apexgit/TestsForNow/UTRotate01/UTRotate.ufn§0§ 2020 6 24 17 4 22 840 §eoyèz§0

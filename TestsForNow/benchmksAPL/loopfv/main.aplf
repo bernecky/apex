@@ -1,0 +1,10 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW;⎕CT
+ ⎕IO←0
+ ⎕PP←17
+ ⎕PW←80
+ ⎕CT←1E¯13
+ n←20000000
+ ⎕RL←16807
+ ⎕←r←(loopfv n)[0]
+ r←1-r=n
+ ⎕←r

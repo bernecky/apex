@@ -1,0 +1,8 @@
+ r←main;⎕IO;v;z
+ ⍝ Integer upgrade performance test
+ ⎕IO←0
+ v←⌽⍳5000000
+ v[0]←¯3 ⍝ No longer a permutation vector
+ z←⍋v
+ ⎕←r←1-z≡¯1⌽⌽⍳⍴v
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/upgradeIntVec/main.ufn§0§ 2020 6 24 17 4 23 44 §tInW§0

@@ -1,0 +1,5 @@
+ r←main y
+ ⍝ Function to echo command line, sort of
+ ⍝  dcl integer scalar y
+ ⎕←y
+ r←1-y=42

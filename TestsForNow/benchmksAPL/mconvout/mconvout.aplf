@@ -1,0 +1,6 @@
+ r←x mconvout y;tr;wz;r1;r2
+⍝ Convolution as outer product
+ wz←0.01×1+⍳x
+ tr←0.01×1+⍳y
+ r←+/wz convo tr
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/mconvout/mconvout.ufn§0§ 2020 6 24 17 4 22 864 §eÙuO§0

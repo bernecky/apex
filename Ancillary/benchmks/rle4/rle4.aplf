@@ -1,0 +1,8 @@
+ r←rle4 n;i;j;oflow
+⍝ Benchmark Reuters ∆scrunch2 function
+ oflow←0.5-0.5
+ i←rlenuax⍳n
+ r←(+/i),+/oflow+i/⍳⍴i
+ i←rlenuax ¯4,(⍳n),¯99
+ r←r,(+/i),+/oflow+i/⍳⍴i
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/rle4/rle4.ufn§0§ 2020 6 24 17 4 23 28 §oÁWÔ§0

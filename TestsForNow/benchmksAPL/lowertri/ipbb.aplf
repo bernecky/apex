@@ -1,0 +1,5 @@
+ r←ipbb siz;m
+⍝ Inner product Boolean ∨.∧ Boolean
+ m←(2⍴siz)⍴0 1 1 0 0 0
+ r←+/+/m∨.∧⍉m
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/lowertri/ipbb.ufn§0§ 2020 6 24 17 4 22 860 §gHNe§0

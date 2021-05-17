@@ -1,0 +1,6 @@
+ X←PRIMES A;S;T
+ S←×/⍴A
+ T←(⍳S)∘.|⍳S
+ T←+⌿T=0
+ X←A∊(2=T)/⍳S
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/ulamAKD/PRIMES.ufn§0§ 2020 6 24 17 4 23 40 §eøqá§0

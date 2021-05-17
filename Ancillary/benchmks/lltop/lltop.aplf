@@ -1,0 +1,3 @@
+ r←lltop n
+ r←(n-1)lltoperm Genll n
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/lltop/lltop.ufn§0§ 2020 6 24 17 4 22 856 §wQi§0

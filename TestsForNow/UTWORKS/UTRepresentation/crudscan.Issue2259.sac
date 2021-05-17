@@ -1,0 +1,22 @@
+module UTRepresentation;
+use Array:{shape,genarray,<,+,++,-,*,sum,sel,modarray};
+export {NOTmain};
+
+inline int mpybslXII(int[.] y)
+{ /* Scan of vector */
+ size = shape(y);
+ arg = genarray(size,1);
+ z = 42;
+ for ( i=1; i<size[[0]]; i++) {
+    z = z + 4 * 3;
+ }
+ return(z);
+}
+
+int NOTmain ()
+{ 
+ z=mpybslXII( [2,3,1]);
+ return(z);
+}
+
+

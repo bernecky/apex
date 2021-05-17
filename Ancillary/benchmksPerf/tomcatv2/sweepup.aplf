@@ -1,0 +1,13 @@
+ d←aa sweepup dd;j;r
+⍝ We thought this was a scan, but I can't make it work.
+ d←dd
+ d[0;]←÷d[0;]
+ nrx←rx
+ nry←ry
+ :For j :In 1+⍳(⍴dd)[0]-1
+     r←aa[j;]×d[j-1;]
+     d[j;]←÷d[j;]-r×aa[j-1;]
+     nrx[j;]←nrx[j;]-nrx[j-1;]×r
+     nry[j;]←nry[j;]-nry[j-1;]×r
+ :EndFor
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatv2/sweepup.ufn§0§ 2020 6 24 17 4 23 40 §srMf§0

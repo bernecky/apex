@@ -1,0 +1,6 @@
+ Z←A OVER B;S
+⍝ Forms a matrix with ⍺ over ⍵
+ A←(S←¯2↑1 1,⍴A)⍴A
+ S←0 1×S⌈⍴B←(¯2↑1 1,⍴B)⍴B
+ Z←((S⌈⍴A)↑A)⍪(S⌈⍴B)↑B
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/matiotaAKD/OVER.ufn§0§ 2020 6 24 17 4 22 864 §sÒOL§0

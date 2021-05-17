@@ -1,0 +1,14 @@
+ z←scrunch3 r;neg;sign;width;i;cor
+⍝ Reuters Retrieve numeric compressor
+⍝ Modified to use control structures
+⍝ Uses transposed representation to speed up
+⍝ APEX and mainframe.
+ neg←∨/sign←r<0
+ r←|r
+ width←1+⌊2⍟1⌈⌈/r
+ cor←(sign××/width⍴2)-sign
+ z←,⍉((neg+width)⍴2)⊤r+cor
+⍝ "1" in next line allows us to tell one
+⍝ representation from another
+ z←(¯8↑1,neg,(5⍴2)⊤width),z
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/rle3/scrunch3.ufn§0§ 2020 6 24 17 4 23 28 §TÆQw§0

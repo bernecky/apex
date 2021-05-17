@@ -1,8 +1,0 @@
-use UTShape: all;
-
-int main()
-{
-  z=UTShape::UTShape_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

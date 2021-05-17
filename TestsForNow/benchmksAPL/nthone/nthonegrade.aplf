@@ -1,0 +1,4 @@
+ r←n nthonegrade b
+⍝ Find n-th 1 in Boolean vector b using real upgrade
+ r←(⍒b)[n]
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/nthone/nthonegrade.ufn§0§ 2020 6 24 17 4 22 868 §csÓõ§0

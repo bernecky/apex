@@ -1,0 +1,8 @@
+ r←MakeArgs n;az;s;s1;s2;b
+⍝ Make string shuffle arguments of length n
+ s←n⍴'abcdefghijklmnopqrstuvwxyz'
+ b←n⍴0 0 1
+ s1←b/s
+ s2←(~b)/s
+ r←s,'/',s1,'/',s2
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/scsAKD/MakeArgs.ufn§0§ 2020 6 24 17 4 23 32 §jàlÀ§0

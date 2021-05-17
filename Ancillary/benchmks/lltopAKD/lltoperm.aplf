@@ -1,0 +1,10 @@
+ r←hd lltoperm links;i
+⍝ Convert linked list headed at element hd
+⍝ of links to permutation vector.
+⍝ Links are origin 0, terminated by ¯1.
+ r←(⍴links)⍴¯1
+ :For i :In ⍳⍴links
+     r[hd]←i
+     hd←links[hd]
+ :EndFor
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/lltopAKD/lltoperm.ufn§0§ 2020 6 24 17 4 22 856 §qMôo§0

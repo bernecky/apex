@@ -1,0 +1,11 @@
+ r←main;⎕IO;n;⎕RL;⎕PP;⎕PW;⎕CT;z
+ ⎕IO←0
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ ⎕CT←1E¯13
+ n←3000000
+ z←Deal n
+ ⎕←r←∧/(⍳n)∊z
+ ⎕←r←r-1
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/unirand/main.ufn§0§ 2020 6 24 17 4 23 40 §tjxÒ§0

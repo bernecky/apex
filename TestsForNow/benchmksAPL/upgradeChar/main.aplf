@@ -1,0 +1,9 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ ⎕RL←16807 ⍝ Make this test reproducible
+ n←1000000 20⍴⎕AV[32+⍳95] ⍝ Typical(?) data with some dups
+ ⎕PP←16
+ ⎕PW←80
+ ⎕←r←+/0.5+⎕AV⍋n
+ ⎕←r←1-r=500000000000+0.5-0.5
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/upgradeChar/main.ufn§0§ 2020 6 24 17 4 23 44 §âELD§0

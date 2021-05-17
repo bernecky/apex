@@ -1,0 +1,12 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW;⎕CT
+⍝this function exists only to make sac2c happy
+ ⎕IO←0
+ n←257
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ ⎕CT←1E¯13
+ r←tomcatv n
+ ⎕←r
+ ⎕←r←1+r≡100 202 2 9.829641760002668E¯7 30 256 0.000001171124699032975
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/tomcatv2/main.ufn§0§ 2020 6 24 17 4 23 40 §zQSW§0

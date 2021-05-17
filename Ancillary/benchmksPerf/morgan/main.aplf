@@ -1,0 +1,8 @@
+ r←main;d;⎕PP
+ ⍝ Ching changed arg size d←GenArg 2 1510 2010
+ ⎕PP←16
+ d←GenArg 2 700 700
+ r←2 morgan d
+ ⎕←r←+/,r
+ ⎕←r←(11257.38883178426=r)-1
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/morgan/main.ufn§0§ 2020 6 24 17 4 22 868 §lFnæ§0

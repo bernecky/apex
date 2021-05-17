@@ -1,0 +1,4 @@
+ r←snpcount3 snp
+⍝ Count number of each snp type
+ r←+/0 1 2∘.=⍉snp
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/snp2AKD/snpcount3.ufn§0§ 2020 6 24 17 4 23 32 §czÃÀ§0

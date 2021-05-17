@@ -1,0 +1,12 @@
+ r←main;⎕IO;n;⎕PP;⎕PW;⎕RL;⎕CT
+ ⎕CT←1E¯14
+ ⎕IO←0
+ ⎕RL←16807 ⍝ Make this test reproducible
+ n←200000 20⍴⎕AV[32+⍳95] ⍝ Typical(?) data with some dups
+ ⎕PP←17
+ ⎕PW←80
+ r←n MATIOTA n⍪⌽100 20↑n
+ ⎕←r←+/(r+0.5-0.5)×⍳⍴r ⍝ Avoid int overflow
+ r←r+⎕←n MATIOTA 20⍴n ⍝ Vector ⍵ case [BROKEN]
+ ⎕←r←1-r[0]≡4180987299974.5-0.5
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/matiota/main.ufn§0§ 2020 6 24 17 4 22 864 §VUÊÄ§0

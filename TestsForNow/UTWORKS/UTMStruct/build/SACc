@@ -1,1 +1,0 @@
-sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/UnitTests/UTMStruct/build/CallUTMStruct.sac.exe -L /home/apex/apexgit/TestsForNow/UnitTests/UTMStruct/build/ -T /home/apex/apexgit/TestsForNow/UnitTests/UTMStruct/build/ /home/apex/apexgit/TestsForNow/UnitTests/UTMStruct/src/CallUTMStruct.sac

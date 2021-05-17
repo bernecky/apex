@@ -1,0 +1,11 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW;z
+⍝ dcl integer scalar n
+ ⎕IO←0
+⍝⍝ n←500000
+ ⎕RL←16807
+ ⎕PP←17
+ ⎕PW←80
+ z←rle4 n
+ ⎕←z
+ ⎕←r←1-(211423015165597.5-0.5)=+/z
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/rle4AKD/main.ufn§0§ 2020 6 24 17 4 23 28 §rtÊÉ§0
