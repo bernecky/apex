@@ -6,4 +6,3 @@
 ⍝ real world computation
  RR←0.01
  L←¯50⌈50⌊50×(DIFF2 WV)÷RR+WV
-⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/logd2AKD/LOGDERIV2.ufn§0§ 2020 6 24 17 4 22 860 §qBAf§0

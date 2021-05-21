@@ -1,1 +1,0 @@
-sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/benchmksAPL/histopf/build/Callhistopf.sac.exe -L /home/apex/apexgit/TestsForNow/benchmksAPL/histopf/build/ -T /home/apex/apexgit/TestsForNow/benchmksAPL/histopf/build/ /home/apex/apexgit/TestsForNow/benchmksAPL/histopf/src/Callhistopf.sac

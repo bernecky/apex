@@ -1,8 +1,6 @@
-/*
-% This is the APEX stdlib.sis include file.
-% Standard equates and constants for APL compiler
-% Also standard coercion functions
-*/
+// APEX stdlib.sis include file.
+// Standard equates and constants for APL compiler
+// Also standard coercion functions
 
 #define toB(x) to_bool((x))
 #define toI(x) toi((x))

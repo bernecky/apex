@@ -12,4 +12,3 @@
  r←r,(3 1⍴4 5 6)≡2 3 4∘.+,2                   ⍝ V V1
  ⎕←r
  r←⎕←1-∧/r
-⍝∇⍣§./TestsForNow/UTJotDot/main.ufn§0§ 2020 6 24 17 4 22 836 §cKÒoè§0

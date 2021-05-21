@@ -1,66 +1,6 @@
- r←main;y;S0;S1;V0;V1;V10100;M234;V101011;z;Vn
+ r←main
 ⍝# Take/Drop unit tests
- S0←0
- S1←1
- V1←,1
- V0←,0
- Vn←⍳0
- V10100←1 0 1 0 0
- V101011←1 0 1 0 1 1
- M234←2 3 4⍴⍳24
-⍝ Scalar Take Vector cases
- r←(0↑1)≡⍳0                ⍝ S↑S
- r←(0↑1)≡0 Take 1
- r←r,(1↑⍳0)≡,0             ⍝ S↑EV overtake
- r←r,(1↑⍳0)≡1 Take⍳0
- r←r,(3↑2)≡2 0 0           ⍝ S↑S overtake
- r←r,(3↑2)≡3 Take 2
- r←r,(¯3↑5)≡0 0 5          ⍝ S↑S overtake
- r←r,(¯3↑5)≡¯3 Take 5
- r←r,(4↑'xy')≡'xy  '       ⍝ S↑V overtake
- r←r,(4↑'xy')≡4 Take'xy'
- r←r,(¯4↑'xy')≡'  xy'      ⍝ S↑V overtake
- r←r,(¯4↑'xy')≡¯4 Take'xy'
- r←r,(3↑'abcd')≡'abc'      ⍝ S↑V undertake
- r←r,(3↑'abcd')≡3 Take'abcd'
- r←r,(¯3↑1 3 8 9)≡3 8 9    ⍝ S↑V undertake
- r←r,(¯3↑1 3 8 9)≡¯3 Take 1 3 8 9
-⍝ Scalar Drop Vector cases
- r←r,(0↓0)≡,0              ⍝ S↓S
- r←r,(0 Drop 0)≡,0
- r←r,(2↓⍳4)≡2 3            ⍝ S↓V underdrop
- r←r,(2 Drop⍳4)≡2 3
- r←r,(¯1↓⍳4)≡0 1 2         ⍝ S↓V underdrop
- r←r,(¯1 Drop⍳4)≡0 1 2
- r←r,(6↓⍳5)≡⍳0             ⍝ S↓V overdrop
- r←r,(6 Drop⍳5)≡⍳0
- r←r,(¯6↓⍳5)≡⍳0            ⍝ S↓V overdrop
- r←r,(¯6↓⍳5)≡⍳0
-⍝ Matrix cases
- ⍝ Overtake matrix
- r←r,(3 ¯4↑2 2⍴⍳4)≡3 4⍴0 0 0 1,0 0 2 3,0 0 0 0
- r←r,(3 ¯4↑2 2⍴⍳4)≡3 ¯4 Take 2 2⍴⍳4
- r←r,(3 4↑2 2⍴⍳4)≡3 4 Take 2 2⍴⍳4
- r←r,(¯3 4↑2 2⍴⍳4)≡¯3 4 Take 2 2⍴⍳4
- r←r,(¯3 ¯4↑2 2⍴⍳4)≡¯3 ¯4 Take 2 2⍴⍳4
- ⍝ Undertake matrix
- r←r,(2 3↑4 5⍴⍳20)≡2 3 Take 4 5⍴⍳20
- r←r,(2 ¯3↑4 5⍴⍳20)≡2 ¯3 Take 4 5⍴⍳20
- r←r,(¯2 3↑4 5⍴⍳20)≡¯2 3 Take 4 5⍴⍳20
- r←r,(¯2 ¯3↑4 5⍴⍳20)≡¯2 ¯3 Take 4 5⍴⍳20
- ⍝ Underdrop matrix
- r←r,(2 2↓3 4⍴⍳12)≡2 2 Drop 3 4⍴⍳12
- r←r,(2 ¯2↓3 4⍴⍳12)≡2 ¯2 Drop 3 4⍴⍳12
- r←r,(¯2 2↓3 4⍴⍳12)≡¯2 2 Drop 3 4⍴⍳12
- r←r,(¯2 ¯2↓3 4⍴⍳12)≡¯2 ¯2 Drop 3 4⍴⍳12
- ⍝ Underdrop matrix with short left argument
- r←r,(2↓3 4⍴⍳12)≡2 Drop 3 4⍴⍳12
- r←r,(¯2↓3 4⍴⍳12)≡¯2 Drop 3 4⍴⍳12
- ⍝ Overdrop matrix
- r←r,(3 2↓3 4⍴⍳12)≡3 2 Drop 3 4⍴⍳12
- r←r,(2 5↓3 4⍴⍳12)≡2 4 Drop 3 4⍴⍳12
- r←r,(¯3 2↓3 4⍴⍳12)≡¯3 2 Drop 3 4⍴⍳12
- r←r,(2 ¯5↓3 4⍴⍳12)≡2 ¯5 Drop 3 4⍴⍳12
+ r←utmain
  ⎕←r
  ⎕←r←1-∧/r
-⍝∇⍣§/home/apex/apexgit/TestsForNow/UTTakeDrop/main.ufn§0§ 2020 6 24 17 4 22 844 §ëeËÂä§0
+

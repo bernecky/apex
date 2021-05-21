@@ -1,8 +1,0 @@
-use iotan: all;
-
-int main()
-{
-  z=iotan::iotan_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

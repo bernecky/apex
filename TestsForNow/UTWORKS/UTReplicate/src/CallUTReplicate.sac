@@ -1,8 +1,0 @@
-use UTReplicate: all;
-
-int main()
-{
-  z=UTReplicate::UTReplicate_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

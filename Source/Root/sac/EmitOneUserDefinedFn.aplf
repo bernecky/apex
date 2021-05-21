@@ -1,4 +1,4 @@
- r←mkmn EmitOneUserDefinedFn asts;ast;fnm;rap;s;newasts;j;fns;wif;sis
+ r←EmitOneUserDefinedFn asts;ast;fnm;rap;s;newasts;j;fns;wif;sis
  ⍝ Emit code for one user-defined function
  ⍝ Result is code & required library fns
  ast←D asts[ssaast]
@@ -22,4 +22,3 @@
  wif←NL,'/*',NL,' ',wif,NL,'*/',NL
  sis←D Raze s,wif,sis,rap[1]
  r←(E sis),E fns ⍝ SAC & fns list
- r←mkmn/r ⍝ Ignore soon-dead code

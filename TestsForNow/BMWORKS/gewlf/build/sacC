@@ -1,1 +1,0 @@
-sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/benchmksAPL/gewlf/build/Callgewlf.sac.exe -L /home/apex/apexgit/TestsForNow/benchmksAPL/gewlf/build/ -T /home/apex/apexgit/TestsForNow/benchmksAPL/gewlf/build/ /home/apex/apexgit/TestsForNow/benchmksAPL/gewlf/src/Callgewlf.sac

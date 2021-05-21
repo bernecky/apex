@@ -1,8 +1,0 @@
-use loopis: all;
-
-int main()
-{
-  z=loopis::loopis_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

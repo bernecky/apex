@@ -1,1 +1,0 @@
-sac2c -v3 -O3 -o TestsForNow/benchmksAPL/compiotaAKD/build/CallcompiotaAKD.sac.exe -L TestsForNow/benchmksAPL/compiotaAKD/build/ -T TestsForNow/benchmksAPL/compiotaAKD/build/ /home/apex/apexgit/TestsForNow/benchmksAPL/compiotaAKD/src/CallcompiotaAKD.sac

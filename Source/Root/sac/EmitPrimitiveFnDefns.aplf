@@ -1,8 +1,7 @@
- r←fnsmk EmitPrimitiveFnDefns ssadat;sis;i;fns2;sis2;fns;mkmn
+ r←fns EmitPrimitiveFnDefns ssadat;sis;i;fns2;sis2;ismn
  ⍝# Emit SAC code to define all APL primitives used
  ⍝# in this application. This is, effectively, a customized stdlib.
  sis←E''
- (fns mkmn)←fnsmk
  fns←D nub ER1 fns              ⍝ No duplicate fn defns, please.
  fns←(~fns[;fnsfn]∊E'')⌿fns
  i←EmitMonadicScalarFns fns     ⍝ ~y, ×y...
@@ -41,7 +40,8 @@
  fns2←D Raze,D 1↓¨sis2
  sis←,D 1↑¨sis2
  :If ~0∊⍴fns2
-     sis←sis,fns2 EmitPrimitiveFnDefns ssadat
+     sis2←fns2 EmitPrimitiveFnDefns ssadat
+     sis←sis,sis2
  :EndIf
  sis←nub(,D 0≠⍴¨sis)/sis
  r←sis

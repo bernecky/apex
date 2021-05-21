@@ -1,8 +1,0 @@
-use gewlf: all;
-
-int main()
-{
-  z=gewlf::gewlf_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

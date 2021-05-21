@@ -1,1 +1,0 @@
-sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/benchmksAPL/logd2/build/Calllogd2.sac.exe -L /home/apex/apexgit/TestsForNow/benchmksAPL/logd2/build/ -T /home/apex/apexgit/TestsForNow/benchmksAPL/logd2/build/ /home/apex/apexgit/TestsForNow/benchmksAPL/logd2/src/Calllogd2.sac

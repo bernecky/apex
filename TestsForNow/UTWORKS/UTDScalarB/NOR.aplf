@@ -23,4 +23,3 @@
  r←r,(BM304⍱BM304)≡~BM304
  r←r,(BM230⍱BS1)≡~(⍴BM230)⍴1
  r←r,(BM230⍱BM230)≡~BM230
-⍝∇⍣§/home/apex/apexgit/TestsForNow/UTDScalarB/NOR.ufn§0§ 2020 6 24 17 4 22 832 §cXÂèò§0

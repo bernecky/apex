@@ -1,0 +1,16 @@
+ r←ismn GenOutputFile y;wsid;APEXVersion;cuasts;cudefinedfns;cuprolog;code;b;cufnm;txt
+ ;mnm;m;fldr
+ ⍝# Package the generated SAC code for one Compilation Unit(CU)
+ cuasts←D y[0] ⍝ All asts for the CU
+ cudefinedfns←D y[1] ⍝ All defined fns for the CU
+ fldr←D y[2] ⍝ The APL file name for the CU
+ cuprolog←GetFileChar #.globals.PathFrag,'prolog.',#.globals.TargetLanguage ⍝ Get prolog code
+ cuprolog←'$MAIN'Strepl(E cuprolog),E CUEntryPoint cuasts
+ APEXVersion←'Compiled by APEX Version: ',⎕WSID
+ cuprolog←cuprolog,(BuildComment APEXVersion,' ',,fts ⎕TS),NL
+ cuprolog←cuprolog,GetFileChar #.globals.PathFrag,'stdlib.',#.globals.TargetLanguage
+ mnm←PathFileName fldr
+ m←(~1∊ismn)/'module ',mnm,';',NL,'export all;',NL,NL
+ cuprolog←m,cuprolog
+ code←cuprolog,cudefinedfns
+ r←toascii AddNL code

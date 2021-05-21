@@ -1,8 +1,0 @@
-use UTRepresentation: all;
-
-int main()
-{
-  z=UTRepresentation::UTRepresentation_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

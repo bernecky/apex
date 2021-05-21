@@ -9,5 +9,4 @@
  InitializePFAT
  TL←LC #.globals.TargetLanguage
  fragbuf←BufferAllCodeFragments #.globals.PathFrag
- ipt←fldr EmitOneCU asts ⍝ module and generated caller
- r←(E fldr)InvokeCompiler¨ipt ⍝ Compile sac module, caller
+ r←fldr EmitOneCU asts ⍝ module and generated caller

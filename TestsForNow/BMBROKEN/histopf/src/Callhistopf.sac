@@ -1,8 +1,0 @@
-use histopf: all;
-
-int main()
-{
-  z=histopf::histopf_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

@@ -1,36 +1,32 @@
  r←fldr EmitOneCU asts;fnmexe;fnmso
- ;ismn;astsmod;astsm
+ ;ismn;astsmod;astsm;m;ismod;junk
  ⍝ Emit compiled APL code for one Compilation Unit(CU), asts
- ⍝ Genned module code written to file r in fldr
- ⍝ Result is r, and the generated main() filenames
- ⍝
- ⍝ We have three cases, based on asts contents:
- ⍝  1. main() is the only user-defined fn: generate exe file
- ⍝     E.g., UTargvAKD or other trivial code.
- ⍝  2. main() does not exist: Generate shared library (.so) only.
- ⍝      E.g., perhaps we are compiling a namespace.
- ⍝  3. main() has sub-functions: Generate .so and .exe.
- ⍝     The .exe and other code can call the .so, a
- ⎕←Trace(fts ⎕TS),': Starting code generation for: ',fldr
+ ⍝ r is genned filenames
+ ⎕←Trace(fts ⎕TS),': Starting code gen for: ',fldr
  InitializeFns   ⍝ and cal
- ⍝ Build mainline code, identify primitives
  asts←SACNames¨asts ⍝ Map names to avoid SAC keyword conflicts, etc
- ismn←isDfnMain¨asts
- fnmexe←fnmso←fnmcall←''
- :If (1∊ismn)∧1=⍴ismn ⍝ Case 1: if main() exists, but no subfns, generate .exe
-     fnmexe←((E fldr),E ismn)GenCode asts
+ ismn←isDfnMain¨asts ⍝ Mark main() in asts
+ fnmexe←fnmso←''
+ (astsmod m)←fldr SACModuleRenameMain asts
+ ismod←0∊ismn
+ :If ismod ⍝ Non-main() present, gen .so
+     txt←((E fldr),E ismod)GenCode astsmod
+     fnmso←txt WriteCode(E fldr),E ismod
+     junk←((E fldr),E ismod)InvokeCompiler fnmso
  :EndIf
- :If ~1∊ismn ⍝ Case 2: no main(): Generate .so file only
-     fnmso←((E fldr),E ismn)GenCode asts
+ :If 1∊ismn ⍝ if main() is present, gen .exe
+     ismod←0
+     :If 1≠≢ismn ⍝ Naked main()?
+         txt←(PathFileName fldr)GenTestCaller m ⍝ non-naked
+     :Else
+         txt←((E fldr),E ismod)GenCode ismn/asts ⍝ naked
+     :EndIf
+     fnmexe←txt WriteCode(E fldr),E ismod
+     junk←((E fldr),E ismod)InvokeCompiler fnmexe
  :EndIf
- :If (1∊ismn)∧1<⍴ismn ⍝ Case 3: main() w/subfns. Gen .so & main() for .so call
-     (astsmod smn)←fldr SACModuleRenameMain asts
-     fnmexe←((E fldr),E ismn)GenCode asts ⍝ Gen main ()
-     fnmso←((E fldr),E~ismn)GenCode astsmod ⍝  Gen .so
- :EndIf
-⍝⍝ ⍝ Generate Caller fn for module
-⍝⍝ ⍝⍝fnm3←smn GenCallerFn fldr
  GenAPLCoverFn fnmexe ⍝ for calling module
+
  r←(E fnmexe),(E fnmso)
+
  r←(×≢¨r)/r
- ⎕←Trace(fts ⎕TS),': Code generation complete for: ',fldr
+ ⎕←Trace(fts ⎕TS),': Code gen done for: ',fldr

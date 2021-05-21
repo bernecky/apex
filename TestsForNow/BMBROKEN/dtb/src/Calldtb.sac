@@ -1,8 +1,0 @@
-use dtb: all;
-
-int main()
-{
-  z=dtb::dtb_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

@@ -1,1 +1,0 @@
-sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/benchmksAPL/histgrade/build/ -L /home/apex/apexgit/TestsForNow/benchmksAPL/histgrade/build/ -T /home/apex/apexgit/TestsForNow/benchmksAPL/histgrade/build/ /home/apex/apexgit/TestsForNow/benchmksAPL/histgrade/src/histgrade.sac

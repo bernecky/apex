@@ -1,8 +1,0 @@
-use loopfvAKD: all;
-
-int main()
-{
-  z=loopfvAKD::loopfvAKD_mainXII();
-  StdIO::show(z);
-  return(0);
-}

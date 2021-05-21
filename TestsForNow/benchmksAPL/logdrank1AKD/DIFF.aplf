@@ -1,5 +1,0 @@
- RES←DIFF SIG
-⍝edited under 2 BFRONT 89/11/21 14:09:09
-⍝ differentiation function
- RES←1↓SIG-¯1⌽SIG
-⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/logdrank1AKD/DIFF.ufn§0§ 2020 6 24 17 4 22 860 §emjN§0

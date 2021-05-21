@@ -1,8 +1,0 @@
-use histop: all;
-
-int main()
-{
-  z=histop::histop_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

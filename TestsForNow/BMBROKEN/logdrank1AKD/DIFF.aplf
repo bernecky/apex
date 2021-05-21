@@ -1,4 +1,4 @@
- RES←DIFF2 SIG
+ RES←DIFF SIG
 ⍝edited under 2 BFRONT 89/11/21 14:09:09
 ⍝ differentiation function
- RES←SIG-0,¯1↓SIG
+ RES←1↓SIG-¯1⌽SIG

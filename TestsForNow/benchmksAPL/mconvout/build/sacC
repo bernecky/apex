@@ -1,1 +1,0 @@
-sac2c -v3 -O3 -o /home/apex/apexgit/TestsForNow/benchmksAPL/mconvout/build/Callmconvout.sac.exe -L /home/apex/apexgit/TestsForNow/benchmksAPL/mconvout/build/ -T /home/apex/apexgit/TestsForNow/benchmksAPL/mconvout/build/ /home/apex/apexgit/TestsForNow/benchmksAPL/mconvout/src/Callmconvout.sac

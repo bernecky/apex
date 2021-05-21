@@ -1,5 +1,5 @@
  r←main
 ⍝# Reverse unit tests
- r←UTReverse
+ r←UTRev
  ⎕←r
  ⎕←r←1-∧/r

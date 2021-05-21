@@ -1,8 +1,0 @@
-use UTCatenate: all;
-
-int main()
-{
-  z=UTCatenate::UTCatenate_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

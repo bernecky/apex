@@ -1,8 +1,0 @@
-use loopisAKD: all;
-
-int main()
-{
-  z=loopisAKD::loopisAKD_mainXII();
-  StdIO::show(z);
-  return(0);
-}

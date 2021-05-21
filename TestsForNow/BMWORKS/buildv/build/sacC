@@ -1,0 +1,1 @@
+sac2c -v1 -O3 -o /home/apex/apexgit/TestsForNow/benchmksAPL/buildv/build/buildv.sac.exe -L /home/apex/apexgit/TestsForNow/benchmksAPL/buildv/build/ -T /home/apex/apexgit/TestsForNow/benchmksAPL/buildv/build/ /home/apex/apexgit/TestsForNow/benchmksAPL/buildv/src/buildv.sac

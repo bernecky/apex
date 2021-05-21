@@ -4,4 +4,3 @@
  r←r,('abc')match'abc'
  ⎕←r
  ⎕←r←1-r≡1 1
-⍝∇⍣§/home/apex/apexgit/TestsForNow/UTClone/main.ufn§0§ 2021 2 2 17 28 47 292 §ibwt§0

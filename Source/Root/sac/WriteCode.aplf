@@ -1,0 +1,12 @@
+ WriteCode←{
+     txt←⍺
+     (fldr ismod)←⍵
+     p←FullPathName fldr,PathDelim,'src'
+     j←⎕SH'mkdir -p ',p ⍝ create subfldr if need be
+     m←D 1⌷FileNameBreak fldr ⍝ Filename only
+     m←m,ismod/'.modu'
+     fnm←p,PathDelim,m,'.',#.globals.TargetLanguage
+     z←txt PutFile fnm
+     zz←('PutFile failed writing file: ',fnm)assert z
+     fnm
+ }

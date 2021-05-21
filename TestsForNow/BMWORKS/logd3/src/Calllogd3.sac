@@ -1,8 +1,0 @@
-use logd3: all;
-
-int main()
-{
-  z=logd3::logd3_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

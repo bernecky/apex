@@ -9,4 +9,3 @@
  r←2 5 8 11 14≡e
  ⎕←r←r,a≡a-1|a    ⍝ Should be in same clique, but nmo fails to catch it
  ⎕←r←1-∧/r
-⍝∇⍣§/home/apex/apexgit/TestsForNow/UTShapeCl/main.ufn§0§ 2020 6 24 17 4 22 840 §PpJC§0

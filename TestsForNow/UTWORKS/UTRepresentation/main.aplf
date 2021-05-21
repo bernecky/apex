@@ -17,4 +17,4 @@
  r←r,((4⍴10)⊤1984 2001 ¯44)≡(4⍴10)Represent 1984 2001 ¯44
  ⎕←r
  r←⎕←1-∧/r
-⍝∇⍣§/home/apex/apexgit/TestsForNow/UTRepresentation/main.ufn§0§ 2020 6 24 17 4 22 840 §dhÉJÃ§0
+

@@ -1,8 +1,0 @@
-use crc: all;
-
-int main()
-{
-  z=crc::crc_mainXXI();
-  StdIO::show(z);
-  return(0);
-}
