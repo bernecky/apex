@@ -1,6 +1,0 @@
- r←n Bjckrbe ts;i
- r←2-2
- :For i :In ⍳n
-     r←r++/tjckrbe i/3 1⍴ts
- :EndFor
-⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/tjckrbeAKD/Bjckrbe.ufn§0§ 2020 6 24 17 4 23 36 §cjMM§0

@@ -1,9 +1,0 @@
- r←wz conv tr;npad;h;n
-⍝ Conv performs standard convolution
-⍝ wz is the filter/wavelet vector (usually shorter than tr)
-⍝ tr is the seis trace or other vector to be filtered
-⍝ conv uses reshape and matrix/vector multiplication.
-⍝ Output r is a vector, the filtered/convolved trace.
- h←tr,(¯1+n←⍴wz)⍴0
- r←(⍴tr)↑wz+.×(⍳n)⌽(n,⍴h)⍴h
-⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/mconvAKD/conv.ufn§0§ 2020 6 24 17 4 22 864 §Bèmh§0

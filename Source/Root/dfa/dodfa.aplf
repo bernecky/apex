@@ -1,6 +1,7 @@
  r←fldr dodfa asts
  InitializeAST
  initializeDEBUG
+ stophere←(E 'LOGDERIV'),E 1 2
  InitializeFns
  InitializeSSA
  InitializeST

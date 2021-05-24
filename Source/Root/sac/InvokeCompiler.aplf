@@ -13,7 +13,6 @@
      lnk←' -L ',bld,' -T ',bld,' '
      ⍝ FIXME: find better home for sac2c options; re-add -doawlf -dopwlf
      cmd←'sac2c -v1 -O3 ',obj,lnk,⍵
-     cmd←cmd,ismod/' -maxoptcyc 1 '
      ⍝⍝⍝ sac2c TOO SLOW!!! z←⎕SH'cd ',fldr,'; ',cmd
      z←bld,'sac',ismod⌷'CM'
      junk←cmd PutFile z

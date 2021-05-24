@@ -1,9 +1,0 @@
- dno←tjv21 ymd;yr;mo;day;a
- yr←+/1 0 0/ymd
- mo←+/0 1 0/ymd
- day←+/0 0 1/ymd
- yr←yr+1900×yr<100
- yr←⍉0 100⊤yr-mo≤2
- dno←+/STSCfloor yr×(⍴yr)⍴36524.25 365.25
- dno←dno+STSCfloor 0.41+day+30.6×12|mo-3
-⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/tjv21AKD/tjv21.ufn§0§ 2020 6 24 17 4 23 36 §oåÅW§0

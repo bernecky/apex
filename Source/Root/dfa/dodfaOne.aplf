@@ -1,4 +1,5 @@
- r←fldr dodfaOne asts;y;i;tn;ct;ast2;ast3;ast;genws;cds;cds2;cds3;i2
+ r←fldr dodfaOne asts;y;i;tn;ct;ast2;ast3;ast;genws;cds;cds2
+ ;cds3;i;badfns
  ⍝ Perform dfa on asts
  Trace(fts ⎕TS),': Starting dataflow analysis for: ',fldr
  asts←MakeBackupAstForCloning¨asts
@@ -26,10 +27,8 @@
  :Until cds≡cds3
  i←dfaOK¨cds               ⍝ Got enough info to run code generator?
  ⍝⍝ THis is rubbishhh - iiAPL2 crpola o if ×/i.
-⍝⍝⍝i2←astsFnName¨(~i)/cds
-⍝⍝⍝('missing type or rank information in fns: ',⍕i2)assert 0∊⍴i2
- ('missing type or rank information in fns: ',⍕'fixme!')assert∧/i
-
+badfns←astsFnName¨(~i)/cds
+ ('missing type or rank information in fns: ',⍕badfns)assert∧/i
  cds←KillQUADctInCalls¨cds  ⍝ Remove dead ⎕ct refs from primitive fns
  ct←BuildCallingTree cds    ⍝ All calling trees are the same
  cds←ct SemiGlobalUnRef cds ⍝ Remove ⎕ct refs from defined fns/calls

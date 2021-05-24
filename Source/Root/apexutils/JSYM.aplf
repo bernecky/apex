@@ -71,7 +71,7 @@
  r←r,'rbr         165           }     right curly brace          ',TCNL
  r←r,'lbr         167           {     left curly brace           ',TCNL
  r←r,'same        183           ≡     same (aka idem, aka match).',TCNL
- r←r,'nuax        185           ⍣     nuax (aka on).             ',TCNL
+ r←r,'nuax        185           ⍤     nuax (aka on).             ',TCNL
  r←r,'coax        187           ö     coax (aka along).          ',TCNL
  r←r,'comb        193           ⍪     comma bar.                 ',TCNL
  r←r,'epsb        195           ⍷     epsilon bar.               ',TCNL

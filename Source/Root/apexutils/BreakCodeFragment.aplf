@@ -2,6 +2,7 @@
  ⍝  break code fragment cinto pieces:
  ⍝  Code fragments, names,n types
  ⍝ See msf.sis for more docn on types
+ cf←TABtoBlank cf
  cf←¯1⌽cf,(NL≠¯1↑cf)/NL
  i←1⌽D(cf=NL)PartitionedEnclose cf
  ⍝ Discard pure comments, but leave Fragment and Generate

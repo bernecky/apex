@@ -1,9 +1,0 @@
- r←n Bjck ts;i;r0;r1
- ⍝ dcl double scalar r
- r←0
- :For i :In ⍳n
-     r0←tjck i⌿1 3⍴ts
-     r1←+/r0+0.5
-     r←r+r1-(0.5×''⍴⍴r0)
- :EndFor
-⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/tjckAKD/Bjck.ufn§0§ 2020 6 24 17 4 23 36 §jùcå§0
