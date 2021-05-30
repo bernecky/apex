@@ -1,0 +1,11 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW;x
+⍝ Downgrade permutation vector
+⍝ dcl integer scalar n
+ ⎕IO←0
+ x←10⌽⍳n  ⍝ Typically 50e6 ⍝ NB. Permutation vector!
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←⍒x
+ r←1-r≡20⌽⌽x
+ ⎕←r

@@ -1,8 +1,6 @@
- r←main;arg;arg2
+ r←main;arg
  arg←MKO2 200
- ⍝arg2←MKO3 200
  r←floyd arg
  r←+/,r
  ⎕←r
  ⎕←r←(r=1134304)-1
-⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/floyd/main.ufn§0§ 2020 6 24 17 4 22 852 §gòóK§0

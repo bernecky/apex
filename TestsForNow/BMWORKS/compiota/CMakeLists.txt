@@ -1,12 +1,14 @@
 CMAKE_MINIMUM_REQUIRED (VERSION 3.3)
 INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/sac2c-variables.cmake")
 INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/resolve-sac2c-dependencies.cmake")
+INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/generate-sac2c-dependency-targets.cmake")
 INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/build-sac2c-program.cmake")
 INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/sac2c-prog-with-versions.cmake")
 
 # SaC files relatively to this CMakeLists.txt.
 SET (SAC_PROG_SRC
-    iotan.sac
+    compiota.unittest.sac
+    compiota.sac
 )
 
 # For every sac file, compile Tree and Mod files.

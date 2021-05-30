@@ -1,5 +1,5 @@
  r←largrarg FixMainArg y;ast;fns;lr;rowno;argv;onetwo;nr;newfns;ren
-⍝ Repair left/right argument to <Mmain> function.
+⍝ Repair left/right argument to <main> function.
 ⍝ 1. Introduce new local definition for argument.
 ⍝ 2. Remove argument from function header.
 ⍝ 3. Introduce function call to argv() reader.
@@ -24,7 +24,6 @@
      nr[0;astrank]←E 0
      nr[0;astshape]←E⍳0
      nr[0;astxrho]←E 1
-     ⍝ garbage r←r astInsertSymbols nr
    ⍝ Generate coercion and assignment
      lr[;asttarget]←E r[;asttarget]⍳lr[0;asttarget]
      lr[;astfn]←fn

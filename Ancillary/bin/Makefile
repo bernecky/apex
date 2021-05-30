@@ -1,73 +1,79 @@
+# Makefile for generic APEX-generated SAC code
+# Generate a shared library (.so) for almost all of the code,
+# and a Calling() function to invoke the .so, in  both seq and mt_pth modes.
+# This assumes that the APL source has a main.apl, ergo a main().
 
-# This makefile goes in each UnitTest and benchmark folder
+BUILD_DIR := ./build
+SRC_DIRS := ./src
 
-# 'make'        build executable file xx.bin, and .so file from fldr/*.sacs file
-#               in folder fldr
-#               E.g., run "make" in UnitTests or benchmksAPL
-# 'make clean'  removes all .o, .so, and executable files
+SACUT=$(wildcard $(SRC_DIRS)/*.unittest.sac)
+SACSRCMODU=$(wildcard $(SRC_DIRS)/*.sac)
+SACMODS=$(filter-out $(SACUT), $(SACSRCMODU))
+DEP = $(SACUT:.sac=.d)  # one dependency file per source file
 
-# define the SAC compiler to use
-SAC2C = sac2c
-# define any compile-time flags
-CFLAGS = -Wall -g -O3
-# maybe later when we fix sac2c performance   SACFLAGS = -doawlf -dopwlf -O3 -v1
-SACFLAGS = -O3 -v1
+SACCC=sac2c
+SACFLAGS= -v1 -O3 -doawlf -I. -gg  -L $(BUILD_DIR) -T $(BUILD_DIR)
+SACTARGETSEQ = -target seq 
+SACTARGETMT = -target mt_pth 
 
-# define any directories containing header files other than /usr/include
-#INCLUDES = -I/home/newhall/include  -I../include
+CFLAGS =  -Xc -shared -Xc -fpic
 
-# define library paths in addition to /usr/lib
-#   if I wanted to include libraries not in /usr/lib I'd specify
-#   their path using -Lpath, something like:
-#LFLAGS = -L/home/newhall/lib  -L../lib
+.PHONY: all
+all:	unittest
 
-# define any libraries to link into executable:
-#   if I want to link in libraries (libx.so or libx.a) I use the -llibname 
-#   option, something like (this will link in libmylib.so and libm.so:
-#LIBS = -lmylib -lm
+whasis: 
+	@echo unit tests are $(SACUT)
+	@echo modules are $(SACMODS)
 
-# define the SAC source files
-SACSRCS := $(wildcard *.sac)
-SACEXES = $(SACSRCS:.sac=.exe)
-SACMODULES := $(wildcard module/*.sac)
+deps: $(SACUT)
+	@echo making deps for $<
+	# I am not sure how to use the .d file 
+	$(SACCC) $< -M > $(BUILD_DIR)/$(notdir $<).d
+	
+### no idea how to handle this include $(DEP)   # include all DEP files in the makefile
+# Make main() unit test code
+unittest: unittestseq unittestmt 
+	@echo unit tests made
 
-SACPREREQ1 := $(SACMODULES:.sac=Tree.so)
-SACPREREQ2 := $(notdir $(SACPREREQ1))
-SACPREREQS := $(addprefix /tree/host/lib,$(SACPREREQ2))
+unittestseq: $(SACUT) moduseq
+	@echo Making unit test seq $<
+	mkdir -p $(BUILD_DIR)
+	$(SACCC) $< -o $(BUILD_DIR)/$(notdir $<).seq.exe $(SACSRC) $(SACFLAGS) $(SACTARGETSEQ) $(CFLAGS)
+	@echo   Made unit test seq $<
 
-SACNONMODULES := $(wildcard nonmodule/*.sac)
+unittestmt: $(SACUT) modumt
+	@echo Making unit test mt $<
+	mkdir -p $(BUILD_DIR)
+	$(SACCC) $< -o $(BUILD_DIR)/$(notdir $<).mt.exe $(SACSRC) $(SACFLAGS) $(SACTARGETMT)  $(CFLAGS)
+	@echo   Made unit test mt $<
 
-.PHONY: depend clean
+moduseq: $(SACMODS)
+	@echo Making module seq $(SACMODS)
+	mkdir -p $(BUILD_DIR)
+	$(SACCC) $< $(SACFLAGS) $(SACTARGETSEQ) -o $(BUILD_DIR) $(CFLAGS)
+	@echo   Made module seq $(SACMODS)
 
-all:    #$(SACPREREQS) 
-	@echo  SACPREREQS are $(SACPREREQS)
-	@echo  SACSRCS are $(SACSRCS) 
-	@echo  SACEXES are $(SACEXES)
-	@echo  SACMODULES are $(SACMODULES)
-	@echo  SACNONMODULES are $(SACNONMODULES)
-	@echo  SACHOSTLIBS are $(SACHOSTLIBS)
-	$(MAKE) %.so
+modumt: $(SACMODS)
+	@echo Making module mt $(SACMODS)
+	mkdir -p $(BUILD_DIR)
+	$(SACCC) $< $(SACFLAGS) $(SACTARGETMT)  -o $(BUILD_DIR) $(CFLAGS)
+	@echo   Made module mt $(SACMODS)
 
-%.exe: $(SACSRCS) $(SACPREREQS) 
-	@echo  making non-module binary $(SACEXES) 
-	@echo  ... from $(SACSRCS) 
-	$(SAC2C) $(SACFLAGS) $(INCLUDES) $<  -o $<.exe
+# Recursive make in a folder with subfolders, such as benchmksAPL
+# which contains these subfolders: snp, upgradeBool, and mconv
+#
+subdirs:
+	@echo now what can we do in $<?
+	cd $<; $(MAKE)
+	touch $<
 
-%.so: $(SACMODULES)  
-	@echo  SACPREREQS are $(SACPREREQS)
-	@echo  making modules $(SACPREREQS)
-	@echo  ... from $(SACMODULES) 
-	$(SAC2C) $(SACFLAGS) $(INCLUDES) $< 
+test: $(SACUT)
+	@echo running test for seq $<
+	$(BUILD_DIR)/$(notdir $<).seq.exe < bench.argv; echo $?
 
+.PHONY: clean
 clean:
-	@echo CLEANING $(SACEXES) 
-	$(RM) $(SACEXES)  a.out a.out.c tree host
-	@echo CLEANING SACMODULES SACMODULECALLERS and SACNONMODULES
-	$(RM) $(SACMODULES) $(SACMODULECALLERS) $(SACNONMODULES)
-	@echo CLEANING SAC LIBS
+	rm -rf $(BUILD_DIR)/tree $(BUILD_DIR)/host $(BUILD_DIR)/*.c $(BUILD_DIR)/*.exe
+	rm -rf $(BUILD_DIR)/*.i $(BUILD_DIR)/*.d
 
-depend: $(SACMODULES)
-	@echo  making depend for $(SACMODULES) 
-	$(RM) $@.d
-	$(SAC2C) $(SACFLAGS) $(INCLUDES) $<  -M  > $<.d
 

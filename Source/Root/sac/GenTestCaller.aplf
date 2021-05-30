@@ -1,7 +1,12 @@
  GenTestCaller←{
+     ⍝ ⍺ is module name; ⍵ is decorated unittest()
      z←'use ',⍺,': all;',NL,NL
+     parms←'n'  ⍝ FIXME from old main()
      z←z,'int main()',NL,'{',NL
-     z←z,' z  = ',⍵,'();',NL
+     decls←'int n;  //DEBUG KLUDGE' ⍝ FIXME TOO
+     z←z,decls,NL
+     z←z,'n = 666; // DEBUG KLUDGE',NL ⍝ FIXME TOOTOO
+     z←z,' z  = ',⍵,'(',parms,');',NL
      z←z,' return(z);',NL,'}',NL
      z
  }

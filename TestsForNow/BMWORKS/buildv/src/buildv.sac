@@ -1,7 +1,0 @@
-use buildv: all;
-
-int main()
-{
- z  = buildv_testXXI();
- return(z);
-}

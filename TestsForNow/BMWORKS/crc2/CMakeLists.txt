@@ -6,7 +6,7 @@ INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/sac2c-prog-with-versions.cmake")
 
 # SaC files relatively to this CMakeLists.txt.
 SET (SAC_PROG_SRC
-    iotan.sac
+    crc2.sac
 )
 
 # For every sac file, compile Tree and Mod files.
