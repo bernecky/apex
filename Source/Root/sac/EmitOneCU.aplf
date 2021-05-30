@@ -2,6 +2,9 @@
  ;ismn;astsmod;astsm;m;ismod;junk
  ⍝ Emit compiled APL code for one Compilation Unit(CU), asts
  ⍝ r is genned filenames
+ ⍝ Always gen main() and so. If main() is present in asts,
+ ⍝ rename it to, e.g., foo.unittest(), & gen a fake main()
+ ⍝ which will call the unit test code.
  ⎕←Trace(fts ⎕TS),': Starting code gen for: ',fldr
  InitializeFns   ⍝ and cal
  asts←SACNames¨asts ⍝ Map names to avoid SAC keyword conflicts, etc
@@ -16,16 +19,16 @@
  :EndIf
  :If 1∊ismn ⍝ if main() is present, gen .exe
      ismod←0
-     :If 1≠≢ismn ⍝ Naked main()?
-         txt←(PathFileName fldr)GenTestCaller m ⍝ non-naked
-         txt2←((E fldr),E ismod)GenCode ismn/asts ⍝ naked
-     :Else
-         txt←((E fldr),E ismod)GenCode ismn/asts ⍝ naked
-     :EndIf
+ ⍝⍝⍝⍝    :If 1=≢ismn ⍝ Naked main()?
+ ⍝⍝⍝⍝       txt←((E fldr),E ismod)GenCode ismn/asts ⍝ naked
+ ⍝⍝⍝⍝     :else
+ ⍝⍝⍝⍝       txt←(PathFileName fldr)GenTestCaller m  ⍝ non-naked
+ ⍝⍝⍝⍝:EndIf
+     txt←(PathFileName fldr)GenTestCaller m
      fnmexe←txt WriteCode(E fldr),E ismod
      junk←((E fldr),E ismod)InvokeCompiler fnmexe
  :EndIf
- GenAPLCoverFn fnmexe ⍝ for calling module
+ GenAPLCoverFn fnmexe ⍝ for calling .so from APL
 
  r←(E fnmexe),(E fnmso)
 
