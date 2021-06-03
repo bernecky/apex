@@ -1,15 +1,16 @@
  SACModuleRenameMain←{
      ⍝ Rename main() to allow us to gen a SaC module
      ⍝ ⍺ is fldr name; ⍵ is asts
-     ⍝ E.g., main -> iotan_test
-     ⍝   Our intent is to avoid name collisions on main()
-     ⍝  If there is no main(), we merely generate the module
+     ⍝ E.g., main -> iotan_test()
+     ⍝ Our intent is to avoid name collisions on main()
+     ⍝ If there is no main(), do nothing
      cv←(isDfnMain¨⍵)⍳1
      csd←D ⍵[cv]
      ast←D ssaast⌷csd
      smn←⍺ SACModuleName ast
      s←⍺ SACModuleTypes ast
      ast[dfnname;asttarget]←E smn
+     ast[dfnname;astlarg,astrarg]←E NULL
      csd[ssaast]←E ast
      z←⍵
      z[cv]←E csd

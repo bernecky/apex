@@ -1,4 +1,4 @@
- r←EmitOneUserDefinedFn asts;ast;fnm;rap;s;newasts;j;fns;wif;sis
+ r←nmain EmitOneUserDefinedFn asts;ast;fnm;rap;s;newasts;j;fns;wif;sis
  ⍝ Emit code for one user-defined function
  ⍝ Result is code & required library fns
  ast←D asts[ssaast]
@@ -7,7 +7,7 @@
  newasts←asts ⋄ newasts[ssaast]←E ast
  fnm←D ast[dfnname;asttarget] ⍝ Function name
  newasts←FORRename newasts ⍝ Fix ast names for X vs OLD X in :FOR loops
- (rap ast)←((1,fnscols)⍴E'')FunctionWrapper D newasts[ssaast]
+ (rap ast)←nmain FunctionWrapper D newasts[ssaast]
  ast←ConstantsSAC ast ⍝ Convert constants to SAC form
  newasts[ssaast]←E ast
  j←EmitUserDefinedFunctionBody newasts ⍝ Emit all fns

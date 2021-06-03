@@ -69,3 +69,47 @@ FUNCTION (RESOLVE_SAC_DEPS_AS_TARGETS file_name target_name_template ret_targets
     ENDIF ()
     SET (${ret_targets} ${ret} PARENT_SCOPE)
 ENDFUNCTION ()
+
+# This function resolves dependencies for a given module, returning both a list
+# of targets which it depends on and source files which should be tracked.
+# Through the later we garantee that when a source file is modified, we cause
+# the module itself to be compiled and all modules that depend on it.
+#
+# This function in part wraps around `RESOLVE_SAC_DEPS_AS_TARGETS()`, appends to
+# the targets list the sources list. This can be used directly in the DEPENDS
+# field of `add_custom_command()`.
+#
+# `file_name`: the name of the module source file
+# `target_name_template`: the template name for targets, with two substitations
+#                         `<TARGET>` and `<NAME>`, see
+#                         `RESOLVE_SAC_DEPS_AS_TARGETS()` for further details.
+# `srcs_list`: a list of (all) source files which is used to compile the
+#              dependent sources for each module
+# `ret_deps`: the return list, made up of targets and source files.
+FUNCTION (RESOLVE_SAC_DEPS_AS_TARGETS_SOURCES file_name target_name_template srcs_list ret_deps)
+    SET (ret_srcs)
+
+    # get target list
+    RESOLVE_SAC_DEPS_AS_TARGETS ("${file_name}" "${target_name_template}" targets_list)
+
+    # from target lists we find the correct source file
+    FOREACH (target ${targets_list})
+        IF ("${target}" MATCHES "-([A-Za-z0-9_]+)$")
+            # we build a copy of the sources list, and then filter out all
+            # values which do not match, which should leave us with 1 source
+            # file.
+            SET (_list_cpy ${srcs_list})
+            LIST (FILTER _list_cpy INCLUDE REGEX "/${CMAKE_MATCH_1}\.[xsac]+$")
+            LIST (LENGTH _list_cpy _list_len)
+            IF (${_list_len} EQUAL 1)
+                LIST (APPEND ret_srcs "${CMAKE_CURRENT_SOURCE_DIR}/${_list_cpy}")
+            ELSE ()
+                MESSAGE (FATAL_ERROR "We have name class on ${CMAKE_MATCH_1}! Aborting...")
+            ENDIF ()
+            UNSET (_list_cpy)
+            UNSET (_list_len)
+        ENDIF ()
+    ENDFOREACH ()
+    MESSAGE (DEBUG "Found following sources: ${ret_srcs}")
+    SET (${ret_deps} "${ret_srcs};${targets_list}" PARENT_SCOPE)
+ENDFUNCTION ()

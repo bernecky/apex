@@ -53,13 +53,19 @@ IF (NOT IS_ABSOLUTE "${TREE_PATH}")
     GET_FILENAME_COMPONENT (TREE_PATH "${TREE_PATH}" ABSOLUTE)
 ENDIF ()
 
-# If the user has no `.sac2crc' directory in their home, they should
-# be the ones to create it.
-IF (NOT IS_DIRECTORY "${sac2crc_path}")
-    MESSAGE (FATAL_ERROR
-    "No ~/.sac2crc directory found, please create it. If you have a "
-    "`.sac2crc' file, please move this to the ~/.sac2crc directory "
-    "and rename it `sac2crc.config'.")
+# check if user has the `.sac2crc` directory. If it is a file (old
+# system rc), we inform the user they need to change it. If the
+# directory does not exist, we create it for them.
+IF (NOT IS_DIRECTORY "${sac2crc_path}" AND EXISTS "${sac2crc_path}")
+    MESSAGE (WARNING "The file ${sac2crc_path} exists, and is no longer "
+        "a valid RC file for the SaC ecosystem. This has now been moved "
+        "for you into ~/.sac2crc/sac2crc.custom. Be aware that you may "
+        "have to change contents of the file.")
+    FILE (RENAME "${sac2crc_path}" "${USER_HOME}/sac2crc.custom")
+    FILE (MAKE_DIRECTORY "${sac2crc_path}")
+    FILE (RENAME "${USER_HOME}/sac2crc.custom" "${USER_HOME}/.sac2crc/sac2crc.custom")
+ELSEIF (NOT IS_DIRECTORY "${sac2crc_path}")
+    FILE (MAKE_DIRECTORY "${sac2crc_path}")
 ENDIF ()
 
 # Apply variables to template sac2crc file

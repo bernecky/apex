@@ -1,10 +1,7 @@
- r←ismod GenProlog fldr;APEXVersion;asts;p;m
+ r←GenProlog fldr;APEXVersion;p
  ⍝# Gen SaC prolog/stdlib code
  APEXVersion←'Compiled by APEX Version: ','FIXME!!'
  p←(BuildComment APEXVersion,' ',,fts ⎕TS),NL
  p←p,GetFileChar #.globals.PathFrag,'prolog.',#.globals.TargetLanguage
 
- p←p,GetFileChar #.globals.PathFrag,'stdlib.',#.globals.TargetLanguage
- m←PathFileName fldr
- m←ismod/'module ',m,';',NL,'export all;',NL,NL
- r←m,p
+ r←p,GetFileChar #.globals.PathFrag,'stdlib.',#.globals.TargetLanguage

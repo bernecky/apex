@@ -11,7 +11,7 @@
 ⍝ The coercion is from character string to
 ⍝ whatever the declared type of x and y are.
  r←ast
- :If ('main'≡D ast[dfnname;asttarget])
+ :If isMain ast
      r fns←dfnlarg FixMainArg(E ast),E fns
      r fns←dfnrarg FixMainArg(E r),E fns
  :EndIf

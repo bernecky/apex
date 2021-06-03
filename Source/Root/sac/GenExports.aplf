@@ -1,0 +1,1 @@
+ GenExports←{'module ',(PathFileName ⍵),';',NL,'export all;',NL,NL}
