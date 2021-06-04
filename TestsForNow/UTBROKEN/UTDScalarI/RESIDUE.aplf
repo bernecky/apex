@@ -17,4 +17,3 @@
  r←(x∘.|y)≡z
  ⍝⍝ r←r,(x∘.|y)≡x∘.residueI y
  ⍝⍝ Disabled until APEX support :if/:then/:else
-⍝∇⍣§/home/apex/apexgit/TestsForNow/UTDScalarI/RESIDUE.ufn§0§ 2020 6 24 17 4 22 832 §buyÚz§0

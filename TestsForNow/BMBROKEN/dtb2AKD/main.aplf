@@ -1,0 +1,12 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW;⎕CT;k
+ ⍝ dcl integer scalar n
+ ⎕IO←0
+ ⎕CT←0
+ ⍝⍝  n←300000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ k←n,150
+ ⎕←r←dtbtest2 k
+ ⎕←r←1-r≡k,k×1 0
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/dtb2AKD/main.ufn§0§ 2020 6 24 17 4 22 852 §yCMú§0

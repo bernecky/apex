@@ -1,0 +1,8 @@
+ r←crctest len;t32;crcloc32;cv
+⍝ Test crc generator
+ crcloc32←33⍴0
+ crcloc32[0 5 11 17 23 28 32]←1
+ cv←len⍴⎕AV
+ t32←table32 crcloc32
+ r←tobin t32 bfcrc32 cv
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/crc2AKD/crctest.ufn§0§ 2020 6 24 17 4 22 848 §jÂòg§0

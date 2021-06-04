@@ -1,0 +1,5 @@
+ r←x mconvout y;tr;wz;r1;r2
+⍝ Convolution as outer product
+ wz←0.01×1+⍳x
+ tr←0.01×1+⍳y
+ r←+/wz convo tr

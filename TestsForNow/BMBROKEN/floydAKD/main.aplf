@@ -1,0 +1,9 @@
+ r←main n;arg
+ ⍝ dcl integer scalar n
+ ⍝ We recommend n←200
+ arg←GenArg n,n
+ r←floyd arg
+ r←+/,r
+ ⎕←r
+ ⎕←r←(r=2000000)-1
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/floydAKD/main.ufn§0§ 2020 6 24 17 4 22 852 §jPHØ§0

@@ -6,15 +6,16 @@
  *
  */
 
-use Array : {genarray,take,-,sel};
+use Array : {genarray,take,-,sel,drop};
 
 inline int[+] rotrXII(int[+] y)
 { /* Last axis reverse on rank>1 */
  cellshape = take([-1], _shape_A_(y));
  cell = genarray(cellshape, 0);
+ frmshape = drop([-1], _shape_A_(y));
  z = with {
         ( . <= iv <= .)
-                : (y[iv]);
+                : (y[(frmshape-1)-iv]);
        } : genarray( [2], cell);
  return(z);
 }

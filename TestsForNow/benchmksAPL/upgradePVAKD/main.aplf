@@ -1,0 +1,11 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW;k
+⍝ dcl integer scalar n
+ ⎕IO←0
+ ⍝⍝n←50000000
+ k←10⌽⍳n ⍝ NB. Permutation vector!
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←⍋k
+ r←1-r≡¯20⌽k
+ ⎕←r

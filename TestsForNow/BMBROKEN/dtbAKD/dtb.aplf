@@ -1,0 +1,6 @@
+ r←dtb y;x
+⍝ Remove trailing blanks from matrix y
+⍝ AKA "removetrail" in Retrieve
+ x←+/∨\⌽∨⌿y≠' '
+ r←((1↑⍴y),x)↑y
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/dtbAKD/dtb.ufn§0§ 2020 6 24 17 4 22 852 §löDÜ§0

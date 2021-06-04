@@ -1,0 +1,6 @@
+ r←x mconvred y;tr;wz
+⍝ Execute convolution problem using window reduction
+ wz←0.01×1+⍳x
+ tr←0.01×1+⍳y
+ r←+/wz convredu tr
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/mconvreds/mconvred.ufn§0§ 2020 6 24 17 4 22 864 §fÛúÈ§0

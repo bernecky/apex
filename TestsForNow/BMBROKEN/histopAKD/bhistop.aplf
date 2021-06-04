@@ -1,0 +1,4 @@
+ r←rg bhistop n
+⍝ Time outer product histogram
+ r←+/histop n⍴⍳rg
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/histopAKD/bhistop.ufn§0§ 2020 6 24 17 4 22 852 §cáuO§0

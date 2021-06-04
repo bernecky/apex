@@ -1,0 +1,5 @@
+ r←ipopne siz;m
+⍝ inner product or point not equal
+ m←(2⍴siz)⍴'abcdefghijk'
+ r←(×/⍴m)-+/+/m∨.≠⍉m
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/ipopneAKD/ipopne.ufn§0§ 2020 6 24 17 4 22 856 §hsOU§0

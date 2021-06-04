@@ -1,0 +1,12 @@
+module UTIndexSet;
+export all;
+
+use Array:{modarray};
+
+int[+] indsx(int[+] X,  int[+] Y)
+{ 
+ z = X;
+ z[[]]=Y;
+ return(z);
+}
+

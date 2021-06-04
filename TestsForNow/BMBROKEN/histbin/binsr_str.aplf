@@ -7,5 +7,5 @@
  Integer←⌊N×(Xdata-Range[1])÷-/Range[2 1]
  Integer←(0≠Integer)/Integer
  Bincount←N⍴0
- Bincount[Integer]+←1
- Binvalue←(Range[1]+(-/Range[2 1])×(¯0.5+⍳N)÷N),[1.5]Bincount
+ Bincount[Integer]←1+Bincount[Integer]
+ Binvalue←(Range[1]+(-/Range[2 1])×(¯0.5+⍳N)÷N),⍤0⊢Bincount

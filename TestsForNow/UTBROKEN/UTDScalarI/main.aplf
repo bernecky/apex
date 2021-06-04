@@ -4,4 +4,3 @@
  r←r,Extend
  ⎕←r
  ⎕←r←1-∧/r
-⍝∇⍣§/home/apex/apexgit/TestsForNow/UTDScalarI/main.ufn§0§ 2020 6 24 17 4 22 832 §hôQg§0

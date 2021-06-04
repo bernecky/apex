@@ -1,0 +1,3941 @@
+
+/*-----------------------------------------------*/
+
+/*
+ *  SAC-Program bug7265.main.sac :
+ */
+
+
+/*
+ *  type definitions
+ */
+
+external typedef sacprelude_p::SACarg;
+
+external SACarg SACARGcopy( SACarg);
+external void SACARGfree( SACarg);
+
+external classtype World::World;
+external classtype Terminal::Terminal;
+external classtype TermFile::TermFile;
+typedef double[2] ComplexBasics::complex;
+typealias ComplexBasics::complex Complex::complex;
+external typedef List::list;
+external void SAC_List_free_list( list);
+
+typedef int Grey::grey;
+typedef int[3] Color8::color;
+external typedef String::string;
+
+external string copy_string( string);
+external void free_string( string);
+
+external typealias Structures::string;
+
+
+/*
+ *  prototypes for externals (FUNDECS)
+ */
+
+external hidden * ArrayIO::printarray( hidden *stream { ,NN } , int d { ,NN } , int[.] s { ,NN } , int[*] a { ,NN } )
+/*
+ *  printarray ::  ---
+ */;
+
+
+
+/*
+ *  prototypes for locals (FUNDEFS)
+ */
+
+external /* sticky */
+int[.], int[.], int[.], int[.] sacprelude_p::partitionSlicer( int[*] min { ,NN } , int[*] max { ,NN } , int[*] axis { ,NN } , int[*] lb { ,NN } , int[*] ub { ,NN } )
+/*
+ *  partitionSlicer :: { int[*] -> { int[*] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])}},
+                                                 int -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])}}},
+                                     int[+] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])}},
+                                                 int -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])}}},
+                                     int[.] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])}},
+                                                 int -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])}}}},
+                         int[+] -> { int[*] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])}},
+                                                 int -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])}}},
+                                     int[+] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])}},
+                                                 int -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])}}},
+                                     int[.] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])}},
+                                                 int -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])}}}},
+                         int[.] -> { int[*] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])}},
+                                                 int -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])}}},
+                                     int[+] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])}},
+                                                 int -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])}}},
+                                     int[.] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                             int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                         int[.] -> ( int[.], int[.], int[.], int[.])}},
+                                                 int -> { int[*] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[+] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])},
+                                                          int[.] -> { int[*] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[+] -> ( int[.], int[.], int[.], int[.]),
+                                                                      int[.] -> ( int[.], int[.], int[.], int[.])}}}}}
+ *  dispatching to: sacprelude_p::partitionSlicer
+ */;
+
+external /* sticky */
+int[.] sacprelude_p::partitionIntersectMax( int[*] PWLbound1 { ,NN } , int[*] ivmin { ,NN } )
+/*
+ *  partitionIntersectMax :: { int[*] -> { int[*] -> ( int[.]),
+                                           int -> ( int[.]),
+                                           int[+] -> ( int[.]),
+                                           int[.] -> ( int[.])},
+                               int[+] -> { int[*] -> ( int[.]),
+                                           int -> ( int[.]),
+                                           int[+] -> ( int[.]),
+                                           int[.] -> ( int[.])},
+                               int[.] -> { int[*] -> ( int[.]),
+                                           int -> ( int[.]),
+                                           int[+] -> ( int[.]),
+                                           int[.] -> ( int[.])}}
+ *  dispatching to: sacprelude_p::partitionIntersectMax,
+ *                  sacprelude_p::partitionIntersectMax
+ */;
+
+external /* sticky */
+bool[.] sacprelude_p::isPartitionIntersectNull( int[*] idxmin { ,NN } , int[*] idxmax { ,NN } , int[*] bound1 { ,NN } , int[*] bound2 { ,NN } )
+/*
+ *  isPartitionIntersectNull :: { int[*] -> { int[*] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[+] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[.] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])}},
+                                              int -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                   int[+] -> ( bool[.]),
+                                                                   int[.] -> ( bool[.])},
+                                                       int[+] -> { int[*] -> ( bool[.]),
+                                                                   int[+] -> ( bool[.]),
+                                                                   int[.] -> ( bool[.])},
+                                                       int[.] -> { int[*] -> ( bool[.]),
+                                                                   int[+] -> ( bool[.]),
+                                                                   int[.] -> ( bool[.])}},
+                                              int[+] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[+] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[.] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])}},
+                                              int[.] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[+] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[.] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])}}},
+                                  int -> { int[*] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                   int[+] -> ( bool[.]),
+                                                                   int[.] -> ( bool[.])},
+                                                       int[+] -> { int[*] -> ( bool[.]),
+                                                                   int[+] -> ( bool[.]),
+                                                                   int[.] -> ( bool[.])},
+                                                       int[.] -> { int[*] -> ( bool[.]),
+                                                                   int[+] -> ( bool[.]),
+                                                                   int[.] -> ( bool[.])}},
+                                           int -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                int[+] -> ( bool[.]),
+                                                                int[.] -> ( bool[.])},
+                                                    int[+] -> { int[*] -> ( bool[.]),
+                                                                int[+] -> ( bool[.]),
+                                                                int[.] -> ( bool[.])},
+                                                    int[.] -> { int[*] -> ( bool[.]),
+                                                                int[+] -> ( bool[.]),
+                                                                int[.] -> ( bool[.])}}},
+                                  int[+] -> { int[*] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[+] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[.] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])}},
+                                              int[+] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[+] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[.] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])}},
+                                              int[.] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[+] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[.] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])}}},
+                                  int[.] -> { int[*] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[+] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[.] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])}},
+                                              int[+] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[+] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[.] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])}},
+                                              int[.] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[+] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])},
+                                                          int[.] -> { int[*] -> ( bool[.]),
+                                                                      int[+] -> ( bool[.]),
+                                                                      int[.] -> ( bool[.])}}}}
+ *  dispatching to: sacprelude_p::isPartitionIntersectNull,
+ *                  sacprelude_p::isPartitionIntersectNull
+ */;
+
+external /* sticky */
+int[.] sacprelude_p::partitionIntersectMin( int[*] PWLbound2 { ,NN } , int[*] ivmax { ,NN } )
+/*
+ *  partitionIntersectMin :: { int[*] -> { int[*] -> ( int[.]),
+                                           int -> ( int[.]),
+                                           int[+] -> ( int[.]),
+                                           int[.] -> ( int[.])},
+                               int[+] -> { int[*] -> ( int[.]),
+                                           int -> ( int[.]),
+                                           int[+] -> ( int[.]),
+                                           int[.] -> ( int[.])},
+                               int[.] -> { int[*] -> ( int[.]),
+                                           int -> ( int[.]),
+                                           int[+] -> ( int[.]),
+                                           int[.] -> ( int[.])}}
+ *  dispatching to: sacprelude_p::partitionIntersectMin,
+ *                  sacprelude_p::partitionIntersectMin
+ */;
+
+external /* sticky */
+int[*] sacprelude_p::adjustLacFunParams( bool[*] p { ,NN } , int[*] i { ,NN } , int[*] iv { ,NN } )
+/*
+ *  adjustLacFunParams :: { bool[*] -> { int[*] -> { int[*] -> ( int[*]),
+                                                     int[+] -> ( int[*]),
+                                                     int[.] -> ( int[*])}}}
+ *  dispatching to: sacprelude_p::adjustLacFunParams
+ */;
+
+external /* sticky */
+int sacprelude_p::prod( int[*] v { ,NN } )
+/*
+ *  prod :: { int[*] -> ( int),
+              int[+] -> ( int),
+              int[.] -> ( int)}
+ *  dispatching to: sacprelude_p::prod
+ */;
+
+external /* sticky */
+int[*] sacprelude_p::adjustLacFunParamsReshape( bool[*] p { ,NN } , int[*] i { ,NN } , int[*] iv { ,NN } , int[*] shp { ,NN } )
+/*
+ *  adjustLacFunParamsReshape :: { bool[*] -> { int[*] -> { int[*] -> { int[*] -> ( int[*]),
+                                                                        int[+] -> ( int[*]),
+                                                                        int[.] -> ( int[*])},
+                                                            int[+] -> { int[*] -> ( int[*]),
+                                                                        int[+] -> ( int[*]),
+                                                                        int[.] -> ( int[*])},
+                                                            int[.] -> { int[*] -> ( int[*]),
+                                                                        int[+] -> ( int[*]),
+                                                                        int[.] -> ( int[*])}}}}
+ *  dispatching to: sacprelude_p::adjustLacFunParamsReshape
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( int[*] A { ,NN } , int[*] B { ,NN } )
+/*
+ *  eq :: { int[*] -> { int[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( float[*] A { ,NN } , float[*] B { ,NN } )
+/*
+ *  eq :: { float[*] -> { float[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( double[*] A { ,NN } , double[*] B { ,NN } )
+/*
+ *  eq :: { double[*] -> { double[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( bool[*] A { ,NN } , bool[*] B { ,NN } )
+/*
+ *  eq :: { bool[*] -> { bool[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( char[*] A { ,NN } , char[*] B { ,NN } )
+/*
+ *  eq :: { char[*] -> { char[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( byte[*] A { ,NN } , byte[*] B { ,NN } )
+/*
+ *  eq :: { byte[*] -> { byte[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( short[*] A { ,NN } , short[*] B { ,NN } )
+/*
+ *  eq :: { short[*] -> { short[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( long[*] A { ,NN } , long[*] B { ,NN } )
+/*
+ *  eq :: { long[*] -> { long[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( longlong[*] A { ,NN } , longlong[*] B { ,NN } )
+/*
+ *  eq :: { longlong[*] -> { longlong[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( ubyte[*] A { ,NN } , ubyte[*] B { ,NN } )
+/*
+ *  eq :: { ubyte[*] -> { ubyte[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( ushort[*] A { ,NN } , ushort[*] B { ,NN } )
+/*
+ *  eq :: { ushort[*] -> { ushort[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( uint[*] A { ,NN } , uint[*] B { ,NN } )
+/*
+ *  eq :: { uint[*] -> { uint[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( ulong[*] A { ,NN } , ulong[*] B { ,NN } )
+/*
+ *  eq :: { ulong[*] -> { ulong[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+bool sacprelude_p::eq( ulonglong[*] A { ,NN } , ulonglong[*] B { ,NN } )
+/*
+ *  eq :: { ulonglong[*] -> { ulonglong[*] -> ( bool)}}
+ *  dispatching to: sacprelude_p::eq
+ */;
+
+external /* sticky */
+int[.], int[.], int[.] sacprelude_p::gridFiller( int[*] lb { ,NN } , int[*] ub { ,NN } , int[*] wdth { ,NN } , int[*] dim { ,NN } , int[*] maxwidth { ,NN } )
+/*
+ *  gridFiller :: { int[*] -> { int[*] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[+] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[.] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}}},
+                                int[+] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[+] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[.] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}}},
+                                int[.] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[+] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[.] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}}}},
+                    int[+] -> { int[*] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[+] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[.] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}}},
+                                int[+] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[+] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[.] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}}},
+                                int[.] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[+] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[.] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}}}},
+                    int[.] -> { int[*] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[+] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[.] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}}},
+                                int[+] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[+] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[.] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}}},
+                                int[.] -> { int[*] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[+] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}},
+                                            int[.] -> { int[*] -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                    int[+] -> ( int[.], int[.], int[.]),
+                                                                    int[.] -> ( int[.], int[.], int[.])},
+                                                        int -> { int[*] -> ( int[.], int[.], int[.]),
+                                                                 int[+] -> ( int[.], int[.], int[.]),
+                                                                 int[.] -> ( int[.], int[.], int[.])}}}}}
+ *  dispatching to: sacprelude_p::gridFiller
+ */;
+
+external /* sticky */
+bool[.] sacprelude_p::isPartitionIntersect1Part( int[*] idxmin { ,NN } , int[*] idxmax { ,NN } , int[*] bound1 { ,NN } , int[*] bound2 { ,NN } )
+/*
+ *  isPartitionIntersect1Part :: { int[*] -> { int[*] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[+] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[.] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])}},
+                                               int -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                    int[+] -> ( bool[.]),
+                                                                    int[.] -> ( bool[.])},
+                                                        int[+] -> { int[*] -> ( bool[.]),
+                                                                    int[+] -> ( bool[.]),
+                                                                    int[.] -> ( bool[.])},
+                                                        int[.] -> { int[*] -> ( bool[.]),
+                                                                    int[+] -> ( bool[.]),
+                                                                    int[.] -> ( bool[.])}},
+                                               int[+] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[+] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[.] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])}},
+                                               int[.] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[+] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[.] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])}}},
+                                   int -> { int[*] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                    int[+] -> ( bool[.]),
+                                                                    int[.] -> ( bool[.])},
+                                                        int[+] -> { int[*] -> ( bool[.]),
+                                                                    int[+] -> ( bool[.]),
+                                                                    int[.] -> ( bool[.])},
+                                                        int[.] -> { int[*] -> ( bool[.]),
+                                                                    int[+] -> ( bool[.]),
+                                                                    int[.] -> ( bool[.])}},
+                                            int -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                 int[+] -> ( bool[.]),
+                                                                 int[.] -> ( bool[.])},
+                                                     int[+] -> { int[*] -> ( bool[.]),
+                                                                 int[+] -> ( bool[.]),
+                                                                 int[.] -> ( bool[.])},
+                                                     int[.] -> { int[*] -> ( bool[.]),
+                                                                 int[+] -> ( bool[.]),
+                                                                 int[.] -> ( bool[.])}}},
+                                   int[+] -> { int[*] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[+] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[.] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])}},
+                                               int[+] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[+] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[.] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])}},
+                                               int[.] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[+] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[.] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])}}},
+                                   int[.] -> { int[*] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[+] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[.] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])}},
+                                               int[+] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[+] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[.] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])}},
+                                               int[.] -> { int[*] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[+] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])},
+                                                           int[.] -> { int[*] -> ( bool[.]),
+                                                                       int[+] -> ( bool[.]),
+                                                                       int[.] -> ( bool[.])}}}}
+ *  dispatching to: sacprelude_p::isPartitionIntersect1Part,
+ *                  sacprelude_p::isPartitionIntersect1Part
+ */;
+
+external /* sticky */
+int{0} sacprelude_p::zero( int[*] A { ,NN } )
+/*
+ *  zero :: { int[*] -> ( int{0})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+double{0.0...} sacprelude_p::zero( double[*] A { ,NN } )
+/*
+ *  zero :: { double[*] -> ( double{0.0...})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+float{0.0...} sacprelude_p::zero( float[*] A { ,NN } )
+/*
+ *  zero :: { float[*] -> ( float{0.0...})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+char{ } sacprelude_p::zero( char[*] A { ,NN } )
+/*
+ *  zero :: { char[*] -> ( char{ })}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+bool{0} sacprelude_p::zero( bool[*] A { ,NN } )
+/*
+ *  zero :: { bool[*] -> ( bool{0})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+byte{} sacprelude_p::zero( byte[*] A { ,NN } )
+/*
+ *  zero :: { byte[*] -> ( byte{})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+short{0} sacprelude_p::zero( short[*] A { ,NN } )
+/*
+ *  zero :: { short[*] -> ( short{0})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+long{0} sacprelude_p::zero( long[*] A { ,NN } )
+/*
+ *  zero :: { long[*] -> ( long{0})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+longlong{0} sacprelude_p::zero( longlong[*] A { ,NN } )
+/*
+ *  zero :: { longlong[*] -> ( longlong{0})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+ubyte{} sacprelude_p::zero( ubyte[*] A { ,NN } )
+/*
+ *  zero :: { ubyte[*] -> ( ubyte{})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+ushort{0} sacprelude_p::zero( ushort[*] A { ,NN } )
+/*
+ *  zero :: { ushort[*] -> ( ushort{0})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+uint{0} sacprelude_p::zero( uint[*] A { ,NN } )
+/*
+ *  zero :: { uint[*] -> ( uint{0})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+ulong{0} sacprelude_p::zero( ulong[*] A { ,NN } )
+/*
+ *  zero :: { ulong[*] -> ( ulong{0})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+ulonglong{0} sacprelude_p::zero( ulonglong[*] A { ,NN } )
+/*
+ *  zero :: { ulonglong[*] -> ( ulonglong{0})}
+ *  dispatching to: sacprelude_p::zero
+ */;
+
+external /* sticky */
+int sacprelude_p::partitionMax( int[*] x { ,NN } , int[*] y { ,NN } )
+/*
+ *  partitionMax :: { int[*] -> { int[*] -> ( int),
+                                  int -> ( int)},
+                      int -> { int[*] -> ( int),
+                               int -> ( int)}}
+ *  dispatching to: sacprelude_p::partitionMax
+ */;
+
+external /* sticky */
+int sacprelude_p::partitionMin( int[*] x { ,NN } , int[*] y { ,NN } )
+/*
+ *  partitionMin :: { int[*] -> { int[*] -> ( int),
+                                  int -> ( int)},
+                      int -> { int[*] -> ( int),
+                               int -> ( int)}}
+ *  dispatching to: sacprelude_p::partitionMin
+ */;
+
+external /* sticky */
+int sacprelude_p::++( int[*] a { ,NN } )
+/*
+ *  ++ :: { int[*] -> ( int),
+            int -> ( int)}
+ *  dispatching to: sacprelude_p::++
+ */;
+
+external /* sticky */
+int[*] sacprelude_p::sel( int[*] idx { ,NN } , int[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { int[*] -> ( int[*])},
+             int[+] -> { int[*] -> ( int[*])},
+             int[.] -> { int[*] -> ( int[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+float[*] sacprelude_p::sel( int[*] idx { ,NN } , float[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { float[*] -> ( float[*])},
+             int[+] -> { float[*] -> ( float[*])},
+             int[.] -> { float[*] -> ( float[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+double[*] sacprelude_p::sel( int[*] idx { ,NN } , double[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { double[*] -> ( double[*])},
+             int[+] -> { double[*] -> ( double[*])},
+             int[.] -> { double[*] -> ( double[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+bool[*] sacprelude_p::sel( int[*] idx { ,NN } , bool[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { bool[*] -> ( bool[*])},
+             int[+] -> { bool[*] -> ( bool[*])},
+             int[.] -> { bool[*] -> ( bool[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+char[*] sacprelude_p::sel( int[*] idx { ,NN } , char[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { char[*] -> ( char[*])},
+             int[+] -> { char[*] -> ( char[*])},
+             int[.] -> { char[*] -> ( char[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+byte[*] sacprelude_p::sel( int[*] idx { ,NN } , byte[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { byte[*] -> ( byte[*])},
+             int[+] -> { byte[*] -> ( byte[*])},
+             int[.] -> { byte[*] -> ( byte[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+short[*] sacprelude_p::sel( int[*] idx { ,NN } , short[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { short[*] -> ( short[*])},
+             int[+] -> { short[*] -> ( short[*])},
+             int[.] -> { short[*] -> ( short[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+long[*] sacprelude_p::sel( int[*] idx { ,NN } , long[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { long[*] -> ( long[*])},
+             int[+] -> { long[*] -> ( long[*])},
+             int[.] -> { long[*] -> ( long[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+longlong[*] sacprelude_p::sel( int[*] idx { ,NN } , longlong[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { longlong[*] -> ( longlong[*])},
+             int[+] -> { longlong[*] -> ( longlong[*])},
+             int[.] -> { longlong[*] -> ( longlong[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+ubyte[*] sacprelude_p::sel( int[*] idx { ,NN } , ubyte[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { ubyte[*] -> ( ubyte[*])},
+             int[+] -> { ubyte[*] -> ( ubyte[*])},
+             int[.] -> { ubyte[*] -> ( ubyte[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+ushort[*] sacprelude_p::sel( int[*] idx { ,NN } , ushort[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { ushort[*] -> ( ushort[*])},
+             int[+] -> { ushort[*] -> ( ushort[*])},
+             int[.] -> { ushort[*] -> ( ushort[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+uint[*] sacprelude_p::sel( int[*] idx { ,NN } , uint[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { uint[*] -> ( uint[*])},
+             int[+] -> { uint[*] -> ( uint[*])},
+             int[.] -> { uint[*] -> ( uint[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+ulong[*] sacprelude_p::sel( int[*] idx { ,NN } , ulong[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { ulong[*] -> ( ulong[*])},
+             int[+] -> { ulong[*] -> ( ulong[*])},
+             int[.] -> { ulong[*] -> ( ulong[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external /* sticky */
+ulonglong[*] sacprelude_p::sel( int[*] idx { ,NN } , ulonglong[*] array { ,NN } )
+/*
+ *  sel :: { int[*] -> { ulonglong[*] -> ( ulonglong[*])},
+             int[+] -> { ulonglong[*] -> ( ulonglong[*])},
+             int[.] -> { ulonglong[*] -> ( ulonglong[*])}}
+ *  dispatching to: sacprelude_p::sel
+ */;
+
+external hidden * World:_INIT::init_TheWorld( hidden *_OI_object { ,NN } )
+/*
+ *  init_TheWorld ::  ---
+ */;
+
+external hidden *, hidden * Terminal:_INIT::init_TheTerminal( hidden *_rso_5_TheWorld { ,NN } , hidden *_OI_object { ,NN } )
+/*
+ *  init_TheTerminal ::  ---
+ */;
+
+external hidden *, hidden * TermFile:_INIT::init_stdout( hidden *_rso_43_TheTerminal { ,NN } , hidden *_OI_object { ,NN } )
+/*
+ *  init_stdout ::  ---
+ */;
+
+external /* sticky */
+int[*] sacprelude_p::adjustLacFunParams( bool[*] p { ,NN } , int[*] i { ,NN } , int[.] iv { ,NN } )
+/*
+ *  adjustLacFunParams ::  ---
+ */;
+
+external /* sticky */
+int[*] sacprelude_p::adjustLacFunParamsReshape( bool[*] p { ,NN } , int[*] i { ,NN } , int[.] iv { ,NN } , int[.] shp { ,NN } )
+/*
+ *  adjustLacFunParamsReshape ::  ---
+ */;
+
+external /* sticky */
+int sacprelude_p::++( int a { ,NN } )
+/*
+ *  ++ ::  ---
+ */;
+
+
+
+/*
+ *  global objects
+ */
+
+external hidden World::TheWorld;
+
+external hidden Terminal::TheTerminal;
+
+external hidden TermFile::stdout;
+
+
+
+/*
+ *  function definitions (FUNDEFS)
+ */
+
+
+
+/****************************************************************************
+ * Wrapper function:
+ * _MAIN::main(...) [ wrapper ]
+ ****************************************************************************/
+hidden *, hidden *, hidden *, int{0} _MAIN::main( hidden *_rso_11_TheTerminal { ,NN } , hidden *_rso_10_stdout { ,NN } , hidden *_rso_9_TheWorld { ,NN } )
+/*
+ *  main :: { hidden[*] -> { hidden[*] -> { hidden[*] -> ( hidden, hidden, hidden, int{0}),
+                                            hidden -> ( hidden, hidden, hidden, int{0})},
+                             hidden -> { hidden[*] -> ( hidden, hidden, hidden, int{0}),
+                                         hidden -> ( hidden, hidden, hidden, int{0})}},
+              hidden -> { hidden[*] -> { hidden[*] -> ( hidden, hidden, hidden, int{0}),
+                                         hidden -> ( hidden, hidden, hidden, int{0})},
+                          hidden -> { hidden[*] -> ( hidden, hidden, hidden, int{0}),
+                                      hidden -> ( hidden, hidden, hidden, int{0})}}}
+ *  dispatching to: _MAIN::main
+ */
+{ 
+  int{0} _cwc_165 { , NN } ; 
+  hidden _cwc_164 { , NN } ; 
+  hidden _cwc_163 { , NN } ; 
+  hidden _cwc_162 { , NN } ; 
+  hidden _cwc_169 { , NN } ; 
+  hidden _cwc_168 { , NN } ; 
+  hidden _cwc_167 { , NN } ; 
+  int{0} _cwc_166 { , NN } ; 
+
+  _cwc_169, _cwc_168, _cwc_167, _cwc_166 = _MAIN::main( _rso_11_TheTerminal, _rso_10_stdout, _rso_9_TheWorld) ; 
+  _cwc_162 = _cwc_169; 
+  _cwc_163 = _cwc_168; 
+  _cwc_164 = _cwc_167; 
+  _cwc_165 = _cwc_166; 
+  return( _cwc_162, _cwc_163, _cwc_164, _cwc_165); 
+}
+
+
+
+/****************************************************************************
+ * _MAIN::main(...) [ body ]
+ ****************************************************************************/
+hidden *, hidden *, hidden *, int{0} _MAIN::main( hidden *_rso_14_TheTerminal { ,NN } , hidden *_rso_13_stdout { ,NN } , hidden *_rso_12_TheWorld { ,NN } )
+/*
+ *  main ::  ---
+ */
+{ 
+  hidden _isaa_789__rso_13_stdout__SSA0_2 { dim: _isaa_766__rso_12_TheWorld, shape: _isaa_767__rso_12_TheWorld, NN } ; 
+  hidden _isaa_786__rso_14_TheTerminal__SSA0_2 { dim: _isaa_766__rso_12_TheWorld, shape: _isaa_767__rso_12_TheWorld, NN } ; 
+  hidden _isaa_783__rso_13_stdout__SSA0_1 { dim: _isaa_766__rso_12_TheWorld, shape: _isaa_767__rso_12_TheWorld, NN } ; 
+  hidden _isaa_780__rso_14_TheTerminal__SSA0_1 { dim: _isaa_766__rso_12_TheWorld, shape: _isaa_767__rso_12_TheWorld, NN } ; 
+  hidden _isaa_777__rso_12_TheWorld__SSA0_1 { dim: _isaa_766__rso_12_TheWorld, shape: _isaa_767__rso_12_TheWorld, NN } ; 
+  hidden _isaa_774__rso_14_TheTerminal { dim: _isaa_766__rso_12_TheWorld, shape: _isaa_767__rso_12_TheWorld, NN } ; 
+  hidden _isaa_771__rso_13_stdout { dim: _isaa_766__rso_12_TheWorld, shape: _isaa_767__rso_12_TheWorld, NN } ; 
+  hidden _isaa_768__rso_12_TheWorld { dim: _isaa_766__rso_12_TheWorld, shape: _isaa_767__rso_12_TheWorld, NN } ; 
+  int[0]{} _isaa_767__rso_12_TheWorld { dim: 1, shape: [ _isaa_766__rso_12_TheWorld ], NN } ; 
+  int{0} _isaa_766__rso_12_TheWorld { dim: 0, shape: [:int], NN } ; 
+  int _pinl_545__eat_20 { dim: 0, shape: [:int], NN } ; 
+  int _pinl_544__eat_19 { dim: 0, shape: [:int], NN } ; 
+  int _pinl_543__eat_18 { dim: 0, shape: [:int], NN } ; 
+  int[2,3,4] _pinl_542_res { dim: 3, shape: [ 2, 3, 4 ], NN } ; 
+  int _pinl_541__flat_107 { dim: 0, shape: [:int], NN } ; 
+  int[3] _pinl_539_iv { dim: 1, shape: [ 3 ], NN } ; 
+  hidden _rso_13_stdout__SSA0_2 { , NN } ;  /* declared: TermFile::TermFile */
+  hidden _rso_14_TheTerminal__SSA0_2 { , NN } ;  /* declared: Terminal::Terminal */
+  hidden _rso_13_stdout__SSA0_1 { , NN } ;  /* declared: TermFile::TermFile */
+  hidden _rso_14_TheTerminal__SSA0_1 { , NN } ;  /* declared: Terminal::Terminal */
+  hidden _rso_12_TheWorld__SSA0_1 { , NN } ;  /* declared: World::World */
+  int{1} _flat_7 { dim: 0, shape: [:int], NN } ; 
+  int{2} _flat_2 { dim: 0, shape: [:int], NN } ; 
+  int{3} _flat_3 { dim: 0, shape: [:int], NN } ; 
+  int{4} _flat_4 { dim: 0, shape: [:int], NN } ; 
+  int{42} _flat_5 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_766__rso_12_TheWorld = 0; 
+  _isaa_767__rso_12_TheWorld = [:int]; 
+  _isaa_768__rso_12_TheWorld = _saabind_( _isaa_766__rso_12_TheWorld, _isaa_767__rso_12_TheWorld, _rso_12_TheWorld); 
+  _isaa_771__rso_13_stdout = _saabind_( _isaa_766__rso_12_TheWorld, _isaa_767__rso_12_TheWorld, _rso_13_stdout); 
+  _isaa_774__rso_14_TheTerminal = _saabind_( _isaa_766__rso_12_TheWorld, _isaa_767__rso_12_TheWorld, _rso_14_TheTerminal); 
+  _rso_12_TheWorld__SSA0_1, _rso_14_TheTerminal__SSA0_1, _rso_13_stdout__SSA0_1 = _MAIN:_INIT::init( _isaa_768__rso_12_TheWorld, _isaa_774__rso_14_TheTerminal, _isaa_771__rso_13_stdout) ; 
+  _isaa_777__rso_12_TheWorld__SSA0_1 = _saabind_( _isaa_766__rso_12_TheWorld, _isaa_767__rso_12_TheWorld, _rso_12_TheWorld__SSA0_1); 
+  _isaa_780__rso_14_TheTerminal__SSA0_1 = _saabind_( _isaa_766__rso_12_TheWorld, _isaa_767__rso_12_TheWorld, _rso_14_TheTerminal__SSA0_1); 
+  _isaa_783__rso_13_stdout__SSA0_1 = _saabind_( _isaa_766__rso_12_TheWorld, _isaa_767__rso_12_TheWorld, _rso_13_stdout__SSA0_1); 
+  _flat_5 = 42; 
+  _flat_4 = 4; 
+  _flat_3 = 3; 
+  _flat_2 = 2; 
+  _flat_7 = 1; 
+  _pinl_542_res = with {
+        /* Partn */
+        ([ 0, 0, 0 ] <= _pinl_539_iv=[_pinl_545__eat_20, _pinl_544__eat_19, _pinl_543__eat_18] < [ _flat_2, _flat_3, _flat_4 ] genwidth [ _flat_2, _flat_3, _flat_4 ])
+        { 
+          _pinl_541__flat_107 = _add_SxS_( _flat_5, _flat_7); 
+        } : _pinl_541__flat_107 ; 
+         } :
+      genarray( [ _flat_2, _flat_3, _flat_4 ], _flat_2); 
+  _rso_14_TheTerminal__SSA0_2, _rso_13_stdout__SSA0_2 = _MAIN:StdIO::print( _isaa_780__rso_14_TheTerminal__SSA0_1, _isaa_783__rso_13_stdout__SSA0_1, _pinl_542_res) ; 
+  _isaa_786__rso_14_TheTerminal__SSA0_2 = _saabind_( _isaa_766__rso_12_TheWorld, _isaa_767__rso_12_TheWorld, _rso_14_TheTerminal__SSA0_2); 
+  _isaa_789__rso_13_stdout__SSA0_2 = _saabind_( _isaa_766__rso_12_TheWorld, _isaa_767__rso_12_TheWorld, _rso_13_stdout__SSA0_2); 
+  return( _isaa_786__rso_14_TheTerminal__SSA0_2, _isaa_789__rso_13_stdout__SSA0_2, _isaa_777__rso_12_TheWorld__SSA0_1, _isaa_766__rso_12_TheWorld); 
+}
+
+
+
+/****************************************************************************
+ * _MAIN:_INIT::init(...) [ body ]
+ ****************************************************************************/
+hidden *, hidden *, hidden * _MAIN:_INIT::init( hidden *_rso_17_TheWorld { ,NN } , hidden *_rso_16_TheTerminal { ,NN } , hidden *_rso_15_stdout { ,NN } )
+/*
+ *  init ::  ---
+ */
+{ 
+  hidden _isaa_815__rso_15_stdout__SSA0_1 { dim: _isaa_792__rso_15_stdout, shape: _isaa_793__rso_15_stdout, NN } ; 
+  hidden _isaa_812__rso_16_TheTerminal__SSA0_2 { dim: _isaa_792__rso_15_stdout, shape: _isaa_793__rso_15_stdout, NN } ; 
+  hidden _isaa_809__rso_16_TheTerminal__SSA0_1 { dim: _isaa_792__rso_15_stdout, shape: _isaa_793__rso_15_stdout, NN } ; 
+  hidden _isaa_806__rso_17_TheWorld__SSA0_2 { dim: _isaa_792__rso_15_stdout, shape: _isaa_793__rso_15_stdout, NN } ; 
+  hidden _isaa_803__rso_17_TheWorld__SSA0_1 { dim: _isaa_792__rso_15_stdout, shape: _isaa_793__rso_15_stdout, NN } ; 
+  hidden _isaa_800__rso_17_TheWorld { dim: _isaa_792__rso_15_stdout, shape: _isaa_793__rso_15_stdout, NN } ; 
+  hidden _isaa_797__rso_16_TheTerminal { dim: _isaa_792__rso_15_stdout, shape: _isaa_793__rso_15_stdout, NN } ; 
+  hidden _isaa_794__rso_15_stdout { dim: _isaa_792__rso_15_stdout, shape: _isaa_793__rso_15_stdout, NN } ; 
+  int[0]{} _isaa_793__rso_15_stdout { dim: 1, shape: [ _isaa_792__rso_15_stdout ], NN } ; 
+  int{0} _isaa_792__rso_15_stdout { dim: 0, shape: [:int], NN } ; 
+  hidden _rso_15_stdout__SSA0_1 { , NN } ;  /* declared: TermFile::TermFile */
+  hidden _rso_16_TheTerminal__SSA0_2 { , NN } ;  /* declared: Terminal::Terminal */
+  hidden _rso_16_TheTerminal__SSA0_1 { , NN } ;  /* declared: Terminal::Terminal */
+  hidden _rso_17_TheWorld__SSA0_2 { , NN } ;  /* declared: World::World */
+  hidden _rso_17_TheWorld__SSA0_1 { , NN } ;  /* declared: World::World */
+
+  _isaa_792__rso_15_stdout = 0; 
+  _isaa_793__rso_15_stdout = [:int]; 
+  _isaa_794__rso_15_stdout = _saabind_( _isaa_792__rso_15_stdout, _isaa_793__rso_15_stdout, _rso_15_stdout); 
+  _isaa_797__rso_16_TheTerminal = _saabind_( _isaa_792__rso_15_stdout, _isaa_793__rso_15_stdout, _rso_16_TheTerminal); 
+  _isaa_800__rso_17_TheWorld = _saabind_( _isaa_792__rso_15_stdout, _isaa_793__rso_15_stdout, _rso_17_TheWorld); 
+  _rso_17_TheWorld__SSA0_1 = World:_INIT::init_TheWorld( _isaa_800__rso_17_TheWorld) ; 
+  _isaa_803__rso_17_TheWorld__SSA0_1 = _saabind_( _isaa_792__rso_15_stdout, _isaa_793__rso_15_stdout, _rso_17_TheWorld__SSA0_1); 
+  _rso_17_TheWorld__SSA0_2, _rso_16_TheTerminal__SSA0_1 = Terminal:_INIT::init_TheTerminal( _isaa_803__rso_17_TheWorld__SSA0_1, _isaa_797__rso_16_TheTerminal) ; 
+  _isaa_806__rso_17_TheWorld__SSA0_2 = _saabind_( _isaa_792__rso_15_stdout, _isaa_793__rso_15_stdout, _rso_17_TheWorld__SSA0_2); 
+  _isaa_809__rso_16_TheTerminal__SSA0_1 = _saabind_( _isaa_792__rso_15_stdout, _isaa_793__rso_15_stdout, _rso_16_TheTerminal__SSA0_1); 
+  _rso_16_TheTerminal__SSA0_2, _rso_15_stdout__SSA0_1 = TermFile:_INIT::init_stdout( _isaa_809__rso_16_TheTerminal__SSA0_1, _isaa_794__rso_15_stdout) ; 
+  _isaa_812__rso_16_TheTerminal__SSA0_2 = _saabind_( _isaa_792__rso_15_stdout, _isaa_793__rso_15_stdout, _rso_16_TheTerminal__SSA0_2); 
+  _isaa_815__rso_15_stdout__SSA0_1 = _saabind_( _isaa_792__rso_15_stdout, _isaa_793__rso_15_stdout, _rso_15_stdout__SSA0_1); 
+  return( _isaa_806__rso_17_TheWorld__SSA0_2, _isaa_812__rso_16_TheTerminal__SSA0_2, _isaa_815__rso_15_stdout__SSA0_1); 
+}
+
+
+
+/****************************************************************************
+ * ArrayIO::print(...) [ body ]
+ ****************************************************************************/
+inline
+hidden * ArrayIO::print( hidden *_rso_85_stdout { ,NN } , int[+] arr { ,NN } )
+/*
+ *  print ::  ---
+ */
+{ 
+  hidden _isaa_825__rso_85_stdout__SSA0_1 { dim: _isaa_819__rso_85_stdout, shape: _isaa_820__rso_85_stdout, NN } ; 
+  hidden _isaa_821__rso_85_stdout { dim: _isaa_819__rso_85_stdout, shape: _isaa_820__rso_85_stdout, NN } ; 
+  int[0]{} _isaa_820__rso_85_stdout { dim: 1, shape: [ _isaa_819__rso_85_stdout ], NN } ; 
+  int{0} _isaa_819__rso_85_stdout { dim: 0, shape: [:int], NN } ; 
+  int[+] _isaa_818_arr { dim: _isaa_816_arr, shape: _isaa_817_arr, NN } ; 
+  int[.] _isaa_817_arr { dim: 1, shape: [ _isaa_816_arr ], NN } ; 
+  int _isaa_816_arr { dim: 0, shape: [:int], NN } ; 
+  hidden _rso_85_stdout__SSA0_1 { , NN } ;  /* declared: TermFile::TermFile */
+
+  _isaa_816_arr = _dim_A_( arr); 
+  _isaa_817_arr = _shape_A_( arr); 
+  _isaa_818_arr = _saabind_( _isaa_816_arr, _isaa_817_arr, arr); 
+  _isaa_819__rso_85_stdout = 0; 
+  _isaa_820__rso_85_stdout = [:int]; 
+  _isaa_821__rso_85_stdout = _saabind_( _isaa_819__rso_85_stdout, _isaa_820__rso_85_stdout, _rso_85_stdout); 
+  _rso_85_stdout__SSA0_1 = ArrayIO::printarray( _isaa_821__rso_85_stdout, _isaa_816_arr, _isaa_817_arr, _isaa_818_arr) ; 
+  _isaa_825__rso_85_stdout__SSA0_1 = _saabind_( _isaa_819__rso_85_stdout, _isaa_820__rso_85_stdout, _rso_85_stdout__SSA0_1); 
+  return( _isaa_825__rso_85_stdout__SSA0_1); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulonglong[*] sacprelude_p::sel( int[.] idx { ,NN } , ulonglong[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_851 { , NN } ; 
+  int _ivesplit_848 { , NN } ; 
+  int[1] _isaa_837_new_idx { , NN } ; 
+  int[1] _isaa_833_new_shape { , NN } ; 
+  int _mse_835__flat_119 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_831_idx { dim: _isaa_829_idx, shape: _isaa_830_idx, NN } ; 
+  int[1] _isaa_830_idx { dim: 1, shape: [ _isaa_829_idx ], NN } ; 
+  int{1} _isaa_829_idx { dim: 0, shape: [:int], NN } ; 
+  ulonglong[*] _isaa_828_array { dim: _isaa_826_array, shape: _isaa_827_array, NN } ; 
+  int[.] _isaa_827_array { dim: 1, shape: [ _isaa_826_array ], NN } ; 
+  int _isaa_826_array { dim: 0, shape: [:int], NN } ; 
+  ulonglong[*] res { dim: _uprf_851, shape: new_shape, NN } ; 
+  ulonglong _flat_127 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_837_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_833_new_shape, NN } ; 
+  ulonglong{0} _flat_124 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_125 { dim: 1, shape: _isaa_833_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_833_new_shape, NN } ; 
+  int _flat_119 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_121 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_826_array = _dim_A_( array); 
+  _isaa_827_array = _shape_A_( array); 
+  _isaa_828_array = _saabind_( _isaa_826_array, _isaa_827_array, array); 
+  _isaa_829_idx = 1; 
+  _isaa_830_idx = _shape_A_( idx); 
+  _isaa_831_idx = _saabind_( _isaa_829_idx, _isaa_830_idx, idx); 
+  _flat_121 = 0; 
+  _flat_119 = _idx_sel_( _flat_121, _isaa_830_idx); 
+  _mse_835__flat_119 = _abs_S_( _flat_119); 
+  _uprf_851 = _sub_SxS_( _isaa_826_array, _mse_835__flat_119); 
+  _isaa_833_new_shape = [ _uprf_851 ]; 
+  new_shape = _drop_SxV_( _flat_119, _isaa_827_array); 
+  _flat_125 = _mul_SxV_( _flat_121, new_shape); 
+  _flat_124 = 0ULL; 
+  res = with {
+        /* Partn */
+        (_flat_125 <= iv < new_shape)
+        { 
+          _isaa_837_new_idx = _add_VxV_( _isaa_830_idx, _isaa_833_new_shape); 
+          new_idx = _cat_VxV_( _isaa_831_idx, iv); 
+          _ivesplit_848 = _vect2offset_( _isaa_827_array, new_idx); 
+          _flat_127 = _idx_sel_( _ivesplit_848, _isaa_828_array); 
+        } : _flat_127 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_124 ; 
+         } :
+      genarray( new_shape, _flat_124); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulong[*] sacprelude_p::sel( int[.] idx { ,NN } , ulong[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_879 { , NN } ; 
+  int _ivesplit_876 { , NN } ; 
+  int[1] _isaa_865_new_idx { , NN } ; 
+  int[1] _isaa_861_new_shape { , NN } ; 
+  int _mse_863__flat_110 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_859_idx { dim: _isaa_857_idx, shape: _isaa_858_idx, NN } ; 
+  int[1] _isaa_858_idx { dim: 1, shape: [ _isaa_857_idx ], NN } ; 
+  int{1} _isaa_857_idx { dim: 0, shape: [:int], NN } ; 
+  ulong[*] _isaa_856_array { dim: _isaa_854_array, shape: _isaa_855_array, NN } ; 
+  int[.] _isaa_855_array { dim: 1, shape: [ _isaa_854_array ], NN } ; 
+  int _isaa_854_array { dim: 0, shape: [:int], NN } ; 
+  ulong[*] res { dim: _uprf_879, shape: new_shape, NN } ; 
+  ulong _flat_118 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_865_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_861_new_shape, NN } ; 
+  ulong{0} _flat_115 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_116 { dim: 1, shape: _isaa_861_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_861_new_shape, NN } ; 
+  int _flat_110 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_112 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_854_array = _dim_A_( array); 
+  _isaa_855_array = _shape_A_( array); 
+  _isaa_856_array = _saabind_( _isaa_854_array, _isaa_855_array, array); 
+  _isaa_857_idx = 1; 
+  _isaa_858_idx = _shape_A_( idx); 
+  _isaa_859_idx = _saabind_( _isaa_857_idx, _isaa_858_idx, idx); 
+  _flat_112 = 0; 
+  _flat_110 = _idx_sel_( _flat_112, _isaa_858_idx); 
+  _mse_863__flat_110 = _abs_S_( _flat_110); 
+  _uprf_879 = _sub_SxS_( _isaa_854_array, _mse_863__flat_110); 
+  _isaa_861_new_shape = [ _uprf_879 ]; 
+  new_shape = _drop_SxV_( _flat_110, _isaa_855_array); 
+  _flat_116 = _mul_SxV_( _flat_112, new_shape); 
+  _flat_115 = 0ul; 
+  res = with {
+        /* Partn */
+        (_flat_116 <= iv < new_shape)
+        { 
+          _isaa_865_new_idx = _add_VxV_( _isaa_858_idx, _isaa_861_new_shape); 
+          new_idx = _cat_VxV_( _isaa_859_idx, iv); 
+          _ivesplit_876 = _vect2offset_( _isaa_855_array, new_idx); 
+          _flat_118 = _idx_sel_( _ivesplit_876, _isaa_856_array); 
+        } : _flat_118 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_115 ; 
+         } :
+      genarray( new_shape, _flat_115); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+uint[*] sacprelude_p::sel( int[.] idx { ,NN } , uint[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_907 { , NN } ; 
+  int _ivesplit_904 { , NN } ; 
+  int[1] _isaa_893_new_idx { , NN } ; 
+  int[1] _isaa_889_new_shape { , NN } ; 
+  int _mse_891__flat_101 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_887_idx { dim: _isaa_885_idx, shape: _isaa_886_idx, NN } ; 
+  int[1] _isaa_886_idx { dim: 1, shape: [ _isaa_885_idx ], NN } ; 
+  int{1} _isaa_885_idx { dim: 0, shape: [:int], NN } ; 
+  uint[*] _isaa_884_array { dim: _isaa_882_array, shape: _isaa_883_array, NN } ; 
+  int[.] _isaa_883_array { dim: 1, shape: [ _isaa_882_array ], NN } ; 
+  int _isaa_882_array { dim: 0, shape: [:int], NN } ; 
+  uint[*] res { dim: _uprf_907, shape: new_shape, NN } ; 
+  uint _flat_109 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_893_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_889_new_shape, NN } ; 
+  uint{0} _flat_106 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_107 { dim: 1, shape: _isaa_889_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_889_new_shape, NN } ; 
+  int _flat_101 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_103 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_882_array = _dim_A_( array); 
+  _isaa_883_array = _shape_A_( array); 
+  _isaa_884_array = _saabind_( _isaa_882_array, _isaa_883_array, array); 
+  _isaa_885_idx = 1; 
+  _isaa_886_idx = _shape_A_( idx); 
+  _isaa_887_idx = _saabind_( _isaa_885_idx, _isaa_886_idx, idx); 
+  _flat_103 = 0; 
+  _flat_101 = _idx_sel_( _flat_103, _isaa_886_idx); 
+  _mse_891__flat_101 = _abs_S_( _flat_101); 
+  _uprf_907 = _sub_SxS_( _isaa_882_array, _mse_891__flat_101); 
+  _isaa_889_new_shape = [ _uprf_907 ]; 
+  new_shape = _drop_SxV_( _flat_101, _isaa_883_array); 
+  _flat_107 = _mul_SxV_( _flat_103, new_shape); 
+  _flat_106 = 0ui; 
+  res = with {
+        /* Partn */
+        (_flat_107 <= iv < new_shape)
+        { 
+          _isaa_893_new_idx = _add_VxV_( _isaa_886_idx, _isaa_889_new_shape); 
+          new_idx = _cat_VxV_( _isaa_887_idx, iv); 
+          _ivesplit_904 = _vect2offset_( _isaa_883_array, new_idx); 
+          _flat_109 = _idx_sel_( _ivesplit_904, _isaa_884_array); 
+        } : _flat_109 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_106 ; 
+         } :
+      genarray( new_shape, _flat_106); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ushort[*] sacprelude_p::sel( int[.] idx { ,NN } , ushort[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_935 { , NN } ; 
+  int _ivesplit_932 { , NN } ; 
+  int[1] _isaa_921_new_idx { , NN } ; 
+  int[1] _isaa_917_new_shape { , NN } ; 
+  int _mse_919__flat_92 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_915_idx { dim: _isaa_913_idx, shape: _isaa_914_idx, NN } ; 
+  int[1] _isaa_914_idx { dim: 1, shape: [ _isaa_913_idx ], NN } ; 
+  int{1} _isaa_913_idx { dim: 0, shape: [:int], NN } ; 
+  ushort[*] _isaa_912_array { dim: _isaa_910_array, shape: _isaa_911_array, NN } ; 
+  int[.] _isaa_911_array { dim: 1, shape: [ _isaa_910_array ], NN } ; 
+  int _isaa_910_array { dim: 0, shape: [:int], NN } ; 
+  ushort[*] res { dim: _uprf_935, shape: new_shape, NN } ; 
+  ushort _flat_100 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_921_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_917_new_shape, NN } ; 
+  ushort{0} _flat_97 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_98 { dim: 1, shape: _isaa_917_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_917_new_shape, NN } ; 
+  int _flat_92 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_94 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_910_array = _dim_A_( array); 
+  _isaa_911_array = _shape_A_( array); 
+  _isaa_912_array = _saabind_( _isaa_910_array, _isaa_911_array, array); 
+  _isaa_913_idx = 1; 
+  _isaa_914_idx = _shape_A_( idx); 
+  _isaa_915_idx = _saabind_( _isaa_913_idx, _isaa_914_idx, idx); 
+  _flat_94 = 0; 
+  _flat_92 = _idx_sel_( _flat_94, _isaa_914_idx); 
+  _mse_919__flat_92 = _abs_S_( _flat_92); 
+  _uprf_935 = _sub_SxS_( _isaa_910_array, _mse_919__flat_92); 
+  _isaa_917_new_shape = [ _uprf_935 ]; 
+  new_shape = _drop_SxV_( _flat_92, _isaa_911_array); 
+  _flat_98 = _mul_SxV_( _flat_94, new_shape); 
+  _flat_97 = 0us; 
+  res = with {
+        /* Partn */
+        (_flat_98 <= iv < new_shape)
+        { 
+          _isaa_921_new_idx = _add_VxV_( _isaa_914_idx, _isaa_917_new_shape); 
+          new_idx = _cat_VxV_( _isaa_915_idx, iv); 
+          _ivesplit_932 = _vect2offset_( _isaa_911_array, new_idx); 
+          _flat_100 = _idx_sel_( _ivesplit_932, _isaa_912_array); 
+        } : _flat_100 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_97 ; 
+         } :
+      genarray( new_shape, _flat_97); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ubyte[*] sacprelude_p::sel( int[.] idx { ,NN } , ubyte[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_963 { , NN } ; 
+  int _ivesplit_960 { , NN } ; 
+  int[1] _isaa_949_new_idx { , NN } ; 
+  int[1] _isaa_945_new_shape { , NN } ; 
+  int _mse_947__flat_83 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_943_idx { dim: _isaa_941_idx, shape: _isaa_942_idx, NN } ; 
+  int[1] _isaa_942_idx { dim: 1, shape: [ _isaa_941_idx ], NN } ; 
+  int{1} _isaa_941_idx { dim: 0, shape: [:int], NN } ; 
+  ubyte[*] _isaa_940_array { dim: _isaa_938_array, shape: _isaa_939_array, NN } ; 
+  int[.] _isaa_939_array { dim: 1, shape: [ _isaa_938_array ], NN } ; 
+  int _isaa_938_array { dim: 0, shape: [:int], NN } ; 
+  ubyte[*] res { dim: _uprf_963, shape: new_shape, NN } ; 
+  ubyte _flat_91 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_949_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_945_new_shape, NN } ; 
+  ubyte{} _flat_88 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_89 { dim: 1, shape: _isaa_945_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_945_new_shape, NN } ; 
+  int _flat_83 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_85 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_938_array = _dim_A_( array); 
+  _isaa_939_array = _shape_A_( array); 
+  _isaa_940_array = _saabind_( _isaa_938_array, _isaa_939_array, array); 
+  _isaa_941_idx = 1; 
+  _isaa_942_idx = _shape_A_( idx); 
+  _isaa_943_idx = _saabind_( _isaa_941_idx, _isaa_942_idx, idx); 
+  _flat_85 = 0; 
+  _flat_83 = _idx_sel_( _flat_85, _isaa_942_idx); 
+  _mse_947__flat_83 = _abs_S_( _flat_83); 
+  _uprf_963 = _sub_SxS_( _isaa_938_array, _mse_947__flat_83); 
+  _isaa_945_new_shape = [ _uprf_963 ]; 
+  new_shape = _drop_SxV_( _flat_83, _isaa_939_array); 
+  _flat_89 = _mul_SxV_( _flat_85, new_shape); 
+  _flat_88 = 0ub; 
+  res = with {
+        /* Partn */
+        (_flat_89 <= iv < new_shape)
+        { 
+          _isaa_949_new_idx = _add_VxV_( _isaa_942_idx, _isaa_945_new_shape); 
+          new_idx = _cat_VxV_( _isaa_943_idx, iv); 
+          _ivesplit_960 = _vect2offset_( _isaa_939_array, new_idx); 
+          _flat_91 = _idx_sel_( _ivesplit_960, _isaa_940_array); 
+        } : _flat_91 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_88 ; 
+         } :
+      genarray( new_shape, _flat_88); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+longlong[*] sacprelude_p::sel( int[.] idx { ,NN } , longlong[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_991 { , NN } ; 
+  int _ivesplit_988 { , NN } ; 
+  int[1] _isaa_977_new_idx { , NN } ; 
+  int[1] _isaa_973_new_shape { , NN } ; 
+  int _mse_975__flat_74 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_971_idx { dim: _isaa_969_idx, shape: _isaa_970_idx, NN } ; 
+  int[1] _isaa_970_idx { dim: 1, shape: [ _isaa_969_idx ], NN } ; 
+  int{1} _isaa_969_idx { dim: 0, shape: [:int], NN } ; 
+  longlong[*] _isaa_968_array { dim: _isaa_966_array, shape: _isaa_967_array, NN } ; 
+  int[.] _isaa_967_array { dim: 1, shape: [ _isaa_966_array ], NN } ; 
+  int _isaa_966_array { dim: 0, shape: [:int], NN } ; 
+  longlong[*] res { dim: _uprf_991, shape: new_shape, NN } ; 
+  longlong _flat_82 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_977_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_973_new_shape, NN } ; 
+  longlong{0} _flat_79 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_80 { dim: 1, shape: _isaa_973_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_973_new_shape, NN } ; 
+  int _flat_74 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_76 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_966_array = _dim_A_( array); 
+  _isaa_967_array = _shape_A_( array); 
+  _isaa_968_array = _saabind_( _isaa_966_array, _isaa_967_array, array); 
+  _isaa_969_idx = 1; 
+  _isaa_970_idx = _shape_A_( idx); 
+  _isaa_971_idx = _saabind_( _isaa_969_idx, _isaa_970_idx, idx); 
+  _flat_76 = 0; 
+  _flat_74 = _idx_sel_( _flat_76, _isaa_970_idx); 
+  _mse_975__flat_74 = _abs_S_( _flat_74); 
+  _uprf_991 = _sub_SxS_( _isaa_966_array, _mse_975__flat_74); 
+  _isaa_973_new_shape = [ _uprf_991 ]; 
+  new_shape = _drop_SxV_( _flat_74, _isaa_967_array); 
+  _flat_80 = _mul_SxV_( _flat_76, new_shape); 
+  _flat_79 = 0LL; 
+  res = with {
+        /* Partn */
+        (_flat_80 <= iv < new_shape)
+        { 
+          _isaa_977_new_idx = _add_VxV_( _isaa_970_idx, _isaa_973_new_shape); 
+          new_idx = _cat_VxV_( _isaa_971_idx, iv); 
+          _ivesplit_988 = _vect2offset_( _isaa_967_array, new_idx); 
+          _flat_82 = _idx_sel_( _ivesplit_988, _isaa_968_array); 
+        } : _flat_82 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_79 ; 
+         } :
+      genarray( new_shape, _flat_79); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+long[*] sacprelude_p::sel( int[.] idx { ,NN } , long[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_1019 { , NN } ; 
+  int _ivesplit_1016 { , NN } ; 
+  int[1] _isaa_1005_new_idx { , NN } ; 
+  int[1] _isaa_1001_new_shape { , NN } ; 
+  int _mse_1003__flat_65 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_999_idx { dim: _isaa_997_idx, shape: _isaa_998_idx, NN } ; 
+  int[1] _isaa_998_idx { dim: 1, shape: [ _isaa_997_idx ], NN } ; 
+  int{1} _isaa_997_idx { dim: 0, shape: [:int], NN } ; 
+  long[*] _isaa_996_array { dim: _isaa_994_array, shape: _isaa_995_array, NN } ; 
+  int[.] _isaa_995_array { dim: 1, shape: [ _isaa_994_array ], NN } ; 
+  int _isaa_994_array { dim: 0, shape: [:int], NN } ; 
+  long[*] res { dim: _uprf_1019, shape: new_shape, NN } ; 
+  long _flat_73 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_1005_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1001_new_shape, NN } ; 
+  long{0} _flat_70 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_71 { dim: 1, shape: _isaa_1001_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_1001_new_shape, NN } ; 
+  int _flat_65 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_67 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_994_array = _dim_A_( array); 
+  _isaa_995_array = _shape_A_( array); 
+  _isaa_996_array = _saabind_( _isaa_994_array, _isaa_995_array, array); 
+  _isaa_997_idx = 1; 
+  _isaa_998_idx = _shape_A_( idx); 
+  _isaa_999_idx = _saabind_( _isaa_997_idx, _isaa_998_idx, idx); 
+  _flat_67 = 0; 
+  _flat_65 = _idx_sel_( _flat_67, _isaa_998_idx); 
+  _mse_1003__flat_65 = _abs_S_( _flat_65); 
+  _uprf_1019 = _sub_SxS_( _isaa_994_array, _mse_1003__flat_65); 
+  _isaa_1001_new_shape = [ _uprf_1019 ]; 
+  new_shape = _drop_SxV_( _flat_65, _isaa_995_array); 
+  _flat_71 = _mul_SxV_( _flat_67, new_shape); 
+  _flat_70 = 0l; 
+  res = with {
+        /* Partn */
+        (_flat_71 <= iv < new_shape)
+        { 
+          _isaa_1005_new_idx = _add_VxV_( _isaa_998_idx, _isaa_1001_new_shape); 
+          new_idx = _cat_VxV_( _isaa_999_idx, iv); 
+          _ivesplit_1016 = _vect2offset_( _isaa_995_array, new_idx); 
+          _flat_73 = _idx_sel_( _ivesplit_1016, _isaa_996_array); 
+        } : _flat_73 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_70 ; 
+         } :
+      genarray( new_shape, _flat_70); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+short[*] sacprelude_p::sel( int[.] idx { ,NN } , short[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_1047 { , NN } ; 
+  int _ivesplit_1044 { , NN } ; 
+  int[1] _isaa_1033_new_idx { , NN } ; 
+  int[1] _isaa_1029_new_shape { , NN } ; 
+  int _mse_1031__flat_56 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_1027_idx { dim: _isaa_1025_idx, shape: _isaa_1026_idx, NN } ; 
+  int[1] _isaa_1026_idx { dim: 1, shape: [ _isaa_1025_idx ], NN } ; 
+  int{1} _isaa_1025_idx { dim: 0, shape: [:int], NN } ; 
+  short[*] _isaa_1024_array { dim: _isaa_1022_array, shape: _isaa_1023_array, NN } ; 
+  int[.] _isaa_1023_array { dim: 1, shape: [ _isaa_1022_array ], NN } ; 
+  int _isaa_1022_array { dim: 0, shape: [:int], NN } ; 
+  short[*] res { dim: _uprf_1047, shape: new_shape, NN } ; 
+  short _flat_64 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_1033_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1029_new_shape, NN } ; 
+  short{0} _flat_61 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_62 { dim: 1, shape: _isaa_1029_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_1029_new_shape, NN } ; 
+  int _flat_56 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_58 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1022_array = _dim_A_( array); 
+  _isaa_1023_array = _shape_A_( array); 
+  _isaa_1024_array = _saabind_( _isaa_1022_array, _isaa_1023_array, array); 
+  _isaa_1025_idx = 1; 
+  _isaa_1026_idx = _shape_A_( idx); 
+  _isaa_1027_idx = _saabind_( _isaa_1025_idx, _isaa_1026_idx, idx); 
+  _flat_58 = 0; 
+  _flat_56 = _idx_sel_( _flat_58, _isaa_1026_idx); 
+  _mse_1031__flat_56 = _abs_S_( _flat_56); 
+  _uprf_1047 = _sub_SxS_( _isaa_1022_array, _mse_1031__flat_56); 
+  _isaa_1029_new_shape = [ _uprf_1047 ]; 
+  new_shape = _drop_SxV_( _flat_56, _isaa_1023_array); 
+  _flat_62 = _mul_SxV_( _flat_58, new_shape); 
+  _flat_61 = 0s; 
+  res = with {
+        /* Partn */
+        (_flat_62 <= iv < new_shape)
+        { 
+          _isaa_1033_new_idx = _add_VxV_( _isaa_1026_idx, _isaa_1029_new_shape); 
+          new_idx = _cat_VxV_( _isaa_1027_idx, iv); 
+          _ivesplit_1044 = _vect2offset_( _isaa_1023_array, new_idx); 
+          _flat_64 = _idx_sel_( _ivesplit_1044, _isaa_1024_array); 
+        } : _flat_64 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_61 ; 
+         } :
+      genarray( new_shape, _flat_61); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+byte[*] sacprelude_p::sel( int[.] idx { ,NN } , byte[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_1075 { , NN } ; 
+  int _ivesplit_1072 { , NN } ; 
+  int[1] _isaa_1061_new_idx { , NN } ; 
+  int[1] _isaa_1057_new_shape { , NN } ; 
+  int _mse_1059__flat_47 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_1055_idx { dim: _isaa_1053_idx, shape: _isaa_1054_idx, NN } ; 
+  int[1] _isaa_1054_idx { dim: 1, shape: [ _isaa_1053_idx ], NN } ; 
+  int{1} _isaa_1053_idx { dim: 0, shape: [:int], NN } ; 
+  byte[*] _isaa_1052_array { dim: _isaa_1050_array, shape: _isaa_1051_array, NN } ; 
+  int[.] _isaa_1051_array { dim: 1, shape: [ _isaa_1050_array ], NN } ; 
+  int _isaa_1050_array { dim: 0, shape: [:int], NN } ; 
+  byte[*] res { dim: _uprf_1075, shape: new_shape, NN } ; 
+  byte _flat_55 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_1061_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1057_new_shape, NN } ; 
+  byte{} _flat_52 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_53 { dim: 1, shape: _isaa_1057_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_1057_new_shape, NN } ; 
+  int _flat_47 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_49 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1050_array = _dim_A_( array); 
+  _isaa_1051_array = _shape_A_( array); 
+  _isaa_1052_array = _saabind_( _isaa_1050_array, _isaa_1051_array, array); 
+  _isaa_1053_idx = 1; 
+  _isaa_1054_idx = _shape_A_( idx); 
+  _isaa_1055_idx = _saabind_( _isaa_1053_idx, _isaa_1054_idx, idx); 
+  _flat_49 = 0; 
+  _flat_47 = _idx_sel_( _flat_49, _isaa_1054_idx); 
+  _mse_1059__flat_47 = _abs_S_( _flat_47); 
+  _uprf_1075 = _sub_SxS_( _isaa_1050_array, _mse_1059__flat_47); 
+  _isaa_1057_new_shape = [ _uprf_1075 ]; 
+  new_shape = _drop_SxV_( _flat_47, _isaa_1051_array); 
+  _flat_53 = _mul_SxV_( _flat_49, new_shape); 
+  _flat_52 = 0b; 
+  res = with {
+        /* Partn */
+        (_flat_53 <= iv < new_shape)
+        { 
+          _isaa_1061_new_idx = _add_VxV_( _isaa_1054_idx, _isaa_1057_new_shape); 
+          new_idx = _cat_VxV_( _isaa_1055_idx, iv); 
+          _ivesplit_1072 = _vect2offset_( _isaa_1051_array, new_idx); 
+          _flat_55 = _idx_sel_( _ivesplit_1072, _isaa_1052_array); 
+        } : _flat_55 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_52 ; 
+         } :
+      genarray( new_shape, _flat_52); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+char[*] sacprelude_p::sel( int[.] idx { ,NN } , char[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_1103 { , NN } ; 
+  int _ivesplit_1100 { , NN } ; 
+  int[1] _isaa_1089_new_idx { , NN } ; 
+  int[1] _isaa_1085_new_shape { , NN } ; 
+  int _mse_1087__flat_38 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_1083_idx { dim: _isaa_1081_idx, shape: _isaa_1082_idx, NN } ; 
+  int[1] _isaa_1082_idx { dim: 1, shape: [ _isaa_1081_idx ], NN } ; 
+  int{1} _isaa_1081_idx { dim: 0, shape: [:int], NN } ; 
+  char[*] _isaa_1080_array { dim: _isaa_1078_array, shape: _isaa_1079_array, NN } ; 
+  int[.] _isaa_1079_array { dim: 1, shape: [ _isaa_1078_array ], NN } ; 
+  int _isaa_1078_array { dim: 0, shape: [:int], NN } ; 
+  char[*] res { dim: _uprf_1103, shape: new_shape, NN } ; 
+  char _flat_46 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_1089_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1085_new_shape, NN } ; 
+  char{ } _flat_43 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_44 { dim: 1, shape: _isaa_1085_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_1085_new_shape, NN } ; 
+  int _flat_38 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_40 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1078_array = _dim_A_( array); 
+  _isaa_1079_array = _shape_A_( array); 
+  _isaa_1080_array = _saabind_( _isaa_1078_array, _isaa_1079_array, array); 
+  _isaa_1081_idx = 1; 
+  _isaa_1082_idx = _shape_A_( idx); 
+  _isaa_1083_idx = _saabind_( _isaa_1081_idx, _isaa_1082_idx, idx); 
+  _flat_40 = 0; 
+  _flat_38 = _idx_sel_( _flat_40, _isaa_1082_idx); 
+  _mse_1087__flat_38 = _abs_S_( _flat_38); 
+  _uprf_1103 = _sub_SxS_( _isaa_1078_array, _mse_1087__flat_38); 
+  _isaa_1085_new_shape = [ _uprf_1103 ]; 
+  new_shape = _drop_SxV_( _flat_38, _isaa_1079_array); 
+  _flat_44 = _mul_SxV_( _flat_40, new_shape); 
+  _flat_43 = ' '; 
+  res = with {
+        /* Partn */
+        (_flat_44 <= iv < new_shape)
+        { 
+          _isaa_1089_new_idx = _add_VxV_( _isaa_1082_idx, _isaa_1085_new_shape); 
+          new_idx = _cat_VxV_( _isaa_1083_idx, iv); 
+          _ivesplit_1100 = _vect2offset_( _isaa_1079_array, new_idx); 
+          _flat_46 = _idx_sel_( _ivesplit_1100, _isaa_1080_array); 
+        } : _flat_46 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_43 ; 
+         } :
+      genarray( new_shape, _flat_43); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[*] sacprelude_p::sel( int[.] idx { ,NN } , bool[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_1131 { , NN } ; 
+  int _ivesplit_1128 { , NN } ; 
+  int[1] _isaa_1117_new_idx { , NN } ; 
+  int[1] _isaa_1113_new_shape { , NN } ; 
+  int _mse_1115__flat_29 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_1111_idx { dim: _isaa_1109_idx, shape: _isaa_1110_idx, NN } ; 
+  int[1] _isaa_1110_idx { dim: 1, shape: [ _isaa_1109_idx ], NN } ; 
+  int{1} _isaa_1109_idx { dim: 0, shape: [:int], NN } ; 
+  bool[*] _isaa_1108_array { dim: _isaa_1106_array, shape: _isaa_1107_array, NN } ; 
+  int[.] _isaa_1107_array { dim: 1, shape: [ _isaa_1106_array ], NN } ; 
+  int _isaa_1106_array { dim: 0, shape: [:int], NN } ; 
+  bool[*] res { dim: _uprf_1131, shape: new_shape, NN } ; 
+  bool _flat_37 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_1117_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1113_new_shape, NN } ; 
+  bool{0} _flat_34 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_35 { dim: 1, shape: _isaa_1113_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_1113_new_shape, NN } ; 
+  int _flat_29 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_31 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1106_array = _dim_A_( array); 
+  _isaa_1107_array = _shape_A_( array); 
+  _isaa_1108_array = _saabind_( _isaa_1106_array, _isaa_1107_array, array); 
+  _isaa_1109_idx = 1; 
+  _isaa_1110_idx = _shape_A_( idx); 
+  _isaa_1111_idx = _saabind_( _isaa_1109_idx, _isaa_1110_idx, idx); 
+  _flat_31 = 0; 
+  _flat_29 = _idx_sel_( _flat_31, _isaa_1110_idx); 
+  _mse_1115__flat_29 = _abs_S_( _flat_29); 
+  _uprf_1131 = _sub_SxS_( _isaa_1106_array, _mse_1115__flat_29); 
+  _isaa_1113_new_shape = [ _uprf_1131 ]; 
+  new_shape = _drop_SxV_( _flat_29, _isaa_1107_array); 
+  _flat_35 = _mul_SxV_( _flat_31, new_shape); 
+  _flat_34 = false; 
+  res = with {
+        /* Partn */
+        (_flat_35 <= iv < new_shape)
+        { 
+          _isaa_1117_new_idx = _add_VxV_( _isaa_1110_idx, _isaa_1113_new_shape); 
+          new_idx = _cat_VxV_( _isaa_1111_idx, iv); 
+          _ivesplit_1128 = _vect2offset_( _isaa_1107_array, new_idx); 
+          _flat_37 = _idx_sel_( _ivesplit_1128, _isaa_1108_array); 
+        } : _flat_37 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_34 ; 
+         } :
+      genarray( new_shape, _flat_34); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+double[*] sacprelude_p::sel( int[.] idx { ,NN } , double[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_1159 { , NN } ; 
+  int _ivesplit_1156 { , NN } ; 
+  int[1] _isaa_1145_new_idx { , NN } ; 
+  int[1] _isaa_1141_new_shape { , NN } ; 
+  int _mse_1143__flat_20 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_1139_idx { dim: _isaa_1137_idx, shape: _isaa_1138_idx, NN } ; 
+  int[1] _isaa_1138_idx { dim: 1, shape: [ _isaa_1137_idx ], NN } ; 
+  int{1} _isaa_1137_idx { dim: 0, shape: [:int], NN } ; 
+  double[*] _isaa_1136_array { dim: _isaa_1134_array, shape: _isaa_1135_array, NN } ; 
+  int[.] _isaa_1135_array { dim: 1, shape: [ _isaa_1134_array ], NN } ; 
+  int _isaa_1134_array { dim: 0, shape: [:int], NN } ; 
+  double[*] res { dim: _uprf_1159, shape: new_shape, NN } ; 
+  double _flat_28 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_1145_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1141_new_shape, NN } ; 
+  double{0.0...} _flat_25 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_26 { dim: 1, shape: _isaa_1141_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_1141_new_shape, NN } ; 
+  int _flat_20 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_22 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1134_array = _dim_A_( array); 
+  _isaa_1135_array = _shape_A_( array); 
+  _isaa_1136_array = _saabind_( _isaa_1134_array, _isaa_1135_array, array); 
+  _isaa_1137_idx = 1; 
+  _isaa_1138_idx = _shape_A_( idx); 
+  _isaa_1139_idx = _saabind_( _isaa_1137_idx, _isaa_1138_idx, idx); 
+  _flat_22 = 0; 
+  _flat_20 = _idx_sel_( _flat_22, _isaa_1138_idx); 
+  _mse_1143__flat_20 = _abs_S_( _flat_20); 
+  _uprf_1159 = _sub_SxS_( _isaa_1134_array, _mse_1143__flat_20); 
+  _isaa_1141_new_shape = [ _uprf_1159 ]; 
+  new_shape = _drop_SxV_( _flat_20, _isaa_1135_array); 
+  _flat_26 = _mul_SxV_( _flat_22, new_shape); 
+  _flat_25 = 0.0; 
+  res = with {
+        /* Partn */
+        (_flat_26 <= iv < new_shape)
+        { 
+          _isaa_1145_new_idx = _add_VxV_( _isaa_1138_idx, _isaa_1141_new_shape); 
+          new_idx = _cat_VxV_( _isaa_1139_idx, iv); 
+          _ivesplit_1156 = _vect2offset_( _isaa_1135_array, new_idx); 
+          _flat_28 = _idx_sel_( _ivesplit_1156, _isaa_1136_array); 
+        } : _flat_28 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_25 ; 
+         } :
+      genarray( new_shape, _flat_25); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+float[*] sacprelude_p::sel( int[.] idx { ,NN } , float[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_1187 { , NN } ; 
+  int _ivesplit_1184 { , NN } ; 
+  int[1] _isaa_1173_new_idx { , NN } ; 
+  int[1] _isaa_1169_new_shape { , NN } ; 
+  int _mse_1171__flat_11 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_1167_idx { dim: _isaa_1165_idx, shape: _isaa_1166_idx, NN } ; 
+  int[1] _isaa_1166_idx { dim: 1, shape: [ _isaa_1165_idx ], NN } ; 
+  int{1} _isaa_1165_idx { dim: 0, shape: [:int], NN } ; 
+  float[*] _isaa_1164_array { dim: _isaa_1162_array, shape: _isaa_1163_array, NN } ; 
+  int[.] _isaa_1163_array { dim: 1, shape: [ _isaa_1162_array ], NN } ; 
+  int _isaa_1162_array { dim: 0, shape: [:int], NN } ; 
+  float[*] res { dim: _uprf_1187, shape: new_shape, NN } ; 
+  float _flat_19 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_1173_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1169_new_shape, NN } ; 
+  float{0.0...} _flat_16 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_17 { dim: 1, shape: _isaa_1169_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_1169_new_shape, NN } ; 
+  int _flat_11 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_13 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1162_array = _dim_A_( array); 
+  _isaa_1163_array = _shape_A_( array); 
+  _isaa_1164_array = _saabind_( _isaa_1162_array, _isaa_1163_array, array); 
+  _isaa_1165_idx = 1; 
+  _isaa_1166_idx = _shape_A_( idx); 
+  _isaa_1167_idx = _saabind_( _isaa_1165_idx, _isaa_1166_idx, idx); 
+  _flat_13 = 0; 
+  _flat_11 = _idx_sel_( _flat_13, _isaa_1166_idx); 
+  _mse_1171__flat_11 = _abs_S_( _flat_11); 
+  _uprf_1187 = _sub_SxS_( _isaa_1162_array, _mse_1171__flat_11); 
+  _isaa_1169_new_shape = [ _uprf_1187 ]; 
+  new_shape = _drop_SxV_( _flat_11, _isaa_1163_array); 
+  _flat_17 = _mul_SxV_( _flat_13, new_shape); 
+  _flat_16 = 0.0f; 
+  res = with {
+        /* Partn */
+        (_flat_17 <= iv < new_shape)
+        { 
+          _isaa_1173_new_idx = _add_VxV_( _isaa_1166_idx, _isaa_1169_new_shape); 
+          new_idx = _cat_VxV_( _isaa_1167_idx, iv); 
+          _ivesplit_1184 = _vect2offset_( _isaa_1163_array, new_idx); 
+          _flat_19 = _idx_sel_( _ivesplit_1184, _isaa_1164_array); 
+        } : _flat_19 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_16 ; 
+         } :
+      genarray( new_shape, _flat_16); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::sel(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[*] sacprelude_p::sel( int[.] idx { ,NN } , int[*] array { ,NN } )
+/*
+ *  sel ::  ---
+ */
+{ 
+  int _uprf_1215 { , NN } ; 
+  int _ivesplit_1212 { , NN } ; 
+  int[1] _isaa_1201_new_idx { , NN } ; 
+  int[1] _isaa_1197_new_shape { , NN } ; 
+  int _mse_1199__flat_2 { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_1195_idx { dim: _isaa_1193_idx, shape: _isaa_1194_idx, NN } ; 
+  int[1] _isaa_1194_idx { dim: 1, shape: [ _isaa_1193_idx ], NN } ; 
+  int{1} _isaa_1193_idx { dim: 0, shape: [:int], NN } ; 
+  int[*] _isaa_1192_array { dim: _isaa_1190_array, shape: _isaa_1191_array, NN } ; 
+  int[.] _isaa_1191_array { dim: 1, shape: [ _isaa_1190_array ], NN } ; 
+  int _isaa_1190_array { dim: 0, shape: [:int], NN } ; 
+  int[*] res { dim: _uprf_1215, shape: new_shape, NN } ; 
+  int _flat_10 { dim: 0, shape: [:int], NN } ; 
+  int[.] new_idx { dim: 1, shape: _isaa_1201_new_idx, NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1197_new_shape, NN } ; 
+  int[.] _flat_8 { dim: 1, shape: _isaa_1197_new_shape, NN } ; 
+  int[.] new_shape { dim: 1, shape: _isaa_1197_new_shape, NN } ; 
+  int _flat_2 { dim: 0, shape: [:int], NN } ; 
+  int{0} _flat_4 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1190_array = _dim_A_( array); 
+  _isaa_1191_array = _shape_A_( array); 
+  _isaa_1192_array = _saabind_( _isaa_1190_array, _isaa_1191_array, array); 
+  _isaa_1193_idx = 1; 
+  _isaa_1194_idx = _shape_A_( idx); 
+  _isaa_1195_idx = _saabind_( _isaa_1193_idx, _isaa_1194_idx, idx); 
+  _flat_4 = 0; 
+  _flat_2 = _idx_sel_( _flat_4, _isaa_1194_idx); 
+  _mse_1199__flat_2 = _abs_S_( _flat_2); 
+  _uprf_1215 = _sub_SxS_( _isaa_1190_array, _mse_1199__flat_2); 
+  _isaa_1197_new_shape = [ _uprf_1215 ]; 
+  new_shape = _drop_SxV_( _flat_2, _isaa_1191_array); 
+  _flat_8 = _mul_SxV_( _flat_4, new_shape); 
+  res = with {
+        /* Partn */
+        (_flat_8 <= iv < new_shape)
+        { 
+          _isaa_1201_new_idx = _add_VxV_( _isaa_1194_idx, _isaa_1197_new_shape); 
+          new_idx = _cat_VxV_( _isaa_1195_idx, iv); 
+          _ivesplit_1212 = _vect2offset_( _isaa_1191_array, new_idx); 
+          _flat_10 = _idx_sel_( _ivesplit_1212, _isaa_1192_array); 
+        } : _flat_10 ; 
+        /* Partn */
+        default partition( iv ):
+        { 
+        } : _flat_4 ; 
+         } :
+      genarray( new_shape, _flat_4); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulonglong{0} sacprelude_p::zero( ulonglong[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  ulonglong{0} _flat_295 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_295 = 0ULL; 
+  return( _flat_295); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ulong{0} sacprelude_p::zero( ulong[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  ulong{0} _flat_294 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_294 = 0ul; 
+  return( _flat_294); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+uint{0} sacprelude_p::zero( uint[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  uint{0} _flat_293 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_293 = 0ui; 
+  return( _flat_293); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ushort{0} sacprelude_p::zero( ushort[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  ushort{0} _flat_292 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_292 = 0us; 
+  return( _flat_292); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+ubyte{} sacprelude_p::zero( ubyte[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  ubyte{} _flat_291 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_291 = 0ub; 
+  return( _flat_291); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+longlong{0} sacprelude_p::zero( longlong[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  longlong{0} _flat_290 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_290 = 0LL; 
+  return( _flat_290); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+long{0} sacprelude_p::zero( long[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  long{0} _flat_289 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_289 = 0l; 
+  return( _flat_289); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+short{0} sacprelude_p::zero( short[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  short{0} _flat_288 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_288 = 0s; 
+  return( _flat_288); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+byte{} sacprelude_p::zero( byte[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  byte{} _flat_287 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_287 = 0b; 
+  return( _flat_287); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool{0} sacprelude_p::zero( bool[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  bool{0} _flat_286 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_286 = false; 
+  return( _flat_286); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+char{ } sacprelude_p::zero( char[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  char{ } _flat_285 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_285 = ' '; 
+  return( _flat_285); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+float{0.0...} sacprelude_p::zero( float[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  float{0.0...} _flat_284 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_284 = 0.0f; 
+  return( _flat_284); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+double{0.0...} sacprelude_p::zero( double[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  double{0.0...} _flat_283 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_283 = 0.0; 
+  return( _flat_283); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::zero(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int{0} sacprelude_p::zero( int[*] A { ,NN } )
+/*
+ *  zero ::  ---
+ */
+{ 
+  int{0} _flat_282 { dim: 0, shape: [:int], NN } ; 
+
+  _flat_282 = 0; 
+  return( _flat_282); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( ulonglong[*] A { ,NN } , ulonglong[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1269 { , NN } ; 
+  int _ivesplit_1268 { , NN } ; 
+  int[1] _isaa_1266__flat_407 { , NN } ; 
+  ulonglong[*] _isaa_1265_A { dim: _isaa_1263_A, shape: _isaa_1264_A, NN } ; 
+  int[.] _isaa_1264_A { dim: 1, shape: [ _isaa_1263_A ], NN } ; 
+  int _isaa_1263_A { dim: 0, shape: [:int], NN } ; 
+  ulonglong[*] _isaa_1262_B { dim: _isaa_1260_B, shape: _isaa_1261_B, NN } ; 
+  int[.] _isaa_1261_B { dim: 1, shape: [ _isaa_1260_B ], NN } ; 
+  int _isaa_1260_B { dim: 0, shape: [:int], NN } ; 
+  ulonglong _ctz_608 { dim: 0, shape: [:int], NN } ; 
+  ulonglong{0} _ctz_609 { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_562__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_437_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_408 { dim: 0, shape: [:int], NN } ; 
+  ulonglong _flat_409 { dim: 0, shape: [:int], NN } ; 
+  ulonglong _flat_410 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1266__flat_407, NN } ; 
+  bool{1} _flat_403 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_404 { dim: 1, shape: _isaa_1266__flat_407, NN } ; 
+  int{0} _flat_405 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1260_B = _dim_A_( B); 
+  _isaa_1261_B = _shape_A_( B); 
+  _isaa_1262_B = _saabind_( _isaa_1260_B, _isaa_1261_B, B); 
+  _isaa_1263_A = _dim_A_( A); 
+  _isaa_1264_A = _shape_A_( A); 
+  _isaa_1265_A = _saabind_( _isaa_1263_A, _isaa_1264_A, A); 
+  _isaa_1266__flat_407 = [ _isaa_1263_A ]; 
+  _flat_405 = 0; 
+  _flat_404 = _mul_SxV_( _flat_405, _isaa_1264_A); 
+  _flat_403 = true; 
+  _ctz_609 = 0ULL; 
+  res = with {
+        /* Partn */
+        (_flat_404 <= iv < _isaa_1264_A)
+        { 
+          _ea_437_res = _accu_( iv); 
+          _ivesplit_1268 = _vect2offset_( _isaa_1261_B, iv); 
+          _flat_410 = _idx_sel_( _ivesplit_1268, _isaa_1262_B); 
+          _ivesplit_1269 = _vect2offset_( _isaa_1264_A, iv); 
+          _flat_409 = _idx_sel_( _ivesplit_1269, _isaa_1265_A); 
+          _ctz_608 = _sub_SxS_( _flat_409, _flat_410); 
+          _flat_408 = _eq_SxS_( _ctz_608, _ctz_609); 
+          _pinl_562__flat_298 = _and_SxS_( _ea_437_res, _flat_408); 
+        } : _pinl_562__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_403); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( ulong[*] A { ,NN } , ulong[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1279 { , NN } ; 
+  int _ivesplit_1278 { , NN } ; 
+  int[1] _isaa_1276__flat_399 { , NN } ; 
+  ulong[*] _isaa_1275_A { dim: _isaa_1273_A, shape: _isaa_1274_A, NN } ; 
+  int[.] _isaa_1274_A { dim: 1, shape: [ _isaa_1273_A ], NN } ; 
+  int _isaa_1273_A { dim: 0, shape: [:int], NN } ; 
+  ulong[*] _isaa_1272_B { dim: _isaa_1270_B, shape: _isaa_1271_B, NN } ; 
+  int[.] _isaa_1271_B { dim: 1, shape: [ _isaa_1270_B ], NN } ; 
+  int _isaa_1270_B { dim: 0, shape: [:int], NN } ; 
+  ulong _ctz_611 { dim: 0, shape: [:int], NN } ; 
+  ulong{0} _ctz_612 { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_563__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_439_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_400 { dim: 0, shape: [:int], NN } ; 
+  ulong _flat_401 { dim: 0, shape: [:int], NN } ; 
+  ulong _flat_402 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1276__flat_399, NN } ; 
+  bool{1} _flat_395 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_396 { dim: 1, shape: _isaa_1276__flat_399, NN } ; 
+  int{0} _flat_397 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1270_B = _dim_A_( B); 
+  _isaa_1271_B = _shape_A_( B); 
+  _isaa_1272_B = _saabind_( _isaa_1270_B, _isaa_1271_B, B); 
+  _isaa_1273_A = _dim_A_( A); 
+  _isaa_1274_A = _shape_A_( A); 
+  _isaa_1275_A = _saabind_( _isaa_1273_A, _isaa_1274_A, A); 
+  _isaa_1276__flat_399 = [ _isaa_1273_A ]; 
+  _flat_397 = 0; 
+  _flat_396 = _mul_SxV_( _flat_397, _isaa_1274_A); 
+  _flat_395 = true; 
+  _ctz_612 = 0ul; 
+  res = with {
+        /* Partn */
+        (_flat_396 <= iv < _isaa_1274_A)
+        { 
+          _ea_439_res = _accu_( iv); 
+          _ivesplit_1278 = _vect2offset_( _isaa_1271_B, iv); 
+          _flat_402 = _idx_sel_( _ivesplit_1278, _isaa_1272_B); 
+          _ivesplit_1279 = _vect2offset_( _isaa_1274_A, iv); 
+          _flat_401 = _idx_sel_( _ivesplit_1279, _isaa_1275_A); 
+          _ctz_611 = _sub_SxS_( _flat_401, _flat_402); 
+          _flat_400 = _eq_SxS_( _ctz_611, _ctz_612); 
+          _pinl_563__flat_298 = _and_SxS_( _ea_439_res, _flat_400); 
+        } : _pinl_563__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_395); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( uint[*] A { ,NN } , uint[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1289 { , NN } ; 
+  int _ivesplit_1288 { , NN } ; 
+  int[1] _isaa_1286__flat_391 { , NN } ; 
+  uint[*] _isaa_1285_A { dim: _isaa_1283_A, shape: _isaa_1284_A, NN } ; 
+  int[.] _isaa_1284_A { dim: 1, shape: [ _isaa_1283_A ], NN } ; 
+  int _isaa_1283_A { dim: 0, shape: [:int], NN } ; 
+  uint[*] _isaa_1282_B { dim: _isaa_1280_B, shape: _isaa_1281_B, NN } ; 
+  int[.] _isaa_1281_B { dim: 1, shape: [ _isaa_1280_B ], NN } ; 
+  int _isaa_1280_B { dim: 0, shape: [:int], NN } ; 
+  uint _ctz_614 { dim: 0, shape: [:int], NN } ; 
+  uint{0} _ctz_615 { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_564__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_441_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_392 { dim: 0, shape: [:int], NN } ; 
+  uint _flat_393 { dim: 0, shape: [:int], NN } ; 
+  uint _flat_394 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1286__flat_391, NN } ; 
+  bool{1} _flat_387 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_388 { dim: 1, shape: _isaa_1286__flat_391, NN } ; 
+  int{0} _flat_389 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1280_B = _dim_A_( B); 
+  _isaa_1281_B = _shape_A_( B); 
+  _isaa_1282_B = _saabind_( _isaa_1280_B, _isaa_1281_B, B); 
+  _isaa_1283_A = _dim_A_( A); 
+  _isaa_1284_A = _shape_A_( A); 
+  _isaa_1285_A = _saabind_( _isaa_1283_A, _isaa_1284_A, A); 
+  _isaa_1286__flat_391 = [ _isaa_1283_A ]; 
+  _flat_389 = 0; 
+  _flat_388 = _mul_SxV_( _flat_389, _isaa_1284_A); 
+  _flat_387 = true; 
+  _ctz_615 = 0ui; 
+  res = with {
+        /* Partn */
+        (_flat_388 <= iv < _isaa_1284_A)
+        { 
+          _ea_441_res = _accu_( iv); 
+          _ivesplit_1288 = _vect2offset_( _isaa_1281_B, iv); 
+          _flat_394 = _idx_sel_( _ivesplit_1288, _isaa_1282_B); 
+          _ivesplit_1289 = _vect2offset_( _isaa_1284_A, iv); 
+          _flat_393 = _idx_sel_( _ivesplit_1289, _isaa_1285_A); 
+          _ctz_614 = _sub_SxS_( _flat_393, _flat_394); 
+          _flat_392 = _eq_SxS_( _ctz_614, _ctz_615); 
+          _pinl_564__flat_298 = _and_SxS_( _ea_441_res, _flat_392); 
+        } : _pinl_564__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_387); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( ushort[*] A { ,NN } , ushort[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1299 { , NN } ; 
+  int _ivesplit_1298 { , NN } ; 
+  int[1] _isaa_1296__flat_383 { , NN } ; 
+  ushort[*] _isaa_1295_A { dim: _isaa_1293_A, shape: _isaa_1294_A, NN } ; 
+  int[.] _isaa_1294_A { dim: 1, shape: [ _isaa_1293_A ], NN } ; 
+  int _isaa_1293_A { dim: 0, shape: [:int], NN } ; 
+  ushort[*] _isaa_1292_B { dim: _isaa_1290_B, shape: _isaa_1291_B, NN } ; 
+  int[.] _isaa_1291_B { dim: 1, shape: [ _isaa_1290_B ], NN } ; 
+  int _isaa_1290_B { dim: 0, shape: [:int], NN } ; 
+  ushort _ctz_617 { dim: 0, shape: [:int], NN } ; 
+  ushort{0} _ctz_618 { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_565__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_443_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_384 { dim: 0, shape: [:int], NN } ; 
+  ushort _flat_385 { dim: 0, shape: [:int], NN } ; 
+  ushort _flat_386 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1296__flat_383, NN } ; 
+  bool{1} _flat_379 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_380 { dim: 1, shape: _isaa_1296__flat_383, NN } ; 
+  int{0} _flat_381 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1290_B = _dim_A_( B); 
+  _isaa_1291_B = _shape_A_( B); 
+  _isaa_1292_B = _saabind_( _isaa_1290_B, _isaa_1291_B, B); 
+  _isaa_1293_A = _dim_A_( A); 
+  _isaa_1294_A = _shape_A_( A); 
+  _isaa_1295_A = _saabind_( _isaa_1293_A, _isaa_1294_A, A); 
+  _isaa_1296__flat_383 = [ _isaa_1293_A ]; 
+  _flat_381 = 0; 
+  _flat_380 = _mul_SxV_( _flat_381, _isaa_1294_A); 
+  _flat_379 = true; 
+  _ctz_618 = 0us; 
+  res = with {
+        /* Partn */
+        (_flat_380 <= iv < _isaa_1294_A)
+        { 
+          _ea_443_res = _accu_( iv); 
+          _ivesplit_1298 = _vect2offset_( _isaa_1291_B, iv); 
+          _flat_386 = _idx_sel_( _ivesplit_1298, _isaa_1292_B); 
+          _ivesplit_1299 = _vect2offset_( _isaa_1294_A, iv); 
+          _flat_385 = _idx_sel_( _ivesplit_1299, _isaa_1295_A); 
+          _ctz_617 = _sub_SxS_( _flat_385, _flat_386); 
+          _flat_384 = _eq_SxS_( _ctz_617, _ctz_618); 
+          _pinl_565__flat_298 = _and_SxS_( _ea_443_res, _flat_384); 
+        } : _pinl_565__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_379); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( ubyte[*] A { ,NN } , ubyte[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1309 { , NN } ; 
+  int _ivesplit_1308 { , NN } ; 
+  int[1] _isaa_1306__flat_375 { , NN } ; 
+  ubyte[*] _isaa_1305_A { dim: _isaa_1303_A, shape: _isaa_1304_A, NN } ; 
+  int[.] _isaa_1304_A { dim: 1, shape: [ _isaa_1303_A ], NN } ; 
+  int _isaa_1303_A { dim: 0, shape: [:int], NN } ; 
+  ubyte[*] _isaa_1302_B { dim: _isaa_1300_B, shape: _isaa_1301_B, NN } ; 
+  int[.] _isaa_1301_B { dim: 1, shape: [ _isaa_1300_B ], NN } ; 
+  int _isaa_1300_B { dim: 0, shape: [:int], NN } ; 
+  ubyte _ctz_620 { dim: 0, shape: [:int], NN } ; 
+  ubyte{} _ctz_621 { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_566__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_445_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_376 { dim: 0, shape: [:int], NN } ; 
+  ubyte _flat_377 { dim: 0, shape: [:int], NN } ; 
+  ubyte _flat_378 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1306__flat_375, NN } ; 
+  bool{1} _flat_371 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_372 { dim: 1, shape: _isaa_1306__flat_375, NN } ; 
+  int{0} _flat_373 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1300_B = _dim_A_( B); 
+  _isaa_1301_B = _shape_A_( B); 
+  _isaa_1302_B = _saabind_( _isaa_1300_B, _isaa_1301_B, B); 
+  _isaa_1303_A = _dim_A_( A); 
+  _isaa_1304_A = _shape_A_( A); 
+  _isaa_1305_A = _saabind_( _isaa_1303_A, _isaa_1304_A, A); 
+  _isaa_1306__flat_375 = [ _isaa_1303_A ]; 
+  _flat_373 = 0; 
+  _flat_372 = _mul_SxV_( _flat_373, _isaa_1304_A); 
+  _flat_371 = true; 
+  _ctz_621 = 0ub; 
+  res = with {
+        /* Partn */
+        (_flat_372 <= iv < _isaa_1304_A)
+        { 
+          _ea_445_res = _accu_( iv); 
+          _ivesplit_1308 = _vect2offset_( _isaa_1301_B, iv); 
+          _flat_378 = _idx_sel_( _ivesplit_1308, _isaa_1302_B); 
+          _ivesplit_1309 = _vect2offset_( _isaa_1304_A, iv); 
+          _flat_377 = _idx_sel_( _ivesplit_1309, _isaa_1305_A); 
+          _ctz_620 = _sub_SxS_( _flat_377, _flat_378); 
+          _flat_376 = _eq_SxS_( _ctz_620, _ctz_621); 
+          _pinl_566__flat_298 = _and_SxS_( _ea_445_res, _flat_376); 
+        } : _pinl_566__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_371); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( longlong[*] A { ,NN } , longlong[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1319 { , NN } ; 
+  int _ivesplit_1318 { , NN } ; 
+  int[1] _isaa_1316__flat_367 { , NN } ; 
+  longlong[*] _isaa_1315_A { dim: _isaa_1313_A, shape: _isaa_1314_A, NN } ; 
+  int[.] _isaa_1314_A { dim: 1, shape: [ _isaa_1313_A ], NN } ; 
+  int _isaa_1313_A { dim: 0, shape: [:int], NN } ; 
+  longlong[*] _isaa_1312_B { dim: _isaa_1310_B, shape: _isaa_1311_B, NN } ; 
+  int[.] _isaa_1311_B { dim: 1, shape: [ _isaa_1310_B ], NN } ; 
+  int _isaa_1310_B { dim: 0, shape: [:int], NN } ; 
+  longlong _ctz_623 { dim: 0, shape: [:int], NN } ; 
+  longlong{0} _ctz_624 { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_567__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_447_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_368 { dim: 0, shape: [:int], NN } ; 
+  longlong _flat_369 { dim: 0, shape: [:int], NN } ; 
+  longlong _flat_370 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1316__flat_367, NN } ; 
+  bool{1} _flat_363 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_364 { dim: 1, shape: _isaa_1316__flat_367, NN } ; 
+  int{0} _flat_365 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1310_B = _dim_A_( B); 
+  _isaa_1311_B = _shape_A_( B); 
+  _isaa_1312_B = _saabind_( _isaa_1310_B, _isaa_1311_B, B); 
+  _isaa_1313_A = _dim_A_( A); 
+  _isaa_1314_A = _shape_A_( A); 
+  _isaa_1315_A = _saabind_( _isaa_1313_A, _isaa_1314_A, A); 
+  _isaa_1316__flat_367 = [ _isaa_1313_A ]; 
+  _flat_365 = 0; 
+  _flat_364 = _mul_SxV_( _flat_365, _isaa_1314_A); 
+  _flat_363 = true; 
+  _ctz_624 = 0LL; 
+  res = with {
+        /* Partn */
+        (_flat_364 <= iv < _isaa_1314_A)
+        { 
+          _ea_447_res = _accu_( iv); 
+          _ivesplit_1318 = _vect2offset_( _isaa_1311_B, iv); 
+          _flat_370 = _idx_sel_( _ivesplit_1318, _isaa_1312_B); 
+          _ivesplit_1319 = _vect2offset_( _isaa_1314_A, iv); 
+          _flat_369 = _idx_sel_( _ivesplit_1319, _isaa_1315_A); 
+          _ctz_623 = _sub_SxS_( _flat_369, _flat_370); 
+          _flat_368 = _eq_SxS_( _ctz_623, _ctz_624); 
+          _pinl_567__flat_298 = _and_SxS_( _ea_447_res, _flat_368); 
+        } : _pinl_567__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_363); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( long[*] A { ,NN } , long[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1329 { , NN } ; 
+  int _ivesplit_1328 { , NN } ; 
+  int[1] _isaa_1326__flat_359 { , NN } ; 
+  long[*] _isaa_1325_A { dim: _isaa_1323_A, shape: _isaa_1324_A, NN } ; 
+  int[.] _isaa_1324_A { dim: 1, shape: [ _isaa_1323_A ], NN } ; 
+  int _isaa_1323_A { dim: 0, shape: [:int], NN } ; 
+  long[*] _isaa_1322_B { dim: _isaa_1320_B, shape: _isaa_1321_B, NN } ; 
+  int[.] _isaa_1321_B { dim: 1, shape: [ _isaa_1320_B ], NN } ; 
+  int _isaa_1320_B { dim: 0, shape: [:int], NN } ; 
+  long _ctz_627 { dim: 0, shape: [:int], NN } ; 
+  long{0} _ctz_628 { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_568__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_449_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_360 { dim: 0, shape: [:int], NN } ; 
+  long _flat_361 { dim: 0, shape: [:int], NN } ; 
+  long _flat_362 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1326__flat_359, NN } ; 
+  bool{1} _flat_355 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_356 { dim: 1, shape: _isaa_1326__flat_359, NN } ; 
+  int{0} _flat_357 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1320_B = _dim_A_( B); 
+  _isaa_1321_B = _shape_A_( B); 
+  _isaa_1322_B = _saabind_( _isaa_1320_B, _isaa_1321_B, B); 
+  _isaa_1323_A = _dim_A_( A); 
+  _isaa_1324_A = _shape_A_( A); 
+  _isaa_1325_A = _saabind_( _isaa_1323_A, _isaa_1324_A, A); 
+  _isaa_1326__flat_359 = [ _isaa_1323_A ]; 
+  _flat_357 = 0; 
+  _flat_356 = _mul_SxV_( _flat_357, _isaa_1324_A); 
+  _flat_355 = true; 
+  _ctz_628 = 0l; 
+  res = with {
+        /* Partn */
+        (_flat_356 <= iv < _isaa_1324_A)
+        { 
+          _ea_449_res = _accu_( iv); 
+          _ivesplit_1328 = _vect2offset_( _isaa_1321_B, iv); 
+          _flat_362 = _idx_sel_( _ivesplit_1328, _isaa_1322_B); 
+          _ivesplit_1329 = _vect2offset_( _isaa_1324_A, iv); 
+          _flat_361 = _idx_sel_( _ivesplit_1329, _isaa_1325_A); 
+          _ctz_627 = _sub_SxS_( _flat_361, _flat_362); 
+          _flat_360 = _eq_SxS_( _ctz_627, _ctz_628); 
+          _pinl_568__flat_298 = _and_SxS_( _ea_449_res, _flat_360); 
+        } : _pinl_568__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_355); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( short[*] A { ,NN } , short[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1339 { , NN } ; 
+  int _ivesplit_1338 { , NN } ; 
+  int[1] _isaa_1336__flat_351 { , NN } ; 
+  short[*] _isaa_1335_A { dim: _isaa_1333_A, shape: _isaa_1334_A, NN } ; 
+  int[.] _isaa_1334_A { dim: 1, shape: [ _isaa_1333_A ], NN } ; 
+  int _isaa_1333_A { dim: 0, shape: [:int], NN } ; 
+  short[*] _isaa_1332_B { dim: _isaa_1330_B, shape: _isaa_1331_B, NN } ; 
+  int[.] _isaa_1331_B { dim: 1, shape: [ _isaa_1330_B ], NN } ; 
+  int _isaa_1330_B { dim: 0, shape: [:int], NN } ; 
+  short _ctz_631 { dim: 0, shape: [:int], NN } ; 
+  short{0} _ctz_632 { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_569__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_451_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_352 { dim: 0, shape: [:int], NN } ; 
+  short _flat_353 { dim: 0, shape: [:int], NN } ; 
+  short _flat_354 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1336__flat_351, NN } ; 
+  bool{1} _flat_347 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_348 { dim: 1, shape: _isaa_1336__flat_351, NN } ; 
+  int{0} _flat_349 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1330_B = _dim_A_( B); 
+  _isaa_1331_B = _shape_A_( B); 
+  _isaa_1332_B = _saabind_( _isaa_1330_B, _isaa_1331_B, B); 
+  _isaa_1333_A = _dim_A_( A); 
+  _isaa_1334_A = _shape_A_( A); 
+  _isaa_1335_A = _saabind_( _isaa_1333_A, _isaa_1334_A, A); 
+  _isaa_1336__flat_351 = [ _isaa_1333_A ]; 
+  _flat_349 = 0; 
+  _flat_348 = _mul_SxV_( _flat_349, _isaa_1334_A); 
+  _flat_347 = true; 
+  _ctz_632 = 0s; 
+  res = with {
+        /* Partn */
+        (_flat_348 <= iv < _isaa_1334_A)
+        { 
+          _ea_451_res = _accu_( iv); 
+          _ivesplit_1338 = _vect2offset_( _isaa_1331_B, iv); 
+          _flat_354 = _idx_sel_( _ivesplit_1338, _isaa_1332_B); 
+          _ivesplit_1339 = _vect2offset_( _isaa_1334_A, iv); 
+          _flat_353 = _idx_sel_( _ivesplit_1339, _isaa_1335_A); 
+          _ctz_631 = _sub_SxS_( _flat_353, _flat_354); 
+          _flat_352 = _eq_SxS_( _ctz_631, _ctz_632); 
+          _pinl_569__flat_298 = _and_SxS_( _ea_451_res, _flat_352); 
+        } : _pinl_569__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_347); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( byte[*] A { ,NN } , byte[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1349 { , NN } ; 
+  int _ivesplit_1348 { , NN } ; 
+  int[1] _isaa_1346__flat_343 { , NN } ; 
+  byte[*] _isaa_1345_A { dim: _isaa_1343_A, shape: _isaa_1344_A, NN } ; 
+  int[.] _isaa_1344_A { dim: 1, shape: [ _isaa_1343_A ], NN } ; 
+  int _isaa_1343_A { dim: 0, shape: [:int], NN } ; 
+  byte[*] _isaa_1342_B { dim: _isaa_1340_B, shape: _isaa_1341_B, NN } ; 
+  int[.] _isaa_1341_B { dim: 1, shape: [ _isaa_1340_B ], NN } ; 
+  int _isaa_1340_B { dim: 0, shape: [:int], NN } ; 
+  byte _ctz_635 { dim: 0, shape: [:int], NN } ; 
+  byte{} _ctz_636 { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_570__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_453_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_344 { dim: 0, shape: [:int], NN } ; 
+  byte _flat_345 { dim: 0, shape: [:int], NN } ; 
+  byte _flat_346 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1346__flat_343, NN } ; 
+  bool{1} _flat_339 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_340 { dim: 1, shape: _isaa_1346__flat_343, NN } ; 
+  int{0} _flat_341 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1340_B = _dim_A_( B); 
+  _isaa_1341_B = _shape_A_( B); 
+  _isaa_1342_B = _saabind_( _isaa_1340_B, _isaa_1341_B, B); 
+  _isaa_1343_A = _dim_A_( A); 
+  _isaa_1344_A = _shape_A_( A); 
+  _isaa_1345_A = _saabind_( _isaa_1343_A, _isaa_1344_A, A); 
+  _isaa_1346__flat_343 = [ _isaa_1343_A ]; 
+  _flat_341 = 0; 
+  _flat_340 = _mul_SxV_( _flat_341, _isaa_1344_A); 
+  _flat_339 = true; 
+  _ctz_636 = 0b; 
+  res = with {
+        /* Partn */
+        (_flat_340 <= iv < _isaa_1344_A)
+        { 
+          _ea_453_res = _accu_( iv); 
+          _ivesplit_1348 = _vect2offset_( _isaa_1341_B, iv); 
+          _flat_346 = _idx_sel_( _ivesplit_1348, _isaa_1342_B); 
+          _ivesplit_1349 = _vect2offset_( _isaa_1344_A, iv); 
+          _flat_345 = _idx_sel_( _ivesplit_1349, _isaa_1345_A); 
+          _ctz_635 = _sub_SxS_( _flat_345, _flat_346); 
+          _flat_344 = _eq_SxS_( _ctz_635, _ctz_636); 
+          _pinl_570__flat_298 = _and_SxS_( _ea_453_res, _flat_344); 
+        } : _pinl_570__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_339); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( char[*] A { ,NN } , char[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1359 { , NN } ; 
+  int _ivesplit_1358 { , NN } ; 
+  int[1] _isaa_1356__flat_335 { , NN } ; 
+  char[*] _isaa_1355_A { dim: _isaa_1353_A, shape: _isaa_1354_A, NN } ; 
+  int[.] _isaa_1354_A { dim: 1, shape: [ _isaa_1353_A ], NN } ; 
+  int _isaa_1353_A { dim: 0, shape: [:int], NN } ; 
+  char[*] _isaa_1352_B { dim: _isaa_1350_B, shape: _isaa_1351_B, NN } ; 
+  int[.] _isaa_1351_B { dim: 1, shape: [ _isaa_1350_B ], NN } ; 
+  int _isaa_1350_B { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_571__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_455_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_336 { dim: 0, shape: [:int], NN } ; 
+  char _flat_337 { dim: 0, shape: [:int], NN } ; 
+  char _flat_338 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1356__flat_335, NN } ; 
+  bool{1} _flat_331 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_332 { dim: 1, shape: _isaa_1356__flat_335, NN } ; 
+  int{0} _flat_333 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1350_B = _dim_A_( B); 
+  _isaa_1351_B = _shape_A_( B); 
+  _isaa_1352_B = _saabind_( _isaa_1350_B, _isaa_1351_B, B); 
+  _isaa_1353_A = _dim_A_( A); 
+  _isaa_1354_A = _shape_A_( A); 
+  _isaa_1355_A = _saabind_( _isaa_1353_A, _isaa_1354_A, A); 
+  _isaa_1356__flat_335 = [ _isaa_1353_A ]; 
+  _flat_333 = 0; 
+  _flat_332 = _mul_SxV_( _flat_333, _isaa_1354_A); 
+  _flat_331 = true; 
+  res = with {
+        /* Partn */
+        (_flat_332 <= iv < _isaa_1354_A)
+        { 
+          _ea_455_res = _accu_( iv); 
+          _ivesplit_1358 = _vect2offset_( _isaa_1351_B, iv); 
+          _flat_338 = _idx_sel_( _ivesplit_1358, _isaa_1352_B); 
+          _ivesplit_1359 = _vect2offset_( _isaa_1354_A, iv); 
+          _flat_337 = _idx_sel_( _ivesplit_1359, _isaa_1355_A); 
+          _flat_336 = _eq_SxS_( _flat_337, _flat_338); 
+          _pinl_571__flat_298 = _and_SxS_( _ea_455_res, _flat_336); 
+        } : _pinl_571__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_331); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( bool[*] A { ,NN } , bool[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1369 { , NN } ; 
+  int _ivesplit_1368 { , NN } ; 
+  int[1] _isaa_1366__flat_327 { , NN } ; 
+  bool[*] _isaa_1365_A { dim: _isaa_1363_A, shape: _isaa_1364_A, NN } ; 
+  int[.] _isaa_1364_A { dim: 1, shape: [ _isaa_1363_A ], NN } ; 
+  int _isaa_1363_A { dim: 0, shape: [:int], NN } ; 
+  bool[*] _isaa_1362_B { dim: _isaa_1360_B, shape: _isaa_1361_B, NN } ; 
+  int[.] _isaa_1361_B { dim: 1, shape: [ _isaa_1360_B ], NN } ; 
+  int _isaa_1360_B { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_572__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_457_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_328 { dim: 0, shape: [:int], NN } ; 
+  bool _flat_329 { dim: 0, shape: [:int], NN } ; 
+  bool _flat_330 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1366__flat_327, NN } ; 
+  bool{1} _flat_323 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_324 { dim: 1, shape: _isaa_1366__flat_327, NN } ; 
+  int{0} _flat_325 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1360_B = _dim_A_( B); 
+  _isaa_1361_B = _shape_A_( B); 
+  _isaa_1362_B = _saabind_( _isaa_1360_B, _isaa_1361_B, B); 
+  _isaa_1363_A = _dim_A_( A); 
+  _isaa_1364_A = _shape_A_( A); 
+  _isaa_1365_A = _saabind_( _isaa_1363_A, _isaa_1364_A, A); 
+  _isaa_1366__flat_327 = [ _isaa_1363_A ]; 
+  _flat_325 = 0; 
+  _flat_324 = _mul_SxV_( _flat_325, _isaa_1364_A); 
+  _flat_323 = true; 
+  res = with {
+        /* Partn */
+        (_flat_324 <= iv < _isaa_1364_A)
+        { 
+          _ea_457_res = _accu_( iv); 
+          _ivesplit_1368 = _vect2offset_( _isaa_1361_B, iv); 
+          _flat_330 = _idx_sel_( _ivesplit_1368, _isaa_1362_B); 
+          _ivesplit_1369 = _vect2offset_( _isaa_1364_A, iv); 
+          _flat_329 = _idx_sel_( _ivesplit_1369, _isaa_1365_A); 
+          _flat_328 = _eq_SxS_( _flat_329, _flat_330); 
+          _pinl_572__flat_298 = _and_SxS_( _ea_457_res, _flat_328); 
+        } : _pinl_572__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_323); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( double[*] A { ,NN } , double[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1379 { , NN } ; 
+  int _ivesplit_1378 { , NN } ; 
+  int[1] _isaa_1376__flat_319 { , NN } ; 
+  double[*] _isaa_1375_A { dim: _isaa_1373_A, shape: _isaa_1374_A, NN } ; 
+  int[.] _isaa_1374_A { dim: 1, shape: [ _isaa_1373_A ], NN } ; 
+  int _isaa_1373_A { dim: 0, shape: [:int], NN } ; 
+  double[*] _isaa_1372_B { dim: _isaa_1370_B, shape: _isaa_1371_B, NN } ; 
+  int[.] _isaa_1371_B { dim: 1, shape: [ _isaa_1370_B ], NN } ; 
+  int _isaa_1370_B { dim: 0, shape: [:int], NN } ; 
+  double _ctz_639 { dim: 0, shape: [:int], NN } ; 
+  double{0.0...} _ctz_640 { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_573__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_459_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_320 { dim: 0, shape: [:int], NN } ; 
+  double _flat_321 { dim: 0, shape: [:int], NN } ; 
+  double _flat_322 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1376__flat_319, NN } ; 
+  bool{1} _flat_315 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_316 { dim: 1, shape: _isaa_1376__flat_319, NN } ; 
+  int{0} _flat_317 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1370_B = _dim_A_( B); 
+  _isaa_1371_B = _shape_A_( B); 
+  _isaa_1372_B = _saabind_( _isaa_1370_B, _isaa_1371_B, B); 
+  _isaa_1373_A = _dim_A_( A); 
+  _isaa_1374_A = _shape_A_( A); 
+  _isaa_1375_A = _saabind_( _isaa_1373_A, _isaa_1374_A, A); 
+  _isaa_1376__flat_319 = [ _isaa_1373_A ]; 
+  _flat_317 = 0; 
+  _flat_316 = _mul_SxV_( _flat_317, _isaa_1374_A); 
+  _flat_315 = true; 
+  _ctz_640 = 0.0; 
+  res = with {
+        /* Partn */
+        (_flat_316 <= iv < _isaa_1374_A)
+        { 
+          _ea_459_res = _accu_( iv); 
+          _ivesplit_1378 = _vect2offset_( _isaa_1371_B, iv); 
+          _flat_322 = _idx_sel_( _ivesplit_1378, _isaa_1372_B); 
+          _ivesplit_1379 = _vect2offset_( _isaa_1374_A, iv); 
+          _flat_321 = _idx_sel_( _ivesplit_1379, _isaa_1375_A); 
+          _ctz_639 = _sub_SxS_( _flat_321, _flat_322); 
+          _flat_320 = _eq_SxS_( _ctz_639, _ctz_640); 
+          _pinl_573__flat_298 = _and_SxS_( _ea_459_res, _flat_320); 
+        } : _pinl_573__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_315); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( float[*] A { ,NN } , float[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1389 { , NN } ; 
+  int _ivesplit_1388 { , NN } ; 
+  int[1] _isaa_1386__flat_311 { , NN } ; 
+  float[*] _isaa_1385_A { dim: _isaa_1383_A, shape: _isaa_1384_A, NN } ; 
+  int[.] _isaa_1384_A { dim: 1, shape: [ _isaa_1383_A ], NN } ; 
+  int _isaa_1383_A { dim: 0, shape: [:int], NN } ; 
+  float[*] _isaa_1382_B { dim: _isaa_1380_B, shape: _isaa_1381_B, NN } ; 
+  int[.] _isaa_1381_B { dim: 1, shape: [ _isaa_1380_B ], NN } ; 
+  int _isaa_1380_B { dim: 0, shape: [:int], NN } ; 
+  float _ctz_643 { dim: 0, shape: [:int], NN } ; 
+  float{0.0...} _ctz_644 { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_574__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_461_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_312 { dim: 0, shape: [:int], NN } ; 
+  float _flat_313 { dim: 0, shape: [:int], NN } ; 
+  float _flat_314 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1386__flat_311, NN } ; 
+  bool{1} _flat_307 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_308 { dim: 1, shape: _isaa_1386__flat_311, NN } ; 
+  int{0} _flat_309 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1380_B = _dim_A_( B); 
+  _isaa_1381_B = _shape_A_( B); 
+  _isaa_1382_B = _saabind_( _isaa_1380_B, _isaa_1381_B, B); 
+  _isaa_1383_A = _dim_A_( A); 
+  _isaa_1384_A = _shape_A_( A); 
+  _isaa_1385_A = _saabind_( _isaa_1383_A, _isaa_1384_A, A); 
+  _isaa_1386__flat_311 = [ _isaa_1383_A ]; 
+  _flat_309 = 0; 
+  _flat_308 = _mul_SxV_( _flat_309, _isaa_1384_A); 
+  _flat_307 = true; 
+  _ctz_644 = 0.0f; 
+  res = with {
+        /* Partn */
+        (_flat_308 <= iv < _isaa_1384_A)
+        { 
+          _ea_461_res = _accu_( iv); 
+          _ivesplit_1388 = _vect2offset_( _isaa_1381_B, iv); 
+          _flat_314 = _idx_sel_( _ivesplit_1388, _isaa_1382_B); 
+          _ivesplit_1389 = _vect2offset_( _isaa_1384_A, iv); 
+          _flat_313 = _idx_sel_( _ivesplit_1389, _isaa_1385_A); 
+          _ctz_643 = _sub_SxS_( _flat_313, _flat_314); 
+          _flat_312 = _eq_SxS_( _ctz_643, _ctz_644); 
+          _pinl_574__flat_298 = _and_SxS_( _ea_461_res, _flat_312); 
+        } : _pinl_574__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_307); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::eq(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool sacprelude_p::eq( int[*] A { ,NN } , int[*] B { ,NN } )
+/*
+ *  eq ::  ---
+ */
+{ 
+  int _ivesplit_1399 { , NN } ; 
+  int _ivesplit_1398 { , NN } ; 
+  int[1] _isaa_1396__flat_303 { , NN } ; 
+  int[*] _isaa_1395_A { dim: _isaa_1393_A, shape: _isaa_1394_A, NN } ; 
+  int[.] _isaa_1394_A { dim: 1, shape: [ _isaa_1393_A ], NN } ; 
+  int _isaa_1393_A { dim: 0, shape: [:int], NN } ; 
+  int[*] _isaa_1392_B { dim: _isaa_1390_B, shape: _isaa_1391_B, NN } ; 
+  int[.] _isaa_1391_B { dim: 1, shape: [ _isaa_1390_B ], NN } ; 
+  int _isaa_1390_B { dim: 0, shape: [:int], NN } ; 
+  int _ctz_647 { dim: 0, shape: [:int], NN } ; 
+  bool _pinl_575__flat_298 { dim: 0, shape: [:int], NN } ; 
+  bool _ea_463_res { dim: 0, shape: [:int], NN } ; 
+  bool res { dim: 0, shape: [:int], NN } ; 
+  bool _flat_304 { dim: 0, shape: [:int], NN } ; 
+  int _flat_305 { dim: 0, shape: [:int], NN } ; 
+  int _flat_306 { dim: 0, shape: [:int], NN } ; 
+  int[.] iv { dim: 1, shape: _isaa_1396__flat_303, NN } ; 
+  bool{1} _flat_299 { dim: 0, shape: [:int], NN } ; 
+  int[.] _flat_300 { dim: 1, shape: _isaa_1396__flat_303, NN } ; 
+  int{0} _flat_301 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1390_B = _dim_A_( B); 
+  _isaa_1391_B = _shape_A_( B); 
+  _isaa_1392_B = _saabind_( _isaa_1390_B, _isaa_1391_B, B); 
+  _isaa_1393_A = _dim_A_( A); 
+  _isaa_1394_A = _shape_A_( A); 
+  _isaa_1395_A = _saabind_( _isaa_1393_A, _isaa_1394_A, A); 
+  _isaa_1396__flat_303 = [ _isaa_1393_A ]; 
+  _flat_301 = 0; 
+  _flat_300 = _mul_SxV_( _flat_301, _isaa_1394_A); 
+  _flat_299 = true; 
+  res = with {
+        /* Partn */
+        (_flat_300 <= iv < _isaa_1394_A)
+        { 
+          _ea_463_res = _accu_( iv); 
+          _ivesplit_1398 = _vect2offset_( _isaa_1391_B, iv); 
+          _flat_306 = _idx_sel_( _ivesplit_1398, _isaa_1392_B); 
+          _ivesplit_1399 = _vect2offset_( _isaa_1394_A, iv); 
+          _flat_305 = _idx_sel_( _ivesplit_1399, _isaa_1395_A); 
+          _ctz_647 = _sub_SxS_( _flat_305, _flat_306); 
+          _flat_304 = _eq_SxS_( _ctz_647, _flat_301); 
+          _pinl_575__flat_298 = _and_SxS_( _ea_463_res, _flat_304); 
+        } : _pinl_575__flat_298 ; 
+         } :
+      fold( sacprelude_p::and(), _flat_299); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::isPartitionIntersectNull(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[.] sacprelude_p::isPartitionIntersectNull( int[.] idxmin { ,NN } , int[.] idxmax { ,NN } , int[.] bound1 { ,NN } , int[.] bound2 { ,NN } )
+/*
+ *  isPartitionIntersectNull ::  ---
+ */
+{ 
+  int[.] _isaa_1411_idxmin { dim: _isaa_1400_bound2, shape: _isaa_1410_idxmin, NN } ; 
+  int[1] _isaa_1410_idxmin { dim: 1, shape: [ _isaa_1400_bound2 ], NN } ; 
+  int[.] _isaa_1408_idxmax { dim: _isaa_1400_bound2, shape: _isaa_1407_idxmax, NN } ; 
+  int[1] _isaa_1407_idxmax { dim: 1, shape: [ _isaa_1400_bound2 ], NN } ; 
+  int[.] _isaa_1405_bound1 { dim: _isaa_1400_bound2, shape: _isaa_1404_bound1, NN } ; 
+  int[1] _isaa_1404_bound1 { dim: 1, shape: [ _isaa_1400_bound2 ], NN } ; 
+  int[.] _isaa_1402_bound2 { dim: _isaa_1400_bound2, shape: _isaa_1401_bound2, NN } ; 
+  int[1] _isaa_1401_bound2 { dim: 1, shape: [ _isaa_1400_bound2 ], NN } ; 
+  int{1} _isaa_1400_bound2 { dim: 0, shape: [:int], NN } ; 
+  int[.] _ctz_653 { dim: 1, shape: _isaa_1410_idxmin, NN } ; 
+  int{0} _ctz_654 { dim: 0, shape: [:int], NN } ; 
+  int[.] _ctz_651 { dim: 1, shape: _isaa_1407_idxmax, NN } ; 
+  bool[.] z { dim: 1, shape: _isaa_1407_idxmax, NN } ; 
+  bool[.] _flat_459 { dim: 1, shape: _isaa_1407_idxmax, NN } ; 
+  bool[.] _flat_460 { dim: 1, shape: _isaa_1410_idxmin, NN } ; 
+
+  _isaa_1400_bound2 = 1; 
+  _isaa_1401_bound2 = _shape_A_( bound2); 
+  _isaa_1402_bound2 = _saabind_( _isaa_1400_bound2, _isaa_1401_bound2, bound2); 
+  _isaa_1404_bound1 = _shape_A_( bound1); 
+  _isaa_1405_bound1 = _saabind_( _isaa_1400_bound2, _isaa_1404_bound1, bound1); 
+  _isaa_1407_idxmax = _shape_A_( idxmax); 
+  _isaa_1408_idxmax = _saabind_( _isaa_1400_bound2, _isaa_1407_idxmax, idxmax); 
+  _isaa_1410_idxmin = _shape_A_( idxmin); 
+  _isaa_1411_idxmin = _saabind_( _isaa_1400_bound2, _isaa_1410_idxmin, idxmin); 
+  _ctz_653 = _sub_VxV_( _isaa_1411_idxmin, _isaa_1402_bound2); 
+  _ctz_654 = 0; 
+  _flat_460 = _ge_VxS_( _ctz_653, _ctz_654); 
+  _ctz_651 = _sub_VxV_( _isaa_1408_idxmax, _isaa_1405_bound1); 
+  _flat_459 = _lt_VxS_( _ctz_651, _ctz_654); 
+  z = _or_VxV_( _flat_459, _flat_460); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::isPartitionIntersectNull(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[.] sacprelude_p::isPartitionIntersectNull( int idxmin { ,NN } , int idxmax { ,NN } , int[.] bound1 { ,NN } , int[.] bound2 { ,NN } )
+/*
+ *  isPartitionIntersectNull ::  ---
+ */
+{ 
+  int _isaa_1428_idxmin { dim: _isaa_1423_idxmax, shape: _isaa_1424_idxmax, NN } ; 
+  int _isaa_1425_idxmax { dim: _isaa_1423_idxmax, shape: _isaa_1424_idxmax, NN } ; 
+  int[0]{} _isaa_1424_idxmax { dim: 1, shape: [ _isaa_1423_idxmax ], NN } ; 
+  int{0} _isaa_1423_idxmax { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_1422_bound1 { dim: _isaa_1417_bound2, shape: _isaa_1421_bound1, NN } ; 
+  int[1] _isaa_1421_bound1 { dim: 1, shape: [ _isaa_1417_bound2 ], NN } ; 
+  int[.] _isaa_1419_bound2 { dim: _isaa_1417_bound2, shape: _isaa_1418_bound2, NN } ; 
+  int[1] _isaa_1418_bound2 { dim: 1, shape: [ _isaa_1417_bound2 ], NN } ; 
+  int{1} _isaa_1417_bound2 { dim: 0, shape: [:int], NN } ; 
+  int[.] _ctz_661 { dim: 1, shape: _isaa_1418_bound2, NN } ; 
+  int[.] _ctz_659 { dim: 1, shape: _isaa_1421_bound1, NN } ; 
+  bool[.] z { dim: 1, shape: _isaa_1421_bound1, NN } ; 
+  bool[.] _flat_461 { dim: 1, shape: _isaa_1421_bound1, NN } ; 
+  bool[.] _flat_462 { dim: 1, shape: _isaa_1418_bound2, NN } ; 
+
+  _isaa_1417_bound2 = 1; 
+  _isaa_1418_bound2 = _shape_A_( bound2); 
+  _isaa_1419_bound2 = _saabind_( _isaa_1417_bound2, _isaa_1418_bound2, bound2); 
+  _isaa_1421_bound1 = _shape_A_( bound1); 
+  _isaa_1422_bound1 = _saabind_( _isaa_1417_bound2, _isaa_1421_bound1, bound1); 
+  _isaa_1423_idxmax = 0; 
+  _isaa_1424_idxmax = [:int]; 
+  _isaa_1425_idxmax = _saabind_( _isaa_1423_idxmax, _isaa_1424_idxmax, idxmax); 
+  _isaa_1428_idxmin = _saabind_( _isaa_1423_idxmax, _isaa_1424_idxmax, idxmin); 
+  _ctz_661 = _sub_SxV_( _isaa_1428_idxmin, _isaa_1419_bound2); 
+  _flat_462 = _ge_VxS_( _ctz_661, _isaa_1423_idxmax); 
+  _ctz_659 = _sub_SxV_( _isaa_1425_idxmax, _isaa_1422_bound1); 
+  _flat_461 = _lt_VxS_( _ctz_659, _isaa_1423_idxmax); 
+  z = _or_VxV_( _flat_461, _flat_462); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionMin(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int sacprelude_p::partitionMin( int x { ,NN } , int y { ,NN } )
+/*
+ *  partitionMin ::  ---
+ */
+{ 
+  int _isaa_1439_x { dim: _isaa_1434_y, shape: _isaa_1435_y, NN } ; 
+  int _isaa_1436_y { dim: _isaa_1434_y, shape: _isaa_1435_y, NN } ; 
+  int[0]{} _isaa_1435_y { dim: 1, shape: [ _isaa_1434_y ], NN } ; 
+  int{0} _isaa_1434_y { dim: 0, shape: [:int], NN } ; 
+  int z { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1434_y = 0; 
+  _isaa_1435_y = [:int]; 
+  _isaa_1436_y = _saabind_( _isaa_1434_y, _isaa_1435_y, y); 
+  _isaa_1439_x = _saabind_( _isaa_1434_y, _isaa_1435_y, x); 
+  z = _min_SxS_( _isaa_1439_x, _isaa_1436_y); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionMax(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int sacprelude_p::partitionMax( int x { ,NN } , int y { ,NN } )
+/*
+ *  partitionMax ::  ---
+ */
+{ 
+  int _isaa_1445_x { dim: _isaa_1440_y, shape: _isaa_1441_y, NN } ; 
+  int _isaa_1442_y { dim: _isaa_1440_y, shape: _isaa_1441_y, NN } ; 
+  int[0]{} _isaa_1441_y { dim: 1, shape: [ _isaa_1440_y ], NN } ; 
+  int{0} _isaa_1440_y { dim: 0, shape: [:int], NN } ; 
+  int z { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1440_y = 0; 
+  _isaa_1441_y = [:int]; 
+  _isaa_1442_y = _saabind_( _isaa_1440_y, _isaa_1441_y, y); 
+  _isaa_1445_x = _saabind_( _isaa_1440_y, _isaa_1441_y, x); 
+  z = _max_SxS_( _isaa_1445_x, _isaa_1442_y); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::isPartitionIntersect1Part(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[.] sacprelude_p::isPartitionIntersect1Part( int[.] idxmin { ,NN } , int[.] idxmax { ,NN } , int[.] bound1 { ,NN } , int[.] bound2 { ,NN } )
+/*
+ *  isPartitionIntersect1Part ::  ---
+ */
+{ 
+  int[.] _isaa_1457_idxmin { dim: _isaa_1446_bound2, shape: _isaa_1456_idxmin, NN } ; 
+  int[1] _isaa_1456_idxmin { dim: 1, shape: [ _isaa_1446_bound2 ], NN } ; 
+  int[.] _isaa_1454_idxmax { dim: _isaa_1446_bound2, shape: _isaa_1453_idxmax, NN } ; 
+  int[1] _isaa_1453_idxmax { dim: 1, shape: [ _isaa_1446_bound2 ], NN } ; 
+  int[.] _isaa_1451_bound1 { dim: _isaa_1446_bound2, shape: _isaa_1450_bound1, NN } ; 
+  int[1] _isaa_1450_bound1 { dim: 1, shape: [ _isaa_1446_bound2 ], NN } ; 
+  int[.] _isaa_1448_bound2 { dim: _isaa_1446_bound2, shape: _isaa_1447_bound2, NN } ; 
+  int[1] _isaa_1447_bound2 { dim: 1, shape: [ _isaa_1446_bound2 ], NN } ; 
+  int{1} _isaa_1446_bound2 { dim: 0, shape: [:int], NN } ; 
+  int[.] _ctz_669 { dim: 1, shape: _isaa_1453_idxmax, NN } ; 
+  int{0} _ctz_670 { dim: 0, shape: [:int], NN } ; 
+  int[.] _ctz_667 { dim: 1, shape: _isaa_1456_idxmin, NN } ; 
+  bool[.] z { dim: 1, shape: _isaa_1456_idxmin, NN } ; 
+  bool[.] _flat_463 { dim: 1, shape: _isaa_1456_idxmin, NN } ; 
+  bool[.] _flat_464 { dim: 1, shape: _isaa_1453_idxmax, NN } ; 
+
+  _isaa_1446_bound2 = 1; 
+  _isaa_1447_bound2 = _shape_A_( bound2); 
+  _isaa_1448_bound2 = _saabind_( _isaa_1446_bound2, _isaa_1447_bound2, bound2); 
+  _isaa_1450_bound1 = _shape_A_( bound1); 
+  _isaa_1451_bound1 = _saabind_( _isaa_1446_bound2, _isaa_1450_bound1, bound1); 
+  _isaa_1453_idxmax = _shape_A_( idxmax); 
+  _isaa_1454_idxmax = _saabind_( _isaa_1446_bound2, _isaa_1453_idxmax, idxmax); 
+  _isaa_1456_idxmin = _shape_A_( idxmin); 
+  _isaa_1457_idxmin = _saabind_( _isaa_1446_bound2, _isaa_1456_idxmin, idxmin); 
+  _ctz_669 = _sub_VxV_( _isaa_1454_idxmax, _isaa_1448_bound2); 
+  _ctz_670 = 0; 
+  _flat_464 = _le_VxS_( _ctz_669, _ctz_670); 
+  _ctz_667 = _sub_VxV_( _isaa_1457_idxmin, _isaa_1451_bound1); 
+  _flat_463 = _ge_VxS_( _ctz_667, _ctz_670); 
+  z = _and_VxV_( _flat_463, _flat_464); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::isPartitionIntersect1Part(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+bool[.] sacprelude_p::isPartitionIntersect1Part( int idxmin { ,NN } , int idxmax { ,NN } , int[.] bound1 { ,NN } , int[.] bound2 { ,NN } )
+/*
+ *  isPartitionIntersect1Part ::  ---
+ */
+{ 
+  int _isaa_1474_idxmin { dim: _isaa_1469_idxmax, shape: _isaa_1470_idxmax, NN } ; 
+  int _isaa_1471_idxmax { dim: _isaa_1469_idxmax, shape: _isaa_1470_idxmax, NN } ; 
+  int[0]{} _isaa_1470_idxmax { dim: 1, shape: [ _isaa_1469_idxmax ], NN } ; 
+  int{0} _isaa_1469_idxmax { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_1468_bound1 { dim: _isaa_1463_bound2, shape: _isaa_1467_bound1, NN } ; 
+  int[1] _isaa_1467_bound1 { dim: 1, shape: [ _isaa_1463_bound2 ], NN } ; 
+  int[.] _isaa_1465_bound2 { dim: _isaa_1463_bound2, shape: _isaa_1464_bound2, NN } ; 
+  int[1] _isaa_1464_bound2 { dim: 1, shape: [ _isaa_1463_bound2 ], NN } ; 
+  int{1} _isaa_1463_bound2 { dim: 0, shape: [:int], NN } ; 
+  int[.] _ctz_677 { dim: 1, shape: _isaa_1464_bound2, NN } ; 
+  int[.] _ctz_675 { dim: 1, shape: _isaa_1467_bound1, NN } ; 
+  bool[.] z { dim: 1, shape: _isaa_1467_bound1, NN } ; 
+  bool[.] _flat_465 { dim: 1, shape: _isaa_1467_bound1, NN } ; 
+  bool[.] _flat_466 { dim: 1, shape: _isaa_1464_bound2, NN } ; 
+
+  _isaa_1463_bound2 = 1; 
+  _isaa_1464_bound2 = _shape_A_( bound2); 
+  _isaa_1465_bound2 = _saabind_( _isaa_1463_bound2, _isaa_1464_bound2, bound2); 
+  _isaa_1467_bound1 = _shape_A_( bound1); 
+  _isaa_1468_bound1 = _saabind_( _isaa_1463_bound2, _isaa_1467_bound1, bound1); 
+  _isaa_1469_idxmax = 0; 
+  _isaa_1470_idxmax = [:int]; 
+  _isaa_1471_idxmax = _saabind_( _isaa_1469_idxmax, _isaa_1470_idxmax, idxmax); 
+  _isaa_1474_idxmin = _saabind_( _isaa_1469_idxmax, _isaa_1470_idxmax, idxmin); 
+  _ctz_677 = _sub_SxV_( _isaa_1471_idxmax, _isaa_1465_bound2); 
+  _flat_466 = _le_VxS_( _ctz_677, _isaa_1469_idxmax); 
+  _ctz_675 = _sub_SxV_( _isaa_1474_idxmin, _isaa_1468_bound1); 
+  _flat_465 = _ge_VxS_( _ctz_675, _isaa_1469_idxmax); 
+  z = _and_VxV_( _flat_465, _flat_466); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionIntersectMax(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[.] sacprelude_p::partitionIntersectMax( int[.] PWLbound1 { ,NN } , int[.] ivmin { ,NN } )
+/*
+ *  partitionIntersectMax ::  ---
+ */
+{ 
+  int[.] _isaa_1485_PWLbound1 { dim: _isaa_1480_ivmin, shape: _isaa_1484_PWLbound1, NN } ; 
+  int[1] _isaa_1484_PWLbound1 { dim: 1, shape: [ _isaa_1480_ivmin ], NN } ; 
+  int[.] _isaa_1482_ivmin { dim: _isaa_1480_ivmin, shape: _isaa_1481_ivmin, NN } ; 
+  int[1] _isaa_1481_ivmin { dim: 1, shape: [ _isaa_1480_ivmin ], NN } ; 
+  int{1} _isaa_1480_ivmin { dim: 0, shape: [:int], NN } ; 
+  int[.] z { dim: 1, shape: _isaa_1484_PWLbound1, NN } ; 
+
+  _isaa_1480_ivmin = 1; 
+  _isaa_1481_ivmin = _shape_A_( ivmin); 
+  _isaa_1482_ivmin = _saabind_( _isaa_1480_ivmin, _isaa_1481_ivmin, ivmin); 
+  _isaa_1484_PWLbound1 = _shape_A_( PWLbound1); 
+  _isaa_1485_PWLbound1 = _saabind_( _isaa_1480_ivmin, _isaa_1484_PWLbound1, PWLbound1); 
+  z = _max_VxV_( _isaa_1485_PWLbound1, _isaa_1482_ivmin); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionIntersectMax(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[.] sacprelude_p::partitionIntersectMax( int[.] PWLbound1 { ,NN } , int ivmin { ,NN } )
+/*
+ *  partitionIntersectMax ::  ---
+ */
+{ 
+  int[.] _isaa_1492_PWLbound1 { dim: _isaa_1490_PWLbound1, shape: _isaa_1491_PWLbound1, NN } ; 
+  int[1] _isaa_1491_PWLbound1 { dim: 1, shape: [ _isaa_1490_PWLbound1 ], NN } ; 
+  int{1} _isaa_1490_PWLbound1 { dim: 0, shape: [:int], NN } ; 
+  int _isaa_1489_ivmin { dim: _isaa_1487_ivmin, shape: _isaa_1488_ivmin, NN } ; 
+  int[0]{} _isaa_1488_ivmin { dim: 1, shape: [ _isaa_1487_ivmin ], NN } ; 
+  int{0} _isaa_1487_ivmin { dim: 0, shape: [:int], NN } ; 
+  int[.] z { dim: 1, shape: _isaa_1491_PWLbound1, NN } ; 
+
+  _isaa_1487_ivmin = 0; 
+  _isaa_1488_ivmin = [:int]; 
+  _isaa_1489_ivmin = _saabind_( _isaa_1487_ivmin, _isaa_1488_ivmin, ivmin); 
+  _isaa_1490_PWLbound1 = 1; 
+  _isaa_1491_PWLbound1 = _shape_A_( PWLbound1); 
+  _isaa_1492_PWLbound1 = _saabind_( _isaa_1490_PWLbound1, _isaa_1491_PWLbound1, PWLbound1); 
+  z = _max_VxS_( _isaa_1492_PWLbound1, _isaa_1489_ivmin); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionIntersectMin(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[.] sacprelude_p::partitionIntersectMin( int[.] PWLbound2 { ,NN } , int[.] ivmax { ,NN } )
+/*
+ *  partitionIntersectMin ::  ---
+ */
+{ 
+  int[.] _isaa_1499_PWLbound2 { dim: _isaa_1494_ivmax, shape: _isaa_1498_PWLbound2, NN } ; 
+  int[1] _isaa_1498_PWLbound2 { dim: 1, shape: [ _isaa_1494_ivmax ], NN } ; 
+  int[.] _isaa_1496_ivmax { dim: _isaa_1494_ivmax, shape: _isaa_1495_ivmax, NN } ; 
+  int[1] _isaa_1495_ivmax { dim: 1, shape: [ _isaa_1494_ivmax ], NN } ; 
+  int{1} _isaa_1494_ivmax { dim: 0, shape: [:int], NN } ; 
+  int[.] z { dim: 1, shape: _isaa_1498_PWLbound2, NN } ; 
+
+  _isaa_1494_ivmax = 1; 
+  _isaa_1495_ivmax = _shape_A_( ivmax); 
+  _isaa_1496_ivmax = _saabind_( _isaa_1494_ivmax, _isaa_1495_ivmax, ivmax); 
+  _isaa_1498_PWLbound2 = _shape_A_( PWLbound2); 
+  _isaa_1499_PWLbound2 = _saabind_( _isaa_1494_ivmax, _isaa_1498_PWLbound2, PWLbound2); 
+  z = _min_VxV_( _isaa_1499_PWLbound2, _isaa_1496_ivmax); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionIntersectMin(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[.] sacprelude_p::partitionIntersectMin( int[.] PWLbound2 { ,NN } , int ivmax { ,NN } )
+/*
+ *  partitionIntersectMin ::  ---
+ */
+{ 
+  int[.] _isaa_1506_PWLbound2 { dim: _isaa_1504_PWLbound2, shape: _isaa_1505_PWLbound2, NN } ; 
+  int[1] _isaa_1505_PWLbound2 { dim: 1, shape: [ _isaa_1504_PWLbound2 ], NN } ; 
+  int{1} _isaa_1504_PWLbound2 { dim: 0, shape: [:int], NN } ; 
+  int _isaa_1503_ivmax { dim: _isaa_1501_ivmax, shape: _isaa_1502_ivmax, NN } ; 
+  int[0]{} _isaa_1502_ivmax { dim: 1, shape: [ _isaa_1501_ivmax ], NN } ; 
+  int{0} _isaa_1501_ivmax { dim: 0, shape: [:int], NN } ; 
+  int[.] z { dim: 1, shape: _isaa_1505_PWLbound2, NN } ; 
+
+  _isaa_1501_ivmax = 0; 
+  _isaa_1502_ivmax = [:int]; 
+  _isaa_1503_ivmax = _saabind_( _isaa_1501_ivmax, _isaa_1502_ivmax, ivmax); 
+  _isaa_1504_PWLbound2 = 1; 
+  _isaa_1505_PWLbound2 = _shape_A_( PWLbound2); 
+  _isaa_1506_PWLbound2 = _saabind_( _isaa_1504_PWLbound2, _isaa_1505_PWLbound2, PWLbound2); 
+  z = _min_VxS_( _isaa_1506_PWLbound2, _isaa_1503_ivmax); 
+  return( z); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::prod(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int sacprelude_p::prod( int[.] v { ,NN } )
+/*
+ *  prod ::  ---
+ */
+{ 
+  int _ivesplit_1513 { , NN } ; 
+  int[.] _isaa_1510_v { dim: _isaa_1508_v, shape: _isaa_1509_v, NN } ; 
+  int[1] _isaa_1509_v { dim: 1, shape: [ _isaa_1508_v ], NN } ; 
+  int{1} _isaa_1508_v { dim: 0, shape: [:int], NN } ; 
+  int _pinl_576__flat_411 { dim: 0, shape: [:int], NN } ; 
+  int _wlbsc_479_sc_e { dim: 0, shape: [:int], NN } ; 
+  int _ea_465_res { dim: 0, shape: [:int], NN } ; 
+  int res { dim: 0, shape: [:int], NN } ; 
+  int _flat_417 { dim: 0, shape: [:int], NN } ; 
+  int i { dim: 0, shape: [:int], NN } ; 
+  int[1] _flat_416 { dim: 1, shape: [ 1 ], NN } ; 
+  int{0} _flat_414 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1508_v = 1; 
+  _isaa_1509_v = _shape_A_( v); 
+  _isaa_1510_v = _saabind_( _isaa_1508_v, _isaa_1509_v, v); 
+  _flat_414 = 0; 
+  _wlbsc_479_sc_e = _idx_sel_( _flat_414, _isaa_1509_v); 
+  res = with {
+        /* Partn */
+        ([ _flat_414 ] <= _flat_416=[i] < [ _wlbsc_479_sc_e ] genwidth [ _wlbsc_479_sc_e ])
+        { 
+          _ea_465_res = _accu_( _flat_416); 
+          _ivesplit_1513 = _vect2offset_( _isaa_1509_v, _flat_416); 
+          _flat_417 = _idx_sel_( _ivesplit_1513, _isaa_1510_v); 
+          _pinl_576__flat_411 = _mul_SxS_( _ea_465_res, _flat_417); 
+        } : _pinl_576__flat_411 ; 
+         } :
+      fold( sacprelude_p::*(), _isaa_1508_v); 
+  return( res); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::partitionSlicer(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[.], int[.], int[.], int[.] sacprelude_p::partitionSlicer( int[.] min { ,NN } , int[.] max { ,NN } , int axis { ,NN } , int[.] lb { ,NN } , int[.] ub { ,NN } )
+/*
+ *  partitionSlicer ::  ---
+ */
+{ 
+  int _ivesplit_1538 { , NN } ; 
+  int _ivesplit_1537 { , NN } ; 
+  int _ivesplit_1536 { , NN } ; 
+  int _ivesplit_1535 { , NN } ; 
+  int[.] _isaa_1530_min { dim: _isaa_1516_ub, shape: _isaa_1529_min, NN } ; 
+  int[1] _isaa_1529_min { dim: 1, shape: [ _isaa_1516_ub ], NN } ; 
+  int[.] _isaa_1527_max { dim: _isaa_1516_ub, shape: _isaa_1526_max, NN } ; 
+  int[1] _isaa_1526_max { dim: 1, shape: [ _isaa_1516_ub ], NN } ; 
+  int _isaa_1524_axis { dim: _isaa_1522_axis, shape: _isaa_1523_axis, NN } ; 
+  int[0]{} _isaa_1523_axis { dim: 1, shape: [ _isaa_1522_axis ], NN } ; 
+  int{0} _isaa_1522_axis { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_1521_lb { dim: _isaa_1516_ub, shape: _isaa_1520_lb, NN } ; 
+  int[1] _isaa_1520_lb { dim: 1, shape: [ _isaa_1516_ub ], NN } ; 
+  int[.] _isaa_1518_ub { dim: _isaa_1516_ub, shape: _isaa_1517_ub, NN } ; 
+  int[1] _isaa_1517_ub { dim: 1, shape: [ _isaa_1516_ub ], NN } ; 
+  int{1} _isaa_1516_ub { dim: 0, shape: [:int], NN } ; 
+  int _pinl_577_z { dim: 0, shape: [:int], NN } ; 
+  int[.] new_max { dim: 1, shape: _isaa_1526_max, NN } ; 
+  int[.] new_min { dim: 1, shape: _isaa_1529_min, NN } ; 
+  int[.] min_upper { dim: 1, shape: _isaa_1529_min, NN } ; 
+  int[.] max_lower { dim: 1, shape: _isaa_1526_max, NN } ; 
+  int _flat_435 { dim: 0, shape: [:int], NN } ; 
+  int lb_i { dim: 0, shape: [:int], NN } ; 
+  int[1] _flat_434 { dim: 1, shape: [ 1 ], NN } ; 
+
+  _isaa_1516_ub = 1; 
+  _isaa_1517_ub = _shape_A_( ub); 
+  _isaa_1518_ub = _saabind_( _isaa_1516_ub, _isaa_1517_ub, ub); 
+  _isaa_1520_lb = _shape_A_( lb); 
+  _isaa_1521_lb = _saabind_( _isaa_1516_ub, _isaa_1520_lb, lb); 
+  _isaa_1522_axis = 0; 
+  _isaa_1523_axis = [:int]; 
+  _isaa_1524_axis = _saabind_( _isaa_1522_axis, _isaa_1523_axis, axis); 
+  _isaa_1526_max = _shape_A_( max); 
+  _isaa_1527_max = _saabind_( _isaa_1516_ub, _isaa_1526_max, max); 
+  _isaa_1529_min = _shape_A_( min); 
+  _isaa_1530_min = _saabind_( _isaa_1516_ub, _isaa_1529_min, min); 
+  _flat_434 = [ _isaa_1524_axis ]; 
+  _ivesplit_1535 = _vect2offset_( _isaa_1520_lb, _flat_434); 
+  lb_i = _idx_sel_( _ivesplit_1535, _isaa_1521_lb); 
+  _ivesplit_1536 = _vect2offset_( _isaa_1517_ub, _flat_434); 
+  _flat_435 = _idx_sel_( _ivesplit_1536, _isaa_1518_ub); 
+  _pinl_577_z = _max_SxS_( lb_i, _flat_435); 
+  _ivesplit_1537 = _vect2offset_( _isaa_1526_max, _flat_434); 
+  max_lower = _idx_modarray_AxSxS_( _isaa_1527_max, _ivesplit_1537, lb_i); 
+  _ivesplit_1538 = _vect2offset_( _isaa_1529_min, _flat_434); 
+  min_upper = _idx_modarray_AxSxS_( _isaa_1530_min, _ivesplit_1538, _pinl_577_z); 
+  new_min = _idx_modarray_AxSxS_( _isaa_1530_min, _ivesplit_1538, lb_i); 
+  new_max = _idx_modarray_AxSxS_( _isaa_1527_max, _ivesplit_1537, _pinl_577_z); 
+  return( max_lower, min_upper, new_min, new_max); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::gridFiller(...) [ body ]
+ ****************************************************************************/
+/* sticky */
+inline
+int[.], int[.], int[.] sacprelude_p::gridFiller( int[.] lb { ,NN } , int[.] ub { ,NN } , int[.] wdth { ,NN } , int dim { ,NN } , int[.] maxwidth { ,NN } )
+/*
+ *  gridFiller ::  ---
+ */
+{ 
+  int _ivesplit_1562 { , NN } ; 
+  int _ivesplit_1561 { , NN } ; 
+  int _ivesplit_1560 { , NN } ; 
+  int _ivesplit_1559 { , NN } ; 
+  int[.] _isaa_1555_lb { dim: _isaa_1541_maxwidth, shape: _isaa_1554_lb, NN } ; 
+  int[1] _isaa_1554_lb { dim: 1, shape: [ _isaa_1541_maxwidth ], NN } ; 
+  int[.] _isaa_1552_ub { dim: _isaa_1541_maxwidth, shape: _isaa_1551_ub, NN } ; 
+  int[1] _isaa_1551_ub { dim: 1, shape: [ _isaa_1541_maxwidth ], NN } ; 
+  int[.] _isaa_1549_wdth { dim: _isaa_1541_maxwidth, shape: _isaa_1548_wdth, NN } ; 
+  int[1] _isaa_1548_wdth { dim: 1, shape: [ _isaa_1541_maxwidth ], NN } ; 
+  int _isaa_1546_dim { dim: _isaa_1544_dim, shape: _isaa_1545_dim, NN } ; 
+  int[0]{} _isaa_1545_dim { dim: 1, shape: [ _isaa_1544_dim ], NN } ; 
+  int{0} _isaa_1544_dim { dim: 0, shape: [:int], NN } ; 
+  int[.] _isaa_1543_maxwidth { dim: _isaa_1541_maxwidth, shape: _isaa_1542_maxwidth, NN } ; 
+  int[1] _isaa_1542_maxwidth { dim: 1, shape: [ _isaa_1541_maxwidth ], NN } ; 
+  int{1} _isaa_1541_maxwidth { dim: 0, shape: [:int], NN } ; 
+  int _pinl_578_z { dim: 0, shape: [:int], NN } ; 
+  int _pinl_579_z { dim: 0, shape: [:int], NN } ; 
+  int[.] nmaxwidth { dim: 1, shape: _isaa_1542_maxwidth, NN } ; 
+  int[.] nwidth { dim: 1, shape: _isaa_1542_maxwidth, NN } ; 
+  int[.] nlb { dim: 1, shape: _isaa_1554_lb, NN } ; 
+  int _flat_448 { dim: 0, shape: [:int], NN } ; 
+  int _flat_449 { dim: 0, shape: [:int], NN } ; 
+  int _flat_441 { dim: 0, shape: [:int], NN } ; 
+  int _flat_442 { dim: 0, shape: [:int], NN } ; 
+  int _flat_444 { dim: 0, shape: [:int], NN } ; 
+  int _flat_446 { dim: 0, shape: [:int], NN } ; 
+  int[1] _flat_447 { dim: 1, shape: [ 1 ], NN } ; 
+
+  _isaa_1541_maxwidth = 1; 
+  _isaa_1542_maxwidth = _shape_A_( maxwidth); 
+  _isaa_1543_maxwidth = _saabind_( _isaa_1541_maxwidth, _isaa_1542_maxwidth, maxwidth); 
+  _isaa_1544_dim = 0; 
+  _isaa_1545_dim = [:int]; 
+  _isaa_1546_dim = _saabind_( _isaa_1544_dim, _isaa_1545_dim, dim); 
+  _isaa_1548_wdth = _shape_A_( wdth); 
+  _isaa_1549_wdth = _saabind_( _isaa_1541_maxwidth, _isaa_1548_wdth, wdth); 
+  _isaa_1551_ub = _shape_A_( ub); 
+  _isaa_1552_ub = _saabind_( _isaa_1541_maxwidth, _isaa_1551_ub, ub); 
+  _isaa_1554_lb = _shape_A_( lb); 
+  _isaa_1555_lb = _saabind_( _isaa_1541_maxwidth, _isaa_1554_lb, lb); 
+  _flat_447 = [ _isaa_1546_dim ]; 
+  _ivesplit_1559 = _vect2offset_( _isaa_1551_ub, _flat_447); 
+  _flat_446 = _idx_sel_( _ivesplit_1559, _isaa_1552_ub); 
+  _ivesplit_1560 = _vect2offset_( _isaa_1548_wdth, _flat_447); 
+  _flat_444 = _idx_sel_( _ivesplit_1560, _isaa_1549_wdth); 
+  _ivesplit_1561 = _vect2offset_( _isaa_1554_lb, _flat_447); 
+  _flat_442 = _idx_sel_( _ivesplit_1561, _isaa_1555_lb); 
+  _flat_441 = _add_SxS_( _flat_442, _flat_444); 
+  _pinl_578_z = _min_SxS_( _flat_441, _flat_446); 
+  _ivesplit_1562 = _vect2offset_( _isaa_1542_maxwidth, _flat_447); 
+  _flat_449 = _idx_sel_( _ivesplit_1562, _isaa_1543_maxwidth); 
+  _flat_448 = _sub_SxS_( _flat_449, _flat_444); 
+  _pinl_579_z = _max_SxS_( _flat_448, _isaa_1544_dim); 
+  nlb = _idx_modarray_AxSxS_( _isaa_1555_lb, _ivesplit_1561, _pinl_578_z); 
+  nwidth = _idx_modarray_AxSxS_( _isaa_1543_maxwidth, _ivesplit_1562, _pinl_579_z); 
+  nmaxwidth = _idx_modarray_AxSxS_( _isaa_1543_maxwidth, _ivesplit_1562, _flat_444); 
+  return( nlb, nwidth, nmaxwidth); 
+}
+
+
+
+/****************************************************************************
+ * _MAIN:StdIO::print(...) [ body ]
+ ****************************************************************************/
+inline
+hidden *, hidden * _MAIN:StdIO::print( hidden *_rso_230_TheTerminal { ,NN } , hidden *_rso_229_stdout { ,NN } , int[.,.,.] arr { ,NN } )
+/*
+ *  print ::  ---
+ */
+{ 
+  hidden _isaa_1577__rso_229_stdout__SSA0_1 { dim: _isaa_1569__rso_229_stdout, shape: _isaa_1570__rso_229_stdout, NN } ; 
+  hidden _isaa_1574__rso_230_TheTerminal { dim: _isaa_1569__rso_229_stdout, shape: _isaa_1570__rso_229_stdout, NN } ; 
+  hidden _isaa_1571__rso_229_stdout { dim: _isaa_1569__rso_229_stdout, shape: _isaa_1570__rso_229_stdout, NN } ; 
+  int[0]{} _isaa_1570__rso_229_stdout { dim: 1, shape: [ _isaa_1569__rso_229_stdout ], NN } ; 
+  int{0} _isaa_1569__rso_229_stdout { dim: 0, shape: [:int], NN } ; 
+  int[.,.,.] _isaa_1568_arr { dim: _isaa_1566_arr, shape: _isaa_1567_arr, NN } ; 
+  int[3] _isaa_1567_arr { dim: 1, shape: [ _isaa_1566_arr ], NN } ; 
+  int{3} _isaa_1566_arr { dim: 0, shape: [:int], NN } ; 
+  hidden _rso_229_stdout__SSA0_1 { , NN } ;  /* declared: TermFile::TermFile */
+
+  _isaa_1566_arr = 3; 
+  _isaa_1567_arr = _shape_A_( arr); 
+  _isaa_1568_arr = _saabind_( _isaa_1566_arr, _isaa_1567_arr, arr); 
+  _isaa_1569__rso_229_stdout = 0; 
+  _isaa_1570__rso_229_stdout = [:int]; 
+  _isaa_1571__rso_229_stdout = _saabind_( _isaa_1569__rso_229_stdout, _isaa_1570__rso_229_stdout, _rso_229_stdout); 
+  _isaa_1574__rso_230_TheTerminal = _saabind_( _isaa_1569__rso_229_stdout, _isaa_1570__rso_229_stdout, _rso_230_TheTerminal); 
+  _rso_229_stdout__SSA0_1 = ArrayIO::print( _isaa_1571__rso_229_stdout, _isaa_1568_arr) ; 
+  _isaa_1577__rso_229_stdout__SSA0_1 = _saabind_( _isaa_1569__rso_229_stdout, _isaa_1570__rso_229_stdout, _rso_229_stdout__SSA0_1); 
+  return( _isaa_1574__rso_230_TheTerminal, _isaa_1577__rso_229_stdout__SSA0_1); 
+}
+
+
+
+/****************************************************************************
+ * _MAIN::indsx(...) [ body ]
+ ****************************************************************************/
+inline
+int[.,.,.] _MAIN::indsx( int[.,.,.] X { ,NN } , int[.,.,.] Y { ,NN } )
+/*
+ *  indsx ::  ---
+ */
+{ 
+  int[.,.,.] _isaa_1583_X { dim: _isaa_1578_Y, shape: _isaa_1582_X, NN } ; 
+  int[3] _isaa_1582_X { dim: 1, shape: [ _isaa_1578_Y ], NN } ; 
+  int[.,.,.] _isaa_1580_Y { dim: _isaa_1578_Y, shape: _isaa_1579_Y, NN } ; 
+  int[3] _isaa_1579_Y { dim: 1, shape: [ _isaa_1578_Y ], NN } ; 
+  int{3} _isaa_1578_Y { dim: 0, shape: [:int], NN } ; 
+  int[0] _pinl_582_iv { dim: 1, shape: [ 0 ], NN } ; 
+  int[.,.,.] z__SSA0_1 { dim: 3, shape: _isaa_1582_X, NN } ; 
+
+  _isaa_1578_Y = 3; 
+  _isaa_1579_Y = _shape_A_( Y); 
+  _isaa_1580_Y = _saabind_( _isaa_1578_Y, _isaa_1579_Y, Y); 
+  _isaa_1582_X = _shape_A_( X); 
+  _isaa_1583_X = _saabind_( _isaa_1578_Y, _isaa_1582_X, X); 
+  z__SSA0_1 = with {
+        /* Partn */
+        ([:int] <= _pinl_582_iv < [:int] genwidth [:int])
+        { 
+        } : _isaa_1580_Y ; 
+         } :
+      modarray( _isaa_1583_X); 
+  return( z__SSA0_1); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::*(...) [ body ]
+ ****************************************************************************/
+inline
+int sacprelude_p::*( int a { ,NN } , int b { ,NN } )
+/*
+ *  * ::  ---
+ */
+{ 
+  int _isaa_1590_a { dim: _isaa_1585_b, shape: _isaa_1586_b, NN } ; 
+  int _isaa_1587_b { dim: _isaa_1585_b, shape: _isaa_1586_b, NN } ; 
+  int[0]{} _isaa_1586_b { dim: 1, shape: [ _isaa_1585_b ], NN } ; 
+  int{0} _isaa_1585_b { dim: 0, shape: [:int], NN } ; 
+  int _flat_411 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1585_b = 0; 
+  _isaa_1586_b = [:int]; 
+  _isaa_1587_b = _saabind_( _isaa_1585_b, _isaa_1586_b, b); 
+  _isaa_1590_a = _saabind_( _isaa_1585_b, _isaa_1586_b, a); 
+  _flat_411 = _mul_SxS_( _isaa_1590_a, _isaa_1587_b); 
+  return( _flat_411); 
+}
+
+
+
+/****************************************************************************
+ * sacprelude_p::and(...) [ body ]
+ ****************************************************************************/
+inline
+bool sacprelude_p::and( bool a { ,NN } , bool b { ,NN } )
+/*
+ *  and ::  ---
+ */
+{ 
+  bool _isaa_1596_a { dim: _isaa_1591_b, shape: _isaa_1592_b, NN } ; 
+  bool _isaa_1593_b { dim: _isaa_1591_b, shape: _isaa_1592_b, NN } ; 
+  int[0]{} _isaa_1592_b { dim: 1, shape: [ _isaa_1591_b ], NN } ; 
+  int{0} _isaa_1591_b { dim: 0, shape: [:int], NN } ; 
+  bool _flat_298 { dim: 0, shape: [:int], NN } ; 
+
+  _isaa_1591_b = 0; 
+  _isaa_1592_b = [:int]; 
+  _isaa_1593_b = _saabind_( _isaa_1591_b, _isaa_1592_b, b); 
+  _isaa_1596_a = _saabind_( _isaa_1591_b, _isaa_1592_b, a); 
+  _flat_298 = _and_SxS_( _isaa_1596_a, _isaa_1593_b); 
+  return( _flat_298); 
+}
+
+
+/*-----------------------------------------------*/

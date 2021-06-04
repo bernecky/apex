@@ -1,0 +1,4 @@
+ r←x CShiftr y
+⍝ C shiftr function. Works on integers x,y
+ r←Bool2Int(-y)↓Int2Bool x
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/crc2AKD/CShiftr.ufn§0§ 2020 6 24 17 4 22 848 §bÛäå§0

@@ -1,0 +1,9 @@
+ r←crcint len;t32;crcloc32;cv
+⍝ Test crc generator in integer domain
+ crcloc32←33⍴0
+ crcloc32[0 5 11 17 23 28 32]←1
+ cv←len⍴⎕AV
+ t32←2⊥⍉table32 crcloc32
+⍝ We could fix table32 instead
+ r←tobin t32 crcint32 cv
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/crc2AKD/crcint.ufn§0§ 2020 6 24 17 4 22 848 §rixh§0

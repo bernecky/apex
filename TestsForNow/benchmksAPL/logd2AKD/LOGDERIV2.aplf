@@ -1,0 +1,9 @@
+ L←LOGDERIV2 WV;RR
+⍝edited under 2 GAPP 94/11/03 17:38:01
+⍝Computes log derivative using method
+⍝ in 4/23/85, Notebook #7€
+⍝ r(t)=f'(t)/Rr+f(t)..RR allows
+⍝ real world computation
+ RR←0.01
+ L←¯50⌈50⌊50×(DIFF2 WV)÷RR+WV
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/AKDtofix/logd2AKD/LOGDERIV2.aplf§0§ 2021 5 21 17 22 24 237 §qBAf§0

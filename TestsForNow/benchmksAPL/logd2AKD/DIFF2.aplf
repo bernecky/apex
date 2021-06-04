@@ -1,0 +1,5 @@
+ RES←DIFF2 SIG
+⍝edited under 2 BFRONT 89/11/21 14:09:09
+⍝ differentiation function
+ RES←SIG-0,¯1↓SIG
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/AKDtofix/logd2AKD/DIFF2.aplf§0§ 2021 5 21 17 22 20 484 §dukú§0

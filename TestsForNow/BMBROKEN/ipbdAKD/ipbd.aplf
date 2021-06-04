@@ -1,0 +1,10 @@
+ r←d ipbd siz;m
+⍝ Inner product Boolean and float
+⍝ d is proportion of 0s to 1s in left argument.
+⍝ E.g., d=10 gives 10% 1s.
+ m←(2⍴siz)⍴0.5+⍳siz×siz
+ r←+/+/(0=d|floor m)+.×⍉m
+⍝ NB. This has "floor" because APL+Linux floor is busted.
+⍝ NB. Very busted.
+⍝ NB. Use ⌊ for benchmarking, please.
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/ipbdAKD/ipbd.ufn§0§ 2020 6 24 17 4 22 856 §zlÃh§0

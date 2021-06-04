@@ -1,0 +1,7 @@
+ r←fi convredu tr
+⍝ convredu performs standard convolution w/window reduce
+⍝ fi is the filter/wavelet vector (usually shorter than tr)
+⍝ tr is the seis trace or other vector to be filtered
+⍝ Output r is a vector, the filtered/convolved trace
+ r←(⍴fi)[0]f/tr,(¯1+⍴fi)⍴0 ⍝ ⍣ no APEX extensions
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/AKDtofix/mconvredsAKD/convredu.aplf§0§ 2021 5 13 13 41 23 991 §zÕaE§0

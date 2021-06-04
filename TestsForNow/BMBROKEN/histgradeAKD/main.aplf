@@ -1,0 +1,13 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW;⎕CT;b
+ ⍝ dcl integer scalar n
+ ⎕IO←0
+ ⍝⍝ n←5000000
+ b←10 100 1000 10000 100000
+ ⎕RL←16807
+ ⎕CT←1E¯13
+ ⎕PP←16
+ ⎕PW←80
+ r←b LQD⍳n
+ ⎕←r
+ ⎕←r←1-r≡11 90 900 9000 90000 4899999
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/histgradeAKD/main.ufn§0§ 2020 6 24 17 4 22 852 §åÂsÔ§0

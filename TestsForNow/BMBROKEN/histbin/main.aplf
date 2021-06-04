@@ -7,4 +7,3 @@
  r←+/1000 bhistlp n
  ⎕←r
  ⎕←r←1-r=5495000 ⍝ fake result
-⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/histbin/main.ufn§0§ 2020 6 24 17 4 22 852 §nktè§0

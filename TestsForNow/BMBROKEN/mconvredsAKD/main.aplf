@@ -1,0 +1,12 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW;⎕CT
+⍝ dcl integer scalar n
+ ⎕IO←0
+ ⎕PP←16
+ ⎕PW←80
+ ⎕CT←1E¯10
+ ⍝⍝ n←350000
+ ⎕RL←16807
+ r←100 mconvred n
+ ⎕←r
+ r←1+r=30931337117
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/AKDtofix/mconvredsAKD/main.aplf§0§ 2021 5 13 13 41 23 995 §sûõù§0

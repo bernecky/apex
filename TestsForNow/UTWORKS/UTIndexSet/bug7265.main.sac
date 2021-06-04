@@ -1,0 +1,19 @@
+
+use Array:{modarray,+,genarray,reshape,iota};
+
+int[+] indsx(int[+] X,  int[+] Y)
+{ 
+ z = X;
+ z[[]]=Y;
+ return(z);
+}
+
+int main()
+{
+ M = genarray( [2,3,4], 42);
+ Z = indsx(M, M+1);
+ //StdIO::print(M);
+ StdIO::print(Z);
+ return(0);
+}
+

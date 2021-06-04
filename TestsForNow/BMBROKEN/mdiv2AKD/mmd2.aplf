@@ -1,0 +1,7 @@
+ z←mmd2 a;sz;id
+⍝Computes inverse by calling dmd with an
+⍝ identity matrix as left argument.
+ sz←(⍴a)[0]
+ id←(2⍴sz)⍴(1+sz)↑1
+ z←id dmd2 a
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/mdiv2AKD/mmd2.ufn§0§ 2020 6 24 17 4 22 864 §jÜPÈ§0

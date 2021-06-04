@@ -1,0 +1,24 @@
+ p←tab bfcrc32 v;z8;t;q;i;vb
+⍝ Modified by rbe to be compilable
+⍝
+⍝ 'Fast-CRC' 32-bit CRC for character
+⍝ vector v (result is 2 characters)
+⍝ tab is the 'table32' encoding of
+⍝ the CRC polynomial.
+⍝ Algorithm comes from 'Computation of
+⍝ Cyclic Redundancy Checks via
+⍝ Table Lookup', CACM Aug 1988,
+⍝ volume 31 Number 8
+⍝
+ q←32⍴z8←8⍴0
+ vb←⍉2 2 2 2 2 2 2 2⊤⎕AV⍳v
+ :For i :In ⍳⍴v
+⍝ Choose table row
+     t←2⊥(8↑q)≠vb[i;]
+⍝ Do exor with shifted accumulators and 0
+     q←(8↓q,z8)≠tab[t;]
+ :EndFor
+⍝
+ p←⎕AV[2⊥⍉4 8⍴q]
+⍝ Result encoded as chars
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/crc2AKD/bfcrc32.ufn§0§ 2020 6 24 17 4 22 848 §bMklb§0

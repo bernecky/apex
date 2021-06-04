@@ -1,0 +1,9 @@
+use buildv: all;
+
+int main()
+{
+int n;  //DEBUG KLUDGE
+n = 666; // DEBUG KLUDGE
+ z  = buildv_testXXI(n);
+ return(z);
+}

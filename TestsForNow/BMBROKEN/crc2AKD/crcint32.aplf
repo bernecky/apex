@@ -1,0 +1,28 @@
+ p←tab crcint32 v;t;q;i;vb
+⍝ Integer domain crc
+⍝ This is intended to exploit our
+⍝ ability to call C library functions
+⍝ from APEX: Cxor and CShiftr
+⍝
+⍝ 'Fast-CRC' 32-bit CRC for character
+⍝ vector v (result is 2 characters)
+⍝ tab is the 'table32' encoding of
+⍝ the CRC polynomial.
+⍝ Algorithm comes from 'Computation of
+⍝ Cyclic Redundancy Checks via
+⍝ Table Lookup', CACM Aug 1988,
+⍝ volume 31 Number 8
+⍝
+ q←2-2
+ vb←⎕AV⍳v
+⍝ This can go in-line now
+ :For i :In ⍳⍴v
+⍝ Choose table row
+     t←(q CShiftr 24)Cxor vb[i]
+⍝ Do exor w/shifted accumu
+     q←(q CShiftl 8)Cxor tab[t]
+ :EndFor
+⍝
+ p←⎕AV[(4⍴256)⊤q]
+⍝ Result encoded as chars
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/crc2AKD/crcint32.ufn§0§ 2020 6 24 17 4 22 848 §bDaSÂ§0

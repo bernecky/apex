@@ -1,0 +1,4 @@
+ r←x minus y
+⍝ APL2 needs dyadic function here. r←y[1]-y[0]
+ r←y-x
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/AKDtofix/logd3AKD/minus.aplf§0§ 2021 5 13 13 38 56 150 §bGàG§0

@@ -1,0 +1,5 @@
+ z←Singular y;j
+⍝ We expect a Boolean scalar y
+ j←1÷y
+ z←j=1
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/mdivAKD/Singular.ufn§0§ 2020 6 24 17 4 22 864 §bAbô§0

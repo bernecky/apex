@@ -1,0 +1,4 @@
+ r←benlogd2 siz
+⍝ Bench Bates' LOGDERIV function
+ r←+/LOGDERIV2 0.5+siz⍴⍳100
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/AKDtofix/logd4AKD/benlogd2.aplf§0§ 2021 5 13 13 40 13 132 §cHQe§0

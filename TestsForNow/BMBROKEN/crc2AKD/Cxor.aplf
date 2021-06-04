@@ -1,0 +1,4 @@
+ r←x Cxor y
+⍝ C xor function. Works on integers x,y
+ r←Bool2Int(Int2Bool x)≠Int2Bool y
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/crc2AKD/Cxor.ufn§0§ 2020 6 24 17 4 22 848 §bØjQ§0

@@ -5,6 +5,7 @@
  Opts←defaultOpts,Options
  #.globals.Initialize Opts
  ⎕←(fts ⎕TS),' Compiling ',fldr
+ fldr←dlb dtb fldr
  ⍝  Invoke each compiler phase
  asts←#.syn.dosyn fldr
  asts←fldr #.idioms.doidioms asts

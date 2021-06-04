@@ -1,0 +1,5 @@
+ r←snpcount2 snp
+⍝ Count snips avoiding use of axis brackets
+⍝ which make APEX uppity
+ r←+/0 1 2∘.=⍉snp
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/AKDtofix/snp2AKD/snpcount2.aplf§0§ 2021 5 13 13 41 25 523 §eøéJ§0

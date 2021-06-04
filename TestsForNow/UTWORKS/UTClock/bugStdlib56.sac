@@ -1,0 +1,17 @@
+use Array:all;
+
+int main()
+{
+ // Integer output does not get newline
+ StdIO::show(42);
+ StdIO::show(666);
+
+ StdIO::show(iota(4));
+ StdIO::show(1.2+tod(iota(5)));
+
+ StdIO::show(42.0);
+ StdIO::show(666.4);
+ return(3);
+
+}
+

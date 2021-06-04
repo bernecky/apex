@@ -1,0 +1,14 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW;⎕CT
+ ⍝ README: CRC computation
+⍝ dcl integer scalar n
+ ⎕IO←0
+⍝⍝⎕←'Enter 1000000 or other problem size'
+⍝⍝n←''⍴⎕fi ⍞
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ ⎕CT←1E¯14
+ ⎕←r←crctest n
+ ⎕←r←''⍴(3.5-1.5)⊥r
+ ⎕←r←1-r=3604692541.5-0.5 ⍝ n=1e6
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/crcAKD/main.ufn§0§ 2020 6 24 17 4 22 848 §LuQM§0

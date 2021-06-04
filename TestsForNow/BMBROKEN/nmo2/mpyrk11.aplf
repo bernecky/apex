@@ -1,0 +1,4 @@
+ r←x mpyrk11 y
+⍝DANGER. Order MUST be correct!
+ r←x times(⍴x)⍴y
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/nmo2/mpyrk11.ufn§0§ 2020 6 24 17 4 22 868 §cvHo§0

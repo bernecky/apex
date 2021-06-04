@@ -1,0 +1,6 @@
+ z←b dmd2 a;v;m;n
+⍝ Dyadic matrix divide using Householder
+⍝ triangularization.
+ b←(2↑(⍴b),1)⍴b
+ z←b ls2 a
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/mdiv2AKD/dmd2.ufn§0§ 2020 6 24 17 4 22 864 §gpLP§0

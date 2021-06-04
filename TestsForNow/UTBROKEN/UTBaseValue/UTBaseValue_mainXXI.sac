@@ -1,8 +1,0 @@
-use UTBaseValue: all;
-
-int main()
-{
-  z=UTBaseValue::UTBaseValue_mainXXI();
-  StdIO::show(z);
-  return(0);
-}

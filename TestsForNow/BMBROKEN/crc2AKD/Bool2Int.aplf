@@ -1,0 +1,5 @@
+ r←Bool2Int y
+⍝ Boolean to Integer
+ r←2⊥y
+⍝⍝r←r-(2*32)×r≥2*31
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/crc2AKD/Bool2Int.ufn§0§ 2020 6 24 17 4 22 848 §drÄH§0

@@ -1,0 +1,4 @@
+ r←Int2Bool y
+⍝ Integer to Boolean
+ r←(32⍴2)⊤y
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/crc2AKD/Int2Bool.ufn§0§ 2020 6 24 17 4 22 848 §bKÖr§0

@@ -1,0 +1,5 @@
+ r←ipape siz;m
+⍝ inner product and point equal
+ m←(2⍴siz)⍴'abcdefghijk'
+ r←+/+/m∧.=⍉m
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/ipapeAKD/ipape.ufn§0§ 2020 6 24 17 4 22 856 §eÁÜQ§0

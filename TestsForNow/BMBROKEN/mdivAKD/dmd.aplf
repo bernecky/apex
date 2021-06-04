@@ -1,0 +1,12 @@
+ z←b dmd a;v;m;n
+⍝ Dyadic matrix divide using Householder
+⍝ triangularization.
+⍝⍝⍝⍝⍝⍝⍝v←Ranerr ~(2≠⍴⍴a)∨∧/ 1 2 ≠⍴⍴b
+⍝⍝⍝⍝v←Lenerr ~((1↑⍴a)≠1↑⍴b)∨(m←1↑⍴a)<(n←1↓⍴a)
+⍝⍝⍝⍝⍝v←1=⍴⍴b
+ b←(2↑(⍴b),1)⍴b
+ z←b ls a
+⍝⍝:if v ⍝ These for ISO-compliant
+⍝⍝  z←,z ⍝ version that won't compile.
+⍝⍝ :endif
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/mdivAKD/dmd.ufn§0§ 2020 6 24 17 4 22 864 §ÆGÜË§0

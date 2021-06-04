@@ -1,0 +1,5 @@
+ r←n Bjckrbe ts;i
+ r←2-2
+ :For i :In ⍳n
+     r←r++/tjckrbe i/3 1⍴ts
+ :EndFor

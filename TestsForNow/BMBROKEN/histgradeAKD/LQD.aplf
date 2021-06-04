@@ -1,0 +1,20 @@
+ Z←L LQD R
+⍝From - Sat Feb  2 16:06:47 2002
+⍝From: glogan⍝nyx10.nyx.net (Gary Logan)
+⍝Newsgroups: comp.lang.apl
+⍝Subject: Histogram algorithm
+⍝Date: 29 Jan 2002 18:30:56 -0700
+
+⍝Here is function to generate a histogram that does not use outer product.
+⍝Howard Smith showed this function during a class offered some 20+ years
+⍝ago.  I make no claims about the speed or space efficiency but I suggest
+⍝you will be glad you took the time to visualize the way it works.
+⍝ Gary Logan
+⍝ L is bucket limits; R is values.
+⍝ Z[i] is # of elements of R≤L[0], and don't fit into othe buckets
+⍝ Result is one item longer than L. It gets the overflows
+ Z←⍋⍋R,L
+ R←⍴Z
+ Z←(-⍴L)↑Z
+ Z←¯1+(Z,R+⎕IO)-(⎕IO-1),Z
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/histgradeAKD/LQD.ufn§0§ 2020 6 24 17 4 22 852 §bEÄÄu§0

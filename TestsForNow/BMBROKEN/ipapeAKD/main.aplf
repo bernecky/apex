@@ -1,0 +1,11 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW
+⍝ dcl integer scalar n
+ ⎕IO←0
+⍝⍝⍝  n←2000
+ ⎕RL←16807
+ ⎕PP←16
+ ⎕PW←80
+ r←ipape n
+ ⎕←r
+ ⎕←r←1-r=363638
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/ipapeAKD/main.ufn§0§ 2020 6 24 17 4 22 856 §róix§0

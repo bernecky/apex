@@ -1,0 +1,6 @@
+ r←loopfv n;i
+⍝this function is intended to exercise the syntax analyzer.
+ r←,0.5-0.5        ⍝ Keep Dyalog from turning 0.0 into 0
+ :For i :In ⍳n
+     r←r+1
+ :EndFor

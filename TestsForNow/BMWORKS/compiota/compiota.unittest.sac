@@ -1,0 +1,9 @@
+use compiota: all;
+
+int main()
+{
+int n;  //DEBUG KLUDGE
+n = 666; // DEBUG KLUDGE
+ z  = compiota_testXXI(n);
+ return(z);
+}

@@ -1,0 +1,15 @@
+ r←main siz;⎕IO;⎕PP;⎕PW
+ ⍝ dcl integer scalar siz
+⍝ siz←20000 is typical
+⍝ Guarded EWLF example.
+⍝ Alter columns of mat via WL, such that
+⍝ EWLF is unable to prove that the index assign
+⍝ will not cause index error, due to exceeding column range of mat.
+ ⎕IO←0
+ ⎕PP←17
+ ⎕PW←80
+ mat←(50,siz)⍴42
+ mat[;⍳5]←666
+ ⎕←r←+/,mat
+ ⎕←r←1-r=(250×666)+(siz-5)×50×42
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/gewlfAKD/main.ufn§0§ 2020 6 24 17 4 22 852 §PùQb§0

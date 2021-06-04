@@ -1,0 +1,12 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW
+ ⍝ README: Partitioned sum-reduction
+ ⍝ dcl integer scalar n
+ n←5000000
+ ⎕IO←0
+ ⎕RL←16807
+ ⎕PP←17
+ ⎕PW←80
+ r←5 pprtest n
+ ⎕←r
+ ⎕←r←1-r≡1000000.5 2498000000.5-0.5
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/csbenchAKD/main.ufn§0§ 2020 6 24 17 4 22 848 §yÉLK§0

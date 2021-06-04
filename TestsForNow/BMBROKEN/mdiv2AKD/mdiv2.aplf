@@ -1,0 +1,4 @@
+ r←mdiv2 n;x
+ x←((2⍴n)⍴(n+1)↑1.5-0.5) ⍝ Id n
+ r←+/,|mmd2 x
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/mdiv2AKD/mdiv2.ufn§0§ 2020 6 24 17 4 22 864 §caÊú§0

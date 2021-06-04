@@ -1,0 +1,14 @@
+ z←floyd D;i;j;k;siz
+⍝ Floyd's algorithm:
+⍝ shortest-path in weighted graph
+⍝ Argument is rank-2 array shape.
+ siz←⍴D
+ :For k :In ⍳siz[0]
+     :For i :In ⍳siz[0]
+         :For j :In ⍳siz[1]
+             D[i;j]←(D[i;k]+D[k;j])⌊D[i;j]
+         :EndFor
+     :EndFor
+ :EndFor
+ z←D
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/floydAKD/floyd.ufn§0§ 2020 6 24 17 4 22 852 §tRpZ§0

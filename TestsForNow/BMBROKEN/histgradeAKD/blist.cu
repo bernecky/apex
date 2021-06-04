@@ -1,2 +1,0 @@
-LQD.ufn
-main.ufn

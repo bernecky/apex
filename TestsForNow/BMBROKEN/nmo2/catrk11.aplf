@@ -1,0 +1,4 @@
+ r←x catrk11 y
+⍝ Catenate rank 1 1. Right arg is vector
+ r←x,((1↑⍴x),⍴y)⍴y
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/nmo2/catrk11.ufn§0§ 2020 6 24 17 4 22 868 §eaûæ§0

@@ -1,0 +1,5 @@
+ r←x mconvred y;tr;wz
+⍝ Execute convolution problem using window reduction
+ wz←0.01×1+⍳x
+ tr←0.01×1+⍳y
+ r←+/wz convredu tr

@@ -1,0 +1,6 @@
+ r←histop y
+⍝ Generate histogram of y, where
+⍝ y is non-negative doubles
+⍝ This version uses outer product
+ r←+/y∘.=y
+⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/histopfAKD/histop.ufn§0§ 2020 6 24 17 4 22 852 §eCSt§0

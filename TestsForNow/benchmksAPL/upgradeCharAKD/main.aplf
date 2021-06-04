@@ -1,0 +1,11 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW;k
+ ⍝ dcl integer scalar n
+ ⎕IO←0
+ ⎕RL←16807 ⍝ Make this test reproducible
+ n←1000000
+ k←(n,20)⍴⎕AV[32+⍳95] ⍝ Typical(?) data with some dups
+ ⎕PP←16
+ ⎕PW←80
+ ⎕←r←+/0.5+⎕AV⍋k
+ ⎕←r←1-r=500000000000
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/AKDtofix/upgradeCharAKD/main.aplf§0§ 2021 6 4 11 42 52 665 §ôÈKò§0
