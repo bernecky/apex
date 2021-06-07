@@ -1,3 +1,0 @@
- r←compiota n
-⍝ Test APEX loop fusion
- r←+/0.5+(⎕AV[32]=n⍴⎕AV)/⍳n

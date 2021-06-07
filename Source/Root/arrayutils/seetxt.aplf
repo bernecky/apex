@@ -1,1 +1,2 @@
- seetxt←{b←⍵∊NL ⋄ z←⍵ ⋄ z[b/⍳⍴b]←CR ⋄ z}
+ seetxt←{ ⍝ kludge for Dyalog APL/RIDE text display
+b←⍵∊NL ⋄ z←⍵ ⋄ z[b/⍳⍴b]←CR ⋄ z}

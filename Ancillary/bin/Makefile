@@ -74,6 +74,6 @@ test: $(SACUT)
 .PHONY: clean
 clean:
 	rm -rf $(BUILD_DIR)/tree $(BUILD_DIR)/host $(BUILD_DIR)/*.c $(BUILD_DIR)/*.exe
-	rm -rf $(BUILD_DIR)/*.i $(BUILD_DIR)/*.d
+	rm -rf $(BUILD_DIR)/*.i $(BUILD_DIR)/*.d $(BUILD_DIR)/a.out*
 
 

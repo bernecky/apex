@@ -1,9 +1,0 @@
- r←main n;⎕IO;⎕CT;⎕PP;⎕PW
- ⍝ README: AWLF performance of compress-iota
- ⍝ dcl integer scalar n
- ⎕IO←0
- ⎕CT←1E¯13
- ⎕PP←16
- ⎕PW←80
- ⎕←r←compiota n
- ⎕←r←1-r=3124985078125 ⍝ n=40e6

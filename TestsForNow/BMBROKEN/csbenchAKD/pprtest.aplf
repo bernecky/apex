@@ -1,8 +1,0 @@
- r←d pprtest n
-⍝ Test pplusreduce performance
-⍝ d is density of result. I.e., 5 gives 20% density,
-⍝ and 10 gives 10% density.
-⍝ n is length of original vector
- r←(n⍴d↑1)pplusreduce n⍴⍳1000
- r←(⍴r),+/r+0.5
-⍝∇⍣§/home/apex/apexgit/TestsForNow/BMBROKEN/csbenchAKD/pprtest.ufn§0§ 2020 6 24 17 4 22 848 §süÈü§0
