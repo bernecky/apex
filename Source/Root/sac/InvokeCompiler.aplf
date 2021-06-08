@@ -14,7 +14,7 @@
      ⍝ FIXME: find better home for sac2c options; re-add -doawlf -dopwlf
      cmd←' -v1 -O3 ',obj,lnk,⍵
      cmd2←'sac2c ',cmd
-     cmd← 'sac2c -target mt-pth ',cmd
+     cmd←'sac2c -target mt_pth ',cmd
      cmd←cmd,NL,cmd2
      ⍝⍝⍝ sac2c TOO SLOW!!! z←⎕SH'cd ',fldr,'; ',cmd
      z←bld,'sac',ismod⌷'CM' ⍝ script name
