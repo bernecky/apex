@@ -1,0 +1,26 @@
+<svg version="1.1"
+     baseProfile="full"
+     width="500" height="400"
+     xmlns="http://www.w3.org/2000/svg">
+
+<rect width="100%" height="100%" fill="orange" />
+
+<text x="00" y="50" style="font-family: apl385 Unicode" font-size="30" fill="green">r</text>
+<text x="20" y="50" style="font-family: apl385 Unicode" font-size="30" fill="blue">←</text>
+<text x="40" y="50" style="font-family: apl385 Unicode" font-size="30" fill="cyan">⌽</text>
+<text x="60" y="50" style="font-family: apl385 Unicode" font-size="30" fill="red">⍳</text>
+<text x="80" y="50" style="font-family: apl385 Unicode" font-size="30" fill="purple">N</text>
+
+<text x="20" y="140" font-size="30" fill="blue"> ⍝ Boolean array formatter  </text>
+<text x="20" y="170" font-size="30" fill="blue"> ⎕PP←PP  </text>
+<tspan x="20" y="200" font-size="30" fill="blue"> y←1/y 
+ <tspan fill="cyan"> ⍝  Comments are cyan vectors </tspan>
+</tspan>
+
+<text x="2" y="230" font-size="15" fill="blue" style="font-family: apl385 Unicode">
+ r←(1 2⍴'0 1 ')[y;] ⍝ BLUE
+ Can I break a line here
+</text>
+
+</svg>
+

@@ -6,6 +6,5 @@
  pd←PathDelim
  en←(E'cmake-common'),E'CMakeLists.txt'
  fldr←FullPathName nm
- r←⎕sh'ls -dD ',fldr,'*',pd,'*'
- ⍝⍝ ???? r←¯1↓¨r ⍝ Drop trailing pd
- r←(~r∊(E fldr,PathDelim),¨en)/r ⍝ See no evil
+ r←⎕SH'ls -d ',fldr
+ r←(~(PathFileName¨r)∊en)/r ⍝ See no evil

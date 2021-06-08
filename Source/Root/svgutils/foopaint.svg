@@ -1,0 +1,11 @@
+<svg version="1.1"
+     baseProfile="full"
+     width="300" height="200"
+     xmlns="http://www.w3.org/2000/svg">
+<text x="  0" y="50" style="font-family: apl385 Unicode" font-size="30" fill="orange"> R</text>
+<text x=" 20" y="50" style="font-family: apl385 Unicode" font-size="30" fill="yellow"> ←</text>
+<text x=" 40" y="50" style="font-family: apl385 Unicode" font-size="30" fill="green "> ⌽</text>
+<text x=" 60" y="50" style="font-family: apl385 Unicode" font-size="30" fill="orange"> ⍳</text>
+<text x=" 80" y="50" style="font-family: apl385 Unicode" font-size="30" fill="yellow"> ⍴</text>
+<text x="100" y="50" style="font-family: apl385 Unicode" font-size="30" fill="green "> ⍵</text>
+</svg>

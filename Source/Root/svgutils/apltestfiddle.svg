@@ -1,0 +1,20 @@
+<script>
+  var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute('style', 'border: 0px solid black');
+  svg.setAttribute('width', '600');
+  svg.setAttribute('height', '250');
+  var newText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+  newText.setAttributeNS(null, "x", 20);
+  newText.setAttributeNS(null, "y", 100);
+  newText.setAttribute('style', 'font-size:24px');
+  newText.innerHTML = "Eins";
+  newText.innerHTML += "<tspan style=\"fill:red\">t</tspan>";
+  newText.innerHTML += "<tspan style=\"fill:green\">e</tspan>";
+  newText.innerHTML += "<tspan style=\"fill:blue\">l</tspan>";
+  newText.innerHTML += "<tspan style=\"fill:orange\">l</tspan>";
+  newText.innerHTML += "ung";
+
+  svg.appendChild(newText);
+  document.body.appendChild(svg);
+
+</script>
