@@ -1,0 +1,41 @@
+\section{Utility Verbs}
+\label{utilityverbs}
+
+\begin{tabular}{l}
+{\apl resh\qlarrow\qlbrace\qlpar\qlpar\qlpar\qrho\qomega\qrpar\qdivide\qalpha\qrpar\qcomma\qalpha\qrpar\qrho\qomega\qrbrace}\\
+{\apl uint8\qlarrow\qlbrace\02\qdtack\qnuax\01\qltack\08~resh~\qomega\qrbrace}\\
+{\apl sum\qlarrow\qlbrace\qplus\qslash\qomega\qrbrace}\\
+{\apl any\qlarrow\qlbrace\qor\qslash\qomega\qrbrace}
+ or {\apl any\qlarrow\qlbrace0\qne\qplus\qslash\qomega\qrbrace}\\
+{\apl all\qlarrow\qlbrace\qand\qslash\qomega\qrbrace}
+ or {\apl all\qlarrow\qlbrace\qlpar\qrho\qomega\qrpar\qeq\qplus\qslash\qomega\qrbrace}\\
+{\apl b256\qlarrow\0\qtran\qlpar\08\qrho\02\qrpar\qutack\qiota\0256}\\
+{\apl PopcountTab\qlarrow\qplus\qslash\0b256}\\
+{\apl RevTab\qlarrow\02\qdtack\qrotf\qtran\0b256}\\
+{\apl ZeroNonzeroTab\qlarrow\0PopcountTab\qcomma\00}\\
+{\apl First0Tab\qlarrow\0b256\qiota\qnuax\01\qrtack\00}\\
+{\apl First1Tab\qlarrow\qrotate\0First0Tab}\\
+\end{tabular}
+
+\begin{figure}
+{\apl\small
+\begin{tabular}{l}
+infix\qlarrow\qlbrace\qtilde\01\quarrow\qovrbar\02\quarrow\qlpar\02\qplus\02\qstile\0\qomega\qrpar\qrho\qalpha\qlbr\00~1\qrbr\qrbrace\\
+cscan\qlarrow\qlbrace~m\qlarrow\qomega\qiota\0\qtilde\qalpha\qlbr\00\qrbr\\
+~~~~~~~~i\qlarrow\0\qalpha~infix~m\\
+~~~~~~~~s\qlarrow\qlpar\00\qustile\qlpar\qrho\qomega\qrpar\qbar\0m\qplus\01\qrpar\qrho\0i\qeq\0\qalpha\qlbr\02\qrbr\\
+~~~~~~~~\qlpar\0m\qrho\qalpha\qlbr\00~1\qrbr\qrpar\qcomma\qlpar\0m\qne\qrho\qomega\qrpar\qslash\0i\qcomma\0s\qrbrace\\
+ltscan~~\qlarrow\qlbrace\00~0~0~cscan~\qomega\qrbrace\\
+orscan~~\qlarrow\qlbrace\00~0~1~cscan~\qomega\qrbrace\\
+norscan~\qlarrow\qlbrace\00~1~0~cscan~\qomega\qrbrace\\
+gescan~~\qlarrow\qlbrace\00~1~1~cscan~\qomega\qrbrace\\
+nandscan\qlarrow\qlbrace\01~0~0~cscan~\qomega\qrbrace\\
+gtscan~~\qlarrow\qlbrace\01~0~1~cscan~\qomega\qrbrace\\
+lescan~~\qlarrow\qlbrace\01~1~0~cscan~\qomega\qrbrace\\
+andscan~\qlarrow\qlbrace\01~1~1~cscan~\qomega\qrbrace\\
+\end{tabular}
+}
+\caption{McDonnell's Boolean scan verbs}
+\label{caretscanverbs}
+\end{figure}
+

@@ -1,0 +1,4 @@
+%% Font definition file for APL2 (saxpsa)
+\ProvidesFile{ot1saxpsa.fd}[2006/11/19 Dieter Kilsch]
+\DeclareFontFamily{OT1}{saxpsa}{}
+\DeclareFontShape {OT1}{saxpsa}{m}{n}{<->saxpsa}{} 

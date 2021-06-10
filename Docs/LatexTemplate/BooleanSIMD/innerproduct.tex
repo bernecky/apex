@@ -1,0 +1,128 @@
+\section{Inner Product}
+\label{innerproduct}
+
+Iverson generalized linear algebra's inner 
+product.~\cite{Iverson62,KEIverson:tot}
+In his groundbreaking book, he said, in regard to
+{\em generalized matrix product}:
+
+\begin{quote}
+This formulation emphasizes the fact that matrix multiplication
+incorporates two elementary operations (${+}, {\times}$) and 
+suggests that they be displayed explicitly. The ordinary
+matrix product will therefore be written as: 
+$X \stackrel{+}{\times} Y$.
+\end{quote}
+
+For \ibmapl, that notation had to be linearized to allow entry
+and display on the typewriter-like terminals of that era. 
+Hence, the ordinary
+inner product is now written as: {\apl X\qplus\qdot\qtimes\0Y},
+and the general case as: {\apl X f\qdot\0g Y}, where {\apl f}
+and {\apl g} are any suitable verbs.
+The generalized inner product has many uses: one step
+of the Boolean-Boolean transitive-closure computation on a connectivity matrix
+can be computed as: {\apl M\qor\qdot\qand\0M}.
+A weaving on a loom can be modeled as a single inner product: a matrix,
+{\apl tieup}, specifies which harness(es) should be raised
+when a given treadle is pushed; {\apl tread} specifies the
+treadling order; {\apl thread} specifies which threads are
+in the weft:
+
+\medskip
+{\apl tieup\qlbr\0tread\qsemic\qrbr\qor\qdot\qeq\0thread}
+\medskip
+
+\fixme{Give example}
+
+The classical algorithm for inner product is painfully slow for all
+data types, but for Boolean arrays, it is excruciatingly so.
+In the early 1970s, the author heard of an inner-product algorithm
+that had been used by colleagues at I.P. Sharp Associates,
+who were developing the STAR APL interpreter for the CDC STAR-100, 
+a memory-to-memory supercomputer that required stride-1
+algorithms for acceptable performance. The STAR APL algorithm 
+worked by interchanging the loop ordering. The classic inner product
+can be written as:
+
+\input{ipclassic}
+
+\noindent By comparison, the STAR APL algorithm can be written
+in APL this way, with one less level of visible loop 
+nesting:\footnote{The mere removal of one level of explicit
+looping makes the STAR APL model execute about 90 times
+faster than the Classic model, on 200x200 matrices of
+real numbers. Of course, that is still 30 times slower than
+the APL derived function.}
+
+\input{ipstar}
+
+The STAR APL algorithm has a number of advantages over the classical
+one: First, it references {\tt Xel}, an element of {\tt X}, only once, and
+does so in stride-1 (ravel) order. Second, any type conversion or
+analysis of {\apl Xel} is amortized over
+the inner loop, so its cost is usually negligible. 
+Third, the multiplies ({\apl g}) in the inner loop are stride-1, 
+scalar-vector computations, so
+they make good use of cache and are trivially vectorizable.
+Fourth, the sum ({\apl f}) reduction in the inner loop is also stride-1
+and vector-vector, offering similar performance benefits.
+Fifth, the latter two vector operations can be loop-fused.
+Finally, in the Boolean domain, an entire word from {\apl X} can
+be quickly checked to see if it is all zeros or all ones.
+This often permits even more work to be elided.
+
+The author realized that the STAR algorithm should work extremely well
+with APL's Boolean arrays, for the above reasons, and because
+it could perform the inner loop a word or a matrix row at a time,
+producing, by itself, a substantial speedup.
+David Allen, then working in the APL Development Group, AKA ``The Zoo",
+at I.P. Sharp Associates Limited, implemented our algorithm in 
+the SHARP APL interpreter. The computational complexity 
+of inner product allowed us to obtain
+final performance improvements on Boolean arrays of
+about three orders of magnitude (32 times 32). 
+
+The STAR APL algorithm offers other benefits.
+Looking at the STAR APL inner loop, we see that it computes a
+scalar-vector function on {\apl g}:
+
+\medskip
+{\apl Xel \qtimes~Y\qlbr\0J\qsemic\qrbr}\\
+
+\noindent We exploited some
+simple algebra to eliminate some or all of the work done
+in each of these computations.~\cite{RBernecky:apex}
+Consider {\apl 0 1 \qor\qdot\qand~Y}: In the first iteration,
+{\apl Xel} is {\apl 0}, {\apl f} is {\apl \qor}, and {\apl g} is {\apl \qand}.
+Hence, the {\apl g} computation is:
+
+{\apl 0~\qand~Y\qlbr0\qsemic\qrbr}
+
+\noindent This will always generate a vector of zeros of the same
+length as a row of {\apl Y}. Knowing this lets us skip
+the {\apl g} computation for that element.
+Furthermore, since zero is the identity element for {\apl \qor},
+we can also skip the reduction part of the computation on {\apl f}. 
+
+The author, while adapting the STAR APL algorithm for use
+in the SAC back end of the APEX APL compiler, developed 
+a further performance enhancement, along these same 
+lines.\cite{RBernecky:apex}
+Some time later, Hui independently rediscovered both of these
+enhancements.\cite{RKWHui:innerproduct}
+The STAR APL and STARLIKE algorithms are now used in 
+the APEX APL compiler, Dyalog APL, the J interpreter, and
+in Walter Fil's Plural compiler.
+
+That enhancement, which we dubbed {\em STARLIKE},
+recognized, essentially, that
+in the second iteration, {\apl Xel}
+is {\apl 1}, which is the identity element for {\apl \qand}.
+This lets us, again, skip the {\apl g}-computation entirely,
+and then perform the {\apl f}-reduction using the current row of Y.
+
+An added advantage of the STAR algorithm is that it works well
+on all data types, providing a crude form of sparse array support
+for elements of {\apl X}.
+

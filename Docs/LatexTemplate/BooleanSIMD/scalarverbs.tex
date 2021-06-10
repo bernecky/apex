@@ -1,0 +1,20 @@
+\section{Scalar Verbs}
+
+In \ibmapl, Breed optimized the rank-0 (scalar) 
+Boolean verbs ({\em e.g.}, 
+{\apl \qand,\qor,\qtilde,\qnand,\qnor\dots})
+and the relationals ({\apl \qlt,\qle,\qeq,\qge,\qgt,\qne})
+on arrays, by applying them a word (32 bits on the S/360)
+at a time, thereby obtaining SIMD speedups in excess of 32 times.
+Breed also included support for {\em scalar extension}, 
+{\em e.g.}:
+
+~~~~~~~{\apl 1\qne\00~1~0~1~0} \\
+{\apl 1~0~1~0~1}\\
+
+
+\noindent we optimized several SHARP APL primitives to 
+include checks for appropriate identities, so that, {\em e.g.}, 
+{\apl 1\qand\0y} would immediately produce the result {\apl y}, 
+without doing {\em any} element-wise computation.
+

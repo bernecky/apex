@@ -1,0 +1,29 @@
+\section{Control Flow Becomes Data Flow}
+\label{controlflowtodataflow}
+
+Conditional expressions negatively impact execution speed, even in
+contemporary computer architectures, so compiler (and interpreter) 
+writers attempt to eliminate them, whenever that is feasible.
+Boolean arrays facilitate the replacement of control flow by
+data flow, frequently improving performance as a result of 
+eliminating conditionals.\cite{DBLP:conf/pldi/BerneckyS15}
+For example, if we want to give everyone whose salary, 
+{\apl s}, is less than {\apl tiny},
+a raise of {\apl r}, it can be done this way in parallel, 
+without resorting to scalar-oriented control flow constructs
+such as {\tt if/then/else}: 
+
+\medskip
+{\apl s\qlarrow\0s\qplus\0r\qtimes\0s\qlt\0tiny}
+\medskip
+
+\noindent This terse and expressive ability arises directly from
+what Knuth calls {\em Iverson's convention for characteristic functions}, 
+of treating Boolean true and false as the integers {\apl 1} and {\apl 0}, 
+respectively.
+Other examples include the verb {\apl mqs}, to mark the 
+quoted strings within a text vector, given in Section~\ref{reduceandscan},
+and the (mostly) SIMD tokenizer for the 
+APEX APL compiler.~\cite{RBernecky:apex,RBernecky:tokenizer}
+
+

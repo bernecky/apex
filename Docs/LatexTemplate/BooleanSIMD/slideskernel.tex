@@ -1,0 +1,433 @@
+
+% Prepared for the Dyalog '16 conference in Glasgow
+
+%%\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{epsfig}
+\usepackage{beamerthemesplit}
+\usepackage{verbatim}
+\usepackage{saxpsa}
+\usepackage{textcomp}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9,width=0.9\paperwidth}
+
+\begin{document}
+
+\def\ibmapl{$APL\backslash\0360$}
+
+\newcommand{\fig}[2]{{%
+\begin{figure}%
+\includegraphics[angle=00,width=0.95\textwidth]{#1}%
+\caption{#2}%
+\label{#1}%
+\end{figure}%
+}}
+
+\newcommand{\fixme}[1]{{ \color{red} \bf FIXME: #1}}
+\newcommand{\sac}{SaC}
+
+%\conferenceinfo{Dyalog '16}{October 9-13, 2016, Glasgow, Scotland}
+
+\title{APL SIMD Boolean Array Algorithms}
+\author{Robert Bernecky}
+
+\institute{Snake Island Research Inc, Canada\\
+bernecky@snakeisland.com}
+
+\maketitle
+
+\frame{
+\frametitle{Abstract}
+\input{abstract}
+}
+
+
+\frame{
+\frametitle{A BIT of Introduction}
+\begin{itemize}
+\item<+-| alert@+>  The bit: the fundamental unit of digital computing
+\item<+-| alert@+>  Yet, few computer languages treat bits as basic data types
+\item<+-| alert@+>  Fewer support multi-dimensional bit arrays (8 bits/byte)
+\item<+-| alert@+>  Fewer yet provide array operations on Boolean arrays
+\item<+-| alert@+>  Boolean arrays appear in image analysis, cryptography, data compression\dots
+\item<+-| alert@+>  The burden of bit twiddling is left to the programmer
+\item<+-| alert@+>  APL, however, simply treats Booleans as the integers 0 and 1
+\item<+-| alert@+>  Boolean arrays are grist to APL's data-parallel, expressive mill!
+\end{itemize}
+}
+
+\frame{
+\frametitle{Why Does APL have One-bit Booleans?}
+\begin{itemize}
+\item<+-| alert@+> Blame Larry Breed: while designing \ibmapl,
+\item<+-| alert@+> Breed decided to store Booleans densely, eight bits/byte
+\item<+-| alert@+> Booleans were stored in row-major order, as are other arrays
+\item<+-| alert@+> This eased indexing, structural and selection verbs, etc.
+\item<+-| alert@+> Single-bit indexing was more expensive than word indexing\dots
+\item<+-| alert@+> But it opened the door to SIMD Boolean array optimizations
+\item<+-| alert@+> Those optimizations are the subject of this talk
+\item<+-| alert@+> Speedups were usually 8X or 32X, but sometimes even more
+\item<+-| alert@+> A half century later, Breed's decision remains brilliant
+\item<+-| alert@+> These optimizations are still important and relevant
+\item<+-| alert@+> GPU and SIMD vector facilities can exploit them
+\end{itemize}
+}
+
+\frame{
+\frametitle{Scalar Verbs}
+\begin{itemize}
+\item<+-| alert@+>Breed optimized many rank-0 (scalar) 
+Boolean verbs {\em e.g.} 
+\item<+-| alert@+> Boolean verbs: {\apl \qand,\qor,\qtilde,\qnand,\qnor\dots}
+\item<+-| alert@+> Relational verbs: {\apl \qlt,\qle,\qeq,\qge,\qgt,\qne}
+\item<+-| alert@+> SIMD application, a word at a time (32 bits on S/360)
+\item<+-| alert@+> One or more of us optimized scalar extension, {\em e.g.}
+\item<+-| alert@+> {\apl 1\qand\0B} would produce {\apl B},
+\item<+-| alert@+> without doing {\em any} element-wise computations
+\end{itemize}
+}
+
+\frame{
+\frametitle{Strength Reduction: a Classic Compiler Optimization}
+\begin{itemize}
+\item<+-| alert@+> {\em Strength reduction}: replace one operation by a cheaper one
+\item<+-| alert@+> {\em E.g.}, replace multiply by a power of two with a shift
+\item<+-| alert@+> In APL, Boolean {\apl B1\qtimes\0B2} becomes {\apl B1\qand\0B2}
+\item<+-| alert@+> In APL, Boolean {\apl B1\qdstile\0B2} becomes {\apl B1\qand\0B2}
+\item<+-| alert@+> In APL, Boolean {\apl B1\qstar\0B2} becomes {\apl B1\qge\0B2}
+\item<+-| alert@+> Performance boosts: simpler verbs, SIMD operation, no conditionals, stay in Boolean domain
+\item<+-| alert@+> Performance boosts: In a compiler, opportunity for other optimizations
+\end{itemize}
+}
+
+\frame{
+\frametitle{Structural and Selection Verbs I}
+\begin{itemize}
+\item<+-| alert@+> catenate, laminate, rotate, reverse, rank, from,
+\item<+-| alert@+> merge, take, drop\dots
+\item<+-| alert@+> These verbs, {\em e.g.}, {\apl 1 0 1, 0 1 1 0 } 
+have to handle array indices that are not byte-aligned
+\item<+-| alert@+> We would like these to run SIMD, word-at-a-time, on Booleans
+\item<+-| alert@+> We introduced rbemove: generalized stride-1 (ravel order) copier verb
+\item<+-| alert@+>  {\apl snk\qlbr\0sni\qplus\qiota\0k\qrbr\qlarrow\0src\qlbr\0sri\qplus\qiota\0k\qrbr}
+\item<+-| alert@+> Does not corrupt out-of-bounds array elements
+\item<+-| alert@+> Operates in SIMD mode(s) whenever possible
+\item<+-| alert@+> Supports all type conversions
+\end{itemize}
+}
+
+\frame{
+\frametitle{Structural and Selection Verbs II}
+\begin{itemize}
+\item<+-| alert@+> Operation on non-trailing array axes: 
+\item<+-| alert@+> SIMD copy entire subarrays at once, {\em e.g.}\\
+{\apl 1\qrotf\02~3~4\qrho\qiota\024}
+\item<+-| alert@+> rbemove will copy 12 adjacent array elements at once
+\end{itemize}
+}
+
+
+\frame{
+\frametitle{Structural and Selection Verbs III}
+\begin{itemize}
+\item<+-| alert@+> {\apl 2~3~4\qrho\qiota\024\\
+~0~~1~~2~~3\\
+~4~~5~~6~~7\\
+~8~~9~10~11\\
+~\\
+12~13~14~15\\
+16~17~18~19\\
+20~21~22~23\\}
+\item<+-| alert@+> {\apl 1\qrotf\02~3~4\qrho\qiota\024\\
+12~13~14~15\\
+16~17~18~19\\
+20~21~22~23\\
+~\\
+~0~~1~~2~~3\\
+~4~~5~~6~~7\\
+~8~~9~10~11\\}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Reverse and Rotate on Booleans}
+\begin{itemize}
+\item<+-| alert@+> Bernecky, 1979: fast algorithms for {\apl \qrotate\0\qomega} \& {\apl \qalpha\qrotate\qomega}
+\item<+-| alert@+> last-axis Boolean {\apl \qrotate\qomega} did a byte at a time, w/table lookup\dots\\
+{\apl~~~~~~ RevTab\qlbr\0uint8~\qomega\qrbr}
+\item<+-| alert@+> then byte-aligned the resulting vector, SIMD, a word at a time
+\item<+-| alert@+> All non-last-axis operations copied entire cells at once, using rbemove
+\end{itemize}
+}
+
+\frame{
+\frametitle{Reverse and Rotate Performance on Booleans}
+\fig{matrix_rotate_first_axis.jpg}{Rotate Rewritten: 50 milliunits = 2.85msec}
+}
+
+\frame{
+\frametitle{Reshape}
+\begin{itemize}
+\item<+-| alert@+> Reshape allows element reuse, {\em e.g.}:\\
+{~~~~~~\apl 8\qrho\01~0~0}\\
+{\apl 1~0~0~1~0~0~1~0}
+\item<+-| alert@+> Breed optimized Boolean reshape this way:
+\item<+-| alert@+> Copy the argument to the result
+\item<+-| alert@+> Catenate the partial result to itself, doubling its length,
+until its tail is byte-aligned.
+\item<+-| alert@+> Do an overlapped move, or ``smear" of the result to its tail
+\end{itemize}
+}
+
+\frame{
+\frametitle{Transpose I}
+\begin{itemize}
+\item<+-| alert@+> An unlikely candidate for SIMD, it would seem\dots
+\item<+-| alert@+> {\apl \qalpha\qtran\qomega} with unchanged trailing axes
+\item<+-| alert@+> {\apl T\qlarrow\02~2~2~3\qrho\qiota\024\\
+~~0~~1~~2\\
+~~3~~4~~5\\
+~\\
+~~6~~7~~8\\
+~~9~10~11\\
+~\\
+~\\
+~12~13~14\\
+~15~16~17\\
+~\\
+~18~19~20\\
+~21~22~23\\
+}
+\end{itemize}
+}
+
+
+\frame{
+\frametitle{Transpose II}
+\begin{itemize}
+\item<+-| alert@+> Transpose with unchanged trailing axes
+\item<+-| alert@+> SIMD copy six elements at once (rbemove)
+\item<+-| alert@+> {\apl 1~0~2~3\qtran\0T\\
+~~0~~1~~2\\
+~~3~~4~~5\\
+~\\
+~12~13~14\\
+~15~16~17\\
+~\\
+~\\
+~~6~~7~~8\\
+~~9~10~11\\
+~\\
+~18~19~20\\
+~21~22~23\\
+}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Boolean Transpose III}
+\begin{itemize}
+\item<+-| alert@+> {\em Hacker's Delight}: fast 8x8 Boolean matrix transpose
+\item<+-| alert@+> Kernel: 16 logical \& shift operations on 64-bit ravel
+\item<+-| alert@+> Uses {\em perfect shuffle} (PDEP) on any power of two shape
+\item<+-| alert@+> Dyalog APL (Foad): 10X speedup on large Boolean array transpose
+\item<+-| alert@+> Kernel generalizes to any power of two, {\em e.g.}, 16x16, 32x32
+\end{itemize}
+}
+
+\frame{
+\frametitle{Search Verbs}
+\begin{itemize}
+\item<+-| alert@+> Bernecky, 1971: fast {\em indexof} and {\em set membership}
+\item<+-| alert@+> All data types except reals with {\apl \qQuad\0ct\qne 0}
+\item<+-| alert@+> {\apl \qlpar\qalpha\qiota\00 1\qrpar\qlbr\qomega\qrbr}
+\item<+-| alert@+> {\apl \qlpar\qalpha\qiota\0\qQuad\0av\qrpar\qlbr\qomega\qrbr}
+\item<+-| alert@+> Booleans: Vector search for first byte of interest
+\item<+-| alert@+> Then, table lookup to get bit offset
+\item<+-| alert@+> Speedup: lots - linear time {\em vs.} quadratic time
+\item<+-| alert@+> Created indexof kernel utility for interpreter use
+\end{itemize}
+}
+
+\frame{
+\frametitle{Reduce}
+\begin{itemize}
+\item<+-| alert@+> Roger D. Moore, 1971: fast {\apl \qplus\qslash\qomega} Boolean vector
+\item<+-| alert@+> Initial use was {\em compress} and {\em expand} setup:\\
+{\apl \qplus\qslash\qalpha} was taking longer than {\em compress}/{\em expand}
+\item<+-| alert@+> S/360 translate vector op: Boolean bytes into population counts, SIMD 124 bytes per segment
+\item<+-| alert@+> SIMD integer sum of 4-byte words gave 4-element partial sum
+\item<+-| alert@+> Shift-and-add gave final result
+\item<+-| alert@+> Segment size limited to prevent inter-byte carries
+\item<+-| alert@+> Larry Breed haiku: {\apl \qplus\qslash\qplus\qslashf\04~resh~PopcountTab\qlbr\0uint8~\qomega\qrbr}
+\item<+-| alert@+> Algorithm used briefly for {\apl \qor\qslash\qomega} and
+{\apl \qand\qslash\qomega}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Reduce and Scan}
+\begin{itemize}
+\item<+-| alert@+> E.E. McDonnell, 1974: elegant APL models of Boolean {\em scan} and {\em reduction} for relationals
+\item<+-| alert@+>  Result was catenation of prefix, infix, \& suffix expressions 
+\item<+-| alert@+> Used Bernecky's fast indexof
+\item<+-| alert@+> Result: linear-time, word-at-a-time, SIMD Boolean scan \& reduce
+\end{itemize}
+}
+
+\frame{
+\frametitle{Scan}
+\begin{itemize}
+\item<+-| alert@+> John Heckman, 1970 or 1971: user-defined APL scan verbs
+\item<+-| alert@+> Now widely used in GPUs
+\item<+-| alert@+> Recursive doubling:\\
+{\apl
+r\qlarrow\0nescanall y\qsemic\0s\qsemic\0biw\\
+~~\qlamp~Not-equal scan\\
+~~r\qlarrow\0y\\
+~~biw\qlarrow\qustile\02\qlog\01\qustile\qrho\0y\\
+~~\qcolon\0For s \qcolon\0In 2\qstar\qiota\0biw \qlamp~Heckman\\
+~~~~r\qlarrow\0←r\qne\qlpar\qbar\qrho\0r\qrpar\quarrow\qlpar\qbar\0s\qrpar\qdarrow\0r\\
+~~\qcolon\0EndFor\\
+}
+\item<+-| alert@+> SIMD, word-at-a-time algorithm for Boolean {\apl \qne\qbslash\qomega} and {\apl\qeq\qbslash\qomega} along last axis
+\item<+-| alert@+> Bernecky's simple C Heckman implementation is about 3X faster than Dyalog APL 15.0 (vector only)
+\item<+-| alert@+> So far, no X86 vectorization; perhaps we can do even better
+\end{itemize}
+}
+
+\frame{
+\frametitle{STAR Inner Product I}
+\begin{itemize}
+\item<+-| alert@+> IPSA, 1973: Boolean array inner products were painfully slow
+\item<+-| alert@+> Control Data (CDC) wanted APL for their new STAR-100 vector supercomputer
+\item<+-| alert@+> Group from Toronto I.P. Sharp Associates hired to work on the interpreter
+\item<+-| alert@+> Memory-to-memory vector instructions needed stride-1 access for good performance
+\item<+-| alert@+> Bernecky: heard about STAR APL stride-1 inner-product algorithm;
+\item<+-| alert@+> redesigned Boolean inner product to use STAR algorithm
+\end{itemize}
+}
+
+\frame{
+\frametitle{Classic Inner Product Algorithm}
+\input{ipclassic}
+}
+
+\frame{
+\frametitle{STAR Inner Product Algorithm}
+\input{ipstar}
+}
+
+
+\frame{
+\frametitle{STAR Inner Product II}
+\begin{itemize}
+\item<+-| alert@+> Inner product loops reordered; key benefits, for 
+{\apl \qalpha\0 f\qdot\0g \qomega}
+\item<+-| alert@+> Each {\apl \qalpha} element, {\apl Xel}, fetched only once
+\item<+-| alert@+> Type conversion of {\apl Xel} no longer time-critical
+\item<+-| alert@+> {\apl Xel} analysis amortized over entire row: {\apl Y\qlbr\0J\qsemic\qrbr}
+\item<+-| alert@+> Scalar-vector application of {\apl g}\\
+{\apl tmp\qlarrow\0Xel g Y\qlbr\0J\qsemic\qrbr}
+\item<+-| alert@+> Vector-vector {\apl f}-reduce into result row {\apl Z\qlbr\0I\qsemic\qrbr}\\
+{\apl Z\qlbr\0I\qsemic\qrbr\qlarrow\0Z\qlbr\0I\qsemic\qrbr\qblank\0f tmp}
+\end{itemize}
+}
+
+\frame{
+\frametitle{SIMD Boolean STAR Inner Product Basics}
+\begin{itemize}
+\item<+-| alert@+> Scalar-vector {\apl Xel g Y\qlbr\0J\qsemic\qrbr} is word-at-a-time Boolean SIMD
+\item<+-| alert@+> Vector-vector {\apl Z\qlbr\0I\qsemic\qrbr\qlarrow\0Z\qlbr\0I\qsemic\qrbr} is word-at-a-time Boolean SIMD
+\item<+-| alert@+> We are already a lot faster\!
+\item<+-| alert@+> The STAR APL model does {\apl \qplus\qdot\qtimes} 90X faster than the Classic model, on 200x200 real matrices
+\item<+-| alert@+> Unfortunately, the APL primitive is still 30X faster than the APL model
+\end{itemize}
+}
+
+\frame{
+\frametitle{Boolean STAR Inner Product Optimizations}
+\begin{itemize}
+\item<+-| alert@+> Consider {\apl tmp\qlarrow\0Xel \qand\qblank\0RO} in {\apl \qalpha \qor\qdot\qand \qomega}
+\item<+-| alert@+> If {\apl Xel} is {\apl 0}, then {\apl tmp} is all zeros: no {\apl g} computation
+\item<+-| alert@+> If {\apl Xel} is {\apl 1}, then {\apl tmp} is just {\apl RO}:
+no {\apl g} computation
+\item<+-| alert@+> {\apl f} is {\apl \qor}, so its identity element is {\apl 0}
+\item<+-| alert@+> Hence, if {\apl Xel} is {\apl 0}, we can skip the {\apl g}-reduction
+\item<+-| alert@+> Similarly, if {\apl Xel} is {\apl 1}, we can do the {\apl g}-reduction using {\apl RO}
+\item<+-| alert@+> This gives us poor man's sparse arrays, which works on other data types, too
+\item<+-| alert@+> Final result: Boolean inner products on SHARP APL/PC ran
+much faster than APL2 on huge mainframe
+\end{itemize}
+}
+
+\frame{
+\frametitle{Control Flow Becomes Data Flow}
+\begin{itemize}
+\item<+-| alert@+> Booleans as arithmetic: replace control flow by data flow
+\item<+-| alert@+> Conditionals can often be removed, {\em e.g.}:
+\item<+-| alert@+> Give those with salary, {\apl S}, less than {\apl Tiny} a raise of {\apl R}\\
+{\apl S\qlarrow\0S\qplus\0R\qtimes\0S\qlt\0Tiny}
+\item<+-| alert@+> Knuth calls this capability {\em Iverson's convention for
+characteristic functions}
+\item<+-| alert@+> See also the verb {\apl mqs}, for finding quoted text
+\item<+-| alert@+> See also the Bernecky-Scholz PLDI2014 Arrays Workshop paper: {\em Abstract Expressionism}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Boolean Sort}
+\begin{itemize}
+\item<+-| alert@+> Sort ascending for Booleans:\\
+{\apl SortAscending\qlarrow\qlbrace\qlpar\qbar\qrho\qomega\qrpar\quarrow\qlpar\qplus\qslash\qomega\qrpar\qrho\01\qrbrace}
+
+\item<+-| alert@+> Boolean sort can use Moore's SIMD {\apl \qplus\qslash\0Boolean} in its first phase of execution
+\item<+-| alert@+> Second phase can be performed in SIMD, {\em e.g.}, by a single SAC data-parallel with-loop.
+\end{itemize}
+}
+
+\frame{
+\frametitle{Boolean Grade}
+\begin{itemize}
+\item<+-| alert@+> SIMD Boolean upgrade:\\
+{\apl ug\qlarrow\qlbrace\qlpar\qlpar\qtilde\qomega\qrpar\qslash\qiota\qrho\qomega\qrpar\qcomma\qomega\qslash\qiota\qrho\qomega\qrbrace}
+\item<+-| alert@+> Not stunningly SIMD, though.
+\end{itemize}
+}
+
+\frame{
+\frametitle{Boolean Matrix Operations}
+\begin{itemize}
+\item<+-| alert@+> {\em Shard}: For byte-oriented algorithms,
+a possibly empty sub-byte fragment of
+a matrix row, extending from the start of the row to next byte,
+or from the last byte in the row to the end of the row.
+\item<+-| alert@+> Handling shards is a nuisance; it destroys algorithmic beauty
+\item<+-| alert@+> Handling shards is also slower than beautiful algorithms
+\item<+-| alert@+> Consider:\\ {\apl 1~1~0~0,~0~0~0~0,~1~0~1~0,~1~1~1~0}
+\item<+-| alert@+> The vector {\apl 1~0~1} is a shard, because its
+elements start at a byte boundary, but end in mid-byte.
+\item<+-| alert@+> The vector {\apl 0~1~1~1~0} is a shard, because
+it starts in mid-byte, and ends on a byte boundary.
+\item<+-| alert@+> A similar definition holds for word-oriented algorithms
+\end{itemize}
+}
+
+\frame{
+\frametitle{Acknowledgements}
+My sincere thanks to James A. Brown, Larry M. Breed, Walter Fil, 
+Jay Foad, Roger K.W. Hui, Roger D. Moore, and Bob Smith,
+for their constructive suggestions and ideas regarding this paper.
+~\\
+The APL programs in this paper were executed on Dyalog APL 
+Version 15.0. Dyalog provides free downloads of their interpreters
+for educational use; they also offer a free download of their
+Raspberry Pi edition, at {\tt www.dyalog.com}.
+~\\
+The British APL Association (BAA) provided the author with
+financial assistance for attending this conference;
+their thoughtfulness and generosity is greatly appreciated.
+}
+

@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: booleanSimd.aux
+The style file: plainurl.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: allbibs.bib
+Warning--empty journal in MHarris:parallelprefixsumwithcuda
+Warning--empty journal in RHui:bitarrays
+You've used 18 entries,
+            2849 wiz_defined-function locations,
+            906 strings with 10026 characters,
+and the built_in function-call counts, 6227 in all, are:
+= -- 649
+> -- 160
+< -- 1
++ -- 60
+- -- 40
+* -- 258
+:= -- 897
+add.period$ -- 58
+call.type$ -- 18
+change.case$ -- 73
+chr.to.int$ -- 0
+cite$ -- 20
+duplicate$ -- 197
+empty$ -- 656
+format.name$ -- 40
+if$ -- 1678
+int.to.chr$ -- 0
+int.to.str$ -- 18
+missing$ -- 12
+newline$ -- 94
+num.names$ -- 30
+pop$ -- 160
+preamble$ -- 1
+purify$ -- 59
+quote$ -- 0
+skip$ -- 520
+stack$ -- 0
+substring$ -- 179
+swap$ -- 26
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 69
+warning$ -- 2
+while$ -- 36
+width$ -- 20
+write$ -- 195
+(There were 2 warnings)

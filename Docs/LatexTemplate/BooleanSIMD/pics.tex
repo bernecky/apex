@@ -1,0 +1,64 @@
+% big pix
+%
+\fig{matrix_rotate_first_axis.jpg}{Rotate Rewritten: 50 milliunits = 2.85msec}
+
+\begin{figure}
+\begin{small}
+\begin{verbatim}
+// Kernel for rbe not-equal scan. We use Heckman recursive doubling on
+// each word, then conditionally invert each word, based on the 
+// rightmost bit of the previous word.
+//
+// This code runs about 3X faster than Dyalog APL 15.0.
+// 2016-09-16
+// 
+// Jay Foad noted that Dyalog APL uses big-endian storage
+// format for Booleans. Hence, the bswap calls, below.
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <smmintrin.h>
+
+int main()
+{
+#define N 16777216
+#define BITSINWORD 32
+#define XOR ^
+ static unsigned int vec[N];
+  static unsigned int res[N];
+  int i,sgn,s,cnt;
+  int z=0;
+  unsigned int w;
+
+  for ( i=0; i<N; i++) {  // random-like test data
+    vec[i] = i;
+  }
+  vec[0] = 0; // defeat loop fusion
+  sgn = 0; // Set this to 1 for equal-scan.
+
+  for( cnt=0; cnt<100; cnt++) { // Run same test many times
+    for ( i=0; i<N; i++) { // Loop over words
+      w = __builtin_bswap32( vec[i]);
+      for( s=1; s<BITSINWORD; s=s*2) { 
+        w = w XOR ( w >> s);
+      }
+      w = w XOR sgn;
+      sgn = ( w & 1) ? -1 : 0;
+      res[i] = __builtin_bswap32 ( w); 
+    }
+  }
+
+  // Result plausibility check
+  for( i=0; i< N; i++) {
+    z = z + _mm_popcnt_u32( res[i]);
+  }
+  printf("sum(nescan(vec)) of length %d is: %d\n", N, z);
+  z = z - 264241152;
+  return( z);
+} 
+\end{verbatim}
+\end{small}
+\caption{C model of not-equal scan}
+\label{nescanc}
+\end{figure}
+

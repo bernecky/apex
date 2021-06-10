@@ -1,0 +1,74 @@
+\documentclass[11pt,preprint]{sigplanconf}
+%% not supported by xelatex??? \usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+%%\usepackage[colorlinks=true,pdfpagemode=UseNone,urlcolor=blue]{hyperref}
+\usepackage{graphicx}
+\usepackage{hyperref}
+%%\usepackage{url}
+\usepackage{verbatim}
+\usepackage{saxpsa}
+% This gets rid of pk fonts
+\usepackage{ae,aecompl}
+\usepackage[usenames]{color}
+
+\begin{document}
+\conferenceinfo{Dyalog '16}{October 9-13, 2016, Glasgow, Scotland}
+\copyrightyear{2016}
+\copyrightdata{Robert Bernecky 2016}
+\preprintfooter{Boolean SIMD paper}
+\titlebanner{DRAFT---Do not distribute}
+
+\title{A Compendium of SIMD Boolean Array Algorithms in APL}
+
+\authorinfo{Robert Bernecky}{Snake Island Research Inc, Canada}
+{bernecky@snakeisland.com}
+
+\maketitle
+
+\def\ibmapl{$APL\backslash\0360$}
+
+\newcommand{\fixme}[1]{{ \color{red} \bf FIXME: #1}}
+
+\newcommand{\fig}[2]{{%
+\begin{figure}%
+\includegraphics[angle=0,width=1.0\textwidth]{#1}%
+\caption{#2}%
+\label{#1}%
+\end{figure}%
+}}
+
+
+\fixme{fix reverse verb ⌽}
+
+\fixme{first axis reductions}
+
+\fixme{look for reverse in ABX [FFT?]}
+
+\fixme{pad}
+
+\input{abstract}
+\input{introduction}
+\input{scalarverbs}
+\input{strengthreduction}
+\input{structuralandselectionverbs}
+\input{transpose}
+\input{searchverbs}
+\input{reduceandscan}
+\input{compressexpand}
+\input{innerproduct}
+\input{controlflow}
+\input{sortandgrade}
+\input{matrixoperations}
+\input{hardwaresupport}
+\input{utilityverbs}
+\input{acknowledgements}
+
+\begin{onecolumn}
+\include{pics}
+
+\bibliographystyle{plainurl} 
+\bibliography{allbibs}
+\end{onecolumn}
+
+\end{document}
+

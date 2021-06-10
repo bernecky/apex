@@ -1,0 +1,136 @@
+\begin{thebibliography}{10}
+
+\bibitem{AMD:instructions}
+Advanced Micro Devices, Inc., Sunnyvale, California.
+\newblock {\em AMD64 Architecture Programmer’s Manual, General-Purpose and
+  System Instructions}, 3.21 edition, October 2013.
+\newblock Publication \#26094.
+
+\bibitem{DFBacon:transformations2}
+David~F. Bacon, Susan~L. Graham, and Oliver~J. Sharp.
+\newblock Compiler transformations for high-performance computing.
+\newblock {\em {ACM} Computing Surveys}, 26(4):345--420, December 1994.
+
+\bibitem{RBernecky:iota}
+Robert Bernecky.
+\newblock Speeding up dyadic iota and dyadic epsilon.
+\newblock In {\em {APL} Congress 73}, pages 479--482. North-Holland Publishing
+  Company, 1973.
+\newblock Second printing.
+
+\bibitem{RBernecky:fastrotrev}
+Robert Bernecky.
+\newblock Fast reversal and rotate.
+\newblock {\em The I.P. Sharp Newsletter}, 7(3), May 1979.
+
+\bibitem{RBernecky:apex}
+Robert Bernecky.
+\newblock {APEX}: The {APL} {P}arallel {E}xecutor.
+\newblock Master's thesis, University of Toronto, 1997.
+
+\bibitem{RBernecky:tokenizer}
+Robert Bernecky.
+\newblock An {SPMD/SIMD} parallel tokenizer for {APL}.
+\newblock In {\em APL2003 Conference Proceedings}. ACM SIGAPL, June 2003.
+
+\bibitem{DBLP:conf/pldi/BerneckyS15}
+Robert Bernecky and Sven{-}Bodo Scholz.
+\newblock Abstract expressionism for parallel performance.
+\newblock In {\em Proceedings of the 2nd {ACM} {SIGPLAN} International Workshop
+  on Libraries, Languages, and Compilers for Array Programming, ARRAY@PLDI,
+  Portland, OR, USA, June 15 - 17, 2015}, pages 54--59, 2015.
+\newblock URL: \url{http://doi.acm.org/10.1145/2774959.2774962}, \href
+  {https://doi.org/10.1145/2774959.2774962}
+  {\path{doi:10.1145/2774959.2774962}}.
+
+\bibitem{GEBlelloch:scansasparallelprefix}
+Guy~E. Blelloch.
+\newblock Scans as primitive parallel operations.
+\newblock {\em IEEE Transactions on Computers}, 38(11):1526--1538, 1989.
+
+\bibitem{GEBlelloch:prefixsums}
+Guy~E. Blelloch.
+\newblock Prefix sums and their applications.
+\newblock Technical Report CMU-CS-90-190, School of Computer Science, Carnegie
+  Mellon University, 1990.
+
+\bibitem{IBM:aplxm6}
+Larry~M. Breed, Roger~D. Moore, Luther Woodrum, Richard Lathwell, and Adin
+  Falkoff, 1972.
+\newblock The APL$\backslash$360 source code is available at the Computer
+  History Museum.
+\newblock URL:
+  \url{http://www.computerhistory.org/atchm/the-apl-programming-language-source-code}.
+
+\bibitem{LMBreed:pc2014}
+L.M. Breed.
+\newblock Private communication, 2014.
+
+\bibitem{EEMcdonnell:caretfunctions}
+Coast Community College District.
+\newblock {\em The Caret Functions}. Coast Community College District, 1974.
+\newblock URL: \url{http://www.jsoftware.com/papers/eem/caret.htm}.
+
+\bibitem{JFoad:pc2016}
+Jay Foad, 2016.
+\newblock Private communication regarding Boolean Transpose.
+
+\bibitem{MHarris:parallelprefixsumwithcuda}
+Mark Harris.
+\newblock Parallel prefix sum (scan) with cuda.
+\newblock April 2007.
+
+\bibitem{DHillis:dpalgs}
+W.~Daniel Hillis and Jr. Guy. L.~Steele.
+\newblock Data parallel algorithms.
+\newblock {\em Communications of the ACM}, 29(12):1170--1183, December 1986.
+
+\bibitem{RKWHui:innerproduct}
+Roger Hui.
+\newblock Inner product - an old/new problem.
+\newblock {\em Vector}, 26(1), October 2013.
+\newblock URL: \url{http://archive.vector.org.uk/art10500200}.
+
+\bibitem{RHui:bitarrays}
+Roger~K.W. Hui.
+\newblock Sum of a bit array.
+\newblock 2008.
+\newblock URL:
+  \url{http://www.jsoftware.com/jwiki/Essays/Sum%20of%20a%20Bit%20Array}.
+
+\bibitem{INTEL:avx}
+Intel.
+\newblock {\em Intel Advanced Vector Extensions Programming Reference}, June
+  2011.
+
+\bibitem{Iverson62}
+K.E. Iverson.
+\newblock {\em {A} {P}rogramming {L}anguage}.
+\newblock Wiley, New York, 1962.
+
+\bibitem{KEIverson:tot}
+Kenneth~E. Iverson.
+\newblock Notation as a tool of thought.
+\newblock {\em Communications of the ACM}, 23(8), August 1979.
+
+\bibitem{DKnuth:twonotesonnotation}
+Donald Knuth.
+\newblock Two notes on notation.
+\newblock {\em American Mathematical Monthly}, 99(5):403--422, May 1992.
+\newblock URL: \url{http://arxiv.org/PS_cache/math/pdf/9205/9205211v1.pdf}.
+
+\bibitem{EEMcDonnell:fastplusreduceboolean}
+Eugene~E. McDonnell.
+\newblock Recreational {APL}, September 1980.
+
+\bibitem{ASamuel:checkers}
+Arthur Samuel.
+\newblock Some studies in machine learning, using the game of checkers.
+\newblock {\em IBM Journal of Research and Development}, 3(3), July 1959.
+
+\bibitem{Warren:2012:HD:2462741}
+Henry~S. Warren.
+\newblock {\em Hacker's Delight}.
+\newblock Addison-Wesley Professional, 2nd edition, 2012.
+
+\end{thebibliography}

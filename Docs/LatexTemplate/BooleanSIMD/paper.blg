@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d (TeX Live 2020/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: paper.aux
+A level-1 auxiliary file: pics.aux
+The style file: plainurl.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: allbibs.bib
+Warning--empty journal in MHarris:parallelprefixsumwithcuda
+Warning--empty journal in RHui:bitarrays
+You've used 24 entries,
+            2882 wiz_defined-function locations,
+            956 strings with 11095 characters,
+and the built_in function-call counts, 8805 in all, are:
+= -- 920
+> -- 226
+< -- 3
++ -- 84
+- -- 58
+* -- 395
+:= -- 1228
+add.period$ -- 76
+call.type$ -- 24
+change.case$ -- 99
+chr.to.int$ -- 0
+cite$ -- 26
+duplicate$ -- 270
+empty$ -- 946
+format.name$ -- 58
+if$ -- 2398
+int.to.chr$ -- 0
+int.to.str$ -- 24
+missing$ -- 17
+newline$ -- 124
+num.names$ -- 42
+pop$ -- 242
+preamble$ -- 1
+purify$ -- 80
+quote$ -- 0
+skip$ -- 700
+stack$ -- 0
+substring$ -- 285
+swap$ -- 42
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 91
+warning$ -- 2
+while$ -- 54
+width$ -- 26
+write$ -- 261
+(There were 2 warnings)

@@ -1,0 +1,32 @@
+\section{Search Verbs}
+\label{searchverbs}
+
+In 1971, the author designed and implemented 
+linear-time or nearly-linear-time algorithms 
+for {\em indexof} ({\apl x\qiota\0y}) 
+and {\em set membership} ({\apl x\qeps\0y}), 
+operating on most data types, on 
+SHARP APL.\cite{RBernecky:iota}
+
+The Boolean cases of these search algorithms used vector search
+instructions ({\tt TRT}, and later, {\tt CLCL}) to find the first
+byte of interest, then used that byte as an index into a table,
+to give the bit offset within that byte.
+
+%%\medskip
+%%\begin{tabular}{l}  % I have no idea what I was thinking here...
+%%{\apl First0Tab\qlbr\qomega\qrbr}\\
+%%{\apl First1Tab\qlbr\qomega\qrbr}\\
+%%{\apl LZCNT\qlarrow\qlbr\qlpar\0uint64~\qalpha\qrpar\qiota\qomega\qrbr}\\
+%%\end{tabular}
+%%\medskip
+
+Contemporary architectures with bit-level vector extensions
+might better use a word-at-a-time search, then a left-zero-count
+instruction (LZCNT) to count the 
+number of leading zeros.~\cite{INTEL:avx,AMD:instructions}
+
+Our original algorithm did not support 64-bit floating point 
+data when comparison tolerance ({\apl \qQuad\0ct}), was non-zero, but
+we later extended it to cover this missing case.
+

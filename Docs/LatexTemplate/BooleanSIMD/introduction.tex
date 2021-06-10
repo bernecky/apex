@@ -1,0 +1,87 @@
+\section{Introduction}
+\label{introduction}
+
+The binary digit, or {\em bit}, is the fundamental unit of 
+digital computing, able to represent zero or one.
+Oddly enough, very few computer languages,
+including most functional array languages,
+admit of the existence of bits, and have few, if any,
+facilities for directly manipulating bit arrays, 
+particularly when they are densely stored as one bit per 
+element, eight bits per byte. They also have no capability
+for expressing Single Instruction, Multiple Data (SIMD) 
+operations on dense, multi-dimensional Boolean arrays.
+SIMD operations, as their name suggests, perform
+a single function upon each element of an array, with no
+interaction among those elements.
+In APL, the so-called {\em scalar functions}, or
+{\em rank-0 verbs} of J, typify SIMD operation. For example,
+all elements of a vector are multiplied by two:
+
+{\apl 2\qtimes\01 2 3 4 5}\\
+{\apl 2 4 6 8 10}\\
+
+\noindent Similarly, here two lists of numbers are added:
+
+{\apl 1 2 3\qplus\04 5 6}\\
+{\apl 5 7 9}\\
+
+Despite this dearth of expressive notation,
+large Boolean arrays appear commonly in applications
+such as image analysis and synthesis, data compression, 
+and cryptography.
+They also facilitate text processing and data base queries,
+through their power of functional composition.\cite{RBernecky:tokenizer}
+
+This notational shortcoming places all the burden of dealing 
+with Boolean data in the hands
+of the programmer. Kenneth E. Iverson's executable,
+generalized, mathematical notation, variously known as 
+{\em Iverson Notation}, {\em
+Iverson's Better Math (IBM)}, and {\em A Programming
+Language} (APL), is a notable exception;
+the APL language treats Booleans as the integers zero and one,
+thereby exposing Boolean arrays 
+to all of the data-parallel, expressive 
+power of APL. Iverson modestly introduced this
+concept, later adopted by Knuth as the {\em Iverson convention}, 
+thusly:~\cite{DKnuth:twonotesonnotation}
+
+\begin{quote}
+A variable is classified according to the range of values it may 
+assume: it is {\em logical}, {\em integral}, or {\em numerical},
+according as the range is the set of logical variables (that is,
+0 and 1), the set of integers, or the set of real numbers. Each
+of the foregoing classes is clearly a subclass of each class following
+it, and any operation defined on a class clearly applies to any
+of its subclasses.~\cite{Iverson62}
+\end{quote}
+
+Some time around 1966, Larry M. Breed, while designing the S/360 
+APL interpreter, made a fundamental, far-reaching, design decision: \ibmapl\ 
+would represent Boolean arrays as one bit per element, 
+densely stored, eight bits per byte, in row-major order.~\cite{IBM:aplxm6}
+That decision opened the door to a number of Boolean array SIMD 
+optimization algorithms for APL interpreters, in the rank-0, or scalar, verbs, 
+search verbs, structural and selection verbs, 
+most of the adverbs and conjunctions (reduction, scan, inner and 
+outer product), and the rank conjunction.\footnote{We use Iverson's
+terminology here, as being more familiar to those without
+a computer science background: {\em verb} instead of {\em function}
+or {\em operator},
+{\em adverb} instead of {\em monadic operator}, and {\em conjunction}
+instead of {\em dyadic operator}. This terminology also avoids
+the {\em function}-{\em operator} confusion in the computer science world.}
+
+On mainframes, these algorithms typically produced speedups of about 8x or 32x, 
+depending on whether they worked at the byte (8-bit) 
+or word (32-bit) level. A few other algorithms, such as matrix
+product, offered speedups of several orders of magnitude.
+
+This paper is a compendium of such optimizations, since
+they are still relevant and applicable, nearly half a century
+after most of them were conceived.
+The advent of SIMD Boolean vector and GPU facilities 
+makes these optimizations particularly relevant today.
+
+

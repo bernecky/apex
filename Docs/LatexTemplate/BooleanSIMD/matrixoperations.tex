@@ -1,0 +1,39 @@
+\section{Matrix Operations}
+\label{matrixoperations}
+
+Most of the above optimizations are defined here on vectors, but with
+a bit of work to handle shards, are
+extendable to higher-rank arguments.\footnote{That 
+bit of work is often somewhat tedious, and usually less elegant,
+than handling the byte-aligned part of a matrix row.}
+{\em Shards} are the two sub-byte fragments, possibly empty, of a 
+Boolean vector or matrix row that starts and/or ends in mid-byte. 
+{\em E.g.,} in the vector:
+
+\medskip
+{\apl 1~1~0~0,~0~0~0~0,~1~0~1~0,~1~1~1~0}\\
+
+\noindent the vector {\apl 1~0~1} is a shard, because its 
+elements start at a byte boundary, but end in mid-byte.
+Similarly, the vector {\apl 0~1~1~1~0} is a shard, because 
+it starts in mid-byte, and ends on a byte boundary.
+
+Shards and partial-word results are usually dealt with one of
+two ways: either part or all of result is precleared to zero, then 
+computed shards are ORd into the result, or the indexed
+assign of the shard is handled by code, such as {\em rbemove}, 
+that is guaranteed not to overwrite any part of the result
+outside the bounds of the shard.
+In the case of multi-thread execution, care must, of course, be taken
+to deal with false sharing among cache lines, and of preventing
+one thread from doing destructive writes of a partial result 
+computed by another thread.
+
+We are not aware of any mainframe implementations of SIMD optimizations
+for non-trailing axis reductions or scans on Booleans.
+However, Roger Hui presented an algorithm for first-axis Boolean reductions on 
+non-byte-aligned matrices at the 2008 Dyalog APL 
+Conference.~\cite{RHui:bitarrays}.
+
+\fixme{Need good example}
+

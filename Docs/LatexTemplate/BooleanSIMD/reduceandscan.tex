@@ -1,0 +1,122 @@
+\section{Reduce and Scan}
+\label{reduceandscan}
+
+Reduce ({\apl f\qslash\qomega, f\qslashf\qomega}) and 
+scan ({\apl f\qbslash\qomega, f\qbslshf\qomega}) 
+are extremely powerful and popular adverbs,
+with manifold applications in the Boolean world. 
+For example, the APEX APL compiler uses these derived utility verbs for
+dropping leading or trailing blanks from a text vector, and for
+marking quoted strings in a text vector:
+
+\medskip
+\begin{tabular}{l}
+{\apl~dlb\qlarrow\qlbrace\qlpar\qor\qbslash\qomega\qne\qquote~\qquote\qrpar\qslash\qomega\qrbrace}\\
+{\apl~dtb\qlarrow\qlbrace\qlpar\qrotate\qor\qbslash\qrotate\0\qomega\qne\qquote~\qquote\qrpar\qslash\qomega\qrbrace}\\
+{\apl~mqs\qlarrow\qlbrace\qne\qbslash\qomega\qeq\qquote\qquote\qquote\qquote\qrbrace}\\
+\end{tabular}
+\medskip
+
+Work in SHARP APL on high-performance algorithms for Boolean reductions began
+with Roger D. Moore's algorithm for summation of Boolean vectors, 
+extending an algorithm created by Arthur Samuel for his checkers 
+program.~\cite{EEMcDonnell:fastplusreduceboolean,ASamuel:checkers}
+Moore's algorithm operated on 124-byte segments of the argument, 
+using a System/360 { \em translate} vector instruction (TR)
+to convert a copy of a Boolean
+vector into population counts for each byte of the vector. It then
+treated the translated vector as if it were segments of
+a 31-element (or less) integer vector, 
+and performed an integer sum reduction of that vector, 
+producing a scalar result that was, in fact, four one-byte sums 
+from the reduce. Each of those sums
+was guaranteed not to have any inter-byte carries, because of the 
+segment size limit. The four bytes of the
+resulting sum were then shifted and added to obtain the partial sum for the
+segment. The algorithm then iterated over the remaining segments, adding the
+partial sums to obtain the final result. The algorithm for one segment,
+which Larry Breed described as haiku, can be written as:
+
+\medskip
+{\apl \qplus\qslash\qplus\qslashf\04~resh~PopcountTab\qlbr\0uint8~\qomega\qrbr}\\
+\medskip
+
+\noindent Moore's algorithm was initially used in the 
+control argument analysis of the derived verbs {\em compress} and {\em expand}.
+It was also, for a brief time, used in 
+{\em and-reduce} ({\apl \qand\qslash\qomega}) and 
+{\em or-reduce} ({\apl \qor\qslash\qomega})
+because it considerably outperformed the extant algorithms, even though 
+it usually did more work than was strictly necessary.
+
+In 1974, Eugene McDonnell designed an elegant APL model of
+efficient algorithms for Boolean scans and reductions
+on the relational verbs.~\cite{EEMcdonnell:caretfunctions}
+McDonnell's scan algorithm generated 
+three vectors - a prefix, an infix, and a suffix - that were catenated to create
+the result. The value of a marker ({\apl m}), that controlled 
+generation of those vectors, was determined using the author's
+high-performance indexof verb described in Section~\ref{searchverbs};
+after that, the only remaining work was assembling the result. 
+McDonnell's algorithms, shown slightly modified
+for presentation in Figure~\ref{caretscanverbs}, 
+were soon implemented in SHARP APL.
+The result was linear-time, word-at-a-time SIMD, Boolean scans
+and reductions. 
+
+As a historical note, there have been a number of papers
+on data-parallel computation of reductions and 
+scans.~\cite{GEBlelloch:prefixsums,GEBlelloch:scansasparallelprefix,
+DHillis:dpalgs}
+These were considerably predated by John Heckman's APL scan verbs,
+which the author first encountered around 1971. Heckman's verbs
+worked the same way as their decades-later cousins,
+using recursive doubling. Unfortunately, we have been unable to
+locate any copies of his verbs, and he does not appear to
+have published the algorithms anywhere.\footnote{The author 
+has hard copy of a few of them, somewhere in his library. The
+key word here is {\em somewhere}.}
+A number of GPU-based scan algorithms are now 
+available, some of which use the Heckman 
+algorithm.~\cite{MHarris:parallelprefixsumwithcuda}
+
+\subsection{Not-Equal Scan and Equal-Scan}
+
+The two sibling scans {\apl \qeq\qbslash\qomega} and
+{\apl \qne\qbslash\qomega} are powerful tools for
+such tasks as marking text, based on Boolean predicates. 
+For example, the
+quoted strings in a vector of text, {\apl T}, can
+be extracted using this verb:
+
+{\apl pq\qlarrow\qlbrace\0b\qlarrow\qomega\qquote\qquote\qquote\qquote\qblank\qdiamon\qblank\qlpar\0b\qor\qne\qbslash\0b\qrpar\qslash\qomega\qrbrace}
+
+{\apl pq \qquote\0The\0\qquote\qquote\0quote\qquote\qquote\qblank\0is\qblank\0here\qquote}\\
+{\apl \qquote\0quote\0\qquote}
+
+\noindent Bit-by-bit evaluation of these verbs is quite slow, but
+thanks to Heckman, there is a SIMD algorithm that will operate
+on an entire word of bits, or more, shown here for vector arguments:
+
+{\apl
+\begin{tabular}{l}
+~r\qlarrow\0nescanall~y\qsemic\0s\qsemic\0srl\qsemic\0biw\\
+~\qlamp~not-equal scan model, using\\
+~\qlamp~Heckman's algorithm\\
+~~r\qlarrow\0y\\
+~~srl\qlarrow\qlbrace\qlpar\qbar\qrho\qomega\qrpar\quarrow\qlpar\qbar\qalpha\qrpar\qdarrow\qomega\qrbrace\\
+~~biw\qlarrow\qustile\02\qlog\01\qustile\qrho\0y\\
+~~\qcolon\0For~s~\qcolon\0In~2\qstar\qiota\0biw\\
+~~~r\qlarrow\0r\qne\0s~srl~r\\
+~~\qcolon\0EndFor\\
+\end{tabular}
+}
+
+Our straightforward C implementation of the {\apl \qne\qbslash\qomega}
+algorithm, shown in Figure~\ref{nescanc}, runs roughly three 
+times faster than the Dyalog APL 15.0 interpreter, albeit only
+on vectors.
+The inner loop of the C algorithm, as presented here, did not 
+automatically vectorize under GCC, so there is likely some room for further
+performance improvement.
+

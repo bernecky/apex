@@ -1,0 +1,25 @@
+\section{Sort and Grade}
+\label{sortandgrade}
+
+A simple sort-up/down algorithm for Booleans counts the number
+of {\apl 1}s in the argument, generates a vector of that
+length of {\apl 1}s, then pads it at the front/back with the appropriate
+number of {\apl 0}s, to give a result whose shape matches the argument:
+
+\medskip
+{\apl SortAscending\qlarrow\qlbrace\qlpar\qbar\qrho\qomega\qrpar\quarrow\qlpar\qplus\qslash\qomega\qrpar\qrho\01\qrbrace}\\
+~\\
+{\apl SortDescending\qlarrow\qlbrace\qlpar\qrho\qomega\qrpar\quarrow\qlpar\qplus\qslash\qomega\qrpar\qrho\01\qrbrace}\\
+\medskip
+
+\noindent Upgrade and downgrade on Boolean vectors can be written as:
+
+\medskip
+{\apl ug\qlarrow\qlbrace\qlpar\qlpar\qtilde\qomega\qrpar\qslash\qiota\qrho\qomega\qrpar\qcomma\qomega\qslash\qiota\qrho\qomega\qrbrace}\\
+~\\
+{\apl dg\qlarrow\qlbrace\qlpar\qlpar\qomega\qslash\qiota\qrho\qomega\qrpar\qcomma\qlpar\qtilde\qomega\qrpar\qslash\qiota\qrho\qomega\qrbrace}\\
+
+\fixme{ Get Roger Hui grade example. Perhaps in J?}
+
+Although all of these algorithms perform quite well, compared
+to normal upgrade, but they are not as data-parallel as we would like.

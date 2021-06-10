@@ -1,0 +1,57 @@
+\section{Compress and Expand Verbs}
+\label{compressexpand}
+
+The {\em compress} ({\apl \qalpha\qslash\qomega}) and
+{\em expand}({\apl \qalpha\qbslash\qomega}) verbs of APL
+are powerful tools of a programmer's repertoire.
+For example, replacing characters in a set, {\apl s},
+in a text vector, {\apl V}, by blanks, can be done with 
+this idiom, which uses both compress and expand:
+
+\medskip
+{\apl p\qlarrow\0V\qeps\0s\\
+~\\
+  p\qbslash\0p\qslash\0V}\\
+
+\noindent The negative elements of a vector, {\apl v},
+can be removed with this expression:
+
+{\apl \qlpar\0v\qlt\00\qrpar\qslash\0v}\\
+
+As noted earlier, Moore's high-speed Boolean 
+sum-reduce ({\apl \qplus\qslash\qomega}) was
+soon put to use in SHARP APL compress and expand, for summing the
+control argument ({\apl \qalpha}) that determines the result shape
+of compress and is used in conformance checking in expand.
+
+Our redesign of the compress/expand/replicate verbs in SHARP APL
+included two optimizations.
+First, like rotate, when
+operating across a non-trailing axis, they handled
+multiple elements using rbemove, {\em e.g.}, this example,
+which copies three elements at a time:
+
+\medskip
+{\apl 1~0~1~0\qslashf\04~3\qrho\qiota\012\\
+0~1~2\\
+6~7~8\\}
+
+\noindent Second, their inner loops, rather than
+iterating over each element of the control argument,
+operated on groups of contiguous zeros and ones in 
+the control argument. This was beneficial for some
+arguments, such as sparse vectors, when many contiguous zeros
+were expected, but it obviously introduced additional
+overhead compared to a simple loop, so its benefit was data-dependent.
+
+Recently, some CPU vendors have introduced instructions
+for bit manipulation that are direct analogs of compress and expand.
+The Intel and AMD {\em Bit Manipulation Instruction Sets 2} (BMI2) 
+instructions
+include {\em PEXT}, which implements compress, and
+{\em PDEP}, which implements expand.
+These instructions have excellent throughput, so should
+perform quite well, for those systems that support BMI2 or
+equivalent instructions.
+
+

@@ -1,0 +1,122 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,colorlinks=true,pdfpagemode=UseNone,urlcolor=blue,ps2pdf]{hyperref}
+\usepackage{url,saxpsa}
+
+\special{!userdict begin /bop-hook{
+gsave 225 100 translate 65 rotate
+/Times-Roman findfont 200 scalefont setfont 0 0 moveto 0.85 setgray (draft) show
+%/Times-Roman findfont 100 scalefont setfont 100 -100 moveto 0.85 setgray (draft) show
+grestore}def end}
+
+\author{Dieter Kilsch\footnote{FH Bingen, email: kilsch@fh-bingen.de}}
+\title{Installation of the APL-font Saxpsa in the Mik\TeX-distribution of \LaTeX}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\vspace{5ex}
+
+
+
+\section{Saxpsa and Mik\TeX}
+Saxpsa is a type-1 font fully scalable in \LaTeX and pdf\LaTeX. To use the standard way of scaling the font in \LaTeX one has to provide a \verb+.fd+-file as described in the following.
+
+\subsection{Changes to the files available from Robert Bernecky}
+These file are available at \url{http://www.snakeisland.com/} for restricted use.
+
+\begin{enumerate}
+\item The file OT1saxpsa.fd is new. Its content must be:\\
+ \verb+\ProvidesFile{OT1saxpsa.fd}[2006/11/19 Dieter Kilsch]+\\
+ \verb+\DeclareFontFamily{OT1}{saxpsa}{}+\\
+ \verb+\DeclareFontShape {OT1}{saxpsa}{m}{n}{<->saxpsa}{}+
+
+\item The file qdefsax.tex must be changed, I recommend to rename it to saxpsa.sty.
+\begin{enumerate}
+\item Enter the following line to the top of the file\footnote{It could be written to any other style file or to your main document!},
+ it is wrapped here:
+\begin{verbatim}
+ \newcommand{\apl}{\fontencoding{OT1}\fontfamily{saxpsa}
+ \fontseries{m}\fontshape{n}\selectfont}
+\end{verbatim}
+The command \verb+\apl+ switches to the font Saxpsa according to the content of \verb+OT1saxpsa.fd+.
+
+\item In all the lines defining the \verb+\q....+ macros the command \verb+\apl+ must be deleted. If not done the scaling macros will not work.
+\end{enumerate}
+
+\end{enumerate}
+
+\subsection{Installation of the font}
+
+Assuming L is your local Tex-directory, proceed the following steps:
+\begin{enumerate}
+\item Copy the files:
+\begin{itemize}
+\item saxpsa.pfb to L/fonts/\emph{type1/public/apl}/
+\item saxpsa.tfm to L/fonts/tfm/\emph{public/apl}/
+\item saxpsa.map to L/map/saxpsa.map
+\item saxpsa.sty to L/tex/Latex/\emph{saxpsa}/
+\item OT1saxpsa.fd to L/tex/Latex/\emph{saxpsa}/
+\end{itemize}
+I believe the italic typed parts might be changed according to your personal taste.
+
+\item Change some files:
+\begin{itemize}
+\item In the file L/dvips/config/config.ps add the line \\
+  \texttt{p +saxpsa.map}\\
+  after the block\\
+ {\tt
+  \% This shows how to add your own map file.\\
+  \% Remove the comment and adjust the name:\\
+  \% p +myfonts.map}
+\item Create the file L/miktex/config/updmap.cfg (if it does not exist) and add the line\\
+  {\tt Map saxpsa.map}
+\end{itemize}
+\item Execute in the DOS shell to update the format and mapping files:
+
+  \par\noindent
+  {\tt initexmf -u}\\
+  {\tt initexmf \verb+--+mkmaps}
+
+Due to the new line in updmap.cfg the last command adds the entry in saxpsa.map to the file L/dvips/config/psfonts.map used by pdflatex to properly embed the font.
+\end{enumerate}
+
+\section{Examples}
+Now using
+\verb+\usepackapge{saxpsa}+~ in your document you may use the standard \LaTeX macros to scale the font:
+\\
+\verb+{\apl\qiota\tiny\qiota\large\qiota\Huge\qitoy}+
+will result in
+{\apl\qiota\tiny\qiota\large\qiota\Huge\qiota}\qquad.
+
+\bigskip
+I include the complete character set of the font:
+\medskip
+
+{\apl
+  \begin{tabular}{r|*{16}c}
+  %      êioΩ0ÿ„(‚'  ',(('&      50')ÆÏ16),'\\\hline'),((‚'50')Æ˛Ï16),˛(Ó˛‚[1]16 16Ê(‚'&\char000')Æ˛Ï256),˛‚'\\'ÿêioΩ1
+    &       0&       1&       2&       3&       4&       5&       6&       7&       8&       9&      10&      11&      12&      13&      14&      15\\\hline
+   0&\char000&\char001&\char002&\char003&\char004&\char005&\char006&\char007&\char008&\char009&\char010&\char011&\char012&\char013&\char014&\char015\\
+   1&\char016&\char017&\char018&\char019&\char020&\char021&\char022&\char023&\char024&\char025&\char026&\char027&\char028&\char029&\char030&\char031\\
+   2&\char032&\char033&\char034&\char035&\char036&\char037&\char038&\char039&\char040&\char041&\char042&\char043&\char044&\char045&\char046&\char047\\
+   3&\char048&\char049&\char050&\char051&\char052&\char053&\char054&\char055&\char056&\char057&\char058&\char059&\char060&\char061&\char062&\char063\\
+   4&\char064&\char065&\char066&\char067&\char068&\char069&\char070&\char071&\char072&\char073&\char074&\char075&\char076&\char077&\char078&\char079\\
+   5&\char080&\char081&\char082&\char083&\char084&\char085&\char086&\char087&\char088&\char089&\char090&\char091&\char092&\char093&\char094&\char095\\
+   6&\char096&\char097&\char098&\char099&\char100&\char101&\char102&\char103&\char104&\char105&\char106&\char107&\char108&\char109&\char110&\char111\\
+   7&\char112&\char113&\char114&\char115&\char116&\char117&\char118&\char119&\char120&\char121&\char122&\char123&\char124&\char125&\char126&\char127\\
+   8&\char128&\char129&\char130&\char131&\char132&\char133&\char134&\char135&\char136&\char137&\char138&\char139&\char140&\char141&\char142&\char143\\
+   9&\char144&\char145&\char146&\char147&\char148&\char149&\char150&\char151&\char152&\char153&\char154&\char155&\char156&\char157&\char158&\char159\\
+  10&\char160&\char161&\char162&\char163&\char164&\char165&\char166&\char167&\char168&\char169&\char170&\char171&\char172&\char173&\char174&\char175\\
+  11&\char176&\char177&\char178&\char179&\char180&\char181&\char182&\char183&\char184&\char185&\char186&\char187&\char188&\char189&\char190&\char191\\
+  12&\char192&\char193&\char194&\char195&\char196&\char197&\char198&\char199&\char200&\char201&\char202&\char203&\char204&\char205&\char206&\char207\\
+  13&\char208&\char209&\char210&\char211&\char212&\char213&\char214&\char215&\char216&\char217&\char218&\char219&\char220&\char221&\char222&\char223\\
+  14&\char224&\char225&\char226&\char227&\char228&\char229&\char230&\char231&\char232&\char233&\char234&\char235&\char236&\char237&\char238&\char239\\
+  15&\char240&\char241&\char242&\char243&\char244&\char245&\char246&\char247&\char248&\char249&\char250&\char251&\char252&\char253&\char254&\char255\\
+  \end{tabular}
+}
+\end{document}

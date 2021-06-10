@@ -1,0 +1,93 @@
+\section{Structural and Selection Verbs}
+
+Structural verbs, such as {\em catenate}, {\em laminate}, 
+{\em rotate}, and {\em reverse}, and selection verbs, such as
+{\em from} (indexing), {\em merge}, {\em take}, and {\em drop},
+typically use word-at-a-time algorithms on Boolean (and other) data.
+This is facilitated by use of a Boolean vector copying verb,
+able to handle source and sink array indices that are not 
+on word or byte boundaries. 
+For example, a Boolean catenate, such as {\apl z\qlarrow\0x,y},
+often requires copying of elements of {\apl y} into {\apl z} 
+without overwriting elements of {\apl x} that have already
+been copied into {\apl z}. The standard libraries supplied with C
+do not have movers that do this. The earliest such mover
+that the author is aware of is Luther J. Woodrum's {\em ljwmove}, 
+used in \ibmapl. The author wrote {\em rbemove}, a generalized stride-one
+copy verb, including an extended version of 
+Woodrum's algorithm. This allowed it to be used safely for
+indexed assign into an extant Boolean array, without overwriting
+adjacent array elements.\footnote{Contemporary microprocessor architectures 
+usually include bit-manipulation instructions, which may simplify 
+writing such a mover.} The {\em rbemove} verb also provided
+support for type conversions on stride-one data, thereby
+simplifying primitives such as catenate.
+
+For verbs operating on non-trailing array axes, further
+performance improvements can often be made by moving entire
+sub-arrays at once. {\em E.g.}, a first-axis rotate, such as
+{\apl 1\qrotf\02~3~4\qrho\qiota\024} can move 12 
+adjacent array elements at once:
+\medskip
+
+{\apl T\qlarrow\02~3~4\qrho\qiota\024\\
+~~0~~1~~2~~3\\
+~~4~~5~~6~~7\\
+~~8~~9~10~11\\
+~\\
+12~13~14~15\\
+16~17~18~19\\
+20~21~22~23\\}
+
+{\apl 1\qrotf\0T\\
+12~13~14~15\\
+16~17~18~19\\
+20~21~22~23\\
+~\\
+~~0~~1~~2~~3\\
+~~4~~5~~6~~7\\
+~~8~~9~10~11\\}
+
+\medskip
+
+In 1979, the author, in the course of implementing enclosed arrays
+for SHARP APL, designed new algorithms for rotate and
+reverse that worked in this manner.~\cite{RBernecky:fastrotrev}
+The algorithm for last-axis reverse on Booleans reversed a byte at a time
+of an entire matrix row, via table lookup on byte-aligned data:
+
+\medskip
+{\apl RevTab\qlbr\0uint8~\qomega\qrbr}
+\medskip
+
+\noindent This result was not guaranteed to be aligned properly, so
+it then bit-aligned the resulting vector into the final result, 
+a word at a time. The {\apl uint8} verb, shown in Section~\ref{utilityverbs},
+can be considered a typecast that 
+converts its Boolean argument into unsigned, 8-bit integers. 
+The performance of the non-optimized and optimized rotate code 
+is shown in Figure~\ref{matrix_rotate_first_axis.jpg}.  
+
+\subsection{Reshape}
+
+The reshape verb supports argument element reuse for array generation. 
+For example:
+
+\medskip
+{~~~~~~\apl 8\qrho\01~0~0}\\
+{\apl 1~0~0~1~0~0~1~0}
+\medskip
+
+\noindent Larry Breed designed and implemented SIMD reshape-with-reuse 
+by copying the right argument to the result,
+then repeatedly catenating that result to itself, doubling its
+length at each step, until its tail was byte-aligned, 
+at which point an overlapped move (``smear") of the argument to 
+its tail would generate the final result.~\cite{LMBreed:pc2014}
+
+Dyalog APL does not use the smear approach. Rather, it performs
+repeated catenation until the final result is generated.
+
+%FIXME fetch bit from word (32 times), store into word, with
+%flag bit signaling sink word full
+

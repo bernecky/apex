@@ -1,0 +1,200 @@
+% The following definitions are intended to be compatible with
+% the "qdefs" definitions created by Joey Tuttle and Martin Gfeller,
+% except that they refer to a generic APL font, rather than to
+% a mix of fonts. The definitions were created to enable the use
+% of Peter Wooster's "saxaplt" APL font.
+
+% Written by Robert Bernecky (bernecky@acm.org) 1997-06-12.
+
+% We start with a few utility macros.
+
+\def\0{\begingroup\endgroup}  % delimiter so can end without a blank.
+\def\RTN{\hfill\break\hbox to0pt{}\hskip 0pt plus .01pt\0}
+
+% Now, onto the main attraction: The APL symbols themselves.
+
+\def\qdollar{{\apl\char36}}   %equ  4   %   $ dollar (english (us) qnu4) 
+\def\qcent{{\apl\char250}}    %equ  5   %   cent (english (us) qnu1)
+\def\qcill{{\apl\char190}}    %equ  6   %   canonical illegal character 
+\def\qlbr{{\apl\char91}}      %equ  14  %   [ left bracket 
+\def\qrbr{{\apl\char93}}      %equ  15  %   ] right bracket
+\def\qlpar{{\apl\char40}}     %equ  16  %   ( left parenthesiss 
+\def\qrpar{{\apl\char41}}     %equ  17  %   ) right parenthesis 
+\def\qsemic{{\apl\char59}}    %equ  18  %   ; semicolon
+\def\qslash{{\apl\char47}}    %equ  19  %   / slash 
+\def\qbslash{{\apl\char92}}   %equ  20  %   \ backslash
+\def\qlarrow{{\apl\char251}}  %equ  21  %   ÿleft arrow 
+\def\qrarrow{{\apl\char253}}  %equ  22  %   right arrow
+\def\qdier{{\apl\char161}}    %equ  25  %    dieresis 
+\def\qplus{{\apl\char43}}     %equ  26  %   + plus
+\def\qbar{{\apl\char45}}      %equ  27  %   - minus 
+\def\qtimes{{\apl\char171}}   %equ  28  %   ’ÿtimes 
+\def\qdivide{{\apl\char223}}  %equ  29  %   ö divide
+\def\qstar{{\apl\char42}}     %equ  30  %   * star
+\def\qustile{{\apl\char211}}  %equ  31  %    ÿmaximum 
+\def\qdstile{{\apl\char196}}  %equ  32  %    ÿminimum 
+\def\qstile{{\apl\char205}}   %equ  33  %   þ residue 
+\def\qand{{\apl\char94}}      %equ  34  %   ^ and 
+\def\qor{{\apl\char169}}      %equ  35  %   úÿor
+\def\qlt{{\apl\char60}}       %equ  36  %   < less than
+\def\qle{{\apl\char164}}      %equ  37  %   óÿless than or equal to 
+\def\qeq{{\apl\char61}}       %equ  38  %   = equal to 
+\def\qge{{\apl\char166}}      %equ  39  %   òÿgreater than or equal to
+\def\qgt{{\apl\char62}}       %equ  40  %   > greater than 
+\def\qne{{\apl\char168}}      %equ  41  %   † not equal to 
+\def\qalpha{{\apl\char193}}   %equ  42  %   à alpha 
+\def\qeps{{\apl\char197}}     %equ  43  %   î epsilon 
+\def\qiota{{\apl\char201}}    %equ  44  %   âÿiota
+\def\qrho{{\apl\char210}}     %equ  45  %   ûÿrho 
+\def\qomega{{\apl\char215}}   %equ  46  %   ÿomega 
+\def\qcomma{{\apl\char44}}    %equ  47  %   , comma 
+\def\qbang{{\apl\char33}}     %equ  48  %   ! exclamation mark. 
+\def\qrotate{{\apl\char247}}  %equ  49  %   èÿreversal 
+\def\qdtack{{\apl\char194}}   %equ  50  %   æÿbase value.
+\def\qutack{{\apl\char206}}   %equ  51  %   çÿrepresentation.
+\def\qcircle{{\apl\char207}}  %equ  52  %   ùÿcircle
+\def\qquery{{\apl\char63}}    %equ  53  %   ? query 
+\def\qtilde{{\apl\char126}}   %equ  54  %   ~ not 
+\def\quarrow{{\apl\char217}}  %equ  55  %   ÿup arrow (take). 
+\def\qdarrow{{\apl\char213}}  %equ  56  %   ÿdown arrow (drop).
+\def\qlshoe{{\apl\char218}}   %equ  57  %   ÿleft shoe.
+\def\qrshoe{{\apl\char216}}   %equ  58  %   ÿright shoe.
+\def\qushoe{{\apl\char195}}   %equ  59  %   ïÿup shoe(cap).
+\def\qdshoe{{\apl\char214}}   %equ  60  %   üÿdown shoe(cup).
+\def\qubar{{\apl\char95}}     %equ  61  %   _ underscore 
+\def\qtran{{\apl\char244}}    %equ  62  %   íÿtranspose
+\def\qibeam{{\apl\char224}}   %equ  63  %   ÿibeam.
+\def\qjot{{\apl\char202}}     %equ  64  %   øÿjot.
+\def\qQuad{{\apl\char204}}    %equ  65  %   •ÿquad
+\def\qquotqd{{\apl\char236}}  %equ  66  %   —ÿquotequad
+\def\qlog{{\apl\char240}}     %equ  67  %   ÿlog 
+\def\qnand{{\apl\char176}}    %equ  68  %   êÿnand
+\def\qnor{{\apl\char185}}     %equ  69  %   åÿnor 
+\def\qlamp{{\apl\char227}}    %equ  70  %   ¦ÿlamp
+\def\qugrade{{\apl\char232}}  %equ  71  %   ÿupgrade 
+\def\qdgrade{{\apl\char231}}  %equ  72  %   ÿdowngrade
+\def\qrotf{{\apl\char225}}    %equ  73  %   éÿaspirin. 
+\def\qslashf{{\apl\char175}}  %equ  74  %   ëÿfirst axis reduction. 
+\def\qbslshf{{\apl\char220}}  %equ  75  %   §ÿfirst axis scan. 
+\def\qquadiv{{\apl\char173}}  %equ  76  %   ˜ÿdomino
+\def\qthorn{{\apl\char238}}   %equ  77  %   ôÿformat
+\def\qhydrnt{{\apl\char226}}  %equ  78  %   õÿexecute 
+\def\qdiamon{{\apl\char254}}  %equ  79  %    diamond 
+\def\qrtack{{\apl\char221}}   %equ  80  %    right tack
+\def\qltack{{\apl\char219}}   %equ  81  %    left tack 
+\def\qrbrace{{\apl\char125}}  %equ  82  %   } right curly brace
+\def\qlbrace{{\apl\char123}}  %equ  83  %   } left curly brace 
+\def\qdelta{{\apl\char200}}   %equ  112 %   ‘ delta
+\def\qdeltaub{{\apl\char252}} %equ  139 %   ñ delta-stress 
+\def\qdot{{\apl\char46}}      %equ  150 %   . period 
+\def\qovrbar{{\apl\char162}}  %equ  151 %   ý overbar
+\def\qblank{{\apl\char32}}    %equ  152 %     blank 
+\def\qquote{{\apl\char39}}    %equ  153 %   ' quote
+\def\qcolon{{\apl\char58}}    %equ  154 %   : colon
+\def\qdel{{\apl\char199}}     %equ  155 %   ìÿdel 
+\def\qdeltil{{\apl\char230}}  %equ  160 %   ì~ÿdel tilde
+\def\qsame{{\apl\char189}}    %equ  163 %   ðÿsame (aka idem, aka identical).
+\def\qnuax{{\apl\char234}}    %equ  164 %   ãÿnuax (aka on).
+\def\qcoax{{\apl\char239}}    %equ  165 %   äÿcoax (aka along).
+\def\qquoteg{{\apl\char96}}   %equ  198 %   ` left quote aka grave accent
+\def\qbars{{\apl\char124}}    %equ  197 %   | split vertical bar
+\def\qpound{{\apl\char35}}    %equ  199 %   # pound sign
+\def\qat{{\apl\char64}}       %equ  200 %   commercial "at"
+\def\qdblqt{{\apl\char34}}    %equ  201 %   " double quote
+\def\qpercnt{{\apl\char37}}   %equ  206 %   percent
+\def\qampsnd{{\apl\char38}}   %equ  207 %   ampersand
+\def\qquadjt{{\apl\char187}}  %equ  208 %   quad bs jot
+\def\qiotbar{{\apl\char233}}  %equ  209 %   iota bs underbar
+\def\qepsbar{{\apl\char229}}  %equ  210 %   epsilon bs underbar 
+\def\qsquad{{\apl\char190}}   %equ  211 %   squish quad
+\def\qquadbk{{\apl\char188}}  %equ  212 %   quad bs backslash 
+\def\qdiper{{\apl\char174}}   %equ  213 %   dieresis bs period
+\def\qcommab{{\apl\char172}}  %equ  219 %   comma bar
+
+% First alphabet is lower case. 
+
+\def\qa{{\apl\char97}}          %equ 086 lower case "a".
+\def\qb{{\apl\char98}}          %equ 087 lower case "b"
+\def\qc{{\apl\char99}}          %equ 088 lower case "c"
+\def\qd{{\apl\char100}}         %equ 089 lower case "d"
+\def\qe{{\apl\char101}}         %equ 090 lower case "e"
+\def\qf{{\apl\char102}}         %equ 091 lower case "f"
+\def\qg{{\apl\char103}}         %equ 092 lower case "g"
+\def\qh{{\apl\char104}}         %equ 093 lower case "h
+\def\qi{{\apl\char105}}         %equ 094 lower case "i"
+\def\qj{{\apl\char106}}         %equ 095 lower case "j"
+\def\qk{{\apl\char107}}         %equ 096 lower case "k"
+\def\ql{{\apl\char108}}         %equ 097 lower case "l"
+\def\qm{{\apl\char109}}         %equ 098 lower case "m"
+\def\qn{{\apl\char110}}         %equ 099 lower case "n"
+\def\qo{{\apl\char111}}         %equ 100 lower case "o"
+\def\qp{{\apl\char112}}         %equ 101 lower case "p"
+\def\qq{{\apl\char113}}         %equ 102 lower case "q"
+\def\qr{{\apl\char114}}         %equ 103 lower case "r"
+\def\qs{{\apl\char115}}         %equ 104 lower case "s"
+\def\qt{{\apl\char116}}         %equ 105 lower case "t"
+\def\qu{{\apl\char117}}         %equ 106 lower case "u"
+\def\qv{{\apl\char118}}         %equ 107 lower case "v"
+\def\qw{{\apl\char119}}         %equ 108 lower case "w"
+\def\qx{{\apl\char120}}         %equ 109 lower case "x"
+\def\qy{{\apl\char121}}         %equ 110 lower case "y"
+\def\qz{{\apl\char122}}         %equ 111 lower case "z"
+
+
+% Second alphabet is upper case. 
+
+\def\qA{{\apl\char65}}         %equ 113 upper case "A".
+\def\qB{{\apl\char66}}         %equ 114 upper case "B"
+\def\qC{{\apl\char67}}         %equ 115 upper case "C"
+\def\qD{{\apl\char68}}         %equ 116 upper case "D"
+\def\qE{{\apl\char69}}         %equ 117 upper case "E"
+\def\qF{{\apl\char70}}         %equ 118 upper case "F"
+\def\qG{{\apl\char71}}         %equ 119 upper case "G"
+\def\qH{{\apl\char72}}         %equ 120 upper case "H
+\def\qI{{\apl\char73}}         %equ 121 upper case "I"
+\def\qJ{{\apl\char74}}         %equ 122 upper case "J"
+\def\qK{{\apl\char75}}         %equ 123 upper case "K"
+\def\qL{{\apl\char76}}         %equ 124 upper case "L"
+\def\qM{{\apl\char77}}         %equ 125 upper case "M"
+\def\qN{{\apl\char78}}         %equ 126 upper case "N"
+\def\qO{{\apl\char79}}         %equ 127 upper case "O"
+\def\qP{{\apl\char80}}         %equ 128 upper case "P"
+\def\qQ{{\apl\char81}}         %equ 129 upper case "Q"
+\def\qR{{\apl\char82}}         %equ 130 upper case "R"
+\def\qS{{\apl\char83}}         %equ 131 upper case "S"
+\def\qT{{\apl\char84}}         %equ 132 upper case "T"
+\def\qU{{\apl\char85}}         %equ 133 upper case "U"
+\def\qV{{\apl\char86}}         %equ 134 upper case "V"
+\def\qW{{\apl\char87}}         %equ 135 upper case "W"
+\def\qX{{\apl\char88}}         %equ 136 upper case "X"
+\def\qY{{\apl\char89}}         %equ 137 upper case "Y"
+\def\qZ{{\apl\char90}}         %equ 138 upper case "Z"
+
+\def\qAUB{{\apl\char129}}      %equ  166 %   third alphabet
+\def\qBUB{{\apl\char130}}      %equ  167 %   (obsolete underbarred one)
+\def\qCUB{{\apl\char131}}      %equ  168 %   
+\def\qDUB{{\apl\char132}}      %equ  169 %
+\def\qEUB{{\apl\char133}}      %equ  170 %
+\def\qFUB{{\apl\char134}}      %equ  171 %
+\def\qGUB{{\apl\char135}}      %equ  172 %
+\def\qHUB{{\apl\char136}}      %equ  173 %
+\def\qIUB{{\apl\char137}}      %equ  174 %
+\def\qJUB{{\apl\char138}}      %equ  175 %
+\def\qKUB{{\apl\char139}}      %equ  176 %
+\def\qLUB{{\apl\char140}}      %equ  177 %
+\def\qMUB{{\apl\char141}}      %equ  178 %
+\def\qNUB{{\apl\char142}}      %equ  179 %
+\def\qOUB{{\apl\char143}}      %equ  180 %
+\def\qPUB{{\apl\char144}}      %equ  181 %
+\def\qQUB{{\apl\char145}}      %equ  182 %
+\def\qRUB{{\apl\char146}}      %equ  183 %
+\def\qSUB{{\apl\char147}}      %equ  184 %
+\def\qTUB{{\apl\char148}}      %equ  185 %
+\def\qUUB{{\apl\char149}}      %equ  186 %
+\def\qVUB{{\apl\char150}}      %equ  187 %
+\def\qWUB{{\apl\char151}}      %equ  188 %
+\def\qXUB{{\apl\char152}}      %equ  189 %
+\def\qYUB{{\apl\char153}}      %equ  190 %
+\def\qZUB{{\apl\char154}}      %equ  191 %
+
+% end of qdefsax.

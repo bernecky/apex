@@ -1,0 +1,8 @@
+Edit paper.tex as appropriate.
+Run "make paper.pdf".
+
+Life will be easier if you make each section a
+separate .tex file. Look at the BooleanSIMD paper to
+see how this was done.
+
+

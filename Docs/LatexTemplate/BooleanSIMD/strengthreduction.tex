@@ -1,0 +1,39 @@
+\section{Strength Reduction}
+\label{strengthreduction}
+
+Strength reduction has been a common compiler optimization
+technique for decades. Strength reduction replaces
+one operation by an equivalent one that is, typically, faster
+to execute. For example, a multiply of an integer by a
+power of two could be replaced with a left shift by the base-two logarithm of
+the power of two, if the shift operation was 
+faster than the multiply.~\cite{DFBacon:transformations2}
+
+Strength reduction has been used in APL interpreters for
+decades. In the case of Boolean arguments to verbs,
+some common strength reductions are, where {\apl B1 and B2} are
+conformable Boolean arrays:
+
+\medskip
+\begin{tabular}{|l|l|}
+\hline
+Unoptimized & Optimized\\
+\hline
+{\apl B1\qtimes\0B2} & {\apl B1\qand\0B2}\\
+{\apl B1\qdstile\0B2} & {\apl B1\qand\0B2}\\
+{\apl B1\qustile\0B2} & {\apl B1\qor\0B2}\\
+{\apl B1\qstar\0B2} & {\apl B1\qge\0B2}\\
+{\apl B1\qstile\0B2} & {\apl B1\qlt\0B2}\\
+{\apl B1\qbang\0B2} & {\apl B1\qle\0B2}\\
+{\apl \qtimes\0B2} & {\apl B2}\\
+\hline
+\end{tabular}
+\medskip
+
+\noindent The reduction of expensive integer (or real) operations
+to fast Boolean operations provides a significant performance boost.
+Furthermore, operating in the Boolean domain provides further
+performance benefits, by eliminating many conditionals 
+within the element-wise computation, and permitting word-at-a-time
+SIMD execution, even in architectures without vector extensions.
+
