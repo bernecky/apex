@@ -1,0 +1,7 @@
+use lowertriAKD: all;
+
+int main()
+{
+ z  = lowertriAKD_testXII();
+ return(z);
+}

@@ -1,0 +1,4 @@
+ r←compiota n
+⍝ Test APEX loop fusion
+ r←(⍳n)+0.5-0.5  ⍝ Poor man's coercion to double
+ r←+/(⎕AV[32]=n⍴⎕AV)/r

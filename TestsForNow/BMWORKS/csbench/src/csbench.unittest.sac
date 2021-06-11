@@ -1,0 +1,7 @@
+use csbench: all;
+
+int main()
+{
+ z  = csbench_testXXI();
+ return(z);
+}

@@ -1,0 +1,7 @@
+use UTShapeCl: all;
+
+int main()
+{
+ z  = UTShapeCl_testXXI();
+ return(z);
+}

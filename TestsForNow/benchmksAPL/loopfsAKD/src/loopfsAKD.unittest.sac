@@ -1,0 +1,7 @@
+use loopfsAKD: all;
+
+int main()
+{
+ z  = loopfsAKD_testXII();
+ return(z);
+}

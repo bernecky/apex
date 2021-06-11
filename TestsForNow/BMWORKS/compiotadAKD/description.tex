@@ -1,0 +1,18 @@
+\subsubsection{\tt compiotadAKD}
+\label{benchmarkcompiotadakd}
+
+This AKD synthetic benchmark measures the performance of the
+APL {\em compress-iota} idiom, {\tt booleanVector\qslash\0\qomega},
+where {\tt \qomega} is a double-precision vector,
+against compiled versions of the same expression.
+
+Since APL interpreters are generally unable to
+detect and special-case this sort of expression, but the \sac compiler 
+should be able to optimize it with no added effort, suggests that
+that compiled \sac code should match or outperform the APL code,
+due to the benefits of \awlf, but the \wlf version will
+likely perform poorly by comparison.
+
+The benchmarks {\tt compiota}, {\tt compiotaAKD}, {\tt compiotad}, and
+{\tt compiotadAKD} form a clique, as they
+all perform similar tasks.

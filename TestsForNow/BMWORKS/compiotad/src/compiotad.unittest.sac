@@ -1,0 +1,7 @@
+use compiotad: all;
+
+int main()
+{
+ z  = compiotad_testXXI();
+ return(z);
+}

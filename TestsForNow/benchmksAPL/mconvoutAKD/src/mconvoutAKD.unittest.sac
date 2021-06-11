@@ -1,0 +1,7 @@
+use mconvoutAKD: all;
+
+int main()
+{
+ z  = mconvoutAKD_testXII();
+ return(z);
+}

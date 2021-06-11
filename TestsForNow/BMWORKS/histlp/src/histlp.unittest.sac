@@ -1,0 +1,7 @@
+use histlp: all;
+
+int main()
+{
+ z  = histlp_testXXI();
+ return(z);
+}

@@ -1,0 +1,14 @@
+ foo;c;d
+ text←''
+ 'hr'⎕WC'HTMLRenderer' ''
+ c←0 ⋄ d←5
+lp:→(d<c←c+1)⍴0
+ :If 0=4|c
+     text←text,'<text style=''color: red''>',(⍕c),'</text>'
+ :Else
+     text←text,'<text> ',(⍕c),' </text>'
+ :EndIf
+ html←' <title> APEX ⍳○⊤ source code </title>',text
+ 'hr'⎕WS'HTML'html
+ ⎕DL 2
+ →lp

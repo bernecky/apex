@@ -1,0 +1,7 @@
+use crc: all;
+
+int main()
+{
+ z  = crc_testXXI();
+ return(z);
+}

@@ -1,0 +1,7 @@
+use logd4: all;
+
+int main()
+{
+ z  = logd4_testXXI();
+ return(z);
+}

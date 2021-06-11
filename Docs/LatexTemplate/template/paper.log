@@ -1,0 +1,241 @@
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Debian) (preloaded format=xelatex 2020.11.12)  10 JUN 2021 18:21
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**paper.tex
+(./paper.tex
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-07-17> (./sigplanconf.cls
+Document Class: sigplanconf 2013/07/02 v2.8 ACM SIGPLAN Proceedings
+\@numheaddepth=\count164
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+\c@part=\count165
+\c@section=\count166
+\c@subsection=\count167
+\c@subsubsection=\count168
+\c@paragraph=\count169
+\c@subparagraph=\count170
+\c@figure=\count171
+\c@table=\count172
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
+)
+\standardtextwidth=\dimen135
+\standardvspace=\skip49
+
+Using natbib package with 'numbers' citation style.
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip50
+\bibsep=\skip51
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count173
+)
+\@sectionaboveskip=\skip52
+\@sectionbelowskip=\skip53
+\@subsectionaboveskip=\skip54
+\@subsectionbelowskip=\skip55
+\@paragraphaboveskip=\skip56
+\@authorcount=\count174
+\@titlenotecount=\count175
+\@titlenotetext=\toks15
+\@fnmark=\toks16
+\@authori=\count176
+\@measbox=\box45
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 11
+2.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 105.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def
+File: xetex.def 2017/06/24 v5.0h Graphics/color driver for xetex
+))
+\Gin@req@height=\dimen136
+\Gin@req@width=\dimen137
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2019/11/10 v1.5r LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks18
+\verbatim@line=\toks19
+\verbatim@in@stream=\read2
+) (./saxpsa.sty
+Invalid UTF-8 byte or sequence at line 36 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 41 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 42 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 44 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 45 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 46 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 48 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 48 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 50 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 50 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 52 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 52 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 55 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 56 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 57 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 57 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 58 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 58 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 59 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 62 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 62 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 63 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 63 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 64 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 64 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 65 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 65 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 68 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 69 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 70 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 71 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 72 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 72 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 73 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 73 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 75 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 75 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 76 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 77 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 77 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 78 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 79 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 80 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 81 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 81 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 82 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 82 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 83 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 84 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 85 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 86 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 86 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 87 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 87 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 88 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 89 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 90 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 90 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 91 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 91 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 98 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 104 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 104 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 105 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 105 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 106 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 106 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 107 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 107 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 108 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 108 replaced by U+FFFD.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/ae/ae.sty
+Package: ae 2001/02/12 1.3 Almost European Computer Modern
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
+))
+(/usr/share/texlive/texmf-dist/tex/latex/ae/aecompl.sty
+Package: aecompl 1998/07/23 0.9 T1 Complements for AE fonts (D. Roegel)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2019/11/23 v1.2a Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: xetex.def on input line 147.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xdvipdfmx.def
+File: l3backend-xdvipdfmx.def 2020-06-29 L3 backend support: xdvipdfmx
+\g__graphics_track_int=\count177
+\l__pdf_internal_box=\box46
+\g__pdf_backend_object_int=\count178
+\g__pdf_backend_annotation_int=\count179
+)
+(./paper.aux)
+\openout1 = `paper.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 1
+3.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Trying to load font information for T1+aer on input line 13
+.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ae/t1aer.fd
+File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
+)
+LaTeX Font Info:    Trying to load font information for T1+aess on input line 2
+4.
+
+(/usr/share/texlive/texmf-dist/tex/latex/ae/t1aess.fd
+File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
+) [1
+
+
+
+] (./paper.bbl)
+[2
+
+] (./paper.aux) ) 
+Here is how much of TeX's memory you used:
+ 1991 strings out of 479712
+ 25683 string characters out of 5891446
+ 270482 words of memory out of 5000000
+ 19224 multiletter control sequences out of 15000+600000
+ 551887 words of font info for 41 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 36i,5n,34p,198b,274s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on paper.pdf (2 pages).

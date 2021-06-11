@@ -1,0 +1,10 @@
+
+⍳5
+
+ )clear
+ ]link.create # TestsForNow/benchmksAPL/histlp
+ ]load TestsForNow/benchmksAPL/histlp/*.ufn
+ ⎕se.Link.Add⍤1⊢⎕nl 3
+
+
+ 

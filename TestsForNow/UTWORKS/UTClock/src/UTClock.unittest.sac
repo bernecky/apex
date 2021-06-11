@@ -1,0 +1,7 @@
+use UTClock: all;
+
+int main()
+{
+ z  = UTClock_testXXI();
+ return(z);
+}

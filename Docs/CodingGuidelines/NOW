@@ -1,0 +1,26 @@
+Coding Style for APEX, Now
+
+Some general thoughts on coding style for
+new work on APEX:
+
+1. Try to write code that does not use
+   control structures. E.g., avoid :IF, :FOR, etc.
+   This means that each function you write
+   should, when feasible, be an APL basic block.
+
+2. Do not use error trapping. Ever.
+
+3. Try to write functions as Dfns. I find them to be
+   easier to maintain. They are likely to
+   be more compilable, should we get to the
+   point of making APEX compile itself.
+
+4. Avoid oddball (object-oriented) rubbish and
+   weird language constructs.
+
+5. Aaron Hsu likes to promote the use of the Dyalog APL "key" operator:
+    https://dl.acm.org/doi/10.1145/2935323.2935331
+   I don't have any immediate wonderful ideas on how
+   it would make APEX simpler, better, cleaner, etc., 
+   but welcome same.
+

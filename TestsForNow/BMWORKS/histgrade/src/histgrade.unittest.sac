@@ -1,0 +1,7 @@
+use histgrade: all;
+
+int main()
+{
+ z  = histgrade_testXXI();
+ return(z);
+}

@@ -1,0 +1,7 @@
+use compiota: all;
+
+int main()
+{
+ z  = compiota_testXXI();
+ return(z);
+}

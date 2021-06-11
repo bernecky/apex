@@ -1,0 +1,7 @@
+use mconvout: all;
+
+int main()
+{
+ z  = mconvout_testXXI();
+ return(z);
+}

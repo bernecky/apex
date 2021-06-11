@@ -1,0 +1,7 @@
+use UTThornInt: all;
+
+int main()
+{
+ z  = UTThornInt_testXXI();
+ return(z);
+}

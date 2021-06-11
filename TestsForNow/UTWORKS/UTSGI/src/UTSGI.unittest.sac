@@ -1,0 +1,7 @@
+use UTSGI: all;
+
+int main()
+{
+ z  = UTSGI_testXXI();
+ return(z);
+}

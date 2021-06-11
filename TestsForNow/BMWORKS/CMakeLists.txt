@@ -1,48 +1,48 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 3.3)
+CMAKE_MINIMUM_REQUIRED (VERSION 3.17)
 
-# Temp home for working benchmksAPL
-PROJECT (apex-BMWORKS)
+# This is the uberproject to build the collection of benchmarks in the
+# folders in this directory, building a SaC module and a SaC program for each.
+# The program depends on its associated module; the program and module source code
+# are located in the `src/` folder in each benchmark.
+# The sac2crc file eases the task of correctly linking the SaC module
+# with its program.
 
-# Where compiled sac modules reside
+PROJECT (apex-bmworks)
+
+# List all the benchmarks
+FILE(GLOB BM_DIRS CONFIGURE_DEPENDS *)
+MESSAGE( STATUS "Building for: " ${BM_DIRS})
+
+
+# Destination for compiled sac modules
 SET (DLL_BUILD_DIR  "${PROJECT_BINARY_DIR}/lib")
 
-# Targets for which we build modules or binaries
-##DEBUG SET (TARGETS            seq mt_pth  CACHE STRING "Build for these targets")
-SET (TARGETS            seq CACHE STRING "Build for these targets")
+# We build modules and programs for all targets, where a target
+# is the result of compiling for e.g., sequential or multi-thread execution
+SET (TARGETS            seq mt_pth  CACHE STRING "Build sequential and pthread code for each target")
+
 SET (SAC2C_EXEC                     CACHE STRING "Path to sac2c compiler")
-SET (LINKSETSIZE        "0"         CACHE STRING "Value for -linksetsize parameter of sac2c")
+SET (LINKSETSIZE        "0"         CACHE STRING "Value for sac2c -linksetsize parameter")
 
 # Check whether sac2c is operational
 INCLUDE ("cmake-common/check-sac2c.cmake")
 INCLUDE ("cmake-common/misc-macros.cmake")
 
+# add our custom Find*.cmake in local cmake directory
+#LIST (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-
-SET (SAC2C_DEF_FLAGS -v0 -O3 -maxlur 3 -linksetsize ${LINKSETSIZE} -L ${DLL_BUILD_DIR} -T ${DLL_BUILD_DIR})
-
-# For every target here, run CMakeLists.txt in target folder
+SET (BM_DIRSfake iotan logd)
+MESSAGE( STATUS "BM_DIRSfake are: " ${BM_DIRSfake})
+# For each target, run CMakeLists.txt in all benchmarks
 FOREACH (TARGET IN ITEMS ${TARGETS})
-INCLUDE ("cmake-common/sac2c-variables.cmake")
-INCLUDE ("cmake-common/resolve-sac2c-dependencies.cmake")
-INCLUDE ("cmake-common/generate-sac2c-dependency-targets.cmake")
-INCLUDE ("cmake-common/build-sac2c-module.cmake")
-	#ADD_SUBDIRECTORY (buildv         buildv-${TARGET})
-	###    ADD_SUBDIRECTORY (loop01       loop01-${TARGET})
-    ADD_SUBDIRECTORY (compiota       compiota-${TARGET})
-    #ADD_SUBDIRECTORY (compiotad     compiotad-${TARGET})
-    #ADD_SUBDIRECTORY (crc           crc-${TARGET})
-    #ADD_SUBDIRECTORY (crc2          crc2-${TARGET})
-    #ADD_SUBDIRECTORY (csbench       csbench-${TARGET})
-    #ADD_SUBDIRECTORY (downgradePV   downgradePV-${TARGET})
-    #ADD_SUBDIRECTORY (gewlf         gewlf-${TARGET})
-    #ADD_SUBDIRECTORY (histgrade     histgrade-${TARGET})
-    #ADD_SUBDIRECTORY (histlp        histlp-${TARGET})
-    #ADD_SUBDIRECTORY (iotan         iotan-${TARGET})
-    #ADD_SUBDIRECTORY (logd          logd-${TARGET})
-    #ADD_SUBDIRECTORY (logd2         logd2-${TARGET})
-    #ADD_SUBDIRECTORY (logd3         logd3-${TARGET})
-    #ADD_SUBDIRECTORY (logd4         logd4-${TARGET})
-    #ADD_SUBDIRECTORY (loopfs        loopfs-${TARGET})
-    #ADD_SUBDIRECTORY (loopfv        loopfv-${TARGET})
-    #ADD_SUBDIRECTORY (lowertri      lowertri-${TARGET})
+	MESSAGE( STATUS "Target is: " ${TARGET})
+	#### DEBUG FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
+	FOREACH ( BM_DIR IN ITEMS ${BM_DIRSfake})
+		MESSAGE( STATUS "BM_DIR is: " ${BM_DIR})
+		ADD_SUBDIRECTORY (${BM_DIR}/src ${BM_DIR}src-${TARGET})
+	ENDFOREACH()
 ENDFOREACH ()
+
+# This build target is responsible for generating the package sac2crc file
+CREATE_SAC2CRC_TARGET ("examplemodule" "${DLL_BUILD_DIR}" "${DLL_BUILD_DIR}" "")
+

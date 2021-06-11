@@ -1,0 +1,7 @@
+use mconv: all;
+
+int main()
+{
+ z  = mconv_testXXI();
+ return(z);
+}

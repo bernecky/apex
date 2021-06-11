@@ -1,0 +1,7 @@
+use UTCompress: all;
+
+int main()
+{
+ z  = UTCompress_testXXI();
+ return(z);
+}

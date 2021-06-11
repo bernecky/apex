@@ -1,0 +1,7 @@
+use UTTakeDrop: all;
+
+int main()
+{
+ z  = UTTakeDrop_testXXI();
+ return(z);
+}

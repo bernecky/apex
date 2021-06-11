@@ -1,0 +1,7 @@
+use UTMStruct: all;
+
+int main()
+{
+ z  = UTMStruct_testXXI();
+ return(z);
+}

@@ -1,0 +1,7 @@
+use compiotaAKD: all;
+
+int main()
+{
+ z  = compiotaAKD_testXII();
+ return(z);
+}

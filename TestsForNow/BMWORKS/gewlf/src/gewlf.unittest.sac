@@ -1,0 +1,7 @@
+use gewlf: all;
+
+int main()
+{
+ z  = gewlf_testXXI();
+ return(z);
+}

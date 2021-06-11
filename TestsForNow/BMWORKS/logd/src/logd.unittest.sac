@@ -1,0 +1,7 @@
+use logd: all;
+
+int main()
+{
+ z  = logd_testXXI();
+ return(z);
+}

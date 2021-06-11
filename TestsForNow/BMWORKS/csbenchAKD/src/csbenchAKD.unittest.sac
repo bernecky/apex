@@ -1,0 +1,7 @@
+use csbenchAKD: all;
+
+int main()
+{
+ z  = csbenchAKD_testXII();
+ return(z);
+}

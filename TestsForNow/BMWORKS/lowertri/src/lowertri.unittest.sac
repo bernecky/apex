@@ -1,0 +1,7 @@
+use lowertri: all;
+
+int main()
+{
+ z  = lowertri_testXXI();
+ return(z);
+}

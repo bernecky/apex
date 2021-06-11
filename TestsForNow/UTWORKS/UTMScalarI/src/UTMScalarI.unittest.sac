@@ -1,0 +1,7 @@
+use UTMScalarI: all;
+
+int main()
+{
+ z  = UTMScalarI_testXXI();
+ return(z);
+}

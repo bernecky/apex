@@ -1,0 +1,396 @@
+module UTThornReal;
+export all;
+
+// Compiled by APEX Version: FIXME!! 2021-06-07 17:54:55.310
+use Array: all;
+use ArrayFormat: all;
+use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
+
+// APEX stdlib.sis include file.
+// Standard equates and constants for APL compiler
+// Also standard coercion functions
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline int[+] plusIII(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : plusIII(xel,yel);
+  } : genarray(shape(y), 0);
+  return(z);
+}
+
+
+inline double[+] plusDID(double x, int[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : plusDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
+inline double[+] plusIDD(int[+] x, double y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : plusIDD(xel,y);
+  } : genarray( shape(x), 0.0d);
+  return(z);
+}
+
+
+inline int[*] rhoIII(int[.] x, int[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), 0);
+   return( z);
+}
+
+
+
+inline char[.] thrnXDC(double y, int QUADpp)
+{ /* Monadic format on double scalar  */
+ z = format(y, QUADpp);
+ return(z);
+}
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline char[+] thrnXDC(double[+] y, int QUADpp)
+{ /* Monadic format on double non-scalar */
+  /* Refer to UTThorn.dws <threal> for APL model of this */
+  z = format(y, QUADpp);
+  return(z);
+}
+
+
+inline bool[*] quadXBB(bool[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline bool[2] comaBBB(bool x, bool y)
+{/* SxS catenate first (or last) axis */
+ return([toB(x)]++[toB(y)]);
+}
+
+inline bool[.] comaBBB(bool[.] x, bool y)
+{/* VxS catenate first (or last) axis */
+ return(toB(x)++[toB(y)]);
+}
+
+inline bool[.] comaBBB(bool[.] x, bool[.] y)
+{ /* VxV catenate first or last axis */
+ return(toB(x)++toB(y));
+}
+
+inline bool sameCCB(char[+] x, char[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqCCB(toC( x),  toC( y)))));
+  return(z);
+}
+
+
+
+inline int[+] indsxxx0(int[+] X, int  I3, int Yin)
+{ /* X[;;nonscalarI;;;]<- scalarY */
+ 
+ z = ItoI(X);
+ Y = Yin;
+
+ for(i0=0; i0<shape(X)[[0]]; i0++){
+ for(i1=0; i1<shape(X)[[1]]; i1++){
+  for(i2=0; i2<shape(X)[[2]]; i2++){
+
+ z[[i0,i1,i2,I3]]=ItoI((Y));
+
+ }
+ }
+  }
+
+ return(z);
+}
+
+
+
+inline bool andslXBBQUICKSTOP(bool[.] y)
+{ /* First/last axis reduction of vector with quick stop*/
+  z = with {
+         (0*shape(y) <= iv < shape(y))
+                : BtoB(y[iv]);
+        } : foldfix( andBBB, ItoB(1), ItoB(0));
+  return(z);
+}
+
+
+inline int plusIII(int x, int y)
+{ return(ItoI(x)+ItoI(y));
+}
+
+inline double plusDDD(double x, double y)
+{ return(DtoD(x)+DtoD(y));
+}
+
+inline double plusIDD(int x, double y)
+{ return(ItoD(x)+DtoD(y));
+}
+
+inline bool andBBB(bool x, bool y)
+{ return(BtoB(x)&BtoB(y));
+}
+
+inline bool[+] eqCCB(char[+] x, char[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+         sy = shape(y);
+         z = with {
+             ( . <= iv <= .) {
+                      xel = x[iv];
+                   yel = y[iv];
+           } : eqCCB(xel,yel);
+        } : genarray(sy, false);
+  return(z);
+}
+
+
+
+
+
+
+inline int V2O( int[.] shp, int[.] iv)
+{ /* Vector iv to offset into array of shape shp */
+  /* See V2O.dws workspace */
+  offset = 0;
+  wt = 1;
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    offset = offset + ( wt * iv[i]);
+    wt = wt * shp[i];
+  }
+  return( offset);
+}
+
+inline int[.] O2V( int[.] shp, int offset)
+{ /* Offset into array of shape shp to index vector */
+  /* See V2O.dws workspace */
+  iv = genarray( shape(shp), 1);
+  wts = iv;
+  for( i=shape(shp)[0]-2; i>=0; i--) {
+    wts[i] = wts[i+1] * shp[i+1];
+  }
+
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    iv[i] = _aplmod_SxS_( offset/wts[i], shp[i]);
+    offset = offset - (iv[i]*wts[i]);
+  }
+  return( iv);
+}
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline int[+] ABC(int[+] I, int Xshape)
+{ /* (OLD) Array bounds check for indexed ref X[nonscalarI] & indexed assign */
+ z = I;
+ return(z);
+}
+
+inline int ABC(int I, int Xshape)
+{ /* (OLD) Array bounds check for indexed ref X[scalarI] & indexed assign */
+ z = I;
+ return(z);
+}
+
+inline bool eqCCB(char x, char y)
+{ /* A=B on non-doubles */
+ return(CtoC(x) == CtoC(y));
+}
+
+inline bool[+] eqCCB(char x, char[+] y)
+{ /* SxA scalar function */
+  xel = toC(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toC(y[iv]);
+                    } : eqCCB(xel,yel);
+  } : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqCCB(char[+] x, char y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : eqCCB(xel,y);
+  } : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline char[.] comaXCC(char[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline char[.] threalIDC(int PP, double y )
+{ 
+/*
+ ?
+*/
+QUADpp_0=( PP);
+ A_21=thrnXDC( y,QUADpp_0);
+r_0=( A_21);
+ return(r_0);
+}
+
+inline bool[.] testthornXIB(int PP,int QUADio)
+{ 
+/*
+ ?
+*/
+QUADpp_0=( PP);
+ A_36=iotaXII( 999,QUADio);
+ // dsf scalar(s)
+A_37=plusIII(-20,A_36);
+ A_38=rhoIII([2, 3, 4, 5],A_37);
+ m_0=( A_38);
+ A_40= ABC(toi(false)-QUADio,shape(m_0)[3]);
+A_45=indsxxx0(m_0,A_40,1000000000);
+m_1=( A_45);
+ A_48=thrnXDC( -2.5,QUADpp_0);
+ A_49=threalIDC(QUADpp_0,-2.5);
+ A_51=sameCCB(A_49,A_48);
+ r_0=( A_51);
+ A_54=iotaXII( 9,QUADio);
+ // dsf scalar(s)
+A_55=plusDID(-2.5,A_54);
+ A_57=thrnXDC( A_55,QUADpp_0);
+ A_59=iotaXII( 9,QUADio);
+ // dsf scalar(s)
+A_60=plusDID(-2.5,A_59);
+ A_61=threalCLONE3IDC(QUADpp_0,A_60);
+ A_63=sameCCB(A_61,A_57);
+ A_64=comaBBB(r_0,A_63);
+ r_1=( A_64);
+ // dsf scalar(s)
+A_66=plusIDD(m_1,0.1);
+ A_68=thrnXDC( A_66,QUADpp_0);
+ // dsf scalar(s)
+A_69=plusIDD(m_1,0.1);
+ A_70=threalCLONE4IDC(QUADpp_0,A_69);
+ A_72=sameCCB(A_70,A_68);
+ A_73=comaBBB(r_1,A_72);
+ r_2=( A_73);
+ return(r_2);
+}
+
+inline int UTThornReal_testXXI()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toI(( false));
+ QUADrl_1=( 16807);
+ QUADpp_1=( 16);
+ QUADpw_1=( 80);
+ A_49=testthornXIB( QUADpp_1,QUADio_1);
+ r_0=( A_49);
+ A_53=quadXBB( A_49,QUADpp_1,QUADpw_1);
+ A_55=testthornXIB( 5,QUADio_1);
+ A_56=comaBBB(r_0,A_55);
+ r_1=( A_56);
+ A_60=quadXBB( A_56,QUADpp_1,QUADpw_1);
+ A_61=andslXBBQUICKSTOP( r_1);
+ // dsf scalar(s)
+A_65=barBBI(true,A_61);
+r_2=( A_65);
+ A_69=quadXII( r_2,QUADpp_1,QUADpw_1);
+ return(r_2);
+}
+
+inline char[.] threalCLONE3IDC(int PP, double[.] y )
+{ 
+/*
+ ?
+*/
+QUADpp_0=( PP);
+ A_21=thrnXDC( y,QUADpp_0);
+r_0=( A_21);
+ return(r_0);
+}
+
+inline char[.,.,.,.] threalCLONE4IDC(int PP, double[.,.,.,.] y )
+{ 
+/*
+ ?
+*/
+QUADpp_0=( PP);
+ A_21=thrnXDC( y,QUADpp_0);
+r_0=( A_21);
+ return(r_0);
+}
+

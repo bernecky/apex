@@ -1,0 +1,7 @@
+use mconvAKD: all;
+
+int main()
+{
+ z  = mconvAKD_testXII();
+ return(z);
+}

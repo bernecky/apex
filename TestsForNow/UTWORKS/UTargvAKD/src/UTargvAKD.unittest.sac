@@ -1,0 +1,7 @@
+use UTargvAKD: all;
+
+int main()
+{
+ z  = UTargvAKD_testXII();
+ return(z);
+}

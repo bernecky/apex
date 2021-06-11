@@ -1,0 +1,24 @@
+Coding Style for APEX, Then
+
+The only coding guidelines for APEX back in The Dark Ages
+were to make it comprehensible by humans, and to
+operate inside a tiny workspace on system that
+probably had 384KB of DRAM, decades before there were Dfns or
+APL control structures such as :FOR.
+
+Experimental design changes, such as the representation of
+conjunctions and adverbs in the Abstract Syntax Tree (AST),
+were just that: experiments, rarely carried through to completion
+as would be done for a production system. I was the only
+customer, so this was okay. Then.
+
+There was no git or svn at the time. I had written
+APE (The APL Program Editor), for maintaining SHARP APL
+source code (mostly S/370 Assembler Code) for IPSA,
+but it was not really suitable for use on a tiny PC
+with a tinier (20MB) hard drive. 
+
+In 1970, when I built the first Snake Island Research Inc
+development system, I bought a 1GB SCSI hard
+drive, for the princely sum of $4500USD.
+

@@ -1,0 +1,7 @@
+use logdAKD: all;
+
+int main()
+{
+ z  = logdAKD_testXII();
+ return(z);
+}

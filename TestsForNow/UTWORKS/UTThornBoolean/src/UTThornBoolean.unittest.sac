@@ -1,0 +1,7 @@
+use UTThornBoolean: all;
+
+int main()
+{
+ z  = UTThornBoolean_testXXI();
+ return(z);
+}

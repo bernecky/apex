@@ -1,0 +1,7 @@
+use UTCatenate: all;
+
+int main()
+{
+ z  = UTCatenate_testXXI();
+ return(z);
+}

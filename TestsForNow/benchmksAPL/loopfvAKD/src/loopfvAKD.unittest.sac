@@ -1,0 +1,7 @@
+use loopfvAKD: all;
+
+int main()
+{
+ z  = loopfvAKD_testXII();
+ return(z);
+}

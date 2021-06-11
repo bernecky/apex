@@ -1,0 +1,7 @@
+use UTIndexSet: all;
+
+int main()
+{
+ z  = UTIndexSet_testXXI();
+ return(z);
+}

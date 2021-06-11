@@ -1,0 +1,7 @@
+use loopfs: all;
+
+int main()
+{
+ z  = loopfs_testXXI();
+ return(z);
+}
