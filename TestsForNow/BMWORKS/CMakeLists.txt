@@ -31,13 +31,13 @@ INCLUDE ("cmake-common/misc-macros.cmake")
 # add our custom Find*.cmake in local cmake directory
 #LIST (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-SET (BM_DIRSfake iotan logd)
-MESSAGE( STATUS "BM_DIRSfake are: " ${BM_DIRSfake})
+SET (BM_DIRS iotan logd)
+MESSAGE( STATUS "BM_DIRSare: " ${BM_DIRS})
 # For each target, run CMakeLists.txt in all benchmarks
 FOREACH (TARGET IN ITEMS ${TARGETS})
 	MESSAGE( STATUS "Target is: " ${TARGET})
 	#### DEBUG FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
-	FOREACH ( BM_DIR IN ITEMS ${BM_DIRSfake})
+	FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
 		MESSAGE( STATUS "BM_DIR is: " ${BM_DIR})
 		ADD_SUBDIRECTORY (${BM_DIR}/src ${BM_DIR}src-${TARGET})
 	ENDFOREACH()

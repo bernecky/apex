@@ -1,17 +1,20 @@
+module ipbb;
+export all;
+
+// Compiled by APEX Version: FIXME!! 2021-06-14 15:05:37.984
 use Array: all;
-use StdIO : all;
-use Numerical : all;
-use CommandLine: all;
-use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
 
-/* Compiled by APEX Version: CLEAR WS2018-10-20 12:00:36.701 */
-/*
-% This is the APEX stdlib.sis include file.
-% Standard equates and constants for APL compiler
-% Also standard coercion functions
-*/
+// APEX stdlib.sis include file.
+// Standard equates and constants for APL compiler
+// Also standard coercion functions
 
 #define toB(x) to_bool((x))
 #define toI(x) toi((x))
@@ -31,6 +34,10 @@ use Bits: all;
 #define DtoB(x) to_bool((x))
 #define DtoI(x) toi((x))
 
+
+inline int mpyIII(int x, int y)
+{ return(ItoI(x)*ItoI(y));
+}
 
 inline bool eqIIB(int x, int y)
 { /* A=B on non-doubles */
@@ -58,7 +65,7 @@ inline bool[*] rhoIBB(int[.] x, bool[*] y)
    z = with {
          ( . <= iv <= .) {
            offset = V2O( toi( x), iv);
-           offset = _mod_SxS_( offset, prod( shape(y)));
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
            el = y[ O2V( shape( y), offset)];
           } : el;
        } : genarray( toi(x), false);
@@ -170,7 +177,7 @@ inline int[.] O2V( int[.] shp, int offset)
   }
 
   for( i=shape(shp)[0]-1; i>=0; i--) {
-    iv[i] = _mod_SxS_( offset/wts[i], shp[i]);
+    iv[i] = _aplmod_SxS_( offset/wts[i], shp[i]);
     offset = offset - (iv[i]*wts[i]);
   }
   return( iv);
@@ -225,18 +232,18 @@ inline int ipbbXII(int siz)
 /*
  ?
 */
-A_23=rhoIII(2,siz);
- A_24=rhoIBB(A_23,[false,true,true,false,false,false]);
-m_0=( A_24);
- A_26=tranXBB( m_0);
- A_27=ordotandBBBSTARLIKE(m_0,A_26);
- A_34=plusslXBIFOLD( A_27);
- A_38=plusslXIIFOLD( A_34);
- r_0=( A_38);
+A_20=rhoIII(2,siz);
+ A_21=rhoIBB(A_20,[false,true,true,false,false,false]);
+m_0=( A_21);
+ A_23=tranXBB( m_0);
+ A_24=ordotandBBBSTARLIKE(m_0,A_23);
+ A_31=plusslXBIFOLD( A_24);
+ A_35=plusslXIIFOLD( A_31);
+ r_0=( A_35);
  return(r_0);
 }
 
-int main()
+inline int ipbb_testXXI()
 { 
 /*
  ?
@@ -251,15 +258,17 @@ QUADio_0=toI(( false));
  QUADrl_1=( 16807);
  QUADpp_1=( 16);
  QUADpw_1=( 80);
- A_56=ipbbXII( n_0);
- r_0=( A_56);
- A_60=quadXII( r_0,QUADpp_1,QUADpw_1);
- /* dsf scalar(s) */
-A_62=eqIIB(r_0,5333334);
-/* dsf scalar(s) */
-A_63=barBBI(true,A_62);
- r_1=( A_63);
- A_67=quadXII( A_63,QUADpp_1,QUADpw_1);
+ A_50=ipbbXII( n_0);
+ r_0=( A_50);
+ A_54=quadXII( r_0,QUADpp_1,QUADpw_1);
+ // dsf Scalar & clique
+A_55=mpyIII(n_0,n_0);
+ // dsf scalar(s)
+A_57=eqIIB(r_0,A_55);
+ // dsf scalar(s)
+A_58=barBBI(true,A_57);
+ r_1=( A_58);
+ A_62=quadXII( A_58,QUADpp_1,QUADpw_1);
  return(r_1);
 }
 

@@ -9,5 +9,5 @@
  InitializePFAT
  TL←LC #.globals.TargetLanguage
  fragbuf←BufferAllCodeFragments #.globals.PathFrag
- GenerateTemplateFiles fldr
+ ⍝  FIXME    GenerateTemplateFiles fldr
  r←fldr EmitOneCU asts ⍝ module and generated caller

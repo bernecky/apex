@@ -1,1 +1,5 @@
 crash in PFATPROPERTY during codegen
+
+2021-06-14 The above appears to be fixed,
+but we are now generating STARLIKE inner product,
+when we should be generating STAR.
