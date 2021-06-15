@@ -1,0 +1,13 @@
+ r←fldr dojulia asts;TL;fragbuf;ipt
+⍝# Emit object code for asts
+ InitializeAST
+ InitializeFragments
+ InitializeCtl
+ InitializeSSA
+ InitializeTYPES
+ InitializePFAT
+ TL←LC #.globals.TargetLanguage
+ fragbuf←BufferAllCodeFragments #.globals.PathFrag
+ ⍝  FIXME    GenerateTemplateFiles fldr
+ r←fldr EmitOneCU asts ⍝ module and generated caller
+

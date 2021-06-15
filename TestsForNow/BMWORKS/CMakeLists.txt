@@ -4,7 +4,7 @@ CMAKE_MINIMUM_REQUIRED (VERSION 3.17)
 # folders in this directory, building a SaC module and a SaC program for each.
 # The program depends on its associated module; the program and module source code
 # are located in the `src/` folder in each benchmark.
-# The sac2crc file eases the task of correctly linking the SaC module
+# The sac2crc file simplifies correct linking of the SaC module
 # with its program.
 
 PROJECT (apex-bmworks)
