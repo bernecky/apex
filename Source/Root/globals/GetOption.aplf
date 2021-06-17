@@ -4,10 +4,10 @@
  ⍝ ⍵ is, e.g.,  "OptionName=DefaultValue"
  ⍝ or "OptionName="  default value will be empty vector
  ⍝ or "OptionName"   error if OptionName=x not in ⍺
-     Oname←(1+⍵⍳'=')↑⍵
-     opts←' ',dlb dtb ⍺,' ',⍵
+     Oname←#.arrayutils.LC(1+⍵⍳'=')↑⍵
+     opts←' ',dlb dtb ⍵,' ',#.arrayutils.LC ⍺
      optm←' 'vtom opts
      b←Oname≡⍤1⊢(⍴Oname)↑⍤1⊢optm ⍝  Mark all desired opts
-     loc←⌈/b/⍳⍴b ⍝ Last desired opt
+     loc←⌈/b/⍳⍴b ⍝ We choose last legal opt
      dtb(⍴Oname)↓loc⌷optm
  }

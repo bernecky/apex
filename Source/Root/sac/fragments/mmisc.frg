@@ -4,6 +4,7 @@
  *      shape, index generator, matrix inverse,
  *      dex, nubsieve, thorn
  * Robert Bernecky 2007-05-13
+xxx
  */
 
 %Fragment iota x01 x bidc i .

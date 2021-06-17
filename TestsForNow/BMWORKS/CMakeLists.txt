@@ -10,9 +10,8 @@ CMAKE_MINIMUM_REQUIRED (VERSION 3.17)
 PROJECT (apex-bmworks)
 
 # List all the benchmarks
-FILE(GLOB BM_DIRS CONFIGURE_DEPENDS *)
+FILE(GLOB BM_DIRS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*)
 MESSAGE( STATUS "Building for: " ${BM_DIRS})
-
 
 # Destination for compiled sac modules
 SET (DLL_BUILD_DIR  "${PROJECT_BINARY_DIR}/lib")
@@ -31,7 +30,7 @@ INCLUDE ("cmake-common/misc-macros.cmake")
 # add our custom Find*.cmake in local cmake directory
 #LIST (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-SET (BM_DIRS iotan logd)
+SET (BM_DIRS iotan )
 MESSAGE( STATUS "BM_DIRSare: " ${BM_DIRS})
 # For each target, run CMakeLists.txt in all benchmarks
 FOREACH (TARGET IN ITEMS ${TARGETS})
@@ -39,7 +38,7 @@ FOREACH (TARGET IN ITEMS ${TARGETS})
 	#### DEBUG FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
 	FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
 		MESSAGE( STATUS "BM_DIR is: " ${BM_DIR})
-		ADD_SUBDIRECTORY (${BM_DIR}/src ${BM_DIR}src-${TARGET})
+		ADD_SUBDIRECTORY (${BM_DIR}/src ${DLL_BUILD_DIR}/${TARGET})
 	ENDFOREACH()
 ENDFOREACH ()
 

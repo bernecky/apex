@@ -1,5 +1,6 @@
  r←fldr dojulia asts;TL;fragbuf;ipt
-⍝# Emit object code for asts
+⍝# Emit Julia object code for asts
+'Time to write code, Holden...' assert 0
  InitializeAST
  InitializeFragments
  InitializeCtl
@@ -8,6 +9,6 @@
  InitializePFAT
  TL←LC #.globals.TargetLanguage
  fragbuf←BufferAllCodeFragments #.globals.PathFrag
+
  ⍝  FIXME    GenerateTemplateFiles fldr
  r←fldr EmitOneCU asts ⍝ module and generated caller
-

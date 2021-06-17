@@ -19,6 +19,8 @@
      fnm←fldr #.sac.dosac asts
  :Case 'plural'
      fnm←fldr #.plural9.doplural asts
+     :case 'julia'
+     fnm←fldr #.julia.dojulia asts
  :Else
      ⎕←'Unable to generate code in: ',fldr,' for: ',TL
      fnm←''
