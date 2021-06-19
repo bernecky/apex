@@ -5,6 +5,8 @@
 #   * DLL_BUILD_DIR has been previously defined.
 #   * `sac2c-variables.cmake' has been included.
 
+MESSAGE( STATUS "debug we are in build_sac2c_module")
+
 # Sanity check.  DLL_BUILD_DIR is the location where to put compiled
 # sac modules.  This is needed to generate local dependency correctly.
 IF (NOT DLL_BUILD_DIR)

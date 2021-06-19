@@ -4,8 +4,6 @@ CMAKE_MINIMUM_REQUIRED (VERSION 3.17)
 # folders in this directory, building a SaC module and a SaC program for each.
 # The program depends on its associated module; the program and module source code
 # are located in the `src/` folder in each benchmark.
-# The sac2crc file simplifies correct linking of the SaC module
-# with its program.
 
 PROJECT (apex-bmworks)
 
@@ -27,21 +25,20 @@ SET (LINKSETSIZE        "0"         CACHE STRING "Value for sac2c -linksetsize p
 INCLUDE ("cmake-common/check-sac2c.cmake")
 INCLUDE ("cmake-common/misc-macros.cmake")
 
-# add our custom Find*.cmake in local cmake directory
-#LIST (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+SET (SAC2C_DEF_FLAGS -v0 -O3 -maxlur 3 -linksetsize ${LINKSETSIZE} -L ${DLL_BUILD_DIR} -T ${DLL_BUILD_DIR})
 
 SET (BM_DIRS iotan )
-MESSAGE( STATUS "BM_DIRSare: " ${BM_DIRS})
+MESSAGE( STATUS "BM_DIRS are: " ${BM_DIRS})
+
 # For each target, run CMakeLists.txt in all benchmarks
 FOREACH (TARGET IN ITEMS ${TARGETS})
 	MESSAGE( STATUS "Target is: " ${TARGET})
-	#### DEBUG FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
 	FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
 		MESSAGE( STATUS "BM_DIR is: " ${BM_DIR})
-		ADD_SUBDIRECTORY (${BM_DIR}/src ${DLL_BUILD_DIR}/${TARGET})
+		MESSAGE( STATUS "DLL_BUILD_DIR is: " ${DLL_BUILD_DIR})
+		##ADD_SUBDIRECTORY (${BM_DIR}/src ${DLL_BUILD_DIR}/${TARGET}/${BM_DIR})
+		ADD_SUBDIRECTORY (${BM_DIR}/src ${BM_DIR}-${TARGET})
+		MESSAGE( STATUS "target for add_subdirectory is: " ${BM_DIR}-${TARGET})
 	ENDFOREACH()
 ENDFOREACH ()
-
-# This build target is responsible for generating the package sac2crc file
-CREATE_SAC2CRC_TARGET ("examplemodule" "${DLL_BUILD_DIR}" "${DLL_BUILD_DIR}" "")
 

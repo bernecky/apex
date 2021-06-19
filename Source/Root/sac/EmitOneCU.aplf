@@ -14,7 +14,7 @@
  mast←D ssaast⌷,D ismn/asts
  nmain←fldr SACModuleName mast
  nmain←nmain,fldr SACModuleTypes mast
- txt←((E fldr), E nmain) GenCode asts ⍝ gen module from all asts
+ txt←((E fldr),E nmain)GenCode asts ⍝ gen module from all asts
  fnmso←txt WriteCode(E fldr),E''
  ismod←1 ⍝ Emit makefile for module
  junk←((E fldr),E ismod)InvokeCompiler fnmso
