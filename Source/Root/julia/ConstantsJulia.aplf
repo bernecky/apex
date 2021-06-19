@@ -1,0 +1,18 @@
+ r←ConstantsJulia ast;cv;c;i;astb;j;tp
+  ⍝ TODO
+ ⍝ Convert APL constants to Julia format
+ cv←ast[;astclass]∊astclassNC,astclassCC
+ astb←ConstantsJuliaDouble ast
+ astb←ConstantsJuliaCharacter astb
+ astb←ConstantsJuliaBoolean astb
+ astb←ConstantsJuliaInteger astb
+ ⍝ Amend vector consts with descriptor.
+ cv←cv∧1=D astb[;astrank] ⍝ Vector constants
+ i←(cv⌿astb)[;asttarget]
+ i←(E'[')catenateeach i catenateeach E']'
+ j←0=D cv/astb[;astxrho] ⍝ Correct empty vectors
+ tp←D(cv\j)⌿astb[;asttype]
+ tp←'[',¨':',¨TypesJulia[tp],¨']'
+ i[j/⍳⍴j]←tp
+ astb[cv/⍳⍴cv;asttarget]←i
+ r←astb

@@ -1,0 +1,24 @@
+ r←EmitReplicate fns;cv;ctl;i;t;cvm;sis
+ ⍝ Emit code for replicate and expand
+ sis←''
+ :If ~0∊⍴fns
+     ctl←7 FragmentCode'replicate'
+     cvm←(ctl FindFn fns)∧(ctl FindRankGen fns)
+     cvm←cvm∧(ctl FindType fns)∧ctl FindSpecialCases fns
+     cvm←<\cvm
+     cv←∨/cvm
+     :If 1∊cv ⍝ Any work?
+         sis←ctl Getsis cvm
+         t←D(cv⌿fns)[;fnstypes] ⍝ Argument, result types
+         i←t[;,1]TypeCoer t[;,2]
+         i←mcb ER1 i,((1↑⍴i),3)⍴'(y)'
+         sis←(E'$YV')Strepl¨ER1(mcb sis),i ⍝ Coerce y
+   ⍝ Coerce left arguments
+         i←t[;,0]TypeCoer t[;,2]
+         i←mcb ER1 i,((1↑⍴i),3)⍴'(x)'
+         sis←(E'$XV')Strepl¨ER1(mcb sis),i ⍝ Coerce x
+         sis←sis EmitPrimitiveFnDefnsTemplateFiller cv⌿fns
+         fns←(~cv)⌿fns
+     :EndIf
+ :EndIf
+ r←(E sis),E fns

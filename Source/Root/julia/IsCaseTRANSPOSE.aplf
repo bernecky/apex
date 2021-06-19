@@ -1,0 +1,6 @@
+ r←IsCaseTRANSPOSE fns;cv;zer;fn
+ ⍝ Identify transpose cases for inner product.
+ ⍝ This is the default case, so we mark everything.
+ r←fns
+ cv←(fns[;fnsfn]∊E'dot')∧~fns[;fnslop]∊E'jot' ⍝ Ignore outer product
+ r[cv/⍳⍴cv;fnsspec]←E'TRANSPOSE'

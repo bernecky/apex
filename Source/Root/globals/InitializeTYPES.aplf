@@ -6,3 +6,5 @@
  TypesSISAL←TypesSISAL,E'NONE'
  TypesSAC←(E'bool'),(E'int'),(E'double'),(E'complex'),E'char'
  TypesSAC←TypesSAC,E'NONE'
+ TypesJulia←(E'bool'),(E'int'),(E'double'),(E'complex'),E'char'
+ TypesJulia←TypesJulia,E'NONE'

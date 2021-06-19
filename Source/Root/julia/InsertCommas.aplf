@@ -1,0 +1,5 @@
+ r←InsertCommas y;k
+⍝ Insert commas at each blank in string
+ r←squeeze y ⍝ Squish out extra blanks
+ r←(1+k←r=' ')/r ⍝ Introduce extra blanks
+ r[(r=' ')/⍳⍴r]←(2×+/k)⍴', '

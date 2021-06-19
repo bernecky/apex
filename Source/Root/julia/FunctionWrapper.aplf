@@ -1,0 +1,14 @@
+ r←nmain FunctionWrapper ast;hd;fn;fd;fns
+ ⍝ Generate fn header for defined fn
+ fns←((1,fnscols))⍴E''
+ fn←D ast[dfnname;asttarget] ⍝ Defined fn name
+ fd fns ast←((E fns),E nmain)FnDefn ast
+ :If #.globals.TargetLanguage≡'sisal'
+     hd←'function ',fd,NL
+     r←(E hd),E'end function % ',fn,NL
+ :ElseIf #.globals.TargetLanguage≡'sac'
+     r←(E fd),E'}',NL,NL
+ :ElseIf #.globals.TargetLanguage≡'julia'
+     r←(E fd),E'}',NL,NL
+ :EndIf
+ r←(E r),E ast

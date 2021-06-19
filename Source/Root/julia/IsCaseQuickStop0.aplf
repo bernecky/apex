@@ -1,0 +1,12 @@
+ r←IsCaseQuickStop0 fns;cv;zer;fn
+ ⍝ Identify quickstop on inner product zero cases,
+ ⍝ in which a zero g causes f to immediately go to a fixpoint
+ ⍝ E.g., 'abcde'^.='abxyz' reaches 'c'='x'.
+ r←fns
+ cv←(fns[;fnsfn]∊E'dot')∧~fns[;fnslop]∊E'jot' ⍝ Ignore outer product
+ :If 1∊cv ⍝ Stupid APL2 prototypes
+     fn←fnsrop ConjToFns cv⌿fns
+     zer←,(PFATl0 PFATProperty fn)∊'0'            ⍝ Dyadic zero fns
+     cv←cv\zer
+     r[cv/⍳⍴cv;fnsspec]←E'QUICKSTOP0'
+ :EndIf

@@ -1,6 +1,5 @@
  r←fldr dojulia asts;TL;fragbuf;ipt
 ⍝# Emit Julia object code for asts
-'Time to write code, Holden...' assert 0
  InitializeAST
  InitializeFragments
  InitializeCtl

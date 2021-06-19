@@ -1,0 +1,9 @@
+ r←ConstantsJuliaCharacter ast;cv;i;j
+  ⍝ TODO
+ ⍝ Convert APL Char constants to Julia format
+ cv←ast[;astclass]∊astclassCC
+ i←(cv⌿ast)[;astvalue] ⍝ Extract char constants
+ ⍝ Turn 'abc' into  'a','b','c'
+ i←CJuliaChar¨i
+ ast[cv/⍳⍴cv;asttarget]←i
+ r←ast

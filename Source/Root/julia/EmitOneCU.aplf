@@ -1,0 +1,27 @@
+ r←fldr EmitOneCU asts;fnmexe;fnmso;mast
+ ;ismn;astsmod;astsm;ismod;junk;nmain;txt
+ ⍝ Emit compiled APL code for one Compilation Unit(CU), asts
+ ⍝ r is genned filenames
+ ⍝ Always gen main() and so. If main() is present in asts,
+ ⍝ rename it to, e.g., foo.unittest(), & gen a fake main()
+ ⍝ which will call the unit test code.
+ ⎕←Trace(fts ⎕TS),': Starting code gen for: ',fldr
+ InitializeFns   ⍝ and cal
+ asts←JuliaNames¨asts ⍝ Map names to avoid Julia keyword conflicts, etc
+ ismn←isDfnMain¨asts ⍝ Mark main() in asts
+ fnmexe←fnmso←''
+ ⍝⍝⍝⍝⍝⍝⍝⍝(astsmod m)←fldr SACModuleRenameMain asts
+ mast←D ssaast⌷,D ismn/asts
+ nmain←fldr JuliaModuleName mast
+ nmain←nmain,fldr JuliaModuleTypes mast
+ txt←((E fldr), E nmain) GenCode asts ⍝ gen module from all asts
+ fnmso←txt WriteCode(E fldr),E''
+ ismod←1 ⍝ Emit makefile for module
+ junk←((E fldr),E ismod)InvokeCompiler fnmso
+ ismod←0 ⍝ Generate main()
+ txt←(PathFileName fldr)GenTestCaller nmain
+ fnmexe←txt WriteCode(E fldr),E'.unittest'
+ GenAPLCoverFn fnmexe ⍝ for calling .so from APL
+ r←(E fnmexe),(E fnmso)
+ r←(×≢¨r)/r
+ ⎕←Trace(fts ⎕TS),': Code gen done for: ',fldr

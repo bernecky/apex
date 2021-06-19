@@ -1,0 +1,7 @@
+ r←GenProlog fldr;APEXVersion;p
+ ⍝# Gen SaC prolog/stdlib code
+ APEXVersion←'Compiled by APEX Version: ','FIXME!!'
+ p←(BuildComment APEXVersion,' ',,fts ⎕TS),NL
+ p←p,GetFileChar #.globals.PathFrag,'prolog.jl'
+
+ r←p,GetFileChar #.globals.PathFrag,'stdlib.jl'

@@ -1,0 +1,8 @@
+ r←SemiGlobalsMarkIn ast;cv;nm
+⍝ Mark incoming semi-globals for this fn
+ cv←ast[;astscope]∊astscopeSGI+0,astscopeSGO
+ cv[0]←0 ⍝ Ignore fn itself
+ nm←cv⌿ast[;asttarget] ⍝ Potential names plus extra
+⍝ SSA names
+ nm←UnSSAName¨nm ⍝ Remove SSA Names
+ r←cv\(⍳⍴nm)=nm⍳nm ⍝ Mark first occurence

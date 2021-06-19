@@ -1,0 +1,47 @@
+ r←fns EmitPrimitiveFnDefns ssadat;sis;i;fns2;sis2;ismn
+ ⍝# Emit SAC code to define all APL primitives used
+ ⍝# in this application. This is, effectively, a customized stdlib.
+ sis←E''
+ fns←D nub ER1 fns              ⍝ No duplicate fn defns, please.
+ fns←(~fns[;fnsfn]∊E'')⌿fns
+ i←EmitMonadicScalarFns fns     ⍝ ~y, ×y...
+ sis←sis,D i[0] ⋄ fns←D i[1]
+ i←EmitDyadicScalarFns fns      ⍝ x+y ...
+ sis←sis,D i[0] ⋄ fns←D i[1]
+ i←EmitMonadicStructuralFns fns ⍝ ⍉y, ⌽y...
+ sis←sis,D i[0] ⋄ fns←D i[1]
+ i←EmitDyadicStructuralFns fns  ⍝ x⍉y, x⌽y
+ sis←sis,D i[0] ⋄ fns←D i[1]
+ i←EmitDyadicSelectFns fns      ⍝ x⍴y and Search fns
+ sis←sis,D i[0] ⋄ fns←D i[1]
+ i←EmitDyadicTakeDropFns fns    ⍝ ⍺↑⍵ and ⍺↓⍵
+ sis←sis,D i[0] ⋄ fns←D i[1]
+ i←EmitMonadicMiscFns fns       ⍝ ⍋y  ⍒y ⎕← ,⍵ ⍴⍵ ⍳⍵ ⍕⍵
+ sis←sis,D i[0] ⋄ fns←D i[1]
+ i←EmitNiladicMiscFns fns       ⍝ ⎕av ⎕ts
+ sis←sis,D i[0] ⋄ fns←D i[1]
+ i←EmitDyadicCatlamFns fns      ⍝ a,b  a⍪b
+ sis←sis,D i[0] ⋄ fns←D i[1]
+ i←EmitDyadicMiscFns fns        ⍝ x€y x⌹y x⍕y x,y x⍕y
+ sis←sis,D i[0] ⋄ fns←D i[1]
+ i←EmitDefnsIndex fns           ⍝ x[i]   x[i]←y
+ sis←sis,D i[0] ⋄ fns←D i[1]
+ i←EmitDefnsQuadFI fns          ⍝ ⎕fi ⎕vi
+ sis←Checksis sis,D i[0] ⋄ fns←D i[1]
+ i←EmitUtilityFns fns           ⍝ Handy subfunctions
+ sis←sis,D i[0] ⋄ fns←D i[1]
+ i←EmitConjunctions fns  ⍝ ⍺+.×⍵  ⍺ f⍤k ⍵   ⍺ fök ⍵
+ sis←Checksis sis,D i[0] ⋄ fns←D i[1]
+ i←ssadat EmitAdverbs fns       ⍝ f/y f\y f⌿y f⍀y  (also replicate)
+ sis←Checksis sis,D i[0] ⋄ fns←D i[1]
+ sis←nub(,D 0≠⍴¨sis)/sis         ⍝ stdlib, less empties &dups
+ 'Failed to generate some fns'assert 0∊⍴fns
+ sis2←RemoveGenerates¨sis
+ fns2←D Raze,D 1↓¨sis2
+ sis←,D 1↑¨sis2
+ :If ~0∊⍴fns2
+     sis2←fns2 EmitPrimitiveFnDefns ssadat
+     sis←sis,sis2
+ :EndIf
+ sis←nub(,D 0≠⍴¨sis)/sis
+ r←sis

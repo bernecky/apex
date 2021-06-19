@@ -1,0 +1,12 @@
+ r←ConstantsJuliaBoolean ast;cv;i;astb
+ ⍝ Convert APL Bool constants to Julia format
+ cv←ast[;astclass]∊astclassNC
+ cv←cv∧asttypeB=D ast[;asttype] ⍝ Booleans
+ astb←ast
+ :For i :In cv/⍳⍴cv
+     j←D ast[i;astvalue] ⍝ Get the value
+     j←((E'false,'),E'true,')[quadfi j]
+     j←¯1↓D Raze j ⍝ Kill trailing comma
+     astb[i;asttarget]←E j
+ :EndFor
+ r←astb

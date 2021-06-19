@@ -1,0 +1,3 @@
+ r←TSAC t
+ ⍝ Get Julia types for types t
+ r←(TypesJulia,E'?BadType!')[Types⍳LC t]

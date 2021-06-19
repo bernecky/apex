@@ -1,0 +1,10 @@
+ r←m EmitFnCallsIndexSetElided y;sis;lhs;rhs;rnk
+⍝# Generate code for X[;;;]←Y
+⍝# Two cases: Y is scalar, Y is non-scalar
+ sis←D y[0]
+ lhs←D y[1]
+ rhs←D y[2]
+ rnk←0≠D y[3]
+ rnk←((~∨/m)∧rnk≠0)/⍳⍴rnk
+ r←(E'genarray(shape('),lhs,(E'),'),rhs,E')'
+ r[rnk;]←(E''),(E''),(E''),rhs[rnk;],E''

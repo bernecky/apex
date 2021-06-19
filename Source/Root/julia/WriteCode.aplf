@@ -1,0 +1,13 @@
+ WriteCode←{
+     txt←⍺
+     (fldr namedec)←⍵
+     p←FullPathName fldr,PathDelim,'src'
+     j←⎕SH'mkdir -p ',p ⍝ create subfldr if need be
+     m←D 1⌷FileNameBreak fldr ⍝ Filename only
+     ⍝ foo.jl for module; foo.unittest.jl for main()
+     m←m,namedec ⍝ Decorate main()
+     fnm←p,PathDelim,m,'.jl'
+     z←txt PutFile fnm
+     zz←('PutFile failed writing file: ',fnm)assert z
+     fnm
+ }

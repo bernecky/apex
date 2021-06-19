@@ -1,0 +1,7 @@
+ r←EmitDefnsIndex fns;j;sis
+ ⍝ Emit indexing code
+ j←'indr'EmitDefnsIndexRef fns ⍝ Indexed reference
+ sis←D j[0] ⋄ fns←D j[1]
+ j←'inds'EmitDefnsIndexAssign fns ⍝ Indexed assign
+ sis←sis,D j[0] ⋄ fns←D j[1]
+ r←(E sis),E fns

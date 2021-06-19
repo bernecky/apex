@@ -1,0 +1,8 @@
+ GenTestCaller←{
+     ⍝ ⍺ is module name; ⍵ is decorated unittest()
+     z←'use ',⍺,': all;',NL,NL
+     z←z,'int main()',NL,'{',NL
+     z←z,' z  = ',⍵,'();',NL
+     z←z,' return(z);',NL,'}',NL
+     z
+ }

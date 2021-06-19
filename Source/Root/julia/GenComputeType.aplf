@@ -1,0 +1,6 @@
+ r←GenComputeType fns;cv;fns2
+⍝ Generate compute type for primitive and derived fns
+ r←PFATct PFATProperty fns   ⍝ Handle primitives
+ cv←isReduceScanFns fns
+ fns2←fnslop ConjToFns cv⌿fns
+ r[cv/⍳⍴cv;]←PFATct PFATProperty fns2

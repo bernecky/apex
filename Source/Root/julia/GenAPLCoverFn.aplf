@@ -1,0 +1,18 @@
+ r←GenAPLCoverFn fldr
+⍝ Build cover function to allow APL
+⍝ to call APEX-generated code.
+⍝ Ditto the ⎕na definer function.
+ r←'FIXME   BUILD CoverFn here, please'
+ ⎕←r
+ →0
+
+ Z←{A}Run W
+ :If 0=⎕NC'⍙.Run_mon'
+     'Run_mon'⍙.⎕NA'crud.so|Run_dwa >PP P <PP'
+     'Run_dya'⍙.⎕NA'crud.so|Run_dwa >PP <PP <PP'
+ :EndIf
+ :If 0=⎕NC'A'
+     Z←⍙.Run_mon 0 0 W
+ :Else
+     Z←⍙.Run_dya 0 A W
+ :EndIf

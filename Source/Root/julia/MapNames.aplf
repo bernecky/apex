@@ -1,0 +1,6 @@
+ r←MapNames ids;b
+⍝ Map APL identifiers into Julia identifiers
+⍝  - Map system varbs to other names.
+⍝  - Map delta and deltaunderbar to... umm. something
+⍝    (in the fullness of time...)
+ r←ids Strplc(E,'⎕'),E'QUAD' ⍝ Map ⎕io to QUADio, etc.

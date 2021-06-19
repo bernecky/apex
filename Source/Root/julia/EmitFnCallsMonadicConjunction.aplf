@@ -1,0 +1,49 @@
+ r←EmitFnCallsMonadicConjunction y;ast;cv;fns;sis;nm;ctl;prim;fn;rnk;loc;t;i;nj;cvm;j;n
+ ⍝ Emit Monadic conjunction SISAL code for defined
+ ⍝ and derived operands only. Reduce and scan
+ ⍝ Primitives are generated earlier.
+ ast←D y[0] ⋄ cv←D y[1] ⋄ fns←D y[2] ⋄ cal←D y[3]
+ sis←E'' ⍝ Assume no work
+ ctl←7 FragmentCode'mconj'
+ ⍝ frag,fn,lhtok,rhtok,lhft,rhft,ztyp
+ ⍝ Match kernels on fn name, valence, & l/r types
+ j←ast[;astfn]∊ER1⍪'/\⌿⍀' ⍝ Adverbs
+ j←j∧isnum ast[;astlop] ⍝ on non-primitives only
+ j←j∧ast[;astlarg]∊NULL ⍝ and monadic calls
+ ⍝ Only with function left operand.
+ n←astclassGFN,astclassDFN,astclassMFN,astclassLFN
+ j←j\(j/ast[;astclass])∊n
+ :If 1∊j       ⍝ Stupid APL2 prototypes
+     fn←ctl FindFnOnly j⌿fns   ⍝ Match adverbs only
+     rnk←ctl FindRank j⌿fns    ⍝ Match ranks
+     cvm←<\rnk∧fn ⍝ Best match
+     cv←∨/cvm
+     :If 1∊cv  ⍝ Any work?
+         sis←ctl Getsis cvm
+         ∘
+ ⍝ Insert kernels into loops.
+ ⍝ Compute fetch types for reduction fn.
+ ⍝ Fake up larg type as being same as rarg.
+ ⍝ Happens to work for SISAL-supported
+ ⍝ reductions, but not in general.
+         t←nm←(j⌿fns)[loc[1;];]
+         i←D t[;fnstypes] ⋄ i[;0]←i[;1] ⋄ t[;fnstypes←ER1 i
+         t[;1 0]←t[;,0],E'' ⍝ Now looks like scalar fn
+         n←prim FindFrag t
+         loc←(⍴n)⊤(,n)/⍳×/⍴n ⍝ Associate frags&fns
+         i←(TS(D nm[;fnstypes])[;,1]),((1↑⍴nm),2)⍴'to' ⍝ BtoI, etc.,lhtype
+         i←i,TS D prim[loc[0;];frgdsfrhct]÷0 ⍝ Fetch type
+ ⍝ Build coercion calls
+         i←' ',i,((1↑⍴i),5)⍴'($YV)'
+         f←mcb(ReduceSISAL nm[;0])catenateeach ER1 i
+         t←(E'$FRVALUE'),E'$YV'
+         sis←(E t)DoMacro¨ER1(⍪sis),f
+         sis←sis EmitPrimitiveFnDefnsTemplateFiller nm
+ ⍝ Insert left identity element for empty arrays
+         t←prim[loc[0;];,frgdsflid]
+         sis←(E'$FRID')Strepl¨ER1(⍪sis),t
+     :EndIf
+     cal←D y[3]
+     cal[j/⍳⍴j;1]←sis
+ :EndIf
+ r←y ⋄ r[3]←E cal
