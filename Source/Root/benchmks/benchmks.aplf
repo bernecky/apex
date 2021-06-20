@@ -4,7 +4,7 @@
 ⍝ Does not return non-folder file names, e.g., README
 ⍝ or other evil names
  pd←PathDelim
- en←(E'cmake-common'),E'CMakeLists.txt'
+ en←(E'cmake-common'),(E'CMakeLists.txt'),E'build'
  fldr←FullPathName nm
  r←⎕SH'ls -d ',fldr
  r←(~(PathFileName¨r)∊en)/r ⍝ See no evil
