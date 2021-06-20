@@ -1,44 +1,37 @@
 CMAKE_MINIMUM_REQUIRED (VERSION 3.17)
 
-# This is the uberproject to build the collection of benchmarks in the
-# folders in this directory, building a SaC module and a SaC program for each.
-# The program depends on its associated module; the program and module source code
-# are located in the `src/` folder in each benchmark.
+# This example project builds both a SaC module and a SaC program (executable).
+# The program depends on the module; both are located under `src/`.
+# It is important that create the sac2crc file for this project, as
+# it is tricky to link, properly, the SaC modules with the program.
 
 PROJECT (apex-bmworks)
 
-# List all the benchmarks
-FILE(GLOB BM_DIRS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*)
-MESSAGE( STATUS "Building for: " ${BM_DIRS})
-
-# Destination for compiled sac modules
+# Where the compiled sac modules are placed
 SET (DLL_BUILD_DIR  "${PROJECT_BINARY_DIR}/lib")
 
-# We build modules and programs for all targets, where a target
-# is the result of compiling for e.g., sequential or multi-thread execution
-SET (TARGETS            seq mt_pth  CACHE STRING "Build sequential and pthread code for each target")
-
+# We build modules for these targets
+SET (TARGETS            seq mt_pth  CACHE STRING "Build for sequential and posix threads")
 SET (SAC2C_EXEC                     CACHE STRING "Path to sac2c compiler")
-SET (LINKSETSIZE        "0"         CACHE STRING "Value for sac2c -linksetsize parameter")
+SET (LINKSETSIZE        "0"         CACHE STRING "Value for sac2c's -linksetsize parameter")
 
 # Check whether sac2c is operational
 INCLUDE ("cmake-common/check-sac2c.cmake")
 INCLUDE ("cmake-common/misc-macros.cmake")
 
-SET (SAC2C_DEF_FLAGS -v0 -O3 -maxlur 3 -linksetsize ${LINKSETSIZE} -L ${DLL_BUILD_DIR} -T ${DLL_BUILD_DIR})
+# add our custom Find*.cmake in local cmake directory
+#LIST (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 SET (BM_DIRS iotan )
 MESSAGE( STATUS "BM_DIRS are: " ${BM_DIRS})
 
-# For each target, run CMakeLists.txt in all benchmarks
+# Run src/CMakeLists.txt for each target
 FOREACH (TARGET IN ITEMS ${TARGETS})
-	MESSAGE( STATUS "Target is: " ${TARGET})
 	FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
-		MESSAGE( STATUS "BM_DIR is: " ${BM_DIR})
-		MESSAGE( STATUS "DLL_BUILD_DIR is: " ${DLL_BUILD_DIR})
-		##ADD_SUBDIRECTORY (${BM_DIR}/src ${DLL_BUILD_DIR}/${TARGET}/${BM_DIR})
-		ADD_SUBDIRECTORY (${BM_DIR}/src ${BM_DIR}-${TARGET})
-		MESSAGE( STATUS "target for add_subdirectory is: " ${BM_DIR}-${TARGET})
-	ENDFOREACH()
+	  MESSAGE( STATUS "target for add_subdirectory is: " ${BM_DIR}/src or maybe ${BM_DIR}-${TARGET})
+          ADD_SUBDIRECTORY (${BM_DIR}/src ${BM_DIR}-${TARGET})
+        ENDFOREACH ()
 ENDFOREACH ()
 
+# This build target is responsible for generating the package sac2crc file
+CREATE_SAC2CRC_TARGET ("examplemodule" "${DLL_BUILD_DIR}" "${DLL_BUILD_DIR}" "")
