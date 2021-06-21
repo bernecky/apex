@@ -23,7 +23,7 @@ INCLUDE ("cmake-common/misc-macros.cmake")
 #LIST (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 SET (BM_DIRS buildv compiota compiotaAKD compiotad compiotadAKD crc crc2 csbench csbenchAKD downgradePV)
-SET (BM_DIRS  ${BMDIRS} gewlf histgrade histlp iotan logd logd2 logd3 logd4 loopfs loopfv lowertri) 
+SET (BM_DIRS  ${BM_DIRS} gewlf histgrade histlp iotan logd logd2 logd3 logd4 loopfs loopfv lowertri) 
 # DEBUG above wants to be all folders in current source dir except for things like cmake-common and CMakeLists.txt
 # DEBUG not sure how to do this cleanly
 
@@ -32,7 +32,6 @@ MESSAGE( STATUS "BM_DIRS are: " ${BM_DIRS})
 # Run src/CMakeLists.txt for each target
 FOREACH (TARGET IN ITEMS ${TARGETS})
 	FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
-	  MESSAGE( STATUS "target for add_subdirectory is: " ${BM_DIR}/src or maybe ${BM_DIR}/src-${TARGET})
           ADD_SUBDIRECTORY (${BM_DIR}/src ${BM_DIR}/src-${TARGET})
         ENDFOREACH ()
 ENDFOREACH ()
