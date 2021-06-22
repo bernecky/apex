@@ -1,0 +1,3 @@
+ r←x mpyrk11 y
+⍝ multiply rank 1 1, right side vector
+ r←x×⍤1 1⊢y

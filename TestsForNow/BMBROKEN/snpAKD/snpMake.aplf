@@ -1,0 +1,5 @@
+ r←snpMake n
+⍝ Make dummy snp data of size n
+ ⍝r←?n⍴2 ⍝⍝ slow
+ r←n⍴0 1 2 0 1 0 0 1
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/snpAKD/snpMake.ufn§0§ 2020 6 24 17 4 23 32 §eLÕó§0

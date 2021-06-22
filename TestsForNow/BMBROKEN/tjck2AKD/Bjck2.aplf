@@ -1,0 +1,9 @@
+ r←Bjck2 n;i;ts2;ts;oflow
+ ts←1600+⍳5000 ⍝ years
+ ts←(((4×⍴ts),1)⍴ts),((4×⍴ts),2)⍴2 28 12 31
+ ts2←⍉ts
+ r←0
+ oflow←0.5-0.5
+ :For i :In ⍳n
+     r←r++/oflow+tjck2 ts2[;⍳i]
+ :EndFor

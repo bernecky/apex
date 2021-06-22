@@ -1,0 +1,7 @@
+use upgradeCharAKD: all;
+
+int main()
+{
+ z  = upgradeCharAKD_testXII();
+ return(z);
+}

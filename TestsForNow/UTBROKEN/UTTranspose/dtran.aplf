@@ -1,0 +1,18 @@
+ r←x dtran y;wts;rankz;shpz;cwts;cp;i;j;ry;z
+ ⍝ Dyadic transpose
+ wts←⌽×\⌽(1↓⍴y),1
+ rankz←1+⌈/x-⎕IO
+ shpz←rankz⍴1+×/⍴y ⍝ All overwritten
+ cwts←shpz×0
+ :For i :In ⍳⍴y
+     j←x[i]
+     shpz[j]←(⍴y)[i]⌊shpz[j]
+     cwts[j]←cwts[j]+wts[i]
+ :EndFor
+ cp←CartProdPlus(cwts,shpz)
+ ry←,y
+ :For i :In ⍳×/shpz
+     z[i]←ry[cp[i]]
+ :EndFor
+ z←shpz⍴z
+⍝∇⍣§/home/apex/apexgit/TestsForNow/UTTranspose/dtran.ufn§0§ 2020 6 24 17 4 22 844 §EÜwÛ§0

@@ -1,0 +1,6 @@
+ r←x mconvred y;tr;wz
+⍝ Execute convolution problem using window reduction
+ wz←0.01×1+⍳x
+ tr←0.01×1+⍳y
+ r←+/wz convredu tr
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/AKDtofix/mconvredAKD/mconvred.aplf§0§ 2021 5 13 13 41 12 614 §fÛúÈ§0

@@ -1,0 +1,9 @@
+ dno←tjv22rbe ymd;yr;mo;day;a
+ a←50 50/2000 1900
+ yr←ymd[0;]
+ mo←ymd[1;]
+ day←ymd[2;]
+ yr←yr+a[100|yr]×yr<100
+ yr←0 100 reprk10 yr-mo≤2
+ dno←+/STSCfloor yr mpyrk11 36524.25 365.25
+ dno←dno+STSCfloor 0.41+day+30.6×12|mo-3

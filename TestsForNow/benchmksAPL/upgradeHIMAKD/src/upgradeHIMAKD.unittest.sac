@@ -1,0 +1,7 @@
+use upgradeHIMAKD: all;
+
+int main()
+{
+ z  = upgradeHIMAKD_testXII();
+ return(z);
+}

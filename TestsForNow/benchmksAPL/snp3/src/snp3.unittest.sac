@@ -1,0 +1,7 @@
+use snp3: all;
+
+int main()
+{
+ z  = snp3_testXXI();
+ return(z);
+}

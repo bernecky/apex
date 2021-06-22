@@ -1,0 +1,22 @@
+ dno←tjck2 ymd;yr;mo;day;a;coeff;mlen
+ yr←ymd[0;] ⍝ One primitive beats 2/rbe
+ mo←ymd[1;] ⍝ Long trailing axis would
+ day←ymd[2;]⍝ probably be faster
+⍝
+⍝ We also avoid the +.× by sneaky reduction
+ coeff←365 0.01 0.25 0.00025 0.0025 ⍝ Signed ordering
+⍝ corresponds to weight vector 1 1 ¯1 1 ¯1
+⍝coeff←365 .25 .01 .0025 .00025
+⍝coeff←365, ÷ 4 100 400 4000
+ mlen←0 31 61 92 122 153 184 214 245 275 306 337
+⍝mlen←+\0 31 30 31 30 31 31 30 31 30 31 31
+ yr←yr+(mo>2)+¯1+(yr<100)×100×STSCfloor 1066÷100
+⍝yr←yr+(mo>2)-1
+⍝⍝dno←(STSCfloor yr∘.×coeff)+.×1 1 ¯1 1 ¯1
+ dno←coeff∘.×yr
+ dno←STSCfloor dno
+ dno←-⌿dno  ⍝ First one ends here
+⍝ ↑↑ long trailing axes usually faster
+⍝dno←+/dno×(⍴dno←sTSCfloor yr∘.×coeff)⍴1 1 ¯1 1 ¯1
+ dno←dno+day+mlen[12|mo-3]
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/tjck2/tjck2.ufn§0§ 2020 6 24 17 4 23 36 §cxhèÀ§0

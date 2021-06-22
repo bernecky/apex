@@ -1,0 +1,10 @@
+ r←main n;⎕IO;snp;z
+ ⍝ snp count for DNA analysis
+ ⍝ n is #patients, #snps
+ ⎕IO←0
+ ⍝⍝ n←100000 80000 ⍝ Small to avoid limit error
+ snp←snpMake n
+ r←snpcount4 snp
+ z←+/,r
+ ⎕←z
+ ⎕←r←1-8000000000=+/,z

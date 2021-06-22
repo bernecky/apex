@@ -1,0 +1,9 @@
+ dno←tjkc ymd;yr;mo;day;a
+ yr←+/1 0 0/ymd
+ mo←+/0 1 0/ymd
+ day←+/0 0 1/ymd
+⍝⍝⍝⍝⍝⍝⍝yr←yr+100×(floor ⎕ts[⎕io]÷100)×yr<100
+ yr←⍉0 40 100⊤yr-mo≤2
+ dno←+/floor yr×(⍴yr)⍴1460969 36524.25 365.25
+ dno←dno+floor 0.41+day+30.6×12|mo-3
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/tjkc/tjkc.ufn§0§ 2020 6 24 17 4 23 36 §zèóG§0

@@ -1,0 +1,6 @@
+ r←n Bjck ts;i
+ r←0
+ :For i :In ⍳n
+     r←r++/(0.5-0.5)+tjck i⌿1 3⍴ts
+ :EndFor
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/tjck/Bjck.ufn§0§ 2020 6 24 17 4 23 36 §cPzÅ§0

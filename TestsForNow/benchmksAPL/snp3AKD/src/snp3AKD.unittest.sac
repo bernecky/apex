@@ -1,0 +1,7 @@
+use snp3AKD: all;
+
+int main()
+{
+ z  = snp3AKD_testXXI();
+ return(z);
+}

@@ -1,0 +1,7 @@
+use upgradeChar: all;
+
+int main()
+{
+ z  = upgradeChar_testXXI();
+ return(z);
+}

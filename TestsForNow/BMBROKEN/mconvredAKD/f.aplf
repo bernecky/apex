@@ -1,0 +1,4 @@
+ r←f tr
+⍝ The composed-sort-of reduction
+ r←fi+.×tr
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/AKDtofix/mconvredAKD/f.aplf§0§ 2021 5 13 13 41 12 614 §VWh§0
