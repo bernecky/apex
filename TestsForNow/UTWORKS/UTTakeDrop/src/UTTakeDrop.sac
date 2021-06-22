@@ -1,7 +1,7 @@
 module UTTakeDrop;
-export all;
+export {UTTakeDrop_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-06-07 17:54:47.801
+// Compiled by APEX Version: FIXME!! 2021-06-22 16:35:58.564
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;

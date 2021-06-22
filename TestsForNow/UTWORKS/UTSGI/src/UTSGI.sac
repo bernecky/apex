@@ -1,7 +1,7 @@
 module UTSGI;
-export all;
+export {UTSGI_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-06-07 17:54:33.073
+// Compiled by APEX Version: FIXME!! 2021-06-22 16:35:43.901
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;

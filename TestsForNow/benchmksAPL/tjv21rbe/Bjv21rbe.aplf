@@ -1,8 +1,0 @@
- r←n Bjv21rbe ts;i;r0;r1
- r←2-2
- :For i :In ⍳n
-     r0←tjv21rbe i/3 1⍴ts
-     r1←+/r0+0.5
-     r←r+r1-(0.5-''⍴⍴r0)
- :EndFor
-⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/tjv21rbe/Bjv21rbe.ufn§0§ 2020 6 24 17 4 23 36 §gØgz§0

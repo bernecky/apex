@@ -1,5 +1,0 @@
- r←n Bjv21rbe ts;i
- r←2-2
- :For i :In ⍳n
-     r←r++/(0.5-0.5)+tjv21rbe i/3 1⍴ts
- :EndFor

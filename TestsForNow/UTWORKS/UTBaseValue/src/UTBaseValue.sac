@@ -1,7 +1,7 @@
 module UTBaseValue;
-export all;
+export {UTBaseValue_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-06-07 17:54:13.377
+// Compiled by APEX Version: FIXME!! 2021-06-22 16:35:24.973
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -67,7 +67,7 @@ inline int[.] comaXII(int[.] y)
 
 
 inline int[.] rhoIII(int[1] x, int y)
-{ // [One-element vector reshape scalar]
+{ // [1-element Vector reshape scalar]
   z = genarray( toi(x),y);
   return(z);
 }

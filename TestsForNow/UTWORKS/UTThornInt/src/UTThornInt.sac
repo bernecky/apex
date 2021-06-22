@@ -1,7 +1,7 @@
 module UTThornInt;
-export all;
+export {UTThornInt_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-06-07 17:54:54.854
+// Compiled by APEX Version: FIXME!! 2021-06-22 16:36:05.351
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -394,7 +394,7 @@ inline int[.]  rhoXII(int[+] y)
 inline char[.] thrnXIC(int y, int QUADpp)
 { /* Monadic format on integer scalar  */
   z = format(y);
-  return( z);
+ return( z);
 }
 
 inline char[.] thrnXBC(bool y, int QUADpp)

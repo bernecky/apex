@@ -1,2 +1,0 @@
- r←x reprk10 y
- r←x⊤⍤1 0⊢y

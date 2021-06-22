@@ -1,7 +1,7 @@
 module mconvout;
-export all;
+export {mconvout_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-06-06 18:39:08.295
+// Compiled by APEX Version: FIXME!! 2021-06-22 17:11:37.658
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -106,7 +106,7 @@ inline double[+] rotrIDD(int [+] x, double[+] y)
 
 
 inline bool[.] rhoIBB(int[1] x, bool y)
-{ // [One-element vector reshape scalar]
+{ // [1-element Vector reshape scalar]
   z = genarray( toi(x),y);
   return(z);
 }
