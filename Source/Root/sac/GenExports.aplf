@@ -1,1 +1,6 @@
- GenExports←{'module ',(PathFileName ⍵),';',NL,'export all;',NL,NL}
+ GenExports←{
+ ⍝ Gen export statement for names ⍺ in folder ⍵
+ z←'module ',(PathFileName ⍵),';',NL
+ z,'export {',⍺,'};',NL,NL
+
+ }

@@ -4,5 +4,5 @@
  fns←D nub ER1 D Raze 1⊃¨j
  sis←fns EmitPrimitiveFnDefns asts
  sis←D Raze sis,D Raze 0⊃¨j
- r←(GenExports fldr),GenProlog fldr
+ r←(nmain GenExports fldr),GenProlog fldr
  r←r,sis

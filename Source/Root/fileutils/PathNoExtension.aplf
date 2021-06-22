@@ -1,4 +1,5 @@
  PathNoExtension←{
  ⍝ Blindly remove last .xxx
      (-1+(⌽⍵)⍳'.')↓⍵
+⍝∇⍣§./Source/Root/fileutils/PathNoExtension.aplf§0§ 2021 2 19 16 33 30 985 §dØÉB§0
  }

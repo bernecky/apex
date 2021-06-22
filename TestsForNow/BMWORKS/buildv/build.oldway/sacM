@@ -1,1 +1,0 @@
-sac2c -v1 -O3 -o /home/apex/apexgit/TestsForNow/BMWORKS/buildv/build/ -L /home/apex/apexgit/TestsForNow/BMWORKS/buildv/build/ -T /home/apex/apexgit/TestsForNow/BMWORKS/buildv/build/ /home/apex/apexgit/TestsForNow/BMWORKS/buildv/src/buildv.sac

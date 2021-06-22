@@ -1,1 +1,0 @@
-sac2c -v1 -O3 -o /home/apex/apexgit/TestsForNow/BMWORKS/compiota/build/ -L /home/apex/apexgit/TestsForNow/BMWORKS/compiota/build/ -T /home/apex/apexgit/TestsForNow/BMWORKS/compiota/build/ /home/apex/apexgit/TestsForNow/BMWORKS/compiota/src/compiota.sac
