@@ -1,7 +1,7 @@
 module iotan;
 export all;
 
-# Compiled by APEX Version: FIXME!! 2021-06-19 16:45:25.540
+# Compiled by APEX Version: FIXME!! 2021-06-23 08:51:15.200
 #=use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -49,25 +49,23 @@ inline double[+] plusDID(double x, int[+] y)
 }
 
 
-function iotaXII(int y, int QUADio)
-    # Index generator on scalar
-    # HELP! Needs domain check for negative shp
-    z = QUADio+iota(toi(y))
-    return z;
-end
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
 
-function quadXDD(double[*] y, int QUADpp, int QUADpw)
-    # {quad}{<-} anything
-    # show(y);
-    # return(y);
-    return "TODO: Fragment quad";
-end
-function quadXII(int[*] y, int QUADpp, int QUADpw)
-    # {quad}{<-} anything
-    # show(y);
-    # return(y);
-    return "TODO: Fragment quad";
-end
+inline double[*] quadXDD(double[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
 inline bool sameDDB(double x, double y,double QUADct)
 { /* Scalar match scalar */
   z = eqDDB(toD(x), toD(y), QUADct);
