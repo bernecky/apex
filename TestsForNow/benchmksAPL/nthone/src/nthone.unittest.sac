@@ -1,0 +1,7 @@
+use nthone: all;
+
+int main()
+{
+ z  = nthone_testXXI();
+ return(z);
+}

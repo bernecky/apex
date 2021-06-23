@@ -1,0 +1,7 @@
+use nsv: all;
+
+int main()
+{
+ z  = nsv_testXXI();
+ return(z);
+}

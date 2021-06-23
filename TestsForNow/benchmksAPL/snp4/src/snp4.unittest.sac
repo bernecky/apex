@@ -1,0 +1,7 @@
+use snp4: all;
+
+int main()
+{
+ z  = snp4_testXXI();
+ return(z);
+}

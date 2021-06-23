@@ -1,7 +1,7 @@
 module UTIndexRef;
-export all;
+export {UTIndexRef_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-06-07 17:54:22.499
+// Compiled by APEX Version: FIXME!! 2021-06-22 16:35:33.722
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;

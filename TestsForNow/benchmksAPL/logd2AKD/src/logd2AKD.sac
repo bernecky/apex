@@ -1,7 +1,7 @@
 module logd2AKD;
-export all;
+export {logd2AKD_testXII};
 
-// Compiled by APEX Version: FIXME!! 2021-06-06 18:39:05.540
+// Compiled by APEX Version: FIXME!! 2021-06-22 17:11:34.707
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;

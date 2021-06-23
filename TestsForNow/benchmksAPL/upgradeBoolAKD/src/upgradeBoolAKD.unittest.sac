@@ -1,0 +1,7 @@
+use upgradeBoolAKD: all;
+
+int main()
+{
+ z  = upgradeBoolAKD_testXII();
+ return(z);
+}

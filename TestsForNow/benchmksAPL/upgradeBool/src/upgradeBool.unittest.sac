@@ -1,0 +1,7 @@
+use upgradeBool: all;
+
+int main()
+{
+ z  = upgradeBool_testXXI();
+ return(z);
+}

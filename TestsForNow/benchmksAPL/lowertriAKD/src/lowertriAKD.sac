@@ -1,7 +1,7 @@
 module lowertriAKD;
-export all;
+export {lowertriAKD_testXII};
 
-// Compiled by APEX Version: FIXME!! 2021-06-06 18:39:07.259
+// Compiled by APEX Version: FIXME!! 2021-06-22 17:11:36.587
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;

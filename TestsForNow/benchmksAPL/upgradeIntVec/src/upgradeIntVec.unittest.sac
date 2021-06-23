@@ -1,0 +1,7 @@
+use upgradeIntVec: all;
+
+int main()
+{
+ z  = upgradeIntVec_testXXI();
+ return(z);
+}

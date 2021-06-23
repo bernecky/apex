@@ -1,0 +1,7 @@
+use upgradeIntVecAKD: all;
+
+int main()
+{
+ z  = upgradeIntVecAKD_testXII();
+ return(z);
+}
