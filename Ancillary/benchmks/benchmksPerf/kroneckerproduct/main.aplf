@@ -1,9 +1,7 @@
- r←main;⎕IO;⎕RL;n;⎕PP;⎕PW;A;B
- ⎕IO←0
- n←400
- ⎕RL←16807
- ⎕PP←16
- ⎕PW←80
- r←(10+iota 2 3)kp iota 3 4
- r←1-4950=+/,r
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/kroneckerproduct/main.ufn§0§ 2020 6 24 17 4 22 856 §hZÂz§0
+ z←main;n;r
+  n←5000
+  r←(10+iota n,600)kp iota  20 30 
+  z←+/,r
+  ⎕←z  
+  z←1-z=808655121450000000
+

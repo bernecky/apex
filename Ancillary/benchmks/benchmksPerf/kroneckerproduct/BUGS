@@ -1,0 +1,7 @@
+1. seq is extremely slow - more than a minute, compared to 5s in APL.
+   This may be due to foldfix --> fold.
+
+2. Very wrong answer. 
+
+3. mt_pth is also slow: 72s for -mt 5 AND wrong answer.
+

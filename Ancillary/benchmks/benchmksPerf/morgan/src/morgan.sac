@@ -1,7 +1,7 @@
 module morgan;
 export {morgan_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-06-23 12:22:20.333
+// Compiled by APEX Version: FIXME!! 2021-06-24 16:43:45.539
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -635,7 +635,7 @@ QUADio_0=toI(( false));
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
  QUADpp_1=( 16);
- A_48=GenArgXID( [2, 700, 700],QUADio_0);
+ A_48=GenArgXID( [2, 20000, 5000],QUADio_0);
  d_0=( A_48);
  A_51=morganIDD(2,d_0,QUADio_0);
  r_0=( A_51);
@@ -644,7 +644,7 @@ QUADio_0=toI(( false));
  r_1=( A_54);
  A_61=quadXDD( A_54,QUADpp_1,QUADpw_0);
  // dsf scalar(s)
-A_63=eqDDB(11257.38883178426,r_1,QUADct_0);
+A_63=eqDDB(r_1,2367882.650016261,QUADct_0);
 // dsf scalar(s)
 A_64=barBBI(A_63,true);
  r_2=( A_64);

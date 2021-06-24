@@ -1,7 +1,7 @@
 module schedr;
 export {schedr_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-06-23 12:22:20.694
+// Compiled by APEX Version: FIXME!! 2021-06-24 16:43:45.878
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -49,16 +49,24 @@ inline bool eqBIB(bool x, int y)
  return(BtoI(x) == ItoI(y));
 }
 
-inline int barIBI(int x, bool y)
-{ return(ItoI(x)-BtoI(y));
+inline double barDDD(double x, double y)
+{ return(DtoD(x)-DtoD(y));
 }
 
-inline int mpyIII(int x, int y)
-{ return(ItoI(x)*ItoI(y));
+inline double plusDID(double x, int y)
+{ return(DtoD(x)+ItoD(y));
 }
 
-inline double divIID(int x, int y)
-{ dx = ItoD(x);
+inline double barDBD(double x, bool y)
+{ return(DtoD(x)-BtoD(y));
+}
+
+inline double mpyDDD(double x, double y)
+{ return(DtoD(x)*DtoD(y));
+}
+
+inline double divDID(double x, int y)
+{ dx = DtoD(x);
   dy = ItoD(y);
   z = (dx == dy) ? 1.0  : dx/dy;
   return(z);
@@ -147,6 +155,18 @@ inline int[+] plusIBI(int[+] x, bool[+] y)
 
 
 
+inline double[+] plusDID(double x, int[+] y)
+{ /* SxA scalar function */
+  xel = toD(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toD(y[iv]);
+                    } : plusDDD(xel,yel);
+  } : genarray(shape(y), 0.0d);
+  return(z);
+}
+
+
 inline int[.] rotrXII(int[.] y)
 { /* Vector reverse */
   z = Array::reverse( 0, y);
@@ -176,13 +196,18 @@ inline int iotaBBI(bool[.] x, bool y,int QUADio)
  return(z+QUADio);
 }
 
-inline int[.] iotaXII(int y, int QUADio)
+inline int[.] iotaXDI(double y, int QUADio)
 { /* Index generator on scalar */
 /* HELP! Needs domain check for negative shp */
   z = QUADio+iota(toi(y));
   return( z);
 }
 
+inline double[*] quadXDD(double[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
 inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
 { /* {quad}{<-} anything */
         show(y);
@@ -198,7 +223,7 @@ inline int[.] comaBII(bool x, int[.] y)
  return([toI(x)]++toI(y));
 }
 
-inline bool sameIDB(int x, double y,double QUADct)
+inline bool sameDDB(double x, double y,double QUADct)
 { /* Scalar match scalar */
   z = eqDDB(toD(x), toD(y), QUADct);
  return(z);
@@ -285,13 +310,13 @@ inline int plusslXBIFOLD(bool[.] y)
 }
 
 
-inline int plusslXIIFOLD(int[.] y)
+inline double plusslXDDFOLD(double[.] y)
 { /* First/last axis fold-based reduction of vector */
   lim = shape(y)[0]-1;
   z = with {
         (0*shape(y) <= iv < shape(y))
-                : ItoI(y[lim-iv]);
-       } :  fold( plusIII, ItoI(0));
+                : DtoD(y[lim-iv]);
+       } :  fold( plusDDD, ItoD(0));
   return(z);
 }
 
@@ -321,6 +346,10 @@ inline bool eqIBB(int x, bool y)
 
 inline int plusIBI(int x, bool y)
 { return(ItoI(x)+BtoI(y));
+}
+
+inline double plusDDD(double x, double y)
+{ return(DtoD(x)+DtoD(y));
 }
 
 inline bool eqDDB(double x, double y, double QUADct)
@@ -511,6 +540,10 @@ inline int ABC(int I, int Xshape)
  return(z);
 }
 
+inline int mpyIII(int x, int y)
+{ return(ItoI(x)*ItoI(y));
+}
+
 inline int[.] schedrIII(int[.] x, int[.] y,int QUADio)
 { 
 /*
@@ -550,18 +583,22 @@ r_2=( A_60);
  return(r_2);
 }
 
-inline int schedrdrXII(int n ,int QUADio)
+inline double schedrdrXDD(double n ,int QUADio)
 { 
 /*
  ?
 */
-A_23=iotaXII( n,QUADio);
- x_0=( A_23);
- A_25=rotrXII( x_0);
- y_0=( A_25);
- A_28=schedrIII(x_0,y_0,QUADio);
-A_29=plusslXIIFOLD( A_28);
- r_0=( A_29);
+A_24=iotaXDI( n,QUADio);
+ x_0=( A_24);
+ A_26=rotrXII( x_0);
+ y_0=( A_26);
+ A_29=schedrIII(x_0,y_0,QUADio);
+ // dsf Scalar & clique
+A_30=barDDD(1.5,1.5);
+// dsf scalar(s)
+A_31=plusDID(A_30,A_29);
+ A_32=plusslXDDFOLD( A_31);
+ r_0=( A_32);
  return(r_0);
 }
 
@@ -576,24 +613,28 @@ QUADio_0=toI(( false));
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
  QUADio_1=toI(( false));
- n_0=( 20000000);
+ // dsf Scalar & clique
+A_48=barDDD(1.5,1.5);
+ // dsf scalar(s)
+A_49=plusDID(A_48,500000000);
+n_0=( A_49);
  QUADrl_1=( 16807);
  QUADpp_1=( 16);
  QUADpw_1=( 80);
- A_52=schedrdrXII( n_0,QUADio_1);
- r_0=( A_52);
- A_56=quadXII( r_0,QUADpp_1,QUADpw_1);
+ A_55=schedrdrXDD( n_0,QUADio_1);
+ r_0=( A_55);
+ A_59=quadXDD( r_0,QUADpp_1,QUADpw_1);
  // dsf scalar(s)
-A_57=barIBI(n_0,true);
+A_60=barDBD(n_0,true);
+ // dsf Scalar & clique
+A_61=mpyDDD(n_0,A_60);
  // dsf scalar(s)
-A_58=mpyIII(n_0,A_57);
+A_62=divDID(A_61,2);
+ A_64=sameDDB(r_0,A_62,QUADct_0);
  // dsf scalar(s)
-A_59=divIID(A_58,2);
- A_61=sameIDB(r_0,A_59,QUADct_0);
- // dsf scalar(s)
-A_62=barBBI(true,A_61);
-r_1=( A_62);
- A_66=quadXII( A_62,QUADpp_1,QUADpw_1);
+A_65=barBBI(true,A_64);
+ r_1=( A_65);
+ A_69=quadXII( A_65,QUADpp_1,QUADpw_1);
  return(r_1);
 }
 

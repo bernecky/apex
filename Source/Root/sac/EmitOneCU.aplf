@@ -17,7 +17,7 @@
  txt←((E fldr),E nmain)GenCode asts ⍝ gen module from all asts
  fnmso←txt WriteCode(E fldr),E''
  ismod←1 ⍝ Emit makefile for module
- junk←((E fldr),E ismod)InvokeCompiler fnmso
+ ⍝⍝   hFIXME  handled by cmake  sort of junk←((E fldr),E ismod)InvokeCompiler fnmso
  ismod←0 ⍝ Generate main()
  txt←(PathFileName fldr)GenTestCaller nmain
  fnmexe←txt WriteCode(E fldr),E'.unittest'

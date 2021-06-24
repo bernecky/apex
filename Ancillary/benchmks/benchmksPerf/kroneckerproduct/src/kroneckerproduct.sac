@@ -1,7 +1,7 @@
 module kroneckerproduct;
 export {kroneckerproduct_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-06-23 12:22:19.750
+// Compiled by APEX Version: FIXME!! 2021-06-24 17:03:30.888
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -35,10 +35,15 @@ use String: {to_string,tochar,sscanf};
 #define DtoI(x) toi((x))
 
 
-inline bool eqIIB(int x, int y)
-{ /* A=B on non-doubles */
- return(ItoI(x) == ItoI(y));
+inline bool eqIDB(int x, double y, double QUADct)
+{ /* A=B on doubles */
+  /* We use | instead of || on the assumption that
+   * the zero-fuzz case will eliminate the second leg,
+   * and it also eliminate a CONDFUN.
+   */
+ return((ItoD(x) == DtoD(y)) | APEXFUZZEQ(ItoD(x),DtoD(y),QUADct));
 }
+
 
 inline int barBBI(bool x, bool y)
 { return(BtoI(x)-BtoI(y));
@@ -140,6 +145,11 @@ inline int[.]  rhoXII(int[+] y)
  return(shape(y));
 }
 
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
 inline int[2] comaIII(int x, int y)
 {/* SxS catenate first (or last) axis */
  return([toI(x)]++[toI(y)]);
@@ -161,7 +171,7 @@ inline int mpyslXIIQUICKSTOP(int[.] y)
   z = with {
          (0*shape(y) <= iv < shape(y))
                 : ItoI(y[iv]);
-        } : foldfix( mpyIII, ItoI(1), ItoI(0));
+        } : fold( mpyIII, ItoI(1));
   return(z);
 }
 
@@ -196,6 +206,15 @@ inline int[+] mpyIII(int x, int[+] y)
   return(z);
 }
 
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
 
 inline int V2O( int[.] shp, int[.] iv)
 { /* Vector iv to offset into array of shape shp */
@@ -265,24 +284,23 @@ QUADio_0=toI(( false));
  QUADpp_0=( 10);
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
- QUADio_1=toI(( false));
- n_0=( 400);
- QUADrl_1=( 16807);
- QUADpp_1=( 16);
- QUADpw_1=( 80);
- A_57=iotaXII( [3, 4],QUADio_1);
- A_59=iotaXII( [2, 3],QUADio_1);
+ n_0=( 5000);
+ A_49=iotaXII( [20, 30],QUADio_0);
+ A_50=comaIII(n_0,600);
+ A_52=iotaXII( A_50,QUADio_0);
  // dsf scalar(s)
-A_60=plusIII(10,A_59);
- A_62=kpIII(A_60,A_57,QUADio_1);
- r_0=( A_62);
- A_64=comaXII( r_0);
- A_65=plusslXIIFOLD( A_64);
+A_53=plusIII(10,A_52);
+ A_55=kpIII(A_53,A_49,QUADio_0);
+ r_0=( A_55);
+ A_57=comaXII( r_0);
+ A_58=plusslXIIFOLD( A_57);
+ z_0=( A_58);
+ A_65=quadXII( z_0,QUADpp_0,QUADpw_0);
  // dsf scalar(s)
-A_70=eqIIB(4950,A_65);
- // dsf scalar(s)
-A_71=barBBI(true,A_70);
-r_1=( A_71);
- return(r_1);
+A_67=eqIDB(z_0,808655121450000000.0,QUADct_0);
+// dsf scalar(s)
+A_68=barBBI(true,A_67);
+ z_1=( A_68);
+ return(z_1);
 }
 
