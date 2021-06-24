@@ -46,4 +46,4 @@ FOREACH (TARGET IN ITEMS ${TARGETS})
 ENDFOREACH ()
 
 # This build target is responsible for generating the package sac2crc file
-CREATE_SAC2CRC_TARGET ("examplemodule" "${DLL_BUILD_DIR}" "${DLL_BUILD_DIR}" "")
+CREATE_SAC2CRC_TARGET ("apex_utworks" "${DLL_BUILD_DIR}" "${DLL_BUILD_DIR}" "")
