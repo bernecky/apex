@@ -1,0 +1,646 @@
+module UTCompress;
+export {UTCompress_testXXI};
+
+// Compiled by APEX Version: FIXME!! 2021-06-23 13:19:01.836
+use Array: all;
+use ArrayFormat: all;
+use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
+
+// APEX stdlib.sis include file.
+// Standard equates and constants for APL compiler
+// Also standard coercion functions
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline int[+] plusIII(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : plusIII(xel,yel);
+  } : genarray(shape(y), 0);
+  return(z);
+}
+
+
+inline bool[.] comaXBB(bool y)
+{ /* Ravel of scalar */
+  return([y]);
+}
+
+inline int[*] rhoIII(int[.] x, int[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), 0);
+   return( z);
+}
+
+
+
+inline bool[*] rhoIBB(int[.] x, bool[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), false);
+   return( z);
+}
+
+
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline int[.] iotaXBI(bool y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline bool[*] quadXBB(bool[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline bool[2] comaBBB(bool x, bool y)
+{/* SxS catenate first (or last) axis */
+ return([toB(x)]++[toB(y)]);
+}
+
+inline bool[.] comaBBB(bool[.] x, bool y)
+{/* VxS catenate first (or last) axis */
+ return(toB(x)++[toB(y)]);
+}
+
+inline int[.] comaIII(int[.] x, int[.] y)
+{ /* VxV catenate first or last axis */
+ return(toI(x)++toI(y));
+}
+
+inline bool sameBIB(bool[+] x, int[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqIIB(toI( x),  toI( y)))));
+  return(z);
+}
+
+
+
+inline bool sameBBB(bool[+] x, bool[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqBBB(toB( x),  toB( y)))));
+  return(z);
+}
+
+
+
+inline bool sameIBB(int[+] x, bool[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqIIB(toI( x),  toI( y)))));
+  return(z);
+}
+
+
+
+inline bool sameIIB(int[+] x, int[+] y)
+{ /* Non-scalar match non-scalar */
+   z = (( _dim_A_( x) == _dim_A_( y))          &&
+       ( all( _shape_A_( x) == _shape_A_( y))) &&
+       ( all( eqIIB(toI( x),  toI( y)))));
+  return(z);
+}
+
+
+
+inline bool[.] slBBB(bool x, bool y)
+{ /* Scalar replicate scalar */
+ z = with {
+        (. <= iv <= .)
+                : y;
+        } : genarray([toi(x)]);
+ return(z);
+}
+
+inline bool[.] slBBB(bool x, bool[.] y)
+{ /* Scalar replicate vector */
+ cell = genarray([toi(x)], false);
+ z = with {
+        (. <= iv <= .)
+                : genarray([toi(x)], y[iv]);
+        } : genarray(shape(y), cell);
+ return(comaXBB(z));
+}
+
+
+inline int[+] slBII(bool x, int[+] y)
+{ /* Boolean scalar compress non-scalar */
+  sy = shape(y);
+  z = (true == toB(x)) ?  y  : genarray(drop([-1],sy)++[0],0);
+  return(z);
+}
+
+inline bool[.] slBBB(bool[.] x, bool y)
+{ /* Vector compress/replicate scalar */
+ shpz = sum(toi(x));
+ z = genarray([shpz],y);
+ return(z);
+}
+
+inline bool[.] slBBB(bool[.] x, bool[.] y)
+{/* Boolean vector compress vector */
+  zxrho = sum(toi(x));
+  z = genarray([zxrho], false);
+  zi = 0;
+  for(i=0; i<shape(x)[0]; i++)
+    if ( x[i]) {
+      z[[zi]] = y[[i]];
+      zi++;
+    }
+  return(z);
+}
+
+inline int[+] slBII(bool[.] x, int[+] y)
+{ /* last-axis vector compress/replicate matrix */
+  /* This needs conformability check FIXME */
+  /* Also, x may be one-element vector */
+ frameshape = drop([-1],shape(y));
+ cellshape = sum(BtoI( x));
+ defcell = genarray([cellshape],0);
+
+ z = with {
+   (. <= iv <= .) : slBII( x, y[iv]);
+   } : genarray( frameshape, defcell);
+
+return(z);
+}
+
+
+
+
+
+inline int[.] slBII(bool[.] x, int[.] y)
+{/* Boolean vector compress vector */
+  zxrho = sum(toi(x));
+  z = genarray([zxrho], 0);
+  zi = 0;
+  for(i=0; i<shape(x)[0]; i++)
+    if ( x[i]) {
+      z[[zi]] = y[[i]];
+      zi++;
+    }
+  return(z);
+}
+
+inline bool[.] sl1BBB(bool x, bool y)
+{ /* Scalar replicate scalar */
+ z = with {
+        (. <= iv <= .)
+                : y;
+        } : genarray([toi(x)]);
+ return(z);
+}
+
+inline bool[.] sl1BBB(bool x, bool[.] y)
+{ /* Scalar replicate vector */
+ cell = genarray([toi(x)], false);
+ z = with {
+        (. <= iv <= .)
+                : genarray([toi(x)], y[iv]);
+        } : genarray(shape(y), cell);
+ return(comaXBB(z));
+}
+
+
+inline int[+] sl1BII(bool x, int[+] y)
+{ /* Boolean scalar compress non-scalar, first axis */
+  sy = shape(y);
+  z = (true == toB(x)) ?  y  : genarray([0]++drop([1],sy),0);
+  return(z);
+}
+
+inline bool[.] sl1BBB(bool[.] x, bool y)
+{ /* Vector compress/replicate scalar */
+ shpz = sum(toi(x));
+ z = genarray([shpz],y);
+ return(z);
+}
+
+inline bool[.] sl1BBB(bool[.] x, bool[.] y)
+{/* Boolean vector compress vector */
+  zxrho = sum(toi(x));
+  z = genarray([zxrho], false);
+  zi = 0;
+  for(i=0; i<shape(x)[0]; i++)
+    if ( x[i]) {
+      z[[zi]] = y[[i]];
+      zi++;
+    }
+  return(z);
+}
+
+inline int[+] sl1BII(bool[.] x, int[+] y)
+{ /* Vector compress/replicate-first-axis matrix */
+  /* FIXME: needs conformability and domain checks on x */
+
+  z = TRANSPOSE( slBII(x, TRANSPOSE( y)));
+  return(z);
+}
+
+
+
+inline bool andslXBBQUICKSTOP(bool[.] y)
+{ /* First/last axis reduction of vector with quick stop*/
+  z = with {
+         (0*shape(y) <= iv < shape(y))
+                : BtoB(y[iv]);
+        } : foldfix( andBBB, ItoB(1), ItoB(0));
+  return(z);
+}
+
+
+inline int plusIII(int x, int y)
+{ return(ItoI(x)+ItoI(y));
+}
+
+inline bool andBBB(bool x, bool y)
+{ return(BtoB(x)&BtoB(y));
+}
+
+inline bool[+] eqIIB(int[+] x, int[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+         sy = shape(y);
+         z = with {
+             ( . <= iv <= .) {
+                      xel = x[iv];
+                   yel = y[iv];
+           } : eqIIB(xel,yel);
+        } : genarray(sy, false);
+  return(z);
+}
+
+
+
+
+
+
+inline bool[+] eqBBB(bool[+] x, bool[+] y)
+{ /* AxA Dyadic scalar fn, shapes may or may not match */
+         sy = shape(y);
+         z = with {
+             ( . <= iv <= .) {
+                      xel = x[iv];
+                   yel = y[iv];
+           } : eqBBB(xel,yel);
+        } : genarray(sy, false);
+  return(z);
+}
+
+
+
+
+
+
+inline bool[.] comaXBB(bool[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline int V2O( int[.] shp, int[.] iv)
+{ /* Vector iv to offset into array of shape shp */
+  /* See V2O.dws workspace */
+  offset = 0;
+  wt = 1;
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    offset = offset + ( wt * iv[i]);
+    wt = wt * shp[i];
+  }
+  return( offset);
+}
+
+inline int[.] O2V( int[.] shp, int offset)
+{ /* Offset into array of shape shp to index vector */
+  /* See V2O.dws workspace */
+  iv = genarray( shape(shp), 1);
+  wts = iv;
+  for( i=shape(shp)[0]-2; i>=0; i--) {
+    wts[i] = wts[i+1] * shp[i+1];
+  }
+
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    iv[i] = _aplmod_SxS_( offset/wts[i], shp[i]);
+    offset = offset - (iv[i]*wts[i]);
+  }
+  return( iv);
+}
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline int[+] TRANSPOSE(int[+] y)
+{ /* Generic monadic transpose */
+  z = with {
+        ( . <= iv <= .)
+                : y[reverse( iv)];
+        }: genarray( reverse( shape(y)), 0);
+  return(z);
+}
+
+inline bool eqIIB(int x, int y)
+{ /* A=B on non-doubles */
+ return(ItoI(x) == ItoI(y));
+}
+
+inline bool eqBBB(bool x, bool y)
+{ /* A=B on non-doubles */
+ return(BtoB(x) == BtoB(y));
+}
+
+inline bool[+] eqIIB(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : eqIIB(xel,yel);
+  } : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqIIB(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : eqIIB(xel,y);
+  } : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline bool[+] eqBBB(bool x, bool[+] y)
+{ /* SxA scalar function */
+  xel = toB(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toB(y[iv]);
+                    } : eqBBB(xel,yel);
+  } : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool[+] eqBBB(bool[+] x, bool y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : eqBBB(xel,y);
+  } : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline int[.] comaXII(int[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline int UTCompress_testXXI()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ S0_0=( false);
+ S1_0=( true);
+ A_102=comaXBB( true);
+ V1_0=( A_102);
+ A_104=comaXBB( false);
+ V0_0=( A_104);
+ V1011_0=( [true,false,true,true]);
+ A_108=iotaXII( 24,QUADio_0);
+ A_109=rhoIII([2, 3, 4],A_108);
+ M234_0=( A_109);
+ A_112=iotaXBI( false,QUADio_0);
+ A_113=slBBB(S0_0,S0_0);
+ A_115=sameBIB(A_113,A_112);
+ r_0=( A_115);
+ A_117=comaXBB( S0_0);
+ A_118=slBBB(S1_0,S0_0);
+ A_120=sameBBB(A_118,A_117);
+ A_121=comaBBB(r_0,A_120);
+ r_1=( A_121);
+ A_123=comaXBB( S1_0);
+ A_124=slBBB(S1_0,S1_0);
+ A_126=sameBBB(A_124,A_123);
+ A_127=comaBBB(r_1,A_126);
+ r_2=( A_127);
+ A_130=iotaXBI( false,QUADio_0);
+ A_131=slBBB(S0_0,V1_0);
+ A_133=sameBIB(A_131,A_130);
+ A_134=comaBBB(r_2,A_133);
+ r_3=( A_134);
+ A_136=slBBB(S1_0,V1_0);
+ A_138=sameBBB(A_136,V1_0);
+ A_139=comaBBB(r_3,A_138);
+ r_4=( A_139);
+ A_141=rhoIBB([2, 3, 0],false);
+ A_142=slBII(S0_0,M234_0);
+ A_144=sameIBB(A_142,A_141);
+ A_145=comaBBB(r_4,A_144);
+ r_5=( A_145);
+ A_147=slBII(S1_0,M234_0);
+ A_149=sameIIB(A_147,M234_0);
+ A_150=comaBBB(r_5,A_149);
+ r_6=( A_150);
+ A_153=iotaXBI( false,QUADio_0);
+ A_154=slBBB(V0_0,S0_0);
+ A_156=sameBIB(A_154,A_153);
+ A_157=comaBBB(r_6,A_156);
+ r_7=( A_157);
+ A_159=comaXBB( S0_0);
+ A_160=slBBB(V1_0,S0_0);
+ A_162=sameBBB(A_160,A_159);
+ A_163=comaBBB(r_7,A_162);
+ r_8=( A_163);
+ A_166=iotaXBI( false,QUADio_0);
+ A_167=slBBB(V0_0,V0_0);
+ A_169=sameBIB(A_167,A_166);
+ A_170=comaBBB(r_8,A_169);
+ r_9=( A_170);
+ A_172=slBBB(V1_0,V0_0);
+ A_174=sameBBB(A_172,V0_0);
+ A_175=comaBBB(r_9,A_174);
+ r_10=( A_175);
+ A_177=rhoIBB([2, 3, 0],false);
+ A_178=slBII(V0_0,M234_0);
+ A_180=sameIBB(A_178,A_177);
+ A_181=comaBBB(r_10,A_180);
+ r_11=( A_181);
+ A_183=slBII(V1_0,M234_0);
+ A_185=sameIIB(A_183,M234_0);
+ A_186=comaBBB(r_11,A_185);
+ r_12=( A_186);
+ A_188=comaIII([16, 18, 19],[20, 22, 23]);
+ A_189=comaIII([12, 14, 15],A_188);
+ A_190=comaIII([8, 10, 11],A_189);
+ A_191=comaIII([4, 6, 7],A_190);
+ A_192=comaIII([0, 2, 3],A_191);
+ A_193=rhoIII([2, 3, 3],A_192);
+ A_194=slBII(V1011_0,M234_0);
+ A_196=sameIIB(A_194,A_193);
+ A_197=comaBBB(r_12,A_196);
+ r_13=( A_197);
+ A_200=iotaXII( 4,QUADio_0);
+ A_201=slBII(V1011_0,A_200);
+ A_203=sameIIB(A_201,[0, 2, 3]);
+ A_204=comaBBB(r_13,A_203);
+ r_14=( A_204);
+ A_207=iotaXBI( false,QUADio_0);
+ A_208=sl1BBB(S0_0,S0_0);
+ A_210=sameBIB(A_208,A_207);
+ A_211=comaBBB(r_14,A_210);
+ r_15=( A_211);
+ A_213=comaXBB( S0_0);
+ A_214=sl1BBB(S1_0,S0_0);
+ A_216=sameBBB(A_214,A_213);
+ A_217=comaBBB(r_15,A_216);
+ r_16=( A_217);
+ A_219=comaXBB( S1_0);
+ A_220=sl1BBB(S1_0,S1_0);
+ A_222=sameBBB(A_220,A_219);
+ A_223=comaBBB(r_16,A_222);
+ r_17=( A_223);
+ A_226=iotaXBI( false,QUADio_0);
+ A_227=sl1BBB(S0_0,V1_0);
+ A_229=sameBIB(A_227,A_226);
+ A_230=comaBBB(r_17,A_229);
+ r_18=( A_230);
+ A_232=sl1BBB(S1_0,V1_0);
+ A_234=sameBBB(A_232,V1_0);
+ A_235=comaBBB(r_18,A_234);
+ r_19=( A_235);
+ A_237=rhoIBB([0, 3, 4],false);
+ A_238=sl1BII(S0_0,M234_0);
+ A_240=sameIBB(A_238,A_237);
+ A_241=comaBBB(r_19,A_240);
+ r_20=( A_241);
+ A_243=sl1BII(S1_0,M234_0);
+ A_245=sameIIB(A_243,M234_0);
+ A_246=comaBBB(r_20,A_245);
+ r_21=( A_246);
+ A_249=iotaXBI( false,QUADio_0);
+ A_250=sl1BBB(V0_0,S0_0);
+ A_252=sameBIB(A_250,A_249);
+ A_253=comaBBB(r_21,A_252);
+ r_22=( A_253);
+ A_255=comaXBB( S0_0);
+ A_256=sl1BBB(V1_0,S0_0);
+ A_258=sameBBB(A_256,A_255);
+ A_259=comaBBB(r_22,A_258);
+ r_23=( A_259);
+ A_262=iotaXBI( false,QUADio_0);
+ A_263=sl1BBB(V0_0,V0_0);
+ A_265=sameBIB(A_263,A_262);
+ A_266=comaBBB(r_23,A_265);
+ r_24=( A_266);
+ A_268=sl1BBB(V1_0,V0_0);
+ A_270=sameBBB(A_268,V0_0);
+ A_271=comaBBB(r_24,A_270);
+ r_25=( A_271);
+ A_273=rhoIBB([0, 3, 4],false);
+ A_274=sl1BII(V0_0,M234_0);
+ A_276=sameIBB(A_274,A_273);
+ A_277=comaBBB(r_25,A_276);
+ r_26=( A_277);
+ A_279=sl1BII(V1_0,M234_0);
+ A_281=sameIIB(A_279,M234_0);
+ A_282=comaBBB(r_26,A_281);
+ r_27=( A_282);
+ A_285=iotaXII( 12,QUADio_0);
+ // dsf scalar(s)
+A_286=plusIII(12,A_285);
+ A_287=rhoIII([1, 3, 4],A_286);
+ A_288=sl1BII([false,true],M234_0);
+ A_290=sameIIB(A_288,A_287);
+ A_291=comaBBB(r_27,A_290);
+ r_28=( A_291);
+ A_294=iotaXII( 12,QUADio_0);
+ A_295=rhoIII([1, 3, 4],A_294);
+ A_296=sl1BII([true,false],M234_0);
+ A_298=sameIIB(A_296,A_295);
+ A_299=comaBBB(r_28,A_298);
+ r_29=( A_299);
+ A_303=quadXBB( r_29,QUADpp_0,QUADpw_0);
+ A_304=andslXBBQUICKSTOP( r_29);
+ // dsf scalar(s)
+A_308=barBBI(true,A_304);
+r_30=( A_308);
+ A_312=quadXII( A_308,QUADpp_0,QUADpw_0);
+ return(r_30);
+}
+

@@ -1,7 +1,0 @@
- r←buildv y;i
- r←⍳0
- :For i :In ⍳y
-     r←r,1000000+⍳i
- :EndFor
- r←+/r+0.5
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/buildv/buildv.ufn§0§ 2020 6 24 17 4 22 844 §cPëg§0

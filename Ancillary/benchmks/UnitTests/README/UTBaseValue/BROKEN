@@ -1,0 +1,4 @@
+Internal compiler error
+Assertion "(NTYPE_CON (array) == TC_aks) || (NTYPE_CON (array) == TC_akv)" failed at /home/sac/sac2c.AprilFool/sac2c/src/libsac2c/typecheck/new_types.c:917 -- TYgetShape applied to other than AKV or AKS type!
+
+

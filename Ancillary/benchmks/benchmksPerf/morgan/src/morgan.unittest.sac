@@ -1,0 +1,7 @@
+use morgan: all;
+
+int main()
+{
+ z  = morgan_testXXI();
+ return(z);
+}
