@@ -32,11 +32,7 @@ list(REMOVE_ITEM BM_DIRST "${CMAKE_SOURCE_DIR}/README")
 FOREACH (BM_DIR IN ITEMS ${BM_DIRST})
 	get_filename_component(BM_DIRONE ${BM_DIR} NAME)
 	list( APPEND BM_DIRS ${BM_DIRONE})
-	#debug	MESSAGE( STATUS "name of ${BM_DIR} is: " ${BM_DIRONE})
 ENDFOREACH ()
-
-##debug SET( BM_DIRS UTCatenate UTClock)
-##debug MESSAGE( STATUS "BM_DIRS are: " ${BM_DIRS})
 
 # Run src/CMakeLists.txt for each target
 FOREACH (TARGET IN ITEMS ${TARGETS})
