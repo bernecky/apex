@@ -1,5 +1,0 @@
- r←ipbb siz;m
-⍝ Inner product Boolean ∨.∧ Boolean
- m←(2⍴siz)⍴0 1 1 0 0 0
- r←+/+/m∨.∧⍉m
-⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/AKDtofix/lowertriAKD/ipbb.aplf§0§ 2021 5 13 13 41 11 358 §gHNe§0

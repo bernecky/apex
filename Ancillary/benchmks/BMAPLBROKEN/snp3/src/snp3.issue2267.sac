@@ -1,0 +1,60 @@
+/**********************************************************************
+ *
+ * SAC bug report: snp3.sacbugreport
+ *
+ **********************************************************************
+ *
+ * Automatically generated on Fri 25 Jun 2021 05:47:56 PM EDT
+ *
+ * using sac2c 1.3.3-MijasCosta-677-g0587e
+ * built 2021-06-23T15:18:35.
+ * by user sac on host boa.
+ *
+ * The compiler was called by
+ *  sac2c_d snp3.codegencrash.sac -v1 -d treecheck -chkfreq 4
+ *
+ * The compiler crashed in
+ *  phase: cg (Generating Code)
+ *  sub phase: cpl (Creating intermediate code macros)
+ *
+ * What follows is the contents of snp3.codegencrash.sac.
+ *
+ **********************************************************************/
+
+use Array: {genarray,sum,shape,toi,sel,-,drop,==};
+
+inline    // ! ! ! must be inlined to fail
+bool[.,.,.] jotdoteqIIB(int [.] x, int [.,.] y)
+{ /* AxA outer product */
+	cell = genarray(shape(y), false);
+	z = with { (. <= iv <= .) { xitem = x[iv];
+		} : xitem == y;
+	} : genarray(shape(x), cell);
+	return(z);
+}
+
+int[.,.] plusslXBIFOLD(bool[.,.,.] y)
+{ /* last axis reduce rank-2 or greater matrix w/folding */
+        zrho = [3,10000];
+	z = with { (. <= iv <= .)
+			: sum(toi(y[iv]));
+	} : genarray(zrho, 0);
+	return(z);
+}
+
+int main()
+{ 
+        snp_0 = genarray([10000,80000], 2);
+	A_17=jotdoteqIIB([0, 1, 2],snp_0);
+	A_56=plusslXBIFOLD( A_17);
+	return(sum(A_56));
+}
+
+
+
+/**********************************************************************
+ *
+ * End of bug report
+ *
+ **********************************************************************/
+

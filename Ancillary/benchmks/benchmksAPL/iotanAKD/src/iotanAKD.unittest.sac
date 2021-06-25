@@ -1,0 +1,7 @@
+use iotanAKD: all;
+
+int main()
+{
+ z  = iotanAKD_testXII();
+ return(z);
+}
