@@ -1,0 +1,12 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⍝ README: build double vector by repeated catenation
+ ⎕IO←0
+⍝⍝⎕←'Enter 2000 or other test size'
+⍝⍝n←⎕fi ⍞ ⍝ 2000 works OK
+ n←2000
+ ⎕RL←16807
+ ⎕PP←17
+ ⎕PW←80
+ ⎕←r←buildv n
+ ⎕←r←1-r≡1335332000
+⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/buildvf/main.ufn§0§ 2020 6 24 17 4 22 848 §ûMVÊ§0

@@ -1,0 +1,8 @@
+ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
+ ⎕IO←0
+ n←1000000
+ ⎕RL←16807
+ ⎕PP←17
+ ⎕PW←80
+ ⎕←r←testindx n
+ ⎕←r←1-r≡n+n+(n×n-(0.5+0.5))÷2

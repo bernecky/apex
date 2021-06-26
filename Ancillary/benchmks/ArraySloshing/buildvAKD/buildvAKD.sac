@@ -1,20 +1,17 @@
-module buildv;
-export {buildv_testXXI};
-
-// Compiled by APEX Version: FIXME!! 2021-06-26 14:39:19.917
 use Array: all;
+use StdIO : all;
+use Numerical : all;
+use CommandLine: all;
+use String: {to_string,tochar,sscanf};
 use ArrayFormat: all;
 use Bits: all;
-use Clock: {clock,mday,mon,year,to_time};
-use CommandLine: all;
-use Numerical : all;
-use RTClock: all;
-use StdIO : all;
-use String: {to_string,tochar,sscanf};
 
-// APEX stdlib.sis include file.
-// Standard equates and constants for APL compiler
-// Also standard coercion functions
+/* Compiled by APEX Version: /home/apex/apex3/wss/sac3013.dws2012-11-07 10:24:26.076 */
+/*
+% This is the APEX stdlib.sis include file.
+% Standard equates and constants for APL compiler
+% Also standard coercion functions
+*/
 
 #define toB(x) to_bool((x))
 #define toI(x) toi((x))
@@ -35,13 +32,26 @@ use String: {to_string,tochar,sscanf};
 #define DtoI(x) toi((x))
 
 
-inline double barDDD(double x, double y)
-{ return(DtoD(x)-DtoD(y));
+inline int maxIBI(int x, bool y)
+{ /* x max y */
+ return (max(ItoI(x),BtoI(y)));
 }
 
 inline int barBBI(bool x, bool y)
 { return(BtoI(x)-BtoI(y));
 }
+
+inline int[+] plusIII(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : plusIII(xel,yel);
+  } : genarray(shape(y), 0);
+  return(z);
+}
+
 
 inline double[+] plusIDD(int[+] x, double y)
 { /* AxS scalar function */
@@ -91,6 +101,13 @@ inline bool sameDDB(double x, double y,double QUADct)
 
 
 
+inline int CommandLineArgvXBI(bool y)
+{ /* Get Command-line argument element #y as integer scalar */
+  int z;
+  junk, z = sscanf(argv(toi(y)), "%d");
+  return( z);
+}
+
 inline double plusslXDDFOLD(double[.] y)
 { /* First/last axis fold-based reduction of vector */
   lim = shape(y)[0]-1;
@@ -102,17 +119,17 @@ inline double plusslXDDFOLD(double[.] y)
 }
 
 
+inline int plusIII(int x, int y)
+{ return(ItoI(x)+ItoI(y));
+}
+
 inline double plusIDD(int x, double y)
 { return(ItoD(x)+DtoD(y));
 }
 
 inline bool eqDDB(double x, double y, double QUADct)
 { /* A=B on doubles */
-  /* We use | instead of || on the assumption that
-   * the zero-fuzz case will eliminate the second leg,
-   * and it also eliminate a CONDFUN.
-   */
- return((DtoD(x) == DtoD(y)) | APEXFUZZEQ(DtoD(x),DtoD(y),QUADct));
+ return((DtoD(x) == DtoD(y)) || APEXFUZZEQ(DtoD(x),DtoD(y),QUADct));
 }
 
 
@@ -134,51 +151,52 @@ inline double buildvXID(int y ,int QUADio)
 /*
  ?
 */
-A_25=iotaXBI( false,QUADio);
- r_0=( A_25);
- A_28=iotaXII( y,QUADio);
- A_CTR29_= 0;
-A_CTR29z_ = (shape(A_28)[[0]])-1;
+A_29=iotaXBI( false,QUADio);
+ r_0=( A_29);
+ A_32=iotaXII( y,QUADio);
+ A_CTR33_= 0;
+A_CTR33z_ = (shape(A_32)[[0]])-1;
 r_2=toI(r_0);
-for(; A_CTR29_ <= A_CTR29z_; A_CTR29_++){
-i_0 = A_28[[A_CTR29_]];
- A_32=iotaXII( i_0,QUADio);
- A_33=comaIII(r_2,A_32);
- r_2=( A_33);
+for(; A_CTR33_ <= A_CTR33z_; A_CTR33_++){
+i_0 = A_32[[A_CTR33_]];
+ A_36=iotaXII( i_0,QUADio);
+ /* dsf scalar(s) */
+A_37=plusIII(1000000,A_36);
+ A_38=comaIII(r_2,A_37);
+ r_2=( A_38);
  }
- // dsf Scalar & clique
-A_36=barDDD(0.5,0.5);
- // dsf scalar(s)
-A_37=plusIDD(r_2,A_36);
- A_38=plusslXDDFOLD( A_37);
- r_3=( A_38);
+ /* dsf scalar(s) */
+A_41=plusIDD(r_2,0.5);
+ A_42=plusslXDDFOLD( A_41);
+ r_3=( A_42);
  return(r_3);
 }
 
-inline int buildv_testXXI()
+int main()
 { 
 /*
  ?
 */
-QUADio_0=toI(( false));
+n=CommandLineArgvXBI( true);
+ QUADio_0=toI(( false));
  QUADct_0=( 1.0e-13);
  QUADpp_0=( 10);
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
  QUADio_1=toI(( false));
- n_0=( 5000);
- QUADrl_1=( 16807);
- QUADpp_1=( 20);
+ /* dsf scalar(s) */
+A_51=maxIBI(n,true);
+ n_0=( A_51);
+ QUADpp_1=( 17);
  QUADpw_1=( 80);
- QUADct_1=( 1.0e-10);
- A_55=buildvXID( n_0,QUADio_1);
- r_0=( A_55);
- A_59=quadXDD( A_55,QUADpp_1,QUADpw_1);
- A_61=sameDDB(r_0,20820835000.0,QUADct_1);
-// dsf scalar(s)
-A_62=barBBI(true,A_61);
- r_1=( A_62);
- A_66=quadXII( A_62,QUADpp_1,QUADpw_1);
+ A_56=buildvXID( n_0,QUADio_1);
+ r_0=( A_56);
+ A_60=quadXDD( A_56,QUADpp_1,QUADpw_1);
+ A_62=sameDDB(r_0,2000332333500.0,QUADct_0);
+/* dsf scalar(s) */
+A_63=barBBI(true,A_62);
+r_1=( A_63);
+ A_67=quadXII( A_63,QUADpp_1,QUADpw_1);
  return(r_1);
 }
 

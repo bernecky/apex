@@ -1,0 +1,7 @@
+use waver: all;
+
+int main()
+{
+ z  = waver_testXXI();
+ return(z);
+}

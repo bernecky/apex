@@ -1,0 +1,7 @@
+use testlcvAKD: all;
+
+int main()
+{
+ z  = testlcvAKD_testXII();
+ return(z);
+}

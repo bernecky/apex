@@ -1,8 +1,0 @@
- r←testindx n;i
- r←n⍴9
- :For i :In ⍳n
-     r[i]←i
-     r[i]←r[i]+2
- :EndFor
- r←+/(0.5-0.5)+r
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/testindx/testindx.ufn§0§ 2020 6 24 17 4 23 32 §djvR§0
