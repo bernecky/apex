@@ -1,0 +1,7 @@
+use metaphonAKD: all;
+
+int main()
+{
+ z  = metaphonAKD_testXII();
+ return(z);
+}

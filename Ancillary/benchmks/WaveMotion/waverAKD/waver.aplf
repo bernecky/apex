@@ -7,4 +7,3 @@
 ⍝ NB: and ignore the wrong answers from APL.
  r←STSCfloor 0.5+(m1+.×0.1 2 3 4 5)+m2+.×0.5 4 3 2 1
  r←+/,r
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/waverAKD/waver.ufn§0§ 2020 6 24 17 4 23 44 §âEAd§0

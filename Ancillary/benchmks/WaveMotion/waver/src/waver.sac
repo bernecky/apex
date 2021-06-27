@@ -1,7 +1,7 @@
 module waver;
 export {waver_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-06-26 16:14:44.365
+// Compiled by APEX Version: FIXME!! 2021-06-27 17:30:26.181
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -460,7 +460,7 @@ QUADio_0=toI(( false));
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
  QUADio_1=toI(( false));
- n_0=( 5000);
+ n_0=( 7500);
  QUADrl_1=( 16807);
  QUADct_1=( 1.0e-13);
  QUADpp_1=( 16);
@@ -469,7 +469,7 @@ QUADio_0=toI(( false));
  r_0=( A_55);
  A_59=quadXDD( A_55,QUADpp_1,QUADpw_1);
  // dsf scalar(s)
-A_61=eqIDB(150013,r_0,QUADct_1);
+A_61=eqIDB(225013,r_0,QUADct_1);
 // dsf scalar(s)
 A_62=barBBI(true,A_61);
  r_1=( A_62);

@@ -1,0 +1,7 @@
+use metaphon: all;
+
+int main()
+{
+ z  = metaphon_testXXI();
+ return(z);
+}

@@ -1,0 +1,3 @@
+ r←Primes2 n
+⍝ Sum of first n primes
+ r←+/prim2 n

@@ -8,4 +8,3 @@
  dscale←(-scale)+0.5-0.5 ⍝ Force real numbers
  power←(10.5-0.5)*dscale
  result←sign×(⌊0.5+power×sign×value)÷power
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/roundcAKD/round.ufn§0§ 2020 6 24 17 4 23 32 §õBãã§0

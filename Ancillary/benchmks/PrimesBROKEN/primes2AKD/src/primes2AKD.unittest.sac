@@ -1,0 +1,7 @@
+use primes2AKD: all;
+
+int main()
+{
+ z  = primes2AKD_testXII();
+ return(z);
+}

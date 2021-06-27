@@ -1,0 +1,5 @@
+ r←benchmet n;char
+⍝ Metaphone benchmark
+ char←' abcdefghijklmnopqrstuvwxyz'
+ r←metaphone(n,25)⍴char
+ r←+/,⎕AV⍳r

@@ -1,4 +1,0 @@
- r←Primes2 n
-⍝ Sum of first n primes
- r←+/prim2 n
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/primes2AKD/Primes2.ufn§0§ 2020 6 24 17 4 23 28 §Uáò§0
