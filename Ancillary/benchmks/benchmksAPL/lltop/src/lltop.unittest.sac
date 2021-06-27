@@ -1,0 +1,7 @@
+use lltop: all;
+
+int main()
+{
+ z  = lltop_testXXI();
+ return(z);
+}

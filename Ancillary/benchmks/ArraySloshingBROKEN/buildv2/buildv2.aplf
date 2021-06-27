@@ -1,0 +1,13 @@
+ r←buildv2 y;i;j;k
+ r←0
+ :For i :In ⍳y
+     r←r+(⍴⍳i)[0]
+ :EndFor
+ r←r⍴0
+ j←0
+ :For i :In ⍳y
+     k←1000000+⍳i
+     r[j+⍳i]←k
+     j←j+i
+ :EndFor
+ r←+/r+0.5

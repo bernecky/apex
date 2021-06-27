@@ -8,4 +8,3 @@
  r←schedrdr n
  ⎕←r
  ⎕←r←1-r≡(n×n-1)÷2
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/schedrAKD/main.ufn§0§ 2020 6 24 17 4 23 32 §toku§0

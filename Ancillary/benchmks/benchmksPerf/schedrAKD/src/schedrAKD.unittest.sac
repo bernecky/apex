@@ -1,0 +1,7 @@
+use schedrAKD: all;
+
+int main()
+{
+ z  = schedrAKD_testXII();
+ return(z);
+}

@@ -1,0 +1,8 @@
+ r←main;⎕PP;n
+ ⍝ README: build integer vector by indexed assign
+ ⎕PP←16
+⍝⍝⎕←'Enter 20000 or other test size'
+⍝⍝n←⎕fi ⍞
+ n←10000
+ ⎕←r←buildv2 n
+ ⎕←r←1-r=50161641667500

@@ -1,0 +1,7 @@
+use sdyn4: all;
+
+int main()
+{
+ z  = sdyn4_testXXI();
+ return(z);
+}

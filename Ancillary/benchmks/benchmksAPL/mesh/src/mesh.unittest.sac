@@ -1,0 +1,7 @@
+use mesh: all;
+
+int main()
+{
+ z  = mesh_testXXI();
+ return(z);
+}

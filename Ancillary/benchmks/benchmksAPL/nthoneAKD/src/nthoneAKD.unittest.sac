@@ -1,0 +1,7 @@
+use nthoneAKD: all;
+
+int main()
+{
+ z  = nthoneAKD_testXII();
+ return(z);
+}

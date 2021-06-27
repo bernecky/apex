@@ -5,3 +5,7 @@
 
 3. mt_pth is also slow: 72s for -mt 5 AND wrong answer.
 
+4. As of 2021-06-27, it does not even compile with -mt_pth.
+   See:  https://gitlab.sac-home.org/sac-group/sac2c/-/issues/2268
+
+

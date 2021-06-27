@@ -8,4 +8,3 @@
  r←BenchSCS n
  ⎕←r
  ⎕←r←1-r=10
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/sdyn4AKD/main.ufn§0§ 2020 6 24 17 4 23 32 §rles§0

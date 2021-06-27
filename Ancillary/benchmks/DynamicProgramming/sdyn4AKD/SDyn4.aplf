@@ -20,4 +20,3 @@
      m[j]←∨/m[j-d]
  :EndFor
  r←¯1↑m
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/sdyn4AKD/SDyn4.ufn§0§ 2020 6 24 17 4 23 32 §bûLÁö§0

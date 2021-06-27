@@ -1,0 +1,7 @@
+ z←buildv y;i;r
+ ⍝ dcl double vector r
+ r←⍳0
+ :For i :In ⍳y
+     r←r,1.5+⍳i
+ :EndFor
+ z←+/r+0.5

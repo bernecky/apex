@@ -1,0 +1,7 @@
+use nsvAKD: all;
+
+int main()
+{
+ z  = nsvAKD_testXII();
+ return(z);
+}
