@@ -13,19 +13,23 @@ When cloning this repo, remember to also load the git submodules using either
 After that, you can load APEX in Dyalog:
 
 ```apl
+    cd apexgit
     ⍝ Start Dyalog APL V18.0 (or newer), downloadable from www.dyalog.com, and then
     )load wss/apex.dws
 ```
 
 At this point, you should have a copy of the apex workspace, which you can
-try out. There are some theoretically working benchmarks in BMWORKS:
+try out. The Ancillary/benchmks folder contains subfolders of benchmarks
+and unit tests, including benchmksAPL, DynamicProgramming, MatrixProducts,
+benchmksPerf, DeepLearning, Geophysics, UnitTests. Others are on their way.
+To compile the APL code (*.aplf files) to SaC, do this:
 
 ```apl
-    bm←benchmks.benchmks'TestsForNow/BMWORKS'
+    bm←benchmks.benchmks'Ancillary/MatrixProducts'
     z←⍪apex¨bm
     z ⍝ Names of generated SaC source code files
 ```
-You will need a left argument to ``apex`` only rarely.
+Rarely, you will need a left argument to ``apex``.
 If specified, the left argument to the `apex` verb is a set of space-delimited
 compiler options, e.g. `'option0=x option1=y...'`
 
@@ -35,8 +39,8 @@ compiler to generate SaC code as its output.
 
 The right argument is a folder name, containing the APL code
 to be compiled, as a set of `*.aplf` files, each containing the
-source code for one defined function, e.g., in `BMWORKS/iotan`, we
-have:
+source code for one 
+defined function, e.g., in `Ancillary/benchmks/benchmksAPL/iotan`, we have:
 
 The verb main.aplf is:
 
@@ -69,11 +73,32 @@ invented when the benchmark was written:
 ```
 
 The funny business with the real numbers is a sloppy way to force the
-result to real numbers.
+result to 64-bit IEEE floating point.
 
-The compiler's output will be a SaC source code file in the input
-folder, `TestsForNow/BMWORKS/iotan/src`. When compiled with `sac2c`
-(from www.sac-home.org), the resulting binary, when executed, will compute
-the sum of the first n non-negative integers.
-The result (r) of executing main should be 0 if the result is correct,
-and 0 otherwise.
+The apex compiler's output is a pair of SaC source code files in the argument
+folder, `Ancillary/benchmks/benchmksAPL/iotan/src`. The `iotan.sac` file will generate
+a SaC module (Shared library, .so, .dll) that can be called from Dyalog APL via `⎕na`,
+or from an executable SaC program, e.g, `iotan.unittest.sac`:
+```
+   cd src
+   sac2c iotan.sac
+   sac2c iotan.unittest.sac
+```
+
+Alternately, an entire set of tests can be compiled this way:
+
+```
+   cd Ancillary/benchmks/benchmksAPL
+   mkdir build
+   cd build
+   cmake ..
+   make
+```
+
+When compiled with `sac2c` (from www.sac-home.org), the resulting binary, when executed, will compute
+the sum of the first n non-negative integers. The result (r) of executing main should be 0 if the result is correct, and 0 otherwise.
+
+
+
+
+
