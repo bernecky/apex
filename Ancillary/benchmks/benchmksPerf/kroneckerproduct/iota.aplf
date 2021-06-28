@@ -1,0 +1,3 @@
+ r←iota n
+⍝ J-like iota on vector n
+ r←n⍴⍳×/n

@@ -1,0 +1,4 @@
+ r←schedrdr n;x;y
+ x←⍳n
+ y←⌽x
+ r←+/(1.5-1.5)+x schedr y

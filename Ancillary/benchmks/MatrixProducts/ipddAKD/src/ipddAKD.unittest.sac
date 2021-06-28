@@ -1,0 +1,7 @@
+use ipddAKD: all;
+
+int main()
+{
+ z  = ipddAKD_testXII();
+ return(z);
+}

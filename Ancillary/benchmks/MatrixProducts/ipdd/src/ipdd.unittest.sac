@@ -1,0 +1,7 @@
+use ipdd: all;
+
+int main()
+{
+ z  = ipdd_testXXI();
+ return(z);
+}

@@ -1,0 +1,15 @@
+1. odd +/vector problem
+   DFA or codegen
+
+2. TRANSPOSE has bad rank info, dfa
+
+2021-06-24 not sure if the above is still relevant.
+
+BUGtypecheck breaks:
+
+Internal compiler error
+Assertion "(NTYPE_CON (array) == TC_aks) || (NTYPE_CON (array) == TC_akv)" failed at /home/sac/sac2c.AprilFool/sac2c/src/libsac2c/typecheck/new_types.c:917 -- TYgetShape applied to other than AKV or AKS type!
+Please file a bug at: http://bugs.sac-home.org
+make[2]: *** [UTBaseValue/src-seq/CMakeFiles/seq-module-UTBaseValue.dir/build.make:74: lib/host/seq/libUTBaseValueMod.so] Error 1
+
+See Issue #

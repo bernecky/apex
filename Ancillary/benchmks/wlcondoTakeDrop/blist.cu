@@ -1,2 +1,0 @@
-kernel.ufn
-main.ufn

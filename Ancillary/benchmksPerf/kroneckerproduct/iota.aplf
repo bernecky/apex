@@ -1,4 +1,0 @@
- r←iota n
-⍝ J-like iota on vector n
- r←n⍴⍳×/n
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmksPerf/kroneckerproduct/iota.ufn§0§ 2020 6 24 17 4 22 856 §bFQt§0

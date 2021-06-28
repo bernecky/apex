@@ -1,0 +1,181 @@
+module lowertriAKD;
+export {lowertriAKD_testXII};
+
+// Compiled by APEX Version: FIXME!! 2021-06-27 14:01:52.752
+use Array: all;
+use ArrayFormat: all;
+use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
+
+// APEX stdlib.sis include file.
+// Standard equates and constants for APL compiler
+// Also standard coercion functions
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline int plusIBI(int x, bool y)
+{ return(ItoI(x)+BtoI(y));
+}
+
+inline int mpyIII(int x, int y)
+{ return(ItoI(x)*ItoI(y));
+}
+
+inline double divIID(int x, int y)
+{ dx = ItoD(x);
+  dy = ItoD(y);
+  z = (dx == dy) ? 1.0  : dx/dy;
+  return(z);
+}
+
+inline bool eqIDB(int x, double y, double QUADct)
+{ /* A=B on doubles */
+  /* We use | instead of || on the assumption that
+   * the zero-fuzz case will eliminate the second leg,
+   * and it also eliminate a CONDFUN.
+   */
+ return((ItoD(x) == DtoD(y)) | APEXFUZZEQ(ItoD(x),DtoD(y),QUADct));
+}
+
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline bool[.] comaXBB(bool[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int CommandLineArgvXBI(bool y)
+{ /* Get Command-line argument element #y as integer scalar */
+  int z;
+  junk, z = sscanf(argv(toi(y)), "%d");
+  return( z);
+}
+
+inline bool[*] jotdotgeIIB(int [+] x, int [+] y)
+{ /* AxA outer product */
+ cell = genarray(shape(y), false);
+ z = with {
+        (. <= iv <= .) {
+         xitem = toI(x[iv]);
+        } : geIIB(xitem, toI(y));
+        } : genarray(shape(x), cell);
+ return(z);
+}
+
+inline int plusslXBIFOLD(bool[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : BtoI(y[lim-iv]);
+       } :  fold( plusIII, ItoI(0));
+  return(z);
+}
+
+
+inline int plusIII(int x, int y)
+{ return(ItoI(x)+ItoI(y));
+}
+
+inline bool[+] geIIB(int x, int[+] y)
+{ /* SxA scalar function */
+  xel = toI(x);
+  z = with {
+     ( . <= iv <= .) {
+              yel = toI(y[iv]);
+                    } : geIIB(xel,yel);
+  } : genarray(shape(y), false);
+  return(z);
+}
+
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline bool geIIB(int x, int y)
+{ /* A>=B on non-Doubles */
+ return(ItoI(x) >= ItoI(y));
+}
+
+inline int lowertriAKD_testXII()
+{ 
+/*
+ ?
+*/
+n=CommandLineArgvXBI( true);
+ QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toI(( false));
+ QUADrl_1=( 16807);
+ QUADpp_1=( 16);
+ QUADpw_1=( 80);
+ A_51=iotaXII( n,QUADio_1);
+ A_53=iotaXII( n,QUADio_1);
+ A_54=jotdotgeIIB(A_53,A_51);
+ r_0=( A_54);
+ A_63=comaXBB( r_0);
+ A_64=plusslXBIFOLD( A_63);
+ r_1=( A_64);
+ A_71=quadXII( r_1,QUADpp_1,QUADpw_1);
+ // dsf scalar(s)
+A_72=plusIBI(n,true);
+ // dsf scalar(s)
+A_73=mpyIII(n,A_72);
+ // dsf scalar(s)
+A_74=divIID(A_73,2);
+ // dsf scalar(s)
+A_76=eqIDB(r_1,A_74,QUADct_0);
+// dsf scalar(s)
+A_77=barBBI(true,A_76);
+ r_2=( A_77);
+ A_81=quadXII( A_77,QUADpp_1,QUADpw_1);
+ return(r_2);
+}
+

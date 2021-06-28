@@ -1,0 +1,7 @@
+use testlcv: all;
+
+int main()
+{
+ z  = testlcv_testXXI();
+ return(z);
+}

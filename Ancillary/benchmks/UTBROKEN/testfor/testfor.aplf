@@ -1,0 +1,9 @@
+ r←testfor n;i;j
+⍝ test loop with renames
+ r←⍳n
+ :For i :In ⍳⌊n÷2
+     r←r+i
+     :For j :In ⍳i
+         r[j]←r[j]+j
+     :EndFor
+ :EndFor

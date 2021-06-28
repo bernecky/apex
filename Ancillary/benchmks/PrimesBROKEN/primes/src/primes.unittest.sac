@@ -1,0 +1,7 @@
+use primes: all;
+
+int main()
+{
+ z  = primes_testXXI();
+ return(z);
+}

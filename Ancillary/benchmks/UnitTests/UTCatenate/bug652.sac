@@ -1,0 +1,14 @@
+use Array: {genarray,++,match,-,+,<,<=};
+
+int main()
+{ 
+ M = genarray( [2,3,4], 42);
+ A_294= genarray([4,3,4], 432);
+ A_295 = M++ M;
+ r_21 = match( A_295, A_294);
+ StdIO::print(r_21);
+ 
+ return(0);
+}
+
+

@@ -1,0 +1,7 @@
+use metaph2: all;
+
+int main()
+{
+ z  = metaph2_testXXI();
+ return(z);
+}

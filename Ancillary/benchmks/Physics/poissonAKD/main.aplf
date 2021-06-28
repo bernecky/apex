@@ -1,0 +1,7 @@
+ r←main n;⎕PP
+ ⍝ dcl integer scalar n
+ ⍝ Try n←1500
+ ⎕PP←16
+ r←poisson GenArg n,n
+ ⎕←r
+ ⎕←r←(r=11247976.70410301)-1

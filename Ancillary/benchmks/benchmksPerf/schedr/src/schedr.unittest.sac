@@ -1,0 +1,7 @@
+use schedr: all;
+
+int main()
+{
+ z  = schedr_testXXI();
+ return(z);
+}

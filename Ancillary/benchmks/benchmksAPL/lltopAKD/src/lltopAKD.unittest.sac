@@ -1,0 +1,7 @@
+use lltopAKD: all;
+
+int main()
+{
+ z  = lltopAKD_testXII();
+ return(z);
+}

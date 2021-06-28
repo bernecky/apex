@@ -1,0 +1,7 @@
+use waverAKD: all;
+
+int main()
+{
+ z  = waverAKD_testXII();
+ return(z);
+}

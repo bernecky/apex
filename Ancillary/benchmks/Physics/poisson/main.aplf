@@ -1,0 +1,6 @@
+ r←main;⎕PP;dat
+ ⎕PP←16
+ dat←MKD 1500
+ r←poisson dat
+ ⎕←r
+ ⎕←r←(r=11247976.70410301)-1

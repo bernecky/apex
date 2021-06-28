@@ -1,0 +1,4 @@
+ r←A kp B
+⍝ Kronecker product of size n
+ r←0 2 1 3⍉A∘.×B
+ r←((×/⍴A),×/⍴B)⍴r

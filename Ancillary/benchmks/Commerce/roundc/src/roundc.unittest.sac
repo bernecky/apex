@@ -1,0 +1,7 @@
+use roundc: all;
+
+int main()
+{
+ z  = roundc_testXXI();
+ return(z);
+}

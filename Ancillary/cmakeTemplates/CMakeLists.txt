@@ -5,7 +5,7 @@ CMAKE_MINIMUM_REQUIRED (VERSION 3.17)
 # It is important that create the sac2crc file for this project, as
 # it is tricky to link, properly, the SaC modules with the program.
 
-PROJECT (apex-utworks)
+PROJECT (apex-bmworks)
 
 # Where the compiled sac modules are placed
 SET (DLL_BUILD_DIR  "${PROJECT_BINARY_DIR}/lib")
@@ -32,11 +32,7 @@ list(REMOVE_ITEM BM_DIRST "${CMAKE_SOURCE_DIR}/README")
 FOREACH (BM_DIR IN ITEMS ${BM_DIRST})
 	get_filename_component(BM_DIRONE ${BM_DIR} NAME)
 	list( APPEND BM_DIRS ${BM_DIRONE})
-	#debug	MESSAGE( STATUS "name of ${BM_DIR} is: " ${BM_DIRONE})
 ENDFOREACH ()
-
-##debug SET( BM_DIRS UTCatenate UTClock)
-##debug MESSAGE( STATUS "BM_DIRS are: " ${BM_DIRS})
 
 # Run src/CMakeLists.txt for each target
 FOREACH (TARGET IN ITEMS ${TARGETS})
@@ -46,4 +42,4 @@ FOREACH (TARGET IN ITEMS ${TARGETS})
 ENDFOREACH ()
 
 # This build target is responsible for generating the package sac2crc file
-CREATE_SAC2CRC_TARGET ("examplemodule" "${DLL_BUILD_DIR}" "${DLL_BUILD_DIR}" "")
+CREATE_SAC2CRC_TARGET ("apex_bmworks" "${DLL_BUILD_DIR}" "${DLL_BUILD_DIR}" "")

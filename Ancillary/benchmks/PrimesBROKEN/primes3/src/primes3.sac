@@ -1,0 +1,176 @@
+module primes3;
+export {primes3_testXXI};
+
+// Compiled by APEX Version: FIXME!! 2021-06-27 18:37:19.578
+use Array: all;
+use ArrayFormat: all;
+use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
+
+// APEX stdlib.sis include file.
+// Standard equates and constants for APL compiler
+// Also standard coercion functions
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline bool eqIIB(int x, int y)
+{ /* A=B on non-doubles */
+ return(ItoI(x) == ItoI(y));
+}
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int plusdoteqIBITRANSPOSE(int[.] x, bool y)
+{ /* Vector-Scalar inner product */
+  z =  plusslXBIFOLD(eqIIB(toI(x),toI(y)));
+  return(z);
+}
+
+
+
+inline int[.] slBII(bool x, int[.] y)
+{ /* Scalar replicate vector */
+ cell = genarray([toi(x)], 0);
+ z = with {
+        (. <= iv <= .)
+                : genarray([toi(x)], y[iv]);
+        } : genarray(shape(y), cell);
+ return(comaXII(z));
+}
+
+
+inline int plusslXIIFOLD(int[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : ItoI(y[lim-iv]);
+       } :  fold( plusIII, ItoI(0));
+  return(z);
+}
+
+
+inline int plusIII(int x, int y)
+{ return(ItoI(x)+ItoI(y));
+}
+
+inline bool[+] eqIIB(int[+] x, int y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : eqIIB(xel,y);
+  } : genarray( shape(x), false);
+  return(z);
+}
+
+
+inline int[.] comaXII(int[+] y)
+{ /* Ravel of anything with rank>1 */
+  z = reshape([prod(shape(y))],y);
+  return(z);
+}
+
+inline int plusslXBIFOLD(bool[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : BtoI(y[lim-iv]);
+       } :  fold( plusIII, ItoI(0));
+  return(z);
+}
+
+
+inline int[.] prim2XII(int b ,int QUADio)
+{ 
+/*
+ ?
+*/
+A_20=iotaXII( b,QUADio);
+ b_0=( A_20);
+ A_22=XII( b_0);
+ // dsf clique
+A_23=moddnuax.(b_0,A_22);
+ A_28=plusdoteqIBITRANSPOSE(A_23,false);
+ // dsf scalar(s)
+A_37=eqIIB(2,A_28);
+ A_38=slBII(A_37,b_0);
+ r_0=( A_38);
+ return(r_0);
+}
+
+inline int Primes2XII(int n ,int QUADio)
+{ 
+/*
+ ?
+*/
+A_17=prim2XII( n,QUADio);
+ A_18=plusslXIIFOLD( A_17);
+ r_0=( A_18);
+ return(r_0);
+}
+
+inline int primes3_testXXI()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toI(( false));
+ n_0=( 50000);
+ QUADrl_1=( 16807);
+ QUADpp_1=( 16);
+ QUADpw_1=( 80);
+ A_52=Primes2XII( n_0,QUADio_1);
+ r_0=( A_52);
+ A_56=quadXII( r_0,QUADpp_1,QUADpw_1);
+ // dsf scalar(s)
+A_58=eqIIB(r_0,937487500);
+// dsf scalar(s)
+A_59=barBBI(true,A_58);
+ r_1=( A_59);
+ A_63=quadXII( A_59,QUADpp_1,QUADpw_1);
+ return(r_1);
+}
+

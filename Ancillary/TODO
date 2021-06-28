@@ -9,12 +9,7 @@ However, until then, here are some things that should be done:
    when it should do the opposite. However, Dfns didn't exist
    back when APEX was designed, so I have a good excuse.
 
-3. APEX should be able to generate shared library files,
-   to ease calling compiled APL from an interpreter.
-   I think this can be easily triggered this way: If
-   there is a "main()" function, we generate binary.
-   If not, generate a shared library, with the name of
-   folder being compiled.
+3. This integer intentionally left blank.
 
 4. It would be great to have nested array support, but
    it is not an easy problem, IMO.
@@ -30,11 +25,11 @@ However, until then, here are some things that should be done:
     (a' b' c') ← foo x
 
 6. The ONLY "nested array" function that is supported is the
-   monadic idiom "⊃⍳". This arises from a typical APL expression
+   monadic idiom dislose-iota (↑⍳). This arises from a typical APL expression
    such as foo¨⍳⍴mat, but which we can often convert into
    an equivalent expression using the rank conjunction, e.g.,
 
-      filter foo⍤99 1⊢ ⊃⍳⍴mat
+      filter foo⍤99 1⊢ ↑⍳⍴mat
 
   as might be done in a convolution application.
   This is due to Dyalog APL's definition of the index generator, ⍳⍵,

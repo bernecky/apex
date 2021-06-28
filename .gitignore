@@ -1,10 +1,6 @@
 *.tradapl
-*.dcf
 *.o
 a.out*
 *.exe*
-host
-tree
-module
-nonmodule
+build
 

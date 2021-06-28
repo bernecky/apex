@@ -1,0 +1,7 @@
+use sdyn4AKD: all;
+
+int main()
+{
+ z  = sdyn4AKD_testXII();
+ return(z);
+}

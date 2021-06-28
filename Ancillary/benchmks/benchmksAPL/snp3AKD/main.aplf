@@ -1,0 +1,18 @@
+ r←main;n;⎕IO;snp;r2;r3;r4;z
+ ⍝ snp count for DNA analysis
+ ⍝ n is #patients, #snps
+ ⎕IO←0
+ n←10000 80000 ⍝ Small to avoid limit error
+ snp←snpMake n
+ r←snpcount snp
+ r2←snpcount2 snp ⍝ 2.5x more expensive!
+ r≡r2
+ r3←snpcount3 snp
+ r≡r3
+ r4←snpcount4 snp
+ r≡r4
+ r←r4
+ z←+/,r
+ ⎕←z
+ ⎕←r←1-800000000=+/,z
+⍝∇⍣§/home/apex/apexgit/TestsForNow/benchmksAPL/snp3AKD/main.ufn§0§ 2020 6 24 17 4 23 32 §PÁUä§0

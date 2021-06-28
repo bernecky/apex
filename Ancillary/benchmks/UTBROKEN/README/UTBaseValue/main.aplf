@@ -1,0 +1,13 @@
+ r←main;y;S;BV;M4;Hex;Byte
+ S←2
+ BV←1 1 0 1 1 0 1 1
+ M4←2 3 4 5⍴⍳999
+ Hex←16 16
+ Byte←256 256 256 256
+ r←(2⊥BV)≡S BaseValue BV                                ⍝ S⊥BV
+ r←r,(2⊥1000)≡2 BaseValue 1000                          ⍝ IV⊥IS
+ r←r,(2⊥⍳10)≡2 BaseValue⍳10                             ⍝ IS⊥IV
+ r←r,(0 100 100⊥10 20 30)≡0 100 100 BaseValue 10 20 30  ⍝ IV⊥IV
+ r←r,(2 3⊥M4)≡2 3 BaseValue M4                          ⍝ IV⊥IM
+ ⎕←r
+ r←⎕←1-∧/r

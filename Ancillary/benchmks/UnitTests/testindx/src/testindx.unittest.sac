@@ -1,0 +1,7 @@
+use testindx: all;
+
+int main()
+{
+ z  = testindx_testXXI();
+ return(z);
+}

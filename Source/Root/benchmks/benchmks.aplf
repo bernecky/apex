@@ -1,10 +1,11 @@
- r←benchmks nm;pd;en;fldr
+ r←benchmks nm;en;fldr
 ⍝ Return list of folders in folder nm
 ⍝ e.g., benchmks 'Ancillary/benchmksPerf'
 ⍝ Does not return non-folder file names, e.g., README
 ⍝ or other evil names
- pd←PathDelim
  en←(E'cmake-common'),(E'CMakeLists.txt'),E'build'
  fldr←FullPathName nm
- r←⎕SH'ls -d ',fldr
+ r←⎕SH'ls -p ',fldr ⍝ Append /
+ r←(PathDelim=,D ¯1↑¨r)/¯1↓¨r ⍝ Remove nondirs
  r←(~(PathFileName¨r)∊en)/r ⍝ See no evil
+ r←(E fldr,PathDelim),¨r

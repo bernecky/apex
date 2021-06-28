@@ -1,0 +1,3 @@
+ r←GenArg siz
+ ⍝ Argument generator for Poisson
+ r←1.5+siz⍴⍳100

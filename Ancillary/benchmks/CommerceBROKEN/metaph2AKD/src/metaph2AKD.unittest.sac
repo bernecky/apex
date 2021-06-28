@@ -1,0 +1,7 @@
+use metaph2AKD: all;
+
+int main()
+{
+ z  = metaph2AKD_testXII();
+ return(z);
+}

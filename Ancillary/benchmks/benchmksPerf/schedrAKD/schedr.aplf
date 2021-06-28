@@ -1,0 +1,20 @@
+ r←x schedr y;eq
+⍝ Hui's scheduler problem.
+⍝ Bernecky variant of J.L. Ryan solution.
+⍝ Problem:
+⍝ Given two n-element vectors, x and y,
+⍝ of unique elements
+⍝ create a permutation vector
+⍝ for the second vector, such that
+⍝ 0=+/x. (n>1)
+⍝
+ eq←x=y ⍝ Mark hits
+ r←(~eq)×y ⍝ Non-hits stay where they are
+ r←r+eq\1⌽eq/y
+⍝ The above works unless only one hit
+⍝ If only one hit, swap it with first
+⍝ element. If it IS first element, swap
+⍝ it with second element.
+ eq←(1=+/eq)/eq⍳1 ⍝ empty or index of hit
+ eq←eq+eq=0
+ r[0,eq]←r[eq,0] ⍝ Swap singleton

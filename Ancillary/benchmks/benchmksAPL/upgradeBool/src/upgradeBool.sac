@@ -1,0 +1,264 @@
+module upgradeBool;
+export {upgradeBool_testXXI};
+
+// Compiled by APEX Version: FIXME!! 2021-06-27 14:01:58.266
+use Array: all;
+use ArrayFormat: all;
+use Bits: all;
+use Clock: {clock,mday,mon,year,to_time};
+use CommandLine: all;
+use Numerical : all;
+use RTClock: all;
+use StdIO : all;
+use String: {to_string,tochar,sscanf};
+
+// APEX stdlib.sis include file.
+// Standard equates and constants for APL compiler
+// Also standard coercion functions
+
+#define toB(x) to_bool((x))
+#define toI(x) toi((x))
+#define toD(x) tod((x))
+#define toC(x) (x)
+#define toc(x) ((x))
+
+#define BtoB(x) ((x))
+#define ItoI(x) ((x))
+#define DtoD(x) ((x))
+#define CtoC(x) ((x))
+
+#define BtoI(x) toi((x))
+#define BtoD(x) tod((x))
+#define ItoB(x) to_bool((x))
+#define ItoD(x) tod((x))
+#define DtoB(x) to_bool((x))
+#define DtoI(x) toi((x))
+
+
+inline double barDDD(double x, double y)
+{ return(DtoD(x)-DtoD(y));
+}
+
+inline double barIDD(int x, double y)
+{ return(ItoD(x)-DtoD(y));
+}
+
+inline double mpyIDD(int x, double y)
+{ return(ItoD(x)*DtoD(y));
+}
+
+inline double mpyDDD(double x, double y)
+{ return(DtoD(x)*DtoD(y));
+}
+
+inline bool eqDDB(double x, double y, double QUADct)
+{ /* A=B on doubles */
+  /* We use | instead of || on the assumption that
+   * the zero-fuzz case will eliminate the second leg,
+   * and it also eliminate a CONDFUN.
+   */
+ return((DtoD(x) == DtoD(y)) | APEXFUZZEQ(DtoD(x),DtoD(y),QUADct));
+}
+
+
+inline int barBBI(bool x, bool y)
+{ return(BtoI(x)-BtoI(y));
+}
+
+inline double[+] plusIDD(int[+] x, double y)
+{ /* AxS scalar function */
+  z = with {
+  ( . <= iv <= .) {
+              xel = x[iv];
+   } : plusIDD(xel,y);
+  } : genarray( shape(x), 0.0d);
+  return(z);
+}
+
+
+inline bool[.] rhoIBB(int x, bool[*] y)
+{ /* [Scalar reshape non-scalar] (to vector) */
+ z = rhoIBB( [toi(x)],y);
+ return(z);
+}
+
+
+
+inline bool[.] takeIBB(int x, bool y)
+{ /* Scalar take scalar */
+  return(take([toi(x)],[y]));
+}
+
+inline int[.] ugrdXBI(bool[.] y, int QUADio)
+{ /* Upgrade of boolean-valued vector */
+  /* ((~y)/iota rho y),y/iota rho y */
+  /* Model upgradeBV2 from workspace 42 upgrade: rbe/2005-12-11 */
+/*
+        z{<-}upgradeBV2 bv;s;n0;n1;i
+        @ upgrade boolean vector
+        s{<-}+/bv
+        z{<-}({rho}bv){rho}{neg}1
+        n0{<-}0
+        n1{<-}({rho}bv)[0]-s
+        :for i :in {iota}{rho}bv
+         :if ~bv[i]
+          z[n0]{<-}i
+          n0{<-}n0+1
+         :else
+          z[n1]{<-}i
+          n1{<-}n1+1
+         :endif
+        :endfor
+*/
+
+ s = sum(toi(y));
+ shpy = shape(y)[[0]];
+ z = genarray(shape(y),-1);
+ n0 = 0;
+ n1 = shpy-s;
+ for(i=0; i<shpy; i++){
+   if (false == toB(y[[i]]))
+        {z[[n0]] = i; n0++;}
+   else
+        {z[[n1]] = i; n1++;}
+ }
+ return(z+QUADio);
+}
+
+
+inline double[*] quadXDD(double[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
+inline double plusslXDDFOLD(double[.] y)
+{ /* First/last axis fold-based reduction of vector */
+  lim = shape(y)[0]-1;
+  z = with {
+        (0*shape(y) <= iv < shape(y))
+                : DtoD(y[lim-iv]);
+       } :  fold( plusDDD, ItoD(0));
+  return(z);
+}
+
+
+inline double mpyslXDDQUICKSTOP(double y)
+{ /* Reduction of scalar */
+        return(y);
+}
+
+inline double plusIDD(int x, double y)
+{ return(ItoD(x)+DtoD(y));
+}
+
+inline double plusDDD(double x, double y)
+{ return(DtoD(x)+DtoD(y));
+}
+
+inline bool[*] rhoIBB(int[.] x, bool[*] y)
+{  /* APEX vector x reshape, with potential item reuse */
+   z = with {
+         ( . <= iv <= .) {
+           offset = V2O( toi( x), iv);
+           offset = _aplmod_SxS_( offset, prod( shape(y)));
+           el = y[ O2V( shape( y), offset)];
+          } : el;
+       } : genarray( toi(x), false);
+   return( z);
+}
+
+
+
+inline int[.] iotaXII(int y, int QUADio)
+{ /* Index generator on scalar */
+/* HELP! Needs domain check for negative shp */
+  z = QUADio+iota(toi(y));
+  return( z);
+}
+
+inline bool APEXFUZZEQ(double x, double y, double QUADct)
+{ /* ISO APL Tolerant equality predicate */
+ absx = abs(x);
+ absy = abs(y);
+ tolerance = QUADct * max(absx,absy);
+ z = abs(x-y) <= tolerance;
+ return(z);
+}
+
+inline int V2O( int[.] shp, int[.] iv)
+{ /* Vector iv to offset into array of shape shp */
+  /* See V2O.dws workspace */
+  offset = 0;
+  wt = 1;
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    offset = offset + ( wt * iv[i]);
+    wt = wt * shp[i];
+  }
+  return( offset);
+}
+
+inline int[.] O2V( int[.] shp, int offset)
+{ /* Offset into array of shape shp to index vector */
+  /* See V2O.dws workspace */
+  iv = genarray( shape(shp), 1);
+  wts = iv;
+  for( i=shape(shp)[0]-2; i>=0; i--) {
+    wts[i] = wts[i+1] * shp[i+1];
+  }
+
+  for( i=shape(shp)[0]-1; i>=0; i--) {
+    iv[i] = _aplmod_SxS_( offset/wts[i], shp[i]);
+    offset = offset - (iv[i]*wts[i]);
+  }
+  return( iv);
+}
+
+inline int upgradeBool_testXXI()
+{ 
+/*
+ ?
+*/
+QUADio_0=toI(( false));
+ QUADct_0=( 1.0e-13);
+ QUADpp_0=( 10);
+ QUADpw_0=( 80);
+ QUADrl_0=( 16807);
+ QUADio_1=toI(( false));
+ n_0=( 10000000);
+ QUADrl_1=( 16807);
+ QUADpp_1=( 17);
+ QUADpw_1=( 80);
+ A_54=takeIBB(200,true);
+ A_55=rhoIBB(n_0,A_54);
+ A_57=ugrdXBI( A_55,QUADio_1);
+ r_0=( A_57);
+ // dsf scalar(s)
+A_59=barDDD(0.5,0.5);
+ // dsf scalar(s)
+A_60=plusIDD(r_0,A_59);
+ A_61=plusslXDDFOLD( A_60);
+ r_1=( A_61);
+ A_68=quadXDD( A_61,QUADpp_1,QUADpw_1);
+ // dsf scalar(s)
+A_69=barDDD(1.5,0.5);
+ // dsf scalar(s)
+A_70=barIDD(n_0,A_69);
+ // dsf scalar(s)
+A_71=mpyIDD(n_0,A_70);
+ A_72=mpyslXDDQUICKSTOP( A_71);
+ // dsf scalar(s)
+A_76=mpyDDD(0.5,A_72);
+ // dsf scalar(s)
+A_78=eqDDB(r_1,A_76,QUADct_0);
+// dsf scalar(s)
+A_79=barBBI(true,A_78);
+ r_2=( A_79);
+ A_83=quadXII( r_2,QUADpp_1,QUADpw_1);
+ return(r_2);
+}
+

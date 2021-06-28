@@ -1,0 +1,7 @@
+use testindxAKD: all;
+
+int main()
+{
+ z  = testindxAKD_testXII();
+ return(z);
+}

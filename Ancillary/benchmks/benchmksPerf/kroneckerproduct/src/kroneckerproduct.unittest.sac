@@ -1,0 +1,7 @@
+use kroneckerproduct: all;
+
+int main()
+{
+ z  = kroneckerproduct_testXXI();
+ return(z);
+}

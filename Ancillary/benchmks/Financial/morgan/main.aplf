@@ -1,0 +1,7 @@
+ r←main;d;⎕PP
+ ⍝ Ching changed arg size d←GenArg 2 1510 2010
+ ⎕PP←16
+ d←GenArg 2 20000 5000
+ r←2 morgan d
+ ⎕←r←+/,r
+ ⎕←r←(r=2367882.650016261)-1

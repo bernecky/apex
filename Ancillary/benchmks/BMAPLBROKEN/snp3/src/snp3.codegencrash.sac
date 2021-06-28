@@ -1,0 +1,29 @@
+use Array: {genarray,sum,shape,toi,sel,-,drop,==};
+
+inline    // ! ! ! must be inlined to fail
+bool[.,.,.] jotdoteqIIB(int [.] x, int [.,.] y)
+{ /* AxA outer product */
+	cell = genarray(shape(y), false);
+	z = with { (. <= iv <= .) { xitem = x[iv];
+		} : xitem == y;
+	} : genarray(shape(x), cell);
+	return(z);
+}
+
+int[.,.] plusslXBIFOLD(bool[.,.,.] y)
+{ /* last axis reduce rank-2 or greater matrix w/folding */
+        zrho = [3,10000];
+	z = with { (. <= iv <= .)
+			: sum(toi(y[iv]));
+	} : genarray(zrho, 0);
+	return(z);
+}
+
+int main()
+{ 
+        snp_0 = genarray([10000,80000], 2);
+	A_17=jotdoteqIIB([0, 1, 2],snp_0);
+	A_56=plusslXBIFOLD( A_17);
+	return(sum(A_56));
+}
+

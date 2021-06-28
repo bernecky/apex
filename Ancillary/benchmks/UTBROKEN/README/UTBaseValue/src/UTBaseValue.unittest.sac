@@ -1,0 +1,7 @@
+use UTBaseValue: all;
+
+int main()
+{
+ z  = UTBaseValue_testXXI();
+ return(z);
+}

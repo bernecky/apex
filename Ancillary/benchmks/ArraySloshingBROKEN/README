@@ -1,0 +1,12 @@
+These tests are intended to measure how well
+interpreters and compilers handle arrays
+that grow in size through accretion (catenate).
+
+The buildv/realloc.sac code uses a fold with-loop
+to perform the catenation, essentially with catenate-reduce.
+
+I saw, in the dim past, linux realloc() being used
+to avoid copying much of the growing result array.
+Private heaps in both Dyalog APL and APEX/SaC probably
+make this difficult, at best.
+

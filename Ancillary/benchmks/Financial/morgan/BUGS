@@ -1,0 +1,7 @@
+1. mt_pth answers are different to make compare with predicted result wrong.
+
+2. seq performance is even slower than APL.
+
+3. show() of double scalar does not include trailing \n.
+
+

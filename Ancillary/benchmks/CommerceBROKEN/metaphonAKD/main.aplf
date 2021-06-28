@@ -1,0 +1,11 @@
+ r←main n;⎕IO;⎕RL;⎕PP;⎕PW;⎕CT
+ ⍝ dcl integer scalar n
+ ⎕IO←0
+ ⍝⍝ n← 1500000
+ ⎕RL←16807
+ ⎕CT←1E¯13
+ ⎕PP←16
+ ⎕PW←80
+ r←benchmet n
+ ⎕←r
+ ⎕←r←¯1+r=2233111160

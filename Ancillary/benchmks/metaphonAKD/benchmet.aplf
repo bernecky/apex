@@ -1,6 +1,0 @@
- r←benchmet n;char
-⍝ Metaphone benchmark
- char←' abcdefghijklmnopqrstuvwxyz'
- r←metaphone(n,25)⍴char
- r←+/,⎕AV⍳r
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/metaphonAKD/benchmet.ufn§0§ 2020 6 24 17 4 22 868 §gSPB§0

@@ -1,4 +1,0 @@
- r←prim2 b
- b←⍳b
- r←(2=(b|⍣1 0 b)+.=0)/b
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/primes3AKD/prim2.ufn§0§ 2020 6 24 17 4 23 28 §Ômá§0

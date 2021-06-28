@@ -1,8 +1,0 @@
- r←main n;⎕PP
- ⍝ dcl integer scalar n
- ⍝ Try n←501
- ⎕PP←16
- r←poisson GenArg n,n
- ⎕←r
- ⎕←r←(r=¯113823387321.223)-1
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/poissonAKD/main.ufn§0§ 2020 6 24 17 4 23 28 §indê§0
