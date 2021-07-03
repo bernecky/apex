@@ -15,10 +15,10 @@
  fns←D j[1]
  ast←D j[2]
  s←D rap[0]
- 'Silly bugger'assert~1∊('/*'⍷wif)∨'*/'⍷wif
+ 'Silly bugger'assert~1∊('#='⍷wif)∨'=#'⍷wif
  wif←(1+wif∊CR)/wif ⍝ Room for spaces
  j←(wif∊CR)/⍳⍴wif
  wif[j]←(⍴j)⍴NL,' ' ⍝ Stupid BillWare(tm)
- wif←NL,'/*',NL,' ',wif,NL,'*/',NL
+ wif←NL,'#=',NL,' ',wif,NL,'=#',NL
  sis←D Raze s,wif,sis,rap[1]
  r←(E sis),E fns ⍝ Julia & fns list

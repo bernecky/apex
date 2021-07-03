@@ -1,7 +1,7 @@
  r←RemoveGenerates sis;cv;g;gen;fns;fn;nl
-⍝# Remove %Generate statements from a code fragment
+⍝# Remove #Generate statements from a code fragment
 ⍝# Result is updated code fragment, Generate statements
- g←'%Generate'
+ g←'#Generate'
  cv←g⍷sis
  fns←(0,fnscols)⍴E'' ⍝ Assume no work
  :If 1∊cv
@@ -10,7 +10,7 @@
      gen←cv/sis
      gen←D Raze(E','),¨(E⍴g)↓¨(g⍷gen)PartitionedEnclose gen
      gen←squeeze¨1↓¨(gen=',')PartitionedEnclose gen
-     gen←(((⍴gen)÷6),6)⍴gen ⍝ Undocumented # cols in %Generate entry
+     gen←(((⍴gen)÷6),6)⍴gen ⍝ Undocumented # cols in #Generate entry
  ⍝ Kludge to turn mpyDDD ($FRVALUE in dcon) into mpy, etc.
      fn←gen[;0]
      gen[;0]←(fn=¨LC¨fn)ReplicateEach fn ⍝ Assumes all jsymb are lower case

@@ -1,7 +1,7 @@
 module iotan;
 export all;
 
-# Compiled by APEX Version: FIXME!! 2021-06-23 08:51:15.200
+# Compiled by APEX Version: FIXME!! 2021-07-01 16:42:36.874
 #=use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -109,17 +109,17 @@ inline bool APEXFUZZEQ(double x, double y, double QUADct)
 }
 
 inline double iotanXID(int n ,int QUADio)
-{ 
+
 /*
  ?
 */
 A_18iotaXII( n,QUADio) # dsf scalar(s)
 A_19barDDD(1.5,0.5) # dsf scalar(s)
 A_20plusDID(A_19,A_18)A_21plusslXDDFOLD( A_20) r_0( A_21) return(r_0);
-}
+end
 
 inline int iotan_testXXI()
-{ 
+
 /*
  ?
 */
@@ -129,5 +129,5 @@ A_60plusIDD(n_0,A_59)# dsf scalar(s)
 A_61mpyIDD(n_0,A_60) # dsf scalar(s)
 A_62divDID(A_61,2) A_64sameDDB(r_0,A_62,QUADct_0) # dsf scalar(s)
 A_65barBBI(A_64,true)r_1( A_65) A_69quadXII( A_65,QUADpp_1,QUADpw_1) return(r_1);
-}
+end
 

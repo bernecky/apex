@@ -1,13 +1,13 @@
-% SAC Code fragments for monadic upgrade, downgrade
-% Robert Bernecky 2006-11-09
+# SAC Code fragments for monadic upgrade, downgrade
+# Robert Bernecky 2006-11-09
 
 
-%Fragment ugrd x11 x b i .      Vector upgrade on Booleans
+#Fragment ugrd x11 x b i .      Vector upgrade on Booleans
 inline $ZTYPE[.] $FNAME($YTYPE[.] y, int QUADio)
-{ /* Upgrade of boolean-valued vector */
-  /* ((~y)/iota rho y),y/iota rho y */
-  /* Model upgradeBV2 from workspace 42 upgrade: rbe/2005-12-11 */
-/*
+{ #= Upgrade of boolean-valued vector =#
+  #= ((~y)/iota rho y),y/iota rho y =#
+  #= Model upgradeBV2 from workspace 42 upgrade: rbe/2005-12-11 =#
+#=
         z{<-}upgradeBV2 bv;s;n0;n1;i
         @ upgrade boolean vector
         s{<-}+/bv
@@ -23,7 +23,7 @@ inline $ZTYPE[.] $FNAME($YTYPE[.] y, int QUADio)
           n1{<-}n1+1
          :endif
         :endfor
-*/
+=#
 
  s = sum(toi(y));
  shpy = shape(y)[[0]];
@@ -38,15 +38,15 @@ inline $ZTYPE[.] $FNAME($YTYPE[.] y, int QUADio)
  }
  return(z+QUADio);
 }
-%Generate , iota, XII, X01, ., I 
+#Generate , iota, XII, X01, ., I 
 
-%Fragment dgrd x11 x b i .      Vector downgrade on Booleans
+#Fragment dgrd x11 x b i .      Vector downgrade on Booleans
 inline $ZTYPE[.] $FNAME($YTYPE[.] y, int QUADio)
-{ /* Downgrade of boolean vector. */
-  /* (y/iota rho y),(~y)/iota rho y */
-  /* See APL model downgradeBV2 in workspace 42 upgrade
+{ #= Downgrade of boolean vector. =#
+  #= (y/iota rho y),(~y)/iota rho y =#
+  #= See APL model downgradeBV2 in workspace 42 upgrade
    * R. Bernecky 2005-11-04
-   */
+   =#
  s = sum(toi(y));
  z = genarray(shape(y),-1);
  shpy = shape(y)[[0]];
@@ -60,10 +60,10 @@ inline $ZTYPE[.] $FNAME($YTYPE[.] y, int QUADio)
  return(z+QUADio); 
 }
 
-%Fragment ugrd x11 x bi i PV   Vector upgrade of permutation vector
+#Fragment ugrd x11 x bi i PV   Vector upgrade of permutation vector
 inline $ZTYPE[.] $FNAME($YTYPE[.] y, int QUADio)
-{ /* Upgrade of permutation vector. */
-  /* This exploits array predicate astPredPV */
+{ #= Upgrade of permutation vector. =#
+  #= This exploits array predicate astPredPV =#
   z = genarray(shape(y), -1);
   for( i=0; i<shape(y)[0]; i++) {
         z[[y[[i]]]] = i+QUADio;
@@ -72,10 +72,10 @@ inline $ZTYPE[.] $FNAME($YTYPE[.] y, int QUADio)
 }
 
 
-%Fragment dgrd x11 x bi i  PV downgrade on permutation vector
+#Fragment dgrd x11 x bi i  PV downgrade on permutation vector
 inline $ZTYPE[.] $FNAME($YTYPE[.] y, int QUADio)
-{ /* Downgrade of permutation vector. */
-  /* This exploits array predicate astPredPV */
+{ #= Downgrade of permutation vector. =#
+  #= This exploits array predicate astPredPV =#
   z = genarray(shape(y), -1);
   size = shape(y)[0];
   for( i=0; i<size; i++) {
@@ -84,22 +84,22 @@ inline $ZTYPE[.] $FNAME($YTYPE[.] y, int QUADio)
  return(z); 
 }
 
-%Fragment ugrd x11 x i i    .  
+#Fragment ugrd x11 x i i    .  
 inline $ZTYPE[.] $FNAME($YTYPE[.] y, int QUADio)
-{ /* Integer vector upgrade  
+{ #= Integer vector upgrade  
    * See radix upgrade model in ws RadixGrade.dws
-   */
+   =#
   rad = 256;
-  radixbase = 8; /* 2 log rad */
+  radixbase = 8; #= 2 log rad =#
   bitsperint = 32;
   numpasses = bitsperint/8;
   hist = RadixGradeHistograms( y);
   z = genarray( shape(y), -1);
   if( 0 != shape(y)[0]) {
     pv = iota(shape(y)[0]);
-    /* LSB-> MSB sort order */
+    #= LSB-> MSB sort order =#
     for( pas=numpasses-1; pas>=0; pas--) {
-      /* Skip pass if all nums in same bucket */
+      #= Skip pass if all nums in same bucket =#
       if( shape(y)[0] != hist[pas, RadixGradeGetIdx( pas, y[pv[0]])]) {
         pvo = RadixGradeOffsets( rad, pas, hist);
         for( i=0; i<shape(y)[0]; i++) {
@@ -114,22 +114,22 @@ inline $ZTYPE[.] $FNAME($YTYPE[.] y, int QUADio)
   z = QUADio + z; 
   return( z);
 }
-%Generate , RadixGradeHistograms, X$YTI, X11, .,
-%Generate , RadixGradeOffsets, X$YTI, X11, .,
-%Generate , RadixGradeGetIdx, X$YTI, X00, .,
+#Generate , RadixGradeHistograms, X$YTI, X11, .,
+#Generate , RadixGradeOffsets, X$YTI, X11, .,
+#Generate , RadixGradeGetIdx, X$YTI, X00, .,
 
-%Fragment ugrd x** x bidc i    .  
+#Fragment ugrd x** x bidc i    .  
 inline $ZTYPE[.] $FNAME($YTYPE[+] y, int QUADio)
-{ /* Vector/matrix upgrade  */
+{ #= Vector/matrix upgrade  =#
  z = QUADio + UpgradeHeap(y); 
  return( z);
 }
-%Generate , UpgradeHeap, X$YTI, X**, ., $CT
+#Generate , UpgradeHeap, X$YTI, X**, ., $CT
 
-%Fragment UpgradeHeap x** x bidc i    .  internal matrix upgrade
+#Fragment UpgradeHeap x** x bidc i    .  internal matrix upgrade
 inline $ZTYPE[.] UpgradeHeap($YTYPE[+] y)
 { 
-/*    Do APL upgrade of array y using heapsort.
+#=    Do APL upgrade of array y using heapsort.
       This is a sub-function shared by upgrade/downgrade/indexof, etc.
       This version adapted from the Sara Baase "Computer Algorithms"
       version of heapsort.
@@ -148,7 +148,7 @@ N{<-}{rho}v
   heap{<-}MakeHeap(v)
   r{<-}(UnHeap(heap))
 :endif
-*/
+=#
 
  N = shape(y)[[0]];
  if (N <= 1)
@@ -162,8 +162,8 @@ N{<-}{rho}v
 
 
 inline int[.] MakeHeap($YTYPE[+] v)
-{ /* Build heap from array v. v has at least two elements */
-/*
+{ #= Build heap from array v. v has at least two elements =#
+#=
 r{<-}MakeHeap v;i;n;heap;biggest
 @ Build heap from v
 @ We know v has at least two elements
@@ -173,7 +173,7 @@ heap{<-}{iota}N
   y FixHeap i,heap[i],n
 :endfor
 r{<-}heap
-*/
+=#
  n = shape(v)[[0]];
  heap = iota(n);
  lim = n/2;
@@ -184,7 +184,7 @@ r{<-}heap
 }
 
 inline int[.] UnHeap(int[.] heap, $YTYPE[+]v)
-{ /* Extract heap elements in top-to-bottom order */
+{ #= Extract heap elements in top-to-bottom order =#
   n = shape(v)[[0]];
   for(heapsize= n-1; heapsize>0; heapsize--){
         biggest = heap[[0]];
@@ -196,64 +196,64 @@ inline int[.] UnHeap(int[.] heap, $YTYPE[+]v)
 
 inline int[.] FixHeap(int[.] heap, $YTYPE[+] v, int root, 
         int heapitem, int heapsize)
-{ /* Restore heap invariant: parent>= both children */
+{ #= Restore heap invariant: parent>= both children =#
  vacant = root;
  lchild = 1+vacant+vacant;
  while( lchild < heapsize) {
-        bigC = lchild;      /* Identify larger child, if any */
+        bigC = lchild;      #= Identify larger child, if any =#
         rchild = lchild+1;
         if ((lchild<(heapsize-1))){
                 li = heap[[lchild]];
                 ri = heap[[rchild]]; 
                 if ((GradeGT(v[[ri]],v[[li]])) | 
-                        (match(v[[ri]], v[[li]]) & (ri>li))){ /* Stability */
-                bigC = rchild; /* right child larger */
+                        (match(v[[ri]], v[[li]]) & (ri>li))){ #= Stability =#
+                bigC = rchild; #= right child larger =#
                 }
         }
-        /* parent vs big kid*/
+        #= parent vs big kid=#
         li = heap[[bigC]];
         if ((GradeGT( v[[li]], v[[heapitem]])) |
                 (match(v[[li]], v[[heapitem]]) & (li>heapitem))) {
                         heap[[vacant]] = heap[[bigC]];
                         vacant = bigC;
                         lchild = 1+vacant+vacant;
-        } else lchild = heapsize;   /* exitloop */
+        } else lchild = heapsize;   #= exitloop =#
  }
  heap[[vacant]] = heapitem;
  return(heap);
 }               
-%Generate , GradeGT, $YT$YTB, 000, ., $CT
-%Generate , GradeGT, $YT$YTB, **0, ., $CT
+#Generate , GradeGT, $YT$YTB, 000, ., $CT
+#Generate , GradeGT, $YT$YTB, **0, ., $CT
 
-%Fragment GradeGT 000 i i b .
+#Fragment GradeGT 000 i i b .
 inline bool GradeGT(int x, int y)
-{ /* Integer Comparator for upgrade */
+{ #= Integer Comparator for upgrade =#
  return(x>y);
 }
 
-%Fragment GradeGT 000 b b b .
+#Fragment GradeGT 000 b b b .
 inline bool GradeGT(bool x, bool y)
-{ /* Boolean Comparator for upgrade */
+{ #= Boolean Comparator for upgrade =#
  return(x & !y);
 }
 
-%Fragment GradeGT 000 d d  b .
+#Fragment GradeGT 000 d d  b .
 inline bool GradeGT(double x, double y)
-{ /* Double Comparator for upgrade */
+{ #= Double Comparator for upgrade =#
  return(x>y);
 }
 
-%Fragment GradeGT 000 c c  b .
+#Fragment GradeGT 000 c c  b .
 inline bool GradeGT(char x, char y)
-{ /* Char Comparator for upgrade */
+{ #= Char Comparator for upgrade =#
  return(x>y);
 }
 
 
-%Fragment GradeGT **0 b b b .
+#Fragment GradeGT **0 b b b .
 inline bool GradeGT(bool[+] x, bool[+] y)
-{ /* Boolean Array Comparator for upgrade */
-  /* The ravels of the two arrays are compared.  */
+{ #= Boolean Array Comparator for upgrade =#
+  #= The ravels of the two arrays are compared.  =#
  z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
@@ -262,10 +262,10 @@ inline bool GradeGT(bool[+] x, bool[+] y)
  return(z);
 }
 
-%Fragment GradeGT **0 c c b .
+#Fragment GradeGT **0 c c b .
 inline bool GradeGT(char[+] x, char[+] y)
-{ /* Char Array Comparator for upgrade */
-  /* The ravels of the two arrays are compared.  */
+{ #= Char Array Comparator for upgrade =#
+  #= The ravels of the two arrays are compared.  =#
  z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
@@ -273,10 +273,10 @@ inline bool GradeGT(char[+] x, char[+] y)
  return(z);
 }
 
-%Fragment GradeGT **0 i i b .
+#Fragment GradeGT **0 i i b .
 inline bool GradeGT(int[+] x, int[+] y)
-{ /* Integer Array Comparator for upgrade */
-  /* The ravels of the two arrays are compared.  */
+{ #= Integer Array Comparator for upgrade =#
+  #= The ravels of the two arrays are compared.  =#
  z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
@@ -284,10 +284,10 @@ inline bool GradeGT(int[+] x, int[+] y)
  return(z);
 }
 
-%Fragment GradeGT **0 d d b .
+#Fragment GradeGT **0 d d b .
 inline bool GradeGT(double[+] x, double[+] y)
-{ /* Double Array Comparator for upgrade */
-  /* The ravels of the two arrays are compared.  */
+{ #= Double Array Comparator for upgrade =#
+  #= The ravels of the two arrays are compared.  =#
  z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
@@ -295,24 +295,24 @@ inline bool GradeGT(double[+] x, double[+] y)
  return(z);
 }
 
-%Fragment dgrd x** x bidc i    .  
+#Fragment dgrd x** x bidc i    .  
 inline $ZTYPE[.] $FNAME($YTYPE[+] y, int QUADio)
-{ /* Do APL downgrade of array y using heapsort. */
+{ #= Do APL downgrade of array y using heapsort. =#
  z = QUADio + DowngradeHeap( y);
  return(z);
 }
-%Generate , DowngradeHeap, X$YTI, X**, ., $CT
+#Generate , DowngradeHeap, X$YTI, X**, ., $CT
 
-%Fragment DowngradeHeap x** x bidc i    .  
+#Fragment DowngradeHeap x** x bidc i    .  
 inline $ZTYPE[.] DowngradeHeap($YTYPE[+] y)
-{ /* Do APL downgrade of array y using heapsort.
+{ #= Do APL downgrade of array y using heapsort.
       This is a sub-function shared by upgrade/downgrade/indexof, etc.
      This version adapted from the Sara Baase "Computer Algorithms"
      version of heapsort.
      Knuth, Vol. III, pp. 145-148 gives a good example. 
      APL model: (See workspace apex2003/benchmks/UTGrade or
                  apex2003/wif/upgrade)
-*/
+=#
 
  N = shape(y)[[0]];
  if (N <= 1)
@@ -326,7 +326,7 @@ inline $ZTYPE[.] DowngradeHeap($YTYPE[+] y)
 
 
 inline int[.] MakeDHeap($YTYPE[+] v)
-{ /* Build downgrade heap from v. v has at least two elements */
+{ #= Build downgrade heap from v. v has at least two elements =#
  n = shape(v)[[0]];
  heap = iota(n);
  lim = n/2;
@@ -337,7 +337,7 @@ inline int[.] MakeDHeap($YTYPE[+] v)
 }
 
 inline int[.] UnDHeap(int[.] heap, $YTYPE[+]v)
-{ /* Extract heap elements in top-to-bottom order */
+{ #= Extract heap elements in top-to-bottom order =#
   n = shape(v)[[0]];
   for(heapsize= n-1; heapsize>0; heapsize--){
         biggest = heap[[0]];
@@ -349,32 +349,32 @@ inline int[.] UnDHeap(int[.] heap, $YTYPE[+]v)
 
 inline int[.] FixDHeap(int[.] heap, $YTYPE[+] v, int root, 
         int heapitem, int heapsize)
-{ /* Restore heap invariant: parent<= both children */
+{ #= Restore heap invariant: parent<= both children =#
  vacant = root;
  lchild = 1+vacant+vacant;
  while( lchild < heapsize) {
-        bigC = lchild;      /* Identify larger child, if any */
+        bigC = lchild;      #= Identify larger child, if any =#
         rchild = lchild+1;
         if ((lchild<(heapsize-1))){
                 li = heap[[lchild]];
                 ri = heap[[rchild]]; 
                 if ((GradeGT(v[[li]], v[[ri]])) | 
-                        (match(v[[ri]],v[[li]])) & (ri>li)){ /* Stability */
-                bigC = rchild; /* right child larger */
+                        (match(v[[ri]],v[[li]])) & (ri>li)){ #= Stability =#
+                bigC = rchild; #= right child larger =#
                 }
         }
-        /* parent vs big kid*/
+        #= parent vs big kid=#
         li = heap[[bigC]];
         if ((GradeGT( v[[heapitem]], v[[li]])) |
                 (match(v[[li]], v[[heapitem]]) & (li>heapitem))) {
                         heap[[vacant]] = heap[[bigC]];
                         vacant = bigC;
                         lchild = 1+vacant+vacant;
-        } else lchild = heapsize;   /* exitloop */
+        } else lchild = heapsize;   #= exitloop =#
  }
  heap[[vacant]] = heapitem;
  return(heap);
 }               
-%Generate , GradeGT, $YT$YTB, 000, ., $CT
-%Generate , GradeGT, $YT$YTB, **0, ., $CT
+#Generate , GradeGT, $YT$YTB, 000, ., $CT
+#Generate , GradeGT, $YT$YTB, **0, ., $CT
 

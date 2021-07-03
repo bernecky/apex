@@ -6,8 +6,8 @@
  cf←¯1⌽cf,(NL≠¯1↑cf)/NL
  i←1⌽D(cf=NL)PartitionedEnclose cf
  ⍝ Discard pure comments, but leave Fragment and Generate
- i←(~(i[;0]='%')∧~i[;1]∊'FG')⌿i
- j←i[;⍳10]∧.='%Fragment ' ⍝ Find frags
+ i←(~(i[;0]='#')∧~i[;1]∊'FG')⌿i
+ j←i[;⍳10]∧.='#Fragment ' ⍝ Find frags
  b←,(⌽∨\0 1↓⌽i≠' '),1 ⍝ Mark trailing blanks
  cv←(⍴i)⍴0 ⋄ cv[;0]←j ⍝ Matrix cut marks
  i←b/,i ⋄ cv←b/,cv

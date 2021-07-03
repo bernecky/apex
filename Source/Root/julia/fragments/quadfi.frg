@@ -1,19 +1,19 @@
-% QUADfi and QUADvi code fragments
-%
-% Robert Bernecky 2006-03-05
-%
-% --------------- QUADfi fragments ----------------------------
-%Fragment quadfi x01  x c d .
+# QUADfi and QUADvi code fragments
+#
+# Robert Bernecky 2006-03-05
+#
+# --------------- QUADfi fragments ----------------------------
+#Fragment quadfi x01  x c d .
 inline $ZTYPE[.] $FNAME($YTYPE y)
-{ /* QUADfi on scalar */
+{ #= QUADfi on scalar =#
  z = toi(y)-toi('0');
  z = z * toi((z>=0) & (z<=9));
  return([z]);
 }
 
-%Fragment quadfi x11  x c d .
+#Fragment quadfi x11  x c d .
 inline $ZTYPE[.] $FNAME($YTYPE[.] y)
-{ /* BROKEN!!!  QUADfi on vector */
+{ #= BROKEN!!!  QUADfi on vector =#
 zshape = with {
          ([0] <= iv < shape(y)-[1])
                 : toi((' ' == y[iv]) && (' ' != y[iv+[1]]));
@@ -28,17 +28,17 @@ zshape = with {
  return(z);
 }
 
-% --------------- QUADvi fragments ----------------------------
-%Fragment quadvi x01  x c bid .
+# --------------- QUADvi fragments ----------------------------
+#Fragment quadvi x01  x c bid .
 inline $ZTYPE[.] $FNAME($YTYPE y)
-{ /* QUADvi on scalar */
+{ #= QUADvi on scalar =#
  z = toi( (y>='0') & (y<='9'));
  return([z]);
 }
 
-%Fragment quadvi x11  x c bid .
+#Fragment quadvi x11  x c bid .
 inline $ZTYPE[.] $FNAME($YTYPE[.] y)
-{ /* QUADvi on vector */
+{ #= QUADvi on vector =#
 zshape = with {
         ([0] <= iv < shape(y)-[1])
                 : toi((' ' == y[iv]) && (' ' != y[iv+[1]]));

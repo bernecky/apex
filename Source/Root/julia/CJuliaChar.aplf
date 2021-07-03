@@ -1,5 +1,6 @@
  r←CJuliaChar y;cv
- ⍝ TODO
+ ⍝ TODO: Gotta figure out how to do this in julia
+ ⎕←'TODO: CJuliaChar'
  
 ⍝# Turn 'abc' into Julia constants  'a','b','c'
 ⍝# Turn non-printables into hex constants

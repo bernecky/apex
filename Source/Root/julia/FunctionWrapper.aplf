@@ -9,6 +9,6 @@
  :ElseIf #.globals.TargetLanguage≡'sac'
      r←(E fd),E'}',NL,NL
  :ElseIf #.globals.TargetLanguage≡'julia'
-     r←(E fd),E'}',NL,NL
+     r←(E fd),E'end',NL,NL
  :EndIf
  r←(E r),E ast

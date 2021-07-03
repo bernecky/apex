@@ -1,9 +1,9 @@
-% Niladic system functions: QUADav and QUADts
-%
-% Robert Bernecky 2007-05-20
-%
-% --------------- QUADts fragments ----------------------------
-%Fragment quadts xx1  x x i .
+# Niladic system functions: QUADav and QUADts
+#
+# Robert Bernecky 2007-05-20
+#
+# --------------- QUADts fragments ----------------------------
+#Fragment quadts xx1  x x i .
 inline $ZTYPE[.] $FNAME()
 { // QUADts - system time-of-day timestamp 
   // This function provides system time in ISO 8601 format,
@@ -20,10 +20,10 @@ inline $ZTYPE[.] $FNAME()
  return(z);
 }
 
-% --------------- QUADav fragment ----------------------------
-%Fragment quadav xx1  x x c .
+# --------------- QUADav fragment ----------------------------
+#Fragment quadav xx1  x x c .
 inline char[256] $FNAME()
-{ /* QUADav - system character set */
+{ #= QUADav - system character set =#
  z = with{
         ([0] <= [i] < [256]) : _toc_S_(i);
         } : genarray( [256], ' ');

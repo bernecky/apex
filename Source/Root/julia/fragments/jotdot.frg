@@ -1,33 +1,33 @@
-% SAC Code fragments for outer product loop control.
-% Robert Bernecky 2005-11-05
+# SAC Code fragments for outer product loop control.
+# Robert Bernecky 2005-11-05
 
-%Fragment  jotdot 000 bidc bidc bidc .
+#Fragment  jotdot 000 bidc bidc bidc .
 inline $ZTYPE $FNAME($XTYPE x, $YTYPE y$SYSVARFGDECL)
-{ /* SxS outer product */
+{ #= SxS outer product =#
   z = $FN$CT$CT$ZT(to$CT(x),to$CT(y)$SYSVARGKER);
   return(z);
 }
-%Generate , $FN, $CT$CT$ZT, 000, ., $CT
+#Generate , $FN, $CT$CT$ZT, 000, ., $CT
 
-%Fragment  jotdot 0** bidc bidc bidc .
+#Fragment  jotdot 0** bidc bidc bidc .
 inline $ZTYPE[*] $FNAME($XTYPE x, $YTYPE[+] y$SYSVARFGDECL)
-{ /* SxA outer product */
+{ #= SxA outer product =#
   z = $FN$CT$CT$ZT(to$CT(x),to$CT(y)$SYSVARGKER);
   return(z);
 }
-%Generate , $FN, $CT$CT$ZT, 0**, ., $CT
+#Generate , $FN, $CT$CT$ZT, 0**, ., $CT
 
-%Fragment  jotdot *0* bidc bidc bidc .
+#Fragment  jotdot *0* bidc bidc bidc .
 inline $ZTYPE[*] $FNAME($XTYPE [+] x, $YTYPE y$SYSVARFGDECL)
-{ /* AxS outer product */
+{ #= AxS outer product =#
   z = $FN$CT$CT$ZT(to$CT(x),to$CT(y)$SYSVARGKER);
   return(z);
 }
-%Generate , $FN, $CT$CT$ZT, *0*, ., $CT
+#Generate , $FN, $CT$CT$ZT, *0*, ., $CT
 
-%Fragment  jotdot *** bidc bidc bidc .
+#Fragment  jotdot *** bidc bidc bidc .
 inline $ZTYPE[*] $FNAME($XTYPE [+] x, $YTYPE [+] y$SYSVARFGDECL)
-{ /* AxA outer product */
+{ #= AxA outer product =#
  cell = genarray(shape(y), $OTFILL);
  z = with {
         (. <= iv <= .) {
@@ -36,4 +36,4 @@ inline $ZTYPE[*] $FNAME($XTYPE [+] x, $YTYPE [+] y$SYSVARFGDECL)
         } : genarray(shape(x), cell);
  return(z);
 }
-%Generate , $FN, $CT$CT$ZT, 0**, ., $CT
+#Generate , $FN, $CT$CT$ZT, 0**, ., $CT

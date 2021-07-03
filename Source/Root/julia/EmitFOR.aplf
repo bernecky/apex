@@ -6,8 +6,8 @@
      j←i\(i/ast[;astfn])∊E':for' ⍝ Handle :For
   ⍝ Iteration counter
      itctrs←TempName(E'CTR'),¨⍕¨j/⍳⍴j
-     itctrsz←mcb MapNamesSAC itctrs catenateeach'z'
-     itctrs←mcb MapNamesSAC itctrs
+     itctrsz←mcb MapNamesJulia itctrs catenateeach'z'
+     itctrs←mcb MapNamesJulia itctrs
      innm←mcb ast TargetName ast FindReferent j⌿ast[;astrarg]
      fornm←mcb ast TargetName j⌿ast[;asttarget]
      t←ast EmitFORlcv(E j),(E itctrs),(E innm),(E itctrsz)

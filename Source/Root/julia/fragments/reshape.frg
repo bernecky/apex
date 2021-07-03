@@ -1,34 +1,34 @@
-% Code fragments for reshape fragments
-%
-% Rewritten for sac with help from Sven-Bodo Scholz.
-% Robert Bernecky 2004-09-17. Add SAC-like rank specifiers
+# Code fragments for reshape fragments
+#
+# Rewritten for sac with help from Sven-Bodo Scholz.
+# Robert Bernecky 2004-09-17. Add SAC-like rank specifiers
 
-%Fragment rho 001 bid bidc bidc .
+#Fragment rho 001 bid bidc bidc .
 inline $ZTYPE[.] $FNAME($XTYPE x, $YTYPE y)
 { // [Scalar reshape scalar] 
   z = genarray( [toi(x)],y);
   return(z);
 }
 
-%Fragment rho 101 bid bidc bidc .
+#Fragment rho 101 bid bidc bidc .
 inline $ZTYPE[.] $FNAME($XTYPE[1] x, $YTYPE y)
 { // [1-element Vector reshape scalar] 
   z = genarray( toi(x),y);
   return(z);
 }
 
-%Fragment rho 0*1 bid bidc bidc .
+#Fragment rho 0*1 bid bidc bidc .
 inline $ZTYPE[.] $FNAME($XTYPE x, $YTYPE[*] y)
-{ /* [Scalar reshape non-scalar] (to vector) */ 
+{ #= [Scalar reshape non-scalar] (to vector) =# 
  z = rhoI$YT$ZT( [toi(x)],y);
  return(z);
 }
-%Generate , rho, I$YT$YT, 1*1, ., $YT
+#Generate , rho, I$YT$YT, 1*1, ., $YT
 
-%Fragment rho 1** c bidc bidc .
+#Fragment rho 1** c bidc bidc .
 inline $ZTYPE[*] $FNAME($XTYPE[.] x, $YTYPE[*] y)
-{  /* Character-vector reshape anything. */
-   /* Left argument must be empty vector! */
+{  #= Character-vector reshape anything. =#
+   #= Left argument must be empty vector! =#
   if( 0 != shape(x)[[0]]) {
     show(tochar("reshape domain error in $FNAME"));
   }
@@ -36,9 +36,9 @@ inline $ZTYPE[*] $FNAME($XTYPE[.] x, $YTYPE[*] y)
   return(z);
 }
 
-%Fragment rho 1** bid bidc bidc .
+#Fragment rho 1** bid bidc bidc .
 inline $ZTYPE[*] $FNAME($XTYPE[.] x, $YTYPE[*] y)
-{  /* APEX vector x reshape, with potential item reuse */ 
+{  #= APEX vector x reshape, with potential item reuse =# 
    z = with {
          ( . <= iv <= .) {
            offset = V2O( toi( x), iv);
@@ -48,12 +48,12 @@ inline $ZTYPE[*] $FNAME($XTYPE[.] x, $YTYPE[*] y)
        } : genarray( toi(x), $OTFILL);
    return( z);
 }
-%Generate , V2O, III, 011, ., I 
-%Generate , O2V, III, 110, ., I 
+#Generate , V2O, III, 011, ., I 
+#Generate , O2V, III, 110, ., I 
 
-%Fragment rho *** bidc bidc bidc .
+#Fragment rho *** bidc bidc bidc .
 inline $ZTYPE[*] $FNAME($XTYPE[*] x, $YTYPE[*] y)
-{ /* x rank>1! rank error! */
+{ #= x rank>1! rank error! =#
  APEXERROR("rank error"++__FILE__++__LINE__);
  return(y);
 }
