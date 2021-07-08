@@ -1,0 +1,27 @@
+github/bernecky/apex issue #5: apex fails to generate correct matmul() code for Wave Motion benchmark
+
+As of 2021-06-28:
+
+Dyalog APL v.40273 takes 1565msec
+
+sac2c waver.unittest.sac takes 3830msec
+
+sac2c -doawlf waver.unittest.sac takes 4700msec
+
+HOWEVER, apex generated generic TRANSPOSE
+code for the matmul in waver.sac, which would explain it
+all.
+
+Except for why -doawlf is even slower...
+
+The APEX STAR code turns out to support only
+rank-2 arrays, which is why it ends up generating
+TRANSPOSE. 
+
+The correct fix is to generalize the STAR code to
+make it work on higher rank arrays. The fallback algorithm
+should also use STAR, but without rbe's identity case.
+
+We should also do timings to see if the TRANSPOSE case is of benefit
+anywhere today.
+

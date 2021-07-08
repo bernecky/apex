@@ -1,4 +1,4 @@
- r←dosyn fldr;f;gst;asts;tok
+ r←dosyn fldr;f;gst;asts;tok;fns
  ⍝ Perform syntax analysis for the
  ⍝ Result is asts
  InitializeAST
@@ -6,9 +6,9 @@
  InitializeST
  InitializeTYPES
  Trace(fts ⎕TS),': Starting syntax analysis for: ',fldr
- src←GetSrc fldr  ⍝ Get all source code
+ (fns src)←GetSrc fldr  ⍝ Get all source code
  src←LocalizeSysVars¨src           ⍝ Undo APL design errors
- src←Dfn2Trad¨src                  ⍝ Convert any Dfns to Tradfns
+ src←fns Dfn2Trad¨src                  ⍝ Convert any Dfns to Tradfns
  src←UnDiamondize¨src              ⍝ Remove diamond statement separators
   ⍝⍝⍝   SaveTradFns(src fldr)             ⍝ Just for debugging Dfn2Trad
  tok←tokenize¨src                  ⍝ tokenize it

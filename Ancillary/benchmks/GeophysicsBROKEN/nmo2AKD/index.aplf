@@ -4,4 +4,3 @@
  a←⍴m
  d←,d
  r←d[m+⍉b×(⌽a)⍴⍳1↑a]
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/nmo2AKD/index.ufn§0§ 2020 6 24 17 4 22 868 §kfØG§0

@@ -1,0 +1,3 @@
+ r←x fr1 y
+⍝ x from rank 1 y
+ r←x index y

@@ -50,4 +50,3 @@
  r←(k,n)⍴wz
  r←r nmo to ⍝ Perform moveout
  r←(+/,r),+/0=,r ⍝ KLUDGE for quick verification of output.
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/nmo2AKD/nmo2.ufn§0§ 2020 6 24 17 4 22 868 §hZFÅú§0

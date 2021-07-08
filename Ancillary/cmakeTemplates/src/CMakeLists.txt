@@ -9,6 +9,7 @@ INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/resolve-sac2c-dependencies.cmake")
 #    ...
 #)
 
+SET (SAC2CFLAGS -doawlf -dopogo)
 # SaC Mod files, relative to this CMakeLists.txt.
 SET (SAC_SRC_MOD
     ${BM_DIR}.sac
@@ -65,7 +66,7 @@ FOREACH (name ${SAC_SRC_MOD})
     ADD_CUSTOM_COMMAND (
         OUTPUT ${mod} ${tree}
         COMMAND
-        ${SAC2C} -v0 -linksetsize ${LINKSETSIZE} -o ${DLL_BUILD_DIR} ${src}
+	${SAC2C} -v0 ${SAC2FLAGS} -linksetsize ${LINKSETSIZE} -o ${DLL_BUILD_DIR} ${src}
         WORKING_DIRECTORY
             ${dir}
         DEPENDS ${moddep_list}
@@ -101,7 +102,7 @@ FOREACH (name ${SAC_SRC_PROG})
     ADD_CUSTOM_COMMAND (
         OUTPUT ${prog}
         COMMAND
-        ${SAC2C} -v0 -linksetsize ${LINKSETSIZE} -o ${prog} ${src}
+	${SAC2C} -v0 ${SAC2FLAGS} -linksetsize ${LINKSETSIZE} -o ${prog} ${src}
         WORKING_DIRECTORY
             ${dir}
         DEPENDS ${moddep_list}

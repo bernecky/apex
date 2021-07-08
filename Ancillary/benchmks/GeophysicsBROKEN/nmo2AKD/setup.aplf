@@ -18,4 +18,3 @@
  to←dt×⍳n+1
  r←d
 ⍝ Matches acorn wsdoc 1995-11-21
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/nmo2AKD/setup.ufn§0§ 2020 6 24 17 4 22 868 §blÁëd§0

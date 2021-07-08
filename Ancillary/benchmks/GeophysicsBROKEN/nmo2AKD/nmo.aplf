@@ -14,7 +14,7 @@
 ⍝ -------------------------------------------------------
  to[0]←1 ⍝ Avoid divide by zero in outer product
 ⍝⍝t←(((⍴x),⍴to)⍴to)×4○x∘.÷to×vstk
- t←(4○x∘.÷to×vstk)mpyrk11 to
+ t←(4○x∘.÷to×vstk)×⍤1⊢to
  t[;0]←⌈/(2×dt),x÷vstk
  a←(dt|t)÷dt
  m←STSCfloor t÷dt
@@ -29,4 +29,3 @@
  dm←(a×1-a)×(d fr1 m+1)+d fr1 m-2
 ⍝⍝dm←(a×1-a)×(d index m+1)+d index m-2
  dm←0.25×((a×5-a)×d fr1 m)+((1-a)×(a+4)×d fr1 m-1)-dm
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/nmo2AKD/nmo.ufn§0§ 2020 6 24 17 4 22 868 §fÙõCY§0
