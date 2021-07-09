@@ -1,7 +1,7 @@
 module UTThornInt;
 export {UTThornInt_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-06-27 14:32:17.411
+// Compiled by APEX Version: FIXME!! 2021-07-09 14:38:20.907
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -1411,105 +1411,105 @@ inline char[.] thintIIC(int PP, int y ,int QUADio)
  ?
 */
 QUADpp_0=( PP);
- A_66=slBII(true,y);
- y_0=( A_66);
- A_68=rhoXII( y_0);
- A_69=takeIII(-1,A_68);
- A_70=rhoXII( y_0);
- A_71=dropIII(-1,A_70);
- A_72=mpyslXIIQUICKSTOP( A_71);
- A_76=comaIII(A_72,A_69);
- A_77=rhoIII(A_76,y_0);
- m_0=( A_77);
- A_79=modXII( m_0);
- A_80=maxsl1XIIFOLD( A_79);
+ A_65=slBII(true,y);
+ y_0=( A_65);
+ A_67=rhoXII( y_0);
+ A_68=takeIII(-1,A_67);
+ A_69=rhoXII( y_0);
+ A_70=dropIII(-1,A_69);
+ A_71=mpyslXIIQUICKSTOP( A_70);
+ A_75=comaIII(A_71,A_68);
+ A_76=rhoIII(A_75,y_0);
+ m_0=( A_76);
+ A_78=modXII( m_0);
+ A_79=maxsl1XIIFOLD( A_78);
  // dsf scalar(s)
-A_84=maxIII(2,A_80);
- A_85=PmtlXII( A_84);
- widths_0=( A_85);
- A_87=minsl1XIIFOLD( m_0);
- maxneg_0=( A_87);
+A_83=maxIII(2,A_79);
+ A_84=PmtlXII( A_83);
+ widths_0=( A_84);
+ A_86=minsl1XIIFOLD( m_0);
+ maxneg_0=( A_86);
  // dsf scalar(s)
-A_93=ltIBB(maxneg_0,false);
- neg_0=( A_93);
- A_95=modXII( maxneg_0);
+A_92=ltIBB(maxneg_0,false);
+ neg_0=( A_92);
+ A_94=modXII( maxneg_0);
  // dsf scalar(s)
-A_96=maxIII(2,A_95);
- A_97=PmtlXII( A_96);
- maxneg_1=( A_97);
+A_95=maxIII(2,A_94);
+ A_96=PmtlXII( A_95);
+ maxneg_1=( A_96);
  // dsf clique
-A_100=geIIB(maxneg_1,widths_0);
+A_99=geIIB(maxneg_1,widths_0);
  // dsf Check needed
-A_101=mpyBBB(neg_0,A_100);
+A_100=mpyBBB(neg_0,A_99);
  // dsf Check needed
-A_102=plusIBI(widths_0,A_101);
- widths_1=( A_102);
- A_104=rhoXII( y_0);
- A_105=rhoIII(A_104,widths_1);
- A_106=comaXII( A_105);
- w_0=( A_106);
+A_101=plusIBI(widths_0,A_100);
+ widths_1=( A_101);
+ A_103=rhoXII( y_0);
+ A_104=rhoIII(A_103,widths_1);
+ A_105=comaXII( A_104);
+ w_0=( A_105);
  // dsf scalar(s)
-A_108=plusIBI(widths_1,true);
- A_109=comaBII(false,A_108);
- A_110=plusbslXII( A_109);
- psw_0=( A_110);
+A_107=plusIBI(widths_1,true);
+ A_108=comaBII(false,A_107);
+ A_109=plusbslXII( A_108);
+ psw_0=( A_109);
  // dsf scalar(s)
-A_115=plusIBI(widths_1,true);
- A_116=plusslXIIFOLD( A_115);
+A_114=plusIBI(widths_1,true);
+ A_115=plusslXIIFOLD( A_114);
  // dsf scalar(s)
-A_120=plusIII(-1,A_116);
- A_122=rhoXII( m_0);
- A_121= ABC(toi(false)-QUADio,shape(A_122)[0]);
-A_124=A_122[[A_121]];
- A_125=comaIII(A_124,A_120);
- shpz_0=( A_125);
- A_127=rhoICC(shpz_0,' ');
- r_0=( A_127);
- A_130=rhoXII( m_0);
- A_129= ABC(toi(false)-QUADio,shape(A_130)[0]);
-A_132=A_130[[A_129]];
- A_134=iotaXII( A_132,QUADio);
- A_CTR135_= 0;
-A_CTR135z_ = (shape(A_134)[[0]])-1;
+A_119=plusIII(-1,A_115);
+ A_121=rhoXII( m_0);
+ A_120= ABC(toi(false)-QUADio,shape(A_121)[0]);
+A_123=A_121[[A_120]];
+ A_124=comaIII(A_123,A_119);
+ shpz_0=( A_124);
+ A_126=rhoICC(shpz_0,' ');
+ r_0=( A_126);
+ A_129=rhoXII( m_0);
+ A_128= ABC(toi(false)-QUADio,shape(A_129)[0]);
+A_131=A_129[[A_128]];
+ A_133=iotaXII( A_131,QUADio);
+ A_CTR134_= 0;
+A_CTR134z_ = (shape(A_133)[[0]])-1;
 r_3=toC(r_0);
-for(; A_CTR135_ <= A_CTR135z_; A_CTR135_++){
-i_0 = A_134[[A_CTR135_]];
- A_138=rhoXII( m_0);
- A_137= ABC(toi(true)-QUADio,shape(A_138)[0]);
-A_140=A_138[[A_137]];
- A_142=iotaXII( A_140,QUADio);
- A_CTR143_= 0;
-A_CTR143z_ = (shape(A_142)[[0]])-1;
+for(; A_CTR134_ <= A_CTR134z_; A_CTR134_++){
+i_0 = A_133[[A_CTR134_]];
+ A_137=rhoXII( m_0);
+ A_136= ABC(toi(true)-QUADio,shape(A_137)[0]);
+A_139=A_137[[A_136]];
+ A_141=iotaXII( A_139,QUADio);
+ A_CTR142_= 0;
+A_CTR142z_ = (shape(A_141)[[0]])-1;
 r_3=toC(r_3);
-for(; A_CTR143_ <= A_CTR143z_; A_CTR143_++){
-j_0 = A_142[[A_CTR143_]];
- A_146= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
-A_145= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
-A_148=m_0[[A_146,A_145]];
- A_149= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_151=w_0[[A_149]];
- A_152=comaIBI(A_151,false);
- A_154=DthornIntIIC(A_152,A_148,QUADio);
- A_155= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_157=w_0[[A_155]];
- A_159=iotaXII( A_157,QUADio);
- A_160= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
-A_162=psw_0[[A_160]];
+for(; A_CTR142_ <= A_CTR142z_; A_CTR142_++){
+j_0 = A_141[[A_CTR142_]];
+ A_145= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
+A_144= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
+A_147=m_0[[A_145,A_144]];
+ A_148= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_150=w_0[[A_148]];
+ A_151=comaIBI(A_150,false);
+ A_153=DthornIntIIC(A_151,A_147,QUADio);
+ A_154= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_156=w_0[[A_154]];
+ A_158=iotaXII( A_156,QUADio);
+ A_159= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
+A_161=psw_0[[A_159]];
  // dsf scalar(s)
-A_163=plusIII(A_162,A_159);
- A_165= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
-A_164= ABC(toi(A_163)-QUADio,shape(r_3)[1]);
-A_167=inds01(r_3,A_165,A_164,A_154);
- r_3=( A_167);
+A_162=plusIII(A_161,A_158);
+ A_164= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
+A_163= ABC(toi(A_162)-QUADio,shape(r_3)[1]);
+A_166=inds01(r_3,A_164,A_163,A_153);
+ r_3=( A_166);
  }
  }
- A_171=rhoXCI( r_3);
- A_172=takeIII(-1,A_171);
- A_173=rhoXII( y_0);
- A_174=dropIII(-1,A_173);
- A_175=comaIII(A_174,A_172);
- A_176=rhoICC(A_175,r_3);
- r_4=( A_176);
+ A_170=rhoXCI( r_3);
+ A_171=takeIII(-1,A_170);
+ A_172=rhoXII( y_0);
+ A_173=dropIII(-1,A_172);
+ A_174=comaIII(A_173,A_171);
+ A_175=rhoICC(A_174,r_3);
+ r_4=( A_175);
  return(r_4);
 }
 
@@ -1627,105 +1627,105 @@ inline char[.] thintCLONE6IBC(int PP, bool y ,int QUADio)
  ?
 */
 QUADpp_0=( PP);
- A_66=slBBB(true,y);
- y_0=( A_66);
- A_68=rhoXBI( y_0);
- A_69=takeIII(-1,A_68);
- A_70=rhoXBI( y_0);
- A_71=dropIII(-1,A_70);
- A_72=mpyslXIIQUICKSTOP( A_71);
- A_76=comaIII(A_72,A_69);
- A_77=rhoIBB(A_76,y_0);
- m_0=( A_77);
- A_79=modXBB( m_0);
- A_80=maxsl1XBBQUICKSTOP( A_79);
+ A_65=slBBB(true,y);
+ y_0=( A_65);
+ A_67=rhoXBI( y_0);
+ A_68=takeIII(-1,A_67);
+ A_69=rhoXBI( y_0);
+ A_70=dropIII(-1,A_69);
+ A_71=mpyslXIIQUICKSTOP( A_70);
+ A_75=comaIII(A_71,A_68);
+ A_76=rhoIBB(A_75,y_0);
+ m_0=( A_76);
+ A_78=modXBB( m_0);
+ A_79=maxsl1XBBQUICKSTOP( A_78);
  // dsf scalar(s)
-A_84=maxIBI(2,A_80);
- A_85=PmtlXII( A_84);
- widths_0=( A_85);
- A_87=minsl1XBBQUICKSTOP( m_0);
- maxneg_0=( A_87);
+A_83=maxIBI(2,A_79);
+ A_84=PmtlXII( A_83);
+ widths_0=( A_84);
+ A_86=minsl1XBBQUICKSTOP( m_0);
+ maxneg_0=( A_86);
  // dsf scalar(s)
-A_93=ltBBB(maxneg_0,false);
- neg_0=( A_93);
- A_95=modXBB( maxneg_0);
+A_92=ltBBB(maxneg_0,false);
+ neg_0=( A_92);
+ A_94=modXBB( maxneg_0);
  // dsf scalar(s)
-A_96=maxIBI(2,A_95);
- A_97=PmtlXII( A_96);
- maxneg_1=( A_97);
+A_95=maxIBI(2,A_94);
+ A_96=PmtlXII( A_95);
+ maxneg_1=( A_96);
  // dsf clique
-A_100=geIIB(maxneg_1,widths_0);
+A_99=geIIB(maxneg_1,widths_0);
  // dsf Check needed
-A_101=mpyBBB(neg_0,A_100);
+A_100=mpyBBB(neg_0,A_99);
  // dsf Check needed
-A_102=plusIBI(widths_0,A_101);
- widths_1=( A_102);
- A_104=rhoXBI( y_0);
- A_105=rhoIII(A_104,widths_1);
- A_106=comaXII( A_105);
- w_0=( A_106);
+A_101=plusIBI(widths_0,A_100);
+ widths_1=( A_101);
+ A_103=rhoXBI( y_0);
+ A_104=rhoIII(A_103,widths_1);
+ A_105=comaXII( A_104);
+ w_0=( A_105);
  // dsf scalar(s)
-A_108=plusIBI(widths_1,true);
- A_109=comaBII(false,A_108);
- A_110=plusbslXII( A_109);
- psw_0=( A_110);
+A_107=plusIBI(widths_1,true);
+ A_108=comaBII(false,A_107);
+ A_109=plusbslXII( A_108);
+ psw_0=( A_109);
  // dsf scalar(s)
-A_115=plusIBI(widths_1,true);
- A_116=plusslXIIFOLD( A_115);
+A_114=plusIBI(widths_1,true);
+ A_115=plusslXIIFOLD( A_114);
  // dsf scalar(s)
-A_120=plusIII(-1,A_116);
- A_122=rhoXBI( m_0);
- A_121= ABC(toi(false)-QUADio,shape(A_122)[0]);
-A_124=A_122[[A_121]];
- A_125=comaIII(A_124,A_120);
- shpz_0=( A_125);
- A_127=rhoICC(shpz_0,' ');
- r_0=( A_127);
- A_130=rhoXBI( m_0);
- A_129= ABC(toi(false)-QUADio,shape(A_130)[0]);
-A_132=A_130[[A_129]];
- A_134=iotaXII( A_132,QUADio);
- A_CTR135_= 0;
-A_CTR135z_ = (shape(A_134)[[0]])-1;
+A_119=plusIII(-1,A_115);
+ A_121=rhoXBI( m_0);
+ A_120= ABC(toi(false)-QUADio,shape(A_121)[0]);
+A_123=A_121[[A_120]];
+ A_124=comaIII(A_123,A_119);
+ shpz_0=( A_124);
+ A_126=rhoICC(shpz_0,' ');
+ r_0=( A_126);
+ A_129=rhoXBI( m_0);
+ A_128= ABC(toi(false)-QUADio,shape(A_129)[0]);
+A_131=A_129[[A_128]];
+ A_133=iotaXII( A_131,QUADio);
+ A_CTR134_= 0;
+A_CTR134z_ = (shape(A_133)[[0]])-1;
 r_3=toC(r_0);
-for(; A_CTR135_ <= A_CTR135z_; A_CTR135_++){
-i_0 = A_134[[A_CTR135_]];
- A_138=rhoXBI( m_0);
- A_137= ABC(toi(true)-QUADio,shape(A_138)[0]);
-A_140=A_138[[A_137]];
- A_142=iotaXII( A_140,QUADio);
- A_CTR143_= 0;
-A_CTR143z_ = (shape(A_142)[[0]])-1;
+for(; A_CTR134_ <= A_CTR134z_; A_CTR134_++){
+i_0 = A_133[[A_CTR134_]];
+ A_137=rhoXBI( m_0);
+ A_136= ABC(toi(true)-QUADio,shape(A_137)[0]);
+A_139=A_137[[A_136]];
+ A_141=iotaXII( A_139,QUADio);
+ A_CTR142_= 0;
+A_CTR142z_ = (shape(A_141)[[0]])-1;
 r_3=toC(r_3);
-for(; A_CTR143_ <= A_CTR143z_; A_CTR143_++){
-j_0 = A_142[[A_CTR143_]];
- A_146= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
-A_145= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
-A_148=m_0[[A_146,A_145]];
- A_149= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_151=w_0[[A_149]];
- A_152=comaIBI(A_151,false);
- A_154=DthornIntCLONE15IBC(A_152,A_148,QUADio);
- A_155= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_157=w_0[[A_155]];
- A_159=iotaXII( A_157,QUADio);
- A_160= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
-A_162=psw_0[[A_160]];
+for(; A_CTR142_ <= A_CTR142z_; A_CTR142_++){
+j_0 = A_141[[A_CTR142_]];
+ A_145= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
+A_144= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
+A_147=m_0[[A_145,A_144]];
+ A_148= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_150=w_0[[A_148]];
+ A_151=comaIBI(A_150,false);
+ A_153=DthornIntCLONE15IBC(A_151,A_147,QUADio);
+ A_154= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_156=w_0[[A_154]];
+ A_158=iotaXII( A_156,QUADio);
+ A_159= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
+A_161=psw_0[[A_159]];
  // dsf scalar(s)
-A_163=plusIII(A_162,A_159);
- A_165= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
-A_164= ABC(toi(A_163)-QUADio,shape(r_3)[1]);
-A_167=inds01(r_3,A_165,A_164,A_154);
- r_3=( A_167);
+A_162=plusIII(A_161,A_158);
+ A_164= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
+A_163= ABC(toi(A_162)-QUADio,shape(r_3)[1]);
+A_166=inds01(r_3,A_164,A_163,A_153);
+ r_3=( A_166);
  }
  }
- A_171=rhoXCI( r_3);
- A_172=takeIII(-1,A_171);
- A_173=rhoXBI( y_0);
- A_174=dropIII(-1,A_173);
- A_175=comaIII(A_174,A_172);
- A_176=rhoICC(A_175,r_3);
- r_4=( A_176);
+ A_170=rhoXCI( r_3);
+ A_171=takeIII(-1,A_170);
+ A_172=rhoXBI( y_0);
+ A_173=dropIII(-1,A_172);
+ A_174=comaIII(A_173,A_171);
+ A_175=rhoICC(A_174,r_3);
+ r_4=( A_175);
  return(r_4);
 }
 
@@ -1735,105 +1735,105 @@ inline char[.] thintCLONE7IIC(int PP, int[.] y ,int QUADio)
  ?
 */
 QUADpp_0=( PP);
- A_66=slBII(true,y);
- y_0=( A_66);
- A_68=rhoXII( y_0);
- A_69=takeIII(-1,A_68);
- A_70=rhoXII( y_0);
- A_71=dropIII(-1,A_70);
- A_72=mpyslXIIQUICKSTOP( A_71);
- A_76=comaIII(A_72,A_69);
- A_77=rhoIII(A_76,y_0);
- m_0=( A_77);
- A_79=modXII( m_0);
- A_80=maxsl1XIIFOLD( A_79);
+ A_65=slBII(true,y);
+ y_0=( A_65);
+ A_67=rhoXII( y_0);
+ A_68=takeIII(-1,A_67);
+ A_69=rhoXII( y_0);
+ A_70=dropIII(-1,A_69);
+ A_71=mpyslXIIQUICKSTOP( A_70);
+ A_75=comaIII(A_71,A_68);
+ A_76=rhoIII(A_75,y_0);
+ m_0=( A_76);
+ A_78=modXII( m_0);
+ A_79=maxsl1XIIFOLD( A_78);
  // dsf scalar(s)
-A_84=maxIII(2,A_80);
- A_85=PmtlXII( A_84);
- widths_0=( A_85);
- A_87=minsl1XIIFOLD( m_0);
- maxneg_0=( A_87);
+A_83=maxIII(2,A_79);
+ A_84=PmtlXII( A_83);
+ widths_0=( A_84);
+ A_86=minsl1XIIFOLD( m_0);
+ maxneg_0=( A_86);
  // dsf scalar(s)
-A_93=ltIBB(maxneg_0,false);
- neg_0=( A_93);
- A_95=modXII( maxneg_0);
+A_92=ltIBB(maxneg_0,false);
+ neg_0=( A_92);
+ A_94=modXII( maxneg_0);
  // dsf scalar(s)
-A_96=maxIII(2,A_95);
- A_97=PmtlXII( A_96);
- maxneg_1=( A_97);
+A_95=maxIII(2,A_94);
+ A_96=PmtlXII( A_95);
+ maxneg_1=( A_96);
  // dsf clique
-A_100=geIIB(maxneg_1,widths_0);
+A_99=geIIB(maxneg_1,widths_0);
  // dsf Check needed
-A_101=mpyBBB(neg_0,A_100);
+A_100=mpyBBB(neg_0,A_99);
  // dsf Check needed
-A_102=plusIBI(widths_0,A_101);
- widths_1=( A_102);
- A_104=rhoXII( y_0);
- A_105=rhoIII(A_104,widths_1);
- A_106=comaXII( A_105);
- w_0=( A_106);
+A_101=plusIBI(widths_0,A_100);
+ widths_1=( A_101);
+ A_103=rhoXII( y_0);
+ A_104=rhoIII(A_103,widths_1);
+ A_105=comaXII( A_104);
+ w_0=( A_105);
  // dsf scalar(s)
-A_108=plusIBI(widths_1,true);
- A_109=comaBII(false,A_108);
- A_110=plusbslXII( A_109);
- psw_0=( A_110);
+A_107=plusIBI(widths_1,true);
+ A_108=comaBII(false,A_107);
+ A_109=plusbslXII( A_108);
+ psw_0=( A_109);
  // dsf scalar(s)
-A_115=plusIBI(widths_1,true);
- A_116=plusslXIIFOLD( A_115);
+A_114=plusIBI(widths_1,true);
+ A_115=plusslXIIFOLD( A_114);
  // dsf scalar(s)
-A_120=plusIII(-1,A_116);
- A_122=rhoXII( m_0);
- A_121= ABC(toi(false)-QUADio,shape(A_122)[0]);
-A_124=A_122[[A_121]];
- A_125=comaIII(A_124,A_120);
- shpz_0=( A_125);
- A_127=rhoICC(shpz_0,' ');
- r_0=( A_127);
- A_130=rhoXII( m_0);
- A_129= ABC(toi(false)-QUADio,shape(A_130)[0]);
-A_132=A_130[[A_129]];
- A_134=iotaXII( A_132,QUADio);
- A_CTR135_= 0;
-A_CTR135z_ = (shape(A_134)[[0]])-1;
+A_119=plusIII(-1,A_115);
+ A_121=rhoXII( m_0);
+ A_120= ABC(toi(false)-QUADio,shape(A_121)[0]);
+A_123=A_121[[A_120]];
+ A_124=comaIII(A_123,A_119);
+ shpz_0=( A_124);
+ A_126=rhoICC(shpz_0,' ');
+ r_0=( A_126);
+ A_129=rhoXII( m_0);
+ A_128= ABC(toi(false)-QUADio,shape(A_129)[0]);
+A_131=A_129[[A_128]];
+ A_133=iotaXII( A_131,QUADio);
+ A_CTR134_= 0;
+A_CTR134z_ = (shape(A_133)[[0]])-1;
 r_3=toC(r_0);
-for(; A_CTR135_ <= A_CTR135z_; A_CTR135_++){
-i_0 = A_134[[A_CTR135_]];
- A_138=rhoXII( m_0);
- A_137= ABC(toi(true)-QUADio,shape(A_138)[0]);
-A_140=A_138[[A_137]];
- A_142=iotaXII( A_140,QUADio);
- A_CTR143_= 0;
-A_CTR143z_ = (shape(A_142)[[0]])-1;
+for(; A_CTR134_ <= A_CTR134z_; A_CTR134_++){
+i_0 = A_133[[A_CTR134_]];
+ A_137=rhoXII( m_0);
+ A_136= ABC(toi(true)-QUADio,shape(A_137)[0]);
+A_139=A_137[[A_136]];
+ A_141=iotaXII( A_139,QUADio);
+ A_CTR142_= 0;
+A_CTR142z_ = (shape(A_141)[[0]])-1;
 r_3=toC(r_3);
-for(; A_CTR143_ <= A_CTR143z_; A_CTR143_++){
-j_0 = A_142[[A_CTR143_]];
- A_146= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
-A_145= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
-A_148=m_0[[A_146,A_145]];
- A_149= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_151=w_0[[A_149]];
- A_152=comaIBI(A_151,false);
- A_154=DthornIntIIC(A_152,A_148,QUADio);
- A_155= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_157=w_0[[A_155]];
- A_159=iotaXII( A_157,QUADio);
- A_160= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
-A_162=psw_0[[A_160]];
+for(; A_CTR142_ <= A_CTR142z_; A_CTR142_++){
+j_0 = A_141[[A_CTR142_]];
+ A_145= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
+A_144= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
+A_147=m_0[[A_145,A_144]];
+ A_148= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_150=w_0[[A_148]];
+ A_151=comaIBI(A_150,false);
+ A_153=DthornIntIIC(A_151,A_147,QUADio);
+ A_154= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_156=w_0[[A_154]];
+ A_158=iotaXII( A_156,QUADio);
+ A_159= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
+A_161=psw_0[[A_159]];
  // dsf scalar(s)
-A_163=plusIII(A_162,A_159);
- A_165= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
-A_164= ABC(toi(A_163)-QUADio,shape(r_3)[1]);
-A_167=inds01(r_3,A_165,A_164,A_154);
- r_3=( A_167);
+A_162=plusIII(A_161,A_158);
+ A_164= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
+A_163= ABC(toi(A_162)-QUADio,shape(r_3)[1]);
+A_166=inds01(r_3,A_164,A_163,A_153);
+ r_3=( A_166);
  }
  }
- A_171=rhoXCI( r_3);
- A_172=takeIII(-1,A_171);
- A_173=rhoXII( y_0);
- A_174=dropIII(-1,A_173);
- A_175=comaIII(A_174,A_172);
- A_176=rhoICC(A_175,r_3);
- r_4=( A_176);
+ A_170=rhoXCI( r_3);
+ A_171=takeIII(-1,A_170);
+ A_172=rhoXII( y_0);
+ A_173=dropIII(-1,A_172);
+ A_174=comaIII(A_173,A_171);
+ A_175=rhoICC(A_174,r_3);
+ r_4=( A_175);
  return(r_4);
 }
 
@@ -1843,105 +1843,105 @@ inline char[.,.] thintCLONE8IIC(int PP, int[.,.] y ,int QUADio)
  ?
 */
 QUADpp_0=( PP);
- A_66=slBII(true,y);
- y_0=( A_66);
- A_68=rhoXII( y_0);
- A_69=takeIII(-1,A_68);
- A_70=rhoXII( y_0);
- A_71=dropIII(-1,A_70);
- A_72=mpyslXIIQUICKSTOP( A_71);
- A_76=comaIII(A_72,A_69);
- A_77=rhoIII(A_76,y_0);
- m_0=( A_77);
- A_79=modXII( m_0);
- A_80=maxsl1XIIFOLD( A_79);
+ A_65=slBII(true,y);
+ y_0=( A_65);
+ A_67=rhoXII( y_0);
+ A_68=takeIII(-1,A_67);
+ A_69=rhoXII( y_0);
+ A_70=dropIII(-1,A_69);
+ A_71=mpyslXIIQUICKSTOP( A_70);
+ A_75=comaIII(A_71,A_68);
+ A_76=rhoIII(A_75,y_0);
+ m_0=( A_76);
+ A_78=modXII( m_0);
+ A_79=maxsl1XIIFOLD( A_78);
  // dsf scalar(s)
-A_84=maxIII(2,A_80);
- A_85=PmtlXII( A_84);
- widths_0=( A_85);
- A_87=minsl1XIIFOLD( m_0);
- maxneg_0=( A_87);
+A_83=maxIII(2,A_79);
+ A_84=PmtlXII( A_83);
+ widths_0=( A_84);
+ A_86=minsl1XIIFOLD( m_0);
+ maxneg_0=( A_86);
  // dsf scalar(s)
-A_93=ltIBB(maxneg_0,false);
- neg_0=( A_93);
- A_95=modXII( maxneg_0);
+A_92=ltIBB(maxneg_0,false);
+ neg_0=( A_92);
+ A_94=modXII( maxneg_0);
  // dsf scalar(s)
-A_96=maxIII(2,A_95);
- A_97=PmtlXII( A_96);
- maxneg_1=( A_97);
+A_95=maxIII(2,A_94);
+ A_96=PmtlXII( A_95);
+ maxneg_1=( A_96);
  // dsf clique
-A_100=geIIB(maxneg_1,widths_0);
+A_99=geIIB(maxneg_1,widths_0);
  // dsf Check needed
-A_101=mpyBBB(neg_0,A_100);
+A_100=mpyBBB(neg_0,A_99);
  // dsf Check needed
-A_102=plusIBI(widths_0,A_101);
- widths_1=( A_102);
- A_104=rhoXII( y_0);
- A_105=rhoIII(A_104,widths_1);
- A_106=comaXII( A_105);
- w_0=( A_106);
+A_101=plusIBI(widths_0,A_100);
+ widths_1=( A_101);
+ A_103=rhoXII( y_0);
+ A_104=rhoIII(A_103,widths_1);
+ A_105=comaXII( A_104);
+ w_0=( A_105);
  // dsf scalar(s)
-A_108=plusIBI(widths_1,true);
- A_109=comaBII(false,A_108);
- A_110=plusbslXII( A_109);
- psw_0=( A_110);
+A_107=plusIBI(widths_1,true);
+ A_108=comaBII(false,A_107);
+ A_109=plusbslXII( A_108);
+ psw_0=( A_109);
  // dsf scalar(s)
-A_115=plusIBI(widths_1,true);
- A_116=plusslXIIFOLD( A_115);
+A_114=plusIBI(widths_1,true);
+ A_115=plusslXIIFOLD( A_114);
  // dsf scalar(s)
-A_120=plusIII(-1,A_116);
- A_122=rhoXII( m_0);
- A_121= ABC(toi(false)-QUADio,shape(A_122)[0]);
-A_124=A_122[[A_121]];
- A_125=comaIII(A_124,A_120);
- shpz_0=( A_125);
- A_127=rhoICC(shpz_0,' ');
- r_0=( A_127);
- A_130=rhoXII( m_0);
- A_129= ABC(toi(false)-QUADio,shape(A_130)[0]);
-A_132=A_130[[A_129]];
- A_134=iotaXII( A_132,QUADio);
- A_CTR135_= 0;
-A_CTR135z_ = (shape(A_134)[[0]])-1;
+A_119=plusIII(-1,A_115);
+ A_121=rhoXII( m_0);
+ A_120= ABC(toi(false)-QUADio,shape(A_121)[0]);
+A_123=A_121[[A_120]];
+ A_124=comaIII(A_123,A_119);
+ shpz_0=( A_124);
+ A_126=rhoICC(shpz_0,' ');
+ r_0=( A_126);
+ A_129=rhoXII( m_0);
+ A_128= ABC(toi(false)-QUADio,shape(A_129)[0]);
+A_131=A_129[[A_128]];
+ A_133=iotaXII( A_131,QUADio);
+ A_CTR134_= 0;
+A_CTR134z_ = (shape(A_133)[[0]])-1;
 r_3=toC(r_0);
-for(; A_CTR135_ <= A_CTR135z_; A_CTR135_++){
-i_0 = A_134[[A_CTR135_]];
- A_138=rhoXII( m_0);
- A_137= ABC(toi(true)-QUADio,shape(A_138)[0]);
-A_140=A_138[[A_137]];
- A_142=iotaXII( A_140,QUADio);
- A_CTR143_= 0;
-A_CTR143z_ = (shape(A_142)[[0]])-1;
+for(; A_CTR134_ <= A_CTR134z_; A_CTR134_++){
+i_0 = A_133[[A_CTR134_]];
+ A_137=rhoXII( m_0);
+ A_136= ABC(toi(true)-QUADio,shape(A_137)[0]);
+A_139=A_137[[A_136]];
+ A_141=iotaXII( A_139,QUADio);
+ A_CTR142_= 0;
+A_CTR142z_ = (shape(A_141)[[0]])-1;
 r_3=toC(r_3);
-for(; A_CTR143_ <= A_CTR143z_; A_CTR143_++){
-j_0 = A_142[[A_CTR143_]];
- A_146= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
-A_145= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
-A_148=m_0[[A_146,A_145]];
- A_149= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_151=w_0[[A_149]];
- A_152=comaIBI(A_151,false);
- A_154=DthornIntIIC(A_152,A_148,QUADio);
- A_155= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_157=w_0[[A_155]];
- A_159=iotaXII( A_157,QUADio);
- A_160= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
-A_162=psw_0[[A_160]];
+for(; A_CTR142_ <= A_CTR142z_; A_CTR142_++){
+j_0 = A_141[[A_CTR142_]];
+ A_145= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
+A_144= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
+A_147=m_0[[A_145,A_144]];
+ A_148= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_150=w_0[[A_148]];
+ A_151=comaIBI(A_150,false);
+ A_153=DthornIntIIC(A_151,A_147,QUADio);
+ A_154= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_156=w_0[[A_154]];
+ A_158=iotaXII( A_156,QUADio);
+ A_159= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
+A_161=psw_0[[A_159]];
  // dsf scalar(s)
-A_163=plusIII(A_162,A_159);
- A_165= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
-A_164= ABC(toi(A_163)-QUADio,shape(r_3)[1]);
-A_167=inds01(r_3,A_165,A_164,A_154);
- r_3=( A_167);
+A_162=plusIII(A_161,A_158);
+ A_164= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
+A_163= ABC(toi(A_162)-QUADio,shape(r_3)[1]);
+A_166=inds01(r_3,A_164,A_163,A_153);
+ r_3=( A_166);
  }
  }
- A_171=rhoXCI( r_3);
- A_172=takeIII(-1,A_171);
- A_173=rhoXII( y_0);
- A_174=dropIII(-1,A_173);
- A_175=comaIII(A_174,A_172);
- A_176=rhoICC(A_175,r_3);
- r_4=( A_176);
+ A_170=rhoXCI( r_3);
+ A_171=takeIII(-1,A_170);
+ A_172=rhoXII( y_0);
+ A_173=dropIII(-1,A_172);
+ A_174=comaIII(A_173,A_171);
+ A_175=rhoICC(A_174,r_3);
+ r_4=( A_175);
  return(r_4);
 }
 
@@ -1986,105 +1986,105 @@ inline char[.] thintCLONE10IIC(int PP, int[.] y ,int QUADio)
  ?
 */
 QUADpp_0=( PP);
- A_66=slBII(true,y);
- y_0=( A_66);
- A_68=rhoXII( y_0);
- A_69=takeIII(-1,A_68);
- A_70=rhoXII( y_0);
- A_71=dropIII(-1,A_70);
- A_72=mpyslXIIQUICKSTOP( A_71);
- A_76=comaIII(A_72,A_69);
- A_77=rhoIII(A_76,y_0);
- m_0=( A_77);
- A_79=modXII( m_0);
- A_80=maxsl1XIIFOLD( A_79);
+ A_65=slBII(true,y);
+ y_0=( A_65);
+ A_67=rhoXII( y_0);
+ A_68=takeIII(-1,A_67);
+ A_69=rhoXII( y_0);
+ A_70=dropIII(-1,A_69);
+ A_71=mpyslXIIQUICKSTOP( A_70);
+ A_75=comaIII(A_71,A_68);
+ A_76=rhoIII(A_75,y_0);
+ m_0=( A_76);
+ A_78=modXII( m_0);
+ A_79=maxsl1XIIFOLD( A_78);
  // dsf scalar(s)
-A_84=maxIII(2,A_80);
- A_85=PmtlXII( A_84);
- widths_0=( A_85);
- A_87=minsl1XIIFOLD( m_0);
- maxneg_0=( A_87);
+A_83=maxIII(2,A_79);
+ A_84=PmtlXII( A_83);
+ widths_0=( A_84);
+ A_86=minsl1XIIFOLD( m_0);
+ maxneg_0=( A_86);
  // dsf scalar(s)
-A_93=ltIBB(maxneg_0,false);
- neg_0=( A_93);
- A_95=modXII( maxneg_0);
+A_92=ltIBB(maxneg_0,false);
+ neg_0=( A_92);
+ A_94=modXII( maxneg_0);
  // dsf scalar(s)
-A_96=maxIII(2,A_95);
- A_97=PmtlXII( A_96);
- maxneg_1=( A_97);
+A_95=maxIII(2,A_94);
+ A_96=PmtlXII( A_95);
+ maxneg_1=( A_96);
  // dsf clique
-A_100=geIIB(maxneg_1,widths_0);
+A_99=geIIB(maxneg_1,widths_0);
  // dsf Check needed
-A_101=mpyBBB(neg_0,A_100);
+A_100=mpyBBB(neg_0,A_99);
  // dsf Check needed
-A_102=plusIBI(widths_0,A_101);
- widths_1=( A_102);
- A_104=rhoXII( y_0);
- A_105=rhoIII(A_104,widths_1);
- A_106=comaXII( A_105);
- w_0=( A_106);
+A_101=plusIBI(widths_0,A_100);
+ widths_1=( A_101);
+ A_103=rhoXII( y_0);
+ A_104=rhoIII(A_103,widths_1);
+ A_105=comaXII( A_104);
+ w_0=( A_105);
  // dsf scalar(s)
-A_108=plusIBI(widths_1,true);
- A_109=comaBII(false,A_108);
- A_110=plusbslXII( A_109);
- psw_0=( A_110);
+A_107=plusIBI(widths_1,true);
+ A_108=comaBII(false,A_107);
+ A_109=plusbslXII( A_108);
+ psw_0=( A_109);
  // dsf scalar(s)
-A_115=plusIBI(widths_1,true);
- A_116=plusslXIIFOLD( A_115);
+A_114=plusIBI(widths_1,true);
+ A_115=plusslXIIFOLD( A_114);
  // dsf scalar(s)
-A_120=plusIII(-1,A_116);
- A_122=rhoXII( m_0);
- A_121= ABC(toi(false)-QUADio,shape(A_122)[0]);
-A_124=A_122[[A_121]];
- A_125=comaIII(A_124,A_120);
- shpz_0=( A_125);
- A_127=rhoICC(shpz_0,' ');
- r_0=( A_127);
- A_130=rhoXII( m_0);
- A_129= ABC(toi(false)-QUADio,shape(A_130)[0]);
-A_132=A_130[[A_129]];
- A_134=iotaXII( A_132,QUADio);
- A_CTR135_= 0;
-A_CTR135z_ = (shape(A_134)[[0]])-1;
+A_119=plusIII(-1,A_115);
+ A_121=rhoXII( m_0);
+ A_120= ABC(toi(false)-QUADio,shape(A_121)[0]);
+A_123=A_121[[A_120]];
+ A_124=comaIII(A_123,A_119);
+ shpz_0=( A_124);
+ A_126=rhoICC(shpz_0,' ');
+ r_0=( A_126);
+ A_129=rhoXII( m_0);
+ A_128= ABC(toi(false)-QUADio,shape(A_129)[0]);
+A_131=A_129[[A_128]];
+ A_133=iotaXII( A_131,QUADio);
+ A_CTR134_= 0;
+A_CTR134z_ = (shape(A_133)[[0]])-1;
 r_3=toC(r_0);
-for(; A_CTR135_ <= A_CTR135z_; A_CTR135_++){
-i_0 = A_134[[A_CTR135_]];
- A_138=rhoXII( m_0);
- A_137= ABC(toi(true)-QUADio,shape(A_138)[0]);
-A_140=A_138[[A_137]];
- A_142=iotaXII( A_140,QUADio);
- A_CTR143_= 0;
-A_CTR143z_ = (shape(A_142)[[0]])-1;
+for(; A_CTR134_ <= A_CTR134z_; A_CTR134_++){
+i_0 = A_133[[A_CTR134_]];
+ A_137=rhoXII( m_0);
+ A_136= ABC(toi(true)-QUADio,shape(A_137)[0]);
+A_139=A_137[[A_136]];
+ A_141=iotaXII( A_139,QUADio);
+ A_CTR142_= 0;
+A_CTR142z_ = (shape(A_141)[[0]])-1;
 r_3=toC(r_3);
-for(; A_CTR143_ <= A_CTR143z_; A_CTR143_++){
-j_0 = A_142[[A_CTR143_]];
- A_146= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
-A_145= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
-A_148=m_0[[A_146,A_145]];
- A_149= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_151=w_0[[A_149]];
- A_152=comaIBI(A_151,false);
- A_154=DthornIntIIC(A_152,A_148,QUADio);
- A_155= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_157=w_0[[A_155]];
- A_159=iotaXII( A_157,QUADio);
- A_160= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
-A_162=psw_0[[A_160]];
+for(; A_CTR142_ <= A_CTR142z_; A_CTR142_++){
+j_0 = A_141[[A_CTR142_]];
+ A_145= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
+A_144= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
+A_147=m_0[[A_145,A_144]];
+ A_148= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_150=w_0[[A_148]];
+ A_151=comaIBI(A_150,false);
+ A_153=DthornIntIIC(A_151,A_147,QUADio);
+ A_154= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_156=w_0[[A_154]];
+ A_158=iotaXII( A_156,QUADio);
+ A_159= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
+A_161=psw_0[[A_159]];
  // dsf scalar(s)
-A_163=plusIII(A_162,A_159);
- A_165= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
-A_164= ABC(toi(A_163)-QUADio,shape(r_3)[1]);
-A_167=inds01(r_3,A_165,A_164,A_154);
- r_3=( A_167);
+A_162=plusIII(A_161,A_158);
+ A_164= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
+A_163= ABC(toi(A_162)-QUADio,shape(r_3)[1]);
+A_166=inds01(r_3,A_164,A_163,A_153);
+ r_3=( A_166);
  }
  }
- A_171=rhoXCI( r_3);
- A_172=takeIII(-1,A_171);
- A_173=rhoXII( y_0);
- A_174=dropIII(-1,A_173);
- A_175=comaIII(A_174,A_172);
- A_176=rhoICC(A_175,r_3);
- r_4=( A_176);
+ A_170=rhoXCI( r_3);
+ A_171=takeIII(-1,A_170);
+ A_172=rhoXII( y_0);
+ A_173=dropIII(-1,A_172);
+ A_174=comaIII(A_173,A_171);
+ A_175=rhoICC(A_174,r_3);
+ r_4=( A_175);
  return(r_4);
 }
 
@@ -2094,105 +2094,105 @@ inline char[.,.,.,.] thintCLONE11IIC(int PP, int[.,.,.,.] y ,int QUADio)
  ?
 */
 QUADpp_0=( PP);
- A_66=slBII(true,y);
- y_0=( A_66);
- A_68=rhoXII( y_0);
- A_69=takeIII(-1,A_68);
- A_70=rhoXII( y_0);
- A_71=dropIII(-1,A_70);
- A_72=mpyslXIIQUICKSTOP( A_71);
- A_76=comaIII(A_72,A_69);
- A_77=rhoIII(A_76,y_0);
- m_0=( A_77);
- A_79=modXII( m_0);
- A_80=maxsl1XIIFOLD( A_79);
+ A_65=slBII(true,y);
+ y_0=( A_65);
+ A_67=rhoXII( y_0);
+ A_68=takeIII(-1,A_67);
+ A_69=rhoXII( y_0);
+ A_70=dropIII(-1,A_69);
+ A_71=mpyslXIIQUICKSTOP( A_70);
+ A_75=comaIII(A_71,A_68);
+ A_76=rhoIII(A_75,y_0);
+ m_0=( A_76);
+ A_78=modXII( m_0);
+ A_79=maxsl1XIIFOLD( A_78);
  // dsf scalar(s)
-A_84=maxIII(2,A_80);
- A_85=PmtlXII( A_84);
- widths_0=( A_85);
- A_87=minsl1XIIFOLD( m_0);
- maxneg_0=( A_87);
+A_83=maxIII(2,A_79);
+ A_84=PmtlXII( A_83);
+ widths_0=( A_84);
+ A_86=minsl1XIIFOLD( m_0);
+ maxneg_0=( A_86);
  // dsf scalar(s)
-A_93=ltIBB(maxneg_0,false);
- neg_0=( A_93);
- A_95=modXII( maxneg_0);
+A_92=ltIBB(maxneg_0,false);
+ neg_0=( A_92);
+ A_94=modXII( maxneg_0);
  // dsf scalar(s)
-A_96=maxIII(2,A_95);
- A_97=PmtlXII( A_96);
- maxneg_1=( A_97);
+A_95=maxIII(2,A_94);
+ A_96=PmtlXII( A_95);
+ maxneg_1=( A_96);
  // dsf clique
-A_100=geIIB(maxneg_1,widths_0);
+A_99=geIIB(maxneg_1,widths_0);
  // dsf Check needed
-A_101=mpyBBB(neg_0,A_100);
+A_100=mpyBBB(neg_0,A_99);
  // dsf Check needed
-A_102=plusIBI(widths_0,A_101);
- widths_1=( A_102);
- A_104=rhoXII( y_0);
- A_105=rhoIII(A_104,widths_1);
- A_106=comaXII( A_105);
- w_0=( A_106);
+A_101=plusIBI(widths_0,A_100);
+ widths_1=( A_101);
+ A_103=rhoXII( y_0);
+ A_104=rhoIII(A_103,widths_1);
+ A_105=comaXII( A_104);
+ w_0=( A_105);
  // dsf scalar(s)
-A_108=plusIBI(widths_1,true);
- A_109=comaBII(false,A_108);
- A_110=plusbslXII( A_109);
- psw_0=( A_110);
+A_107=plusIBI(widths_1,true);
+ A_108=comaBII(false,A_107);
+ A_109=plusbslXII( A_108);
+ psw_0=( A_109);
  // dsf scalar(s)
-A_115=plusIBI(widths_1,true);
- A_116=plusslXIIFOLD( A_115);
+A_114=plusIBI(widths_1,true);
+ A_115=plusslXIIFOLD( A_114);
  // dsf scalar(s)
-A_120=plusIII(-1,A_116);
- A_122=rhoXII( m_0);
- A_121= ABC(toi(false)-QUADio,shape(A_122)[0]);
-A_124=A_122[[A_121]];
- A_125=comaIII(A_124,A_120);
- shpz_0=( A_125);
- A_127=rhoICC(shpz_0,' ');
- r_0=( A_127);
- A_130=rhoXII( m_0);
- A_129= ABC(toi(false)-QUADio,shape(A_130)[0]);
-A_132=A_130[[A_129]];
- A_134=iotaXII( A_132,QUADio);
- A_CTR135_= 0;
-A_CTR135z_ = (shape(A_134)[[0]])-1;
+A_119=plusIII(-1,A_115);
+ A_121=rhoXII( m_0);
+ A_120= ABC(toi(false)-QUADio,shape(A_121)[0]);
+A_123=A_121[[A_120]];
+ A_124=comaIII(A_123,A_119);
+ shpz_0=( A_124);
+ A_126=rhoICC(shpz_0,' ');
+ r_0=( A_126);
+ A_129=rhoXII( m_0);
+ A_128= ABC(toi(false)-QUADio,shape(A_129)[0]);
+A_131=A_129[[A_128]];
+ A_133=iotaXII( A_131,QUADio);
+ A_CTR134_= 0;
+A_CTR134z_ = (shape(A_133)[[0]])-1;
 r_3=toC(r_0);
-for(; A_CTR135_ <= A_CTR135z_; A_CTR135_++){
-i_0 = A_134[[A_CTR135_]];
- A_138=rhoXII( m_0);
- A_137= ABC(toi(true)-QUADio,shape(A_138)[0]);
-A_140=A_138[[A_137]];
- A_142=iotaXII( A_140,QUADio);
- A_CTR143_= 0;
-A_CTR143z_ = (shape(A_142)[[0]])-1;
+for(; A_CTR134_ <= A_CTR134z_; A_CTR134_++){
+i_0 = A_133[[A_CTR134_]];
+ A_137=rhoXII( m_0);
+ A_136= ABC(toi(true)-QUADio,shape(A_137)[0]);
+A_139=A_137[[A_136]];
+ A_141=iotaXII( A_139,QUADio);
+ A_CTR142_= 0;
+A_CTR142z_ = (shape(A_141)[[0]])-1;
 r_3=toC(r_3);
-for(; A_CTR143_ <= A_CTR143z_; A_CTR143_++){
-j_0 = A_142[[A_CTR143_]];
- A_146= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
-A_145= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
-A_148=m_0[[A_146,A_145]];
- A_149= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_151=w_0[[A_149]];
- A_152=comaIBI(A_151,false);
- A_154=DthornIntIIC(A_152,A_148,QUADio);
- A_155= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_157=w_0[[A_155]];
- A_159=iotaXII( A_157,QUADio);
- A_160= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
-A_162=psw_0[[A_160]];
+for(; A_CTR142_ <= A_CTR142z_; A_CTR142_++){
+j_0 = A_141[[A_CTR142_]];
+ A_145= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
+A_144= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
+A_147=m_0[[A_145,A_144]];
+ A_148= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_150=w_0[[A_148]];
+ A_151=comaIBI(A_150,false);
+ A_153=DthornIntIIC(A_151,A_147,QUADio);
+ A_154= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_156=w_0[[A_154]];
+ A_158=iotaXII( A_156,QUADio);
+ A_159= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
+A_161=psw_0[[A_159]];
  // dsf scalar(s)
-A_163=plusIII(A_162,A_159);
- A_165= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
-A_164= ABC(toi(A_163)-QUADio,shape(r_3)[1]);
-A_167=inds01(r_3,A_165,A_164,A_154);
- r_3=( A_167);
+A_162=plusIII(A_161,A_158);
+ A_164= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
+A_163= ABC(toi(A_162)-QUADio,shape(r_3)[1]);
+A_166=inds01(r_3,A_164,A_163,A_153);
+ r_3=( A_166);
  }
  }
- A_171=rhoXCI( r_3);
- A_172=takeIII(-1,A_171);
- A_173=rhoXII( y_0);
- A_174=dropIII(-1,A_173);
- A_175=comaIII(A_174,A_172);
- A_176=rhoICC(A_175,r_3);
- r_4=( A_176);
+ A_170=rhoXCI( r_3);
+ A_171=takeIII(-1,A_170);
+ A_172=rhoXII( y_0);
+ A_173=dropIII(-1,A_172);
+ A_174=comaIII(A_173,A_171);
+ A_175=rhoICC(A_174,r_3);
+ r_4=( A_175);
  return(r_4);
 }
 
@@ -2237,105 +2237,105 @@ inline char[.,.,.,.] thintCLONE13IIC(int PP, int[.,.,.,.] y ,int QUADio)
  ?
 */
 QUADpp_0=( PP);
- A_66=slBII(true,y);
- y_0=( A_66);
- A_68=rhoXII( y_0);
- A_69=takeIII(-1,A_68);
- A_70=rhoXII( y_0);
- A_71=dropIII(-1,A_70);
- A_72=mpyslXIIQUICKSTOP( A_71);
- A_76=comaIII(A_72,A_69);
- A_77=rhoIII(A_76,y_0);
- m_0=( A_77);
- A_79=modXII( m_0);
- A_80=maxsl1XIIFOLD( A_79);
+ A_65=slBII(true,y);
+ y_0=( A_65);
+ A_67=rhoXII( y_0);
+ A_68=takeIII(-1,A_67);
+ A_69=rhoXII( y_0);
+ A_70=dropIII(-1,A_69);
+ A_71=mpyslXIIQUICKSTOP( A_70);
+ A_75=comaIII(A_71,A_68);
+ A_76=rhoIII(A_75,y_0);
+ m_0=( A_76);
+ A_78=modXII( m_0);
+ A_79=maxsl1XIIFOLD( A_78);
  // dsf scalar(s)
-A_84=maxIII(2,A_80);
- A_85=PmtlXII( A_84);
- widths_0=( A_85);
- A_87=minsl1XIIFOLD( m_0);
- maxneg_0=( A_87);
+A_83=maxIII(2,A_79);
+ A_84=PmtlXII( A_83);
+ widths_0=( A_84);
+ A_86=minsl1XIIFOLD( m_0);
+ maxneg_0=( A_86);
  // dsf scalar(s)
-A_93=ltIBB(maxneg_0,false);
- neg_0=( A_93);
- A_95=modXII( maxneg_0);
+A_92=ltIBB(maxneg_0,false);
+ neg_0=( A_92);
+ A_94=modXII( maxneg_0);
  // dsf scalar(s)
-A_96=maxIII(2,A_95);
- A_97=PmtlXII( A_96);
- maxneg_1=( A_97);
+A_95=maxIII(2,A_94);
+ A_96=PmtlXII( A_95);
+ maxneg_1=( A_96);
  // dsf clique
-A_100=geIIB(maxneg_1,widths_0);
+A_99=geIIB(maxneg_1,widths_0);
  // dsf Check needed
-A_101=mpyBBB(neg_0,A_100);
+A_100=mpyBBB(neg_0,A_99);
  // dsf Check needed
-A_102=plusIBI(widths_0,A_101);
- widths_1=( A_102);
- A_104=rhoXII( y_0);
- A_105=rhoIII(A_104,widths_1);
- A_106=comaXII( A_105);
- w_0=( A_106);
+A_101=plusIBI(widths_0,A_100);
+ widths_1=( A_101);
+ A_103=rhoXII( y_0);
+ A_104=rhoIII(A_103,widths_1);
+ A_105=comaXII( A_104);
+ w_0=( A_105);
  // dsf scalar(s)
-A_108=plusIBI(widths_1,true);
- A_109=comaBII(false,A_108);
- A_110=plusbslXII( A_109);
- psw_0=( A_110);
+A_107=plusIBI(widths_1,true);
+ A_108=comaBII(false,A_107);
+ A_109=plusbslXII( A_108);
+ psw_0=( A_109);
  // dsf scalar(s)
-A_115=plusIBI(widths_1,true);
- A_116=plusslXIIFOLD( A_115);
+A_114=plusIBI(widths_1,true);
+ A_115=plusslXIIFOLD( A_114);
  // dsf scalar(s)
-A_120=plusIII(-1,A_116);
- A_122=rhoXII( m_0);
- A_121= ABC(toi(false)-QUADio,shape(A_122)[0]);
-A_124=A_122[[A_121]];
- A_125=comaIII(A_124,A_120);
- shpz_0=( A_125);
- A_127=rhoICC(shpz_0,' ');
- r_0=( A_127);
- A_130=rhoXII( m_0);
- A_129= ABC(toi(false)-QUADio,shape(A_130)[0]);
-A_132=A_130[[A_129]];
- A_134=iotaXII( A_132,QUADio);
- A_CTR135_= 0;
-A_CTR135z_ = (shape(A_134)[[0]])-1;
+A_119=plusIII(-1,A_115);
+ A_121=rhoXII( m_0);
+ A_120= ABC(toi(false)-QUADio,shape(A_121)[0]);
+A_123=A_121[[A_120]];
+ A_124=comaIII(A_123,A_119);
+ shpz_0=( A_124);
+ A_126=rhoICC(shpz_0,' ');
+ r_0=( A_126);
+ A_129=rhoXII( m_0);
+ A_128= ABC(toi(false)-QUADio,shape(A_129)[0]);
+A_131=A_129[[A_128]];
+ A_133=iotaXII( A_131,QUADio);
+ A_CTR134_= 0;
+A_CTR134z_ = (shape(A_133)[[0]])-1;
 r_3=toC(r_0);
-for(; A_CTR135_ <= A_CTR135z_; A_CTR135_++){
-i_0 = A_134[[A_CTR135_]];
- A_138=rhoXII( m_0);
- A_137= ABC(toi(true)-QUADio,shape(A_138)[0]);
-A_140=A_138[[A_137]];
- A_142=iotaXII( A_140,QUADio);
- A_CTR143_= 0;
-A_CTR143z_ = (shape(A_142)[[0]])-1;
+for(; A_CTR134_ <= A_CTR134z_; A_CTR134_++){
+i_0 = A_133[[A_CTR134_]];
+ A_137=rhoXII( m_0);
+ A_136= ABC(toi(true)-QUADio,shape(A_137)[0]);
+A_139=A_137[[A_136]];
+ A_141=iotaXII( A_139,QUADio);
+ A_CTR142_= 0;
+A_CTR142z_ = (shape(A_141)[[0]])-1;
 r_3=toC(r_3);
-for(; A_CTR143_ <= A_CTR143z_; A_CTR143_++){
-j_0 = A_142[[A_CTR143_]];
- A_146= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
-A_145= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
-A_148=m_0[[A_146,A_145]];
- A_149= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_151=w_0[[A_149]];
- A_152=comaIBI(A_151,false);
- A_154=DthornIntIIC(A_152,A_148,QUADio);
- A_155= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
-A_157=w_0[[A_155]];
- A_159=iotaXII( A_157,QUADio);
- A_160= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
-A_162=psw_0[[A_160]];
+for(; A_CTR142_ <= A_CTR142z_; A_CTR142_++){
+j_0 = A_141[[A_CTR142_]];
+ A_145= ABC(toi(i_0)-QUADio,shape(m_0)[0]);
+A_144= ABC(toi(j_0)-QUADio,shape(m_0)[1]);
+A_147=m_0[[A_145,A_144]];
+ A_148= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_150=w_0[[A_148]];
+ A_151=comaIBI(A_150,false);
+ A_153=DthornIntIIC(A_151,A_147,QUADio);
+ A_154= ABC(toi(j_0)-QUADio,shape(w_0)[0]);
+A_156=w_0[[A_154]];
+ A_158=iotaXII( A_156,QUADio);
+ A_159= ABC(toi(j_0)-QUADio,shape(psw_0)[0]);
+A_161=psw_0[[A_159]];
  // dsf scalar(s)
-A_163=plusIII(A_162,A_159);
- A_165= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
-A_164= ABC(toi(A_163)-QUADio,shape(r_3)[1]);
-A_167=inds01(r_3,A_165,A_164,A_154);
- r_3=( A_167);
+A_162=plusIII(A_161,A_158);
+ A_164= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
+A_163= ABC(toi(A_162)-QUADio,shape(r_3)[1]);
+A_166=inds01(r_3,A_164,A_163,A_153);
+ r_3=( A_166);
  }
  }
- A_171=rhoXCI( r_3);
- A_172=takeIII(-1,A_171);
- A_173=rhoXII( y_0);
- A_174=dropIII(-1,A_173);
- A_175=comaIII(A_174,A_172);
- A_176=rhoICC(A_175,r_3);
- r_4=( A_176);
+ A_170=rhoXCI( r_3);
+ A_171=takeIII(-1,A_170);
+ A_172=rhoXII( y_0);
+ A_173=dropIII(-1,A_172);
+ A_174=comaIII(A_173,A_171);
+ A_175=rhoICC(A_174,r_3);
+ r_4=( A_175);
  return(r_4);
 }
 

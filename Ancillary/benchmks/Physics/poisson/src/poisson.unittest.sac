@@ -1,0 +1,7 @@
+use poisson: all;
+
+int main()
+{
+ z  = poisson_testXXI();
+ return(z);
+}

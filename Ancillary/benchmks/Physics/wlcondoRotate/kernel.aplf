@@ -2,4 +2,3 @@
  N←⍴y
  m←(0=⍳N)∨(N-1)=⍳N
  r←(m×y)+(~m)×((1⌽y)+¯1⌽y)÷2
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/wlcondoRotate/kernel.ufn§0§ 2020 6 24 17 4 23 44 §dÁsz§0

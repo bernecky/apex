@@ -1,0 +1,7 @@
+use wlcondoShift: all;
+
+int main()
+{
+ z  = wlcondoShift_testXXI();
+ return(z);
+}
