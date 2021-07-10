@@ -1,1 +1,1 @@
- GenExports←{'# TODO: Module and export',NL,'# module ',(PathFileName ⍵),';',NL,'# export all;',NL,NL}
+ GenExports←{'# TODO: Module and export',NL,'module ',(PathFileName ⍵),'',NL,'export all',NL,NL}

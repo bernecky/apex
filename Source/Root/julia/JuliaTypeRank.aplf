@@ -13,6 +13,8 @@ notmt:
      rk←10|'0123456789'⍳rk ⍝ Array rank
  :EndIf
  tp←TJulia tp
+
+ ⍝ TODO: Make it instead of Type[.] to Array{Type}
  lft←(×0⌈rk)⍴¨'['
  rt←(×0⌈rk)⍴¨']'
  dots←(0⌈¯1+2×rk)⍴¨E'.,'

@@ -1,4 +1,6 @@
  r←fldr dojulia asts;TL;fragbuf;ipt
+⎕←'Using experimental julia backend! Be careful!'
+ 
 ⍝# Emit Julia object code for asts
  InitializeAST
  InitializeFragments

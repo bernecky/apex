@@ -160,14 +160,14 @@ inline double sacmod(double x, double y)
 }
 
 #Fragment APEXFUZZEQ 000 d d b . D
-inline bool APEXFUZZEQ(double x, double y, double QUADct)
-{ #= ISO APL Tolerant equality predicate =#
- absx = abs(x);
- absy = abs(y);
- tolerance = QUADct * max(absx,absy);
- z = abs(x-y) <= tolerance;
- return(z);
-}
+function APEXFUZZEQ(Float64 x, Float64 y, Float64 QUADct)::Bool
+ #= ISO APL Tolerant equality predicate =#
+ absx = abs(x)
+ absy = abs(y)
+ tolerance = QUADct * max(absx, absy)
+ z = abs(x-y) <= tolerance
+ return(z)
+end
 
 #Fragment APEXFUZZEQ 000 bid bid b . $CT
 # This fragment isn't needed for anything except double/float

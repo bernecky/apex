@@ -24,9 +24,9 @@ function $FNAME(x::$XTYPE, y::$YTYPE)
 end
 
 #Fragment bar 000 bid bid bid .
-inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
-{ return($XTto$CT(x)-$YTto$CT(y));
-}
+function $FNAME(x::$XTYPE, y::$YTYPE)::$ZTYPE
+  return($XTto$CT(x)-$YTto$CT(y))
+end
 
 #Fragment mpy 000 b b b .
 inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
@@ -194,14 +194,14 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
 }
 
 #Fragment eq 000 bid bid b .
-inline $ZTYPE $FNAME($XTYPE x, $YTYPE y, double QUADct)
-{ #= A=B on doubles =#
+function $FNAME($XTYPE x, $YTYPE y, double QUADct)::$ZTYPE
+  #= A=B on doubles =#
   #= We use | instead of || on the assumption that 
-   * the zero-fuzz case will eliminate the second leg,
-   * and it also eliminate a CONDFUN.
-   =#
+     the zero-fuzz case will eliminate the second leg,
+     and it also eliminate a CONDFUN.
+  =#
  return(($XTto$CT(x) == $YTto$CT(y)) | APEXFUZZEQ($XTto$CT(x),$YTto$CT(y),QUADct));
-}
+end
 #Generate , APEXFUZZEQ, DDB, 000, ., D
 
 #Fragment ne 000 bic bic b .

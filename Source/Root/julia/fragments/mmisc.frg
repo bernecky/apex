@@ -59,5 +59,6 @@ end
 #Fragment quad x** x bidc bidc .
 function $FNAME(y, QUADpp, QUADpw)
     # {quad}{<-} anything
-    print(y)
+    # Use Base.print instead of just print because if the module name is print, there is a conflict
+    Base.print(y)
 end

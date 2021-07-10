@@ -11,8 +11,10 @@
  tp←(ast[tp;,asttype])TypeRank ast[tp;,astrank]
  fnrks←(¯1⌽TypesBig)[1+ast[dfnlarg,dfnrarg,dfnres;asttype]]
  ismain←fn≡'main' ⍝ Main is "special" in several ways
- ('int main() has bad result type: ',D tp[2])assert(~ismain)∨tp[2]≡E'Int64'
+ ⍝ I am not sure why this is bad?('int main() has bad result type: ',D tp[2])assert(~ismain)∨tp[2]≡E'Int64'
  fn←fn,(~ismain)/fnrks ⍝ No function type signature for main
+ 
+ ⍝ TODO: Arg type needs to be formatted Arg::ArgType instead of ArgType Arg
  args←¯2↓,dy[0 1]⌿tp[0 1],(E' '),args,2 2⍴', '
 
  ⍝ Build fn header, renaming main
@@ -24,7 +26,8 @@
  ⍝ Otherwise, inline all non-main user-defined fns
  ⍝ Inlining slows down compile times a LOT (See saczilla bug#243)
  ⍝⍝hdr←D Raze((inlineme∧~ismain)/E'inline '),fd[0]
- hdr←'function ', D Raze fd[0]
+ hdr←'function '
+ ft←'::',D Raze fd[0]
  fd←D Raze 1↓fd
  ⍝ Build header for incoming semiglobals
  sg←(SemiGlobalsMarkIn ast)⌿ast
@@ -47,6 +50,6 @@
      tps←(sg⌿ast[;,asttype])TypeRank sg⌿ast[;,astrank]
      sg←D Raze,(',',¨tps),E,NL
  :EndIf
- r←(squeeze hdr,sg,fd,NL)
+ r←(squeeze hdr,sg,fd,ft,NL)
  'stupid enclosed arrays'assert∧/r∊⎕AV
  r←(E r),(E fns),E ast

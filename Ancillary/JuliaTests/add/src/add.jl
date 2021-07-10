@@ -1,8 +1,8 @@
 # TODO: Module and export
-# module add;
-# export all;
+module add
+export all
 
-# Compiled by APEX Version: FIXME!! 2021-07-03 19:20:18.297
+# Compiled by APEX Version: FIXME!! 2021-07-10 11:45:10.028
 #=use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -40,7 +40,11 @@ function plusIII(x::Int64, y::Int64)
   return convert(Int64, x) + convert(Int64, y)
 end
 
-function Int64 add_testXXI()
+function quadXII(y, QUADpp, QUADpw)
+    # {quad}{<-} anything
+    print(y)
+end
+function add_testXXI()::Int64
 
 #=
  ?
@@ -50,11 +54,13 @@ QUADio_0=toI(( false))
  QUADpp_0=( 10) 
  QUADpw_0=( 80) 
  QUADrl_0=( 16807) 
- n1_0=( 2) 
- n2_0=( 2) 
+ n1_0=( 5) 
+ n2_0=( 5) 
  # dsf Scalar & clique
 A_42=plusIII(n1_0,n2_0) 
 r_0=( A_42) 
+ A_46=quadXII( r_0,QUADpp_0,QUADpw_0) 
  return(r_0);
 end
 
+end

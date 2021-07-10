@@ -1,13 +1,6 @@
 r←main;n1;n2
-⍝ r←main;⎕IO;⎕RL;n;⎕PP;⎕PW
-⍝ ⎕IO←0
-⍝ ⎕RL←16807
-⍝ ⎕PP←16
-⍝ ⎕PW←80
-⍝ r←iotan n
-⍝ ⎕←r
-⍝ ⎕←r←(r≡(n×n+1.5-0.5)÷2)-1
-n1←2
-n2←2
+n1←5
+n2←5
 r←n1+n2
+⎕←r
 r

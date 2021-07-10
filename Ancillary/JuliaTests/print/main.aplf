@@ -1,0 +1,5 @@
+r←main;txt
+txt←'Hello, Julia Backend For APEX!'
+⎕←txt
+r←1
+r

@@ -1,10 +1,8 @@
- GenTestCaller←{
+GenTestCaller←{
      ⍝ ⍺ is module name; ⍵ is decorated unittest()
-     ⍝ z←'use ',⍺,': all;',NL,NL
-     ⍝ z←z,'int main()',NL,'{',NL
-     ⍝ z←z,' z  = ',⍵,'();',NL
-     ⍝ z←z,' return(z);',NL,'}',NL
-     ⍝ z
-     ⍝ TODO: UnitTests
-     'TODO: UnitTests'
+     z←'module TestModule',NL,NL
+     z←z,' include("',⍺,'.jl")',NL
+     z←z,' z  = ',⍺,'.',⍵,'()',NL
+     z←z,' return z',NL,'end',NL
+     z
  }

@@ -14,6 +14,7 @@
  j←0=D cv/astb[;astxrho] ⍝ Correct empty vectors
  tp←D(cv\j)⌿astb[;asttype]
  tp←'[',¨':',¨TypesJulia[tp],¨']'
+ tp
  i[j/⍳⍴j]←tp
  astb[cv/⍳⍴cv;asttarget]←i
  r←astb

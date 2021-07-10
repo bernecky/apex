@@ -1,5 +1,5 @@
  InvokeCompiler←{
-     'depreciated in julia backend' assert 0
+     'Not needed in julia backend' assert 0
      
      
      

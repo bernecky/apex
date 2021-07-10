@@ -1,4 +1,4 @@
  JuliaModuleTypes←{
-     ⎕←z←('?',¯1⌽TypesBig)[2+⍵[dfnlarg,dfnrarg,dfnres;asttype]]
+     z←('?',¯1⌽TypesBig)[2+⍵[dfnlarg,dfnrarg,dfnres;asttype]]
      z
 }

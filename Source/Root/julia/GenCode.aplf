@@ -5,4 +5,4 @@
  sis←fns EmitPrimitiveFnDefns asts
  sis←D Raze sis,D Raze 0⊃¨j
  r←(GenExports fldr),GenProlog fldr
- r←r,sis
+ r←r,sis,'end' ⍝ Enclose in end for the module to be complete 

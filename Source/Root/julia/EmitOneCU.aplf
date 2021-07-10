@@ -12,9 +12,8 @@
  fnmexe←fnmso←''
  ⍝⍝⍝⍝⍝⍝⍝⍝(astsmod m)←fldr SACModuleRenameMain asts
  mast←D ssaast⌷,D ismn/asts
- nmain←fldr JuliaModuleName 0 ⍝ Why does this need a right argument that it doesnt use?
+ nmain←fldr JuliaModuleName 0 ⍝ TODO: ? Why does this need a right argument that it doesnt use?
  nmain←nmain,fldr JuliaModuleTypes mast
- ⎕←nmain,fldr JuliaModuleTypes mast
  txt←((E fldr), E nmain) GenCode asts ⍝ gen module from all asts
  fnmso←txt WriteCode(E fldr),E''
  ismod←1 ⍝ Emit makefile for module
