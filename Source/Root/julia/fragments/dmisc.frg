@@ -179,11 +179,11 @@ inline $ZTYPE[+] $FNAME($XTYPE[.] x, $YTYPE[+] y)
 # --------------- MATCH fragments ----------------------------
 
 #Fragment same 000 bidc bidc b .
-inline $ZTYPE $FNAME($XTYPE x, $YTYPE y$SYSVARGDECL)
-{ #= Scalar match scalar =#
-  z = eq$CT$CTB(to$CT(x), to$CT(y)$SYSVARGKER);
- return(z);
-}
+function $FNAME(x::$XTYPE, y::$YTYPE $SYSVARGDECL)::$ZTYPE
+ #= Scalar match scalar =#
+  z = eq$CT$CTB(to$CT(x), to$CT(y)$SYSVARGKER)
+ return(z)
+end
 #Generate , APEXFUZZEQ, $XT$YTB, 000, ., D
 #Generate , eq, $CT$CTB, 000, ., $CT
 

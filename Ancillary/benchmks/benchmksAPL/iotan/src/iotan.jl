@@ -2,7 +2,7 @@
 module iotan
 export all
 
-# Compiled by APEX Version: FIXME!! 2021-07-10 14:05:08.466
+# Compiled by APEX Version: FIXME!! 2021-07-10 21:43:51.771
 #=use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -44,16 +44,16 @@ function plusIDD(x::Int64, y::Float64)
   return convert(Int64, x) + convert(Int64, y)
 end
 
-inline Float64 mpyIDD(Int64 x, Float64 y)
-{ return(ItoD(x)*DtoD(y));
-}
+function mpyIDD(x::Int64, y::Float64)::Float64
+  return ItoD(x) * DtoD(y)
+end
 
-inline Float64 divDID(Float64 x, Int64 y)
-{ dx = DtoD(x);
-  dy = ItoD(y);
-  z = (dx == dy) ? 1.0  : dx/dy;
-  return(z);
-}
+function divDID(x::Float64, y::Int64)::Float64
+  dx = DtoD(x)
+  dy = ItoD(y)
+  z = (dx == dy) ? 1.0 : dx/dy
+  return z
+end
 
 function barBBI(x::Bool, y::Bool)::Int64
   return(BtoI(x)-BtoI(y))
@@ -71,10 +71,10 @@ inline Float64[+] plusDID(Float64 x, Int64[+] y)
 }
 
 
-function iotaXII(Int64 y, int QUADio)
+function iotaXII(y::Int64, QUADio)
     # Index generator on scalar
     # HELP! Needs domain check for negative shp
-    z = QUADio+iota(toi(y))
+    z = Int64(QUADio) .+ collect(0:Int64(y)-1)
     return z;
 end
 
@@ -88,23 +88,24 @@ function quadXII(y, QUADpp, QUADpw)
     # Use Base.print instead of just print because if the module name is print, there is a conflict
     Base.print(y)
 end
-inline Bool sameDDB(Float64 x, Float64 y,double QUADct)
-{ #= Scalar match scalar =#
-  z = eqDDB(toD(x), toD(y), QUADct);
- return(z);
-}
+function sameDDB(x::Float64, y::Float64 ,double QUADct)::Bool
+ #= Scalar match scalar =#
+  z = eqDDB(toD(x), toD(y), QUADct)
+ return(z)
+end
 
 
 
-inline Float64 plusslXDDFOLD(Float64[.] y)
-{ #= First/last axis fold-based reduction of vector =#
-  lim = shape(y)[0]-1;
+function plusslXDDFOLD(y::Array{Float64})::Float64
+  #= First/last axis fold-based reduction of vector =#
+  # TODO
+  lim = size(y)[1]-1;
   z = with {
-        (0*shape(y) <= iv < shape(y))
+        (0*size(y) <= iv < size(y))
                 : DtoD(y[lim-iv]);
        } :  fold( plusDDD, ItoD(0));
   return(z);
-}
+end
 
 
 function plusDDD(x::Float64, y::Float64)
@@ -112,7 +113,7 @@ function plusDDD(x::Float64, y::Float64)
   return convert(Int64, x) + convert(Int64, y)
 end
 
-function eqDDB(Float64 x, Float64 y, double QUADct)::Bool
+function eqDDB(x::Float64, y::Float64, QUADct::Float64)::Bool
   #= A=B on doubles =#
   #= We use | instead of || on the assumption that
      the zero-fuzz case will eliminate the second leg,
@@ -122,7 +123,7 @@ function eqDDB(Float64 x, Float64 y, double QUADct)::Bool
 end
 
 
-function APEXFUZZEQ(Float64 x, Float64 y, Float64 QUADct)::Bool
+function APEXFUZZEQ(x::Float64, y::Float64, QUADct::Float64)::Bool
  #= ISO APL Tolerant equality predicate =#
  absx = abs(x)
  absy = abs(y)

@@ -34,17 +34,17 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
 }
 
 #Fragment mpy 000 bid bid bid .
-inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
-{ return($XTto$CT(x)*$YTto$CT(y));
-}
+function $FNAME(x::$XTYPE, y::$YTYPE)::$ZTYPE
+  return $XTto$CT(x) * $YTto$CT(y)
+end
 
 #Fragment div 000 bid bid d .
-inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
-{ dx = $XTtoD(x);
-  dy = $YTtoD(y);
-  z = (dx == dy) ? 1.0  : dx/dy;
-  return(z);
-}
+function $FNAME(x::$XTYPE, y::$YTYPE)::$ZTYPE
+  dx = $XTtoD(x)
+  dy = $YTtoD(y)
+  z = (dx == dy) ? 1.0 : dx/dy
+  return z
+end
 
 #Fragment min 000 b b b .
 inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
@@ -194,7 +194,7 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
 }
 
 #Fragment eq 000 bid bid b .
-function $FNAME($XTYPE x, $YTYPE y, double QUADct)::$ZTYPE
+function $FNAME(x::$XTYPE, y::$YTYPE, QUADct::Float64)::$ZTYPE
   #= A=B on doubles =#
   #= We use | instead of || on the assumption that 
      the zero-fuzz case will eliminate the second leg,

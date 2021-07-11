@@ -160,7 +160,7 @@ inline double sacmod(double x, double y)
 }
 
 #Fragment APEXFUZZEQ 000 d d b . D
-function APEXFUZZEQ(Float64 x, Float64 y, Float64 QUADct)::Bool
+function APEXFUZZEQ(x::Float64, y::Float64, QUADct::Float64)::Bool
  #= ISO APL Tolerant equality predicate =#
  absx = abs(x)
  absy = abs(y)

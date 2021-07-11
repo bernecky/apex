@@ -7,35 +7,35 @@ Robert Bernecky 2007-05-13
 =#
 
 #Fragment iota x01 x bidc i .
-function $FNAME($YTYPE y, int QUADio)
+function $FNAME(y::$YTYPE, QUADio)
     # Index generator on scalar
     # HELP! Needs domain check for negative shp
-    z = QUADio+iota(toi(y))
+    z = Int64(QUADio) .+ collect(0:Int64(y)-1)
     return z;
 end
 
 #Fragment iota x01 x bidc i NonNeg
-function $FNAMENonNeg($YTYPE y, int QUADio)
+function $FNAMENonNeg($YTYPE y, QUADio)
     # Index generator on ScalarN when N is non-negative integer
-    z = QUADio+iota(toi(y))
-    return z;
+    z = Int64(QUADio) .+ collect(0:Int64(y)-1)
+    return z
 end
 
 #Fragment iota x11 x bidc i .
-function $FNAME($YTYPE[1] y, int QUADio)
+function $FNAME($YTYPE[1] y, QUADio)
     # Index generator on 1-element vector =#
     # HELP! Needs length error check =#
     # HELP! Needs domain check for negative shp =#
-    z = QUADio+iota(toi(y[[0]]));
-    return z;
+    z = Int64(QUADio) .+ collect(0:Int64(y)-1)
+    return z
 end
 
 #Fragment iota x11 x bidc i NonNeg
-function $FNAMENonNeg(y, int QUADio)
+function $FNAMENonNeg(y, QUADio)
     # Index generator on 1-element vector, known to be non-negative integer
-    if ()
-    z = QUADio+iota(toi(y[[0]]));
-    return z;
+    # z = 0+collect(toi(y[[0]]));
+    z = Int64(QUADio) .+ collect(0:Int64(y)-1)
+    return z
 end
 
 #Fragment ltak *** x bidc bidc .

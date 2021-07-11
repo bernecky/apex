@@ -40,15 +40,16 @@ inline $ZTYPE $FNAMEFOLD($YTYPE y)
 
 #Fragment sl  x10 bidc bidc bidc FOLD 
 #Fragment sl1 x10 bidc bidc bidc FOLD 
-inline $ZTYPE $FNAMEFOLD($YTYPE[.] y)
-{ #= First/last axis fold-based reduction of vector =# 
-  lim = shape(y)[0]-1;
+function $FNAMEFOLD(y::Array{$YTYPE})::$ZTYPE
+  #= First/last axis fold-based reduction of vector =# 
+  # TODO
+  lim = size(y)[1]-1;
   z = with {
-        (0*shape(y) <= iv < shape(y)) 
+        (0*size(y) <= iv < size(y)) 
                 : $YTto$ZT(y[lim-iv]);
        } :  fold( $FN$ZT$ZT$ZT, Ito$ZT($FRID));
   return(z);
-}
+end
 #Generate , $FN, $ZT$ZT$ZT, 000, ., $ZT
 
 #Fragment sl  x10 bidc bidc bidc QUICKSTOP 
