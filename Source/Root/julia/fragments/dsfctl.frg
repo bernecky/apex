@@ -33,16 +33,13 @@
 
 #Fragment dsfctl   0**  bidc bidc bidc .
 #Fragment dsfctlsx 0**  bidc bidc bidc . 
-inline $ZTYPE[+] $FNAME($XTYPE x, $YTYPE[+] y$SYSVARGDECL)
-{ #= SxA scalar function =#
-  xel = to$CT(x);
-  z = with {
-	( . <= iv <= .) {
-        	yel = to$CT(y[iv]);
-      		} : $FN$CT$CT$ZT(xel,yel$SYSVARGKER);
-	} : genarray(shape(y), $OTFILL);
+function $FNAME(x::$XTYPE, y::Array{$YTYPE}$SYSVARGDECL)::Array{$ZTYPE}
+	#= SxA scalar function =#
+	# TODO
+  xel = to$CT(x)
+  z = with { ( . <= iv <= .) { yel = to$CT(y[iv]); } : $FN$CT$CT$ZT(xel,yel$SYSVARGKER); } : genarray(shape(y), $OTFILL);
   return(z);
-}
+end
 #Generate , $FN, $CT$CT$ZT, 000, ., $CT
 
 #Fragment dsfctl   *0* bidc bidc bidc .

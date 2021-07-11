@@ -2,7 +2,7 @@
 module iotan
 export all
 
-# Compiled by APEX Version: FIXME!! 2021-07-10 21:43:51.771
+# Compiled by APEX Version: FIXME!! 2021-07-11 17:49:40.964
 #=use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -59,16 +59,13 @@ function barBBI(x::Bool, y::Bool)::Int64
   return(BtoI(x)-BtoI(y))
 end
 
-inline Float64[+] plusDID(Float64 x, Int64[+] y)
-{ #= SxA scalar function =#
-  xel = toD(x);
-  z = with {
-     ( . <= iv <= .) {
-              yel = toD(y[iv]);
-                    } : plusDDD(xel,yel);
-  } : genarray(shape(y), 0.0d);
+function plusDID(x::Float64, y::Array{Int64})::Array{Float64}
+   #= SxA scalar function =#
+      # TODO
+  xel = toD(x)
+  z = with { ( . <= iv <= .) { yel = toD(y[iv]); } : plusDDD(xel,yel); } : genarray(shape(y), 0.0d);
   return(z);
-}
+end
 
 
 function iotaXII(y::Int64, QUADio)
