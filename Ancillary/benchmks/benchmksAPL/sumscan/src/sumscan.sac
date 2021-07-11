@@ -207,6 +207,7 @@ A_21=mpyDID(0.01,A_20);
 A_22=comaIII(n,n);
  A_23=rhoIDD(A_22,A_21);
  r_0=( A_23);
+r_0 = reverse(r_0); // rbe
  A_25=plusbslXDD( r_0);
  A_29=comaXDD( A_25);
  A_30=plusslXDDFOLD( A_29);

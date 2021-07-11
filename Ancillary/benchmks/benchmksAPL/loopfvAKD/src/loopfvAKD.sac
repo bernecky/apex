@@ -1,7 +1,7 @@
 module loopfvAKD;
 export {loopfvAKD_testXII};
 
-// Compiled by APEX Version: FIXME!! 2021-07-07 16:48:06.220
+// Compiled by APEX Version: FIXME!! 2021-07-11 16:28:45.697
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -77,12 +77,12 @@ inline int barBBI(bool x, bool y)
 { return(BtoI(x)-BtoI(y));
 }
 
-inline double[+] plusDBD(double[+] x, bool y)
+inline double[+] plusDID(double[+] x, int y)
 { /* AxS scalar function */
   z = with {
   ( . <= iv <= .) {
               xel = x[iv];
-   } : plusDBD(xel,y);
+   } : plusDID(xel,y);
   } : genarray( shape(x), 0.0d);
   return(z);
 }
@@ -129,8 +129,8 @@ inline int CommandLineArgvXBI(bool y)
   return( z);
 }
 
-inline double plusDBD(double x, bool y)
-{ return(DtoD(x)+BtoD(y));
+inline double plusDID(double x, int y)
+{ return(DtoD(x)+ItoD(y));
 }
 
 inline double[*] indrfr(int fr, double[+] X, int[+] I)
@@ -200,18 +200,18 @@ inline double[.] loopfvXID(int n ,int QUADio)
  ?
 */
 // dsf scalar(s)
-A_24=barDDD(0.5,0.5);
- A_25=comaXDD( A_24);
- r_0=( A_25);
- A_28=iotaXII( n,QUADio);
- A_CTR29_= 0;
-A_CTR29z_ = (shape(A_28)[[0]])-1;
+A_23=barDDD(0.5,0.5);
+ A_24=comaXDD( A_23);
+ r_0=( A_24);
+ A_27=iotaXII( n,QUADio);
+ A_CTR28_= 0;
+A_CTR28z_ = (shape(A_27)[[0]])-1;
 r_2=toD(r_0);
-for(; A_CTR29_ <= A_CTR29z_; A_CTR29_++){
-i_0 = A_28[[A_CTR29_]];
+for(; A_CTR28_ <= A_CTR28z_; A_CTR28_++){
+i_0 = A_27[[A_CTR28_]];
  // dsf scalar(s)
-A_31=plusDBD(r_2,true);
- r_2=( A_31);
+A_30=plusDID(r_2,i_0);
+ r_2=( A_30);
  }
  return(r_2);
 }
