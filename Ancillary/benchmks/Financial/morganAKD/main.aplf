@@ -1,8 +1,7 @@
  r←main args;d;⎕PP
- ⍝ dcl integer vector n
+ ⍝ dcl integer vector  args
  ⍝⍝ E.g.,  d←GenArg 2 1510 2010
  d←GenArg args
  r←2 morgan d
  ⎕←r←+/,r
  ⎕←r←(72114.0266543345=r)-1
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/morganAKD/main.ufn§0§ 2020 6 24 17 4 22 868 §lJmã§0

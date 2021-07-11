@@ -1,0 +1,7 @@
+use wlcondoTakeDrop: all;
+
+int main()
+{
+ z  = wlcondoTakeDrop_testXXI();
+ return(z);
+}

@@ -1,0 +1,7 @@
+use morganAKD: all;
+
+int main()
+{
+ z  = morganAKD_testXII();
+ return(z);
+}

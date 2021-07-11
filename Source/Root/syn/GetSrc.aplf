@@ -1,11 +1,13 @@
  r←GetSrc fldr;fnm
  ⍝ Get source text from .aplf files in fldr,
  ⍝ or from namespace fldr
+ ⍝ Result is (fn names]ish]),src
  :If ⎕NEXISTS fldr  ⍝ Compile *.aplf in folder
      fnm←fldr,#.globals.PathDelim,'*.aplf'
      r←#.fileutils.ls fnm
-     r←GetFn¨r
+     r←(E PathNoExtension¨PathFileName¨r),E GetFn¨r
  :Else
-
-     r←fldr.⎕CR¨fldr.⎕NL 3 ⍝ Compile fns in namespace
+     fnm←fldr.⎕NL 3 ⍝ fns in namespace
+     r←fldr.⎕CR¨fldr.⎕NL 3 ⍝ fns in namespace to compile
+     r←(E fnm),E r
  :EndIf

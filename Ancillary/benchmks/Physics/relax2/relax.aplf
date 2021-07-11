@@ -9,4 +9,3 @@
  inner_B←((m-2),n-2)↑1 1↓B
  middle←left_A,inner_B,right_A
  result←upper_A⍪middle⍪lower_A
-⍝∇⍣§/home/apex/apexgit/Ancillary/benchmks/relax2/relax.ufn§0§ 2020 6 24 17 4 23 28 §CJHã§0

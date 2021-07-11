@@ -1,7 +1,14 @@
 % SAC Code fragments for dyadic conjunctions, such as x +.* y
-% Robert Bernecky 2007-05-08
+% Robert Bernecky 2021-06-28
 
-% ALL code requires checks for length error!! rbe 2005-09-05
+%FIXME ALL code requires checks for length error!! rbe 2005-09-05
+
+%The definition of inner product  f.g is:
+%   (f⌿ g⍤(lg,¯1))⍤(1+lg, infinity)
+% where lg is the left rank of g
+% for the scalar verb subsets of f and g, with lg=0, we have:
+%   (f⌿ g⍤(0 ¯1))⍤(1 infinity)
+
 
 % For the non-trivial cases of inner product, we
 % define several algorithms, roughly in order of decreasing best-case

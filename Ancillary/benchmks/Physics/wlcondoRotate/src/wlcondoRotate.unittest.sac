@@ -1,0 +1,7 @@
+use wlcondoRotate: all;
+
+int main()
+{
+ z  = wlcondoRotate_testXXI();
+ return(z);
+}

@@ -1,0 +1,20 @@
+ r←k setup n;b;a;t
+⍝ Setup provides model data for nmo
+⍝ x is a list of shot/geophone offsets.
+⍝dt is the time sample interval.
+⍝ j×dt is the normal incidence two way time to
+⍝ the reflector.
+⍝ dx is the geophone spacing.
+⍝ vstk is velocity, a constant.
+⍝ Output is the data d ready for nmo. (d may be
+⍝ convolved with a suitable wavelet), output is also
+⍝ the times "to" required for nmo.
+ x←dx×1+⍳k
+ t←(((j×dt)*2)+((x÷vstk)*2))*0.5
+ d←(k,n+1)⍴0
+ b←STSCfloor t÷dt
+ d[;0]←1 ⍝ KLUDGE 1995-12-11: force floating type
+ d←(-b)⌽d
+ to←dt×⍳n+1
+ r←d
+⍝ Matches acorn wsdoc 1995-11-21

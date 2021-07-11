@@ -1,8 +1,5 @@
  Dfn2Trad←{
  ⍝ Convert Dfn to TradFn
- ⎕←'FIXME Dfn2Trad'
- ⍵
- ⍝ DO We need ⍺ really?
      fnm←DfnName ⍵ ⍝ Get function name, if any
      fns←PathNoExtension¨PathFileName¨⍺ ⍝ Need all fn names as global, non-locals
      outerfn←dbr ⍵
@@ -10,5 +7,5 @@
      outerfn←D(isDfn outerfn)⌷(E outerfn),E dfn
      (outerfn innerfns fns)←Dfn2TradTacit(outerfn''fnm fns)
      outerfn←(D outerfn)Dfn2TradTacitOne(fnm fns)
-     (dbr¨#.arrayutils.DeleteMultipleBlanks¨(outerfn,innerfns))
+     D Raze(dbr¨#.arrayutils.DeleteMultipleBlanks¨(outerfn,innerfns))
  }

@@ -1,0 +1,7 @@
+use poissonAKD: all;
+
+int main()
+{
+ z  = poissonAKD_testXII();
+ return(z);
+}

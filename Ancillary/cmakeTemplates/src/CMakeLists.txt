@@ -9,6 +9,7 @@ INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/resolve-sac2c-dependencies.cmake")
 #    ...
 #)
 
+SET (SAC2CFLAGS -doawlf -dopogo)
 # SaC Mod files, relative to this CMakeLists.txt.
 SET (SAC_SRC_MOD
     ${BM_DIR}.sac
@@ -18,30 +19,6 @@ SET (SAC_SRC_MOD
 SET (SAC_SRC_PROG
     ${BM_DIR}.unittest.sac
 )
-
-# For every C source, compile an object file maintaining the right location
-# in the binary dir so that sac files can pick it up.
-# XXX do we ever pass some extra flags, etc to C files?
-#FOREACH(name ${C_DEPS_SRC})
-#  SET (src "${CMAKE_CURRENT_SOURCE_DIR}/${name}")
-#
-#  GET_FILENAME_COMPONENT (dir ${name} DIRECTORY)
-#
-#  GET_FILENAME_COMPONENT (dst ${name} NAME_WE)
-#  SET (dst "${CMAKE_CURRENT_BINARY_DIR}/${dir}/${dst}${OBJEXT}")
-#
-#  # Make sure that we put the object file in the same location where
-#  # the source file was.
-#  FILE (MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${dir}")
-#
-#  ADD_CUSTOM_COMMAND (
-#    OUTPUT "${dst}"
-#    MAIN_DEPENDENCY "${src}"
-#    IMPLICIT_DEPENDS C "${src}"
-#    COMMAND ${SAC2C} -v0 -noprelude -cc ccmod -o "${dst}" "${src}"
-#    COMMENT "Generating ${dst}"
-#  )
-#ENDFOREACH(name)
 
 # Make a directory for sac2c output
 FILE (MAKE_DIRECTORY "${DLL_BUILD_DIR}/${TARGET_ENV}/${SBI}")
@@ -65,7 +42,7 @@ FOREACH (name ${SAC_SRC_MOD})
     ADD_CUSTOM_COMMAND (
         OUTPUT ${mod} ${tree}
         COMMAND
-        ${SAC2C} -v0 -linksetsize ${LINKSETSIZE} -o ${DLL_BUILD_DIR} ${src}
+	${SAC2C} -v0 ${SAC2FLAGS} -linksetsize ${LINKSETSIZE} -o ${DLL_BUILD_DIR} ${src}
         WORKING_DIRECTORY
             ${dir}
         DEPENDS ${moddep_list}
@@ -101,7 +78,7 @@ FOREACH (name ${SAC_SRC_PROG})
     ADD_CUSTOM_COMMAND (
         OUTPUT ${prog}
         COMMAND
-        ${SAC2C} -v0 -linksetsize ${LINKSETSIZE} -o ${prog} ${src}
+	${SAC2C} -v0 ${SAC2FLAGS} -linksetsize ${LINKSETSIZE} -o ${prog} ${src}
         WORKING_DIRECTORY
             ${dir}
         DEPENDS ${moddep_list}

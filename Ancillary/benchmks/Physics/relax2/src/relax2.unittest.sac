@@ -1,0 +1,7 @@
+use relax2: all;
+
+int main()
+{
+ z  = relax2_testXXI();
+ return(z);
+}

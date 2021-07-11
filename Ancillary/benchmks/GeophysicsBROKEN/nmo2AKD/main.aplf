@@ -1,0 +1,11 @@
+ r←main n;⎕IO;⎕CT;⎕PP;⎕PW
+ ⍝ dcl integer scalar n
+ ⎕IO←0
+ ⎕CT←1E¯13
+ ⎕PP←16
+ ⎕PW←80
+ ⍝⍝ n←20000
+ r←nmo2 n
+ ⎕←r
+ ⎕←r←1-r≡57.78672267053511 5610893
+
