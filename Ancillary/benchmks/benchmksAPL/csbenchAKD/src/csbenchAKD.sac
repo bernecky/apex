@@ -1,7 +1,7 @@
 module csbenchAKD;
 export {csbenchAKD_testXII};
 
-// Compiled by APEX Version: FIXME!! 2021-07-07 16:48:00.116
+// Compiled by APEX Version: FIXME!! 2021-07-12 12:23:50.474
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -192,17 +192,15 @@ inline int[.] slBII(bool[.] x, int[.] y)
 }
 
 inline int[.] plusbslXII(int[.] y)
-{ /* Scan of vector */
-/* This does the scan in the wrong direction, but since
- * we assume associative functions only, it should be ok.
- */
- size = shape(y);
+{ // Scan of vector
+ ry = reverse(y);
+ size = shape(ry);
  z = genarray(size,ItoI(0));
  if (0 != size[[0]]) {
         /* real work to do */
-        z[[0]] = ItoI(y[[0]]); /* Not sure about the coercion... */
+        z[[0]] = ItoI(ry[[0]]); /* Not sure about the coercion... */
         for ( i=1; i<size[[0]]; i++) {
-                z[[i]] = plusIII(ItoI(z[[i-1]]),ItoI(y[[i]]));
+                z[[i]] = plusIII(ItoI(z[[i-1]]),ItoI(ry[[i]]));
         }
   }
  return(z);

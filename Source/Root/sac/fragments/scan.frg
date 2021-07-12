@@ -10,7 +10,7 @@ inline $ZTYPE $FNAME($YTYPE y)
 %Fragment bsl x11 bid bid bid .
 inline $ZTYPE[.] $FNAME($YTYPE[.] y)
 { // Scan of vector 
- yr = reverse(y);
+ ry = reverse(y);
  size = shape(ry);
  z = genarray(size,Ito$ZT($FRID));
  if (0 != size[[0]]) {
