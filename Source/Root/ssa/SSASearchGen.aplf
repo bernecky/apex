@@ -11,7 +11,7 @@
  cv←bb BBn X ⋄ b←cv⌿ast ⍝ The bb of interest
  i←(cv⌿ast)[;asttarget]∊tar
  :If 1∊i ⍝ If a gen exists, push it onto the stack
-     jj←~(cv⌿ast)[;astfn]∊E':For' ⍝ This doesn't count as
+     jj←~(cv⌿ast)[;astfn]∊E LC ':For' ⍝ This doesn't count as
  ⍝ a gen, since the PHI does it.
      'More than 1 gen/bb'assert 1≥+/jj/i
      j←ast[;asttarget]⍳nms[0]

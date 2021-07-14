@@ -1,0 +1,8 @@
+ r←ControlStructuresDyalog
+ ⍝ List Dyalog ctl structure keywords
+r←(E':If'),E':EndIf'
+ r←r,(E':Else'),(E':ElseIf'),(E':AndIf'),(E':OrIf')
+ r←r,(E':For'),(E':EndFor'),(E':In')
+ r←r,(E':While'),(E':EndWhile')
+ r←r,(E':Until'),(E':Repeat'),(E':EndRepeat')
+ r←r,(E':Case'),(E':EndCase'),(E':CaseList'),(E':EndCaseList')
