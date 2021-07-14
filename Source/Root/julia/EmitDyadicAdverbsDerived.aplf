@@ -38,6 +38,8 @@
     ⍝ Name of this fn is special, because of the derived fns.
     ⍝ Generate list of global name characteristics for
     ⍝ placement in header of this fn.
+    
+    ⍝ TODO
              t←':',¨¨(E E ast)TypeDefn¨¨sg
              t←,¨D¨Raze¨sgn,¨¨' ',¨¨t,¨¨E E';',NL
              t←¯1 dropeach t

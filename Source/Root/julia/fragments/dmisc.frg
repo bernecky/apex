@@ -182,7 +182,7 @@ inline $ZTYPE[+] $FNAME($XTYPE[.] x, $YTYPE[+] y)
 function $FNAME(x::$XTYPE, y::$YTYPE $SYSVARGDECL)::$ZTYPE
  #= Scalar match scalar =#
   z = eq$CT$CTB(to$CT(x), to$CT(y)$SYSVARGKER)
- return(z)
+ return z
 end
 #Generate , APEXFUZZEQ, $XT$YTB, 000, ., D
 #Generate , eq, $CT$CTB, 000, ., $CT

@@ -13,9 +13,11 @@
  ismain←fn≡'main' ⍝ Main is "special" in several ways
  ⍝ I am not sure why this is bad?('int main() has bad result type: ',D tp[2])assert(~ismain)∨tp[2]≡E'Int64'
  fn←fn,(~ismain)/fnrks ⍝ No function type signature for main
- 
+
  ⍝ TODO: Arg type needs to be formatted Arg::ArgType instead of ArgType Arg
- args←¯2↓,dy[0 1]⌿tp[0 1],(E' '),args,2 2⍴', '
+ ⍝ args←¯2↓,dy[0 1]⌿tp[0 1],(E' '),args,2 2⍴', '
+ ⍝ Quick a dirty soloution below!!
+ args←¯2↓((1↓⌽(,dy[0 1]⌿tp[0 1],(E'::'),args)),', ')
 
  ⍝ Build fn header, renaming main
  fd←D ismain⌷(E fn),E nmain
@@ -35,7 +37,7 @@
  :If (~0∊⍴sg) ⍝ KLUDGE for stupid APL2 empty treatment
      tps←sg[;,asttype]TypeRank sg[;,astrank]
      sg←⍪ast TargetName sg[;asttarget]
-     sg←¯1↓,tps,(E' '),sg,E','
+     sg←¯1↓,(⌽tps,(E'::'),sg),E','
      fd←fd,(('('≠¯1↑fd)/E','),sg
  :EndIf
  fd←D Raze⍉fd,E')'

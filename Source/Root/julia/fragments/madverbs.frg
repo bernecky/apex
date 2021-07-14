@@ -42,13 +42,15 @@ inline $ZTYPE $FNAMEFOLD($YTYPE y)
 #Fragment sl1 x10 bidc bidc bidc FOLD 
 function $FNAMEFOLD(y::Array{$YTYPE})::$ZTYPE
   #= First/last axis fold-based reduction of vector =# 
-  # TODO
-  lim = size(y)[1]-1;
+  # TODO: Is this good enough?
+  #=lim = size(y)[1]-1
   z = with {
         (0*size(y) <= iv < size(y)) 
                 : $YTto$ZT(y[lim-iv]);
        } :  fold( $FN$ZT$ZT$ZT, Ito$ZT($FRID));
-  return(z);
+  return(z);=#
+  z = reduce($FN$ZT$ZT$ZT, y)
+  return z
 end
 #Generate , $FN, $ZT$ZT$ZT, 000, ., $ZT
 

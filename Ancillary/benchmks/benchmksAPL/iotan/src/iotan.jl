@@ -2,7 +2,7 @@
 module iotan
 export all
 
-# Compiled by APEX Version: FIXME!! 2021-07-11 17:49:40.964
+# Compiled by APEX Version: FIXME!! 2021-07-13 21:06:49.546
 #=use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -14,6 +14,8 @@ use StdIO : all;
 use String: {to_string,tochar,sscanf};=#
 
 # TODO Do prolog
+
+# Is this needed? I use all base libraries anyways...
 # TODO: Add STDLIB 
 
 # (This stuff below is temporary)
@@ -36,12 +38,13 @@ ItoD(x) = Float64(x)
 DtoB(x) = Bool(x)
 DtoI(x) = Int64(x)
 function barDDD(x::Float64, y::Float64)::Float64
-  return(DtoD(x)-DtoD(y))
+  return DtoD(x)-DtoD(y)
 end
 
-function plusIDD(x::Int64, y::Float64)
+function plusIDD(x, y)
+  # Remove the feed types because they are causing problems. Probably wise to add them back later though.
   # In theory this should always work as long as it isnt fed weird types...
-  return convert(Int64, x) + convert(Int64, y)
+  return x + y
 end
 
 function mpyIDD(x::Int64, y::Float64)::Float64
@@ -56,15 +59,14 @@ function divDID(x::Float64, y::Int64)::Float64
 end
 
 function barBBI(x::Bool, y::Bool)::Int64
-  return(BtoI(x)-BtoI(y))
+  return BtoI(x)-BtoI(y)
 end
 
 function plusDID(x::Float64, y::Array{Int64})::Array{Float64}
    #= SxA scalar function =#
       # TODO
-  xel = toD(x)
-  z = with { ( . <= iv <= .) { yel = toD(y[iv]); } : plusDDD(xel,yel); } : genarray(shape(y), 0.0d);
-  return(z);
+         z = plusDDD.(repeat([x], length(y)),y)
+         return z
 end
 
 
@@ -72,42 +74,49 @@ function iotaXII(y::Int64, QUADio)
     # Index generator on scalar
     # HELP! Needs domain check for negative shp
     z = Int64(QUADio) .+ collect(0:Int64(y)-1)
-    return z;
+    return z
 end
 
 function quadXDD(y, QUADpp, QUADpw)
     # {quad}{<-} anything
     # Use Base.print instead of just print because if the module name is print, there is a conflict
-    Base.print(y)
+    # Base.print(y)
+    # Actually, lets use println
+    println(y)
 end
 function quadXII(y, QUADpp, QUADpw)
     # {quad}{<-} anything
     # Use Base.print instead of just print because if the module name is print, there is a conflict
-    Base.print(y)
+    # Base.print(y)
+    # Actually, lets use println
+    println(y)
 end
-function sameDDB(x::Float64, y::Float64 ,double QUADct)::Bool
+function sameDDB(x::Float64, y::Float64 , QUADct)::Bool
  #= Scalar match scalar =#
   z = eqDDB(toD(x), toD(y), QUADct)
- return(z)
+ return z
 end
 
 
 
 function plusslXDDFOLD(y::Array{Float64})::Float64
   #= First/last axis fold-based reduction of vector =#
-  # TODO
-  lim = size(y)[1]-1;
+  # TODO: Is this good enough?
+  #=lim = size(y)[1]-1
   z = with {
         (0*size(y) <= iv < size(y))
                 : DtoD(y[lim-iv]);
        } :  fold( plusDDD, ItoD(0));
-  return(z);
+  return(z);=#
+  z = reduce(plusDDD, y)
+  return z
 end
 
 
-function plusDDD(x::Float64, y::Float64)
+function plusDDD(x, y)
+  # Remove the feed types because they are causing problems. Probably wise to add them back later though.
   # In theory this should always work as long as it isnt fed weird types...
-  return convert(Int64, x) + convert(Int64, y)
+  return x + y
 end
 
 function eqDDB(x::Float64, y::Float64, QUADct::Float64)::Bool
@@ -129,7 +138,7 @@ function APEXFUZZEQ(x::Float64, y::Float64, QUADct::Float64)::Bool
  return(z)
 end
 
-function iotanXID(Int64 n ,Int64 QUADio)::Float64
+function iotanXID(n::Int64,QUADio::Int64)::Float64
 
 #=
  ?
@@ -141,7 +150,7 @@ A_19=barDDD(1.5,0.5)
 A_20=plusDID(A_19,A_18) 
 A_21=plusslXDDFOLD( A_20) 
  r_0=( A_21) 
- return(r_0);
+ return r_0
 end
 
 function iotan_testXXI()::Int64
@@ -175,7 +184,7 @@ A_62=divDID(A_61,2)
 A_65=barBBI(A_64,true) 
 r_1=( A_65) 
  A_69=quadXII( A_65,QUADpp_1,QUADpw_1) 
- return(r_1);
+ return r_1
 end
 
 end

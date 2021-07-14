@@ -15,7 +15,10 @@ notmt:
  tp←TJulia tp
 
  ⍝ TODO: Make it instead of Type[.] to Array{Type}
+
+⍝ Not really sure how to do this though... It isnt important for now, but nessacary as soon as possible
  lft←(×0⌈rk)⍴¨'['
+ ⍝ assert 0
  rt←(×0⌈rk)⍴¨']'
  dots←(0⌈¯1+2×rk)⍴¨E'.,'
  r←Raze⍉tp,lft,dots,rt

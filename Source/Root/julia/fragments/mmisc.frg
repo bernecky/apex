@@ -11,7 +11,7 @@ function $FNAME(y::$YTYPE, QUADio)
     # Index generator on scalar
     # HELP! Needs domain check for negative shp
     z = Int64(QUADio) .+ collect(0:Int64(y)-1)
-    return z;
+    return z
 end
 
 #Fragment iota x01 x bidc i NonNeg
@@ -60,5 +60,7 @@ end
 function $FNAME(y, QUADpp, QUADpw)
     # {quad}{<-} anything
     # Use Base.print instead of just print because if the module name is print, there is a conflict
-    Base.print(y)
+    # Base.print(y)
+    # Actually, lets use println
+    println(y)
 end

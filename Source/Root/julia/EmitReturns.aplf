@@ -15,6 +15,6 @@
  r←j,(ast[;astfn]∊E':RI')/⍳1↑⍴ast ⍝ Implicit results
  r←ast[r;,astrarg] ⍝ Explicit result,semiglobal out names
  r←ast TargetName D r
- r←¯2↓D Raze,r,E',',NL
- r←' return(',r,');'NL
+ r←¯3↓D Raze,r,E', ',NL
+ r←' return ',r,''NL
  r←(E r),E cal

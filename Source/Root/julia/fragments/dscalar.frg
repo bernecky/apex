@@ -18,14 +18,15 @@
 # than general mod code.
 #
 #Fragment plus 000 bid bid bid .        
-function $FNAME(x::$XTYPE, y::$YTYPE)
+function $FNAME(x, y)
+  # Remove the feed types because they are causing problems. Probably wise to add them back later though.
   # In theory this should always work as long as it isnt fed weird types...
-  return convert(Int64, x) + convert(Int64, y)
+  return x + y
 end
 
 #Fragment bar 000 bid bid bid .
 function $FNAME(x::$XTYPE, y::$YTYPE)::$ZTYPE
-  return($XTto$CT(x)-$YTto$CT(y))
+  return $XTto$CT(x)-$YTto$CT(y)
 end
 
 #Fragment mpy 000 b b b .

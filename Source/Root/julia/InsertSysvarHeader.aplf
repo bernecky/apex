@@ -8,8 +8,9 @@
  fout←D b[3]
  gout←D b[4]
  fgout←D b[5]
- qdecl←(E''),(E',double QUADct'),(E',int QUADio'),(E'int QUADpp')
- qdecl←qdecl,(E',int QUADpw'),E',int QUADrl'
+ ⍝ TODO: Add types to these?
+ qdecl←(E''),(E', QUADct'),(E', QUADio'),(E', QUADpp')
+ qdecl←qdecl,(E', QUADpw'),E', QUADrl'
  qcall←(E''),(E', QUADct'),(E', QUADio'),E', QUADpp'
  qcall←qcall,(E', QUADpw'),E', QUADrl'
 ⍝ Handle function headers

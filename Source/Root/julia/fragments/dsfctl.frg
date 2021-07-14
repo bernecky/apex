@@ -36,9 +36,8 @@
 function $FNAME(x::$XTYPE, y::Array{$YTYPE}$SYSVARGDECL)::Array{$ZTYPE}
 	#= SxA scalar function =#
 	# TODO
-  xel = to$CT(x)
-  z = with { ( . <= iv <= .) { yel = to$CT(y[iv]); } : $FN$CT$CT$ZT(xel,yel$SYSVARGKER); } : genarray(shape(y), $OTFILL);
-  return(z);
+	z = $FN$CT$CT$ZT.(repeat([x], length(y)),y$SYSVARGKER)
+	return z
 end
 #Generate , $FN, $CT$CT$ZT, 000, ., $CT
 
