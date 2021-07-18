@@ -40,7 +40,7 @@ inline $ZTYPE $FNAMEFOLD($YTYPE y)
 
 #Fragment sl  x10 bidc bidc bidc FOLD 
 #Fragment sl1 x10 bidc bidc bidc FOLD 
-function $FNAMEFOLD(y::Array{$YTYPE})::$ZTYPE
+function $FNAMEFOLD(y)::$ZTYPE
   #= First/last axis fold-based reduction of vector =# 
   # TODO: Is this good enough?
   #=lim = size(y)[1]-1

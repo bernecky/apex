@@ -2,7 +2,7 @@
 module iotan
 export all
 
-# Compiled by APEX Version: FIXME!! 2021-07-14 15:55:37.322
+# Compiled by APEX Version: FIXME!! 2021-07-17 20:47:05.034
 #=use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -62,34 +62,29 @@ function barBBI(x::Bool, y::Bool)::Int64
   return BtoI(x)-BtoI(y)
 end
 
-function plusDID(x::Float64, y::Array{Int64})::Array{Float64}
-   #= SxA scalar function =#
+function plusDID(x::Float64, y)
+         #= SxA scalar function =#
       # TODO
          z = plusDDD.(repeat([x], length(y)),y)
          return z
 end
 
 
-function iotaXII(y::Int64, QUADio)
+function iotaXII(y::Int64, QUADio)::UnitRange{Int64}
     # Index generator on scalar
     # HELP! Needs domain check for negative shp
-    z = Int64(QUADio) .+ collect(0:Int64(y)-1)
-    return z
+    return QUADio .+ 0:y-1
 end
 
 function quadXDD(y, QUADpp, QUADpw)
     # {quad}{<-} anything
-    # Use Base.print instead of just print because if the module name is print, there is a conflict
-    # Base.print(y)
-    # Actually, lets use println
     println(y)
+    return y
 end
 function quadXII(y, QUADpp, QUADpw)
     # {quad}{<-} anything
-    # Use Base.print instead of just print because if the module name is print, there is a conflict
-    # Base.print(y)
-    # Actually, lets use println
     println(y)
+    return y
 end
 function sameDDB(x::Float64, y::Float64 , QUADct)::Bool
  #= Scalar match scalar =#
@@ -99,7 +94,7 @@ end
 
 
 
-function plusslXDDFOLD(y::Array{Float64})::Float64
+function plusslXDDFOLD(y)::Float64
   #= First/last axis fold-based reduction of vector =#
   # TODO: Is this good enough?
   #=lim = size(y)[1]-1
