@@ -1,7 +1,7 @@
 module csbench;
 export {csbench_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-12 12:23:50.128
+// Compiled by APEX Version: FIXME!! 2021-07-20 11:03:00.097
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -186,14 +186,12 @@ inline int[.] slBII(bool[.] x, int[.] y)
 
 inline int[.] plusbslXII(int[.] y)
 { // Scan of vector
- ry = reverse(y);
- size = shape(ry);
- z = genarray(size,ItoI(0));
- if (0 != size[[0]]) {
-        /* real work to do */
-        z[[0]] = ItoI(ry[[0]]); /* Not sure about the coercion... */
-        for ( i=1; i<size[[0]]; i++) {
-                z[[i]] = plusIII(ItoI(z[[i-1]]),ItoI(ry[[i]]));
+ shp = shape(y)[0];
+ z = genarray([shp],ItoI(0));
+ if (0 != shp) { // real work to do
+        z[[0]] = ItoI(y[[0]]); // Not sure about coercion
+        for ( i=1; i<shp; i++) {
+           z[[i]] = plusIII(ItoI(z[[i-1]]),ItoI(y[[i]]));
         }
   }
  return(z);

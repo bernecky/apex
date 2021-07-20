@@ -1,7 +1,0 @@
-use sumscan: all;
-
-int main()
-{
- z  = sumscan_testXXI();
- return(z);
-}

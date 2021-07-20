@@ -1,0 +1,4 @@
+ r←sumscan n
+⍝ Perform +\⍵ on array of shape n,n
+ r←(n,n)⍴0.01×⍳n+1
+ r←+/,+\r
