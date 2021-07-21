@@ -1,0 +1,4 @@
+ r←AllScalarIndices fns
+ r←0 3↓D fns[;fnsranks]
+ r←∧/r∊'0 ' ⍝ index ops with all-scalar indices
+⍝∇⍣§./Source/Root/julia/AllScalarIndices.aplf§0§ 2021 2 19 16 33 30 937 §dôÉf§0

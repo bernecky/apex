@@ -1,2 +1,1 @@
- r←x takeeach y
- r←x↑¨y
+../apexutils/takeeach.aplf

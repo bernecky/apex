@@ -1,0 +1,3 @@
+ r←x membereach y
+ r←x∊¨y
+⍝∇⍣§./Source/Root/julia/membereach.aplf§0§ 2021 2 19 16 33 30 961 §ClJ§0

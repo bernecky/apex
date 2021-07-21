@@ -1,0 +1,3 @@
+ r←ScalarIndices fns
+ r←(0 3↓D fns[;fnsranks])∊' 0' ⍝ Mark scalar indices in each index op
+⍝∇⍣§./Source/Root/julia/ScalarIndices.aplf§0§ 2021 2 19 16 33 30 957 §cfËú§0

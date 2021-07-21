@@ -4,3 +4,4 @@
  b←,array≤(⍴array)⍴boolean
  c←b/,array
  result←1/(⍴array)⍴~≠\b\c≠¯1↓1,c
+⍝∇⍣§./Source/Root/julia/pandscan.aplf§0§ 2021 2 19 16 33 30 993 §öÀòM§0

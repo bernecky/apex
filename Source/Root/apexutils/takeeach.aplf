@@ -1,0 +1,3 @@
+ r←x takeeach y
+ r←x↑¨y
+⍝∇⍣§./Source/Root/julia/takeeach.aplf§0§ 2021 2 19 16 33 30 965 §äõó§0

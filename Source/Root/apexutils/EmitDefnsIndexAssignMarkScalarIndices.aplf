@@ -1,0 +1,4 @@
+ r←EmitDefnsIndexAssignMarkScalarIndices rks
+⍝# Mark scalar index lists
+ r←rks∊'0'
+⍝∇⍣§./Source/Root/julia/EmitDefnsIndexAssignMarkScalarIndices.aplf§0§ 2021 2 19 16 33 30 941 §cæié§0

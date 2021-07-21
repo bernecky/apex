@@ -1,2 +1,1 @@
- r←x dropeach y
- r←x↓¨y
+../arrayutils/dropeach.aplf

@@ -1,0 +1,4 @@
+ r←EmitDefnsIndexAssignMarkElidedTrailingAxes mil
+⍝# Mark elided trailing axes in index expressions
+ r←,⌽∧\⌽mil∊0,NULL
+⍝∇⍣§./Source/Root/julia/EmitDefnsIndexAssignMarkElidedTrailingAxes.aplf§0§ 2021 2 19 16 33 30 941 §gÛzâ§0

@@ -1,0 +1,9 @@
+ r←ast IndexType mil;i;il;j
+⍝ Type of each index in index list mil
+ i←,~mil∊0,D NULL
+ il←i/,mil ⍝ Valid ast indices
+ j←D ast[il;asttype]
+ r←i\j
+ r[(,mil∊D NULL)/⍳⍴,mil]←D NULL
+ r←(⍴mil)⍴r
+⍝∇⍣§./Source/Root/julia/IndexType.aplf§0§ 2021 2 19 16 33 30 953 §uÈIl§0

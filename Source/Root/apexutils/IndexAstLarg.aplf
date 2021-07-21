@@ -1,0 +1,3 @@
+ r←ast IndexAstLarg I
+ r←ast[I;astlarg]
+⍝∇⍣§./Source/Root/julia/IndexAstLarg.aplf§0§ 2021 2 19 16 33 30 953 §òqh§0

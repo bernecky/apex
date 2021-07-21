@@ -1,0 +1,5 @@
+ r←f TypeCoer t
+ ⍝ Generate type coercion fn names
+ ⍝ for coercion from f to t
+ r←(UC f),'T','o',UC t
+⍝∇⍣§./Source/Root/julia/TypeCoer.aplf§0§ 2021 7 21 16 56 58 756 §clwÔ§0
