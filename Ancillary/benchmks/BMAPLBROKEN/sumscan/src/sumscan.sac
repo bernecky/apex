@@ -1,7 +1,7 @@
 module sumscan;
 export {sumscan_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-16 14:47:41.212
+// Compiled by APEX Version: FIXME!! 2021-07-20 13:37:10.544
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -84,7 +84,6 @@ inline int[.] iotaXII(int y, int QUADio)
 
 inline double[*] quadXDD(double[*] y, int QUADpp, int QUADpw)
 { /* {quad}{<-} anything */
- printf("%12.5g\n", y);
         show(y);
         return(y);
 }
@@ -224,7 +223,7 @@ QUADio_0=toI(( false));
  QUADio_1=toI(( false));
  n_0=( 6000);
  QUADrl_1=( 16807);
- QUADpp_1=( 16);
+ QUADpp_1=( 20);
  QUADpw_1=( 80);
  A_52=sumscanXID( n_0,QUADio_1);
  r_0=( A_52);

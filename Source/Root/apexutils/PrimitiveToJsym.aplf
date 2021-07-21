@@ -1,0 +1,4 @@
+ r←PrimitiveToJsym y;nm
+ ⍝ Return boxed jsymbols for boxed APL primitive symbols y
+ nm←dtb¨ER1 JSYM[;⍳4]⍪'????'
+ r←nm[(ER1 JSYM[;,29])⍳y]
