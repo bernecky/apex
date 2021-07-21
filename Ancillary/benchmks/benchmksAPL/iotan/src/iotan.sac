@@ -2,13 +2,9 @@ module iotan;
 export {iotan_testXXI};
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 // Compiled by APEX Version: FIXME!! 2021-07-13 14:59:05.153
 =======
 // Compiled by APEX Version: FIXME!! 2021-07-12 12:23:51.465
->>>>>>> master
-=======
-// Compiled by APEX Version: FIXME!! 2021-07-20 11:03:01.458
 >>>>>>> master
 use Array: all;
 use ArrayFormat: all;

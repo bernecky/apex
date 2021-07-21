@@ -1,7 +1,7 @@
 module mconvAKD;
 export {mconvAKD_testXII};
 
-// Compiled by APEX Version: FIXME!! 2021-07-20 11:03:07.482
+// Compiled by APEX Version: FIXME!! 2021-07-12 12:23:57.391
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -402,7 +402,7 @@ n=CommandLineArgvXBI( true);
  r_0=( A_55);
  A_59=quadXDD( r_0,QUADpp_1,QUADpw_1);
  // dsf scalar(s)
-A_61=eqDDB(r_0,30931337116.79252,QUADct_1);
+A_61=eqDDB(r_0,3093125882491.794,QUADct_1);
 // dsf scalar(s)
 A_62=barBBI(true,A_61);
  r_1=( A_62);

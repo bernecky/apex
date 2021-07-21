@@ -26,11 +26,11 @@
 %  6  Value of left 0 ("thisvalue fn anything" produces 0)
 %     This is used by inner product.
 %  7  Value of left 1 ("thisvalue fn anything" produces 1)
-%  8  Function uses QUADct (if 1)
-%  9  Function uses QUADio (if 1)
-% 10  Function uses QUADpp (if 1)
-% 11  Function uses QUADpw (if 1)
-% 12  Function uses QUADrl (if 1)
+%  8  Function uses QUADCT (if 1)
+%  9  Function uses QUADIO (if 1)
+% 10  Function uses QUADPP (if 1)
+% 11  Function uses QUADPW (if 1)
+% 12  Function uses QUADRL (if 1)
 % 13  Function is uniform: result rank & shape function of arg shape(s) only
 
 % Compute type and result type table

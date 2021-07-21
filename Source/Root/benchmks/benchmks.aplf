@@ -3,7 +3,7 @@
 ⍝ e.g., benchmks 'Ancillary/benchmksPerf'
 ⍝ Does not return non-folder file names, e.g., README
 ⍝ or other evil names
- en←(E'cmake-common'),(E'CMakeLists.txt'),(E'build'),(E'src')
+ en←(E'cmake-common'),(E'CMakeLists.txt'),E'build'
  fldr←FullPathName nm
  r←⎕SH'ls -p ',fldr ⍝ Append /
  r←(PathDelim=,D ¯1↑¨r)/¯1↓¨r ⍝ Remove nondirs

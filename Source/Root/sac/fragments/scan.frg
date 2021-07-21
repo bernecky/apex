@@ -10,12 +10,14 @@ inline $ZTYPE $FNAME($YTYPE y)
 %Fragment bsl x11 bid bid bid .
 inline $ZTYPE[.] $FNAME($YTYPE[.] y)
 { // Scan of vector 
- shp = shape(y)[0];
- z = genarray([shp],Ito$ZT($FRID));
- if (0 != shp) { // real work to do
-        z[[0]] = $YTto$ZT(y[[0]]); // Not sure about coercion
-        for ( i=1; i<shp; i++) {
-           z[[i]] = $FN$ZT$ZT$ZT($YTto$ZT(z[[i-1]]),$YTto$ZT(y[[i]]));
+ ry = reverse(y);
+ size = shape(ry);
+ z = genarray(size,Ito$ZT($FRID));
+ if (0 != size[[0]]) {
+        /* real work to do */ 
+        z[[0]] = $YTto$ZT(ry[[0]]); /* Not sure about the coercion... */
+        for ( i=1; i<size[[0]]; i++) {
+                z[[i]] = $FN$ZT$ZT$ZT($YTto$ZT(z[[i-1]]),$YTto$ZT(ry[[i]]));
         }
   }
  return(z);
