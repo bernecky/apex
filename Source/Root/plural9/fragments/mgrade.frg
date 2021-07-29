@@ -265,7 +265,8 @@ bool GradeGT($XTYPE x, $YTYPE y)
  z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
-        }: foldfix( &, true,false);
+        }: fold( &, true,false);
+        // foldfix crashes mt_pth }: foldfix( &, true,false);
  return(z);
 }
 
@@ -276,7 +277,8 @@ bool GradeGT($XTYPE x, $YTYPE y)
   z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
-        }: foldfix( &, true,false);
+        }: fold( &, true,false);
+        // foldfix crashes mt_pth }: foldfix( &, true,false);
  return(z);
 }
 
@@ -287,7 +289,8 @@ bool GradeGT($XTYPE x, $YTYPE y)
   z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
-        }: foldfix( &, true,false);
+        }: fold( &, true,false);
+        // foldfix crashes mt_pth }: foldfix( &, true,false);
  return(z);
 }
 

@@ -11,8 +11,7 @@ PROJECT (apex-testsandbenchmarks)
 SET (DLL_BUILD_DIR  "${PROJECT_BINARY_DIR}/lib")
 
 # We build modules for these targets
-### DISABLED UNTIL sac2c mt bugs fixed    SET (TARGETS            seq mt_pth  CACHE STRING "Build for sequential and posix threads")
-SET (TARGETS            seq CACHE STRING "Build for sequential and posix threads")
+SET (TARGETS            seq mt_pth CACHE STRING "Build for sequential and posix threads")
 SET (SAC2C_EXEC                     CACHE STRING "Path to sac2c compiler")
 SET (LINKSETSIZE        "0"         CACHE STRING "Value for sac2c's -linksetsize parameter")
 
