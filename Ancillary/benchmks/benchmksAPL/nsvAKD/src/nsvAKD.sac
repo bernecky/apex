@@ -1,7 +1,7 @@
 module nsvAKD;
 export {nsvAKD_testXII};
 
-// Compiled by APEX Version: FIXME!! 2021-07-20 11:03:09.149
+// Compiled by APEX Version: FIXME!! 2021-07-29 18:21:33.141
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -417,7 +417,8 @@ inline bool GradeGT(int[+] x, int[+] y)
  z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
-        }: foldfix( &, true,false);
+        }: fold( &, true);
+        // FIXME - mt_pth breaks on foldfix}: foldfix( &, true,false);
  return(z);
 }
 

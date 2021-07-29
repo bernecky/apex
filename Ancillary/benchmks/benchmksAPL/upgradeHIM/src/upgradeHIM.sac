@@ -1,7 +1,7 @@
 module upgradeHIM;
 export {upgradeHIM_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-20 11:03:12.372
+// Compiled by APEX Version: FIXME!! 2021-07-29 18:21:36.936
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -160,7 +160,8 @@ inline double mpyslXDDQUICKSTOP(double[.] y)
   z = with {
          (0*shape(y) <= iv < shape(y))
                 : DtoD(y[iv]);
-        } : foldfix( mpyDDD, ItoD(1), ItoD(0));
+        } : fold( mpyDDD, ItoD(1) );
+        // FIXME mt_pth crashes on foldfix } : foldfix( mpyDDD, ItoD(1), ItoD(0));
   return(z);
 }
 
@@ -375,7 +376,8 @@ inline bool GradeGT(int[+] x, int[+] y)
  z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
-        }: foldfix( &, true,false);
+        }: fold( &, true);
+        // FIXME - mt_pth breaks on foldfix}: foldfix( &, true,false);
  return(z);
 }
 

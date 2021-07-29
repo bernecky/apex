@@ -1,7 +1,7 @@
 module nsv;
 export {nsv_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-20 11:03:08.832
+// Compiled by APEX Version: FIXME!! 2021-07-29 18:21:32.773
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -410,7 +410,8 @@ inline bool GradeGT(int[+] x, int[+] y)
  z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
-        }: foldfix( &, true,false);
+        }: fold( &, true);
+        // FIXME - mt_pth breaks on foldfix}: foldfix( &, true,false);
  return(z);
 }
 

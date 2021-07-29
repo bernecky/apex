@@ -1,7 +1,7 @@
 module UTThornInt;
 export {UTThornInt_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-29 17:06:59.215
+// Compiled by APEX Version: FIXME!! 2021-07-29 18:10:02.669
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -697,7 +697,8 @@ inline int mpyslXIIQUICKSTOP(int[.] y)
   z = with {
          (0*shape(y) <= iv < shape(y))
                 : ItoI(y[iv]);
-        } : foldfix( mpyIII, ItoI(1), ItoI(0));
+        } : fold( mpyIII, ItoI(1) );
+        // FIXME mt_pth crashes on foldfix } : foldfix( mpyIII, ItoI(1), ItoI(0));
   return(z);
 }
 
@@ -760,7 +761,8 @@ inline bool andslXBBQUICKSTOP(bool[.] y)
   z = with {
          (0*shape(y) <= iv < shape(y))
                 : BtoB(y[iv]);
-        } : foldfix( andBBB, ItoB(1), ItoB(0));
+        } : fold( andBBB, ItoB(1) );
+        // FIXME mt_pth crashes on foldfix } : foldfix( andBBB, ItoB(1), ItoB(0));
   return(z);
 }
 
@@ -1182,7 +1184,8 @@ inline bool maxslXBBQUICKSTOP(bool[.] y)
   z = with {
          (0*shape(y) <= iv < shape(y))
                 : BtoB(y[iv]);
-        } : foldfix( maxBBB, ItoB(0), ItoB(1));
+        } : fold( maxBBB, ItoB(0) );
+        // FIXME mt_pth crashes on foldfix } : foldfix( maxBBB, ItoB(0), ItoB(1));
   return(z);
 }
 
@@ -1192,7 +1195,8 @@ inline bool minslXBBQUICKSTOP(bool[.] y)
   z = with {
          (0*shape(y) <= iv < shape(y))
                 : BtoB(y[iv]);
-        } : foldfix( minBBB, ItoB(1), ItoB(0));
+        } : fold( minBBB, ItoB(1) );
+        // FIXME mt_pth crashes on foldfix } : foldfix( minBBB, ItoB(1), ItoB(0));
   return(z);
 }
 

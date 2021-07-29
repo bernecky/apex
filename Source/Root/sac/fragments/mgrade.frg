@@ -257,7 +257,7 @@ inline bool GradeGT(bool[+] x, bool[+] y)
  z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
-        }: fold( &, true,false);
+        }: fold( &, true);
         // FIXME - mt_pth breaks on foldfix}: foldfix( &, true,false);
 
  return(z);
@@ -270,7 +270,7 @@ inline bool GradeGT(char[+] x, char[+] y)
  z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
-        }: fold( &, true,false);
+        }: fold( &, true);
         // FIXME - mt_pth breaks on foldfix}: foldfix( &, true,false);
  return(z);
 }
@@ -282,7 +282,7 @@ inline bool GradeGT(int[+] x, int[+] y)
  z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
-        }: fold( &, true,false);
+        }: fold( &, true);
         // FIXME - mt_pth breaks on foldfix}: foldfix( &, true,false);
  return(z);
 }
@@ -294,7 +294,7 @@ inline bool GradeGT(double[+] x, double[+] y)
  z = with {
        (0*shape(x) <= iv < shape(x))
                 : x[iv] > y[iv];
-        }: fold( &, true,false);
+        }: fold( &, true);
         // FIXME - mt_pth breaks on foldfix}: foldfix( &, true,false);
  return(z);
 }

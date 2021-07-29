@@ -1,7 +1,7 @@
 module UTMScalarI;
 export {UTMScalarI_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-29 17:06:31.275
+// Compiled by APEX Version: FIXME!! 2021-07-29 18:09:35.131
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -357,7 +357,8 @@ inline bool andslXBBQUICKSTOP(bool[.] y)
   z = with {
          (0*shape(y) <= iv < shape(y))
                 : BtoB(y[iv]);
-        } : foldfix( andBBB, ItoB(1), ItoB(0));
+        } : fold( andBBB, ItoB(1) );
+        // FIXME mt_pth crashes on foldfix } : foldfix( andBBB, ItoB(1), ItoB(0));
   return(z);
 }
 
