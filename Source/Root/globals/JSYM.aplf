@@ -1,0 +1,84 @@
+ r←JSYM
+ r←'diamon      3             ⋄     end-of-statement.          ',NL
+ r←r,'doll        9             $     dollar sign                ',NL
+ r←r,'cent        11            ¢     cent sign                  ',NL
+ r←r,'dot         17            .     period, aka dot.           ',NL
+ r←r,'lpar        33            (     left parenthesis           ',NL
+ r←r,'rpar        35            )     right parenthesis          ',NL
+ r←r,'semi        37            ;     semicolon                  ',NL
+ r←r,'sl          39            /     slash                      ',NL
+ r←r,'bsl         41            \     back slash                 ',NL
+ r←r,'assg        43            ←     left arrow                 ',NL
+ r←r,'goto        45            →     right arrow                ',NL
+ r←r,'dier        51            ¨     dieresis (upshift 1)       ',NL
+ r←r,'plus        53            +     plus                       ',NL
+ r←r,'bar         55            -     minus                      ',NL
+ r←r,'mpy         57            ×     times                      ',NL
+ r←r,'div         59            ÷     divide                     ',NL
+ r←r,'star        61            *     star                       ',NL
+ r←r,'max         63            ⌈     maximum                    ',NL
+ r←r,'min         65            ⌊     minimum                    ',NL
+ r←r,'mod         67            |     residue                    ',NL
+ r←r,'and         69            ∧     and                        ',NL
+ r←r,'or          71            ∨     or                         ',NL
+ r←r,'lt          73            <     less than                  ',NL
+ r←r,'le          75            ≤     less than or equal         ',NL
+ r←r,'eq          77            =     equal                      ',NL
+ r←r,'ge          79            ≥     greater than or equal      ',NL
+ r←r,'gt          81            >     greater than               ',NL
+ r←r,'ne          83            ≠     not equal                  ',NL
+ r←r,'alph        85            ⍺     alpha                      ',NL
+ r←r,'eps         87            ∊     epsilon                    ',NL
+ r←r,'iota        89            ⍳     iota                       ',NL
+ r←r,'rho         91            ⍴     rho                        ',NL
+ r←r,'omeg        93            ⍵     omega                      ',NL
+ r←r,'coma        95            ,     comma                      ',NL
+ r←r,'bang        97            !     exclamation mark.          ',NL
+ r←r,'rotr        99            ⌽     rotate and reversal.       ',NL
+ r←r,'dtak        101           ⊥     decode (base value)        ',NL
+ r←r,'utak        103           ⊤     encode (representation)    ',NL
+ r←r,'circ        105           ○     circle                     ',NL
+ r←r,'quer        107           ?     query                      ',NL
+ r←r,'not         109           ~     logical negation           ',NL
+ r←r,'take        111           ↑     take. up-arrow             ',NL
+ r←r,'drop        113           ↓     drop. down-arrow           ',NL
+ r←r,'subs        115           ⊂     subset                     ',NL
+ r←r,'rsub        117           ⊃     right subset               ',NL
+ r←r,'cap         119           ∩     cap                        ',NL
+ r←r,'cup         121           ∪     cup                        ',NL
+ r←r,'ubar        123           _     underscore                 ',NL
+ r←r,'tran        125           ⍉     transpose                  ',NL
+ r←r,'ibem        127           ⌶     i-beam                     ',NL
+ r←r,'jot         129           ∘     jot  (small circle)        ',NL
+ r←r,'quad        131           ⎕←    quad output                ',NL
+ r←r,'quad        131           ←⎕    quad input                 ',NL
+ r←r,'qqd         133           ⍞←    quote-quad output          ',NL
+ r←r,'qdd         133           ←⍞    quote-quad input           ',NL
+ r←r,'log         135           ⍟     log                        ',NL
+ r←r,'nand        137           ⍲     nand                       ',NL
+ r←r,'nor         139           ⍱     nor                        ',NL
+ r←r,'lamp        141           ⍝     lamp-comment               ',NL
+ r←r,'ugrd        143           ⍋     up grade                   ',NL
+ r←r,'dgrd        145           ⍒     down grade                 ',NL
+ r←r,'rot1        147           ⊖     overstruck circle-hyphen   ',NL
+ r←r,'sl1         149           ⌿     overstruck slash-hyphen    ',NL
+ r←r,'bsl1        151           ⍀     overstruck backslash-hyphen',NL
+ r←r,'mdiv        153           ⌹     domino                     ',NL
+ r←r,'thrn        155           ⍕     format                     ',NL
+ r←r,'hydr        157           ⍎     execute                    ',NL
+ r←r,'rtak        161           ⊣     right tack                 ',NL
+ r←r,'ltak        163           €     left tack                  ',NL
+ r←r,'rbr         165           }     right curly brace          ',NL
+ r←r,'lbr         167           {     left curly brace           ',NL
+ r←r,'same        183           ≡     same (aka idem, aka match).',NL
+ r←r,'nuax        185           ⍤     nuax (aka on).             ',NL
+ r←r,'coax        187           ö     coax (aka along).          ',NL
+ r←r,'comb        193           ⍪     comma bar.                 ',NL
+ r←r,'epsb        195           ⍷     epsilon bar.               ',NL
+ r←r,'indr        xxx           [     Indexed reference          ',NL
+ r←r,'inds        xxx           ]     Indexed                    ',NL
+ r←r,'quadfi      xxx           ⎕fi   ⎕fi                        ',NL
+ r←r,'quadvi      xxx           ⎕vi   ⎕vi                        ',NL
+ r←r,'quadts      xxx           ⎕ts   ⎕ts                        ',NL
+ r←r,'quadav      xxx           ⎕av   ⎕av                        ',NL
+ r←vtom NL,r

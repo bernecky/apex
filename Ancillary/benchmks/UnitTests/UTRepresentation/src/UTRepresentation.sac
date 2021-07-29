@@ -1,7 +1,7 @@
 module UTRepresentation;
 export {UTRepresentation_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-09 14:37:56.825
+// Compiled by APEX Version: FIXME!! 2021-07-29 17:06:34.947
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -438,17 +438,13 @@ inline double[+] inds0(double[+] X, int  I0, double Yin)
 
 
 inline int[.] mpybslXII(int[.] y)
-{ /* Scan of vector */
-/* This does the scan in the wrong direction, but since
- * we assume associative functions only, it should be ok.
- */
- size = shape(y);
- z = genarray(size,ItoI(1));
- if (0 != size[[0]]) {
-        /* real work to do */
-        z[[0]] = ItoI(y[[0]]); /* Not sure about the coercion... */
-        for ( i=1; i<size[[0]]; i++) {
-                z[[i]] = mpyIII(ItoI(z[[i-1]]),ItoI(y[[i]]));
+{ // Scan of vector
+ shp = shape(y)[0];
+ z = genarray([shp],ItoI(1));
+ if (0 != shp) { // real work to do
+        z[[0]] = ItoI(y[[0]]); // Not sure about coercion
+        for ( i=1; i<shp; i++) {
+           z[[i]] = mpyIII(ItoI(z[[i-1]]),ItoI(y[[i]]));
         }
   }
  return(z);
@@ -476,17 +472,13 @@ inline bool andslXBBQUICKSTOP(bool[.] y)
 
 
 inline bool[.] mpybslXBB(bool[.] y)
-{ /* Scan of vector */
-/* This does the scan in the wrong direction, but since
- * we assume associative functions only, it should be ok.
- */
- size = shape(y);
- z = genarray(size,ItoB(1));
- if (0 != size[[0]]) {
-        /* real work to do */
-        z[[0]] = BtoB(y[[0]]); /* Not sure about the coercion... */
-        for ( i=1; i<size[[0]]; i++) {
-                z[[i]] = mpyBBB(BtoB(z[[i-1]]),BtoB(y[[i]]));
+{ // Scan of vector
+ shp = shape(y)[0];
+ z = genarray([shp],ItoB(1));
+ if (0 != shp) { // real work to do
+        z[[0]] = BtoB(y[[0]]); // Not sure about coercion
+        for ( i=1; i<shp; i++) {
+           z[[i]] = mpyBBB(BtoB(z[[i-1]]),BtoB(y[[i]]));
         }
   }
  return(z);

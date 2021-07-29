@@ -1,1 +1,0 @@
-('% Code fragment for quote-quad input and probably others',(⎕UCS 10 10),'%Fragment qdd XX1 X X C .',(⎕UCS 10),'inline char[.] $FNAME()',(⎕UCS 10),'{ /* Quote-quad input */',(⎕UCS 10),'  arbitrarylimit = 100000;',(⎕UCS 10),'  z = drop([-1], tochar(scanl(arbitrarylimit)));',(⎕UCS 10),'  return( z);',(⎕UCS 10),'}',(⎕UCS 10 10))

@@ -1,7 +1,7 @@
 % Monadic and dyadic thorn formatting functions
 
 % We don't do this yet, but should keep it in mind...
-% Dyalog APL Version 10.1 Ref Man p153 says that monadic format
+% Dyalog APL Version 18.0 Ref Man p153 says that monadic format
 % has these properties:
 %   1. the decimal points for floating point or scaled formats are aligned.
 %   2. The E characters for scaled formats are aligned, with trailing zeros
@@ -20,8 +20,6 @@
 %      1.2346E5
 %          thorn 0.0000001234
 %      1.234E_7
-%   7. Negative numbers are formatted with ascii '-', not high-minus.
-
 
 %%%%%%%%%%%%% monadic character thorn %%%%%%%%%%%%%%%%%
 
@@ -87,7 +85,7 @@ inline char[+] $FNAME($XTYPE[2] x,  $YTYPE y)
 { /* Dyadic thorn on Boolean, Integer, or double scalar */
  widths = toi(x[[0]]);
  precision = toi(x[[1]]);
- z, junk = APEXDthrn( [y], widths);
+ z, junk = ePEXDthrn( [y], widths);
  if ( widths<shape(z)[0]) { 
         z = genarray([widths], '*');
  }

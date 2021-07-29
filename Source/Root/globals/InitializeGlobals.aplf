@@ -9,6 +9,7 @@
  TargetLanguage←Options GetOption'targetlanguage=sac'  ⍝  Or "plural"
  GITKLUDGE←'Source/Root/' ⍝    FIXME   this won't do for  MyCmds vstuff...
  PathFrag←Options GetOption'pathfrag=',PathApex,GITKLUDGE,TargetLanguage,PathDelim,'fragments',PathDelim
+ pfat←⎕csv PathFrag,PathDelim,'pfat.csv'
  VisualizeDfa←'01'⍳Options GetOption'visualizedfa=0'
  PartialEvaluation←'01'⍳Options GetOption'partialevaluation=0'
  DisplayTemps←'01'⍳Options GetOption'displaytemps=0'
