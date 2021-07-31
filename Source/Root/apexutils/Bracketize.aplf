@@ -1,4 +1,5 @@
  r←lhs Bracketize p
 ⍝# put [brackets] around p/lhs
- r←((E''),E'[[')[p],¨lhs,¨((E''),E']]')[p]
+⍝ If this breaks sac compilation, I will check if julia and change depending on if julia or other language
+ r←((E''),E'[')[p],¨lhs,¨((E''),E']')[p]
 ⍝∇⍣§./Source/Root/julia/Bracketize.aplf§0§ 2021 2 19 16 33 30 937 §bule§0

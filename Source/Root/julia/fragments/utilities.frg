@@ -253,18 +253,18 @@ inline int[+] VectorRotateAmount(int[+] x, int y)
 #Generate , VECTORROTATEAMOUNT, III, 000, ., I
 
 #Fragment ABC *00 bidc bidc i . I
-inline int ABC(int I, int Xshape)
-{ #= (OLD) Array bounds check for indexed ref X[scalarI] & indexed assign =#
- z = I;
- return(z);
-}
+function ABC(I::Int64, Xshape::Int64)::Int64
+ #= (OLD) Array bounds check for indexed ref X[scalarI] & indexed assign =#
+ z = I + 1
+ return z
+end
 
 #Fragment ABC *** bidc bidc i . I
-inline int[+] ABC(int[+] I, int Xshape)
-{ #= (OLD) Array bounds check for indexed ref X[nonscalarI] & indexed assign =#
- z = I;
- return(z);
-}
+function ABC(I::Array{Int64}, Xshape::Int64)::Array{Int64}
+ #= (OLD) Array bounds check for indexed ref X[nonscalarI] & indexed assign =#
+ z = I .+ 1
+ return z
+end
 
 #Fragment RadixGradeHistograms x11 x i i . 
 inline int[.,.] RadixGradeHistograms( int[.] y)

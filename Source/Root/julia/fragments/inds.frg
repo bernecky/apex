@@ -25,16 +25,17 @@
 #                                  NB.  frame and cell shapes must match
 
 #Fragment inds *0* bidc bidc bidc . nonscalarX[;;nonscalarI;;]<- scalarY 
-inline $ZTYPE[+] $FNAME($XTYPE[+] X, $INDICES $YTYPE Yin)
-{ #= X[;;nonscalarI;;;]<- scalarY =#
- $RAVELS 
- z = $XTto$ZT(X);
- $RESH
- $FORLOOPSPROLOG
- $BODY
- $FORLOOPSEPILOG
- return(z);
-}
+function $FNAME(x::Array{$XTYPE}, $INDICES yin::$YTYPE)::Array{$ZTYPE}
+  #= X[;;nonscalarI;;;]<- scalarY =#
+  $RAVELS 
+  z = $XTto$ZT(x)
+  $RESH
+  $FORLOOPSPROLOG
+  # TODO: Very very todo...
+  $BODY
+  $FORLOOPSEPILOG
+  return z
+end
 #Generate , ABC, III, ***, ., I
 #Generate , ABC, III, *00, ., I
 

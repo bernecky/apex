@@ -18,7 +18,7 @@
  sis←','InsertInterAxisCommas(⍴mt)⍴sis
  lhs←mcb ast TargetName ast FindReferent(i\k)⌿ast[;astlarg]
  m2←~∧/mt                        ⍝ Non-empty indices need brackets
- lhs←lhs,((E''),E'[[')[m2]
- rhs←((E''),E']]')[m2]
+ lhs←lhs,((E''),E'[')[m2]
+ rhs←((E''),E']')[m2]
  sis←Raze⍉lhs,(mcb sis),rhs
  r←(E k),E sis                   ⍝ k is the items we can handle

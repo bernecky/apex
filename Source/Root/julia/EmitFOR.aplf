@@ -17,7 +17,7 @@
      cal[t/⍳⍴t;]←E''
      f←f,(E'for(; '),itctrs,(E' <= '),itctrsz
      f←f,(E'; '),itctrs,E'++){',NL
-     f←f,fornm,(E' = '),innm,(E'[['),itctrs,E']];',NL
+     f←f,fornm,(E' = '),innm,(E'['),itctrs,E']',NL
      f←Raze⍉f
      cal[j/⍳⍴j;]←E''
      cal[j/⍳⍴j;caltarget]←f

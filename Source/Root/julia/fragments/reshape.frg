@@ -4,11 +4,12 @@
 # Robert Bernecky 2004-09-17. Add SAC-like rank specifiers
 
 #Fragment rho 001 bid bidc bidc .
-inline $ZTYPE[.] $FNAME($XTYPE x, $YTYPE y)
-{ // [Scalar reshape scalar] 
-  z = genarray( [toi(x)],y);
-  return(z);
-}
+function $FNAME(x::$XTYPE, y::$YTYPE)::Array{$ZTYPE}
+  # [Scalar reshape scalar] 
+  
+  z = repeat([toI(x)], y)
+  return z
+end
 
 #Fragment rho 101 bid bidc bidc .
 inline $ZTYPE[.] $FNAME($XTYPE[1] x, $YTYPE y)

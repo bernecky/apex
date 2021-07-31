@@ -17,14 +17,14 @@
  ndxp←LC¨lhs                       ⍝ The X[...] part
  rks←0 3↓D fns[;fnsranks]
  k←,ScalarIndices fns
- ndxp←(UC¨lhs),¨((E'[['),E'')[k],¨ndxp,¨((E']]'),E'')[k]
+ ndxp←(UC¨lhs),¨((E'['),E'')[k],¨ndxp,¨((E']'),E'')[k]
  ndxp[k/⍳⍴k]←UC¨k/lhs              ⍝ No for-loop on scalar indices
  lhs[eta/⍳⍴lhs]←E''                ⍝ Kill trail'g elided indices
  lhs[eta/⍳⍴ndxp]←E''
  lhs[(,~nul)/⍳⍴lhs]←(,~nul)/ndxp
  lhs[(~,cv)/⍳⍴lhs]←E''
  lhs←','InsertInterAxisCommas(⍴cv)⍴lhs
- lhs←(E'[['),lhs,E']]'
+ lhs←(E'['),lhs,E']'
 ⍝
 ⍝ Handle scalar extension of Y
  hdr←(E'z'),mcb lhs

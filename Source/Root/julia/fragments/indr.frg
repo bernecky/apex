@@ -36,17 +36,15 @@
 
 #Fragment indr *0*           nonscalarX[scalarI;;] 
 #              XIZ after fns2 gets made 
-inline $ZTYPE[*] indr($XTYPE[+] X, int I)
-{ #= X[scalarI;;;] =#
-  #= Used only in conjunction with other indexing, e.g.,
-   * X[scalarI;;j;]
-   =#
- z = X[[I]];
- return(z);
-}
+function indr(x::Array{$XTYPE}, i::Int64)::Array{$ZTYPE}
+    #= X[scalarI;;;] =#
+    #= Used only in conjunction with other indexing, e.g.,
+    # X[scalarI;;j;]
+    =#
+    z = x[i]
+    return z
+end
 #Generate , ABC,    III,           *00, ., I 
-#Generate , indrfr, $XTI$XT, ****, ., I
-#Generate , indrfr, $XTI$XT, *0*0, ., I
 
 #Fragment indr *x*           nonscalarX[;;;] 
 #              XIZ after fns2 gets made 
@@ -78,45 +76,61 @@ inline $ZTYPE[*] indr($XTYPE[+] X, int[+] I)
 
 #Fragment indrfr *0*0           nonscalarX[;;scalarI;;] 
 #                XIZ after fns2 gets made 
-inline $ZTYPE[*] indrfr(int fr, $XTYPE[+] X, int I)
-{ #= X[;;;I;;;], where I has fr (framerank) semicolons to its left =#
+function indrfr(fr::Int64, X::Array{$XTYPE}, I::Int64)::Array{$ZTYPE}
+  #= X[;;;I;;;], where I has fr (framerank) semicolons to its left =#
   #= This is actually "I from"fr X" =#
- frameshape = take([fr], shape(X)); 
+  println(fr)
+  println(X)
+  println(I)
+  exit()
+ #=frameshape = take([fr], shape(X)); 
  cellshape = drop([1+fr],shape(X));
  cell = genarray(cellshape,$OTFILL);
+
+
  z = with {
         (. <= iv <= .)
                 : sel( I, X[iv]);
         } : genarray(frameshape, cell);
- return(z);
-}
+ return z=#     
+end
 #Generate , ABC, III, ***, ., I 
 
 #Fragment indrfr ****           nonscalarX[;;nonscalarI;;] 
 #                XIZ after fns2 gets made 
-inline $ZTYPE[*] indrfr(int fr, $XTYPE[+] X, int[+] I)
-{ #= X[;;;I;;;], where I has fr (framerank) semicolons to its left =#
+function indrfr(fr::Int64, X::Array{$XTYPE}, I::Array{Int64})::Array{$ZTYPE}
+  #= X[;;;I;;;], where I has fr (framerank) semicolons to its left =#
   #= This is actually "I from"fr X" =#
-  frameshape = take([fr], shape(X));
+  println(fr)
+  println(X)
+  println(I)
+  exit()
+
+
+  #=frameshape = take([fr], shape(X));
   cellshape =  shape(I)++drop([fr+1], shape(X));
   cell = genarray(cellshape, $OTFILL);
  z = with {
         (. <= iv <= .)
                 : indrfr0(X[iv], I);
         } : genarray(frameshape, cell);
- return(z);
-}
+ return(z);=#
+end
 
-inline $ZTYPE[*] indrfr0($XTYPE[+] X, int[+] I)
-{ #= X[I;;;] or    I from X =#
-  cellshape =  drop([1], shape(X));
+function indrfr0(X::Array{$XTYPE}, I::Array{Int64})
+  #= X[I;;;] or    I from X ::Array{$ZTYPE} =#
+  println(X)
+  println(I)
+  exit()
+  
+  #=cellshape =  drop([1], shape(X));
   cell = genarray(cellshape, $OTFILL);
  z = with {
         (. <= iv <= .)
                 : sel( I[iv], X);
         } : genarray(shape(I), cell);
- return(z);
-}
+ return(z);=#
+end
 #Generate , ABC, III, ***, ., I 
 #Generate , ABC, III, *00, ., I 
 

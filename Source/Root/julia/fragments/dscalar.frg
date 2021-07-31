@@ -1,4 +1,4 @@
-# Dyadic Scalar function definitions 
+# Dyadic Scalar function definitions
 # R. Bernecky 2006-01-05
 #
 # Header notes:
@@ -10,14 +10,14 @@
 #    Field 4: Result type for fragment
 #    Field 5: ifergit
 #
-# Header ordering may be critical in the case where two 
+# Header ordering may be critical in the case where two
 # fragments would both work. This is important in epio, for
 # example, where a special case (e.g., charvec iota charvec)
-# must be chosen in preference to the general case. 
+# must be chosen in preference to the general case.
 # Or, here, where we can use a fast Boolean-mod-Boolean, rather
 # than general mod code.
 #
-#Fragment plus 000 bid bid bid .        
+#Fragment plus 000 bid bid bid .
 function $FNAME(x, y)
   # Remove the feed types because they are causing problems. Probably wise to add them back later though.
   # In theory this should always work as long as it isnt fed weird types...
@@ -65,7 +65,7 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
 
 #Fragment max 000 bidc bidc idc .
 inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
-{ #= x max y =# 
+{ #= x max y =#
  return (max($XTto$CT(x),$YTto$CT(y)));
 }
 
@@ -87,14 +87,14 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
   } else {
     z = y;
   }
- 
+
   if( z != 0) {
     if( mpyXII( x) != mpyXII( y)) {
       z = z + x;
     }
   }
  return(z);
-} 
+}
 #Generate , mpy, X$YT$ZT, X00, ., $CT
 
 #Fragment mod 000 bid bid bid .
@@ -104,7 +104,7 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE y, double QUADct)
    * It extends the definition of residue to fractional right arguments
    * and to zero, negative and fractional left arguments.
    * r= y-x times floor y divide x+0=x
-   * See also APL model in workspace 43 UTDScalarI. 
+   * See also APL model in workspace 43 UTDScalarI.
    =#
   nx = (0.0 == $XTto$CT(x))  ?  1.0  : $XTto$CT(x);
   z = $YTto$CT(y) - $XTto$CT(x) * tod(DFLOOR($YTto$CT(y)/nx, QUADct));
@@ -119,7 +119,7 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
 
 #Fragment star 000 bid b bid .
 inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
-{ 
+{
  z =  ($YTtoB(y))  ?  $XTto$ZT(x)  : Ito$ZT(1);
  return(z);
 }
@@ -129,7 +129,7 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
 {  #= number to integer power =#
   z = Ito$CT( 1);
   for( i=0; i<$YTtoI( y); i++) {
-    z = z * $XTto$CT(x);  
+    z = z * $XTto$CT(x);
   }
   return( z);
 }
@@ -157,7 +157,7 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
   return($XTto$CT(x)<$YTto$CT(y));
 }
 
-#Fragment lt 000 bi bi b i 
+#Fragment lt 000 bi bi b i
 inline $ZTYPE $FNAME($XTYPE x, $YTYPE y, double QUADct)
 { #= Boolean/Integer less than =#
  return($XTto$CT(x)<=$YTto$CT(y));
@@ -189,15 +189,16 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE y, double QUADct)
 #Generate , APEXFUZZEQ, DDB, 000, ., D
 
 #Fragment eq 000 bic bic b .
-inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
-{ #= A=B on non-doubles =#
- return($XTto$CT(x) == $YTto$CT(y));
-}
+function $FNAME(x::$XTYPE, y)::$ZTYPE
+    #= A=B on non-doubles =#
+    # Always just compare first element?
+    return Int64(collect(x)[1]) == Int64(collect(y)[1])
+end
 
 #Fragment eq 000 bid bid b .
 function $FNAME(x::$XTYPE, y::$YTYPE, QUADct::Float64)::$ZTYPE
   #= A=B on doubles =#
-  #= We use | instead of || on the assumption that 
+  #= We use | instead of || on the assumption that
      the zero-fuzz case will eliminate the second leg,
      and it also eliminate a CONDFUN.
   =#
@@ -251,7 +252,7 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
 
 #Fragment ge 000 bid bid b .
 inline $ZTYPE $FNAME($XTYPE x, $YTYPE y, double QUADct)
-{ #= A>=B on doubles =# 
+{ #= A>=B on doubles =#
  return(($XTto$CT(x) >= $YTto$CT(y)) | APEXFUZZEQ($XTto$CT(x),$YTto$CT(y),QUADct));
 }
 #Generate , APEXFUZZEQ, DDB, 000, ., D
@@ -288,8 +289,8 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE y)
         z = tan($YTtoD(y));
  else if (4 == xi)
         z = pow(1.0+($YTtoD(y)*$YTtoD(y)),0.5);
- else 
+ else
         z = 42.0; #= Should be domain error or something =#
- return(z); 
+ return(z);
 }
 

@@ -4,21 +4,17 @@
 #
 # --------------- QUADts fragments ----------------------------
 #Fragment quadts xx1  x x i .
-inline $ZTYPE[.] $FNAME()
-{ // QUADts - system time-of-day timestamp 
-  // This function provides system time in ISO 8601 format,
-  // via CLOCK_REALTIME.
-  // It may not be the best way to measure elapsed time. For that,
-  // see documentation for clock_gettime, using CLOCK_MONOTONIC.
- sec, nsec = gettime(); // From Stdlib module RTClock 
- secs = to_time(toi(sec));
- d = mday(secs);
- m = mon (secs);
- y = year(secs);
- h,mi,s = clock(secs);
- z = [y + 1900, m + 1 , d, h, mi, s, toi(nsec)/1000000];
- return(z);
-}
+function $FNAME()::Array{$ZTYPE}
+    # QUADts - system time-of-day timestamp 
+    # This function provides system time in ISO 8601 format (but array),
+    # via now(). See https://docs.julialang.org/en/v1/stdlib/Dates/
+
+    z = Dates.format(now(), "Y m d H M S s") # Create Date
+    z = convert(String, z) # Convert from DateTime type to String
+    z = split(z, " ") # Convert from single String to Array of substrings
+    z = parse.(Int64, z) # Convert Array of Substrings to Array of Ints
+    return z
+end
 
 # --------------- QUADav fragment ----------------------------
 #Fragment quadav xx1  x x c .

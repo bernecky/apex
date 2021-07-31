@@ -33,10 +33,10 @@
 
 #Fragment dsfctl   0**  bidc bidc bidc .
 #Fragment dsfctlsx 0**  bidc bidc bidc . 
-function $FNAME(x::$XTYPE, y$SYSVARGDECL)
+function $FNAME(x::$XTYPE, y::$YTYPE$SYSVARGDECL)::Array{$ZTYPE}
 	#= SxA scalar function =#
 	# TODO
-	z = $FN$CT$CT$ZT.(repeat([x], length(y)),y$SYSVARGKER)
+	z = $FN$CT$CT$ZT.(repeat([x], length(y)), $XTto$CT(y)$SYSVARGKER)
 	return z
 end
 #Generate , $FN, $CT$CT$ZT, 000, ., $CT

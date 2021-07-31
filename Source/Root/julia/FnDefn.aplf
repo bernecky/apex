@@ -17,7 +17,9 @@
  ⍝ TODO: Arg type needs to be formatted Arg::ArgType instead of ArgType Arg
  ⍝ args←¯2↓,dy[0 1]⌿tp[0 1],(E' '),args,2 2⍴', '
  ⍝ Quick a dirty soloution below!!
+
  args←¯2↓((1↓⌽(,dy[0 1]⌿tp[0 1],(E'::'),args)),', ')
+
 
  ⍝ Build fn header, renaming main
  fd←D ismain⌷(E fn),E nmain
@@ -29,7 +31,8 @@
  ⍝ Inlining slows down compile times a LOT (See saczilla bug#243)
  ⍝⍝hdr←D Raze((inlineme∧~ismain)/E'inline '),fd[0]
  hdr←'function '
- ft←'::',D Raze fd[0]
+ ⍝ ft←'::',D Raze fd[0]
+ ft←⍬
  fd←D Raze 1↓fd
  ⍝ Build header for incoming semiglobals
  sg←(SemiGlobalsMarkIn ast)⌿ast
