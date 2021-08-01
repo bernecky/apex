@@ -126,8 +126,7 @@ return(z);
 %Fragment sl1 0** b bidc bidc ONEEL
 inline $ZTYPE[+] $FNAME($XTYPE x, $YTYPE[+] y)
 { /* Boolean scalar compress non-scalar, first axis */
-  sy = shape(y);
-  z = (true == toB(x)) ?  y  : genarray([0]++drop([1],sy),$OTFILL);
+  z = (true == toB(x)) ? y : genarray([0]++drop([1],shape(y)),$OTFILL);
   return(z);
 }
 
@@ -149,11 +148,18 @@ inline $ZTYPE[+] $FNAME($XTYPE x, $YTYPE[+] y)
  return(z);
 }
 
+%Fragment sl1 1** bid bidc bidc ONEEL
+inline $ZTYPE[+] $FNAME($XTYPE[1] x, $YTYPE[+] y)
+{ // Vector[1] compress/replicate-first-axis matrix
+  // FIXME: needs conformability check on x
+  z = (true == toB(x[0]) ? y : genarray([0]++drop([1],shape(y)),$OTFILL);
+  return(z);
+}
+
 %Fragment sl1 1** bid bidc bidc  .
 inline $ZTYPE[+] $FNAME($XTYPE[.] x, $YTYPE[+] y)
 { /* Vector compress/replicate-first-axis matrix */
   /* FIXME: needs conformability and domain checks on x */
-
   z = TRANSPOSE( sl$XT$YT$ZT(x, TRANSPOSE( y)));
   return(z);
 }

@@ -1,0 +1,7 @@
+% Fragment header fields
+% z = x jsymbol y
+%         jsymbol xyz-ranks lefttypes righttypes resulttypes specialcasename, if any
+%         1       2         3         4          5           6 
+% e.g.,
+%Fragment sl      001       bid       bidc       bidc        ONEEL
+%Fragment sl      001       bid       bidc       bidc        .
