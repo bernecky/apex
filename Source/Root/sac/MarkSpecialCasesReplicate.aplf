@@ -2,7 +2,7 @@
 ⍝# Generate special case names for replicate
 ⍝ Mark one-element non-scalar left arguments
  cv←(ast[;astfn]∊ER1⍪'/⌿')∧IsDyadic fns
- larg←(cv⌿ast)[;astlarg]
+ larg←cv/ast[;astlarg]
  oneel←(1=ast[larg;astxrho])∧0≠ast[larg;astrank]
  r←fns
- r[cv/⍳⍴cv;fnsspec]←((E''),E'ONEEL')[oneel]
+ r[cv/⍳⍴cv;fnsspec]←((E,'.'),E'ONEEL')[oneel]
