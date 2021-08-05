@@ -1,7 +1,7 @@
 module compiota;
 export {compiota_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-29 18:21:19.363
+// Compiled by APEX Version: FIXME!! 2021-08-05 15:06:01.575
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -118,7 +118,7 @@ inline char[*] indr(char[+] X, int I)
 
 
 inline int[.] slBII(bool[.] x, int[.] y)
-{/* Boolean vector compress vector */
+{ // Boolean vector compress vector
   zxrho = sum(toi(x));
   z = genarray([zxrho], 0);
   zi = 0;

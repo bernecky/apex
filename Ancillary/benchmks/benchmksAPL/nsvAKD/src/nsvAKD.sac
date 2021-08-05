@@ -1,7 +1,7 @@
 module nsvAKD;
 export {nsvAKD_testXII};
 
-// Compiled by APEX Version: FIXME!! 2021-07-29 18:21:33.141
+// Compiled by APEX Version: FIXME!! 2021-08-05 15:06:14.089
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -128,28 +128,23 @@ inline int plusdotmpyBIITRANSPOSE(bool[.] x, int[.] y)
 
 
 inline int[.] slIII(int x, int y)
-{ /* Scalar replicate scalar */
+{ // Scalar replicate scalar
+  z = genarray([toi(x)], y);
+  return(z);
+}
+
+inline int[+] slIIIONEEL(int[1] x, int[+] y)
+{ // last-axis vector[1] compress/replicate matrix
+  // This needs conformability check FIXME
+ frameshape = drop([-1],shape(y));
+ cellshape = ItoI( x);
+ defcell = genarray(cellshape,0);
  z = with {
-        (. <= iv <= .)
-                : y;
-        } : genarray([toi(x)]);
+   (. <= iv <= .) : slIII( x, y[iv]);
+   } : genarray( frameshape, defcell);
  return(z);
 }
 
-inline int[.] slIII(int[.] x, int[.] y)
-{/* Non-Boolean vector compress/replicate vector */
- /* HELP! non-boolean left argument needs a range check */
-  intx = toi(x);
-  zxrho = sum(intx);
-  z = genarray([zxrho], 0);
-  zi = 0;
-  for(i=0; i<shape(x)[0]; i++)
-    for(k=0; k<intx[[i]]; k++){
-     z[[zi]] = y[[i]];
-     zi++;
-    }
-  return(z);
-}
 
 
 inline bool[+] eqIIB(int x, int[+] y)
@@ -364,6 +359,30 @@ inline int[.] FixHeap(int[.] heap, int[+] v, int root,
 
 
 
+inline int[+] TRANSPOSE(int[+] y)
+{ /* Generic monadic transpose */
+  z = with {
+        ( . <= iv <= .)
+                : y[reverse( iv)];
+        }: genarray( reverse( shape(y)), 0);
+  return(z);
+}
+
+inline int[.] slIII(int[.] x, int[.] y)
+{ // Non-Boolean vector compress/replicate vector
+  // FIXME! non-boolean left argument needs a range check
+  intx = toi(x);
+  zxrho = sum(intx);
+  z = genarray([zxrho], 0);
+  zi = 0;
+  for(i=0; i<shape(x)[0]; i++)
+    for(k=0; k<intx[[i]]; k++){
+     z[[zi]] = y[[i]];
+     zi++;
+    }
+  return(z);
+}
+
 inline int plusslXIIFOLD(int[.] y)
 { /* First/last axis fold-based reduction of vector */
   lim = shape(y)[0]-1;
@@ -442,9 +461,9 @@ inline int[.] testdataXII(int n ,int QUADio)
  ?
 */
 A_17=iotaXII( 10,QUADio);
-A_18=slIII(10,n);
- A_19=slIII(A_18,A_17);
- r_0=( A_19);
+ A_18=slIII(10,n);
+ A_19=slIIIONEEL(A_18,A_17);
+r_0=( A_19);
  return(r_0);
 }
 

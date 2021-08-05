@@ -1,7 +1,7 @@
 module UTReplicate;
 export {UTReplicate_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-29 18:09:36.593
+// Compiled by APEX Version: FIXME!! 2021-08-05 14:43:21.131
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -132,35 +132,32 @@ inline int[*] indr(int[+] X, int[+] I)
 
 
 inline int[.] slIII(int x, int y)
-{ /* Scalar replicate scalar */
- z = with {
-        (. <= iv <= .)
-                : y;
-        } : genarray([toi(x)]);
- return(z);
+{ // Scalar replicate scalar
+  z = genarray([toi(x)], y);
+  return(z);
 }
 
-inline int[.] slIII(int[.] x, int y)
-{ /* Vector compress/replicate scalar */
- shpz = sum(toi(x));
- z = genarray([shpz],y);
- return(z);
+inline int[.] slIIIONEEL(int[1] x, int y)
+{ // Vector[1] compress/replicate scalar
+  z = genarray(toi(x),y);
+  return(z);
 }
 
 inline int[.] slIII(int x, int[.] y)
-{ /* Scalar replicate vector */
+{ // Scalar replicate vector
  cell = genarray([toi(x)], 0);
  z = with {
         (. <= iv <= .)
                 : genarray([toi(x)], y[iv]);
         } : genarray(shape(y), cell);
- return(comaXII(z));
+ z = comaXII(z);
+ return(z);
 }
 
 
 inline int[.] slIII(int[.] x, int[.] y)
-{/* Non-Boolean vector compress/replicate vector */
- /* HELP! non-boolean left argument needs a range check */
+{ // Non-Boolean vector compress/replicate vector
+  // FIXME! non-boolean left argument needs a range check
   intx = toi(x);
   zxrho = sum(intx);
   z = genarray([zxrho], 0);
@@ -173,10 +170,9 @@ inline int[.] slIII(int[.] x, int[.] y)
   return(z);
 }
 
-
 inline int[+] slIII(int x, int[+] y)
-{/* Non-Boolean scalar replicate non-scalar */
- /* FIXME : domain check needed on x */
+{// Last-axis non-Boolean scalar replicate non-scalar
+ // FIXME : domain check needed on x
  ix = [toi(x)];
  frameshape = drop([-1],shape(y));
  cellshape = ItoI( x) * take([-1], shape(y));
@@ -190,54 +186,57 @@ inline int[+] slIII(int x, int[+] y)
 
 
 inline int[+] slIII(int[.] x, int[+] y)
-{ /* last-axis vector compress/replicate matrix */
-  /* This needs conformability check FIXME */
-  /* Also, x may be one-element vector */
+{ // last-axis vector compress/replicate matrix
+  // This needs conformability check FIXME
+  // Also, x may be one-element vector
  frameshape = drop([-1],shape(y));
  cellshape = sum(ItoI( x));
  defcell = genarray([cellshape],0);
-
  z = with {
    (. <= iv <= .) : slIII( x, y[iv]);
    } : genarray( frameshape, defcell);
-
-return(z);
-}
-
-
-
-
-
-inline int[.] sl1III(int x, int y)
-{ /* Scalar replicate scalar */
- z = with {
-        (. <= iv <= .)
-                : y;
-        } : genarray([toi(x)]);
  return(z);
 }
 
-inline int[.] sl1III(int[.] x, int y)
-{ /* Vector compress/replicate scalar */
+
+
+
+
+
+inline int[.] slIII(int[.] x, int y)
+{ // Vector compress/replicate scalar
  shpz = sum(toi(x));
  z = genarray([shpz],y);
  return(z);
 }
 
+inline int[.] sl1III(int x, int y)
+{ // Scalar replicate scalar
+  z = genarray([toi(x)], y);
+  return(z);
+}
+
+inline int[.] sl1IIIONEEL(int[1] x, int y)
+{ // Vector[1] compress/replicate scalar
+  z = genarray(toi(x),y);
+  return(z);
+}
+
 inline int[.] sl1III(int x, int[.] y)
-{ /* Scalar replicate vector */
+{ // Scalar replicate vector
  cell = genarray([toi(x)], 0);
  z = with {
         (. <= iv <= .)
                 : genarray([toi(x)], y[iv]);
         } : genarray(shape(y), cell);
- return(comaXII(z));
+ z = comaXII(z);
+ return(z);
 }
 
 
 inline int[.] sl1III(int[.] x, int[.] y)
-{/* Non-Boolean vector compress/replicate vector */
- /* HELP! non-boolean left argument needs a range check */
+{ // Non-Boolean vector compress/replicate vector
+  // FIXME! non-boolean left argument needs a range check
   intx = toi(x);
   zxrho = sum(intx);
   z = genarray([zxrho], 0);
@@ -250,11 +249,9 @@ inline int[.] sl1III(int[.] x, int[.] y)
   return(z);
 }
 
-
 inline int[+] sl1III(int[.] x, int[+] y)
 { /* Vector compress/replicate-first-axis matrix */
   /* FIXME: needs conformability and domain checks on x */
-
   z = TRANSPOSE( slIII(x, TRANSPOSE( y)));
   return(z);
 }
@@ -454,7 +451,7 @@ QUADio_0=toI(( false));
  A_103=sameIIB(A_101,[2, 2, 2]);
  A_104=comaBBB(r_0,A_103);
  r_1=( A_104);
- A_106=slIII(V5_0,S2_0);
+ A_106=slIIIONEEL(V5_0,S2_0);
  A_108=sameIIB(A_106,[2, 2, 2, 2, 2]);
  A_109=comaBBB(r_1,A_108);
  r_2=( A_109);
@@ -496,7 +493,7 @@ A_132=plusIII(z_0,12);
  A_153=sameIIB(A_151,[2, 2, 2]);
  A_154=comaBBB(r_8,A_153);
  r_9=( A_154);
- A_156=sl1III(V5_0,S2_0);
+ A_156=sl1IIIONEEL(V5_0,S2_0);
  A_158=sameIIB(A_156,[2, 2, 2, 2, 2]);
  A_159=comaBBB(r_9,A_158);
  r_10=( A_159);

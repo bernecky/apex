@@ -1,7 +1,7 @@
 module logd3;
 export {logd3_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-29 18:21:27.199
+// Compiled by APEX Version: FIXME!! 2021-08-05 15:06:08.775
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -166,15 +166,17 @@ inline double plusslXDDFOLD(double[.] y)
 }
 
 
-inline double[.] barslIDDWIDTHN2(int x, double[.] y)
-{ /* Width-minus-2 window-reduce vector */
-  /* FIXME: Need checks on x range */
- shp = shape(y)-1;
+inline double[.] barslIDD(int x, double[.] y)
+{ /* Scalar window-reduce vector producing vector result */
+  /* FIXME: Need checks on x range and shape */
+ rev = ItoI(x) < 0;      /* Reverse cell? */
+ wid = [abs(ItoI(x))];
+ shp = 1+shape(y)-wid;
  z = with {
         (. <= iv <= .) {
-                xel = DtoD(y[iv]);
-                yel = DtoD(y[iv + 1]);
-                } : barDDD(yel,xel);
+                cell = toD(tile( wid, iv, y));
+                cell = rev ? reverse(cell) : cell;
+                } : barslXDD(cell);
         } : genarray(shp);
  return(z);
 }
@@ -203,10 +205,6 @@ inline double minDDD(double x, double y)
 inline double maxDDD(double x, double y)
 { /* x max y */
  return (max(DtoD(x),DtoD(y)));
-}
-
-inline double barDDD(double x, double y)
-{ return(DtoD(x)-DtoD(y));
 }
 
 inline double[+] divDDD(double x, double[+] y)
@@ -261,6 +259,26 @@ inline bool APEXFUZZEQ(double x, double y, double QUADct)
  return(z);
 }
 
+inline double barslXDD(double[.] y)
+{ /* First/last axis slow reduction of vector. Can't use fold or quickstop */
+ shp = shape(y)[[0]];
+ if (0 == shp) {
+   z = ItoD(0);
+ } else {
+   z = DtoD(y[[shp-1]]);
+   for (i=shp-2; i>=0; i--) {
+     z = barDDD(DtoD(y[[i]]),DtoD(z));
+   }
+ }
+ return(z);
+}
+
+
+
+inline double barDDD(double x, double y)
+{ return(DtoD(x)-DtoD(y));
+}
+
 inline int V2O( int[.] shp, int[.] iv)
 { /* Vector iv to offset into array of shape shp */
   /* See V2O.dws workspace */
@@ -294,7 +312,7 @@ inline double[.] diff3XDD(double[.] SIG)
 /*
  ?
 */
-A_16=barslIDDWIDTHN2(-2,SIG);
+A_16=barslIDD(-2,SIG);
  RES_0=( A_16);
  return(RES_0);
 }

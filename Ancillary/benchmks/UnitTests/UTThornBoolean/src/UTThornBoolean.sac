@@ -1,7 +1,7 @@
 module UTThornBoolean;
 export {UTThornBoolean_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-29 18:09:56.933
+// Compiled by APEX Version: FIXME!! 2021-08-05 14:43:44.256
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -215,27 +215,25 @@ inline char[*] indr(char[+] X, int[+] I)
 
 
 inline bool[.] slBBB(bool x, bool y)
-{ /* Scalar replicate scalar */
- z = with {
-        (. <= iv <= .)
-                : y;
-        } : genarray([toi(x)]);
- return(z);
+{ // Scalar replicate scalar
+  z = genarray([toi(x)], y);
+  return(z);
 }
 
 inline bool[.] slBBB(bool x, bool[.] y)
-{ /* Scalar replicate vector */
+{ // Scalar replicate vector
  cell = genarray([toi(x)], false);
  z = with {
         (. <= iv <= .)
                 : genarray([toi(x)], y[iv]);
         } : genarray(shape(y), cell);
- return(comaXBB(z));
+ z = comaXBB(z);
+ return(z);
 }
 
 
 inline bool[+] slBBB(bool x, bool[+] y)
-{ /* Boolean scalar compress non-scalar */
+{ // Boolean scalar compress non-scalar
   sy = shape(y);
   z = (true == toB(x)) ?  y  : genarray(drop([-1],sy)++[0],false);
   return(z);

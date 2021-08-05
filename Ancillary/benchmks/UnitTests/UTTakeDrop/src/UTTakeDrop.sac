@@ -1,7 +1,7 @@
 module UTTakeDrop;
 export {UTTakeDrop_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-29 18:09:55.802
+// Compiled by APEX Version: FIXME!! 2021-08-05 14:43:42.989
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -621,47 +621,43 @@ inline bool[.] bslBBB(bool x, bool[.] y)
 
 
 inline bool[.] slBBB(bool x, bool y)
-{ /* Scalar replicate scalar */
- z = with {
-        (. <= iv <= .)
-                : y;
-        } : genarray([toi(x)]);
- return(z);
+{ // Scalar replicate scalar
+  z = genarray([toi(x)], y);
+  return(z);
 }
 
 inline int[.] slBII(bool x, int[.] y)
-{ /* Scalar replicate vector */
+{ // Scalar replicate vector
  cell = genarray([toi(x)], 0);
  z = with {
         (. <= iv <= .)
                 : genarray([toi(x)], y[iv]);
         } : genarray(shape(y), cell);
- return(comaXII(z));
+ z = comaXII(z);
+ return(z);
 }
 
 
 inline int[.] slBII(bool x, int y)
-{ /* Scalar replicate scalar */
- z = with {
-        (. <= iv <= .)
-                : y;
-        } : genarray([toi(x)]);
- return(z);
+{ // Scalar replicate scalar
+  z = genarray([toi(x)], y);
+  return(z);
 }
 
 inline char[.] slBCC(bool x, char[.] y)
-{ /* Scalar replicate vector */
+{ // Scalar replicate vector
  cell = genarray([toi(x)], ' ');
  z = with {
         (. <= iv <= .)
                 : genarray([toi(x)], y[iv]);
         } : genarray(shape(y), cell);
- return(comaXCC(z));
+ z = comaXCC(z);
+ return(z);
 }
 
 
 inline int[+] slBII(bool x, int[+] y)
-{ /* Boolean scalar compress non-scalar */
+{ // Boolean scalar compress non-scalar
   sy = shape(y);
   z = (true == toB(x)) ?  y  : genarray(drop([-1],sy)++[0],0);
   return(z);
