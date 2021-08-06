@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 3.17)
+CMAKE_MINIMUM_REQUIRED (VERSION 3.19)
 
 # This example project builds a SaC module and a SaC program (executable).
 # The program depends on the module; both are located under `src/`.
@@ -32,16 +32,16 @@ list(REMOVE_ITEM BM_DIRST "${CMAKE_SOURCE_DIR}/README.md")
 list(REMOVE_ITEM BM_DIRST "${CMAKE_SOURCE_DIR}/.git")
 
 FOREACH (BM_DIR IN ITEMS ${BM_DIRST})
-	get_filename_component(BM_DIRONE ${BM_DIR} NAME)
-	list( APPEND BM_DIRS ${BM_DIRONE})
+    get_filename_component(BM_DIRONE ${BM_DIR} NAME)
+    list( APPEND BM_DIRS ${BM_DIRONE})
 ENDFOREACH ()
 
 # Run src/CMakeLists.txt for each target
 FOREACH (TARGET IN ITEMS ${TARGETS})
-	FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
-   MESSAGE (STATUS adding subdirectory ${BM_DIR}/src)
-          ADD_SUBDIRECTORY (${BM_DIR}/src ${BM_DIR}/src-${TARGET})
-        ENDFOREACH ()
+    FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
+        MESSAGE (STATUS adding subdirectory ${BM_DIR}/src)
+        ADD_SUBDIRECTORY (${BM_DIR}/src ${BM_DIR}/src-${TARGET})
+    ENDFOREACH ()
 ENDFOREACH ()
 
 # This build target is responsible for generating the package sac2crc file
