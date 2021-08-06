@@ -1,3 +1,0 @@
-[submodule "Ancillary/cmakeTemplates/cmake-common"]
-	path = Ancillary/cmakeTemplates/cmake-common
-	url = https://github.com/SacBase/cmake-common.git
