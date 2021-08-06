@@ -48,22 +48,23 @@ ENDFOREACH ()
 CREATE_SAC2CRC_TARGET ("apex_bmworks" "${DLL_BUILD_DIR}" "${DLL_BUILD_DIR}" "")
 
 # Testing section
+ MESSAGE( STATUS  "START TESTING WITH" ${CMAKE_PROJECT_NAME} and ${PROJECT_NAME})
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     INCLUDE(CTest)
     FOREACH (TARGET IN ITEMS ${TARGETS})
 	FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
           SET (ARGFNM ${CMAKE_SOURCE_DIR}/${BM_DIR}/bench.argv)
-          ##DEBUG  MESSAGE (STATUS arg fnm is ${ARGFNM})
+           MESSAGE (STATUS "arg fnm is" ${ARGFNM})
           IF (EXISTS ${ARGFNM})
               FILE (STRINGS ${ARGFNM} ARG)
-               ##DEBUG MESSAGE (STATUS Value of file: "${ARGFNM} is: "  ${ARG})
+              MESSAGE (STATUS "Value of file:" "${ARGFNM} is: "  ${ARG})
           ELSE()
-               ##DEBUG MESSAGE (STATUS file: "${ARGFNM}" does not exist)
+              MESSAGE (STATUS file: "${ARGFNM}" does not exist)
               UNSET (ARG)
           ENDIF()
 
-          ADD_TEST (Test-${BM_DIR}-${TARGET} ${BM_DIR}-${TARGET} ${ARG})
-          FOREACH (THREDS IN LISTS 1 5 10) # number of threads
+          FOREACH (THREDS IN ITEMS 1 5 10) # number of threads
+              MESSAGE (STATUS Test-${BM_DIR}-${TARGET} "with ARG" ${ARG} "and THREDS= ${THREDS}")
               ADD_TEST (Test-${BM_DIR}-${TARGET} ${BM_DIR}-${TARGET} ${ARG} -mt ${THREDS})
           ENDFOREACH ()
         ENDFOREACH ()
