@@ -1,7 +1,7 @@
 module schedrAKD;
 export {schedrAKD_testXII};
 
-// Compiled by APEX Version: FIXME!! 2021-07-09 15:45:05.383
+// Compiled by APEX Version: FIXME!! 2021-08-07 16:33:40.299
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -265,7 +265,7 @@ inline int CommandLineArgvXBI(bool y)
 }
 
 inline int[.] slBII(bool[.] x, int[.] y)
-{/* Boolean vector compress vector */
+{ // Boolean vector compress vector
   zxrho = sum(toi(x));
   z = genarray([zxrho], 0);
   zi = 0;
@@ -294,12 +294,9 @@ inline int[.] bslBII(bool[.] x, int[.] y)
 
 
 inline int[.] slBII(bool x, int y)
-{ /* Scalar replicate scalar */
- z = with {
-        (. <= iv <= .)
-                : y;
-        } : genarray([toi(x)]);
- return(z);
+{ // Scalar replicate scalar
+  z = genarray([toi(x)], y);
+  return(z);
 }
 
 inline int plusslXBIFOLD(bool[.] y)

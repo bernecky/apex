@@ -1,7 +1,7 @@
 module kroneckerproduct;
 export {kroneckerproduct_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-09 15:45:04.724
+// Compiled by APEX Version: FIXME!! 2021-08-07 16:33:39.569
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -171,7 +171,8 @@ inline int mpyslXIIQUICKSTOP(int[.] y)
   z = with {
          (0*shape(y) <= iv < shape(y))
                 : ItoI(y[iv]);
-        } : foldfix( mpyIII, ItoI(1), ItoI(0));
+        } : fold( mpyIII, ItoI(1) );
+        // FIXME mt_pth crashes on foldfix } : foldfix( mpyIII, ItoI(1), ItoI(0));
   return(z);
 }
 
