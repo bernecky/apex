@@ -1,7 +1,7 @@
 module testindx;
 export {testindx_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-07-21 14:41:43.459
+// Compiled by APEX Version: FIXME!! 2021-08-10 11:13:11.784
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -125,14 +125,14 @@ inline int[*] indr(int[+] X, int I)
 
 
 
-inline int[+] inds0(int[+] X, int  I0, int Yin)
+inline int[+] inds0(int[+] X, I, int Yin)
 { /* X[;;nonscalarI;;;]<- scalarY */
  
  z = ItoI(X);
  Y = Yin;
 
  
- z[[I0]]=ItoI((Y));
+ z[I0]=ItoI((Y));
 
  
  return(z);
@@ -231,7 +231,7 @@ A_26=rhoIII(n,9);
  r_0=( A_26);
  A_29=iotaXII( n,QUADio);
  A_CTR30_= 0;
-A_CTR30z_ = (shape(A_29)[[0]])-1;
+A_CTR30z_ = (length(A_29)[1])-1;
 r_3=toI(r_0);
 for(; A_CTR30_ <= A_CTR30z_; A_CTR30_++){
 i_0 = A_29[[A_CTR30_]];

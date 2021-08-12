@@ -17,8 +17,8 @@
  ⍝ Note 10k line assumption on max src pgm size in zi3 above.
  typeint←Types⍳'i'
  f←itctrs,¨mm E'= 0;'
- f←f,(E NL),itctrsz,E' = (shape('
- f←f,innm,E')[[0]])-1;',NL
+ f←f,(E NL),itctrsz,E' = (length('
+ f←f,innm,E')[1])-1;',NL
  m←ast[;astfn]∊E':PHI'
  pf←(1,¯1↓j)pandscan m∨ast[;astfn]∊NULL
  pf←pf∧m ⍝ PHIs, NULLs interspersed.

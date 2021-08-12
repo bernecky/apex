@@ -3,7 +3,13 @@
 # (This stuff below is temporary)
 
 toB(x) = Bool(x)
-toI(x) = Int64(x)
+function toI(x)
+    if(isa(x, Array))
+        convert.(Int64, x)
+    else 
+        Int64(x)
+    end
+end
 toD(x) = Float64(x)
 toC(x) = Complex(x)
 toc(x) = Complex(x)

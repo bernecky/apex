@@ -2,26 +2,20 @@
 module testindx
 export all
 
-# Compiled by APEX Version: FIXME!! 2021-07-21 19:56:49.911
-#=use Array: all;
-use ArrayFormat: all;
-use Bits: all;
-use Clock: {clock,mday,mon,year,to_time};
-use CommandLine: all;
-use Numerical : all;
-use RTClock: all;
-use StdIO : all;
-use String: {to_string,tochar,sscanf};=#
-
-# TODO Do prolog
-
-# Is this needed? I use all base libraries anyways...
+# Compiled by APEX Version: FIXME!! 2021-08-10 11:13:19.859
+using Dates
 # TODO: Add STDLIB 
 
 # (This stuff below is temporary)
 
 toB(x) = Bool(x)
-toI(x) = Int64(x)
+function toI(x)
+    if(isa(x, Array))
+        convert.(Int64, x)
+    else 
+        Int64(x)
+    end
+end
 toD(x) = Float64(x)
 toC(x) = Complex(x)
 toc(x) = Complex(x)
@@ -78,11 +72,11 @@ function barBBI(x::Bool, y::Bool)::Int64
   return BtoI(x)-BtoI(y)
 end
 
-function plusDID(x::Float64, y)
-         #= SxA scalar function =#
+function plusDID(x::Float64, y::Int64)::Array{Float64}
+  #= SxA scalar function =#
       # TODO
-         z = plusDDD.(repeat([x], length(y)),y)
-         return z
+         z = plusDDD.(repeat([x], length(y)), DtoD(y))
+      return z
 end
 
 
@@ -118,15 +112,13 @@ end
 
 
 function indr(x::Array{Int64}, i::Int64)::Array{Int64}
-  #= X[scalarI;;;] =#
-  #= Used only in conjunction with other indexing, e.g.,
-   * X[scalarI;;j;]
-   =#
- z = x[[i]]
- return z
+    #= X[scalarI;;;] =#
+    #= Used only in conjunction with other indexing, e.g.,
+    # X[scalarI;;j;]
+    =#
+    z = x[i]
+    return z
 end
-
-
 
 
 function inds0(x::Array{Int64}, I, yin::Int64)::Array{Int64}
@@ -136,7 +128,8 @@ function inds0(x::Array{Int64}, I, yin::Int64)::Array{Int64}
   Y = Yin;
 
   
-  z[[I0]]=ItoI((Y));
+  # TODO: Very very todo...
+  z[I0]=ItoI((Y));
 
   
   return z
@@ -168,46 +161,6 @@ function eqDDB(x::Float64, y::Float64, QUADct::Float64)::Bool
 end
 
 
-inline Int64[*] indrfr(int fr, Int64[+] X, int[+] I)
-{ #= X[;;;I;;;], where I has fr (framerank) semicolons to its left =#
-  #= This is actually "I from"fr X" =#
-  frameshape = take([fr], shape(X));
-  cellshape =  shape(I)++drop([fr+1], shape(X));
-  cell = genarray(cellshape, 0);
- z = with {
-        (. <= iv <= .)
-                : indrfr0(X[iv], I);
-        } : genarray(frameshape, cell);
- return(z);
-}
-
-inline Int64[*] indrfr0(Int64[+] X, int[+] I)
-{ #= X[I;;;] or    I from X =#
-  cellshape =  drop([1], shape(X));
-  cell = genarray(cellshape, 0);
- z = with {
-        (. <= iv <= .)
-                : sel( I[iv], X);
-        } : genarray(shape(I), cell);
- return(z);
-}
-
-
-
-inline Int64[*] indrfr(int fr, Int64[+] X, int I)
-{ #= X[;;;I;;;], where I has fr (framerank) semicolons to its left =#
-  #= This is actually "I from"fr X" =#
- frameshape = take([fr], shape(X));
- cellshape = drop([1+fr],shape(X));
- cell = genarray(cellshape,0);
- z = with {
-        (. <= iv <= .)
-                : sel( I, X[iv]);
-        } : genarray(frameshape, cell);
- return(z);
-}
-
-
 function APEXFUZZEQ(x::Float64, y::Float64, QUADct::Float64)::Bool
  #= ISO APL Tolerant equality predicate =#
  absx = abs(x)
@@ -217,19 +170,19 @@ function APEXFUZZEQ(x::Float64, y::Float64, QUADct::Float64)::Bool
  return(z)
 end
 
-inline int ABC(int I, int Xshape)
-{ #= (OLD) Array bounds check for indexed ref X[scalarI] & indexed assign =#
- z = I;
- return(z);
-}
+function ABC(I::Int64, Xshape::Int64)::Int64
+ #= (OLD) Array bounds check for indexed ref X[scalarI] & indexed assign =#
+ z = I + 1
+ return z
+end
 
-inline int[+] ABC(int[+] I, int Xshape)
-{ #= (OLD) Array bounds check for indexed ref X[nonscalarI] & indexed assign =#
- z = I;
- return(z);
-}
+function ABC(I::Array{Int64}, Xshape::Int64)::Array{Int64}
+ #= (OLD) Array bounds check for indexed ref X[nonscalarI] & indexed assign =#
+ z = I .+ 1
+ return z
+end
 
-function testindxXID(n::Int64,QUADio::Int64)::Float64
+function testindxXID(n::Int64,QUADio::Int64)
 
 #=
  ?
@@ -238,18 +191,18 @@ A_26=rhoIII(n,9)
  r_0=( A_26) 
  A_29=iotaXII( n,QUADio) 
  A_CTR30_= 0;
-A_CTR30z_ = (shape(A_29)[[0]])-1;
+A_CTR30z_ = (length(A_29)[1])-1;
 r_3=toI(r_0);
 for(; A_CTR30_ <= A_CTR30z_; A_CTR30_++){
-i_0 = A_29[[A_CTR30_]];
- A_32= ABC(toi(i_0)-QUADio,shape(r_3)[0]);
+i_0 = A_29[A_CTR30_]
+ A_32= ABC(toI(i_0)-QUADio, length(r_3)[1])
 A_34=inds0(r_3,A_32,i_0) 
  r_2=( A_34) 
- A_36= ABC(toi(i_0)-QUADio,shape(r_2)[0]);
-A_38=r_2[[A_36]] 
+ A_36= ABC(toI(i_0)-QUADio, length(r_2)[1])
+A_38=r_2[A_36] 
  # dsf scalar(s)
 A_39=plusIII(A_38,2) 
- A_40= ABC(toi(i_0)-QUADio,shape(r_2)[0]);
+ A_40= ABC(toI(i_0)-QUADio, length(r_2)[1])
 A_42=inds0(r_2,A_40,A_39) 
  r_3=( A_42) 
  }
@@ -262,7 +215,7 @@ A_46=plusDID(A_45,r_3)
  return r_4
 end
 
-function testindx_testXXI()::Int64
+function testindx_testXXI()
 
 #=
  ?

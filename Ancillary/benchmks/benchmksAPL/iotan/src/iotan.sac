@@ -1,11 +1,7 @@
 module iotan;
 export {iotan_testXXI};
 
-<<<<<<< HEAD
-// Compiled by APEX Version: FIXME!! 2021-07-13 14:59:05.153
-=======
-// Compiled by APEX Version: FIXME!! 2021-07-12 12:23:51.465
->>>>>>> master
+// Compiled by APEX Version: FIXME!! 2021-08-01 13:39:40.415
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;

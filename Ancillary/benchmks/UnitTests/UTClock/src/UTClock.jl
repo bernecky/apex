@@ -2,7 +2,7 @@
 module UTClock
 export all
 
-# Compiled by APEX Version: FIXME!! 2021-07-31 11:57:29.379
+# Compiled by APEX Version: FIXME!! 2021-07-31 11:51:41.502
 using Dates
 # TODO: Add STDLIB 
 
@@ -69,15 +69,79 @@ function indr(x::Array{Bool}, i::Int64)::Array{Bool}
 end
 
 
+
+
 function eqIIB(x::Int64, y)::Bool
     #= A=B on non-doubles =#
     # Always just compare first element?
     return Int64(collect(x)[1]) == Int64(collect(y)[1])
 end
 
+function indrfr(fr::Int64, X::Array{Bool}, I::Array{Int64})::Array{Bool}
+  #= X[;;;I;;;], where I has fr (framerank) semicolons to its left =#
+  #= This is actually "I from"fr X" =#
+  println("indrfr",fr)
+  println("indrfr",X)
+  println("indrfr",I)
+  exit()
+
+
+  #=frameshape = take([fr], shape(X));
+  cellshape =  shape(I)++drop([fr+1], shape(X));
+  cell = genarray(cellshape, false);
+ z = with {
+        (. <= iv <= .)
+                : indrfr0(X[iv], I);
+        } : genarray(frameshape, cell);
+ return(z);=#
+end
+
+function indrfr0(X::Array{Bool}, I::Array{Int64})
+  #= X[I;;;] or    I from X ::Array{Bool} =#
+  println("indrfr0",X)
+  println("indrfr0",I)
+  exit()
+
+  #=cellshape =  drop([1], shape(X));
+  cell = genarray(cellshape, false);
+ z = with {
+        (. <= iv <= .)
+                : sel( I[iv], X);
+        } : genarray(shape(I), cell);
+ return(z);=#
+end
+
+
+
+function indrfr(fr::Int64, X::Array{Bool}, I::Int64)::Array{Bool}
+  #= X[;;;I;;;], where I has fr (framerank) semicolons to its left =#
+  #= This is actually "I from"fr X" =#
+  println("indrfr1",fr)
+  println("indrfr1",X)
+  println("indrfr1",I)
+  exit()
+ #=frameshape = take([fr], shape(X));
+ cellshape = drop([1+fr],shape(X));
+ cell = genarray(cellshape,false);
+
+
+ z = with {
+        (. <= iv <= .)
+                : sel( I, X[iv]);
+        } : genarray(frameshape, cell);
+ return z=#
+end
+
+
 function ABC(I::Int64, Xshape::Int64)::Int64
  #= (OLD) Array bounds check for indexed ref X[scalarI] & indexed assign =#
  z = I + 1
+ return z
+end
+
+function ABC(I::Array{Int64}, Xshape::Int64)::Array{Int64}
+ #= (OLD) Array bounds check for indexed ref X[nonscalarI] & indexed assign =#
+ z = I .+ 1
  return z
 end
 
