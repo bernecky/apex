@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 3.17)
+CMAKE_MINIMUM_REQUIRED (VERSION 3.19)
 
 # This example project builds a SaC module and a SaC program (executable).
 # The program depends on the module; both are located under `src/`.
@@ -11,8 +11,7 @@ PROJECT (apex-testsandbenchmarks)
 SET (DLL_BUILD_DIR  "${PROJECT_BINARY_DIR}/lib")
 
 # We build modules for these targets
-### DISABLED UNTIL sac2c mt bugs fixed    SET (TARGETS            seq mt_pth  CACHE STRING "Build for sequential and posix threads")
-SET (TARGETS            seq CACHE STRING "Build for sequential and posix threads")
+SET (TARGETS            seq mt_pth CACHE STRING "Build for sequential and posix threads")
 SET (SAC2C_EXEC                     CACHE STRING "Path to sac2c compiler")
 SET (LINKSETSIZE        "0"         CACHE STRING "Value for sac2c's -linksetsize parameter")
 
@@ -31,38 +30,39 @@ list(REMOVE_ITEM BM_DIRST "${CMAKE_SOURCE_DIR}/build")
 list(REMOVE_ITEM BM_DIRST "${CMAKE_SOURCE_DIR}/README")
 
 FOREACH (BM_DIR IN ITEMS ${BM_DIRST})
-	get_filename_component(BM_DIRONE ${BM_DIR} NAME)
-	list( APPEND BM_DIRS ${BM_DIRONE})
+    get_filename_component(BM_DIRONE ${BM_DIR} NAME)
+    list( APPEND BM_DIRS ${BM_DIRONE})
 ENDFOREACH ()
 
 # Run src/CMakeLists.txt for each target
 FOREACH (TARGET IN ITEMS ${TARGETS})
-	FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
-   MESSAGE (STATUS adding subdirectory ${BM_DIR}/src)
-          ADD_SUBDIRECTORY (${BM_DIR}/src ${BM_DIR}/src-${TARGET})
-        ENDFOREACH ()
+    FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
+        MESSAGE (STATUS adding subdirectory ${BM_DIR}/src)
+        ADD_SUBDIRECTORY (${BM_DIR}/src ${BM_DIR}/src-${TARGET})
+    ENDFOREACH ()
 ENDFOREACH ()
 
 # This build target is responsible for generating the package sac2crc file
 CREATE_SAC2CRC_TARGET ("apex_bmworks" "${DLL_BUILD_DIR}" "${DLL_BUILD_DIR}" "")
 
 # Testing section
+ MESSAGE( STATUS  "START TESTING WITH" ${CMAKE_PROJECT_NAME} and ${PROJECT_NAME})
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     INCLUDE(CTest)
     FOREACH (TARGET IN ITEMS ${TARGETS})
 	FOREACH ( BM_DIR IN ITEMS ${BM_DIRS})
           SET (ARGFNM ${CMAKE_SOURCE_DIR}/${BM_DIR}/bench.argv)
-          ##DEBUG  MESSAGE (STATUS arg fnm is ${ARGFNM})
+           MESSAGE (STATUS "arg fnm is" ${ARGFNM})
           IF (EXISTS ${ARGFNM})
               FILE (STRINGS ${ARGFNM} ARG)
-               ##DEBUG MESSAGE (STATUS Value of file: "${ARGFNM} is: "  ${ARG})
+              MESSAGE (STATUS "Value of file:" "${ARGFNM} is: "  ${ARG})
           ELSE()
-               ##DEBUG MESSAGE (STATUS file: "${ARGFNM}" does not exist)
+              MESSAGE (STATUS file: "${ARGFNM}" does not exist)
               UNSET (ARG)
           ENDIF()
 
-          ADD_TEST (Test-${BM_DIR}-${TARGET} ${BM_DIR}-${TARGET} ${ARG})
-          FOREACH (THREDS IN LISTS 1 5 10) # number of threads
+          FOREACH (THREDS IN ITEMS 1 5 10) # number of threads
+              MESSAGE (STATUS Test-${BM_DIR}-${TARGET} "with ARG" ${ARG} "and THREDS= ${THREDS}")
               ADD_TEST (Test-${BM_DIR}-${TARGET} ${BM_DIR}-${TARGET} ${ARG} -mt ${THREDS})
           ENDFOREACH ()
         ENDFOREACH ()

@@ -65,13 +65,6 @@ inline $ZTYPE[.] $FNAME($YTYPE[+] y)
   return(z);
 }
 
-%Fragment rotr x11 x bidc bidc .
-inline $ZTYPE[.] $FNAME($YTYPE[.] y)
-{ /* Vector reverse */
-  z = Array::reverse( 0, y);
-  return( z);
-}
-
 %Fragment rot1 x** x bidc bidc .
 inline $ZTYPE[+] $FNAME($YTYPE[+] y)
 { /* First axis reverse on anything */
@@ -81,7 +74,7 @@ inline $ZTYPE[+] $FNAME($YTYPE[+] y)
 
 %Fragment rotr x** x bidc bidc .
 inline $ZTYPE[+] $FNAME($YTYPE[+] y)
-{/* Last axis reverse on rank>1 */
+{ // Last axis reverse on rank>1
   axis = _dim_A_( y) - 1;
   z = Array::reverse( axis, y);
   return( z);

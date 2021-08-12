@@ -1,7 +1,8 @@
- r←p PFATProperty fns;t;i;cv;f;fi;m;tp;j;tx;ty;val
+ r←p PFATProperty fns;t;i;cv;f;fi;m;tp;j;tx;ty;val;PFAT
 ⍝ Get primitive function property.
 ⍝ p is a column index into PFAT
  r←(1↑⍴fns)⍴0
+ PFAT←#.globals.pfat
  :If ~0∊⍴fns
      val←'md'['X'≠(D fns[;fnstypes])[;,0]]
  ⍝ E.g., to get compute type: PFATct PFATProperty fns

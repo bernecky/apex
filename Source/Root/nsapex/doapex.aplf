@@ -4,6 +4,7 @@
  defaultOpts←'targetlanguage=sac trace= '
  Opts←defaultOpts,Options
  #.globals.Initialize Opts
+ #.globals.InitializeGlobals Opts
  ⎕←(fts ⎕TS),' Compiling ',fldr
  fldr←dlb dtb fldr
  ⍝  Invoke each compiler phase

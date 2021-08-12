@@ -14,5 +14,4 @@
  PFATqrl←1+PFATqpw   ⍝ PFAT fn needs ⎕rl
  PFATuni←1+PFATqrl   ⍝ PFAT fn is uniform
  PFATcols←1+PFATuni  ⍝ PFAT table width
- PFAT←#.globals.PFAT
 

@@ -1,7 +1,7 @@
 % Monadic and dyadic thorn formatting functions
 
 % We don't do this yet, but should keep it in mind...
-% Dyalog APL Version 10.1 Ref Man p153 says that monadic format
+% Dyalog APL Version 18.0 Ref Man p153 says that monadic format
 % has these properties:
 %   1. the decimal points for floating point or scaled formats are aligned.
 %   2. The E characters for scaled formats are aligned, with trailing zeros
@@ -13,15 +13,13 @@
 %   5. The exponent values in scaled formats are left-adjusted to remove any blanks
         and + signs.
 %   6. Scaled notation is used of the magnitude of the non-integer number is too large
-%      to represent with QAADpp significant digits or if the number requires more
+%      to represent with QUADpp significant digits or if the number requires more
 %      than five leading zeros after the decimal point. E.g.:
 %          QUADpp{<-} 5
 %          thorn 123456.7
 %      1.2346E5
 %          thorn 0.0000001234
 %      1.234E_7
-%   7. Negative numbers are formatted with ascii '-', not high-minus.
-
 
 %%%%%%%%%%%%% monadic character thorn %%%%%%%%%%%%%%%%%
 

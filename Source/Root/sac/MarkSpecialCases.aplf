@@ -6,3 +6,4 @@
  r←ast MarkSpecialCasesEpio r
  r←MarkSpecialCasesCatlam r
  r←ast MarkSpecialCasesMonadicGrade r
+ r←ast MarkSpecialCasesReplicate r

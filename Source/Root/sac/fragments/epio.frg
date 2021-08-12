@@ -252,7 +252,8 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE[.] y$SYSVARGDECL)
  z = with {
         (0*shape(y) <= iv < shape(y))
                 : to$CT(x) == to$CT(y[iv]);
-        } : foldfix(|, false, true);
+        } : fold(|, false);
+        // foldfix crashes on mt_pth } : foldfix(|, false, true);
  return(z);
 }
 
@@ -264,7 +265,8 @@ inline $ZTYPE $FNAME($XTYPE x, $YTYPE[.] y$SYSVARGDECL)
  z = with {
         (0*shape(y) <= iv < shape(y))
                 : eqDDB(to$CT(x),to$CT(y[[i]]),QUADct);
-        } : foldfix(|, false, true);
+        } : fold(|, false);
+        // foldfix crashes on mt_pth } : foldfix(|, false, true);
  return(z);
 }
 %Generate , eq, DDB, 000, ., $CT
@@ -275,7 +277,8 @@ inline $ZTYPE[+] $FNAME($XTYPE[+] x, $YTYPE y$SYSVARGDECL)
  z = with {
         (. <= iv <= .) 
                 : (to$CT(x) == to$CT(y);
-        } : foldfix(|, false, true);
+        } : fold(|, false);
+        // foldfix crashes on mt_pth } : foldfix(|, false, true);
  return(z);
 }
 
@@ -285,7 +288,8 @@ inline $ZTYPE[+] $FNAME($XTYPE[+] x, $YTYPE y$SYSVARGDECL)
  z = with {
         (0*shape(y) <= iv < shape(y))
                 : eqDDB(to$CT(x[iv]),to$CT(y),QUADct);
-        } : foldfix(|, false, true);
+        } : fold(|, false);
+        // foldfix crashes on mt_pth } : foldfix(|, false, true);
  return(z);
 }
 %Generate , eq, DDB, 000, ., $CT

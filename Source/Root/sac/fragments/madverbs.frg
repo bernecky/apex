@@ -58,7 +58,8 @@ inline $ZTYPE $FNAMEQUICKSTOP($YTYPE[.] y)
   z = with {
          (0*shape(y) <= iv < shape(y)) 
                 : $YTto$CT(y[iv]);
-        } : foldfix( $FN$ZT$CT$ZT, Ito$ZT($FRID), Ito$ZT($STOPONVALUE));
+        } : fold( $FN$ZT$CT$ZT, Ito$ZT($FRID) );
+        // FIXME mt_pth crashes on foldfix } : foldfix( $FN$ZT$CT$ZT, Ito$ZT($FRID), Ito$ZT($STOPONVALUE));
   return(z);
 }
 %Generate , $FN, $ZT$ZT$ZT, 000, ., $ZT

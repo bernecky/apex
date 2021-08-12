@@ -1,4 +1,4 @@
- z←PFATSystemVar ast;fnnm;q;hdr;cv;sysv;r
+ z←PFATSystemVar ast;fnnm;q;hdr;cv;sysv;r;PFAT
 ⍝# Return system variable usage for this fn
 ⍝# Result is list of shape (1↑⍴ast), containing list of
 ⍝# system vars for each line in the ast.
@@ -6,6 +6,7 @@
  cv←(dfainit ast)∧~ast[;astfn]∊NULL
  fnnm←jsym cv⌿ast[;astfn] ⍝ Compute primitive function names
  fnnm←('dm'[(D cv⌿ast[;astlarg])∊NULL]),¨fnnm
+ PFAT←#.globals.pfat
  r←PFAT[;PFATfn]⍳fnnm  ⍝ Table lookup for system var usage
  hdr←PFAT[0;]          ⍝ Column names
  q←'Q'∊¨hdr
