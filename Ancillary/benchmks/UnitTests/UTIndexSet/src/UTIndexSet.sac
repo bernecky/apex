@@ -1,7 +1,7 @@
 module UTIndexSet;
 export {UTIndexSet_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-08-06 11:34:38.181
+// Compiled by APEX Version: FIXME!! 2021-08-12 10:10:24.002
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -55,14 +55,8 @@ inline int[+] plusIII(int x, int[+] y)
 }
 
 
-inline int[.] rotrXII(int[.] y)
-{ /* Vector reverse */
-  z = Array::reverse( 0, y);
-  return( z);
-}
-
 inline int[+] rotrXII(int[+] y)
-{/* Last axis reverse on rank>1 */
+{ // Last axis reverse on rank>1
   axis = _dim_A_( y) - 1;
   z = Array::reverse( axis, y);
   return( z);
