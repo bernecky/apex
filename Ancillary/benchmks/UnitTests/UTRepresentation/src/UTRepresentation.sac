@@ -1,7 +1,7 @@
 module UTRepresentation;
 export {UTRepresentation_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-08-06 11:34:42.889
+// Compiled by APEX Version: FIXME!! 2021-08-12 10:10:28.710
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -107,9 +107,10 @@ inline int[.] comaXII(int[.] y)
 }
 
 
-inline int[.] rotrXII(int[.] y)
-{ /* Vector reverse */
-  z = Array::reverse( 0, y);
+inline int[+] rotrXII(int[+] y)
+{ // Last axis reverse on rank>1
+  axis = _dim_A_( y) - 1;
+  z = Array::reverse( axis, y);
   return( z);
 }
 
@@ -135,9 +136,10 @@ inline bool[.] comaXBB(bool[.] y)
 }
 
 
-inline bool[.] rotrXBB(bool[.] y)
-{ /* Vector reverse */
-  z = Array::reverse( 0, y);
+inline bool[+] rotrXBB(bool[+] y)
+{ // Last axis reverse on rank>1
+  axis = _dim_A_( y) - 1;
+  z = Array::reverse( axis, y);
   return( z);
 }
 

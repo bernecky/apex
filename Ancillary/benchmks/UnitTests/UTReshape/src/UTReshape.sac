@@ -1,7 +1,7 @@
 module UTReshape;
 export {UTReshape_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-08-06 11:34:43.162
+// Compiled by APEX Version: FIXME!! 2021-08-12 10:10:28.993
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -49,7 +49,7 @@ inline int barBBI(bool x, bool y)
 }
 
 inline int[+] rotrXII(int[+] y)
-{/* Last axis reverse on rank>1 */
+{ // Last axis reverse on rank>1
   axis = _dim_A_( y) - 1;
   z = Array::reverse( axis, y);
   return( z);

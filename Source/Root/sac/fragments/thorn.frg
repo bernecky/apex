@@ -13,7 +13,7 @@
 %   5. The exponent values in scaled formats are left-adjusted to remove any blanks
         and + signs.
 %   6. Scaled notation is used of the magnitude of the non-integer number is too large
-%      to represent with QAADpp significant digits or if the number requires more
+%      to represent with QUADpp significant digits or if the number requires more
 %      than five leading zeros after the decimal point. E.g.:
 %          QUADpp{<-} 5
 %          thorn 123456.7
@@ -85,7 +85,7 @@ inline char[+] $FNAME($XTYPE[2] x,  $YTYPE y)
 { /* Dyadic thorn on Boolean, Integer, or double scalar */
  widths = toi(x[[0]]);
  precision = toi(x[[1]]);
- z, junk = ePEXDthrn( [y], widths);
+ z, junk = APEXDthrn( [y], widths);
  if ( widths<shape(z)[0]) { 
         z = genarray([widths], '*');
  }

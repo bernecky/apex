@@ -1,7 +1,7 @@
 module UTReverse;
 export {UTReverse_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-08-06 11:34:44.269
+// Compiled by APEX Version: FIXME!! 2021-08-12 10:10:30.143
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -123,9 +123,10 @@ inline bool[.] comaXBB(bool y)
   return([y]);
 }
 
-inline bool[.] rotrXBB(bool[.] y)
-{ /* Vector reverse */
-  z = Array::reverse( 0, y);
+inline bool[+] rotrXBB(bool[+] y)
+{ // Last axis reverse on rank>1
+  axis = _dim_A_( y) - 1;
+  z = Array::reverse( axis, y);
   return( z);
 }
 
@@ -140,9 +141,10 @@ inline int[.] comaXII(int y)
   return([y]);
 }
 
-inline int[.] rotrXII(int[.] y)
-{ /* Vector reverse */
-  z = Array::reverse( 0, y);
+inline int[+] rotrXII(int[+] y)
+{ // Last axis reverse on rank>1
+  axis = _dim_A_( y) - 1;
+  z = Array::reverse( axis, y);
   return( z);
 }
 
@@ -157,9 +159,10 @@ inline double[.] comaXDD(double y)
   return([y]);
 }
 
-inline double[.] rotrXDD(double[.] y)
-{ /* Vector reverse */
-  z = Array::reverse( 0, y);
+inline double[+] rotrXDD(double[+] y)
+{ // Last axis reverse on rank>1
+  axis = _dim_A_( y) - 1;
+  z = Array::reverse( axis, y);
   return( z);
 }
 
@@ -174,43 +177,16 @@ inline char[.] comaXCC(char y)
   return([y]);
 }
 
-inline char[.] rotrXCC(char[.] y)
-{ /* Vector reverse */
-  z = Array::reverse( 0, y);
+inline char[+] rotrXCC(char[+] y)
+{ // Last axis reverse on rank>1
+  axis = _dim_A_( y) - 1;
+  z = Array::reverse( axis, y);
   return( z);
 }
 
 inline char[+] rot1XCC(char[+] y)
 { /* First axis reverse on anything */
   z = Array::reverse( 0, y);
-  return( z);
-}
-
-inline bool[+] rotrXBB(bool[+] y)
-{/* Last axis reverse on rank>1 */
-  axis = _dim_A_( y) - 1;
-  z = Array::reverse( axis, y);
-  return( z);
-}
-
-inline int[+] rotrXII(int[+] y)
-{/* Last axis reverse on rank>1 */
-  axis = _dim_A_( y) - 1;
-  z = Array::reverse( axis, y);
-  return( z);
-}
-
-inline double[+] rotrXDD(double[+] y)
-{/* Last axis reverse on rank>1 */
-  axis = _dim_A_( y) - 1;
-  z = Array::reverse( axis, y);
-  return( z);
-}
-
-inline char[+] rotrXCC(char[+] y)
-{/* Last axis reverse on rank>1 */
-  axis = _dim_A_( y) - 1;
-  z = Array::reverse( axis, y);
   return( z);
 }
 

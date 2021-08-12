@@ -1,7 +1,7 @@
 module UTMStruct;
 export {UTMStruct_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-08-06 11:34:39.698
+// Compiled by APEX Version: FIXME!! 2021-08-12 10:10:25.527
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -110,22 +110,16 @@ inline int rot1XII(int y)
   return(y);
 }
 
-inline int[.] rotrXII(int[.] y)
-{ /* Vector reverse */
-  z = Array::reverse( 0, y);
+inline int[+] rotrXII(int[+] y)
+{ // Last axis reverse on rank>1
+  axis = _dim_A_( y) - 1;
+  z = Array::reverse( axis, y);
   return( z);
 }
 
 inline int[+] rot1XII(int[+] y)
 { /* First axis reverse on anything */
   z = Array::reverse( 0, y);
-  return( z);
-}
-
-inline int[+] rotrXII(int[+] y)
-{/* Last axis reverse on rank>1 */
-  axis = _dim_A_( y) - 1;
-  z = Array::reverse( axis, y);
   return( z);
 }
 

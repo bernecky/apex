@@ -85,20 +85,26 @@ or from an executable SaC program, e.g, `iotan.unittest.sac`:
    sac2c iotan.unittest.sac
 ```
 
-Alternately, an entire set of tests can be compiled this way:
+Alternately, an entire set of tests can be compiled this way, using, e.g., 
+7 tasks:
 
 ```
    cd Ancillary/benchmks/benchmksAPL
    mkdir build
    cd build
    cmake ..
-   make
+   make -j 7
 ```
 
 When compiled with `sac2c` (from www.sac-home.org), the resulting binary, when executed, will compute
-the sum of the first n non-negative integers. The result (r) of executing main should be 0 if the result is correct, and 0 otherwise.
+the sum of the first n non-negative integers. The result (r) of executing main should be 0 
+if the result is correct, and 0 otherwise.
 
+You can use ctest to run all tests automatically:
 
-
+```
+   ctest -j 7
+```
+   
 
 
