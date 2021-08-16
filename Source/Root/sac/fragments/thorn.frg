@@ -21,6 +21,11 @@
 %          thorn 0.0000001234
 %      1.234E_7
 
+% As noted in Stdlib/src/structures/ArrayFormat.xsac, the monadic format() calls
+% are trustworthy, but those with multiple arguments are broken, as we have to deal
+% with (a) print precision, (b) dyadic thorn left arguments, and (c) picture thorn.
+% And, perhaps with ⎕fmt. 
+
 %%%%%%%%%%%%% monadic character thorn %%%%%%%%%%%%%%%%%
 
 %Fragment thrn X** X C C  .
@@ -41,7 +46,8 @@ inline char[.] $FNAME($YTYPE y, int QUADpp)
 %Fragment thrn X** X B C  .
 inline char[+] $FNAME($YTYPE[+] y, int QUADpp)
 { /* Monadic format on Boolean non-scalars */
-  z = format(y, QUADpp);
+  // BROKEN z = format(y, QUADpp);
+  z = format(y);
   return(z);
 }
 
@@ -61,12 +67,13 @@ inline char[+] $FNAME($YTYPE[+] y, int QUADpp)
   return(z);
 }
  
-%%%%%%%%%%%%% monadic double  thorn %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% monadic double thorn %%%%%%%%%%%%%%%%%
 
 %Fragment thrn X01 X D C  .
 inline char[.] $FNAME($YTYPE y, int QUADpp)
 { /* Monadic format on double scalar  */
- z = format(y, QUADpp);
+ // BROKEN z = format(y, QUADpp);
+ z = format(y);
  return(z);
 }
 
@@ -74,7 +81,8 @@ inline char[.] $FNAME($YTYPE y, int QUADpp)
 inline char[+] $FNAME($YTYPE[+] y, int QUADpp)
 { /* Monadic format on double non-scalar */
   /* Refer to UTThorn.dws <threal> for APL model of this */
-  z = format(y, QUADpp);
+  // BROKEN z = format(y, QUADpp);
+  z = format(y);
   return(z);
 }
 
@@ -108,5 +116,5 @@ inline int thcharsto(char[.] ch, char[.] fry)
 }
 
 % We should have dyadic thorn for arrays...
-% with  scalar, 2-element vector, and shape-of-Y-cols X argument...
+% with scalar, 2-element vector, and shape-of-Y-cols X argument...
 

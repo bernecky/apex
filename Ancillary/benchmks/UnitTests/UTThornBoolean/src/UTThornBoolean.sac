@@ -1,7 +1,7 @@
 module UTThornBoolean;
 export {UTThornBoolean_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-08-12 10:10:47.110
+// Compiled by APEX Version: FIXME!! 2021-08-13 16:24:03.026
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -139,7 +139,8 @@ inline char[.] thrnXBC(bool y, int QUADpp)
 
 inline char[+] thrnXBC(bool[+] y, int QUADpp)
 { /* Monadic format on Boolean non-scalars */
-  z = format(y, QUADpp);
+  // BROKEN z = format(y, QUADpp);
+  z = format(y);
   return(z);
 }
 

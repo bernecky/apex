@@ -1,7 +1,7 @@
 module UTThornReal;
 export {UTThornReal_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-08-12 10:10:53.217
+// Compiled by APEX Version: FIXME!! 2021-08-13 16:24:09.381
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -90,7 +90,8 @@ inline int[*] rhoIII(int[.] x, int[*] y)
 
 inline char[.] thrnXDC(double y, int QUADpp)
 { /* Monadic format on double scalar  */
- z = format(y, QUADpp);
+ // BROKEN z = format(y, QUADpp);
+ z = format(y);
  return(z);
 }
 
@@ -104,7 +105,8 @@ inline int[.] iotaXII(int y, int QUADio)
 inline char[+] thrnXDC(double[+] y, int QUADpp)
 { /* Monadic format on double non-scalar */
   /* Refer to UTThorn.dws <threal> for APL model of this */
-  z = format(y, QUADpp);
+  // BROKEN z = format(y, QUADpp);
+  z = format(y);
   return(z);
 }
 

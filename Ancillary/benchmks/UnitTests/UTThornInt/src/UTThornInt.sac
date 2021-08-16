@@ -1,7 +1,7 @@
 module UTThornInt;
 export {UTThornInt_testXXI};
 
-// Compiled by APEX Version: FIXME!! 2021-08-12 10:10:52.761
+// Compiled by APEX Version: FIXME!! 2021-08-13 16:24:08.911
 use Array: all;
 use ArrayFormat: all;
 use Bits: all;
@@ -416,6 +416,11 @@ inline bool[*] quadXBB(bool[*] y, int QUADpp, int QUADpw)
         show(y);
         return(y);
 }
+inline char[*] quadXCC(char[*] y, int QUADpp, int QUADpw)
+{ /* {quad}{<-} anything */
+        show(y);
+        return(y);
+}
 inline int[*] quadXII(int[*] y, int QUADpp, int QUADpw)
 { /* {quad}{<-} anything */
         show(y);
@@ -464,11 +469,6 @@ inline bool[2] comaBBB(bool x, bool y)
 inline bool[.] comaBBB(bool[.] x, bool y)
 {/* VxS catenate first (or last) axis */
  return(toB(x)++[toB(y)]);
-}
-
-inline bool[.] comaBBB(bool[.] x, bool[.] y)
-{ /* VxV catenate first or last axis */
- return(toB(x)++toB(y));
 }
 
 inline bool sameCCB(char[+] x, char[+] y)
@@ -1595,22 +1595,17 @@ QUADio_0=toI(( false));
  QUADpw_0=( 80);
  QUADrl_0=( 16807);
  QUADio_1=toI(( false));
- QUADrl_1=( 16807);
  QUADpp_1=( 16);
- QUADpw_1=( 80);
- A_49=testthornXIB( QUADpp_1,QUADio_1);
- r_0=( A_49);
- A_53=quadXBB( A_49,QUADpp_1,QUADpw_1);
- A_55=testthornXIB( 5,QUADio_1);
- A_56=comaBBB(r_0,A_55);
- r_1=( A_56);
- A_60=quadXBB( A_56,QUADpp_1,QUADpw_1);
- A_61=andslXBBQUICKSTOP( r_1);
+ A_43=testthornXIB( QUADpp_1,QUADio_1);
+ r_0=( A_43);
+ A_47=quadXBB( A_43,QUADpp_1,QUADpw_0);
+ A_50=quadXCC( ['t','e','s','t','t','h','o','r','n',' ','w','i','t','h',' ','q','u','a','d','p','p',' ','5',' ','d','i','s','a','b','l','e','d',' ','f','o','r',' ','n','o','w'],QUADpp_1,QUADpw_0);
+A_51=andslXBBQUICKSTOP( r_0);
  // dsf scalar(s)
-A_65=barBBI(true,A_61);
-r_2=( A_65);
- A_69=quadXII( r_2,QUADpp_1,QUADpw_1);
- return(r_2);
+A_55=barBBI(true,A_51);
+ r_1=( A_55);
+ A_59=quadXII( r_1,QUADpp_1,QUADpw_0);
+ return(r_1);
 }
 
 inline char[.] thintCLONE6IBC(int PP, bool y ,int QUADio)
