@@ -1,4 +1,10 @@
-The APEX APL Compiler
+The APEX APL Compiler HAS BEEN MOVED!!!!!
+
+APEX is now at git@gitlab.com/bernecky/apex.git
+
+ALL OF THIS CODE IS VERY OBSOLETE, SO GET THEE HENCE.
+
+
 =====================
 
 APEX compiles a subset of Dyalog APL into one of several languages, currently SISAL, SaC, and D.
